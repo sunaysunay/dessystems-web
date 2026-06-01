@@ -79,16 +79,16 @@ export default function Nav() {
       <div className="flex items-center justify-between px-[4%] h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <img
-            src="https://ttydqyiezarpdysqacaa.supabase.co/storage/v1/object/public/watermark-logos/dessystems-logo.png"
-            alt="DES Systems"
-            style={{
-              height: "40px",
-              width: "auto",
-              objectFit: "contain",
-              filter: "brightness(0) invert(1) drop-shadow(0 0 6px rgba(56,189,248,0.5))",
-            }}
-          />
+          <div style={{
+            width: "180px",
+            height: "42px",
+            backgroundImage: "url('https://ttydqyiezarpdysqacaa.supabase.co/storage/v1/object/public/watermark-logos/dessystems-logo.png')",
+            backgroundSize: "130%",
+            backgroundPosition: "38% 50%",
+            backgroundRepeat: "no-repeat",
+            filter: "brightness(0) invert(1) drop-shadow(0 0 5px rgba(56,189,248,0.4))",
+            flexShrink: 0,
+          }} />
         </Link>
 
         {/* Desktop */}

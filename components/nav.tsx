@@ -86,8 +86,8 @@ export default function Nav() {
               height: "44px",
               width: "44px",
               objectFit: "contain",
-              filter: "invert(1) drop-shadow(0 0 3px rgba(56,189,248,0.4))",
-              mixBlendMode: "screen",
+              filter: "invert(1) sepia(1) saturate(4) hue-rotate(197deg) brightness(1.15) drop-shadow(0 0 4px rgba(56,189,248,0.5))",
+              mixBlendMode: "normal",
               flexShrink: 0,
             }}
           />

@@ -2,12 +2,28 @@ import { NextRequest, NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 import { createClient } from "@supabase/supabase-js"
 
-const TOPICS: Record<string, { label: string; adminEmail: string }> = {
-  erp:        { label: "ERP Consulting",              adminEmail: "info@dessystems.io" },
-  mes:        { label: "MES Integration",             adminEmail: "info@dessystems.io" },
-  automation: { label: "Automation",                  adminEmail: "info@dessystems.io" },
-  freelance:  { label: "Freelance / Project",         adminEmail: "info@dessystems.io" },
-  platform:   { label: "DES Platform",                adminEmail: "info@dessystems.io" },
+const sb = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+
+// Maps contact topic → mail_identity code
+const TOPIC_TO_IDENTITY: Record<string, string> = {
+  erp:        "DESSI_ERP",        // sales@dessystems.io
+  mes:        "DESSI_ERP",        // sales@dessystems.io
+  automation: "DESSI_ERP",        // sales@dessystems.io
+  freelance:  "DESSI_FREELANCE",  // sunay@dessystems.io
+  platform:   "DESSI_INFO",       // info@dessystems.io
+}
+
+async function getIdentity(code: string) {
+  const { data } = await sb
+    .from("mail_identity")
+    .select("email, name, bcc_email, reply_to")
+    .eq("code", code)
+    .eq("tenant_id", 500)
+    .single()
+  return data
 }
 
 export async function POST(req: NextRequest) {
@@ -17,26 +33,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Required fields missing" }, { status: 400 })
     }
 
-    const route  = TOPICS[topic] ?? TOPICS.erp
-    const name   = `${firstName} ${lastName}`.trim()
+    const identityCode = TOPIC_TO_IDENTITY[topic] ?? "DESSI_INFO"
+    const identity = await getIdentity(identityCode)
+    const fromEmail = identity?.email ?? "info@dessystems.io"
+    const fromName  = identity?.name  ?? "DES Systems"
+    const bccEmail  = identity?.bcc_email ?? null
+    const replyTo   = identity?.reply_to ?? fromEmail
+    const name      = `${firstName} ${lastName}`.trim()
+    const topicLabel = { erp:"ERP Consulting", mes:"MES Integration", automation:"Automation", freelance:"Freelance / Project", platform:"DES Platform" }[topic] ?? topic
 
-    // 1. Save lead to Supabase under Tenant 500
-    const sb = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    )
+    // Save lead to Supabase tenant 500
     await sb.from("lead").insert({
       tenant_id: 500,
-      name,
-      email,
+      name, email,
       phone: phone || null,
-      message: `[${route.label}]${company ? ` | Company: ${company}` : ""}\n\n${message}`,
+      message: `[${topicLabel}]${company ? ` | Company: ${company}` : ""}\n\n${message}`,
       status: "new",
       locale: "en",
-    }).then(({ error }) => {
-      if (error) console.warn("[dessystems lead]", error.message)
-    })
+    }).then(({ error }) => { if (error) console.warn("[dessi lead]", error.message) })
 
+    // SMTP via Zoho — send FROM the correct @dessystems.io alias
     const transporter = nodemailer.createTransport({
       host:   process.env.SMTP_HOST,
       port:   Number(process.env.SMTP_PORT ?? 587),
@@ -44,16 +60,17 @@ export async function POST(req: NextRequest) {
       auth:   { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
     })
 
-    // 2. Admin notification
+    // 1. Admin notification → correct inbox
     await transporter.sendMail({
-      from:    `"DES Systems" <${process.env.SMTP_USER}>`,
-      to:      route.adminEmail,
+      from:    `"${fromName}" <${fromEmail}>`,
+      to:      fromEmail,
+      bcc:     bccEmail ?? undefined,
       replyTo: email,
-      subject: `[dessystems.io] New inquiry — ${route.label} — ${name}`,
+      subject: `[dessystems.io] ${topicLabel} — ${name}`,
       html: `<div style="font-family:Arial,sans-serif;max-width:580px;padding:24px">
-        <div style="background:#080c14;padding:18px 24px;border-radius:8px 8px 0 0">
-          <div style="color:#fff;font-size:16px;font-weight:700">📩 New Inquiry — ${route.label}</div>
-          <div style="color:rgba(255,255,255,0.5);font-size:11px;margin-top:2px">dessystems.io · Tenant 500</div>
+        <div style="background:#080c14;padding:16px 24px;border-radius:8px 8px 0 0">
+          <div style="color:#fff;font-size:16px;font-weight:700">📩 New Inquiry — ${topicLabel}</div>
+          <div style="color:rgba(255,255,255,0.4);font-size:11px;margin-top:2px">dessystems.io · Tenant 500 · via ${fromEmail}</div>
         </div>
         <div style="border:1px solid #e2e8f0;border-top:none;border-radius:0 0 8px 8px;padding:20px 24px">
           <table style="width:100%;font-size:13px;border-collapse:collapse">
@@ -61,31 +78,33 @@ export async function POST(req: NextRequest) {
             <tr><td style="color:#64748b;padding:6px 0">Email</td><td><a href="mailto:${email}" style="color:#2563eb">${email}</a></td></tr>
             ${phone ? `<tr><td style="color:#64748b;padding:6px 0">Phone</td><td>${phone}</td></tr>` : ""}
             ${company ? `<tr><td style="color:#64748b;padding:6px 0">Company</td><td>${company}</td></tr>` : ""}
-            <tr><td style="color:#64748b;padding:6px 0">Topic</td><td style="color:#2563eb;font-weight:600">${route.label}</td></tr>
+            <tr><td style="color:#64748b;padding:6px 0">Topic</td><td style="color:#2563eb;font-weight:600">${topicLabel}</td></tr>
           </table>
           <div style="margin-top:16px;padding:14px;background:#f8fafc;border-radius:8px;font-size:13px;color:#334155;line-height:1.6;white-space:pre-wrap">${message}</div>
-          <div style="margin-top:12px;font-size:11px;color:#94a3b8">Received via dessystems.io</div>
+          <div style="margin-top:12px;font-size:11px;color:#94a3b8">Received via dessystems.io · ${new Date().toLocaleString("en-NL")}</div>
         </div>
       </div>`,
     })
 
-    // 3. Auto-responder to visitor
+    // 2. Auto-responder to visitor (from noreply)
+    const noreply = await getIdentity("DESSI_NOREPLY")
     await transporter.sendMail({
-      from:    `"DES Systems" <${process.env.SMTP_USER}>`,
+      from:    `"DES Systems" <${noreply?.email ?? "noreply@dessystems.io"}>`,
       to:      email,
+      replyTo: replyTo,
       subject: `Thank you for your inquiry — DES Systems`,
       html: `<div style="font-family:Arial,sans-serif;max-width:560px;padding:24px">
         <div style="background:linear-gradient(90deg,#080c14,#1e3a8a);padding:24px 32px;border-radius:8px 8px 0 0">
           <div style="color:#fff;font-size:18px;font-weight:700">DES <span style="color:#3b82f6">SYSTEMS</span></div>
-          <div style="color:rgba(255,255,255,0.5);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-top:2px">Enterprise Solutions</div>
+          <div style="color:rgba(255,255,255,0.4);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-top:2px">Enterprise Solutions · dessystems.io</div>
         </div>
         <div style="border:1px solid #e2e8f0;border-top:none;border-radius:0 0 8px 8px;padding:24px 32px">
           <p style="font-size:14px;color:#0f172a;font-weight:600;margin-bottom:8px">Dear ${firstName},</p>
           <p style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:12px">
-            Thank you for reaching out about <strong>${route.label}</strong>. We have received your inquiry and will respond within one business day.
+            Thank you for reaching out about <strong>${topicLabel}</strong>. We have received your inquiry and will respond within one business day.
           </p>
           <p style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:20px">
-            If your matter is urgent, you can reach us directly at <a href="mailto:info@dessystems.io" style="color:#2563eb">info@dessystems.io</a>.
+            For direct contact: <a href="mailto:${replyTo}" style="color:#2563eb">${replyTo}</a>
           </p>
           <div style="border-top:1px solid #e2e8f0;padding-top:16px;font-size:11px;color:#94a3b8">
             DES Systems · dessystems.io · Enterprise Solutions &amp; Digital Transformation<br>

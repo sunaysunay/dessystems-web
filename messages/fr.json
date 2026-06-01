@@ -1,0 +1,30 @@
+{
+  "Nav": {
+    "solutions":  "Solutions",
+    "services":   "Services",
+    "industries": "Industries",
+    "about":      "About Us",
+    "insights":   "Insights",
+    "careers":    "Careers",
+    "cta":        "Contact Us"
+  },
+  "Hero": {
+    "erp_title":        "ERP Consulting",
+    "erp_sub":          "Process optimisation and SAP expertise for real business impact.",
+    "mes_title":        "MES Integration",
+    "mes_sub":          "Connecting shop floor and ERP systems for real-time visibility.",
+    "automation_title": "Automation",
+    "automation_sub":   "Workflow automation and digital operations at scale.",
+    "platform_title":   "Business Operating Platform",
+    "platform_sub":     "Our proprietary platform powering businesses across Europe.",
+    "sap_title":        "SAP Logistics",
+    "sap_sub":          "PP · QM · S/4HANA · Manufacturing Excellence.",
+    "discover":         "Discover More"
+  },
+  "Home": {
+    "available": "Available for Remote & On-site Engagements"
+  },
+  "Footer": {
+    "tagline": "DES Systems delivers enterprise solutions, ERP consulting, MES integrations and automation to drive real business impact."
+  }
+}

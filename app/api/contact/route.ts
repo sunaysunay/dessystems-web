@@ -40,7 +40,8 @@ export async function POST(req: NextRequest) {
     const bccEmail  = identity?.bcc_email ?? null
     const replyTo   = identity?.reply_to ?? fromEmail
     const name      = `${firstName} ${lastName}`.trim()
-    const topicLabel: Record<string,string> = { erp:"ERP Consulting", mes:"MES Integration", automation:"Automation", freelance:"Freelance / Project", platform:"DES Platform" }[topic] ?? topic
+    const LABELS: Record<string,string> = { erp:"ERP Consulting", mes:"MES Integration", automation:"Automation", freelance:"Freelance / Project", platform:"DES Platform" }
+    const topicLabel: string = LABELS[topic as string] ?? (topic as string)
 
     // Save lead to Supabase tenant 500
     await sb.from("lead").insert({

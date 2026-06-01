@@ -78,17 +78,30 @@ export default function Nav() {
       }}>
       <div className="flex items-center justify-between px-[4%] h-16">
         {/* Logo */}
-        <Link href="/" className="flex flex-col leading-none">
-          <div className="flex items-baseline gap-2">
-            <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif" }}>
-              DES <span style={{ color: "var(--accent2)" }}>SYSTEMS</span>
+        <Link href="/" className="flex items-center gap-2">
+          <img
+            src="https://ttydqyiezarpdysqacaa.supabase.co/storage/v1/object/public/watermark-logos/dessystems-icon.png"
+            alt=""
+            style={{
+              height: "44px",
+              width: "44px",
+              objectFit: "contain",
+              mixBlendMode: "lighten",
+              flexShrink: 0,
+            }}
+          />
+          <div className="flex flex-col leading-none">
+            <div className="flex items-baseline gap-2">
+              <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif" }}>
+                DES <span style={{ color: "var(--accent2)" }}>SYSTEMS</span>
+              </div>
+              <div className="text-[11px] font-semibold" style={{ color: "var(--accent2)", letterSpacing: "0.04em", opacity: 0.85 }}>
+                AI | ERP | MES | CRM | DevOps
+              </div>
             </div>
-            <div className="text-[9px] font-semibold" style={{ color: "var(--accent2)", letterSpacing: "0.05em", opacity: 0.8 }}>
-              AI | ERP | MES | CRM | DevOps
+            <div className="text-[10px] tracking-[0.1em] uppercase mt-[-2px]" style={{ color: "var(--text3)" }}>
+              Enterprise Solutions
             </div>
-          </div>
-          <div className="text-[10px] tracking-[0.1em] uppercase mt-[-2px]" style={{ color: "var(--text3)" }}>
-            Enterprise Solutions
           </div>
         </Link>
 

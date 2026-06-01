@@ -1,30 +1,47 @@
 {
   "Nav": {
-    "solutions":  "Solutions",
-    "services":   "Services",
+    "solutions": "Solutions",
+    "services": "Services",
     "industries": "Industries",
-    "about":      "About Us",
-    "insights":   "Insights",
-    "careers":    "Careers",
-    "cta":        "Contact Us"
+    "about": "About Us",
+    "insights": "Insights",
+    "careers": "Careers",
+    "cta": "Contact Us"
   },
   "Hero": {
-    "erp_title":        "ERP Consulting",
-    "erp_sub":          "Process optimisation and SAP expertise for real business impact.",
-    "mes_title":        "MES Integration",
-    "mes_sub":          "Connecting shop floor and ERP systems for real-time visibility.",
+    "erp_title": "ERP Consulting",
+    "erp_sub": "Process optimisation and SAP expertise for real business impact.",
+    "mes_title": "MES Integration",
+    "mes_sub": "Connecting shop floor and ERP systems for real-time visibility.",
     "automation_title": "Automation",
-    "automation_sub":   "Workflow automation and digital operations at scale.",
-    "platform_title":   "Business Operating Platform",
-    "platform_sub":     "Our proprietary platform powering businesses across Europe.",
-    "sap_title":        "SAP Logistics",
-    "sap_sub":          "PP · QM · S/4HANA · Manufacturing Excellence.",
-    "discover":         "Discover More"
+    "automation_sub": "Workflow automation and digital operations at scale.",
+    "platform_title": "Business Operating Platform",
+    "platform_sub": "Our proprietary platform powering businesses across Europe.",
+    "sap_title": "SAP Logistics",
+    "sap_sub": "PP · QM · S/4HANA · Manufacturing Excellence.",
+    "discover": "Discover More"
   },
   "Home": {
     "available": "Available for Remote & On-site Engagements"
   },
   "Footer": {
     "tagline": "DES Systems delivers enterprise solutions, ERP consulting, MES integrations and automation to drive real business impact."
+  },
+  "Contact": {
+    "eyebrow": "Contact",
+    "title": "Discutons de votre projet",
+    "subtitle": "Disponible pour des missions à distance et sur site dans le monde entier.",
+    "send": "Envoyer le Message",
+    "sent_title": "Message envoyé!",
+    "sent_desc": "Nous avons reçu votre demande et répondrons dans un jour ouvrable.",
+    "send_another": "Envoyer un autre message",
+    "company_label": "Entreprise (optionnel)",
+    "company_ph": "Nom de votre entreprise"
+  },
+  "Solutions": {
+    "eyebrow": "Nos Solutions",
+    "title": "Solutions d'Entreprise. Impact Réel.",
+    "subtitle": "Solutions de bout en bout pour ERP, MES, automatisation et intégration.",
+    "discuss": "Discuter de cette Solution"
   }
 }

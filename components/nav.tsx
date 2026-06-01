@@ -85,6 +85,9 @@ export default function Nav() {
           <div className="text-[10px] tracking-[0.1em] uppercase mt-[-2px]" style={{ color: "var(--text3)" }}>
             Enterprise Solutions
           </div>
+          <div className="text-[9px] font-medium mt-[1px]" style={{ color: "var(--accent2)", letterSpacing: "0.04em" }}>
+            AI | ERP | MES | CRM | DevOps
+          </div>
         </Link>
 
         {/* Desktop */}

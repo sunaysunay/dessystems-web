@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl"
 
 export default function HeroPanels() {
   const t = useTranslations("Hero")
-  const [active, setActive] = useState(3)
+  const [active, setActive] = useState(1)
 
   const panels = [
     {
@@ -19,12 +19,20 @@ export default function HeroPanels() {
       num: "01",
     },
     {
+      title: t("platform_title"),
+      subtitle: t("platform_sub"),
+      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+      href: "/platform",
+      accent: "#3b82f6",
+      num: "02",
+    },
+    {
       title: t("mes_title"),
       subtitle: t("mes_sub"),
       img: "https://images.unsplash.com/photo-1565793979963-e6a42c9a37c8?w=1200&q=80",
       href: "/solutions#mes",
       accent: "#10b981",
-      num: "02",
+      num: "03",
     },
     {
       title: t("automation_title"),
@@ -32,14 +40,6 @@ export default function HeroPanels() {
       img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80",
       href: "/solutions#automation",
       accent: "#7c3aed",
-      num: "03",
-    },
-    {
-      title: t("platform_title"),
-      subtitle: t("platform_sub"),
-      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
-      href: "/platform",
-      accent: "#3b82f6",
       num: "04",
     },
 

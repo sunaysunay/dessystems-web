@@ -13,7 +13,7 @@ export default function HeroPanels() {
     {
       title: t("erp_title"),
       subtitle: t("erp_sub"),
-      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80",
+      img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80",
       href: "/solutions#erp",
       accent: "#2563eb",
       num: "01",
@@ -42,18 +42,11 @@ export default function HeroPanels() {
       accent: "#3b82f6",
       num: "04",
     },
-    {
-      title: t("sap_title"),
-      subtitle: t("sap_sub"),
-      img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80",
-      href: "/solutions#sap",
-      accent: "#f59e0b",
-      num: "05",
-    },
+
   ]
 
   return (
-    <section className="h-screen flex overflow-hidden">
+    <section className="flex overflow-hidden" style={{height:"62vh",minHeight:"480px"}}>
       {panels.map((p, i) => (
         <motion.div
           key={p.title}

@@ -82,8 +82,12 @@ export default function Nav() {
           <img
             src="https://ttydqyiezarpdysqacaa.supabase.co/storage/v1/object/public/watermark-logos/dessystems-logo.png"
             alt="DES Systems"
-            className="h-9 w-auto object-contain rounded-lg px-2 py-1"
-            style={{ background: "rgba(255,255,255,0.95)" }}
+            style={{
+              height: "40px",
+              width: "auto",
+              objectFit: "contain",
+              filter: "brightness(0) invert(1) drop-shadow(0 0 6px rgba(56,189,248,0.5))",
+            }}
           />
         </Link>
 

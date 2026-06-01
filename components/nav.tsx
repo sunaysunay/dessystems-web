@@ -79,18 +79,27 @@ export default function Nav() {
       <div className="flex items-center justify-between px-[4%] h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <img
-            src="https://ttydqyiezarpdysqacaa.supabase.co/storage/v1/object/public/watermark-logos/dessystems-icon.png"
-            alt=""
-            style={{
-              height: "44px",
-              width: "44px",
-              objectFit: "contain",
-              filter: "invert(1) sepia(0.6) saturate(3) hue-rotate(197deg) brightness(1.05)",
-              mixBlendMode: "screen",
-              flexShrink: 0,
-            }}
-          />
+          <div style={{
+            width: "40px",
+            height: "40px",
+            borderRadius: "8px",
+            overflow: "hidden",
+            flexShrink: 0,
+            background: "rgba(8,12,20,0.0)",
+          }}>
+            <img
+              src="https://ttydqyiezarpdysqacaa.supabase.co/storage/v1/object/public/watermark-logos/dessystems-icon.png"
+              alt=""
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                filter: "invert(1) sepia(0.5) saturate(3) hue-rotate(197deg) brightness(1.1)",
+                mixBlendMode: "screen",
+                display: "block",
+              }}
+            />
+          </div>
           <div className="flex flex-col leading-none">
             <div className="flex items-baseline gap-2">
               <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif" }}>

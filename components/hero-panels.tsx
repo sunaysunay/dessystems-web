@@ -7,7 +7,23 @@ import { useTranslations } from "next-intl"
 
 export default function HeroPanels() {
   const t = useTranslations("Hero")
-  const [active, setActive] = useState(3)
+  const [active, setActive] = useState(1)
+
+  const panels = [
+,
+,
+,
+,
+]"use client"
+import { motion } from "framer-motion"
+import { useState } from "react"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+import { useTranslations } from "next-intl"
+
+export default function HeroPanels() {
+  const t = useTranslations("Hero")
+  const [active, setActive] = useState(1)
 
   const panels = [
     {

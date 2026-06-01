@@ -79,14 +79,16 @@ export default function Nav() {
       <div className="flex items-center justify-between px-[4%] h-16">
         {/* Logo */}
         <Link href="/" className="flex flex-col leading-none">
-          <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif" }}>
-            DES <span style={{ color: "var(--accent2)" }}>SYSTEMS</span>
+          <div className="flex items-baseline gap-2">
+            <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif" }}>
+              DES <span style={{ color: "var(--accent2)" }}>SYSTEMS</span>
+            </div>
+            <div className="text-[9px] font-semibold" style={{ color: "var(--accent2)", letterSpacing: "0.05em", opacity: 0.8 }}>
+              AI | ERP | MES | CRM | DevOps
+            </div>
           </div>
           <div className="text-[10px] tracking-[0.1em] uppercase mt-[-2px]" style={{ color: "var(--text3)" }}>
             Enterprise Solutions
-          </div>
-          <div className="text-[9px] font-medium mt-[1px]" style={{ color: "var(--accent2)", letterSpacing: "0.04em" }}>
-            AI | ERP | MES | CRM | DevOps
           </div>
         </Link>
 

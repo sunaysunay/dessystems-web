@@ -39,7 +39,7 @@ export function ClickTracker() {
       const href       = (tracked as HTMLAnchorElement).href || tracked.querySelector("a")?.href || ""
       const sessionId  = getSessionId()
 
-      navigator.sendBeacon("/api/log", JSON.stringify({
+      const payload = JSON.stringify({
         event_type: "click",
         page:       window.location.pathname,
         session_id: sessionId,
@@ -51,7 +51,8 @@ export function ClickTracker() {
           x:           Math.round(e.clientX),
           y:           Math.round(e.clientY),
         },
-      }))
+      })
+      navigator.sendBeacon("/api/log", new Blob([payload], { type: 'application/json' }))
     }
 
     document.addEventListener("click", handleClick, { passive: true })

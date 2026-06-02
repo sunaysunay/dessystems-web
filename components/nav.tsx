@@ -1,4 +1,5 @@
 "use client"
+import { ClickTracker } from "@/components/click-tracker"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Menu, X, ChevronDown } from "lucide-react"
@@ -70,6 +71,8 @@ export default function Nav() {
   ]
 
   return (
+    <>
+    <ClickTracker />
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         background: scrolled ? "rgba(8,12,20,0.97)" : "rgba(8,12,20,0.85)",
@@ -137,5 +140,6 @@ export default function Nav() {
         </div>
       )}
     </header>
+    </>
   )
 }

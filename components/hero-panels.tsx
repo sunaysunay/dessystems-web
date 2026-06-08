@@ -29,7 +29,7 @@ export default function HeroPanels() {
     {
       title: t("mes_title"),
       subtitle: t("mes_sub"),
-      img: "https://images.unsplash.com/photo-1565793979963-e6a42c9a37c8?w=1200&q=80",
+      img: "/mes-integration-bg.jpg",
       href: "/solutions#mes",
       accent: "#10b981",
       num: "03",

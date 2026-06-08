@@ -119,7 +119,29 @@ export async function GET(
 ) {
   const { slug } = await params
   const short_code = slug?.[0]
-  if (!short_code) return NextResponse.redirect(new URL("/en", req.url))
+
+  // Render the themed 404 instead of silently bouncing unknown / unmapped
+  // URLs back to the homepage. "__nf__" is a single path segment that can
+  // never be a valid locale, so requesting it triggers the [locale] layout's
+  // notFound(), which renders the themed not-found page. We fetch that
+  // rendered HTML internally and serve it (with a 404 status) at the
+  // original URL — NextResponse.rewrite() isn't supported in route handlers.
+  const renderNotFound = async () => {
+    try {
+      const res = await fetch(new URL('/__nf__', req.url), {
+        headers: { cookie: req.headers.get('cookie') ?? '' },
+      })
+      const html = await res.text()
+      return new NextResponse(html, {
+        status: 404,
+        headers: { 'content-type': 'text/html; charset=utf-8' },
+      })
+    } catch {
+      return new NextResponse('Not Found', { status: 404 })
+    }
+  }
+
+  if (!short_code) return renderNotFound()
 
   const { data: link } = await sb
     .from("short_links")
@@ -129,12 +151,12 @@ export async function GET(
     .maybeSingle()
 
   if (!link) {
-    return NextResponse.redirect(new URL("/en", req.url))
+    return renderNotFound()
   }
 
   // Check expiry
   if (link.expires_at && new Date(link.expires_at) < new Date()) {
-    return NextResponse.redirect(new URL("/en", req.url))
+    return renderNotFound()
   }
 
   // Immediate redirect

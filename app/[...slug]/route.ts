@@ -128,8 +128,17 @@ export async function GET(
   // original URL — NextResponse.rewrite() isn't supported in route handlers.
   const renderNotFound = async () => {
     try {
-      const res = await fetch(new URL('/__nf__', req.url), {
-        headers: { cookie: req.headers.get('cookie') ?? '' },
+      // Fetch from the local server directly — building the URL from req.url
+      // would target the public hostname (e.g. dessystems.io behind
+      // Cloudflare), looping the request back out through the proxy and
+      // timing out.
+      const internalUrl = new URL('/__nf__', `http://127.0.0.1:${process.env.PORT ?? 3003}`)
+      internalUrl.search = req.nextUrl.search
+      const res = await fetch(internalUrl, {
+        headers: {
+          cookie: req.headers.get('cookie') ?? '',
+          host: req.headers.get('host') ?? '',
+        },
       })
       const html = await res.text()
       return new NextResponse(html, {

@@ -108,6 +108,11 @@ export default function Nav() {
 
         <div className="hidden lg:flex items-center gap-3">
           <LangSwitcher />
+          <Link href="/deslab"
+            className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors"
+            style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
+            Laboratory
+          </Link>
           <Link href="/contact"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors text-white"
             style={{ background: "var(--accent)" }}>
@@ -129,8 +134,13 @@ export default function Nav() {
               {l.label}
             </Link>
           ))}
-          <div className="flex items-center justify-between mt-3">
+          <div className="flex items-center justify-between mt-3 gap-2">
             <LangSwitcher />
+            <Link href="/deslab" onClick={() => setOpen(false)}
+              className="text-sm font-medium px-4 py-2 rounded-md"
+              style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
+              Laboratory
+            </Link>
             <Link href="/contact" onClick={() => setOpen(false)}
               className="text-sm font-medium px-4 py-2 rounded-md text-white"
               style={{ background: "var(--accent)" }}>

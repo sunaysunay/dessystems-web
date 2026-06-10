@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "@/src/i18n/routing"
 import { NotFoundTracker } from "./not-found-tracker"
 import { NotFoundActions, NotFoundTrace } from "./not-found-client"
 

@@ -1,5 +1,5 @@
 import HeroPanels from "@/components/hero-panels"
-import Link from "next/link"
+import { Link } from "@/src/i18n/routing"
 import { ArrowRight, CheckCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
 

@@ -1,10 +1,10 @@
 "use client"
 import { ClickTracker } from "@/components/click-tracker"
-import Link from "next/link"
+import { Link } from "@/src/i18n/routing"
 import { useState, useEffect } from "react"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { useTranslations, useLocale } from "next-intl"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname } from "@/src/i18n/routing"
 
 const LOCALES = [
   { code: "en", label: "EN" },
@@ -22,9 +22,7 @@ function LangSwitcher() {
 
   function switchTo(code: string) {
     setOpen(false)
-    const segs = pathname.split("/")
-    segs[1] = code
-    router.push(segs.join("/") || "/")
+    router.replace(pathname, { locale: code })
   }
 
   return (

@@ -1,5 +1,5 @@
 ﻿import type { Metadata } from "next"
-import Link from "next/link"
+import { Link } from "@/src/i18n/routing"
 import { ArrowRight, Sparkles, Cpu, FlaskConical, Bot, Zap, Database } from "lucide-react"
 
 export const metadata: Metadata = {

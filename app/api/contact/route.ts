@@ -44,14 +44,16 @@ export async function POST(req: NextRequest) {
     const topicLabel: string = LABELS[topic as string] ?? (topic as string)
 
     // Save lead to Supabase tenant 500
-    await sb.from("lead").insert({
+    const { data: lead, error: leadError } = await sb.from("lead").insert({
       tenant_id: 500,
       name, email,
       phone: phone || null,
       message: `[${topicLabel}]${company ? ` | Company: ${company}` : ""}\n\n${message}`,
       status: "new",
       locale: "en",
-    }).then(({ error }) => { if (error) console.warn("[dessi lead]", error.message) })
+    }).select("id, internal_id").single()
+    if (leadError) console.warn("[dessi lead]", leadError.message)
+    const internalId: string = lead?.internal_id?.toString() ?? lead?.id?.slice(0, 8) ?? ""
 
     // SMTP via Zoho — send FROM the correct @dessystems.io alias
     const transporter = nodemailer.createTransport({
@@ -67,11 +69,11 @@ export async function POST(req: NextRequest) {
       to:      fromEmail,
       bcc:     bccEmail ?? undefined,
       replyTo: email,
-      subject: `[dessystems.io] ${topicLabel} — ${name}`,
+      subject: `[#${internalId}] [dessystems.io] ${topicLabel} — ${name}`,
       html: `<div style="font-family:Arial,sans-serif;max-width:580px;padding:24px">
         <div style="background:#080c14;padding:16px 24px;border-radius:8px 8px 0 0">
           <div style="color:#fff;font-size:16px;font-weight:700">📩 New Inquiry — ${topicLabel}</div>
-          <div style="color:rgba(255,255,255,0.4);font-size:11px;margin-top:2px">dessystems.io · Tenant 500 · via ${fromEmail}</div>
+          <div style="color:rgba(255,255,255,0.4);font-size:11px;margin-top:2px">dessystems.io · Tenant 500 · Ref #${internalId} · via ${fromEmail}</div>
         </div>
         <div style="border:1px solid #e2e8f0;border-top:none;border-radius:0 0 8px 8px;padding:20px 24px">
           <table style="width:100%;font-size:13px;border-collapse:collapse">
@@ -93,7 +95,7 @@ export async function POST(req: NextRequest) {
       from:    `"DES Systems" <${noreply?.email ?? "noreply@dessystems.io"}>`,
       to:      email,
       replyTo: replyTo,
-      subject: `Thank you for your inquiry — DES Systems`,
+      subject: `[#${internalId}] Thank you for your inquiry — DES Systems`,
       html: `<div style="font-family:Arial,sans-serif;max-width:560px;padding:24px">
         <div style="background:linear-gradient(90deg,#080c14,#1e3a8a);padding:24px 32px;border-radius:8px 8px 0 0">
           <div style="color:#fff;font-size:18px;font-weight:700">DES <span style="color:#3b82f6">SYSTEMS</span></div>
@@ -104,9 +106,12 @@ export async function POST(req: NextRequest) {
           <p style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:12px">
             Thank you for reaching out about <strong>${topicLabel}</strong>. We have received your inquiry and will respond within one business day.
           </p>
-          <p style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:20px">
+          <p style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:12px">
             For direct contact: <a href="mailto:${replyTo}" style="color:#2563eb">${replyTo}</a>
           </p>
+          <div style="margin-bottom:20px;padding:10px 14px;background:#f8fafc;border-radius:8px;font-size:12px;color:#64748b">
+            Reference ID: <strong style="color:#0f172a">#${internalId}</strong>
+          </div>
           <div style="border-top:1px solid #e2e8f0;padding-top:16px;font-size:11px;color:#94a3b8">
             DES Systems · dessystems.io · Enterprise Solutions &amp; Digital Transformation<br>
             Powered by DES Business Operating Platform
@@ -115,7 +120,7 @@ export async function POST(req: NextRequest) {
       </div>`,
     })
 
-    return NextResponse.json({ ok: true })
+    return NextResponse.json({ ok: true, leadId: internalId })
   } catch (err: unknown) {
     console.error("[dessystems/contact]", err)
     return NextResponse.json({ error: "Send failed" }, { status: 500 })

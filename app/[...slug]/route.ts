@@ -126,30 +126,17 @@ export async function GET(
   // notFound(), which renders the themed not-found page. We fetch that
   // rendered HTML internally and serve it (with a 404 status) at the
   // original URL — NextResponse.rewrite() isn't supported in route handlers.
-  const renderNotFound = async () => {
-    try {
-      // Fetch from the local server directly — building the URL from req.url
-      // would target the public hostname (e.g. dessystems.io behind
-      // Cloudflare), looping the request back out through the proxy and
-      // timing out.
-      const internalUrl = new URL('/__nf__', `http://127.0.0.1:${process.env.PORT ?? 3003}`)
-      internalUrl.search = req.nextUrl.search
-      const res = await fetch(internalUrl, {
-        headers: {
-          cookie: req.headers.get('cookie') ?? '',
-          host: req.headers.get('host') ?? '',
-        },
-      })
-      const html = await res.text()
-      return new NextResponse(html, {
-        status: 404,
-        headers: { 'content-type': 'text/html; charset=utf-8' },
-      })
-    } catch {
-      return new NextResponse('Not Found', { status: 404 })
-    }
+  const renderNotFound = () => {
+    // Branded 404 returned inline. We deliberately do NOT self-fetch an
+    // internal URL here: every unmapped path is served by THIS catch-all
+    // route, so any internal fetch (/__nf__, /en/__nf__, ...) re-enters this
+    // handler and recurses infinitely (connection pile-up + timeouts).
+    const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>404 — Page Not Found</title><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a0e1a;color:#e2e8f0;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}.box{text-align:center;padding:2rem}.code{font-size:5.5rem;font-weight:800;color:#f59e0b;letter-spacing:-.05em;line-height:1}.msg{margin:.75rem 0 1.75rem;color:#94a3b8;font-size:1rem}a{color:#f59e0b;text-decoration:none;border:1px solid rgba(245,158,11,.35);padding:.65rem 1.3rem;border-radius:.6rem;font-size:.9rem}a:hover{background:rgba(245,158,11,.12)}</style></head><body><div class="box"><div class="code">404</div><div class="msg">The page you&rsquo;re looking for doesn&rsquo;t exist.</div><a href="/">Return home</a></div></body></html>`
+    return new NextResponse(html, {
+      status: 404,
+      headers: { "content-type": "text/html; charset=utf-8" },
+    })
   }
-
   if (!short_code) return renderNotFound()
 
   const { data: link } = await sb

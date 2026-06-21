@@ -131,7 +131,7 @@ export default function ContactPage() {
         )}
 
         {/* Contact info strip */}
-        <div className="mt-8 grid grid-cols-3 gap-4">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
             { ico: "✉", label: t("info_email"), val: "info@dessystems.io" },
             { ico: "📞", label: t("info_phone"), val: "+31 6 82545600" },

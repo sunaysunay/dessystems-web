@@ -241,5 +241,11 @@
     "cta_title": "Een idee dat een prototype verdient?",
     "cta_desc": "We experimenteren voortdurend met nieuwe manieren om bedrijfsprocessen sneller en slimmer te maken. Wil je samenwerken of een tool testen? Neem contact op met het team.",
     "cta_btn": "Praat met DES Systems"
+  },
+  "CookieConsent": {
+    "title": "Cookies & Privacy",
+    "description": "Wij gebruiken cookies om uw ervaring te verbeteren en websiteverkeer te analyseren. Door op \"Accepteren\" te klikken, gaat u akkoord met ons gebruik van cookies.",
+    "accept": "Accepteren",
+    "decline": "Weigeren"
   }
 }

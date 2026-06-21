@@ -241,5 +241,11 @@
     "cta_title": "Prototipe değer bir fikriniz mi var?",
     "cta_desc": "İş operasyonlarını daha hızlı ve akıllı hale getirmenin yeni yollarını sürekli deniyoruz. İş birliği yapmak veya bir aracı pilot olarak kullanmak isterseniz ekiple iletişime geçin.",
     "cta_btn": "DES Systems ile görüşün"
+  },
+  "CookieConsent": {
+    "title": "Çerezler ve Gizlilik",
+    "description": "Deneyiminizi geliştirmek ve web sitesi trafiğini analiz etmek için çerezler kullanıyoruz. \"Kabul Et\"e tıklayarak çerez kullanımımızı kabul etmiş olursunuz.",
+    "accept": "Kabul Et",
+    "decline": "Reddet"
   }
 }

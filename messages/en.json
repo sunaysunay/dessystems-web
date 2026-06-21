@@ -241,5 +241,11 @@
     "cta_title": "Got an idea worth prototyping?",
     "cta_desc": "We're always experimenting with new ways to make business operations faster and smarter. If you'd like to collaborate or pilot a tool, reach out to the team.",
     "cta_btn": "Talk to DES Systems"
+  },
+  "CookieConsent": {
+    "title": "Cookies & Privacy",
+    "description": "We use cookies to enhance your experience and analyze website traffic. By clicking \"Accept\", you agree to our use of cookies.",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }

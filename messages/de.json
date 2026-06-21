@@ -241,5 +241,11 @@
     "cta_title": "Eine Idee, die einen Prototyp verdient?",
     "cta_desc": "Wir experimentieren ständig mit neuen Wegen, Geschäftsabläufe schneller und intelligenter zu machen. Für Kooperationen oder Pilotprojekte: Sprechen Sie uns an.",
     "cta_btn": "Mit DES Systems sprechen"
+  },
+  "CookieConsent": {
+    "title": "Cookies & Datenschutz",
+    "description": "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern und den Website-Verkehr zu analysieren. Durch Klicken auf \"Akzeptieren\" stimmen Sie unserer Verwendung von Cookies zu.",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen"
   }
 }

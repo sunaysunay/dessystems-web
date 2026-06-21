@@ -241,5 +241,11 @@
     "cta_title": "Une idée qui mérite un prototype ?",
     "cta_desc": "Nous expérimentons en permanence de nouvelles façons de rendre les opérations plus rapides et plus intelligentes. Pour collaborer ou piloter un outil, contactez l'équipe.",
     "cta_btn": "Parler à DES Systems"
+  },
+  "CookieConsent": {
+    "title": "Cookies & Confidentialité",
+    "description": "Nous utilisons des cookies pour améliorer votre expérience et analyser le trafic du site Web. En cliquant sur « Accepter », vous acceptez notre utilisation des cookies.",
+    "accept": "Accepter",
+    "decline": "Refuser"
   }
 }

@@ -84,7 +84,7 @@ export default function Nav() {
             <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif" }}>
               DES <span style={{ color: "var(--accent2)" }}>SYSTEMS</span>
             </div>
-            <div className="text-[11px] font-semibold" style={{ color: "var(--accent2)", letterSpacing: "0.04em", opacity: 0.85 }}>
+            <div className="hidden sm:block text-[11px] font-semibold" style={{ color: "var(--accent2)", letterSpacing: "0.04em", opacity: 0.85 }}>
               AI | ERP | MES | CRM | DevOps
             </div>
           </div>

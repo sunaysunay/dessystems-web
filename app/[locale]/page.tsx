@@ -76,7 +76,20 @@ const css = `
 .dx .cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .dx .cta .btn-ghost{color:#fff;border-color:rgba(255,255,255,.28)}
 .dx .cta .btn-ghost:hover{background:rgba(255,255,255,.08)}
+.dx .flier{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);overflow:hidden}
+.dx .flier .track{display:flex;width:max-content;white-space:nowrap;padding:13px 0;animation:dxmarq 30s linear infinite}
+.dx .flier:hover .track{animation-play-state:paused}
+.dx .flier .item{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9fb0cc;padding:0 38px;position:relative;flex:none}
+.dx .flier .item:before{content:"";position:absolute;left:-3px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
+@keyframes dxmarq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.dx .flier .track{animation:none}}
 `
+
+const flier = [
+  "AI · ERP · MES · CRM · DevOps", "SAP S/4HANA", "ERP Consulting", "MES Integration",
+  "Workflow Automation", "Autonomous AI Agents", "EDI / IDoc", "NL · BE · DE Markets",
+  "Roosendaal HQ", "Enterprise Solutions",
+]
 
 const solutions = [
   { Icon: LayoutGrid, title: "ERP & SAP Consulting", desc: "S/4HANA implementation, support and optimisation across MM, PP, QM, WM and SD." },
@@ -88,8 +101,14 @@ const solutions = [
 const checks = ["Process Analysis & Design", "ERP Implementation", "Data Migration", "System Optimisation", "Training & Support", "Change Management"]
 const sapModules = ["SAP MM", "SAP PP", "SAP QM", "SAP WM/EWM", "SAP PM", "SAP SD", "SAP TM"]
 
+const mesChecks = ["MES Rollout & Configuration", "Shop-Floor Connectivity", "Real-Time OEE & Monitoring", "ERP ↔ MES Synchronisation", "IoT & Machine Data", "EDI / IDoc Interfaces"]
+const mesModules = ["OPC-UA", "MQTT", "SCADA", "PLC", "OEE", "SAP DM", "EDI", "IDoc"]
+
+const ecomChecks = ["Webshop Development", "Headless Commerce", "SEO & Content", "Paid Media (SEA / Social)", "CRM & Marketing Automation", "Analytics & CRO"]
+const ecomModules = ["Shopify", "Next.js", "Headless", "SEO", "Google Ads", "Meta Ads", "Klaviyo", "GA4"]
+
 const stats = [
-  ["10+", "Years of SAP experience"], ["50+", "Successful projects"],
+  ["23+", "Years of SAP experience"], ["50+", "Successful projects"],
   ["99.2%", "On-time delivery"], ["EU", "Coverage & compliance"],
 ]
 
@@ -122,6 +141,13 @@ export default function HomePage() {
 
       <div className="dx">
         <style dangerouslySetInnerHTML={{ __html: css }} />
+
+        {/* FLIER — running banner (descamper style) */}
+        <div className="flier" aria-hidden="true">
+          <div className="track">
+            {[...flier, ...flier].map((item, i) => <span className="item" key={i}>{item}</span>)}
+          </div>
+        </div>
 
         {/* LOGOS */}
         <section className="logos">
@@ -171,6 +197,50 @@ export default function HomePage() {
               <p>Deep, hands-on knowledge of SAP S/4HANA logistics modules — from planning to execution, greenfield to brownfield.</p>
               <div className="modules">
                 {sapModules.map(m => <span className="chip" key={m}>{m}</span>)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* MES */}
+        <section className="section" id="mes">
+          <div className="wrap split">
+            <div>
+              <span className="eyebrow">MES & Integration</span>
+              <h2 style={{ margin: "10px 0 16px" }}>Establish MES and integrations</h2>
+              <p className="lead">We connect shop-floor systems to your ERP — deploying MES, capturing machine data in real time, and wiring up the integrations that keep production and planning in sync.</p>
+              <ul className="checks">
+                {mesChecks.map(c => <li key={c}><Check />{c}</li>)}
+              </ul>
+              <Link href="/solutions" className="btn btn-primary">View MES services</Link>
+            </div>
+            <div className="panelcard">
+              <h3>Shop-Floor to Top-Floor</h3>
+              <p>From sensor to SAP — unified production data across every layer of your operation.</p>
+              <div className="modules">
+                {mesModules.map(m => <span className="chip" key={m}>{m}</span>)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* E-COMMERCE & MARKETING */}
+        <section className="section soft" id="ecommerce">
+          <div className="wrap split">
+            <div>
+              <span className="eyebrow">E-Commerce & Marketing</span>
+              <h2 style={{ margin: "10px 0 16px" }}>Commerce and growth marketing</h2>
+              <p className="lead">We build and scale online stores and run the marketing that fills them — from headless webshops to SEO, paid media and lifecycle automation.</p>
+              <ul className="checks">
+                {ecomChecks.map(c => <li key={c}><Check />{c}</li>)}
+              </ul>
+              <Link href="/contact" className="btn btn-primary">View commerce services</Link>
+            </div>
+            <div className="panelcard">
+              <h3>Digital Growth Stack</h3>
+              <p>A modern commerce and marketing toolkit, integrated end to end with your ERP and data.</p>
+              <div className="modules">
+                {ecomModules.map(m => <span className="chip" key={m}>{m}</span>)}
               </div>
             </div>
           </div>

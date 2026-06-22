@@ -49,7 +49,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2">
             <div className="font-bold text-[18px] tracking-wide mb-0.5" style={{ fontFamily: "'Syne',sans-serif" }}>
-              DES <span style={{ color: "var(--accent2)" }}>SYSTEMS</span>
+              DES <span style={{ color: "var(--accent2)" }}>TECH</span>
             </div>
             <div className="text-[10px] tracking-[0.1em] uppercase mb-4" style={{ color: "var(--text3)" }}>Enterprise Solutions</div>
             <p className="text-[13px] leading-relaxed mb-5 max-w-xs" style={{ color: "var(--text3)" }}>

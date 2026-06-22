@@ -82,10 +82,7 @@ export default function Nav() {
         <Link href="/" className="flex flex-col leading-none">
           <div className="flex items-baseline gap-2">
             <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif" }}>
-              DES <span style={{ color: "var(--accent2)" }}>SYSTEMS</span>
-            </div>
-            <div className="hidden sm:block text-[11px] font-semibold" style={{ color: "var(--accent2)", letterSpacing: "0.04em", opacity: 0.85 }}>
-              AI | ERP | MES | CRM | DevOps
+              DES <span style={{ color: "var(--accent2)" }}>TECH</span>
             </div>
           </div>
           <div className="text-[10px] tracking-[0.1em] uppercase mt-[-2px]" style={{ color: "var(--text3)" }}>

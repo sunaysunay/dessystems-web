@@ -86,8 +86,11 @@ const css = `
 
 const flier = [
   "AI · ERP · MES · CRM · DevOps", "SAP S/4HANA", "ERP Consulting", "MES Integration",
-  "Workflow Automation", "Autonomous AI Agents", "EDI / IDoc",
-  "Enterprise Solutions",
+  "Workflow Automation", "Autonomous AI Agents", "EDI / IDoc", "Enterprise Solutions",
+  "AI Marketing Automation", "AI Lead Generation", "Predictive Lead Scoring",
+  "E-Commerce AI", "Headless Commerce", "AI Product Listings", "Smart Catalog Management",
+  "AI Content Generation", "Programmatic Advertising", "AI Personalisation",
+  "Conversational AI", "RAG / LLM Pipelines", "Corporate AI Solutions",
 ]
 
 const solutions = [

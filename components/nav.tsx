@@ -29,16 +29,16 @@ function LangSwitcher() {
     <div className="relative">
       <button onClick={() => setOpen(v => !v)}
         className="flex items-center gap-1 text-[12px] font-semibold px-2 py-1 rounded-md transition-colors"
-        style={{ color: "var(--text2)" }}>
+        style={{ color: "rgba(255,255,255,0.80)" }}>
         {locale.toUpperCase()} <ChevronDown className="w-3 h-3" />
       </button>
       {open && (
         <div className="absolute right-0 top-full mt-1 rounded-lg overflow-hidden shadow-xl min-w-[70px] z-50"
-          style={{ background: "var(--bg3)", border: "1px solid var(--border2)" }}>
+          style={{ background: "#111c30", border: "1px solid rgba(255,255,255,0.16)" }}>
           {LOCALES.map(l => (
             <button key={l.code} onClick={() => switchTo(l.code)}
               className="block w-full text-left px-4 py-2 text-[12px] font-semibold transition-colors"
-              style={{ color: l.code === locale ? "var(--text)" : "var(--text3)", background: l.code === locale ? "rgba(37,99,235,0.15)" : "transparent" }}>
+              style={{ color: l.code === locale ? "#ffffff" : "rgba(255,255,255,0.52)", background: l.code === locale ? "rgba(37,99,235,0.15)" : "transparent" }}>
               {l.label}
             </button>
           ))}
@@ -73,19 +73,20 @@ export default function Nav() {
     <ClickTracker />
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "var(--header-bg-solid)" : "var(--header-bg)",
+        background: "linear-gradient(100deg, #0e1524 0%, #16223c 55%, #0f1932 100%)",
         backdropFilter: "blur(12px)",
-        borderBottom: "1px solid var(--border)",
+        borderBottom: "1px solid rgba(255,255,255,0.10)",
+        boxShadow: scrolled ? "0 10px 30px rgba(0,0,0,0.35)" : "none",
       }}>
       <div className="flex items-center justify-between px-[4%] h-16">
         {/* Logo */}
         <Link href="/" className="flex flex-col leading-none">
           <div className="flex items-baseline gap-2">
-            <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif" }}>
+            <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif", color: "#fff" }}>
               DES <span style={{ color: "var(--accent2)" }}>TECH</span>
             </div>
           </div>
-          <div className="text-[10px] tracking-[0.1em] uppercase mt-[-2px]" style={{ color: "var(--text3)" }}>
+          <div className="text-[10px] tracking-[0.1em] uppercase mt-[-2px]" style={{ color: "rgba(255,255,255,0.52)" }}>
             Enterprise Solutions
           </div>
         </Link>
@@ -95,7 +96,7 @@ export default function Nav() {
           {links.map(l => (
             <Link key={l.href} href={l.href}
               className="text-[13px] transition-colors hover:opacity-100"
-              style={{ color: "var(--text2)" }}>
+              style={{ color: "rgba(255,255,255,0.80)" }}>
               {l.label}
             </Link>
           ))}
@@ -104,12 +105,12 @@ export default function Nav() {
         <div className="hidden lg:flex items-center gap-3">
           <Link href="/deslab"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
-            style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
+            style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>
             Laboratory
           </Link>
           <a href="https://deshold.com" target="_blank" rel="noopener noreferrer"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
-            style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
+            style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>
             DES Group
           </a>
           <LangSwitcher />
@@ -120,29 +121,29 @@ export default function Nav() {
           </Link>
         </div>
 
-        <button className="lg:hidden p-1.5" style={{ color: "var(--text)" }} onClick={() => setOpen(v => !v)}>
+        <button className="lg:hidden p-1.5" style={{ color: "#ffffff" }} onClick={() => setOpen(v => !v)}>
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
       {open && (
-        <div className="lg:hidden px-[4%] pb-4" style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)" }}>
+        <div className="lg:hidden px-[4%] pb-4" style={{ background: "#0e1626", borderTop: "1px solid rgba(255,255,255,0.10)" }}>
           {links.map(l => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
               className="block py-2.5 text-sm border-b"
-              style={{ color: "var(--text2)", borderColor: "var(--border)" }}>
+              style={{ color: "rgba(255,255,255,0.80)", borderColor: "rgba(255,255,255,0.10)" }}>
               {l.label}
             </Link>
           ))}
           <div className="flex items-center justify-between mt-3 gap-2">
             <Link href="/deslab" onClick={() => setOpen(false)}
               className="text-sm font-medium px-4 py-2 rounded-md"
-              style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
+              style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>
               Laboratory
             </Link>
             <a href="https://deshold.com" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}
               className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors w-fit"
-              style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
+              style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>
               DES Group
             </a>
             <LangSwitcher />

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { useTranslations, useLocale } from "next-intl"
 import { useRouter, usePathname } from "@/src/i18n/routing"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const LOCALES = [
   { code: "en", label: "EN" },
@@ -73,7 +74,7 @@ export default function Nav() {
     <ClickTracker />
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "rgba(8,12,20,0.97)" : "rgba(8,12,20,0.85)",
+        background: scrolled ? "var(--header-bg-solid)" : "var(--header-bg)",
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid var(--border)",
       }}>
@@ -113,6 +114,7 @@ export default function Nav() {
             DES Group
           </a>
           <LangSwitcher />
+          <ThemeToggle />
           <Link href="/contact"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors text-white"
             style={{ background: "var(--accent)" }}>
@@ -120,7 +122,7 @@ export default function Nav() {
           </Link>
         </div>
 
-        <button className="lg:hidden p-1.5 text-white" onClick={() => setOpen(v => !v)}>
+        <button className="lg:hidden p-1.5" style={{ color: "var(--text)" }} onClick={() => setOpen(v => !v)}>
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
@@ -146,6 +148,7 @@ export default function Nav() {
               DES Group
             </a>
             <LangSwitcher />
+            <ThemeToggle />
             <Link href="/contact" onClick={() => setOpen(false)}
               className="text-sm font-medium px-4 py-2 rounded-md text-white"
               style={{ background: "var(--accent)" }}>

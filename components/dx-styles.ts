@@ -73,4 +73,17 @@ export const dxCss = `
 .dx .flier .item{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9fb0cc;padding:0 38px;position:relative;flex:none}
 .dx .flier .item:before{content:"";position:absolute;left:-3px;top:50%;transform:translateY(-50%);width:4px;height:4px;border-radius:50%;background:var(--accent-2)}
 @keyframes dxmarq{to{transform:translateX(-50%)}}
+
+/* ── DARK MODE overrides for .dx content ── */
+.dark .dx{--ink:#cfd8e8;--slate:#8a9bbf;--line:rgba(255,255,255,0.10);--bg:#0a0f1a;--bg-soft:#0e1626;background:var(--bg);color:var(--ink)}
+.dark .dx h2,.dark .dx h3{color:#eef3fc}
+.dark .dx .card{background:#0e1626;border-color:rgba(255,255,255,0.08);box-shadow:none}
+.dark .dx .card:hover{border-color:rgba(255,255,255,0.18);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.dark .dx .card p{color:#9fb0cc}
+.dark .dx .chip{background:#0e1626;border-color:rgba(255,255,255,0.12);color:#cdd8ea}
+.dark .dx .checks li{color:#cfd8e8}
+.dark .dx .logos{border-color:rgba(255,255,255,0.08)}
+.dark .dx .logo-row b{color:#eef3fc}
+.dark .dx .btn-ghost,.dark .dx .btn-outline{color:#eef3fc;border-color:rgba(255,255,255,0.18);background:transparent}
+.dark .dx .btn-ghost:hover,.dark .dx .btn-outline:hover{border-color:var(--accent-2);color:#fff}
 `

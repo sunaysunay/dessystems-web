@@ -102,17 +102,17 @@ export default function Nav() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
+          <Link href="/deslab"
+            className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
+            style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
+            Laboratory
+          </Link>
           <a href="https://deshold.com" target="_blank" rel="noopener noreferrer"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
             style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
             DES Group
           </a>
           <LangSwitcher />
-          <Link href="/deslab"
-            className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
-            style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
-            Laboratory
-          </Link>
           <Link href="/contact"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors text-white"
             style={{ background: "var(--accent)" }}>
@@ -135,17 +135,17 @@ export default function Nav() {
             </Link>
           ))}
           <div className="flex items-center justify-between mt-3 gap-2">
-            <LangSwitcher />
-            <a href="https://deshold.com" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}
-              className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors w-fit"
-              style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
-              DES Group
-            </a>
             <Link href="/deslab" onClick={() => setOpen(false)}
               className="text-sm font-medium px-4 py-2 rounded-md"
               style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
               Laboratory
             </Link>
+            <a href="https://deshold.com" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}
+              className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors w-fit"
+              style={{ border: "1px solid var(--border2)", color: "var(--text2)" }}>
+              DES Group
+            </a>
+            <LangSwitcher />
             <Link href="/contact" onClick={() => setOpen(false)}
               className="text-sm font-medium px-4 py-2 rounded-md text-white"
               style={{ background: "var(--accent)" }}>

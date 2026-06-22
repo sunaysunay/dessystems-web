@@ -12,10 +12,10 @@ export default function HeroPanels() {
   const [active, setActive] = useState(1)
 
   const panels: Panel[] = [
-    { title: t("erp_title"),        subtitle: t("erp_sub"),        img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80", href: "/solutions#erp",        accent: "#2563eb", num: "01" },
-    { title: t("platform_title"),   subtitle: t("platform_sub"),   img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80", href: "/platform",             accent: "#3b82f6", num: "02" },
+    { title: t("erp_title"),        subtitle: t("erp_sub"),        img: "/hero/erp.jpg", href: "/solutions#erp",        accent: "#2563eb", num: "01" },
+    { title: t("platform_title"),   subtitle: t("platform_sub"),   img: "/hero/platform.jpg", href: "/platform",             accent: "#3b82f6", num: "02" },
     { title: t("mes_title"),        subtitle: t("mes_sub"),        img: "/mes-integration-bg-v2.jpg",                                           href: "/solutions#mes",        accent: "#10b981", num: "03" },
-    { title: t("automation_title"), subtitle: t("automation_sub"), img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80", href: "/solutions#automation", accent: "#7c3aed", num: "04" },
+    { title: t("automation_title"), subtitle: t("automation_sub"), img: "/hero/automation.jpg", href: "/solutions#automation", accent: "#7c3aed", num: "04" },
   ]
 
   return (
@@ -27,8 +27,7 @@ export default function HeroPanels() {
             key={p.title}
             onMouseEnter={() => setActive(i)}
             onClick={() => setActive(i)}
-            animate={{ flex: active === i ? 3 : 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            style={{ flex: active === i ? 3 : 1, transition: "flex 0.5s ease" }}
             className="relative cursor-pointer overflow-hidden"
           >
             <motion.div

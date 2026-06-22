@@ -77,18 +77,17 @@ const css = `
 .dx .cta .btn-ghost{color:#fff;border-color:rgba(255,255,255,.28)}
 .dx .cta .btn-ghost:hover{background:rgba(255,255,255,.08)}
 .dx .flier{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);overflow:hidden}
-.dx .flier .track{display:flex;width:max-content;white-space:nowrap;padding:13px 0;animation:dxmarq 30s linear infinite}
+.dx .flier .track{display:flex;width:max-content;white-space:nowrap;padding:6px 0;animation:dxmarq 30s linear infinite}
 .dx .flier:hover .track{animation-play-state:paused}
-.dx .flier .item{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9fb0cc;padding:0 38px;position:relative;flex:none}
-.dx .flier .item:before{content:"";position:absolute;left:-3px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
+.dx .flier .item{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9fb0cc;padding:0 38px;position:relative;flex:none}
+.dx .flier .item:before{content:"";position:absolute;left:-3px;top:50%;transform:translateY(-50%);width:4px;height:4px;border-radius:50%;background:var(--accent-2)}
 @keyframes dxmarq{to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.dx .flier .track{animation:none}}
 `
 
 const flier = [
   "AI · ERP · MES · CRM · DevOps", "SAP S/4HANA", "ERP Consulting", "MES Integration",
-  "Workflow Automation", "Autonomous AI Agents", "EDI / IDoc", "NL · BE · DE Markets",
-  "Roosendaal HQ", "Enterprise Solutions",
+  "Workflow Automation", "Autonomous AI Agents", "EDI / IDoc",
+  "Enterprise Solutions",
 ]
 
 const solutions = [

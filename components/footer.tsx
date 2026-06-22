@@ -1,4 +1,5 @@
 import { Link } from "@/src/i18n/routing"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const cols = [
   {
@@ -111,6 +112,7 @@ export default function Footer() {
               <a key={l} href="#" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{l}</a>
             ))}
           </div>
+          <ThemeToggle />
           <div className="text-[12px] flex items-center gap-1.5" style={{ color: "var(--text3)" }}>
             Made with <span style={{ color: "#e45" }}>♥</span> in Europe
           </div>

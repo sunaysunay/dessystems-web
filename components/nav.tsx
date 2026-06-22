@@ -5,7 +5,6 @@ import { useState, useEffect } from "react"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { useTranslations, useLocale } from "next-intl"
 import { useRouter, usePathname } from "@/src/i18n/routing"
-import { ThemeToggle } from "@/components/theme-toggle"
 
 const LOCALES = [
   { code: "en", label: "EN" },
@@ -114,7 +113,6 @@ export default function Nav() {
             DES Group
           </a>
           <LangSwitcher />
-          <ThemeToggle />
           <Link href="/contact"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors text-white"
             style={{ background: "var(--accent)" }}>
@@ -148,7 +146,6 @@ export default function Nav() {
               DES Group
             </a>
             <LangSwitcher />
-            <ThemeToggle />
             <Link href="/contact" onClick={() => setOpen(false)}
               className="text-sm font-medium px-4 py-2 rounded-md text-white"
               style={{ background: "var(--accent)" }}>

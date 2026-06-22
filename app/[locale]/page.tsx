@@ -1,308 +1,265 @@
 import HeroPanels from "@/components/hero-panels"
 import { Link } from "@/src/i18n/routing"
-import { ArrowRight, CheckCircle } from "lucide-react"
-import { useTranslations } from "next-intl"
+import {
+  ArrowRight, Check, LayoutGrid, Settings, Workflow, Webhook,
+  Car, Factory, Truck, ShoppingBag, Cog, Plus,
+} from "lucide-react"
 
-// ── Inline mini-dashboard ─────────────────────────────────────────────────────
-function DashMockup() {
-  return (
-    <div className="rounded-xl overflow-hidden shadow-2xl" style={{ background: "var(--bg3)", border: "1px solid var(--border2)" }}>
-      <div className="flex items-center justify-between px-4 py-3" style={{ background: "var(--bg4)", borderBottom: "1px solid var(--border)" }}>
-        <div>
-          <div className="text-[13px] font-bold" style={{ fontFamily: "'Syne',sans-serif" }}>DES <span style={{ color: "var(--accent2)" }}>PLATFORM</span></div>
-          <div className="text-[11px] mt-0.5" style={{ color: "var(--text3)" }}>Dashboard · This Month</div>
-        </div>
-        <div className="flex gap-1.5">
-          {["#ff5f57","#3b82f6","#10b981"].map(c => <span key={c} className="w-2 h-2 rounded-full" style={{ background: c, opacity: 0.7 }} />)}
-        </div>
-      </div>
-      <div className="grid grid-cols-4" style={{ gap: "1px", background: "var(--border)" }}>
-        {[["Total Leads","1,250","↑ 18.5%"],["Active Clients","320","↑ 12.2%"],["Open Projects","98","↑ 15.7%"],["Revenue YTD","€2.4M","↑ 21.9%"]].map(([l,v,d]) => (
-          <div key={l} className="px-3 py-3" style={{ background: "var(--bg3)" }}>
-            <div className="text-[9px] uppercase tracking-wider mb-1" style={{ color: "var(--text3)" }}>{l}</div>
-            <div className="text-[18px] font-bold" style={{ fontFamily: "'Syne',sans-serif" }}>{v}</div>
-            <div className="text-[10px] mt-0.5" style={{ color: "var(--green)" }}>{d}</div>
-          </div>
-        ))}
-      </div>
-      <div className="px-4 py-3">
-        <div className="text-[10px] mb-2" style={{ color: "var(--text3)" }}>Leads over time</div>
-        <div className="flex items-end gap-1 h-12">
-          {[35,45,40,60,55,75,100].map((h,i) => (
-            <div key={i} className="flex-1 rounded-t-sm" style={{ height: `${h}%`, background: "var(--accent)", opacity: i === 6 ? 1 : 0.25 + i*0.07 }} />
-          ))}
-        </div>
-      </div>
-      <div className="grid grid-cols-3 gap-2 px-4 pb-4">
-        {[["⚙","Automation"],["📊","Analytics"],["🔗","Integrations"]].map(([ico,name]) => (
-          <div key={name} className="rounded-lg px-3 py-2.5 text-[11px]" style={{ background: "var(--bg4)", border: "1px solid var(--border)" }}>
-            <div className="text-base mb-1" style={{ color: "var(--accent2)" }}>{ico}</div>
-            <div style={{ color: "var(--text2)" }}>{name}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
+// Scoped styling ported from the DES Systems sample layout. Everything is
+// namespaced under `.dx` so it never leaks into the dark nav/footer or globals.
+const css = `
+.dx{--navy:#0b1f3a;--navy-2:#13294b;--ink:#1a2233;--slate:#5a6678;--line:#e4e8ef;--bg:#fff;--bg-soft:#f5f7fa;--accent:#1d6cf0;--accent-2:#0f9d8c;--radius:14px;--shadow:0 1px 2px rgba(11,31,58,.06),0 8px 24px rgba(11,31,58,.06);--maxw:1180px;color:var(--ink);background:var(--bg)}
+.dx a{color:inherit;text-decoration:none}
+.dx .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.dx .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.dx h2{font-size:clamp(26px,3.4vw,38px);line-height:1.15;font-weight:800;letter-spacing:-.02em;color:var(--navy)}
+.dx h3{font-size:18px;font-weight:700;color:var(--navy);letter-spacing:-.01em}
+.dx p.lead{color:var(--slate);font-size:17px;max-width:620px}
+.dx .section{padding:88px 0}
+.dx .section.soft{background:var(--bg-soft)}
+.dx .center{text-align:center}
+.dx .center p.lead{margin:14px auto 0}
+.dx .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;padding:13px 22px;border-radius:10px;transition:.18s ease;border:1px solid transparent;cursor:pointer}
+.dx .btn svg{width:16px;height:16px}
+.dx .btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(29,108,240,.28)}
+.dx .btn-primary:hover{background:#1559cc;transform:translateY(-1px)}
+.dx .btn-ghost{background:transparent;color:var(--navy);border-color:var(--line)}
+.dx .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.dx .btn-outline{background:#fff;color:var(--navy);border-color:var(--line)}
+.dx .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.dx .logos{padding:34px 0;border-bottom:1px solid var(--line)}
+.dx .logos p{text-align:center;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-bottom:22px}
+.dx .logo-row{display:flex;flex-wrap:wrap;gap:42px;justify-content:center;align-items:center;opacity:.62}
+.dx .logo-row b{font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.dx .grid{display:grid;gap:22px}
+.dx .grid-3{grid-template-columns:repeat(3,1fr)}
+.dx .grid-4{grid-template-columns:repeat(4,1fr)}
+.dx .grid-2{grid-template-columns:1fr 1fr}
+@media(max-width:920px){.dx .grid-3,.dx .grid-4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.dx .grid-3,.dx .grid-4,.dx .grid-2{grid-template-columns:1fr}}
+.dx .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);transition:.2s}
+.dx .card:hover{transform:translateY(-3px);border-color:#cdd8ea;box-shadow:0 12px 30px rgba(11,31,58,.10)}
+.dx .ic{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;margin-bottom:16px;background:linear-gradient(135deg,rgba(29,108,240,.12),rgba(15,157,140,.12))}
+.dx .ic svg{width:23px;height:23px;color:var(--accent)}
+.dx .card p{color:var(--slate);font-size:14.5px;margin-top:8px}
+.dx .card .more{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:14px;font-weight:600;color:var(--accent)}
+.dx .card .more svg{width:15px;height:15px}
+.dx .head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.dx .head-row p.lead{margin-top:12px}
+.dx .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:860px){.dx .split{grid-template-columns:1fr;gap:36px}}
+.dx .checks{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 22px;margin:26px 0 30px;padding:0}
+.dx .checks li{display:flex;align-items:center;gap:10px;font-weight:500;font-size:15px;color:var(--ink)}
+.dx .checks svg{width:20px;height:20px;flex:none;color:var(--accent-2)}
+.dx .modules{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.dx .chip{background:#fff;border:1px solid var(--line);color:var(--navy);font-weight:600;font-size:13px;padding:8px 14px;border-radius:8px}
+.dx .panelcard{background:var(--navy);border-radius:18px;padding:34px;color:#fff;box-shadow:var(--shadow)}
+.dx .panelcard h3{color:#fff;font-size:20px;margin-bottom:10px}
+.dx .panelcard p{color:#bccadf;font-size:15px}
+.dx .band{background:var(--navy);color:#fff}
+.dx .band .grid-4{gap:0}
+.dx .band .s{padding:46px 26px;text-align:center;border-left:1px solid rgba(255,255,255,.10)}
+.dx .band .s:first-child{border-left:none}
+.dx .band .s b{display:block;font-size:40px;font-weight:800;letter-spacing:-.02em}
+.dx .band .s span{color:#9fb0cc;font-size:14px}
+@media(max-width:600px){.dx .band .s{border-left:none;border-top:1px solid rgba(255,255,255,.1)}.dx .band .s:first-child{border-top:none}}
+.dx .quote{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+.dx .quote .stars{color:#f5a623;letter-spacing:3px;font-size:15px;margin-bottom:14px}
+.dx .quote p{font-size:16px;color:var(--ink);font-weight:500}
+.dx .quote .by{display:flex;align-items:center;gap:12px;margin-top:20px}
+.dx .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--navy));color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px}
+.dx .by b{font-size:14px;color:var(--navy);display:block}
+.dx .by span{font-size:13px;color:var(--slate)}
+.dx .cta{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;border-radius:20px;padding:56px;text-align:center}
+.dx .cta h2{color:#fff}
+.dx .cta p{color:#bccadf;margin:14px auto 28px;max-width:520px}
+.dx .cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.dx .cta .btn-ghost{color:#fff;border-color:rgba(255,255,255,.28)}
+.dx .cta .btn-ghost:hover{background:rgba(255,255,255,.08)}
+`
 
-const SAP_MODS = ["SAP MM","SAP PP","SAP QM","SAP WM/EWM","SAP PM","SAP SD","SAP TM"]
-const TECH_CAPS = [
-  { id:"tc1", ico:"🏭" }, { id:"tc2", ico:"🔌" }, { id:"tc3", ico:"🔄" },
-  { id:"tc4", ico:"📄" }, { id:"tc5", ico:"🌐" }, { id:"tc6", ico:"🛠️" },
+const solutions = [
+  { Icon: LayoutGrid, title: "ERP & SAP Consulting", desc: "S/4HANA implementation, support and optimisation across MM, PP, QM, WM and SD." },
+  { Icon: Settings,   title: "Automation",           desc: "Workflow automation that removes manual bottlenecks, cuts cost and reduces error rates." },
+  { Icon: Workflow,   title: "MES Integration",      desc: "Real-time production visibility by connecting shop-floor MES with your ERP backbone." },
+  { Icon: Webhook,    title: "Integration & APIs",   desc: "REST APIs, EDI and IDoc development to unify systems, data and processes." },
 ]
-const INDUSTRIES = [
-  { id:"in1", ico:"🚗" }, { id:"in2", ico:"🏭" }, { id:"in3", ico:"📦" },
-  { id:"in4", ico:"🛒" }, { id:"in5", ico:"⚙️" }, { id:"in6", ico:"➕" },
+
+const checks = ["Process Analysis & Design", "ERP Implementation", "Data Migration", "System Optimisation", "Training & Support", "Change Management"]
+const sapModules = ["SAP MM", "SAP PP", "SAP QM", "SAP WM/EWM", "SAP PM", "SAP SD", "SAP TM"]
+
+const stats = [
+  ["10+", "Years of SAP experience"], ["50+", "Successful projects"],
+  ["99.2%", "On-time delivery"], ["EU", "Coverage & compliance"],
 ]
-const INSIGHTS = [
-  { id:"ia1", tag:"ERP",         ico:"📊", date:"May 10, 2024", color:"var(--accent)" },
-  { id:"ia2", tag:"Automation",  ico:"🤖", date:"May 6, 2024",  color:"#10b981" },
-  { id:"ia3", tag:"Integration", ico:"🔗", date:"May 2, 2024",  color:"#7c3aed" },
+
+const industries = [
+  { Icon: Car,         title: "Automotive",               desc: "Manufacturing and supply-chain solutions for tier suppliers and OEMs." },
+  { Icon: Factory,     title: "Manufacturing",            desc: "Production planning and shop-floor integration for real-time control." },
+  { Icon: Truck,       title: "Logistics & Supply Chain", desc: "End-to-end visibility and process optimisation across the chain." },
+  { Icon: ShoppingBag, title: "Retail & Distribution",    desc: "Inventory, order and distribution management at scale." },
+  { Icon: Cog,         title: "Engineering",              desc: "Project-driven, engineered-to-order solutions and processes." },
+  { Icon: Plus,        title: "More Industries",          desc: "Tailored solutions for your specific operational requirements." },
 ]
-const PLATFORM_FEATURES = [
-  { id:"pf1", ico:"👥" }, { id:"pf2", ico:"🌐" }, { id:"pf3", ico:"⚡" },
-  { id:"pf4", ico:"📈" }, { id:"pf5", ico:"🏢" }, { id:"pf6", ico:"🔒" },
+
+const testimonials = [
+  { q: "The S/4HANA migration was delivered on schedule and our WM cycle times dropped noticeably within the first quarter.", n: "Markus Keller", r: "Head of Operations, NORDWERK", a: "MK" },
+  { q: "Clear process design, strong SAP logistics depth, and a team that actually understood our shop floor.", n: "Sofia Demir", r: "Supply Chain Lead, Helix Logistics", a: "SD" },
+  { q: "Automation removed days of manual reporting every month. The ROI was obvious within weeks.", n: "Lars Visser", r: "CFO, Vantis", a: "LV" },
 ]
-const EXPERTISE = [
-  { id:"ex1", ico:"🏭" }, { id:"ex2", ico:"⚙️" }, { id:"ex3", ico:"🤖" }, { id:"ex4", ico:"🔗" },
-]
-const FL_STATS = [
-  { id:"fs1", val:"10+" }, { id:"fs2", val:"50+" }, { id:"fs3", val:"Global" }, { id:"fs4", val:"Flex" },
+
+const insights = [
+  { cat: "ERP",         title: "How ERP drives operational excellence",  desc: "How modern ERP systems help businesses improve efficiency and agility." },
+  { cat: "Automation",  title: "The power of business automation",       desc: "Why automation has become a necessity for growth and scalability." },
+  { cat: "Integration", title: "MES & ERP integration best practices",   desc: "Key strategies for successful MES and ERP integration in manufacturing." },
 ]
 
 export default function HomePage() {
-  const t = useTranslations("Home")
-
   return (
     <>
-      {/* ── Hero ── */}
+      {/* HERO — multi-panel major activities (unchanged) */}
       <HeroPanels />
 
-      {/* ── Platform section ── */}
-      <section className="py-20 px-[4%]" style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase font-medium mb-3" style={{ color: "var(--accent2)" }}>{t("platform_eyebrow")}</div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight" style={{ fontFamily: "'Syne',sans-serif" }}>
-              Business Operating Platform
-            </h2>
-            <p className="text-[15px] leading-relaxed mb-8" style={{ color: "var(--text2)" }}>
-              {t("platform_desc")}
-            </p>
-            <div className="grid grid-cols-2 gap-3 mb-8">
-              {PLATFORM_FEATURES.map(f => (
-                <div key={f.id} className="rounded-lg p-4 transition-colors"
-                  style={{ background: "var(--bg3)", border: "1px solid var(--border)" }}>
-                  <div className="text-lg mb-2" style={{ color: "var(--accent2)" }}>{f.ico}</div>
-                  <div className="text-[13px] font-medium mb-1">{t(`${f.id}_name`)}</div>
-                  <div className="text-[12px] leading-relaxed" style={{ color: "var(--text3)" }}>{t(`${f.id}_desc`)}</div>
+      <div className="dx">
+        <style dangerouslySetInnerHTML={{ __html: css }} />
+
+        {/* LOGOS */}
+        <section className="logos">
+          <div className="wrap">
+            <p>Trusted by manufacturing &amp; logistics teams across Europe</p>
+            <div className="logo-row">
+              {["NORDWERK", "Vantis", "METRA Group", "Helix Logistics", "AXIOM", "Procyon"].map(n => <b key={n}>{n}</b>)}
+            </div>
+          </div>
+        </section>
+
+        {/* SOLUTIONS */}
+        <section className="section" id="solutions">
+          <div className="wrap">
+            <div className="center" style={{ marginBottom: 46 }}>
+              <span className="eyebrow">What we do</span>
+              <h2 style={{ marginTop: 10 }}>Core expertise, end to end</h2>
+              <p className="lead">From greenfield SAP implementations to automation at scale — one partner across the full enterprise stack.</p>
+            </div>
+            <div className="grid grid-4">
+              {solutions.map(s => (
+                <div className="card" key={s.title}>
+                  <div className="ic"><s.Icon /></div>
+                  <h3>{s.title}</h3>
+                  <p>{s.desc}</p>
+                  <Link href="/solutions" className="more">Discover more <ArrowRight /></Link>
                 </div>
               ))}
             </div>
-            <Link href="/platform"
-              className="inline-flex items-center gap-2 text-[14px] font-medium px-5 py-2.5 rounded-lg transition-all"
-              style={{ border: "1px solid var(--border2)", color: "var(--text)" }}>
-              {t("platform_cta")} <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
-          <div><DashMockup /></div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── Core expertise ── */}
-      <section className="py-20 px-[4%]" style={{ background: "var(--bg3)" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <div className="text-[11px] tracking-[0.12em] uppercase font-medium mb-3" style={{ color: "var(--accent2)" }}>{t("expertise_eyebrow")}</div>
-            <h2 className="text-3xl font-bold" style={{ fontFamily: "'Syne',sans-serif" }}>{t("expertise_title")}</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 rounded-xl overflow-hidden" style={{ gap: "1px", background: "var(--border)", border: "1px solid var(--border)" }}>
-            {EXPERTISE.map(c => (
-              <div key={c.id} className="p-7 transition-colors" style={{ background: "var(--bg3)" }}>
-                <div className="text-2xl mb-4" style={{ color: "var(--accent2)" }}>{c.ico}</div>
-                <div className="text-[16px] font-semibold mb-2" style={{ fontFamily: "'Syne',sans-serif" }}>{t(`${c.id}_name`)}</div>
-                <div className="text-[13px] leading-relaxed" style={{ color: "var(--text3)" }}>{t(`${c.id}_desc`)}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── ERP Consulting ── */}
-      <section className="py-20 px-[4%]" style={{ background: "var(--bg2)" }}>
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase font-medium mb-3" style={{ color: "var(--accent2)" }}>{t("erp_eyebrow")}</div>
-            <h2 className="text-3xl font-bold mb-4 leading-tight" style={{ fontFamily: "'Syne',sans-serif" }}>
-              {t("erp_title")}
-            </h2>
-            <p className="text-[15px] leading-relaxed mb-6" style={{ color: "var(--text2)" }}>
-              {t("erp_desc")}
-            </p>
-            <ul className="grid grid-cols-2 gap-3 mb-8">
-              {[1,2,3,4,5,6].map(i => (
-                <li key={i} className="flex items-center gap-2 text-[13px]" style={{ color: "var(--text2)" }}>
-                  <CheckCircle className="w-4 h-4 shrink-0" style={{ color: "var(--green)" }} /> {t(`erp_b${i}`)}
-                </li>
-              ))}
-            </ul>
-            <Link href="/services#erp"
-              className="inline-flex items-center gap-2 text-[14px] font-medium px-5 py-2.5 rounded-lg text-white transition-colors"
-              style={{ background: "var(--accent)" }}>
-              {t("erp_cta")} <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="rounded-xl p-7" style={{ background: "var(--bg3)", border: "1px solid var(--border2)" }}>
-            <h3 className="text-xl font-bold mb-2" style={{ fontFamily: "'Syne',sans-serif" }}>{t("sap_box_title")}</h3>
-            <p className="text-[13px] mb-5 leading-relaxed" style={{ color: "var(--text2)" }}>
-              {t("sap_box_desc")}
-            </p>
-            <div className="flex flex-wrap gap-2 mb-5">
-              {SAP_MODS.map(m => (
-                <span key={m} className="text-[12px] font-medium px-3 py-1 rounded"
-                  style={{ background: "rgba(37,99,235,0.12)", border: "1px solid rgba(37,99,235,0.25)", color: "var(--accent2)" }}>
-                  {m}
-                </span>
-              ))}
-            </div>
-            <p className="text-[12px] pt-4 leading-relaxed" style={{ color: "var(--text3)", borderTop: "1px solid var(--border)" }}>
-              {t("sap_box_foot")}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Technical capabilities ── */}
-      <section className="py-20 px-[4%]" style={{ background: "var(--bg)" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <div className="text-[11px] tracking-[0.12em] uppercase font-medium mb-3" style={{ color: "var(--accent2)" }}>{t("tech_eyebrow")}</div>
-            <h2 className="text-3xl font-bold" style={{ fontFamily: "'Syne',sans-serif" }}>{t("tech_title")}</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {TECH_CAPS.map(c => (
-              <div key={c.id} className="rounded-xl p-6 text-center transition-all"
-                style={{ background: "var(--bg3)", border: "1px solid var(--border)" }}>
-                <div className="text-2xl mb-3" style={{ color: "var(--accent2)" }}>{c.ico}</div>
-                <div className="text-[14px] font-medium mb-2">{t(`${c.id}_name`)}</div>
-                <div className="text-[12px] leading-relaxed" style={{ color: "var(--text3)" }}>{t(`${c.id}_desc`)}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Freelance ── */}
-      <section className="py-20 px-[4%] relative overflow-hidden" style={{ background: "linear-gradient(135deg,#0a1628 0%,#0d1e3a 50%,#0a1628 100%)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.08) 0%, transparent 60%)" }} />
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative">
-          <div>
-            <div className="text-[11px] tracking-[0.12em] uppercase font-medium mb-3" style={{ color: "var(--accent2)" }}>{t("fl_eyebrow")}</div>
-            <h2 className="text-3xl font-bold mb-4 leading-tight" style={{ fontFamily: "'Syne',sans-serif" }}>
-              {t("fl_title")}
-            </h2>
-            <p className="text-[15px] leading-relaxed mb-6" style={{ color: "var(--text2)" }}>
-              {t("fl_desc")}
-            </p>
-            <ul className="flex flex-col gap-3 mb-8">
-              {[1,2,3].map(i => (
-                <li key={i} className="flex items-center gap-3 text-[14px]" style={{ color: "var(--text2)" }}>
-                  <CheckCircle className="w-4 h-4 shrink-0" style={{ color: "var(--green)" }} /> {t(`fl_b${i}`)}
-                </li>
-              ))}
-            </ul>
-            <Link href="/contact"
-              className="inline-flex items-center gap-2 text-[14px] font-medium px-5 py-2.5 rounded-lg text-white"
-              style={{ background: "var(--accent)" }}>
-              {t("fl_cta")} <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-6">
-            {FL_STATS.map(s => (
-              <div key={s.id}>
-                <div className="text-[32px] font-bold" style={{ fontFamily: "'Syne',sans-serif" }}>{s.val}</div>
-                <div className="text-[11px] uppercase tracking-wider mt-1" style={{ color: "var(--text3)" }}>{t(`${s.id}_label`)}</div>
-                <div className="text-[12px] mt-0.5" style={{ color: "var(--text2)" }}>{t(`${s.id}_sub`)}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Industries ── */}
-      <section className="py-20 px-[4%]" style={{ background: "var(--bg2)" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <div className="text-[11px] tracking-[0.12em] uppercase font-medium mb-3" style={{ color: "var(--accent2)" }}>{t("ind_eyebrow")}</div>
-            <h2 className="text-3xl font-bold" style={{ fontFamily: "'Syne',sans-serif" }}>{t("ind_title")}</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {INDUSTRIES.map(i => (
-              <div key={i.id} className="rounded-xl p-6 transition-all"
-                style={{ background: "var(--bg3)", border: "1px solid var(--border)" }}>
-                <div className="text-2xl mb-3" style={{ color: "var(--accent2)" }}>{i.ico}</div>
-                <div className="text-[13px] font-medium mb-2">{t(`${i.id}_name`)}</div>
-                <div className="text-[12px] leading-relaxed" style={{ color: "var(--text3)" }}>{t(`${i.id}_desc`)}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Insights ── */}
-      <section className="py-20 px-[4%]" style={{ background: "var(--bg)" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-10">
+        {/* SAP SPLIT */}
+        <section className="section soft" id="services">
+          <div className="wrap split">
             <div>
-              <div className="text-[11px] tracking-[0.12em] uppercase font-medium mb-2" style={{ color: "var(--accent2)" }}>{t("ins_eyebrow")}</div>
-              <h2 className="text-3xl font-bold" style={{ fontFamily: "'Syne',sans-serif" }}>{t("ins_title")}</h2>
+              <span className="eyebrow">ERP Consulting Services</span>
+              <h2 style={{ margin: "10px 0 16px" }}>SAP &amp; ERP expertise that delivers</h2>
+              <p className="lead">We help businesses implement, optimise and support their ERP systems — ensuring better processes, accurate data and outcomes you can measure.</p>
+              <ul className="checks">
+                {checks.map(c => <li key={c}><Check />{c}</li>)}
+              </ul>
+              <Link href="/solutions" className="btn btn-primary">View ERP services</Link>
             </div>
-            <Link href="/insights" className="text-[13px] flex items-center gap-1.5" style={{ color: "var(--accent2)" }}>
-              {t("ins_viewall")} <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {INSIGHTS.map(n => (
-              <div key={n.id} className="rounded-xl overflow-hidden transition-all cursor-pointer group"
-                style={{ background: "var(--bg3)", border: "1px solid var(--border)" }}>
-                <div className="relative h-36 flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg,#0d1e3a,#162035)" }}>
-                  <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider text-white px-2 py-0.5 rounded"
-                    style={{ background: n.color }}>{n.tag}</span>
-                  <span className="text-4xl">{n.ico}</span>
-                </div>
-                <div className="p-5">
-                  <div className="text-[11px] mb-2" style={{ color: "var(--text3)" }}>{n.date}</div>
-                  <div className="text-[14px] font-medium mb-2 leading-snug group-hover:text-blue-400 transition-colors">{t(`${n.id}_title`)}</div>
-                  <div className="text-[12px] leading-relaxed" style={{ color: "var(--text3)" }}>{t(`${n.id}_desc`)}</div>
-                </div>
+            <div className="panelcard">
+              <h3>SAP Logistics Expertise</h3>
+              <p>Deep, hands-on knowledge of SAP S/4HANA logistics modules — from planning to execution, greenfield to brownfield.</p>
+              <div className="modules">
+                {sapModules.map(m => <span className="chip" key={m}>{m}</span>)}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* STATS BAND */}
+        <section className="band">
+          <div className="wrap grid grid-4">
+            {stats.map(([b, s]) => (
+              <div className="s" key={s}><b>{b}</b><span>{s}</span></div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── CTA ── */}
-      <section className="py-16 px-[4%]" style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)" }}>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h2 className="text-2xl font-bold mb-2" style={{ fontFamily: "'Syne',sans-serif" }}>{t("cta_title")}</h2>
-            <p className="text-[14px]" style={{ color: "var(--text2)" }}>{t("cta_sub")}</p>
+        {/* INDUSTRIES */}
+        <section className="section" id="industries">
+          <div className="wrap">
+            <div className="head-row">
+              <div>
+                <span className="eyebrow">Industries we serve</span>
+                <h2 style={{ marginTop: 10 }}>Sector expertise across verticals</h2>
+              </div>
+              <p className="lead">Solutions shaped by the operational realities of each industry we work in.</p>
+            </div>
+            <div className="grid grid-3">
+              {industries.map(i => (
+                <div className="card" key={i.title}>
+                  <div className="ic"><i.Icon /></div>
+                  <h3>{i.title}</h3>
+                  <p>{i.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex gap-3 shrink-0">
-            <Link href="/contact"
-              className="flex items-center gap-2 text-[14px] font-medium px-6 py-3 rounded-lg text-white"
-              style={{ background: "var(--accent)" }}>
-              {t("cta_btn1")} <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/solutions"
-              className="flex items-center gap-2 text-[14px] font-medium px-6 py-3 rounded-lg transition-colors"
-              style={{ border: "1px solid var(--border2)", color: "var(--text)" }}>
-              {t("cta_btn2")}
-            </Link>
+        </section>
+
+        {/* TESTIMONIALS */}
+        <section className="section soft" id="about">
+          <div className="wrap">
+            <div className="center" style={{ marginBottom: 44 }}>
+              <span className="eyebrow">Client results</span>
+              <h2 style={{ marginTop: 10 }}>What partners say</h2>
+            </div>
+            <div className="grid grid-3">
+              {testimonials.map(t => (
+                <div className="quote" key={t.n}>
+                  <div className="stars">★★★★★</div>
+                  <p>&ldquo;{t.q}&rdquo;</p>
+                  <div className="by"><span className="avatar">{t.a}</span><div><b>{t.n}</b><span>{t.r}</span></div></div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* INSIGHTS */}
+        <section className="section" id="insights">
+          <div className="wrap">
+            <div className="head-row">
+              <div><span className="eyebrow">Latest insights</span><h2 style={{ marginTop: 10 }}>News &amp; articles</h2></div>
+              <Link href="/contact" className="btn btn-outline">View all insights</Link>
+            </div>
+            <div className="grid grid-3">
+              {insights.map(a => (
+                <article className="card" key={a.title}>
+                  <span className="eyebrow" style={{ color: "var(--accent-2)" }}>{a.cat}</span>
+                  <h3 style={{ margin: "10px 0 6px" }}>{a.title}</h3>
+                  <p>{a.desc}</p>
+                  <Link href="/contact" className="more">Read article <ArrowRight /></Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="section" id="contact">
+          <div className="wrap">
+            <div className="cta">
+              <h2>Let&apos;s discuss your project</h2>
+              <p>Available for remote &amp; on-site engagements across Europe. Tell us about your systems and we&apos;ll map the fastest path to results.</p>
+              <div className="row">
+                <a href="mailto:info@dessystems.io" className="btn btn-primary">Get in touch</a>
+                <Link href="/solutions" className="btn btn-ghost">Our solutions</Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </>
   )
 }

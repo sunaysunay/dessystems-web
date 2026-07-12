@@ -99,16 +99,19 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   }
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative hidden lg:block">
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
-        className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors"
-        style={{ color: "rgba(255,255,255,0.80)" }}
+        className="flex items-center gap-1.5 text-[13px] font-medium transition-colors"
+        style={{ color: "rgba(255,255,255,0.8)" }}
+        onMouseEnter={(e) => e.currentTarget.style.color = "#fff"}
+        onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.8)"}
       >
-        {current.flag ? <FlagImg cc={current.flag} /> : <Globe size={16} strokeWidth={1.6} />}
+        <Globe size={16} strokeWidth={1.8} />
+        {current.code.toUpperCase()}
         <ChevronDown
-          size={12}
+          size={14}
           strokeWidth={2}
           className={"transition-transform " + (open ? "rotate-180" : "")}
         />
@@ -116,7 +119,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
 
       {open && (
         <div className="absolute top-full right-0 z-[300] mt-2">
-          <div className="min-w-[180px] overflow-hidden rounded-xl border bg-white shadow-xl" style={{ borderColor: "#e5e7eb" }}>
+          <div className="min-w-[180px] overflow-hidden rounded-xl border shadow-xl" style={{ background: "rgba(14,22,38,0.95)", backdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.15)" }}>
             {LOCALES.map(({ code, name, flag }) => {
               const active = locale === code
               return (
@@ -126,11 +129,11 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
                   onClick={() => switchLocale(code)}
                   className="flex w-full items-center gap-3 px-4 py-[10px] text-left transition-colors"
                   style={{
-                    backgroundColor: active ? "#FFF1E5" : "transparent",
-                    color: active ? "#E07B2A" : "#374151"
+                    backgroundColor: active ? "rgba(224,123,42,0.15)" : "transparent",
+                    color: active ? "var(--accent)" : "rgba(255,255,255,0.8)"
                   }}
                   onMouseEnter={(e) => {
-                    if (!active) e.currentTarget.style.backgroundColor = "#f9fafb"
+                    if (!active) e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.05)"
                   }}
                   onMouseLeave={(e) => {
                     if (!active) e.currentTarget.style.backgroundColor = "transparent"
@@ -145,17 +148,17 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
                 </button>
               )
             })}
-            <div className="border-t" style={{ borderColor: "#e5e7eb", marginTop: "4px" }}>
+            <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.10)", marginTop: "4px" }}>
               <button
                 type="button"
                 onClick={resetToGeo}
                 className="flex w-full items-center gap-3 px-4 py-[10px] text-left transition-colors"
-                style={{ color: "#6b7280" }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#f9fafb"}
+                style={{ color: "rgba(255,255,255,0.52)" }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.05)"}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
               >
                 <span className="w-5 flex-none flex items-center justify-center">
-                  <Globe size={15} strokeWidth={1.6} style={{ color: "#9ca3af" }} />
+                  <Globe size={15} strokeWidth={1.6} style={{ color: "rgba(255,255,255,0.4)" }} />
                 </span>
                 <span className="text-[12px] italic">Auto-detect</span>
               </button>

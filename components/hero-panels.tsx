@@ -9,11 +9,11 @@ type Panel = { title: string; subtitle: string; img: string; href: string; accen
 
 export default function HeroPanels() {
   const t = useTranslations("Hero")
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(0)
 
   const panels: Panel[] = [
-    { title: t("erp_title"),        subtitle: t("erp_sub"),        img: "/hero/erp.jpg", href: "/solutions#erp",        accent: "#2563eb", num: "01" },
-    { title: t("platform_title"),   subtitle: t("platform_sub"),   img: "/hero/platform.jpg", href: "/platform",             accent: "#3b82f6", num: "02" },
+    { title: t("platform_title"),   subtitle: t("platform_sub"),   img: "/hero/platform.jpg", href: "/platform",             accent: "#3b82f6", num: "01" },
+    { title: t("erp_title"),        subtitle: t("erp_sub"),        img: "/hero/erp.jpg", href: "/solutions#erp",        accent: "#2563eb", num: "02" },
     { title: t("mes_title"),        subtitle: t("mes_sub"),        img: "/mes-integration-bg-v2.jpg",                                           href: "/solutions#mes",        accent: "#10b981", num: "03" },
     { title: t("automation_title"), subtitle: t("automation_sub"), img: "/hero/automation.jpg", href: "/solutions#automation", accent: "#7c3aed", num: "04" },
   ]

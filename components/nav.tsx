@@ -6,42 +6,161 @@ import { Menu, X, ChevronDown } from "lucide-react"
 import { useTranslations, useLocale } from "next-intl"
 import { useRouter, usePathname } from "@/src/i18n/routing"
 
+import { useRef } from "react"
+import { Globe } from "lucide-react"
+
 const LOCALES = [
-  { code: "en", label: "EN" },
-  { code: "nl", label: "NL" },
-  { code: "de", label: "DE" },
-  { code: "fr", label: "FR" },
-  { code: "tr", label: "TR" },
+  { code: "en", name: "English",    flag: null },
+  { code: "nl", name: "Nederlands", flag: "nl" },
+  { code: "de", name: "Deutsch",    flag: "de" },
+  { code: "fr", name: "Français",   flag: "fr" },
+  { code: "tr", name: "Türkçe",     flag: "tr" },
+  { code: "ro", name: "Română",     flag: "ro" },
+  { code: "bg", name: "Български",  flag: "bg" },
+  { code: "el", name: "Ελληνικά",   flag: "gr" },
+  { code: "es", name: "Español",    flag: "es" },
+  { code: "it", name: "Italiano",   flag: "it" },
 ]
 
-function LangSwitcher() {
+function FlagImg({ cc }: { cc: string }) {
+  return (
+    <img
+      src={"https://flagcdn.com/w20/" + cc + ".png"}
+      srcSet={"https://flagcdn.com/w40/" + cc + ".png 2x"}
+      width={20}
+      height={14}
+      alt={cc}
+      className="rounded-[2px] object-cover"
+      style={{ display: "block", flexShrink: 0 }}
+    />
+  )
+}
+
+function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   const locale   = useLocale()
-  const router   = useRouter()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
-  function switchTo(code: string) {
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
+  }, [open])
+
+  function switchLocale(code: string) {
+    document.cookie = "NEXT_LOCALE=" + code + "; path=/; max-age=" + (60 * 60 * 24 * 365)
     setOpen(false)
-    router.replace(pathname, { locale: code })
+    window.location.href = "/" + code + pathname
+  }
+
+  function resetToGeo() {
+    document.cookie = "NEXT_LOCALE=; path=/; max-age=0"
+    setOpen(false)
+    window.location.href = "/"
+  }
+
+  const current = LOCALES.find(l => l.code === locale) || LOCALES[0]
+
+  if (mobile) {
+    return (
+      <div className="py-4 border-t" style={{ borderColor: "rgba(255,255,255,0.10)", marginTop: "8px" }}>
+        <p className="mb-3 text-[10px] font-semibold tracking-[0.14em] uppercase" style={{ color: "rgba(255,255,255,0.52)" }}>
+          Language
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {LOCALES.map(({ code, name, flag }) => {
+            const active = locale === code
+            return (
+              <button
+                key={code}
+                type="button"
+                onClick={() => switchLocale(code)}
+                title={name}
+                className={"flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-[12px] transition-colors"}
+                style={{
+                  borderColor: active ? "var(--accent)" : "rgba(255,255,255,0.16)",
+                  backgroundColor: active ? "rgba(37,99,235,0.15)" : "transparent",
+                  color: active ? "var(--accent)" : "rgba(255,255,255,0.8)",
+                  fontWeight: active ? 600 : 500
+                }}
+              >
+                {flag ? <FlagImg cc={flag} /> : <Globe size={16} strokeWidth={1.6} />}
+                <span className="text-[11px] uppercase tracking-[0.06em]">{code}</span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
+    )
   }
 
   return (
-    <div className="relative">
-      <button onClick={() => setOpen(v => !v)}
-        className="flex items-center gap-1 text-[12px] font-semibold px-2 py-1 rounded-md transition-colors"
-        style={{ color: "rgba(255,255,255,0.80)" }}>
-        {locale.toUpperCase()} <ChevronDown className="w-3 h-3" />
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors"
+        style={{ color: "rgba(255,255,255,0.80)" }}
+      >
+        {current.flag ? <FlagImg cc={current.flag} /> : <Globe size={16} strokeWidth={1.6} />}
+        <ChevronDown
+          size={12}
+          strokeWidth={2}
+          className={"transition-transform " + (open ? "rotate-180" : "")}
+        />
       </button>
+
       {open && (
-        <div className="absolute right-0 top-full mt-1 rounded-lg overflow-hidden shadow-xl min-w-[70px] z-50"
-          style={{ background: "#111c30", border: "1px solid rgba(255,255,255,0.16)" }}>
-          {LOCALES.map(l => (
-            <button key={l.code} onClick={() => switchTo(l.code)}
-              className="block w-full text-left px-4 py-2 text-[12px] font-semibold transition-colors"
-              style={{ color: l.code === locale ? "#ffffff" : "rgba(255,255,255,0.52)", background: l.code === locale ? "rgba(37,99,235,0.15)" : "transparent" }}>
-              {l.label}
-            </button>
-          ))}
+        <div className="absolute top-full right-0 z-[300] mt-2">
+          <div className="min-w-[180px] overflow-hidden rounded-xl border bg-white shadow-xl" style={{ borderColor: "#e5e7eb" }}>
+            {LOCALES.map(({ code, name, flag }) => {
+              const active = locale === code
+              return (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => switchLocale(code)}
+                  className="flex w-full items-center gap-3 px-4 py-[10px] text-left transition-colors"
+                  style={{
+                    backgroundColor: active ? "#FFF1E5" : "transparent",
+                    color: active ? "#E07B2A" : "#374151"
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!active) e.currentTarget.style.backgroundColor = "#f9fafb"
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!active) e.currentTarget.style.backgroundColor = "transparent"
+                  }}
+                >
+                  <span className="w-5 flex-none flex items-center justify-center">
+                    {flag ? <FlagImg cc={flag} /> : <Globe size={16} strokeWidth={1.6} />}
+                  </span>
+                  <span className={"text-[13px] " + (active ? "font-semibold" : "font-normal")}>
+                    {name}
+                  </span>
+                </button>
+              )
+            })}
+            <div className="border-t" style={{ borderColor: "#e5e7eb", marginTop: "4px" }}>
+              <button
+                type="button"
+                onClick={resetToGeo}
+                className="flex w-full items-center gap-3 px-4 py-[10px] text-left transition-colors"
+                style={{ color: "#6b7280" }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#f9fafb"}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+              >
+                <span className="w-5 flex-none flex items-center justify-center">
+                  <Globe size={15} strokeWidth={1.6} style={{ color: "#9ca3af" }} />
+                </span>
+                <span className="text-[12px] italic">Auto-detect</span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

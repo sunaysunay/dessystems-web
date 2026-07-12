@@ -1,19 +1,12 @@
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
 import CalculatorClient from "./calculator-client"
 
-type Props = {
-  params: { locale: string }
+export const metadata: Metadata = {
+  title: "Savings & Profit Calculator — DES BOP V2",
+  description: "Model what the DES Business Operating Platform is worth to your dealership — hard cash saved, hours reclaimed, and net profit uplift.",
 }
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "bop_calculator" })
-  return {
-    title: t("page_title"),
-    description: t("page_desc")
-  }
-}
-
-export default function CalculatorPage() {
-  return <CalculatorClient />
+export default async function CalculatorPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  return <CalculatorClient locale={locale} />
 }

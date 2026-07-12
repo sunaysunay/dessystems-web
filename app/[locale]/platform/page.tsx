@@ -1,19 +1,12 @@
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
 import PlatformClient from "./platform-client"
 
-type Props = {
-  params: { locale: string }
+export const metadata: Metadata = {
+  title: "Business Operating Platform — DES Systems",
+  description: "DES BOP V2 — the operating system vehicle dealers run their day on. Inventory, marketplace, CRM, sales, finance and AI in one console.",
 }
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "bop_platform" })
-  return {
-    title: t("page_title"),
-    description: t("page_desc")
-  }
-}
-
-export default function PlatformPage() {
-  return <PlatformClient />
+export default async function PlatformPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  return <PlatformClient locale={locale} />
 }

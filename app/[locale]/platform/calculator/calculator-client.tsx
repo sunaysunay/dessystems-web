@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect } from "react"
-import { useTranslations } from "next-intl"
 
 /* ─────────────────────────────────────────────────────────────────────────
    DES BOP V2 — Savings & Profit Calculator.
@@ -104,57 +103,133 @@ const CSS = `
 @media(prefers-reduced-motion:reduce){.bopv2 *{transition:none!important}}
 `
 
-const MARKUP = `
+type Str = {
+  back: string; eyebrow: string; h1: string; sub: string
+  card1H2: string; card1Hint: string
+  fUnits: string; fPrice: string; fGm: string; fNm: string
+  card2H2: string; card2Hint: string
+  fRate: string; fDays: string; fExtra: string; days15: string
+  resLab: string; per: string; hsNet: string; hsTotal: string
+  bdH3: string; bTools: string; bLabour: string; bCarry: string; bBop: string; bNet: string; bGrowth: string; bTotmo: string
+  pbH3: string; pbNote: string; pbBase: string; roiPre: string; roiPost: string
+  ctaDemo: string; ctaPlatform: string; footNote: string
+  tools: string[]; hours: (n: number) => string; uplift: (a: number, b: number) => string
+}
+
+const STR: Record<string, Str> = {
+  en: {
+    back: "← Back to the platform", eyebrow: "BOP V2 · dealer economics",
+    h1: "What one platform is worth to your lot.",
+    sub: "Drag the sliders to your dealership. The model separates hard cash saved from margin gained — and shows why, at thin dealer margins, the profit percentage moves more than you'd expect.",
+    card1H2: "Your dealership", card1Hint: "Set your real numbers",
+    fUnits: "Cars sold per month", fPrice: "Average sale price", fGm: "Gross margin per car", fNm: "Net margin (for profit-% view)",
+    card2H2: "Tools BOP replaces", card2Hint: "Toggle what you pay for today · monthly €",
+    fRate: "Loaded staff cost / hour", fDays: "Days-on-lot reduced by AI", fExtra: "Extra cars/mo from freed time", days15: "15 days",
+    resLab: "Net benefit after BOP subscription", per: "per month &nbsp;·&nbsp; hard cash, before growth",
+    hsNet: "Net saving / year", hsTotal: "With extra units / year",
+    bdH3: "Monthly breakdown", bTools: "Tool subscriptions replaced", bLabour: "Labour reclaimed", bCarry: "Carrying cost avoided",
+    bBop: "DES BOP V2 subscription", bNet: "Net hard saving", bGrowth: "+ Incremental gross (extra units)", bTotmo: "Total benefit / month",
+    pbH3: "Effect on annual net profit", pbNote: "Because dealer margins are thin, the same euros land as a big percentage swing.", pbBase: "Baseline net profit",
+    roiPre: "Every € 1 spent on BOP returns", roiPost: "in hard benefit.",
+    ctaDemo: "Book a demo →", ctaPlatform: "See the platform",
+    footNote: "<b>Method.</b> Hard benefit = replaced tool subscriptions + labour hours reclaimed (AI spec import, listing copy, translation, photo cleanup, publishing, lead replies, BTW prep) valued at your loaded rate + floorplan carrying cost avoided from faster turn, minus the € 349/mo BOP subscription. Growth = incremental units × gross-per-car (softer upside). Marketplace listing fees (Marktplaats, Mobile.de, AutoScout24) are <b>not</b> counted as savings — those channels continue regardless. Benchmarks: dealers average ~6.8 software integrations per sale and thin ~2–3% net margins, so a modest absolute saving is a large share of profit. All figures are estimates for planning — override every input with your own.",
+    tools: ["DMS / inventory", "CRM / leads", "Invoicing + boekhouding add-ons", "Photo / background tool", "Multi-channel uploader", "Separate AI writing", "Website feed sync"],
+    hours: (n) => "· " + n + " h/mo", uplift: (a, b) => `Net profit up +${a}% (hard) · +${b}% with growth`,
+  },
+  nl: {
+    back: "← Terug naar het platform", eyebrow: "BOP V2 · dealer-economie",
+    h1: "Wat één platform waard is voor jouw terrein.",
+    sub: "Sleep de schuiven naar jouw autobedrijf. Het model scheidt harde cash-besparing van gewonnen marge — en laat zien waarom bij dunne dealermarges het winstpercentage sterker beweegt dan je zou denken.",
+    card1H2: "Jouw autobedrijf", card1Hint: "Vul je echte cijfers in",
+    fUnits: "Auto's verkocht per maand", fPrice: "Gemiddelde verkoopprijs", fGm: "Brutomarge per auto", fNm: "Nettomarge (voor winst-%-weergave)",
+    card2H2: "Tools die BOP vervangt", card2Hint: "Zet aan wat je nu betaalt · per maand €",
+    fRate: "Belaste personeelskosten / uur", fDays: "Dagen-op-terrein verkort door AI", fExtra: "Extra auto's/mnd door vrijgekomen tijd", days15: "15 dagen",
+    resLab: "Netto voordeel na BOP-abonnement", per: "per maand &nbsp;·&nbsp; harde cash, vóór groei",
+    hsNet: "Netto besparing / jaar", hsTotal: "Met extra units / jaar",
+    bdH3: "Maandelijkse verdeling", bTools: "Vervangen tool-abonnementen", bLabour: "Teruggewonnen arbeid", bCarry: "Vermeden voorraadkosten",
+    bBop: "DES BOP V2-abonnement", bNet: "Netto harde besparing", bGrowth: "+ Extra bruto (extra units)", bTotmo: "Totaal voordeel / maand",
+    pbH3: "Effect op jaarlijkse nettowinst", pbNote: "Omdat dealermarges dun zijn, landen dezelfde euro's als een grote procentuele sprong.", pbBase: "Basis-nettowinst",
+    roiPre: "Elke € 1 aan BOP levert", roiPost: "aan harde waarde op.",
+    ctaDemo: "Plan een demo →", ctaPlatform: "Bekijk het platform",
+    footNote: "<b>Methode.</b> Harde waarde = vervangen tool-abonnementen + teruggewonnen arbeidsuren (AI spec-import, advertentietekst, vertaling, foto-opschoning, publiceren, lead-antwoorden, BTW-voorbereiding) gewaardeerd tegen jouw belaste uurtarief + vermeden voorraad-/floorplankosten door snellere doorloop, minus het € 349/mnd BOP-abonnement. Groei = extra units × bruto-per-auto (zachtere upside). Advertentiekosten van marktplaatsen (Marktplaats, Mobile.de, AutoScout24) tellen <b>niet</b> als besparing — die kanalen lopen sowieso door. Benchmarks: dealers gebruiken gemiddeld ~6,8 software-integraties per verkoop en dunne ~2–3% nettomarges, dus een bescheiden absolute besparing is een groot deel van de winst. Alle cijfers zijn schattingen voor planning — overschrijf elke invoer met je eigen cijfers.",
+    tools: ["DMS / voorraad", "CRM / leads", "Facturatie + boekhoudkoppelingen", "Foto / achtergrond-tool", "Multi-channel uploader", "Aparte AI-tekst", "Website feed-sync"],
+    hours: (n) => "· " + n + " u/mnd", uplift: (a, b) => `Nettowinst +${a}% (hard) · +${b}% met groei`,
+  },
+  de: {
+    back: "← Zurück zur Plattform", eyebrow: "BOP V2 · Händler-Ökonomie",
+    h1: "Was eine Plattform deinem Hof wert ist.",
+    sub: "Zieh die Regler auf dein Autohaus. Das Modell trennt harte Ersparnis von gewonnener Marge — und zeigt, warum bei dünnen Händlermargen der Gewinnprozentsatz stärker ausschlägt als erwartet.",
+    card1H2: "Dein Autohaus", card1Hint: "Trage deine echten Zahlen ein",
+    fUnits: "Verkaufte Autos pro Monat", fPrice: "Durchschnittlicher Verkaufspreis", fGm: "Bruttomarge pro Auto", fNm: "Nettomarge (für Gewinn-%-Ansicht)",
+    card2H2: "Tools, die BOP ersetzt", card2Hint: "Aktiviere, was du heute zahlst · monatlich €",
+    fRate: "Beladene Personalkosten / Stunde", fDays: "Standtage durch KI reduziert", fExtra: "Extra Autos/Mon. durch freie Zeit", days15: "15 Tage",
+    resLab: "Nettonutzen nach BOP-Abo", per: "pro Monat &nbsp;·&nbsp; harte Ersparnis, vor Wachstum",
+    hsNet: "Nettoersparnis / Jahr", hsTotal: "Mit Extra-Einheiten / Jahr",
+    bdH3: "Monatliche Aufschlüsselung", bTools: "Ersetzte Tool-Abos", bLabour: "Zurückgewonnene Arbeit", bCarry: "Vermiedene Lagerkosten",
+    bBop: "DES BOP V2-Abo", bNet: "Netto-Hartersparnis", bGrowth: "+ Zusätzlicher Brutto (Extra-Einheiten)", bTotmo: "Gesamtnutzen / Monat",
+    pbH3: "Effekt auf den jährlichen Nettogewinn", pbNote: "Weil Händlermargen dünn sind, landen dieselben Euro als großer prozentualer Sprung.", pbBase: "Basis-Nettogewinn",
+    roiPre: "Jeder € 1 für BOP bringt", roiPost: "an hartem Nutzen.",
+    ctaDemo: "Demo buchen →", ctaPlatform: "Plattform ansehen",
+    footNote: "<b>Methode.</b> Harter Nutzen = ersetzte Tool-Abos + zurückgewonnene Arbeitsstunden (KI-Spec-Import, Anzeigentext, Übersetzung, Foto-Bereinigung, Veröffentlichung, Lead-Antworten, MwSt-Vorbereitung) bewertet mit deinem beladenen Stundensatz + vermiedene Lager-/Floorplan-Kosten durch schnelleren Umschlag, abzüglich des € 349/Mon. BOP-Abos. Wachstum = zusätzliche Einheiten × Brutto-pro-Auto (weichere Aufwärtschance). Anzeigengebühren der Marktplätze (Marktplaats, Mobile.de, AutoScout24) zählen <b>nicht</b> als Ersparnis — diese Kanäle laufen ohnehin weiter. Benchmarks: Händler nutzen im Schnitt ~6,8 Software-Integrationen pro Verkauf und dünne ~2–3% Nettomargen, sodass eine bescheidene absolute Ersparnis ein großer Anteil des Gewinns ist. Alle Zahlen sind Schätzungen zur Planung — überschreibe jede Eingabe mit deinen eigenen.",
+    tools: ["DMS / Bestand", "CRM / Leads", "Rechnung + Buchhaltungs-Add-ons", "Foto / Hintergrund-Tool", "Multi-Channel-Uploader", "Separate KI-Texte", "Website-Feed-Sync"],
+    hours: (n) => "· " + n + " Std/Mon", uplift: (a, b) => `Nettogewinn +${a}% (hart) · +${b}% mit Wachstum`,
+  },
+}
+
+const TOOL_COSTS = [220, 120, 90, 45, 110, 60, 75]
+
+function buildMarkup(t: Str, locale: string): string {
+  return `
 <div class="wrap">
-  <a href="/en/platform" class="back">← Back to the platform</a>
-  <div class="head"><span class="mark">DES</span><span class="eyebrow">BOP V2 · dealer economics</span></div>
-  <h1>What one platform is worth to your lot.</h1>
-  <p class="sub">Drag the sliders to your dealership. The model separates hard cash saved from margin gained — and shows why, at thin dealer margins, the profit percentage moves more than you'd expect.</p>
+  <a href="/${locale}/platform" class="back">${t.back}</a>
+  <div class="head"><span class="mark">DES</span><span class="eyebrow">${t.eyebrow}</span></div>
+  <h1>${t.h1}</h1>
+  <p class="sub">${t.sub}</p>
 
   <div class="grid">
     <div>
       <div class="card">
-        <h2>Your dealership</h2>
-        <div class="hint">Set your real numbers</div>
+        <h2>${t.card1H2}</h2>
+        <div class="hint">${t.card1Hint}</div>
         <div class="field">
-          <label>Cars sold per month <span class="val" id="v_units">25</span></label>
+          <label>${t.fUnits} <span class="val" id="v_units">25</span></label>
           <input type="range" id="units" min="5" max="80" value="25" step="1">
           <div class="tick"><span>5</span><span>80</span></div>
         </div>
         <div class="field">
-          <label>Average sale price <span class="val" id="v_price">€ 18.000</span></label>
+          <label>${t.fPrice} <span class="val" id="v_price">€ 18.000</span></label>
           <input type="range" id="price" min="6000" max="60000" value="18000" step="500">
           <div class="tick"><span>€6k</span><span>€60k</span></div>
         </div>
         <div class="field">
-          <label>Gross margin per car <span class="val" id="v_gm">9%</span></label>
+          <label>${t.fGm} <span class="val" id="v_gm">9%</span></label>
           <input type="range" id="gm" min="4" max="18" value="9" step="0.5">
           <div class="tick"><span>4%</span><span>18%</span></div>
         </div>
         <div class="field">
-          <label>Net margin (for profit-% view) <span class="val" id="v_nm">2.5%</span></label>
+          <label>${t.fNm} <span class="val" id="v_nm">2.5%</span></label>
           <input type="range" id="nm" min="1" max="6" value="2.5" step="0.1">
           <div class="tick"><span>1%</span><span>6%</span></div>
         </div>
       </div>
 
       <div class="card" style="margin-top:18px">
-        <h2>Tools BOP replaces</h2>
-        <div class="hint">Toggle what you pay for today · monthly €</div>
+        <h2>${t.card2H2}</h2>
+        <div class="hint">${t.card2Hint}</div>
         <div class="toggle-row" id="tools"></div>
         <div class="divider"></div>
         <div class="field" style="margin-bottom:8px">
-          <label>Loaded staff cost / hour <span class="val" id="v_rate">€ 32</span></label>
+          <label>${t.fRate} <span class="val" id="v_rate">€ 32</span></label>
           <input type="range" id="rate" min="18" max="55" value="32" step="1">
           <div class="tick"><span>€18</span><span>€55</span></div>
         </div>
         <div class="field" style="margin-bottom:8px">
-          <label>Days-on-lot reduced by AI <span class="val" id="v_days">6</span></label>
+          <label>${t.fDays} <span class="val" id="v_days">6</span></label>
           <input type="range" id="days" min="0" max="15" value="6" step="1">
-          <div class="tick"><span>0</span><span>15 days</span></div>
+          <div class="tick"><span>0</span><span>${t.days15}</span></div>
         </div>
         <div class="field" style="margin-bottom:0">
-          <label>Extra cars/mo from freed time <span class="val" id="v_extra">1.5</span></label>
+          <label>${t.fExtra} <span class="val" id="v_extra">1.5</span></label>
           <input type="range" id="extra" min="0" max="5" value="1.5" step="0.5">
           <div class="tick"><span>0</span><span>5</span></div>
         </div>
@@ -163,62 +238,58 @@ const MARKUP = `
 
     <div class="result">
       <div class="headline">
-        <div class="lab">Net benefit after BOP subscription</div>
+        <div class="lab">${t.resLab}</div>
         <div class="big-num"><span class="cur">€</span><span id="hero">3.849</span></div>
-        <div class="per">per month &nbsp;·&nbsp; hard cash, before growth</div>
+        <div class="per">${t.per}</div>
         <div class="head-split">
-          <div class="s"><div class="n" id="hero_yr">€46.187</div><div class="l">Net saving / year</div></div>
-          <div class="s"><div class="n green" id="hero_total">€75.347</div><div class="l">With extra units / year</div></div>
+          <div class="s"><div class="n" id="hero_yr">€46.187</div><div class="l">${t.hsNet}</div></div>
+          <div class="s"><div class="n green" id="hero_total">€75.347</div><div class="l">${t.hsTotal}</div></div>
         </div>
       </div>
 
       <div class="breakdown">
-        <h3>Monthly breakdown</h3>
-        <div class="brow"><div class="k"><span class="dot" style="background:var(--plate)"></span>Tool subscriptions replaced</div><div class="v" id="b_tools">€ 720</div></div>
-        <div class="brow"><div class="k"><span class="dot" style="background:var(--live)"></span>Labour reclaimed <span id="b_hours" style="color:var(--fog-2);font-family:var(--mono);font-size:11px"></span></div><div class="v" id="b_labour">€ 2.912</div></div>
-        <div class="brow"><div class="k"><span class="dot" style="background:#85B7EB"></span>Carrying cost avoided</div><div class="v" id="b_carry">€ 566</div></div>
-        <div class="brow cost"><div class="k"><span class="dot" style="background:var(--alert)"></span>DES BOP V2 subscription</div><div class="v" id="b_bop">− € 349</div></div>
-        <div class="brow total"><div class="k">Net hard saving</div><div class="v" id="b_net">€ 3.849</div></div>
-        <div class="brow sub"><div class="k">+ Incremental gross (extra units)</div><div class="v" id="b_growth">€ 2.430</div></div>
-        <div class="brow total"><div class="k">Total benefit / month</div><div class="v" id="b_totmo">€ 6.279</div></div>
+        <h3>${t.bdH3}</h3>
+        <div class="brow"><div class="k"><span class="dot" style="background:var(--plate)"></span>${t.bTools}</div><div class="v" id="b_tools">€ 720</div></div>
+        <div class="brow"><div class="k"><span class="dot" style="background:var(--live)"></span>${t.bLabour} <span id="b_hours" style="color:var(--fog-2);font-family:var(--mono);font-size:11px"></span></div><div class="v" id="b_labour">€ 2.912</div></div>
+        <div class="brow"><div class="k"><span class="dot" style="background:#85B7EB"></span>${t.bCarry}</div><div class="v" id="b_carry">€ 566</div></div>
+        <div class="brow cost"><div class="k"><span class="dot" style="background:var(--alert)"></span>${t.bBop}</div><div class="v" id="b_bop">− € 349</div></div>
+        <div class="brow total"><div class="k">${t.bNet}</div><div class="v" id="b_net">€ 3.849</div></div>
+        <div class="brow sub"><div class="k">${t.bGrowth}</div><div class="v" id="b_growth">€ 2.430</div></div>
+        <div class="brow total"><div class="k">${t.bTotmo}</div><div class="v" id="b_totmo">€ 6.279</div></div>
       </div>
 
       <div class="profit-band">
-        <h3>Effect on annual net profit</h3>
-        <div class="note">Because dealer margins are thin, the same euros land as a big percentage swing.</div>
+        <h3>${t.pbH3}</h3>
+        <div class="note">${t.pbNote}</div>
         <div class="pbar-wrap">
-          <div class="pbar-lab"><span>Baseline net profit</span><span id="pl_base">€135.000</span></div>
-          <div class="pbar"><div class="base" id="bar_base" style="width:64%">baseline</div><div class="lift" id="bar_lift" style="width:22%">+lift</div></div>
+          <div class="pbar-lab"><span>${t.pbBase}</span><span id="pl_base">€135.000</span></div>
+          <div class="pbar"><div class="base" id="bar_base" style="width:64%"></div><div class="lift" id="bar_lift" style="width:22%"></div></div>
         </div>
-        <div class="uplift-tag"><span>▲</span><span id="uplift">Net profit up +34% (hard) · +56% with growth</span></div>
-        <div class="roi">Every € 1 spent on BOP returns <b id="roi">€ 12</b> in hard benefit.</div>
+        <div class="uplift-tag"><span>▲</span><span id="uplift"></span></div>
+        <div class="roi">${t.roiPre} <b id="roi">€ 12</b> ${t.roiPost}</div>
       </div>
 
       <div class="cta-row">
-        <a href="/en/contact" class="btn btn-primary">Book a demo →</a>
-        <a href="/en/platform" class="btn btn-ghost">See the platform</a>
+        <a href="/${locale}/contact" class="btn btn-primary">${t.ctaDemo}</a>
+        <a href="/${locale}/platform" class="btn btn-ghost">${t.ctaPlatform}</a>
       </div>
     </div>
   </div>
 
-  <div class="foot-note">
-    <b>Method.</b> Hard benefit = replaced tool subscriptions + labour hours reclaimed (AI spec import, listing copy, translation, photo cleanup, publishing, lead replies, BTW prep) valued at your loaded rate + floorplan carrying cost avoided from faster turn, minus the € 349/mo BOP subscription. Growth = incremental units × gross-per-car (softer upside). Marketplace listing fees (Marktplaats, Mobile.de, AutoScout24) are <b>not</b> counted as savings — those channels continue regardless. Benchmarks: dealers average ~6.8 software integrations per sale and thin ~2–3% net margins, so a modest absolute saving is a large share of profit. All figures are estimates for planning — override every input with your own.
-  </div>
+  <div class="foot-note">${t.footNote}</div>
 </div>
 `
+}
 
-export default function CalculatorClient() {
-  const t = useTranslations("bop_calculator");
+export default function CalculatorClient({ locale = "en" }: { locale?: string }) {
+  const lang = STR[locale] ? locale : "en"
+  const t = STR[lang]
   useEffect(() => {
     const el = (id: string) => document.getElementById(id) as HTMLInputElement | HTMLElement | null
     const fmt = (n: number) => "€ " + Math.round(n).toLocaleString("nl-NL")
     const fmtc = (n: number) => Math.round(n).toLocaleString("nl-NL")
 
-    const toolDefs: [string, number, boolean][] = [
-      ["DMS / inventory", 220, true], ["CRM / leads", 120, true], ["Invoicing + boekhouding add-ons", 90, true],
-      ["Photo / background tool", 45, true], ["Multi-channel uploader", 110, true],
-      ["Separate AI writing", 60, true], ["Website feed sync", 75, true],
-    ]
+    const toolDefs: [string, number, boolean][] = t.tools.map((name, i) => [name, TOOL_COSTS[i], true])
     const BOP = 349
     const PER_CAR_MIN = 108
     const OPS_HOURS_BASE = 46
@@ -258,7 +329,7 @@ export default function CalculatorClient() {
 
       text("b_tools", fmt(tools))
       text("b_labour", fmt(labour))
-      text("b_hours", "· " + Math.round(totalHours) + " h/mo")
+      text("b_hours", t.hours(Math.round(totalHours)))
       text("b_carry", fmt(carryMo))
       text("b_bop", "− " + fmt(BOP))
       text("b_net", fmt(netMo))
@@ -274,7 +345,7 @@ export default function CalculatorClient() {
       const hardYr = netMo * 12, totYr = totMo * 12
       text("pl_base", fmt(baseNet))
       const upHard = hardYr / baseNet * 100, upTot = totYr / baseNet * 100
-      text("uplift", `Net profit up +${Math.round(upHard)}% (hard) · +${Math.round(upTot)}% with growth`)
+      text("uplift", t.uplift(Math.round(upHard), Math.round(upTot)))
       const baseW = 52
       const liftW = Math.min(46, baseW * (upTot / 100))
       const barBase = el("bar_base") as HTMLElement, barLift = el("bar_lift") as HTMLElement
@@ -308,12 +379,12 @@ export default function CalculatorClient() {
       ids.forEach(id => el(id)?.removeEventListener("input", calc))
       if (toolsWrap) toolsWrap.innerHTML = ""
     }
-  }, [])
+  }, [lang, t])
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div className="bopv2" dangerouslySetInnerHTML={{ __html: MARKUP }} />
+      <div className="bopv2" dangerouslySetInnerHTML={{ __html: buildMarkup(t, lang) }} />
     </>
   )
 }

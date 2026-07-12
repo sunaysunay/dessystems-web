@@ -1,48 +1,51 @@
 import { Link } from "@/src/i18n/routing"
 import { ThemeToggle } from "@/components/theme-toggle"
-
-const cols = [
-  {
-    title: "Solutions",
-    links: [
-      { label: "Business Operating Platform", href: "/platform" },
-      { label: "Enterprise Systems", href: "/solutions#enterprise" },
-      { label: "ERP", href: "/solutions#erp" },
-      { label: "Automation", href: "/solutions#automation" },
-      { label: "Integration", href: "/solutions#integration" },
-    ],
-  },
-  {
-    title: "Services",
-    links: [
-      { label: "ERP Consulting",       href: "/services#erp" },
-      { label: "SAP Logistics",        href: "/services#sap" },
-      { label: "MES Integrations",     href: "/services#mes" },
-      { label: "APIs & EDI",           href: "/services#api" },
-      { label: "Custom Platforms",     href: "/services#custom" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About Us",              href: "/about" },
-      { label: "Careers",               href: "/careers" },
-      { label: "Freelance",             href: "/freelance" },
-      { label: "News & Insights",       href: "/insights" },
-      { label: "Contact",               href: "/contact" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy",    href: "/privacy" },
-      { label: "Terms of Service",  href: "/terms" },
-      { label: "Cookie Policy",     href: "/cookies" },
-    ],
-  },
-]
+import { useTranslations } from "next-intl"
 
 export default function Footer() {
+  const t = useTranslations("Footer")
+
+  const cols = [
+    {
+      title: t("col_solutions"),
+      links: [
+        { label: t("l_bop"), href: "/platform" },
+        { label: t("l_enterprise"), href: "/solutions#enterprise" },
+        { label: t("l_erp"), href: "/solutions#erp" },
+        { label: t("l_automation"), href: "/solutions#automation" },
+        { label: t("l_integration"), href: "/solutions#integration" },
+      ],
+    },
+    {
+      title: t("col_services"),
+      links: [
+        { label: t("l_erp_consulting"), href: "/services#erp" },
+        { label: t("l_sap"), href: "/services#sap" },
+        { label: t("l_mes"), href: "/services#mes" },
+        { label: t("l_apis"), href: "/services#api" },
+        { label: t("l_custom"), href: "/services#custom" },
+      ],
+    },
+    {
+      title: t("col_company"),
+      links: [
+        { label: t("l_about"), href: "/about" },
+        { label: t("l_careers"), href: "/careers" },
+        { label: t("l_freelance"), href: "/freelance" },
+        { label: t("l_insights"), href: "/insights" },
+        { label: t("l_contact"), href: "/contact" },
+      ],
+    },
+    {
+      title: t("col_legal"),
+      links: [
+        { label: t("l_privacy"), href: "/privacy" },
+        { label: t("l_terms"), href: "/terms" },
+        { label: t("l_cookies"), href: "/cookies" },
+      ],
+    },
+  ]
+
   return (
     <footer style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)" }}>
       <div className="max-w-7xl mx-auto px-[4%] pt-14 pb-8">
@@ -54,7 +57,7 @@ export default function Footer() {
             </div>
             <div className="text-[10px] tracking-[0.1em] uppercase mb-4" style={{ color: "var(--text3)" }}>Enterprise Solutions</div>
             <p className="text-[13px] leading-relaxed mb-5 max-w-xs" style={{ color: "var(--text3)" }}>
-              DES Systems delivers enterprise solutions, ERP consulting, MES integrations and automation to drive real business impact.
+              {t("tagline")}
             </p>
             <div className="flex gap-2.5">
               {[["in","LinkedIn"],["𝕏","X"],["gh","GitHub"],["yt","YouTube"]].map(([l,title]) => (
@@ -84,7 +87,7 @@ export default function Footer() {
 
           {/* Contact col */}
           <div>
-            <h4 className="text-[11px] font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text3)" }}>Contact Us</h4>
+            <h4 className="text-[11px] font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text3)" }}>{t("col_contact")}</h4>
             <div className="space-y-2 mb-4">
               {[
                 ["✉","info@dessystems.io"],
@@ -99,27 +102,27 @@ export default function Footer() {
             <Link href="/contact"
               className="block w-full text-center text-[13px] font-medium py-2.5 rounded-lg text-white transition-colors"
               style={{ background: "var(--accent)" }}>
-              Get in Touch
+              {t("get_in_touch")}
             </Link>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 pt-6"
           style={{ borderTop: "1px solid var(--border)" }}>
-          <span className="text-[12px]" style={{ color: "var(--text3)" }}>© 2026 DES Systems. All rights reserved.</span>
+          <span className="text-[12px]" style={{ color: "var(--text3)" }}>© 2026 DES Systems. {t("rights")}</span>
           <div className="flex gap-5">
-            {["Privacy Policy","Terms of Service","Cookie Policy"].map(l => (
-              <a key={l} href="#" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{l}</a>
-            ))}
+            <Link href="/privacy" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{t("l_privacy")}</Link>
+            <Link href="/terms" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{t("l_terms")}</Link>
+            <Link href="/cookies" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{t("l_cookies")}</Link>
           </div>
           <ThemeToggle />
           <div className="text-[12px] flex items-center gap-1.5" style={{ color: "var(--text3)" }}>
-            Made with <span style={{ color: "#e45" }}>♥</span> in Europe
+            {t.rich("made_with", { heart: () => <span style={{ color: "#e45" }}>♥</span> })}
           </div>
         </div>
 
         <div className="mt-4 pt-4 text-center text-[11px]" style={{ borderTop: "1px solid var(--border)", color: "var(--text3)" }}>
-          Powered by <span style={{ color: "var(--accent2)" }}>DES Business Operating Platform</span>
+          {t("powered_by")} <span style={{ color: "var(--accent2)" }}>DES Business Operating Platform</span>
         </div>
       </div>
     </footer>

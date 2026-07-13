@@ -218,6 +218,14 @@ const CSS = `
 @media(max-width:900px){.bopv2 .mods{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.bopv2 .mods{grid-template-columns:1fr}}
 
+/* module-grid variant: 3 cols desktop -> 2 tablet -> 1 mobile, text-only cells */
+.bopv2 .mods3{grid-template-columns:repeat(3,1fr)}
+.bopv2 .mods3 .mod{min-height:auto;padding:24px 22px}
+.bopv2 .mod-desc{margin-top:8px;font-size:13.5px;color:var(--fog);line-height:1.6;font-family:var(--body)}
+.bopv2 .eyebrow.center{justify-content:center}
+@media(max-width:900px){.bopv2 .mods3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.bopv2 .mods3{grid-template-columns:1fr}}
+
 /* comparison */
 .bopv2 .cmp{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .bopv2 .cmp .h{padding:16px 22px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
@@ -283,6 +291,20 @@ const MARKUP = `
         <div class="step" data-i="7"><div class="ico">✓</div><div><div class="who">finance</div><div class="txt">Sold. <b>Margeregeling invoice + afleverbon</b>, boekhouding updated</div></div></div>
       </div>
       <div class="console-foot"><span id="footlabel">idle · press play</span><span class="prog" id="prog"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:56px;padding-bottom:56px">
+  <div class="wrap">
+    <div class="eyebrow center" style="margin-bottom:26px">EVERY MODULE, ONE PLATFORM</div>
+    <div class="mods mods3">
+      <div class="mod"><h3>Inventory</h3><p class="mod-desc">Full vehicle lifecycle: intake, RDW specs, condition, photos — one record, every channel.</p></div>
+      <div class="mod"><h3>Marketplace</h3><p class="mod-desc">Publish once to Marktplaats, Mobile.de, AutoScout24 and your own site — synced, not duplicated.</p></div>
+      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, test-drive slots, follow-ups — AI drafts the reply, you close the deal.</p></div>
+      <div class="mod"><h3>Sales</h3><p class="mod-desc">Quotes, orders, contracts, afleverbon — generated, not typed.</p></div>
+      <div class="mod"><h3>Finance</h3><p class="mod-desc">BTW margeregeling, invoicing, profitability — handled the way NL/BE/DE dealers actually work.</p></div>
+      <div class="mod"><h3>AI Intelligence</h3><p class="mod-desc">Pricing, translation, listing copy — embedded in every module, not bolted on.</p></div>
     </div>
   </div>
 </section>
@@ -603,6 +625,20 @@ const MARKUP_NL = `
   </div>
 </section>
 
+<section class="pad" style="padding-top:56px;padding-bottom:56px">
+  <div class="wrap">
+    <div class="eyebrow center" style="margin-bottom:26px">ELKE MODULE, ÉÉN PLATFORM</div>
+    <div class="mods mods3">
+      <div class="mod"><h3>Voorraad</h3><p class="mod-desc">Volledige voertuiglevenscyclus: inname, RDW-specs, staat, foto's — één record, elk kanaal.</p></div>
+      <div class="mod"><h3>Marktplaats</h3><p class="mod-desc">Eén keer publiceren naar Marktplaats, Mobile.de, AutoScout24 en je eigen site — gesynchroniseerd, niet gedupliceerd.</p></div>
+      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, proefritslots, opvolging — AI stelt het antwoord op, jij sluit de deal.</p></div>
+      <div class="mod"><h3>Sales</h3><p class="mod-desc">Offertes, orders, contracten, afleverbon — gegenereerd, niet getypt.</p></div>
+      <div class="mod"><h3>Financiën</h3><p class="mod-desc">BTW-margeregeling, facturatie, winstgevendheid — zoals NL/BE/DE-dealers echt werken.</p></div>
+      <div class="mod"><h3>AI Intelligence</h3><p class="mod-desc">Prijsstelling, vertaling, advertentietekst — ingebouwd in elke module, niet erbij geplakt.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="econ" id="numbers">
   <div class="wrap">
     <div class="econ-head">
@@ -899,6 +935,20 @@ const MARKUP_DE = `
         <div class="step" data-i="7"><div class="ico">✓</div><div><div class="who">Finanzen</div><div class="txt">Verkauft. <b>Differenzbesteuerungs-Rechnung + Lieferschein</b>, Buchhaltung aktualisiert</div></div></div>
       </div>
       <div class="console-foot"><span id="footlabel">inaktiv · Play drücken</span><span class="prog" id="prog"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:56px;padding-bottom:56px">
+  <div class="wrap">
+    <div class="eyebrow center" style="margin-bottom:26px">JEDES MODUL, EINE PLATTFORM</div>
+    <div class="mods mods3">
+      <div class="mod"><h3>Bestand</h3><p class="mod-desc">Voller Fahrzeuglebenszyklus: Annahme, RDW-Specs, Zustand, Fotos — ein Datensatz, jeder Kanal.</p></div>
+      <div class="mod"><h3>Marktplatz</h3><p class="mod-desc">Einmal veröffentlichen auf Marktplaats, Mobile.de, AutoScout24 und der eigenen Seite — synchronisiert, nicht dupliziert.</p></div>
+      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, Probefahrt-Termine, Nachfassen — KI entwirft die Antwort, Sie schließen den Deal ab.</p></div>
+      <div class="mod"><h3>Sales</h3><p class="mod-desc">Angebote, Aufträge, Verträge, Lieferschein — generiert, nicht getippt.</p></div>
+      <div class="mod"><h3>Finanzen</h3><p class="mod-desc">Differenzbesteuerung, Rechnungsstellung, Profitabilität — so wie NL/BE/DE-Händler tatsächlich arbeiten.</p></div>
+      <div class="mod"><h3>KI Intelligence</h3><p class="mod-desc">Preisgestaltung, Übersetzung, Anzeigentext — in jedem Modul eingebettet, nicht angeflanscht.</p></div>
     </div>
   </div>
 </section>

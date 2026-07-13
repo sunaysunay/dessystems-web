@@ -3,7 +3,7 @@ import { dxCss } from "@/components/dx-styles"
 import { Link } from "@/src/i18n/routing"
 import { useTranslations } from "next-intl"
 import {
-  ArrowRight, Check, LayoutGrid, Settings, Workflow, Webhook,
+  ArrowRight, Check, Layers, LayoutGrid, Settings, Workflow, Webhook,
   Car, Factory, Truck, ShoppingBag, Cog, Plus,
 } from "lucide-react"
 
@@ -27,10 +27,11 @@ export default function HomePage() {
   const t = useTranslations("HomeContent")
 
   const solutions = [
-    { Icon: LayoutGrid, name: t("s1_name"), desc: t("s1_desc") },
-    { Icon: Settings,   name: t("s2_name"), desc: t("s2_desc") },
-    { Icon: Workflow,   name: t("s3_name"), desc: t("s3_desc") },
-    { Icon: Webhook,    name: t("s4_name"), desc: t("s4_desc") },
+    { Icon: Layers,     name: t("bop_name"), desc: t("bop_desc"), href: "/platform" },
+    { Icon: LayoutGrid, name: t("s1_name"),  desc: t("s1_desc"),  href: "/solutions" },
+    { Icon: Settings,   name: t("s2_name"),  desc: t("s2_desc"),  href: "/solutions" },
+    { Icon: Workflow,   name: t("s3_name"),  desc: t("s3_desc"),  href: "/solutions" },
+    { Icon: Webhook,    name: t("s4_name"),  desc: t("s4_desc"),  href: "/solutions" },
   ]
   const checks = [t("chk1"), t("chk2"), t("chk3"), t("chk4"), t("chk5"), t("chk6")]
   const mesChecks = [t("mchk1"), t("mchk2"), t("mchk3"), t("mchk4"), t("mchk5"), t("mchk6")]
@@ -88,13 +89,13 @@ export default function HomePage() {
               <h2 style={{ marginTop: 10 }}>{t("sol_title")}</h2>
               <p className="lead">{t("sol_lead")}</p>
             </div>
-            <div className="grid grid-4">
+            <div className="grid grid-5">
               {solutions.map(s => (
                 <div className="card" key={s.name}>
                   <div className="ic"><s.Icon /></div>
                   <h3>{s.name}</h3>
                   <p>{s.desc}</p>
-                  <Link href="/solutions" className="more">{t("discover_more")} <ArrowRight /></Link>
+                  <Link href={s.href} className="more">{t("discover_more")} <ArrowRight /></Link>
                 </div>
               ))}
             </div>

@@ -440,7 +440,7 @@
     "logos_caption": "Trusted by manufacturing & logistics teams across Europe",
     "sol_eyebrow": "What we do",
     "sol_title": "Core expertise, end to end",
-    "sol_lead": "From greenfield SAP implementations to automation at scale — one partner across the full enterprise stack.",
+    "sol_lead": "From greenfield SAP implementations to the proprietary platforms we build in-house — one partner across the full enterprise stack.",
     "discover_more": "Discover more",
     "s1_name": "ERP & SAP Consulting",
     "s1_desc": "S/4HANA implementation, support and optimisation across MM, PP, QM, WM and SD.",
@@ -526,6 +526,8 @@
     "cta_title": "Let's discuss your project",
     "cta_lead": "Available for remote & on-site engagements across Europe. Tell us about your systems and we'll map the fastest path to results.",
     "cta_btn1": "Get in touch",
-    "cta_btn2": "Our solutions"
+    "cta_btn2": "Our solutions",
+    "bop_name": "Business Operating Platform",
+    "bop_desc": "Our proprietary multi-tenant platform running core operations end-to-end, built with AI-native flexibility to adapt as the business scales."
   }
 }

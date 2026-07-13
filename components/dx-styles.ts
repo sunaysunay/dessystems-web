@@ -25,9 +25,11 @@ export const dxCss = `
 .dx .grid{display:grid;gap:22px}
 .dx .grid-3{grid-template-columns:repeat(3,1fr)}
 .dx .grid-4{grid-template-columns:repeat(4,1fr)}
+.dx .grid-5{grid-template-columns:repeat(5,1fr)}
 .dx .grid-2{grid-template-columns:1fr 1fr}
-@media(max-width:920px){.dx .grid-3,.dx .grid-4{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.dx .grid-3,.dx .grid-4,.dx .grid-2{grid-template-columns:1fr}}
+@media(max-width:1100px){.dx .grid-5{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:920px){.dx .grid-3,.dx .grid-4,.dx .grid-5{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.dx .grid-3,.dx .grid-4,.dx .grid-5,.dx .grid-2{grid-template-columns:1fr}}
 .dx .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);transition:.2s}
 .dx .card:hover{transform:translateY(-3px);border-color:#cdd8ea;box-shadow:0 12px 30px rgba(11,31,58,.10)}
 .dx .ic{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;margin-bottom:16px;background:linear-gradient(135deg,rgba(29,108,240,.12),rgba(15,157,140,.12))}

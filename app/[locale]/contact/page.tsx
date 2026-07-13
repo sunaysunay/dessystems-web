@@ -8,11 +8,11 @@ import { dxCss } from "@/components/dx-styles"
 type Topic = "erp" | "mes" | "automation" | "freelance" | "platform"
 
 const TOPICS: { id: Topic; Icon: typeof Settings }[] = [
+  { id: "platform",   Icon: BarChart3 },
   { id: "erp",        Icon: Settings },
   { id: "mes",        Icon: Factory },
   { id: "automation", Icon: Bot },
   { id: "freelance",  Icon: Briefcase },
-  { id: "platform",   Icon: BarChart3 },
 ]
 
 const inputStyle: CSSProperties = { width: "100%", fontSize: 14, padding: "10px 12px", borderRadius: 8, background: "#fff", border: "1px solid var(--line)", color: "var(--ink)", outline: "none" }
@@ -20,7 +20,7 @@ const labelStyle: CSSProperties = { display: "block", fontSize: 11, fontWeight: 
 
 export default function ContactPage() {
   const t = useTranslations("Contact")
-  const [topic, setTopic]     = useState<Topic>("erp")
+  const [topic, setTopic]     = useState<Topic>("platform")
   const [form, setForm]       = useState({ firstName: "", lastName: "", email: "", phone: "", company: "", message: "" })
   const [sending, setSending] = useState(false)
   const [sent, setSent]       = useState(false)

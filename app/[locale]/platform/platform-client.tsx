@@ -295,6 +295,59 @@ const MARKUP = `
   </div>
 </section>
 
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Inside the platform</div>
+      <h2>One shell. Eight domains. The full dealer lifecycle.</h2>
+      <p>Every module shares the same records, permissions, and AI layer — no switching, no re-typing, no export-import between systems.</p>
+    </div>
+    <div class="split">
+      <div class="copy">
+        <div class="eyebrow">The console</div>
+        <h3>A fixed shell your team learns once.</h3>
+        <p>SAP-grade structure without the SAP overhead. Six-anchor shell bar, permissioned left-nav, object codes on every screen — the operators' interface, not a consumer app dressed up.</p>
+        <ul>
+          <li>Overview · Operations · Sales & CRM domains</li>
+          <li>Marketplace · Finance · Intelligence</li>
+          <li>Master Data · Tools — all in one tree</li>
+          <li>Role-based access on every object</li>
+        </ul>
+      </div>
+      <div class="snapwrap">
+        <div class="snap">
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">bop.dessystems.io / console</span></div>
+          <div class="mock-nav">
+            <div class="mn-side">
+              <div class="mn-group">Overview</div>
+              <div class="mn-item sel"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Exec Dashboard<span class="code">AN001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Conversion Funnel<span class="code">AN002</span></div>
+              <div class="mn-group">Operations</div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>Inventory<span class="code">AS001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Catalog<span class="code">IN001</span></div>
+              <div class="mn-group">Sales & CRM</div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a5 5 0 015-5h2"/></svg>Leads<span class="code">CR001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Appointments<span class="code">SA007</span></div>
+            </div>
+            <div class="mn-main">
+              <div class="mn-crumb">Overview / <b>Exec Dashboard</b></div>
+              <div class="mn-tiles">
+                <div class="mn-tile"><div class="tk">STOCK</div><div class="tn">47</div><div class="ts">units live</div></div>
+                <div class="mn-tile"><div class="tk">SOLD · MTD</div><div class="tn">23</div><div class="ts">+4 vs target</div></div>
+                <div class="mn-tile"><div class="tk">AVG DAYS</div><div class="tn">18</div><div class="ts">−6 with AI</div></div>
+                <div class="mn-tile"><div class="tk">LEADS</div><div class="tn">61</div><div class="ts">14 open</div></div>
+                <div class="mn-tile"><div class="tk">GROSS · MTD</div><div class="tn" style="font-size:14px">€41k</div><div class="ts">margeregeling</div></div>
+                <div class="mn-tile"><div class="tk">PUBLISHED</div><div class="tn">188</div><div class="ts">4 channels</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="snap-cap">Exec Dashboard — the live shell, object codes and all</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="pad" style="padding-top:56px;padding-bottom:56px">
   <div class="wrap">
     <div class="eyebrow center" style="margin-bottom:26px">EVERY MODULE, ONE PLATFORM</div>
@@ -348,59 +401,6 @@ const MARKUP = `
     <span class="chip">Motorhomes</span><span class="chip">Auction stock</span><span class="chip">Fleet</span><span class="chip">Import / Export</span>
   </div>
 </div>
-
-<section class="pad">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Inside the platform</div>
-      <h2>One shell. Eight domains. The full dealer lifecycle.</h2>
-      <p>Every module shares the same records, permissions, and AI layer — no switching, no re-typing, no export-import between systems.</p>
-    </div>
-    <div class="split">
-      <div class="copy">
-        <div class="eyebrow">The console</div>
-        <h3>A fixed shell your team learns once.</h3>
-        <p>SAP-grade structure without the SAP overhead. Six-anchor shell bar, permissioned left-nav, object codes on every screen — the operators' interface, not a consumer app dressed up.</p>
-        <ul>
-          <li>Overview · Operations · Sales & CRM domains</li>
-          <li>Marketplace · Finance · Intelligence</li>
-          <li>Master Data · Tools — all in one tree</li>
-          <li>Role-based access on every object</li>
-        </ul>
-      </div>
-      <div class="snapwrap">
-        <div class="snap">
-          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">bop.dessystems.io / console</span></div>
-          <div class="mock-nav">
-            <div class="mn-side">
-              <div class="mn-group">Overview</div>
-              <div class="mn-item sel"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Exec Dashboard<span class="code">AN001</span></div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Conversion Funnel<span class="code">AN002</span></div>
-              <div class="mn-group">Operations</div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>Inventory<span class="code">AS001</span></div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Catalog<span class="code">IN001</span></div>
-              <div class="mn-group">Sales & CRM</div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a5 5 0 015-5h2"/></svg>Leads<span class="code">CR001</span></div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Appointments<span class="code">SA007</span></div>
-            </div>
-            <div class="mn-main">
-              <div class="mn-crumb">Overview / <b>Exec Dashboard</b></div>
-              <div class="mn-tiles">
-                <div class="mn-tile"><div class="tk">STOCK</div><div class="tn">47</div><div class="ts">units live</div></div>
-                <div class="mn-tile"><div class="tk">SOLD · MTD</div><div class="tn">23</div><div class="ts">+4 vs target</div></div>
-                <div class="mn-tile"><div class="tk">AVG DAYS</div><div class="tn">18</div><div class="ts">−6 with AI</div></div>
-                <div class="mn-tile"><div class="tk">LEADS</div><div class="tn">61</div><div class="ts">14 open</div></div>
-                <div class="mn-tile"><div class="tk">GROSS · MTD</div><div class="tn" style="font-size:14px">€41k</div><div class="ts">margeregeling</div></div>
-                <div class="mn-tile"><div class="tk">PUBLISHED</div><div class="tn">188</div><div class="ts">4 channels</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="snap-cap">Exec Dashboard — the live shell, object codes and all</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="pad">
   <div class="wrap">
@@ -625,44 +625,6 @@ const MARKUP_NL = `
   </div>
 </section>
 
-<section class="pad" style="padding-top:56px;padding-bottom:56px">
-  <div class="wrap">
-    <div class="eyebrow center" style="margin-bottom:26px">ELKE MODULE, ÉÉN PLATFORM</div>
-    <div class="mods mods3">
-      <div class="mod"><h3>Voorraad</h3><p class="mod-desc">Volledige voertuiglevenscyclus: inname, RDW-specs, staat, foto's — één record, elk kanaal.</p></div>
-      <div class="mod"><h3>Marktplaats</h3><p class="mod-desc">Eén keer publiceren naar Marktplaats, Mobile.de, AutoScout24 en je eigen site — gesynchroniseerd, niet gedupliceerd.</p></div>
-      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, proefritslots, opvolging — AI stelt het antwoord op, jij sluit de deal.</p></div>
-      <div class="mod"><h3>Sales</h3><p class="mod-desc">Offertes, orders, contracten, afleverbon — gegenereerd, niet getypt.</p></div>
-      <div class="mod"><h3>Financiën</h3><p class="mod-desc">BTW-margeregeling, facturatie, winstgevendheid — zoals NL/BE/DE-dealers echt werken.</p></div>
-      <div class="mod"><h3>AI Intelligence</h3><p class="mod-desc">Prijsstelling, vertaling, advertentietekst — ingebouwd in elke module, niet erbij geplakt.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="econ" id="numbers">
-  <div class="wrap">
-    <div class="econ-head">
-      <div class="t">Wat het waard is voor een middelgroot terrein — <b>25 auto's per maand.</b></div>
-      <div class="note">conservatief model · pas elke waarde aan in de rekentool</div>
-    </div>
-    <div class="stat-row">
-      <div class="stat hl"><div class="k">Netto besparing / jaar</div><div class="n"><span class="cur">€</span>46.187</div><div class="sub">Harde cash na het abonnement — tools, arbeid, snellere doorloop.</div></div>
-      <div class="stat green"><div class="k">Nettowinst-stijging</div><div class="n">+34%</div><div class="sub">Bij een dunne marge van 2,5% telt elke euro flink door. +56% met groei.</div></div>
-      <div class="stat"><div class="k">Uren teruggewonnen / maand</div><div class="n">91</div><div class="sub">AI doet spec-import, tekst, vertaling, foto's, publiceren, opvolging.</div></div>
-      <div class="stat"><div class="k">Rendement per € 1</div><div class="n"><span class="cur">€</span>12</div><div class="sub">Alleen harde waarde. Terugverdiend binnen de eerste maand.</div></div>
-    </div>
-    <div style="margin-top:20px"><a href="/nl/platform/calculator" class="btn btn-primary">Open de besparingscalculator →</a></div>
-  </div>
-</section>
-
-<div class="strip">
-  <div class="wrap strip-inner">
-    <span class="lbl">Door de hele handel gebouwd</span>
-    <span class="chip">Bedrijfswagens</span><span class="chip">Auto's</span><span class="chip">Campers</span>
-    <span class="chip">Kampeerauto's</span><span class="chip">Veilingvoorraad</span><span class="chip">Wagenpark</span><span class="chip">Import / Export</span>
-  </div>
-</div>
-
 <section class="pad">
   <div class="wrap">
     <div class="sec-head">
@@ -715,6 +677,44 @@ const MARKUP_NL = `
     </div>
   </div>
 </section>
+
+<section class="pad" style="padding-top:56px;padding-bottom:56px">
+  <div class="wrap">
+    <div class="eyebrow center" style="margin-bottom:26px">ELKE MODULE, ÉÉN PLATFORM</div>
+    <div class="mods mods3">
+      <div class="mod"><h3>Voorraad</h3><p class="mod-desc">Volledige voertuiglevenscyclus: inname, RDW-specs, staat, foto's — één record, elk kanaal.</p></div>
+      <div class="mod"><h3>Marktplaats</h3><p class="mod-desc">Eén keer publiceren naar Marktplaats, Mobile.de, AutoScout24 en je eigen site — gesynchroniseerd, niet gedupliceerd.</p></div>
+      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, proefritslots, opvolging — AI stelt het antwoord op, jij sluit de deal.</p></div>
+      <div class="mod"><h3>Sales</h3><p class="mod-desc">Offertes, orders, contracten, afleverbon — gegenereerd, niet getypt.</p></div>
+      <div class="mod"><h3>Financiën</h3><p class="mod-desc">BTW-margeregeling, facturatie, winstgevendheid — zoals NL/BE/DE-dealers echt werken.</p></div>
+      <div class="mod"><h3>AI Intelligence</h3><p class="mod-desc">Prijsstelling, vertaling, advertentietekst — ingebouwd in elke module, niet erbij geplakt.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="econ" id="numbers">
+  <div class="wrap">
+    <div class="econ-head">
+      <div class="t">Wat het waard is voor een middelgroot terrein — <b>25 auto's per maand.</b></div>
+      <div class="note">conservatief model · pas elke waarde aan in de rekentool</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat hl"><div class="k">Netto besparing / jaar</div><div class="n"><span class="cur">€</span>46.187</div><div class="sub">Harde cash na het abonnement — tools, arbeid, snellere doorloop.</div></div>
+      <div class="stat green"><div class="k">Nettowinst-stijging</div><div class="n">+34%</div><div class="sub">Bij een dunne marge van 2,5% telt elke euro flink door. +56% met groei.</div></div>
+      <div class="stat"><div class="k">Uren teruggewonnen / maand</div><div class="n">91</div><div class="sub">AI doet spec-import, tekst, vertaling, foto's, publiceren, opvolging.</div></div>
+      <div class="stat"><div class="k">Rendement per € 1</div><div class="n"><span class="cur">€</span>12</div><div class="sub">Alleen harde waarde. Terugverdiend binnen de eerste maand.</div></div>
+    </div>
+    <div style="margin-top:20px"><a href="/nl/platform/calculator" class="btn btn-primary">Open de besparingscalculator →</a></div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap strip-inner">
+    <span class="lbl">Door de hele handel gebouwd</span>
+    <span class="chip">Bedrijfswagens</span><span class="chip">Auto's</span><span class="chip">Campers</span>
+    <span class="chip">Kampeerauto's</span><span class="chip">Veilingvoorraad</span><span class="chip">Wagenpark</span><span class="chip">Import / Export</span>
+  </div>
+</div>
 
 <section class="pad">
   <div class="wrap">
@@ -939,44 +939,6 @@ const MARKUP_DE = `
   </div>
 </section>
 
-<section class="pad" style="padding-top:56px;padding-bottom:56px">
-  <div class="wrap">
-    <div class="eyebrow center" style="margin-bottom:26px">JEDES MODUL, EINE PLATTFORM</div>
-    <div class="mods mods3">
-      <div class="mod"><h3>Bestand</h3><p class="mod-desc">Voller Fahrzeuglebenszyklus: Annahme, RDW-Specs, Zustand, Fotos — ein Datensatz, jeder Kanal.</p></div>
-      <div class="mod"><h3>Marktplatz</h3><p class="mod-desc">Einmal veröffentlichen auf Marktplaats, Mobile.de, AutoScout24 und der eigenen Seite — synchronisiert, nicht dupliziert.</p></div>
-      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, Probefahrt-Termine, Nachfassen — KI entwirft die Antwort, Sie schließen den Deal ab.</p></div>
-      <div class="mod"><h3>Sales</h3><p class="mod-desc">Angebote, Aufträge, Verträge, Lieferschein — generiert, nicht getippt.</p></div>
-      <div class="mod"><h3>Finanzen</h3><p class="mod-desc">Differenzbesteuerung, Rechnungsstellung, Profitabilität — so wie NL/BE/DE-Händler tatsächlich arbeiten.</p></div>
-      <div class="mod"><h3>KI Intelligence</h3><p class="mod-desc">Preisgestaltung, Übersetzung, Anzeigentext — in jedem Modul eingebettet, nicht angeflanscht.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="econ" id="numbers">
-  <div class="wrap">
-    <div class="econ-head">
-      <div class="t">Was es einem mittelgroßen Hof bringt — <b>25 Autos pro Monat.</b></div>
-      <div class="note">konservatives Modell · jeden Wert im Live-Rechner anpassen</div>
-    </div>
-    <div class="stat-row">
-      <div class="stat hl"><div class="k">Nettoersparnis / Jahr</div><div class="n"><span class="cur">€</span>46.187</div><div class="sub">Harte Ersparnis nach dem Abo — Tools, Arbeit, schnellerer Umschlag.</div></div>
-      <div class="stat green"><div class="k">Nettogewinn-Anstieg</div><div class="n">+34%</div><div class="sub">Bei dünnen 2,5% Marge schlägt jeder Euro stark durch. +56% mit Wachstum.</div></div>
-      <div class="stat"><div class="k">Stunden zurückgewonnen / Monat</div><div class="n">91</div><div class="sub">KI erledigt Spec-Import, Text, Übersetzung, Fotos, Veröffentlichung, Nachfassen.</div></div>
-      <div class="stat"><div class="k">Rendite pro € 1</div><div class="n"><span class="cur">€</span>12</div><div class="sub">Nur harter Nutzen. Amortisiert im ersten Monat.</div></div>
-    </div>
-    <div style="margin-top:20px"><a href="/de/platform/calculator" class="btn btn-primary">Sparrechner öffnen →</a></div>
-  </div>
-</section>
-
-<div class="strip">
-  <div class="wrap strip-inner">
-    <span class="lbl">Über den ganzen Handel gebaut</span>
-    <span class="chip">Transporter</span><span class="chip">Autos</span><span class="chip">Camper</span>
-    <span class="chip">Wohnmobile</span><span class="chip">Auktionsbestand</span><span class="chip">Flotte</span><span class="chip">Import / Export</span>
-  </div>
-</div>
-
 <section class="pad">
   <div class="wrap">
     <div class="sec-head">
@@ -1029,6 +991,44 @@ const MARKUP_DE = `
     </div>
   </div>
 </section>
+
+<section class="pad" style="padding-top:56px;padding-bottom:56px">
+  <div class="wrap">
+    <div class="eyebrow center" style="margin-bottom:26px">JEDES MODUL, EINE PLATTFORM</div>
+    <div class="mods mods3">
+      <div class="mod"><h3>Bestand</h3><p class="mod-desc">Voller Fahrzeuglebenszyklus: Annahme, RDW-Specs, Zustand, Fotos — ein Datensatz, jeder Kanal.</p></div>
+      <div class="mod"><h3>Marktplatz</h3><p class="mod-desc">Einmal veröffentlichen auf Marktplaats, Mobile.de, AutoScout24 und der eigenen Seite — synchronisiert, nicht dupliziert.</p></div>
+      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, Probefahrt-Termine, Nachfassen — KI entwirft die Antwort, Sie schließen den Deal ab.</p></div>
+      <div class="mod"><h3>Sales</h3><p class="mod-desc">Angebote, Aufträge, Verträge, Lieferschein — generiert, nicht getippt.</p></div>
+      <div class="mod"><h3>Finanzen</h3><p class="mod-desc">Differenzbesteuerung, Rechnungsstellung, Profitabilität — so wie NL/BE/DE-Händler tatsächlich arbeiten.</p></div>
+      <div class="mod"><h3>KI Intelligence</h3><p class="mod-desc">Preisgestaltung, Übersetzung, Anzeigentext — in jedem Modul eingebettet, nicht angeflanscht.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="econ" id="numbers">
+  <div class="wrap">
+    <div class="econ-head">
+      <div class="t">Was es einem mittelgroßen Hof bringt — <b>25 Autos pro Monat.</b></div>
+      <div class="note">konservatives Modell · jeden Wert im Live-Rechner anpassen</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat hl"><div class="k">Nettoersparnis / Jahr</div><div class="n"><span class="cur">€</span>46.187</div><div class="sub">Harte Ersparnis nach dem Abo — Tools, Arbeit, schnellerer Umschlag.</div></div>
+      <div class="stat green"><div class="k">Nettogewinn-Anstieg</div><div class="n">+34%</div><div class="sub">Bei dünnen 2,5% Marge schlägt jeder Euro stark durch. +56% mit Wachstum.</div></div>
+      <div class="stat"><div class="k">Stunden zurückgewonnen / Monat</div><div class="n">91</div><div class="sub">KI erledigt Spec-Import, Text, Übersetzung, Fotos, Veröffentlichung, Nachfassen.</div></div>
+      <div class="stat"><div class="k">Rendite pro € 1</div><div class="n"><span class="cur">€</span>12</div><div class="sub">Nur harter Nutzen. Amortisiert im ersten Monat.</div></div>
+    </div>
+    <div style="margin-top:20px"><a href="/de/platform/calculator" class="btn btn-primary">Sparrechner öffnen →</a></div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap strip-inner">
+    <span class="lbl">Über den ganzen Handel gebaut</span>
+    <span class="chip">Transporter</span><span class="chip">Autos</span><span class="chip">Camper</span>
+    <span class="chip">Wohnmobile</span><span class="chip">Auktionsbestand</span><span class="chip">Flotte</span><span class="chip">Import / Export</span>
+  </div>
+</div>
 
 <section class="pad">
   <div class="wrap">

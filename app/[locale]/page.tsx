@@ -1,14 +1,14 @@
 import HeroPanels from "@/components/hero-panels"
 import { dxCss } from "@/components/dx-styles"
 import { Link } from "@/src/i18n/routing"
+import { useTranslations } from "next-intl"
 import {
   ArrowRight, Check, LayoutGrid, Settings, Workflow, Webhook,
   Car, Factory, Truck, ShoppingBag, Cog, Plus,
 } from "lucide-react"
 
-// Scoped styling ported from the DES Systems sample layout. Everything is
-// namespaced under `.dx` so it never leaks into the dark nav/footer or globals.
-
+// Keyword banner + tech chips + client logos stay as-is (universal tech / brand
+// terms). Everything else is driven by the HomeContent i18n namespace.
 const flier = [
   "AI · ERP · MES · CRM · DevOps", "SAP S/4HANA", "ERP Consulting", "MES Integration",
   "Workflow Automation", "Autonomous AI Agents", "EDI / IDoc", "Enterprise Solutions",
@@ -17,50 +17,44 @@ const flier = [
   "AI Content Generation", "Programmatic Advertising", "AI Personalisation",
   "Conversational AI", "RAG / LLM Pipelines", "Corporate AI Solutions",
 ]
-
-const solutions = [
-  { Icon: LayoutGrid, title: "ERP & SAP Consulting", desc: "S/4HANA implementation, support and optimisation across MM, PP, QM, WM and SD." },
-  { Icon: Settings,   title: "Automation",           desc: "Workflow automation that removes manual bottlenecks, cuts cost and reduces error rates." },
-  { Icon: Workflow,   title: "MES Integration",      desc: "Real-time production visibility by connecting shop-floor MES with your ERP backbone." },
-  { Icon: Webhook,    title: "Integration & APIs",   desc: "REST APIs, EDI and IDoc development to unify systems, data and processes." },
-]
-
-const checks = ["Process Analysis & Design", "ERP Implementation", "Data Migration", "System Optimisation", "Training & Support", "Change Management"]
 const sapModules = ["SAP MM", "SAP PP", "SAP QM", "SAP WM/EWM", "SAP PM", "SAP SD", "SAP TM"]
-
-const mesChecks = ["MES Rollout & Configuration", "Shop-Floor Connectivity", "Real-Time OEE & Monitoring", "ERP ↔ MES Synchronisation", "IoT & Machine Data", "EDI / IDoc Interfaces"]
 const mesModules = ["OPC-UA", "MQTT", "SCADA", "PLC", "OEE", "SAP DM", "EDI", "IDoc"]
-
-const ecomChecks = ["Webshop Development", "Headless Commerce", "SEO & Content", "Paid Media (SEA / Social)", "CRM & Marketing Automation", "Analytics & CRO"]
 const ecomModules = ["Shopify", "Next.js", "Headless", "SEO", "Google Ads", "Meta Ads", "Klaviyo", "GA4"]
-
-const stats = [
-  ["23+", "Years of SAP experience"], ["50+", "Successful projects"],
-  ["99.2%", "On-time delivery"], ["EU", "Coverage & compliance"],
-]
-
-const industries = [
-  { Icon: Car,         title: "Automotive",               desc: "Manufacturing and supply-chain solutions for tier suppliers and OEMs." },
-  { Icon: Factory,     title: "Manufacturing",            desc: "Production planning and shop-floor integration for real-time control." },
-  { Icon: Truck,       title: "Logistics & Supply Chain", desc: "End-to-end visibility and process optimisation across the chain." },
-  { Icon: ShoppingBag, title: "Retail & Distribution",    desc: "Inventory, order and distribution management at scale." },
-  { Icon: Cog,         title: "Engineering",              desc: "Project-driven, engineered-to-order solutions and processes." },
-  { Icon: Plus,        title: "More Industries",          desc: "Tailored solutions for your specific operational requirements." },
-]
-
-const testimonials = [
-  { q: "The S/4HANA migration was delivered on schedule and our WM cycle times dropped noticeably within the first quarter.", n: "Markus Keller", r: "Head of Operations, NORDWERK", a: "MK" },
-  { q: "Clear process design, strong SAP logistics depth, and a team that actually understood our shop floor.", n: "Sofia Demir", r: "Supply Chain Lead, Helix Logistics", a: "SD" },
-  { q: "Automation removed days of manual reporting every month. The ROI was obvious within weeks.", n: "Lars Visser", r: "CFO, Vantis", a: "LV" },
-]
-
-const insights = [
-  { cat: "ERP",         title: "How ERP drives operational excellence",  desc: "How modern ERP systems help businesses improve efficiency and agility." },
-  { cat: "Automation",  title: "The power of business automation",       desc: "Why automation has become a necessity for growth and scalability." },
-  { cat: "Integration", title: "MES & ERP integration best practices",   desc: "Key strategies for successful MES and ERP integration in manufacturing." },
-]
+const logos = ["NORDWERK", "Vantis", "METRA Group", "Helix Logistics", "AXIOM", "Procyon"]
+const statNums = ["23+", "50+", "99.2%", "EU"]
 
 export default function HomePage() {
+  const t = useTranslations("HomeContent")
+
+  const solutions = [
+    { Icon: LayoutGrid, name: t("s1_name"), desc: t("s1_desc") },
+    { Icon: Settings,   name: t("s2_name"), desc: t("s2_desc") },
+    { Icon: Workflow,   name: t("s3_name"), desc: t("s3_desc") },
+    { Icon: Webhook,    name: t("s4_name"), desc: t("s4_desc") },
+  ]
+  const checks = [t("chk1"), t("chk2"), t("chk3"), t("chk4"), t("chk5"), t("chk6")]
+  const mesChecks = [t("mchk1"), t("mchk2"), t("mchk3"), t("mchk4"), t("mchk5"), t("mchk6")]
+  const ecomChecks = [t("echk1"), t("echk2"), t("echk3"), t("echk4"), t("echk5"), t("echk6")]
+  const stats = statNums.map((n, i) => [n, t(`stat${i + 1}_sub`)] as const)
+  const industries = [
+    { Icon: Car,         name: t("i1_name"), desc: t("i1_desc") },
+    { Icon: Factory,     name: t("i2_name"), desc: t("i2_desc") },
+    { Icon: Truck,       name: t("i3_name"), desc: t("i3_desc") },
+    { Icon: ShoppingBag, name: t("i4_name"), desc: t("i4_desc") },
+    { Icon: Cog,         name: t("i5_name"), desc: t("i5_desc") },
+    { Icon: Plus,        name: t("i6_name"), desc: t("i6_desc") },
+  ]
+  const testimonials = [
+    { q: t("q1"), n: "Markus Keller", r: "Head of Operations, NORDWERK", a: "MK" },
+    { q: t("q2"), n: "Sofia Demir",   r: "Supply Chain Lead, Helix Logistics", a: "SD" },
+    { q: t("q3"), n: "Lars Visser",   r: "CFO, Vantis", a: "LV" },
+  ]
+  const insights = [
+    { cat: t("a1_cat"), title: t("a1_title"), desc: t("a1_desc") },
+    { cat: t("a2_cat"), title: t("a2_title"), desc: t("a2_desc") },
+    { cat: t("a3_cat"), title: t("a3_title"), desc: t("a3_desc") },
+  ]
+
   return (
     <>
       {/* HERO — multi-panel major activities (unchanged) */}
@@ -69,7 +63,7 @@ export default function HomePage() {
       <div className="dx">
         <style dangerouslySetInnerHTML={{ __html: dxCss }} />
 
-        {/* FLIER — running banner (descamper style) */}
+        {/* FLIER — running banner */}
         <div className="flier" aria-hidden="true">
           <div className="track">
             {[...flier, ...flier].map((item, i) => <span className="item" key={i}>{item}</span>)}
@@ -79,9 +73,9 @@ export default function HomePage() {
         {/* LOGOS */}
         <section className="logos">
           <div className="wrap">
-            <p>Trusted by manufacturing &amp; logistics teams across Europe</p>
+            <p>{t("logos_caption")}</p>
             <div className="logo-row">
-              {["NORDWERK", "Vantis", "METRA Group", "Helix Logistics", "AXIOM", "Procyon"].map(n => <b key={n}>{n}</b>)}
+              {logos.map(n => <b key={n}>{n}</b>)}
             </div>
           </div>
         </section>
@@ -90,17 +84,17 @@ export default function HomePage() {
         <section className="section" id="solutions">
           <div className="wrap">
             <div className="center" style={{ marginBottom: 46 }}>
-              <span className="eyebrow">What we do</span>
-              <h2 style={{ marginTop: 10 }}>Core expertise, end to end</h2>
-              <p className="lead">From greenfield SAP implementations to automation at scale — one partner across the full enterprise stack.</p>
+              <span className="eyebrow">{t("sol_eyebrow")}</span>
+              <h2 style={{ marginTop: 10 }}>{t("sol_title")}</h2>
+              <p className="lead">{t("sol_lead")}</p>
             </div>
             <div className="grid grid-4">
               {solutions.map(s => (
-                <div className="card" key={s.title}>
+                <div className="card" key={s.name}>
                   <div className="ic"><s.Icon /></div>
-                  <h3>{s.title}</h3>
+                  <h3>{s.name}</h3>
                   <p>{s.desc}</p>
-                  <Link href="/solutions" className="more">Discover more <ArrowRight /></Link>
+                  <Link href="/solutions" className="more">{t("discover_more")} <ArrowRight /></Link>
                 </div>
               ))}
             </div>
@@ -111,17 +105,17 @@ export default function HomePage() {
         <section className="section soft" id="services">
           <div className="wrap split">
             <div>
-              <span className="eyebrow">ERP Consulting Services</span>
-              <h2 style={{ margin: "10px 0 16px" }}>SAP &amp; ERP expertise that delivers</h2>
-              <p className="lead">We help businesses implement, optimise and support their ERP systems — ensuring better processes, accurate data and outcomes you can measure.</p>
+              <span className="eyebrow">{t("sap_eyebrow")}</span>
+              <h2 style={{ margin: "10px 0 16px" }}>{t("sap_title")}</h2>
+              <p className="lead">{t("sap_lead")}</p>
               <ul className="checks">
                 {checks.map(c => <li key={c}><Check />{c}</li>)}
               </ul>
-              <Link href="/solutions" className="btn btn-primary">View ERP services</Link>
+              <Link href="/solutions" className="btn btn-primary">{t("sap_btn")}</Link>
             </div>
             <div className="panelcard">
-              <h3>SAP Logistics Expertise</h3>
-              <p>Deep, hands-on knowledge of SAP S/4HANA logistics modules — from planning to execution, greenfield to brownfield.</p>
+              <h3>{t("sap_box_title")}</h3>
+              <p>{t("sap_box_desc")}</p>
               <div className="modules">
                 {sapModules.map(m => <span className="chip" key={m}>{m}</span>)}
               </div>
@@ -133,17 +127,17 @@ export default function HomePage() {
         <section className="section" id="mes">
           <div className="wrap split">
             <div>
-              <span className="eyebrow">MES & Integration</span>
-              <h2 style={{ margin: "10px 0 16px" }}>Establish MES and integrations</h2>
-              <p className="lead">We connect shop-floor systems to your ERP — deploying MES, capturing machine data in real time, and wiring up the integrations that keep production and planning in sync.</p>
+              <span className="eyebrow">{t("mes_eyebrow")}</span>
+              <h2 style={{ margin: "10px 0 16px" }}>{t("mes_title")}</h2>
+              <p className="lead">{t("mes_lead")}</p>
               <ul className="checks">
                 {mesChecks.map(c => <li key={c}><Check />{c}</li>)}
               </ul>
-              <Link href="/solutions" className="btn btn-primary">View MES services</Link>
+              <Link href="/solutions" className="btn btn-primary">{t("mes_btn")}</Link>
             </div>
             <div className="panelcard">
-              <h3>Shop-Floor to Top-Floor</h3>
-              <p>From sensor to SAP — unified production data across every layer of your operation.</p>
+              <h3>{t("mes_box_title")}</h3>
+              <p>{t("mes_box_desc")}</p>
               <div className="modules">
                 {mesModules.map(m => <span className="chip" key={m}>{m}</span>)}
               </div>
@@ -155,17 +149,17 @@ export default function HomePage() {
         <section className="section soft" id="ecommerce">
           <div className="wrap split">
             <div>
-              <span className="eyebrow">E-Commerce & Marketing</span>
-              <h2 style={{ margin: "10px 0 16px" }}>Commerce and growth marketing</h2>
-              <p className="lead">We build and scale online stores and run the marketing that fills them — from headless webshops to SEO, paid media and lifecycle automation.</p>
+              <span className="eyebrow">{t("ecom_eyebrow")}</span>
+              <h2 style={{ margin: "10px 0 16px" }}>{t("ecom_title")}</h2>
+              <p className="lead">{t("ecom_lead")}</p>
               <ul className="checks">
                 {ecomChecks.map(c => <li key={c}><Check />{c}</li>)}
               </ul>
-              <Link href="/contact" className="btn btn-primary">View commerce services</Link>
+              <Link href="/contact" className="btn btn-primary">{t("ecom_btn")}</Link>
             </div>
             <div className="panelcard">
-              <h3>Digital Growth Stack</h3>
-              <p>A modern commerce and marketing toolkit, integrated end to end with your ERP and data.</p>
+              <h3>{t("ecom_box_title")}</h3>
+              <p>{t("ecom_box_desc")}</p>
               <div className="modules">
                 {ecomModules.map(m => <span className="chip" key={m}>{m}</span>)}
               </div>
@@ -187,16 +181,16 @@ export default function HomePage() {
           <div className="wrap">
             <div className="head-row">
               <div>
-                <span className="eyebrow">Industries we serve</span>
-                <h2 style={{ marginTop: 10 }}>Sector expertise across verticals</h2>
+                <span className="eyebrow">{t("ind_eyebrow")}</span>
+                <h2 style={{ marginTop: 10 }}>{t("ind_title")}</h2>
               </div>
-              <p className="lead">Solutions shaped by the operational realities of each industry we work in.</p>
+              <p className="lead">{t("ind_lead")}</p>
             </div>
             <div className="grid grid-3">
               {industries.map(i => (
-                <div className="card" key={i.title}>
+                <div className="card" key={i.name}>
                   <div className="ic"><i.Icon /></div>
-                  <h3>{i.title}</h3>
+                  <h3>{i.name}</h3>
                   <p>{i.desc}</p>
                 </div>
               ))}
@@ -208,15 +202,15 @@ export default function HomePage() {
         <section className="section soft" id="about">
           <div className="wrap">
             <div className="center" style={{ marginBottom: 44 }}>
-              <span className="eyebrow">Client results</span>
-              <h2 style={{ marginTop: 10 }}>What partners say</h2>
+              <span className="eyebrow">{t("test_eyebrow")}</span>
+              <h2 style={{ marginTop: 10 }}>{t("test_title")}</h2>
             </div>
             <div className="grid grid-3">
-              {testimonials.map(t => (
-                <div className="quote" key={t.n}>
+              {testimonials.map(tm => (
+                <div className="quote" key={tm.n}>
                   <div className="stars">★★★★★</div>
-                  <p>&ldquo;{t.q}&rdquo;</p>
-                  <div className="by"><span className="avatar">{t.a}</span><div><b>{t.n}</b><span>{t.r}</span></div></div>
+                  <p>&ldquo;{tm.q}&rdquo;</p>
+                  <div className="by"><span className="avatar">{tm.a}</span><div><b>{tm.n}</b><span>{tm.r}</span></div></div>
                 </div>
               ))}
             </div>
@@ -227,8 +221,8 @@ export default function HomePage() {
         <section className="section" id="insights">
           <div className="wrap">
             <div className="head-row">
-              <div><span className="eyebrow">Latest insights</span><h2 style={{ marginTop: 10 }}>News &amp; articles</h2></div>
-              <Link href="/contact" className="btn btn-outline">View all insights</Link>
+              <div><span className="eyebrow">{t("ins_eyebrow")}</span><h2 style={{ marginTop: 10 }}>{t("ins_title")}</h2></div>
+              <Link href="/contact" className="btn btn-outline">{t("ins_viewall")}</Link>
             </div>
             <div className="grid grid-3">
               {insights.map(a => (
@@ -236,7 +230,7 @@ export default function HomePage() {
                   <span className="eyebrow" style={{ color: "var(--accent-2)" }}>{a.cat}</span>
                   <h3 style={{ margin: "10px 0 6px" }}>{a.title}</h3>
                   <p>{a.desc}</p>
-                  <Link href="/contact" className="more">Read article <ArrowRight /></Link>
+                  <Link href="/contact" className="more">{t("read_article")} <ArrowRight /></Link>
                 </article>
               ))}
             </div>
@@ -247,11 +241,11 @@ export default function HomePage() {
         <section className="section" id="contact">
           <div className="wrap">
             <div className="cta">
-              <h2>Let&apos;s discuss your project</h2>
-              <p>Available for remote &amp; on-site engagements across Europe. Tell us about your systems and we&apos;ll map the fastest path to results.</p>
+              <h2>{t("cta_title")}</h2>
+              <p>{t("cta_lead")}</p>
               <div className="row">
-                <a href="mailto:info@dessystems.io" className="btn btn-primary">Get in touch</a>
-                <Link href="/solutions" className="btn btn-ghost">Our solutions</Link>
+                <a href="mailto:info@dessystems.io" className="btn btn-primary">{t("cta_btn1")}</a>
+                <Link href="/solutions" className="btn btn-ghost">{t("cta_btn2")}</Link>
               </div>
             </div>
           </div>

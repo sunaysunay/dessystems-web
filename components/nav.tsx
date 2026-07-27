@@ -92,7 +92,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   }
 
   return (
-    <div ref={ref} className="relative hidden lg:block">
+    <div ref={ref} className="relative lg:block max-lg:hidden">
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
@@ -207,7 +207,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop */}
-        <nav className="hidden lg:flex items-center gap-7">
+        <nav className="lg:flex max-lg:hidden items-center gap-7">
           {links.map(l => (
             <Link key={l.href} href={l.href}
               className="text-[13px] transition-colors hover:opacity-100"
@@ -217,7 +217,7 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="lg:flex max-lg:hidden items-center gap-3">
           <Link href="/deslab"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
             style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>

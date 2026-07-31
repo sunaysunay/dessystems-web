@@ -114,6 +114,14 @@ export default function ContactPage() {
               </div>
             ))}
           </div>
+
+          <p style={{ marginTop: 28, textAlign: "center", fontSize: 13, color: "var(--slate)" }}>
+            Verify in the official register →{" "}
+            <a href="https://www.kvk.nl/zoeken/?source=qs&q=96837225" target="_blank" rel="noopener noreferrer"
+              style={{ color: "#f97316", fontWeight: 600, textDecoration: "none" }}>
+              KVK Business Register
+            </a>
+          </p>
         </div>
       </section>
     </div>

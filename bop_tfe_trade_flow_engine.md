@@ -3,8 +3,8 @@
 > **Program:** BOP-TFE | **Console:** /opt/dessystems-console | **Stack:** Next.js 14 / TypeScript / Supabase / Zoho SMTP / Telegram
 > **Estimated effort:** ~33 FTE days (7 working weeks solo) | **Target:** 2026-10-15
 > **Scope:** Lead → Case → Quotation → Order → Invoice → Handover → Warranty → Survey → Review
-> **Status:** 4/8 phases done (54%) — P0-P3 deployed, P4-P7 pending
-> **Last updated:** 2026-08-04
+> **Status:** 6/8 phases done (75%) — P0-P5 deployed, P6-P7 pending
+> **Last updated:** 2026-08-05
 
 ---
 
@@ -24,8 +24,10 @@
 | crm_leads | CRM | ADAPTED (P1) | v2_71 | +direction, channel, ref_code, converted_case_id, owner |
 | sal_quotations | SAL | ADAPTED (P2) | v2_73 | +case_id, btw_regime, snapshot, version, replaces_id |
 | sal_orders | SAL | ADAPTED (P3) | v2_74 | +case_id, btw_regime, vehicle_id, koopovereenkomst_url, delivery_terms, aanbetaling_pct, cancel_reason/type |
-| fin_invoices | FIN | PENDING (P4) | — | +case_id, btw_regime, snapshot, invoice_pdf_url |
-| sal_handovers | SAL | PENDING (P5) | — | NEW: vehicle delivery + checklist + signature |
+| fin_invoices | FIN | ADAPTED (P4) | v2_75 | +case_id, btw_regime, snapshot, invoice_pdf_url, order_id, invoice_kind |
+| bop_invoice_transitions | FIN | DEPLOYED (P4) | v2_75 | Invoice status transitions (11 rules) |
+| sal_handovers | SAL | DEPLOYED (P5) | v2_76 | NEW: vehicle delivery + checklist + signature |
+| bop_handover_transitions | SAL | DEPLOYED (P5) | v2_76 | Handover status transitions (5 rules) |
 | sal_warranties | SAL | PENDING (P6) | — | NEW: post-sale warranty tracking + claims |
 | sal_surveys | SAL | PENDING (P6) | — | NEW: NPS + satisfaction + review routing |
 
@@ -47,6 +49,14 @@
 | `bop_order_transition(order_id, to_status, actor, reason)` | P3 | Validated status change + audit trail |
 | `bop_order_confirm(order_id, actor)` | P3 | OLS vehicle lock + approval token + confirmed |
 | `bop_order_cancel(order_id, reason_type, reason, actor)` | P3 | Refund guard + lock release + cancelled |
+| `bop_invoice_allowed_transitions(invoice_id)` | P4 | Returns valid next statuses |
+| `bop_invoice_transition(invoice_id, to_status, actor, reason)` | P4 | Validated status change + audit trail |
+| `bop_create_invoice_from_order(order_id, kind, amount, actor)` | P4 | Generates deposit/final/credit_note invoice from order |
+| `invoice_payment_state(invoice_id)` | P4 | Returns paid/partial/unpaid + overdue + credit status |
+| `bop_handover_allowed_transitions(handover_id)` | P5 | Returns valid next statuses |
+| `bop_handover_transition(handover_id, to_status, actor, reason)` | P5 | Validated status change + audit trail |
+| `bop_handover_complete(handover_id, signature, signed_by, actor)` | P5 | Signature + OLS release + order→delivered |
+| `bop_create_handover_from_order(order_id, scheduled_at, actor)` | P5 | Creates handover + order→handover_scheduled |
 
 ---
 
@@ -65,6 +75,13 @@
 | `/api/bop/sal/orders/[id]/confirm` | POST | P3 | Confirm order (OLS lock + approval) |
 | `/api/bop/sal/orders/[id]/cancel` | POST | P3 | Cancel order (refund guard) |
 | `/api/bop/approve` | GET/POST | P2 | Public approval token handler |
+| `/api/bop/fin/invoices/[id]/transition` | GET/POST | P4 | Allowed transitions + execute transition |
+| `/api/bop/fin/invoices/from-order` | POST | P4 | Create invoice from order (deposit/final/credit_note) |
+| `/api/bop/sal/handovers` | GET | P5 | Handover list with status/order filters |
+| `/api/bop/sal/handovers/[id]` | GET/PATCH | P5 | Handover detail + update checklist fields |
+| `/api/bop/sal/handovers/[id]/transition` | GET/POST | P5 | Allowed transitions + execute transition |
+| `/api/bop/sal/handovers/[id]/complete` | POST | P5 | Complete handover (signature + OLS release) |
+| `/api/bop/sal/handovers/from-order` | POST | P5 | Create handover from order |
 
 ---
 
@@ -76,6 +93,10 @@
 | CR002 Lead Detail | CRM | P1 | Validated transitions from RPC, Convert split-button (→Quotation / →Order), direction badge, converted banner |
 | SA002 Quotation Detail | SAL | P2 | Validated transitions, Send to Customer button, New Version button, version badge (v2+), BTW regime badge (Marge/BTW belast), snapshot frozen banner, marge regime hides VAT line |
 | SA010 Order Detail | SAL | P3 | Validated transitions (9-status flow), Confirm Order button, Cancel Order modal (reason type dropdown + free text), refund guard message, BTW regime badge, cancel reason banner, deposit % display |
+| FI001 Invoices AR | FIN | P4 | Added invoice_kind badge (Deposit/Final/Credit), source order column, validated transitions via RPC |
+| FI002 Invoice Detail | FIN | P4 | Validated transitions from RPC, BTW regime badge, invoice kind badge, source order link banner |
+| SA019 Handovers | SAL | P5 | Handover list with filter presets (All, Scheduled, In Progress, Completed), partner+order joins |
+| SA020 Handover Detail | SAL | P5 | Mobile-first checklist: Odometer → Fuel → Keys → Accessories → RDW → Notes → Signature capture |
 | SY051 Implementation Cockpit | SYS | — | Compact program bar, OP001 task link with searchable dropdown, Refresh/Back buttons, Delete Program, Verify All |
 
 ---
@@ -103,6 +124,8 @@
 | `sql_bop_v2_72_sy_tasks_op_link.sql` | SY051 | Deployed | op_task_id column + recreated progress views |
 | `sql_bop_v2_73_quotation_versioning.sql` | P2 | Deployed | ALTER sal_quotations + transitions table + 4 RPCs + RLS |
 | `sql_bop_v2_74_order_confirmation.sql` | P3 | Deployed | ALTER sal_orders + transitions table + 4 RPCs + RLS |
+| `sql_bop_v2_75_invoice_linking.sql` | P4 | Deployed | ALTER fin_invoices + transitions table + 5 RPCs + RLS |
+| `sql_bop_v2_76_handover.sql` | P5 | Deployed | CREATE sal_handovers + transitions table + 4 RPCs + trigger + RLS |
 
 ---
 
@@ -133,6 +156,28 @@ draft → confirmed → customer_confirmed → in_preparation → ready → hand
 ```
 Guards: `confirmed` requires `koopovereenkomst_sent`, `customer_confirmed` requires `approval_token`, `handover_scheduled` requires `delivery_date_set`, `completed` requires `paid_in_full`, `cancelled` from customer_confirmed/in_preparation requires `refund_check`.
 
+### Invoice (P4)
+```
+draft → sent → partial → paid
+              → overdue
+       → cancelled
+sent → paid
+partial → paid
+overdue → partial → paid
+draft → cancelled
+sent → cancelled
+paid → credited
+```
+Kinds: `deposit`, `final`, `credit_note`. BTW regimes: `marge` (no VAT shown), `btw_belast` (21% VAT).
+
+### Handover (P5)
+```
+scheduled → in_progress → executed → completed
+scheduled → cancelled
+in_progress → cancelled
+```
+Guards: `executed` requires `checklist_complete`, `completed` requires `signature_captured`. Completion triggers: OLS vehicle lock release + order→delivered transition.
+
 ---
 
 ## Type Definitions
@@ -155,6 +200,10 @@ QUOTATION_STATUSES = ['draft', 'sent', 'viewed', 'accepted', 'declined', 'expire
 BTW_REGIMES = ['marge', 'btw_belast']
 ORDER_STATUSES = ['draft', 'confirmed', 'customer_confirmed', 'in_preparation', 'ready', 'handover_scheduled', 'delivered', 'completed', 'cancelled']
 CANCEL_REASON_TYPES = ['customer_withdrew', 'financing_failed', 'vehicle_issue', 'other']
+INVOICE_STATUSES = ['draft', 'sent', 'partial', 'paid', 'overdue', 'cancelled', 'credited']
+INVOICE_KINDS = ['deposit', 'final', 'credit_note']
+HANDOVER_STATUSES = ['scheduled', 'in_progress', 'executed', 'completed', 'cancelled']
+FUEL_LEVELS = ['empty', 'quarter', 'half', 'three_quarter', 'full', 'electric_pct']
 ```
 
 ---
@@ -214,26 +263,43 @@ API routes: `/orders/[id]/transition` (GET/POST), `/confirm` (POST), `/cancel` (
 
 ---
 
-## Phase 4 — Invoice Linking + Payment Tracking (PENDING, ~3 days)
+## Phase 4 — Invoice Linking + Payment Tracking (DONE)
 
-**Goal:** Adapt FI001/FI011. Link invoices into trade flow via doc_flow, add derived payment state.
+**Migration:** `sql_bop_v2_75_invoice_linking.sql`
+**Deployed:** 2026-08-05
 
-- **Adapt fin_invoices:** Add `case_id`, `btw_regime`, `snapshot` JSONB, `invoice_pdf_url`
-- **`invoice_payment_state(id)`:** Returns {status: unpaid|partial|paid, overdue: bool, credited: none|partial|full}
-- **`bop_create_invoice_from_order(order_id, kind, amount?, user_id)`:** kind=deposit|final|credit_note
-- **FI011 UI:** Case breadcrumb, source order link, derived payment badges
-- **FI001 UI:** Add case_number column + filter
-- **Invoice PDF template** with marge/btw_belast variants
+Added `case_id`, `btw_regime`, `snapshot` (JSONB), `invoice_pdf_url`, `order_id`, `invoice_kind` (deposit/final/credit_note) to `fin_invoices`. Status expanded to 7: draft/sent/partial/paid/overdue/cancelled/credited. `bop_invoice_transitions` table with 11 rules.
+
+RPCs:
+- `bop_invoice_allowed_transitions`: returns valid next statuses from adjacency table
+- `bop_invoice_transition`: validated status change + audit trail via `bop_status_transitions`
+- `bop_create_invoice_from_order`: generates invoice from order with deposit/final/credit_note kinds, copies partner/case/btw_regime, writes `spawned` to `bop_doc_flow`, auto-numbers INV-YYYYMM-NNNN
+- `invoice_payment_state`: returns {status: paid/partial/unpaid, overdue: bool, credit_applied: bool}
+
+FI001 rewritten: added invoice_kind badge column (Deposit/Final/Credit), source order number column, order join in list API.
+FI002 rewritten: validated transitions from RPC (replaced free-form status buttons), BTW regime badge, invoice kind badge, source order link banner with navigation to order detail.
+
+API routes: `/invoices/[id]/transition` (GET/POST), `/invoices/from-order` (POST).
 
 ---
 
-## Phase 5 — Handover: Mobile Checklist + Signature (PENDING, ~5 days)
+## Phase 5 — Handover: Mobile Checklist + Signature (DONE)
 
-**Goal:** New sal_handovers table + mobile-first checklist screen (SA019).
+**Migration:** `sql_bop_v2_76_handover.sql`
+**Deployed:** 2026-08-05
 
-- **Flow:** `scheduled → in_progress → executed → completed`
-- **`bop_handover_complete`:** Single transaction — signature + warranty + survey schedule + OLS release + order→delivered
-- **SA019:** Single-column mobile, sections: Odometer → Fuel → Keys → Accessories → Photos → RDW refs → Notes → SignaturePad
+New `sal_handovers` table with: handover_number (auto HO-YYYYMM-XXXXX), order_id, case_id, vehicle_id, partner_id, status, scheduled/started/completed timestamps, checklist fields (odometer_km, fuel_level, keys_count, accessories JSONB, photos JSONB, rdw_tenaamstelling, rdw_ref, notes), signature fields (signature_data, signed_by, signed_at), warranty_id, survey_id. `bop_handover_transitions` table with 5 rules.
+
+RPCs:
+- `bop_handover_allowed_transitions`: returns valid next statuses
+- `bop_handover_transition`: validated status change + auto-sets started_at/completed_at timestamps
+- `bop_handover_complete`: single transaction — saves signature, transitions to completed, releases OLS vehicle lock, transitions order to delivered, writes `spawned` to doc_flow
+- `bop_create_handover_from_order`: creates handover from order, transitions order to handover_scheduled if ready
+
+SA019 Handover List: filter presets (All, Scheduled, In Progress, Completed), table with ref/customer/order/status/scheduled columns.
+SA020 Handover Detail: mobile-first checklist — Odometer → Fuel level (6 options) → Keys (1-3) → Accessories (8 toggles) → RDW tenaamstelling + ref → Notes → Signature capture (canvas). Validated transitions from RPC. "Complete Handover — Capture Signature" button with inline signature pad and signed_by input. Editable only in `in_progress` status.
+
+API routes: `/handovers` (GET), `/handovers/[id]` (GET/PATCH), `/handovers/[id]/transition` (GET/POST), `/handovers/[id]/complete` (POST), `/handovers/from-order` (POST).
 
 ---
 
@@ -267,8 +333,8 @@ API routes: `/orders/[id]/transition` (GET/POST), `/confirm` (POST), `/cancel` (
 | P1 Lead Consolidation | done | 4/4 | 18/18 | 100% |
 | P2 Quotation Versioning | done | 5/5 | 20/20 | 100% |
 | P3 Order Confirmation | done | 5/5 | 17/17 | 100% |
-| P4 Invoice Linking | not started | 0/4 | 0/11 | 0% |
-| P5 Handover | not started | 0/4 | 0/15 | 0% |
+| P4 Invoice Linking | done | 4/4 | 11/11 | 100% |
+| P5 Handover | done | 4/4 | 15/15 | 100% |
 | P6 Post-Sale | not started | 0/4 | 0/14 | 0% |
 | P7 Case Timeline | not started | 0/5 | 0/22 | 0% |
 
@@ -308,10 +374,10 @@ API routes: `/orders/[id]/transition` (GET/POST), `/confirm` (POST), `/cancel` (
 | 1 | Lead consolidation + conversion gate | 4 | DONE |
 | 2 | Quotation lifecycle + customer approval | 5 | DONE |
 | 3 | Order + vehicle lock + koopovereenkomst | 5 | DONE |
-| 4 | Invoice linking + payment tracking | 3 | PENDING |
-| 5 | Handover + signature | 5 | PENDING |
+| 4 | Invoice linking + payment tracking | 3 | DONE |
+| 5 | Handover + signature | 5 | DONE |
 | 6 | Post-sale automation | 4 | PENDING |
 | 7 | Case timeline + guards | 4 | PENDING |
-| **Total** | | **33** | **4/8 done** |
+| **Total** | | **33** | **6/8 done** |
 
 Phases 0-3 deliver usable vehicle trade flow. Phases 4-7 complete the automation layer.

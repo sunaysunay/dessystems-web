@@ -251,9 +251,9 @@ ON CONFLICT (object_id) DO NOTHING;
 
 -- ── 11. Register counter ──
 
-INSERT INTO bop_counters (prefix, entity, current_seq)
-VALUES ('HO', 'sal_handovers', 0)
-ON CONFLICT DO NOTHING;
+INSERT INTO bop_counter (object_name, short_code, counter)
+VALUES ('sal_handovers', 'HO', 0)
+ON CONFLICT (object_name) DO NOTHING;
 
 -- ── 12. RLS policies ──
 

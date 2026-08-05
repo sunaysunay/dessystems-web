@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS sal_warranties (
   warranty_type   text DEFAULT 'standard' NOT NULL,
   starts_at       date NOT NULL DEFAULT CURRENT_DATE,
   term_months     integer DEFAULT 6 NOT NULL,
-  expires_at      date GENERATED ALWAYS AS (starts_at + (term_months || ' months')::interval) STORED,
+  expires_at      date,
   coverage_notes  text,
   -- Claims
   claim_count     integer DEFAULT 0,
@@ -26,6 +26,21 @@ CREATE TABLE IF NOT EXISTS sal_warranties (
   created_at      timestamptz DEFAULT now(),
   updated_at      timestamptz DEFAULT now()
 );
+
+-- ── 1b. Compute expires_at trigger ──
+
+CREATE OR REPLACE FUNCTION sal_warranty_expires_trigger()
+RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+  NEW.expires_at := NEW.starts_at + (NEW.term_months || ' months')::interval;
+  RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS trg_sal_warranty_expires ON sal_warranties;
+CREATE TRIGGER trg_sal_warranty_expires
+  BEFORE INSERT OR UPDATE OF starts_at, term_months ON sal_warranties
+  FOR EACH ROW EXECUTE FUNCTION sal_warranty_expires_trigger();
 
 -- ── 2. Status + type constraints ──
 

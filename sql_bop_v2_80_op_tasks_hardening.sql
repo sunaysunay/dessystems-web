@@ -102,6 +102,7 @@ CREATE POLICY op_task_attachments_tenant_isolation ON op_task_attachments
   WITH CHECK (task_id IN (SELECT id FROM op_tasks));
 
 -- ── T80.6  Fix bulk_update variable shadow + count inflation ─
+DROP FUNCTION IF EXISTS op_task_bulk_update(uuid[], jsonb, uuid);
 CREATE OR REPLACE FUNCTION op_task_bulk_update(
   p_task_ids   uuid[],
   p_updates    jsonb,

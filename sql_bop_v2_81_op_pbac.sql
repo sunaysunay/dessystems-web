@@ -4,16 +4,17 @@
 -- ============================================================
 
 -- ── T81.1  Register OP001 + OP002 in bop_screens ───────────
-INSERT INTO bop_screens (screen_id, title, module, route, func_type, status, nav_group, nav_subgroup, nav_order, nav_visible)
+INSERT INTO bop_screens (screen_id, title, module, route, func_type, status, sequence, nav_group, nav_subgroup, nav_order, nav_visible)
 VALUES
-  ('OP001', 'Operations Cockpit', 'OPS', '/console/ops/tasks', 'transaction', 'active', 'operations', 'tasks', 10, true),
-  ('OP002', 'Strategy Cockpit', 'OPS', '/console/ops/goals', 'transaction', 'planned', 'operations', 'goals', 20, false)
+  ('OP001', 'Operations Cockpit', 'OPS', '/console/ops/tasks', 'transaction', 'active', 1, 'operations', 'tasks', 10, true),
+  ('OP002', 'Strategy Cockpit', 'OPS', '/console/ops/goals', 'transaction', 'planned', 2, 'operations', 'goals', 20, false)
 ON CONFLICT (screen_id) DO UPDATE SET
   title = EXCLUDED.title,
   module = EXCLUDED.module,
   route = EXCLUDED.route,
   func_type = EXCLUDED.func_type,
   status = EXCLUDED.status,
+  sequence = EXCLUDED.sequence,
   nav_group = EXCLUDED.nav_group,
   nav_subgroup = EXCLUDED.nav_subgroup,
   nav_order = EXCLUDED.nav_order,

@@ -143,6 +143,8 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/menu/operations': { id: 'OP000', title: 'Operations Menu', mod: 'OPS' },
   '/console/ops/tasks': { id: 'OP001', title: 'Operations Cockpit', mod: 'OPS' },
   '/console/ops/tasks/grid': { id: 'OP001', title: 'Task Grid', mod: 'OPS' },
+  '/console/ops/tasks/kanban': { id: 'OP001', title: 'Kanban Board', mod: 'OPS' },
+  '/console/ops/tasks/calendar': { id: 'OP001', title: 'Calendar View', mod: 'OPS' },
   '/console/ops/goals': { id: 'OP002', title: 'Strategy Cockpit', mod: 'OPS' },
   '/console/ops/goals/[id]': { id: 'OP002', title: 'Goal Detail', mod: 'OPS' },
   '/console/ops/profit-lab': { id: 'OP003', title: 'Profit Lab', mod: 'OPS' },

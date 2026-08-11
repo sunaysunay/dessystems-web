@@ -1,8 +1,9 @@
 # BOP V2 — OP001 + OP002 Implementation Plan
 
-**Version:** 2.1 · 2026-08-05  
+**Version:** 2.2 · 2026-08-10  
 **Scope:** Operations Cockpit (OP001 Tasks) + Strategy Cockpit (OP002 Goals & OKRs)  
-**Tables:** 14 new (6 with tenant_id, 9 without) · ~15 PBAC permissions · 3 cron workers
+**Tables:** 14 new (6 with tenant_id, 9 without) · ~15 PBAC permissions · 3 cron workers  
+**Status:** OPS-P1 ✅ · STR-P1 ✅ · OPS-P2 ✅ · STR-P2 ✅ · OPS-P3 Deferred · STR-P3 Deferred
 
 ---
 
@@ -152,17 +153,17 @@ Dependencies, audit trail, comments, attachments, checklist, SLA engine, automat
 
 ---
 
-### Phase STR-P2 — Automated Metrics & Executive Dashboard (~6-8 sessions)
+### Phase STR-P2 — Automated Metrics & Executive Dashboard ✅ COMPLETED 2026-08-10
 
-| P | Task | Type | Deliverables | Est |
-|---|------|------|-------------|-----|
-| P1 | **T4.1** Create `op_goal_metrics_catalog` — code PK, name_i18n JSONB, metric_type, unit_label, entity_scoped, query_key. No tenant_id (system-wide reference). 9 initial codes: vans_sold, revenue_invoiced, gross_margin_sum, avg_days_to_sale, inquiries_count, inquiry_to_sale_conversion, nps_avg, review_score_avg, stock_count. | schema | DB_TABLE, seed rows | 2h |
-| P1 | **T4.2** `computeMetric()` service — Switch on query_key. Reads: listings (sold count, days-to-sale, stock), fin_invoices (revenue, margin — margeregeling-aware), listing_inquiries (lead volume, conversion), reviews (avg score, NPS). All entity-scoped + period-filtered. | api | SERVICE | 10h |
-| P1 | **T4.3** Nightly computation + snapshots cron — PM2 daily at 02:00. For each active auto-KR: computeMetric → update current_value → INSERT snapshot. Recompute roll-up. Health recalc. Telegram on transitions. | infra | CRON, TELEGRAM | 4h |
-| P1 | **T4.4** `op_tasks.goal_kr_id` FK bridge — ADD COLUMN goal_kr_id UUID FK → op_goal_key_results ON DELETE SET NULL. Task detail shows KR chip. KR detail lists linked tasks. | schema | MIGRATION, SCREEN x2 | 2h |
-| P1 | **T4.5** Executive dashboard — Vision banner (editable). Progress rings for active-quarter KRs. Entity lanes. At-risk panel. Trend charts from snapshots (Recharts). | screen | SCREEN, I18N_KEY | 12h |
-| P2 | **T4.6** Monday check-in Telegram prompt — PM2 cron Mon 08:00. Active objectives + current % + pace. Deep link to check-in form. | infra | TELEGRAM, CRON | 2h |
-| P2 | **T4.7** KR sparklines + metric chips — Last 30 snapshots as sparkline. Auto/Manual chip. Pace arrow. | screen | SCREEN | 4h |
+| P | Task | Type | Deliverables | Status |
+|---|------|------|-------------|--------|
+| P1 | **T4.1** Create `op_goal_metrics_catalog` — code PK, name_i18n JSONB, metric_type, unit_label, entity_scoped, query_key. No tenant_id (system-wide reference). 9 initial codes. | schema | DB_TABLE, seed rows | ✅ |
+| P1 | **T4.2** `computeMetric()` service — 9 QUERIES dispatch map. Entity-scoped + period-filtered. | api | SERVICE | ✅ |
+| P1 | **T4.3** Nightly computation + snapshots cron — PM2 daily at 02:00. WebSocket transport for Node 20. | infra | CRON, TELEGRAM | ✅ |
+| P1 | **T4.4** `op_tasks.goal_kr_id` FK bridge — ADD COLUMN goal_kr_id UUID FK. | schema | MIGRATION, SCREEN x2 | ✅ |
+| P1 | **T4.5** Executive dashboard (OP012) — Vision banner, ProgressRing, EntityLane, AtRiskPanel, KpiStrip, TrendCharts. | screen | SCREEN, I18N_KEY | ✅ |
+| P2 | **T4.6** Monday check-in Telegram prompt — PM2 cron Mon 08:00. | infra | TELEGRAM, CRON | ✅ |
+| P2 | **T4.7** KR sparklines + metric chips — CockpitKit Spark, PaceArrow, ⟳ Compute button. | screen | SCREEN | ✅ |
 
 ---
 

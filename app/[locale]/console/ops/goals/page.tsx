@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback, useMemo } from "react"
+import { useRouter, useParams } from "next/navigation"
 import {
   Plus, Search, Filter, RefreshCw, LayoutGrid, List,
   Target, TrendingUp, AlertTriangle, CheckCircle2,
@@ -24,6 +25,8 @@ const STATUS_TABS: { key: GoalStatus | "all"; label: string }[] = [
 ]
 
 export default function OP002GoalsPage() {
+  const router = useRouter()
+  const { locale } = useParams()
   const [goals, setGoals] = useState<Goal[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -316,7 +319,7 @@ export default function OP002GoalsPage() {
             goals={filteredGoals}
             onAddChild={(parent) => openNewGoal(parent)}
             onSelect={(goal) => {
-              // Future: navigate to goal detail page
+              router.push(`/${locale}/console/ops/goals/${goal.id}`)
             }}
           />
         )}

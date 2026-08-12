@@ -5,7 +5,7 @@ export type EntityScope =
   | "des_systems"
   | "des_group"
 
-export type PeriodType = "quarterly" | "semi_annual" | "annual" | "custom"
+export type PeriodType = "monthly" | "quarterly" | "semi_annual" | "annual" | "custom"
 export type GoalStatus = "active" | "achieved" | "semi_achieved" | "paused" | "closed"
 export type GoalHealth = "on_track" | "at_risk" | "off_track"
 export type GoalPriority = "critical" | "high" | "medium" | "low"
@@ -30,8 +30,20 @@ export interface KeyResult {
   weight: number
   progress_pct: number
   pace_delta: number
+  data_source: string | null
   created_at: string
   updated_at: string
+}
+
+export interface GoalSnapshot {
+  id: string
+  goal_id: string
+  kr_id: string | null
+  current_value: number
+  source: "manual" | "auto"
+  note: string | null
+  measured_at: string
+  created_at: string
 }
 
 export interface GoalCheckin {
@@ -122,6 +134,7 @@ export const ENTITY_LABELS: Record<EntityScope, string> = {
 }
 
 export const PERIOD_LABELS: Record<PeriodType, string> = {
+  monthly: "Monthly",
   quarterly: "Quarterly",
   semi_annual: "Semi-Annual",
   annual: "Annual",
@@ -173,6 +186,9 @@ export const STATUS_COLORS: Record<GoalStatus, string> = {
 export function computePeriodEnd(type: PeriodType, start: string): string {
   const d = new Date(start)
   switch (type) {
+    case "monthly":
+      d.setMonth(d.getMonth() + 1)
+      break
     case "quarterly":
       d.setMonth(d.getMonth() + 3)
       break

@@ -1,4 +1,17 @@
+import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
+import { localeAlternates } from "@/src/i18n/seo"
 import HeroPanels from "@/components/hero-panels"
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "Meta" })
+  return {
+    title: t("home_title"),
+    description: t("home_desc"),
+    alternates: localeAlternates(""),
+  }
+}
 import { dxCss } from "@/components/dx-styles"
 import { Link } from "@/src/i18n/routing"
 import { useTranslations } from "next-intl"

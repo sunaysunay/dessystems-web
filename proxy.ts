@@ -47,11 +47,13 @@ function detectLocale(request: NextRequest): Locale {
   const cookie = request.cookies.get('NEXT_LOCALE')?.value
   if (isLocale(cookie)) return cookie
 
-  const negotiated = fromAcceptLanguage(request.headers.get('accept-language'))
-  if (negotiated) return negotiated
-
+  // Geo first — location expectation wins; browser language is the fallback
   const country = (request.headers.get('cf-ipcountry') ?? '').toUpperCase()
-  return countryToLocale[country] ?? routing.defaultLocale
+  const geo = countryToLocale[country]
+  if (geo) return geo
+
+  const negotiated = fromAcceptLanguage(request.headers.get('accept-language'))
+  return negotiated ?? routing.defaultLocale
 }
 
 export function proxy(request: NextRequest) {

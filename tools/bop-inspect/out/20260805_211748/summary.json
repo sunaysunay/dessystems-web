@@ -1,0 +1,10 @@
+{
+  "timestamp": "20260805_211748",
+  "pass": 2,
+  "fail": 3,
+  "tsc_errors": 147,
+  "eslint_errors": 201,
+  "knip_findings": 0,
+  "dup_pct": 3.99,
+  "audit_high": 3
+}

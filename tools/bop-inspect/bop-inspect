@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# bop-inspect — Quality Inspection Engine CLI
+# Usage: bop-inspect <gate|db|review|score|full>
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CMD="${1:-help}"
+shift || true
+
+case "$CMD" in
+  gate)   bash "$SCRIPT_DIR/gate.sh" "$@" ;;
+  db)     node "$SCRIPT_DIR/db.mjs" "$@" ;;
+  review) node "$SCRIPT_DIR/review.mjs" "$@" ;;
+  score)  node "$SCRIPT_DIR/score.mjs" "$@" ;;
+  full)   bop-inspect gate && bop-inspect db && bop-inspect score --triggered-by full ;;
+  *)
+    echo "Usage: bop-inspect <gate|db|review|score|full>"
+    echo "  gate   — Layer 1 deterministic gates (tsc, eslint, knip, jscpd, audit)"
+    echo "  db     — Layer 2 DB & domain rules [Phase 2]"
+    echo "  review — Layer 3 AI senior reviewer [Phase 3]"
+    echo "  score  — Layer 4 score aggregation [Phase 4]"
+    echo "  full   — All layers [Phase 4]"
+    ;;
+esac

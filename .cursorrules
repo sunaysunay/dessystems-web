@@ -1,0 +1,47 @@
+# DES BOP Console — Cursor AI Rules
+
+## Adding a new screen or program — ALL FIVE STEPS ARE MANDATORY
+
+A screen is incomplete until validate-structure.sh passes with zero errors.
+Do not mark any task done until you have completed every step below.
+
+### Step 1 — Screen Registry (lib/screen-registry.ts)
+- Add the route: `'/console/seg/name': { id: 'XX000', title: '...', mod: 'MOD' }`
+- Screen ID format: two-letter module prefix + 3-digit number (e.g. DEV001, INT002)
+- Add module color to MOD_COLORS if the module prefix is new
+
+### Step 2 — Navigation (components/Shell.tsx)
+- Add nav item: `{ label: tn('keyName'), href: '/console/seg/name' }`
+- Add group: `{ label: tg('groupKey'), ... }`
+- NEVER use hardcoded strings. Always tn() for nav items, tg() for group labels.
+
+### Step 3 — Translations (messages/nl.json, en.json, de.json, fr.json, tr.json)
+Update ALL FIVE files. Each needs:
+- `"nav": { "keyName": "translated label" }`
+- `"groups": { "groupKey": "translated group name" }`
+- `"screens": { "XX000": "translated screen name" }`
+
+### Step 4 — Middleware (middleware.ts)
+- Add to SEG_TO_MODULE: `seg: 'MOD'`
+- Add MOD to ROLE_MODULES for every role that should access it
+
+### Step 5 — Validate
+```bash
+bash scripts/validate-structure.sh
+```
+Fix all reported errors before running rebuild.sh.
+
+## Hard rules
+- Never hardcode strings in Shell.tsx nav labels
+- Never create page.tsx without a screen-registry entry
+- Never skip any of the 5 language files
+- Never skip middleware.ts when adding a new path segment
+- Run validate-structure.sh before every build
+
+## Key files
+- lib/screen-registry.ts — screen ID registry
+- components/Shell.tsx — sidebar nav (i18n keys only)
+- messages/{nl,en,de,fr,tr}.json — translations
+- middleware.ts — RBAC (SEG_TO_MODULE + ROLE_MODULES)
+- scripts/validate-structure.sh — structural integrity check
+- rebuild.sh — build + deploy (calls validator automatically)

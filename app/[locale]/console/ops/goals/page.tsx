@@ -9,6 +9,7 @@ import {
 } from "lucide-react"
 import GoalFormModal from "@/components/console/goal-form-modal"
 import GoalTree from "@/components/console/goal-tree"
+import type { SortField, SortDir } from "@/components/console/goal-tree"
 import type { Goal, GoalCreateInput, GoalStatus, EntityScope, GoalPriority } from "@/lib/op-goals-types"
 import {
   ENTITY_LABELS, STATUS_LABELS, PRIORITY_LABELS,
@@ -37,6 +38,8 @@ export default function OP002GoalsPage() {
   const [priorityFilter, setPriorityFilter] = useState<GoalPriority | "">("")
   const [searchQuery, setSearchQuery] = useState("")
   const [showFilters, setShowFilters] = useState(false)
+  const [sortField, setSortField] = useState<SortField>(null)
+  const [sortDir, setSortDir] = useState<SortDir>("asc")
 
   const fetchGoals = useCallback(async () => {
     setLoading(true)
@@ -61,17 +64,48 @@ export default function OP002GoalsPage() {
   useEffect(() => { fetchGoals() }, [fetchGoals])
 
   const filteredGoals = useMemo(() => {
-    if (!searchQuery.trim()) return goals
-    const q = searchQuery.toLowerCase()
-    const matches = (g: Goal): boolean => {
-      if (g.title.toLowerCase().includes(q)) return true
-      if (g.goal_number?.toLowerCase().includes(q)) return true
-      if (g.description?.toLowerCase().includes(q)) return true
-      if ((g.children ?? []).some(matches)) return true
-      return false
+    let result = goals
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase()
+      const matches = (g: Goal): boolean => {
+        if (g.title.toLowerCase().includes(q)) return true
+        if (g.goal_number?.toLowerCase().includes(q)) return true
+        if (g.description?.toLowerCase().includes(q)) return true
+        if ((g.children ?? []).some(matches)) return true
+        return false
+      }
+      result = result.filter(matches)
     }
-    return goals.filter(matches)
-  }, [goals, searchQuery])
+    if (sortField) {
+      const STATUS_ORDER: Record<string, number> = { active: 0, paused: 1, achieved: 2, semi_achieved: 3, closed: 4 }
+      const PRIORITY_ORDER: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3 }
+      result = [...result].sort((a, b) => {
+        let cmp = 0
+        if (sortField === "status") {
+          cmp = (STATUS_ORDER[a.status] ?? 9) - (STATUS_ORDER[b.status] ?? 9)
+        } else if (sortField === "period_start") {
+          cmp = (a.period_start ?? "").localeCompare(b.period_start ?? "")
+        } else if (sortField === "period_end") {
+          cmp = (a.period_end ?? "").localeCompare(b.period_end ?? "")
+        } else if (sortField === "progress") {
+          cmp = (a.progress_pct ?? 0) - (b.progress_pct ?? 0)
+        } else if (sortField === "priority") {
+          cmp = (PRIORITY_ORDER[a.priority] ?? 9) - (PRIORITY_ORDER[b.priority] ?? 9)
+        }
+        return sortDir === "desc" ? -cmp : cmp
+      })
+    }
+    return result
+  }, [goals, searchQuery, sortField, sortDir])
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortDir(d => d === "asc" ? "desc" : "asc")
+    } else {
+      setSortField(field)
+      setSortDir("asc")
+    }
+  }
 
   const stats = useMemo(() => {
     const flatten = (gs: Goal[]): Goal[] =>
@@ -321,6 +355,9 @@ export default function OP002GoalsPage() {
             onSelect={(goal) => {
               router.push(`/${locale}/console/ops/goals/${goal.id}`)
             }}
+            sortField={sortField}
+            sortDir={sortDir}
+            onSort={handleSort}
           />
         )}
       </div>

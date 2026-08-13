@@ -103,7 +103,7 @@ async function notifyAsync(link: Record<string, unknown>, req: NextRequest) {
             ${link.related_entity_id ? `<tr><td style="color:#64748b;padding:6px 0">Entity</td><td>${link.related_entity_type} #${link.related_entity_id}</td></tr>` : ""}
           </table>
           <div style="margin-top:16px;font-size:11px;color:#94a3b8">
-            DES Business Operating Platform · Short Links · ${new Date().toLocaleString("en-GB")}
+            DES Business Operating Platform · Short Links · ${new Date().toLocaleString("en-NL")}
           </div>
         </div>`,
       })

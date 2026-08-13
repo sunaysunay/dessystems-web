@@ -5,7 +5,7 @@
 
 DO $$
 DECLARE
-  v_tenant UUID;
+  v_tenant integer;
   t1 UUID; t2 UUID; t3 UUID; t4 UUID; t5 UUID;
 BEGIN
   SELECT tenant_id INTO v_tenant FROM op_tasks WHERE deleted_at IS NULL LIMIT 1;

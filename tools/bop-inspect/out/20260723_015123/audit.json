@@ -1,0 +1,42 @@
+npm warn audit 503 Service Unavailable - POST https://registry.npmjs.org/-/npm/v1/security/advisories/bulk - Service Unavailable
+npm error audit endpoint returned an error
+{
+  "message": "503 Service Unavailable - POST https://registry.npmjs.org/-/npm/v1/security/advisories/bulk - Service Unavailable",
+  "method": "POST",
+  "uri": "https://registry.npmjs.org/-/npm/v1/security/advisories/bulk",
+  "headers": {
+    "date": [
+      "Wed, 22 Jul 2026 23:51:50 GMT"
+    ],
+    "content-type": [
+      "application/json"
+    ],
+    "content-length": [
+      "31"
+    ],
+    "connection": [
+      "keep-alive"
+    ],
+    "set-cookie": [
+      "__cf_bm=A.Szt6xj5b4isKtXWOpvmrFAZuQxEgSzwSxfd6vE0Qs-1784764291.659419-1.0.1.1-mooC0zaouOIVzXmsfEgGaVSsrI6GOZ77BRUqqsW.egeJKnMTnQh5S2fWpqtwsLF33Q7bT.AfVlUQUrDA5oovnlJjnFZ78sRu4Ern8HrerPiwA7hvAKN0fsFqnMlG9kJP; HttpOnly; SameSite=None; Secure; Path=/; Domain=npmjs.org; Expires=Thu, 23 Jul 2026 00:21:50 GMT"
+    ],
+    "server": [
+      "cloudflare"
+    ],
+    "cf-ray": [
+      "a1f65a96dc688d87-HEL"
+    ],
+    "x-fetch-attempts": [
+      "1"
+    ]
+  },
+  "statusCode": 503,
+  "body": {
+    "error": "Service Unavailable"
+  },
+  "error": {
+    "summary": "",
+    "detail": ""
+  }
+}
+npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-22T23_51_31_346Z-debug-0.log

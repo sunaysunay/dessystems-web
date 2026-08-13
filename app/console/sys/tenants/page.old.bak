@@ -1,0 +1,154 @@
+'use client';
+import { useState, useEffect } from 'react';
+import { ScreenHeader } from '@/components/ScreenBadge';
+import { BopSelect } from '@/components/BopSelect';
+
+export default function SY003Page() {
+  const [tenants, setTenants] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [editing, setEditing] = useState<any>(null);
+  const [form, setForm] = useState({ name: '', slug: '', plan: 'starter', status: 'active', contact_email: '', max_users: 5 });
+  const [saving, setSaving] = useState(false);
+  const [toast, setToast] = useState('');
+
+  function showToast(m: string) { setToast(m); setTimeout(() => setToast(''), 2500); }
+  function f(k: string, v: any) { setForm(p => ({ ...p, [k]: v })); }
+
+  async function load() {
+    setLoading(true);
+    const j = await fetch('/api/bop/sys/tenants').then(r => r.json());
+    setTenants(j.tenants ?? []);
+    setLoading(false);
+  }
+
+  useEffect(() => { load(); }, []);
+
+  function openEdit(t: any) {
+    setEditing(t);
+    setForm({ name: t.name, slug: t.slug ?? '', plan: t.plan ?? 'starter', status: t.status ?? 'active', contact_email: t.contact_email ?? '', max_users: t.max_users ?? 5 });
+    setDrawerOpen(true);
+  }
+
+  async function save() {
+    setSaving(true);
+    if (editing) {
+      await fetch(`/api/bop/sys/tenants/${editing.id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form),
+      });
+      showToast('Tenant updated');
+    }
+    setSaving(false);
+    setDrawerOpen(false);
+    load();
+  }
+
+  const PLAN_COLOR: Record<string, string> = {
+    starter: 'bg-slate-100 text-slate-500',
+    pro:     'bg-blue-100 text-blue-700',
+    enterprise: 'bg-purple-100 text-purple-700',
+  };
+
+  return (
+    <div>
+      <ScreenHeader title="Tenant Management" description="Manage BOP tenants and workspace settings — SY003" />
+
+      {toast && (
+        <div className="fixed top-5 right-5 z-50 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white shadow-xl">{toast}</div>
+      )}
+
+      {loading ? (
+        <div className="flex h-48 items-center justify-center text-sm text-slate-400">Loading…</div>
+      ) : (
+        <div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-slate-50 text-xs font-semibold uppercase text-slate-400">
+              <tr>
+                <th className="px-4 py-3 text-left">Tenant</th>
+                <th className="px-4 py-3 text-left">Slug</th>
+                <th className="px-4 py-3 text-left">Plan</th>
+                <th className="px-4 py-3 text-left">Contact</th>
+                <th className="px-4 py-3 text-center">Max Users</th>
+                <th className="px-4 py-3 text-left">Status</th>
+                <th className="px-4 py-3 text-left">Created</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-50">
+              {tenants.length === 0 ? (
+                <tr><td colSpan={7} className="px-4 py-12 text-center text-slate-400">No tenants found</td></tr>
+              ) : tenants.map(t => (
+                <tr key={t.id} className="hover:bg-slate-50 cursor-pointer" onClick={() => openEdit(t)}>
+                  <td className="px-4 py-3 font-semibold text-slate-800">{t.name}</td>
+                  <td className="px-4 py-3 font-mono text-xs text-slate-400">{t.slug ?? '—'}</td>
+                  <td className="px-4 py-3">
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${PLAN_COLOR[t.plan] ?? PLAN_COLOR.starter}`}>
+                      {t.plan ?? 'starter'}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-xs text-slate-500">{t.contact_email ?? '—'}</td>
+                  <td className="px-4 py-3 text-center text-slate-600">{t.max_users ?? '—'}</td>
+                  <td className="px-4 py-3">
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${t.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-400'}`}>
+                      {t.status ?? 'active'}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-xs text-slate-400">
+                    {t.created_at ? new Date(t.created_at).toLocaleDateString('nl-NL') : '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {drawerOpen && editing && (
+        <div className="fixed inset-0 z-40 flex justify-end">
+          <div className="absolute inset-0 bg-black/30" onClick={() => setDrawerOpen(false)} />
+          <div className="relative z-50 flex h-full w-full max-w-lg flex-col bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+              <h2 className="text-lg font-bold text-slate-900">Edit Tenant</h2>
+              <button onClick={() => setDrawerOpen(false)} className="rounded-lg p-2 hover:bg-slate-100">
+                <svg className="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
+              {[['name','Name'],['slug','Slug'],['contact_email','Contact Email']].map(([k, label]) => (
+                <div key={k}>
+                  <label className="block text-xs font-medium text-slate-600 mb-1">{label}</label>
+                  <input value={(form as any)[k]} onChange={e => f(k, e.target.value)}
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none" />
+                </div>
+              ))}
+              <div>
+                <label className="block text-xs font-medium text-slate-600 mb-1">Plan</label>
+                <BopSelect value={form.plan} onChange={v => f('plan', v)}
+                  options={['starter','pro','enterprise'].map(p=>({value:p, label:p.charAt(0).toUpperCase()+p.slice(1)}))}
+                  placeholder="Plan" size="md" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-600 mb-1">Status</label>
+                <BopSelect value={form.status} onChange={v => f('status', v)}
+                  options={[{value:'active',label:'Active',color:'#10b981'},{value:'suspended',label:'Suspended',color:'#ef4444'},{value:'inactive',label:'Inactive',color:'#94a3b8'}]}
+                  placeholder="Status" size="md" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-600 mb-1">Max Users</label>
+                <input type="number" value={form.max_users} onChange={e => f('max_users', parseInt(e.target.value))}
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none" />
+              </div>
+            </div>
+            <div className="border-t border-slate-100 px-6 py-4 flex justify-end gap-3">
+              <button onClick={() => setDrawerOpen(false)}
+                className="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50">Cancel</button>
+              <button onClick={save} disabled={saving}
+                className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50">
+                {saving ? 'Saving…' : 'Save Changes'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

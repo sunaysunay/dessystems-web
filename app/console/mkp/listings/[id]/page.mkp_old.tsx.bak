@@ -1,0 +1,119 @@
+'use client';
+import { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { ScreenHeader } from '@/components/ScreenBadge';
+
+const STATUS_COLOR: Record<string,string> = {
+  draft:'bg-slate-100 text-slate-500', active:'bg-emerald-100 text-emerald-700',
+  paused:'bg-amber-100 text-amber-700', sold:'bg-blue-100 text-blue-700', expired:'bg-red-100 text-red-600',
+};
+const CHANNELS = ['website','marktplaats','autoscout24','mobile.de','facebook','andere'];
+
+export default function MP002Page() {
+  const { id } = useParams<{ id: string }>();
+  const router = useRouter();
+  const [listing, setListing] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [toast, setToast] = useState('');
+  const [edit, setEdit] = useState<any>({});
+  function showToast(m: string) { setToast(m); setTimeout(() => setToast(''), 2500); }
+  function f(k: string, v: any) { setEdit((p: any) => ({ ...p, [k]: v })); }
+
+  async function load() {
+    setLoading(true);
+    const j = await fetch(`/api/bop/mkp/listings/${id}`).then(r => r.json());
+    setListing(j.listing ?? null);
+    setEdit(j.listing ?? {});
+    setLoading(false);
+  }
+  useEffect(() => { load(); }, [id]);
+
+  async function save() {
+    setSaving(true);
+    await fetch(`/api/bop/mkp/listings/${id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify(edit) });
+    showToast('Listing saved'); setSaving(false); load();
+  }
+
+  if (loading) return <div className="flex h-64 items-center justify-center text-sm text-slate-400">Loading...</div>;
+  if (!listing) return <div className="p-8 text-slate-400">Listing not found. <button onClick={() => router.back()} className="text-blue-600 underline">Go back</button></div>;
+
+  const asset = listing.ast_assets;
+
+  return (
+    <div>
+      {toast && <div className="fixed top-5 right-5 z-50 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white shadow-xl">{toast}</div>}
+      <ScreenHeader title={listing.title ?? 'Listing Detail'} description={`MP002 — Listing Editor · ${listing.channel ?? '—'}`}/>
+
+      <div className="mb-4 flex items-center gap-3 flex-wrap">
+        <span className={`rounded-full px-3 py-1 text-xs font-bold ${STATUS_COLOR[listing.status]??'bg-slate-100 text-slate-500'}`}>{listing.status}</span>
+        <div className="flex gap-1.5">
+          {['active','paused','expired'].filter(s => s !== listing.status).map(s => (
+            <button key={s} onClick={() => { f('status', s); }}
+              className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-500 hover:border-blue-400 hover:text-blue-600 transition-colors">
+              → {s}
+            </button>
+          ))}
+        </div>
+        <button onClick={() => router.back()} className="ml-auto text-xs text-slate-400 hover:text-slate-600">Back</button>
+      </div>
+
+      {asset && (
+        <div className="mb-4 rounded-xl border border-slate-200 bg-white p-4 flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-400 font-bold text-lg">🚐</div>
+          <div>
+            <div className="font-semibold text-slate-800">{asset.make} {asset.model} {asset.year}</div>
+            <div className="text-xs text-slate-400">{asset.vehicle_type} · {asset.vin ?? '—'}</div>
+          </div>
+          <div className="ml-auto text-lg font-bold text-slate-800">{asset.asking_price ? `€${Number(asset.asking_price).toLocaleString()}` : '—'}</div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-3 gap-4">
+        <div className="col-span-2 space-y-4">
+          <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-slate-400 mb-1">Title</label>
+              <input value={edit.title??''} onChange={e => f('title', e.target.value)}
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none"/>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-slate-400 mb-1">Description</label>
+              <textarea value={edit.description??''} onChange={e => f('description', e.target.value)} rows={6}
+                className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none"/>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-medium text-slate-400 mb-1">List price (€)</label>
+                <input type="number" value={edit.price??''} onChange={e => f('price', e.target.value)}
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none"/>
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-400 mb-1">Channel</label>
+                <select value={edit.channel??''} onChange={e => f('channel', e.target.value)}
+                  className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none">
+                  <option value="">Select channel</option>
+                  {CHANNELS.map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <button onClick={save} disabled={saving} className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50">
+                {saving ? 'Saving...' : 'Save listing'}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-2 text-sm">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Info</p>
+            {[['Channel', listing.channel],['Status', listing.status],['Views', listing.views ?? 0],['Leads', listing.leads_count ?? 0],['Published', listing.published_at ? new Date(listing.published_at).toLocaleDateString() : '—'],['Expires', listing.expires_at ? new Date(listing.expires_at).toLocaleDateString() : '—']].map(([l,v]) => (
+              <div key={l} className="flex justify-between"><span className="text-slate-400">{l}</span><span className="font-medium text-slate-700 capitalize">{String(v)}</span></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

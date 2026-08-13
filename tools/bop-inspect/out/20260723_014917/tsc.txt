@@ -1,0 +1,128 @@
+app/api/analytics/realtime/route.ts(65,5): error TS2532: Object is possibly 'undefined'.
+app/api/analytics/route.ts(39,14): error TS2538: Type 'undefined' cannot be used as an index type.
+app/api/analytics/route.ts(41,85): error TS2532: Object is possibly 'undefined'.
+app/api/bop/an/cockpits/route.ts(152,32): error TS2532: Object is possibly 'undefined'.
+app/api/bop/an/dashboard/route.ts(39,91): error TS18048: 'now' is possibly 'undefined'.
+app/api/bop/an/dashboard/route.ts(40,91): error TS18048: 'now' is possibly 'undefined'.
+app/api/bop/ast/lifecycle/route.ts(17,59): error TS2532: Object is possibly 'undefined'.
+app/api/bop/comm/compose/send/route.ts(26,31): error TS2379: Argument of type '{ contextType: ContextType; recordId: string; tenantId: number; category: string; locale: string; brandId: string | undefined; toOverride: { to: string; name?: string; }[] | undefined; }' is not assignable to parameter of type 'SendInput' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/api/bop/crm/lead-stats/route.ts(50,23): error TS2532: Object is possibly 'undefined'.
+app/api/bop/dae/pricing/route.ts(37,7): error TS2532: Object is possibly 'undefined'.
+app/api/bop/dae/pricing/route.ts(42,13): error TS18048: 'last' is possibly 'undefined'.
+app/api/bop/dae/pricing/route.ts(42,20): error TS18048: 'first' is possibly 'undefined'.
+app/api/bop/dae/pricing/route.ts(44,27): error TS18048: 'first' is possibly 'undefined'.
+app/api/bop/dae/pricing/route.ts(44,35): error TS18048: 'last' is possibly 'undefined'.
+app/api/bop/dae/pricing/route.ts(44,43): error TS18048: 'first' is possibly 'undefined'.
+app/api/bop/dev/definition-audit/route.ts(22,19): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+app/api/bop/dev/definition-audit/route.ts(22,37): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+app/api/bop/dev/definition-audit/route.ts(22,59): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/dev/definition-audit/route.ts(22,72): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/dev/definition-audit/route.ts(22,82): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/dev/definition-audit/route.ts(22,95): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/dev/definition-audit/route.ts(41,7): error TS2532: Object is possibly 'undefined'.
+app/api/bop/dev/definition-audit/route.ts(68,17): error TS2532: Object is possibly 'undefined'.
+app/api/bop/fin/invoices/route.ts(25,84): error TS18048: 'now' is possibly 'undefined'.
+app/api/bop/mkp/analytics/route.ts(47,22): error TS2532: Object is possibly 'undefined'.
+app/api/bop/sal/sell-leads/[id]/route.ts(26,19): error TS18048: 't.subject' is possibly 'undefined'.
+app/api/bop/sal/sell-leads/[id]/route.ts(105,41): error TS2345: Argument of type 'Record<string, string> | undefined' is not assignable to parameter of type 'Record<string, string>'.
+app/api/bop/suim/route.ts(122,7): error TS2532: Object is possibly 'undefined'.
+app/api/bop/suim/route.ts(123,7): error TS2532: Object is possibly 'undefined'.
+app/api/bop/sys/help/tech/route.ts(25,43): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+app/api/bop/sys/screens/[id]/source/route.ts(29,29): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/sys/screens/[id]/source/route.ts(29,48): error TS2532: Object is possibly 'undefined'.
+app/api/bop/sys/screens/[id]/source/route.ts(31,28): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/sys/screens/[id]/source/route.ts(31,49): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/sys/screens/[id]/source/route.ts(39,22): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/sys/screens/[id]/source/route.ts(39,40): error TS2532: Object is possibly 'undefined'.
+app/api/bop/sys/screens/[id]/source/route.ts(39,68): error TS2532: Object is possibly 'undefined'.
+app/api/bop/sys/screens/[id]/source/route.ts(50,52): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+app/api/bop/sys/users/[id]/detail/route.ts(38,24): error TS2532: Object is possibly 'undefined'.
+app/api/bop/sys/users/[id]/detail/route.ts(38,53): error TS2532: Object is possibly 'undefined'.
+app/api/bop/sys/users/route.ts(20,5): error TS2532: Object is possibly 'undefined'.
+app/api/bop/users/route.ts(32,5): error TS2532: Object is possibly 'undefined'.
+app/console/an/funnel/page.tsx(40,51): error TS2532: Object is possibly 'undefined'.
+app/console/dae/cockpit/page.tsx(83,36): error TS2532: Object is possibly 'undefined'.
+app/console/dae/cockpit/page.tsx(104,16): error TS2532: Object is possibly 'undefined'.
+app/console/dae/cockpit/page.tsx(104,44): error TS2532: Object is possibly 'undefined'.
+app/console/dae/cockpit/page.tsx(111,31): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+app/console/dae/cockpit/page.tsx(111,78): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+app/console/dae/cockpit/page.tsx(130,22): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number | null'.
+app/console/dae/cockpit/page.tsx(130,46): error TS2532: Object is possibly 'undefined'.
+app/console/dae/cockpit/page.tsx(132,46): error TS2532: Object is possibly 'undefined'.
+app/console/dae/cockpit/page.tsx(132,72): error TS2532: Object is possibly 'undefined'.
+app/console/dae/cockpit/page.tsx(134,22): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number | null'.
+app/console/dae/cockpit/page.tsx(134,60): error TS2532: Object is possibly 'undefined'.
+app/console/dev/commits/page.tsx(148,225): error TS2532: Object is possibly 'undefined'.
+app/console/dev/definition-audit/page.tsx(137,62): error TS2375: Type '{ value: string; label: string; sublabel: string | undefined; }' is not assignable to type 'SelectOption' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/console/dev/releases/page.tsx(59,218): error TS2532: Object is possibly 'undefined'.
+app/console/mkp/auctions/page.tsx(76,54): error TS2322: Type '{ value: "live" | "online" | "sealed" | "hybrid"; label: string | undefined; }' is not assignable to type 'SelectOption'.
+app/console/mkp/auctions/page.tsx(132,72): error TS2322: Type '{ value: "live" | "online" | "sealed" | "hybrid"; label: string | undefined; }[]' is not assignable to type 'SelectOption[]'.
+app/console/mkp/listings/[id]/page.tsx(423,65): error TS18048: 'specFields' is possibly 'undefined'.
+app/console/mkp/listings/[id]/page.tsx(426,14): error TS18048: 'specFields' is possibly 'undefined'.
+app/console/mkp/listings/page.tsx(221,135): error TS2322: Type '{ value: "fixed" | "auction" | "buy_now_bid" | "tender" | "lease"; label: string | undefined; }' is not assignable to type 'SelectOption'.
+app/console/mkp/listings/page.tsx(223,139): error TS2375: Type '{ value: "active" | "draft" | "reserved" | "sold" | "review" | "archived" | "approved"; label: string; color: string | undefined; }' is not assignable to type 'SelectOption' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/console/mkp/listings/page.tsx(268,21): error TS2322: Type '{ value: "active" | "draft" | "reserved" | "sold" | "review" | "archived" | "approved"; label: string; color: string | undefined; }[]' is not assignable to type 'SelectOption[]'.
+app/console/mkp/listings/page.tsx(348,72): error TS2322: Type '{ value: "fixed" | "auction" | "buy_now_bid" | "tender" | "lease"; label: string | undefined; }[]' is not assignable to type 'SelectOption[]'.
+app/console/my-work/page.tsx(56,73): error TS2345: Argument of type 'Pin | undefined' is not assignable to parameter of type 'Pin'.
+app/console/sys/dealer-applications/page.tsx(157,18): error TS2532: Object is possibly 'undefined'.
+app/console/sys/docs/page.tsx(116,64): error TS2322: Type '{ value: string; label: string; sublabel: string | undefined; }[]' is not assignable to type 'SelectOption[]'.
+app/console/sys/flow-map/page.tsx(173,11): error TS2532: Object is possibly 'undefined'.
+app/console/sys/flow-map/page.tsx(291,13): error TS2375: Type '{ value: string; label: string; sublabel: string | undefined; }' is not assignable to type 'SelectOption' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/console/sys/health/page.tsx(54,82): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+app/console/sys/imap/page.tsx(94,31): error TS2538: Type 'undefined' cannot be used as an index type.
+app/console/sys/imap/page.tsx(95,56): error TS2464: A computed property name must be of type 'string', 'number', 'symbol', or 'any'.
+app/console/sys/menu-config/page.tsx(89,57): error TS2375: Type '{ value: any; label: any; sublabel: string | undefined; }' is not assignable to type 'SelectOption' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/console/sys/object-explorer/page.tsx(149,72): error TS18048: 'p' is possibly 'undefined'.
+app/console/sys/object-explorer/page.tsx(150,8): error TS18048: 'p' is possibly 'undefined'.
+app/console/sys/object-explorer/page.tsx(453,90): error TS18048: 'p' is possibly 'undefined'.
+app/console/sys/object-explorer/page.tsx(453,106): error TS18048: 'p' is possibly 'undefined'.
+app/console/sys/object-explorer/page.tsx(516,22): error TS2375: Type '{ label: string; variant: "danger"; disabled: boolean; tooltip: string | undefined; onClick: () => false | void; }' is not assignable to type '{ label: string; onClick?: () => void; disabled?: boolean; tooltip?: string; variant?: "default" | "danger"; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/console/sys/object-explorer/page.tsx(528,22): error TS2375: Type '{ label: string; disabled: boolean; tooltip: string | undefined; }' is not assignable to type '{ label: string; onClick?: () => void; disabled?: boolean; tooltip?: string; variant?: "default" | "danger"; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/console/sys/processes/page.tsx(83,13): error TS2375: Type '{ value: string; label: string; sublabel: string | undefined; }' is not assignable to type 'SelectOption' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/console/sys/rbac/page.tsx(33,7): error TS2532: Object is possibly 'undefined'.
+app/console/sys/recertification/page.tsx(94,67): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+app/console/sys/screen-explorer/page.tsx(296,5): error TS2375: Type '{ id: "history"; label: string; badge: number | undefined; }' is not assignable to type '{ id: Tab; label: string; badge?: number; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+app/console/sys/screen-explorer/page.tsx(454,26): error TS2532: Object is possibly 'undefined'.
+app/console/sys/screen-explorer/page.tsx(458,69): error TS2532: Object is possibly 'undefined'.
+app/console/sys/screen-explorer/page.tsx(543,117): error TS2532: Object is possibly 'undefined'.
+app/console/sys/security/page.tsx(59,68): error TS2538: Type 'undefined' cannot be used as an index type.
+app/console/sys/security/page.tsx(60,75): error TS2538: Type 'undefined' cannot be used as an index type.
+app/console/sys/security/page.tsx(112,75): error TS2538: Type 'undefined' cannot be used as an index type.
+app/console/sys/suim/page.tsx(226,17): error TS2322: Type '{ value: string; label: string | undefined; }[]' is not assignable to type 'SelectOption[]'.
+app/console/sys/users/page.tsx(216,51): error TS2322: Type '{ value: "super_admin" | "platform_admin" | "tenant_manager" | "editor" | "viewer"; label: string | undefined; }' is not assignable to type 'SelectOption'.
+app/console/sys/users/page.tsx(460,23): error TS2322: Type '{ value: "super_admin" | "platform_admin" | "tenant_manager" | "editor" | "viewer"; label: string | undefined; }[]' is not assignable to type 'SelectOption[]'.
+components/FlyoutSidebar.tsx(75,3): error TS2375: Type '{ maxHeight: number; left: number; right?: never; top: number | undefined; bottom: number | undefined; } | { maxHeight: number; right: number; left?: never; top: number | undefined; bottom: number | undefined; }' is not assignable to type 'PosResult' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+components/FlyoutSidebar.tsx(92,6): error TS2375: Type '{ children: (Element | undefined)[]; href: string; onClick: (() => void) | undefined; className: string; }' is not assignable to type 'InternalLinkProps' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+components/FlyoutSidebar.tsx(315,39): error TS2345: Argument of type 'NavItem | undefined' is not assignable to parameter of type 'NavItem'.
+components/FlyoutSidebar.tsx(316,67): error TS2345: Argument of type 'NavItem | undefined' is not assignable to parameter of type 'NavItem'.
+components/NavIcons.tsx(99,84): error TS2538: Type 'undefined' cannot be used as an index type.
+components/NavIcons.tsx(103,14): error TS2538: Type 'undefined' cannot be used as an index type.
+components/Shell.tsx(355,80): error TS2322: Type '{ screen_id: string; title: string; route: string; } | undefined' is not assignable to type '{ screen_id: string; title: string; route: string; }'.
+components/Shell.tsx(355,89): error TS2322: Type '{ screen_id: string; title: string; route: string; } | undefined' is not assignable to type '{ screen_id: string; title: string; route: string; }'.
+components/Shell.tsx(356,93): error TS2322: Type '{ screen_id: string; title: string; route: string; } | undefined' is not assignable to type '{ screen_id: string; title: string; route: string; }'.
+components/Shell.tsx(356,100): error TS2322: Type '{ screen_id: string; title: string; route: string; } | undefined' is not assignable to type '{ screen_id: string; title: string; route: string; }'.
+components/Shell.tsx(911,18): error TS2379: Argument of type '{ id: string; label: string; route: string; group: string; tc: string | undefined; }' is not assignable to parameter of type '{ id: string; label: string; route: string; group: string; tc?: string; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+components/Shell.tsx(973,19): error TS2379: Argument of type '{ route: string; label: string; group: string; tc: string | undefined; }' is not assignable to parameter of type 'Omit<HistoryItem, "at">' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+components/Shell.tsx(977,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+components/Shell.tsx(1429,24): error TS2345: Argument of type '{ tc: string; label: string; route: string; } | undefined' is not assignable to parameter of type '{ tc: string; label: string; route: string; }'.
+lib/bop-mkt.ts(95,53): error TS18047: 'specVan' is possibly 'null'.
+lib/bop-mkt.ts(98,52): error TS18047: 'specVan' is possibly 'null'.
+lib/bop-mkt.ts(170,20): error TS2532: Object is possibly 'undefined'.
+lib/bop-mkt.ts(198,83): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+lib/comm/context-bindings.ts(38,81): error TS2769: No overload matches this call.
+lib/comm/resolver.ts(68,54): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+lib/comm/resolver.ts(74,23): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+lib/comm/send.ts(102,32): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+lib/comm/send.ts(108,63): error TS2532: Object is possibly 'undefined'.
+lib/comm/send.ts(108,90): error TS2532: Object is possibly 'undefined'.
+lib/comm/send.ts(132,15): error TS2532: Object is possibly 'undefined'.
+lib/comm/send.ts(132,42): error TS2532: Object is possibly 'undefined'.
+lib/integration/connectors/autoscout24.ts(64,49): error TS2769: No overload matches this call.
+lib/integration/connectors/marktplaats.ts(47,49): error TS2769: No overload matches this call.
+lib/integration/engine/executor.ts(199,3): error TS2375: Type '{ status: "error" | "ok"; result: unknown; runId: any; ms: number; errorMsg: string | undefined; }' is not assignable to type 'RunResult' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+lib/scope-context.tsx(44,33): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+lib/scope-context.tsx(70,5): error TS2345: Argument of type 'BusinessUnit | undefined' is not assignable to parameter of type 'BusinessUnit | (() => BusinessUnit)'.
+lib/scope-context.tsx(104,26): error TS2345: Argument of type 'BusinessUnit | undefined' is not assignable to parameter of type 'SetStateAction<BusinessUnit>'.
+lib/scope-context.tsx(105,29): error TS18048: 'restored' is possibly 'undefined'.
+lib/scope-context.tsx(115,17): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+lib/scope-context.tsx(115,33): error TS18048: 'name' is possibly 'undefined'.

@@ -7,7 +7,7 @@ export type EntityScope =
 
 export type PeriodType = "monthly" | "quarterly" | "semi_annual" | "annual" | "custom"
 export type GoalStatus = "active" | "achieved" | "semi_achieved" | "paused" | "closed"
-export type GoalHealth = "on_track" | "at_risk" | "off_track"
+export type GoalHealth = "on_track" | "at_risk" | "off_track" | "no_data"
 export type GoalPriority = "critical" | "high" | "medium" | "low"
 export type GoalType = "committed" | "aspirational"
 export type Visibility = "public" | "entity" | "private"
@@ -17,6 +17,7 @@ export type Direction = "increase" | "decrease"
 
 export interface KeyResult {
   id: string
+  tenant_id: number
   kr_number: string
   goal_id: string
   title: string
@@ -30,20 +31,26 @@ export interface KeyResult {
   weight: number
   progress_pct: number
   pace_delta: number
+  metric_source: string | null
+  metric_code: string | null
   data_source: string | null
+  deleted_at: string | null
   created_at: string
   updated_at: string
 }
 
 export interface GoalSnapshot {
   id: string
-  goal_id: string
-  kr_id: string | null
-  current_value: number
-  source: "manual" | "auto"
-  note: string | null
-  measured_at: string
-  created_at: string
+  kr_id: string
+  snapshot_date: string
+  value: number
+  progress_pct: number
+  // Legacy fields from op_goal_snapshots (used by orphaned [locale] pages, removed in P6)
+  current_value?: number
+  note?: string | null
+  measured_at?: string
+  source?: string
+  goal_id?: string
 }
 
 export interface GoalCheckin {
@@ -58,6 +65,7 @@ export interface GoalCheckin {
 
 export interface Goal {
   id: string
+  tenant_id: number
   goal_number: string
   parent_goal_id: string | null
   level: number
@@ -81,6 +89,8 @@ export interface Goal {
   contributor_ids: string[]
   strategic_pillar: string | null
   checkin_frequency: CheckinFrequency
+  next_review_at: string | null
+  last_review_at: string | null
   closed_at: string | null
   closed_by: string | null
   closing_note: string | null
@@ -93,6 +103,7 @@ export interface Goal {
 }
 
 export interface GoalCreateInput {
+  tenant_id?: number
   title: string
   description?: string
   vision_text?: string
@@ -123,6 +134,9 @@ export interface KeyResultCreateInput {
   target: number
   unit_label?: string
   weight?: number
+  metric_code?: string
+  metric_source?: string
+  data_source?: string
 }
 
 export const ENTITY_LABELS: Record<EntityScope, string> = {
@@ -131,6 +145,14 @@ export const ENTITY_LABELS: Record<EntityScope, string> = {
   des_shop: "DES Shop",
   des_systems: "DES Systems",
   des_group: "DES Group",
+}
+
+export const ENTITY_COLORS: Record<EntityScope, string> = {
+  des_mobil: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  des_campers: "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400",
+  des_shop: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  des_systems: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
+  des_group: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400",
 }
 
 export const PERIOD_LABELS: Record<PeriodType, string> = {
@@ -153,6 +175,7 @@ export const HEALTH_LABELS: Record<GoalHealth, string> = {
   on_track: "On Track",
   at_risk: "At Risk",
   off_track: "Off Track",
+  no_data: "No Data",
 }
 
 export const PRIORITY_LABELS: Record<GoalPriority, string> = {
@@ -173,6 +196,14 @@ export const HEALTH_COLORS: Record<GoalHealth, string> = {
   on_track: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
   at_risk: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
   off_track: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+  no_data: "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-500",
+}
+
+export const HEALTH_DOT_COLORS: Record<GoalHealth, string> = {
+  on_track: "bg-emerald-500",
+  at_risk: "bg-amber-500",
+  off_track: "bg-red-500",
+  no_data: "bg-slate-400",
 }
 
 export const STATUS_COLORS: Record<GoalStatus, string> = {
@@ -181,6 +212,28 @@ export const STATUS_COLORS: Record<GoalStatus, string> = {
   semi_achieved: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
   paused: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400",
   closed: "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-500",
+}
+
+export const LEVEL_LABELS: Record<number, string> = {
+  0: "Goal",
+  1: "Objective",
+  2: "Key Result",
+}
+
+export const CONFIDENCE_LABELS: Record<number, string> = {
+  1: "Very Low",
+  2: "Low",
+  3: "Medium",
+  4: "High",
+  5: "Very High",
+}
+
+export const METRIC_TYPE_LABELS: Record<MetricType, string> = {
+  count: "Count",
+  sum: "Sum",
+  avg: "Average",
+  ratio: "Ratio",
+  manual: "Manual",
 }
 
 export function computePeriodEnd(type: PeriodType, start: string): string {

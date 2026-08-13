@@ -1,33 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 import { createClient } from "@supabase/supabase-js"
-import { locales, routing, type Locale } from "@/src/i18n/routing"
-
-type EmailStrings = {
-  replySubject: string
-  greeting: string
-  bodyIntro: string
-  directContact: string
-  referenceId: string
-  footerTagline: string
-  footerPoweredBy: string
-  topics: Record<string, string>
-}
-
-async function getEmailStrings(locale: Locale): Promise<EmailStrings> {
-  const en = (await import("@/messages/en.json")).default.Email as EmailStrings
-  if (locale === routing.defaultLocale) return en
-  try {
-    const loc = (await import(`@/messages/${locale}.json`)).default.Email as Partial<EmailStrings> | undefined
-    return { ...en, ...loc, topics: { ...en.topics, ...(loc?.topics ?? {}) } }
-  } catch {
-    return en
-  }
-}
-
-function fill(template: string, vars: Record<string, string>) {
-  return template.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "")
-}
 
 const sb = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -67,8 +40,7 @@ async function getNextLeadId(): Promise<string> {
 
 export async function POST(req: NextRequest) {
   try {
-    const { firstName, lastName, email, phone, company, message, topic, locale: rawLocale } = await req.json()
-    const locale: Locale = (locales as readonly string[]).includes(rawLocale) ? rawLocale : routing.defaultLocale
+    const { firstName, lastName, email, phone, company, message, topic } = await req.json()
     if (!email || !message || !firstName) {
       return NextResponse.json({ error: "Required fields missing" }, { status: 400 })
     }
@@ -94,7 +66,7 @@ export async function POST(req: NextRequest) {
       phone: phone || null,
       message: `[${topicLabel}]${company ? ` | Company: ${company}` : ""}\n\n${message}`,
       status: "new",
-      locale,
+      locale: "en",
     })
     if (leadError) console.warn("[dessi lead]", leadError.message)
 
@@ -132,7 +104,7 @@ export async function POST(req: NextRequest) {
               <tr><td style="color:#64748b;padding:6px 0">Topic</td><td style="color:#2563eb;font-weight:600">${topicLabel}</td></tr>
             </table>
             <div style="margin-top:16px;padding:14px;background:#f8fafc;border-radius:8px;font-size:13px;color:#334155;line-height:1.6;white-space:pre-wrap">${message}</div>
-            <div style="margin-top:12px;font-size:11px;color:#94a3b8">Received via dessystems.io · ${new Date().toLocaleString("en-GB")}</div>
+            <div style="margin-top:12px;font-size:11px;color:#94a3b8">Received via dessystems.io · ${new Date().toLocaleString("en-NL")}</div>
           </div>
           <div style="background:#080c14;padding:10px 16px;border-radius:0 0 8px 8px;overflow:hidden">
             <span style="float:left;font-size:9px;color:rgba(255,255,255,0.35);font-family:monospace">EM-WB01</span>
@@ -158,11 +130,9 @@ export async function POST(req: NextRequest) {
       console.error("[dessystems/contact] comm_history log (admin) failed", logErr)
     }
 
-    // 2. Auto-responder to visitor (from noreply) — localized to the visitor's site language
+    // 2. Auto-responder to visitor (from noreply)
     const noreply = await getIdentity("DESSI_NOREPLY")
-    const em = await getEmailStrings(locale)
-    const localizedTopic = em.topics[topic as string] ?? topicLabel
-    const replySubject = fill(em.replySubject, { id: internalId })
+    const replySubject = `[#${internalId}] Thank you for your inquiry — DES Systems`
     let replyStatus: 'sent' | 'failed' = 'sent'
     let replyMessageId: string | undefined
     try {
@@ -178,19 +148,19 @@ export async function POST(req: NextRequest) {
             <div style="position:absolute;top:12px;right:16px;font-size:9px;color:rgba(255,255,255,0.35);font-family:monospace">EM-WB02</div>
           </div>
           <div style="border:1px solid #e2e8f0;border-top:none;padding:24px 32px">
-            <p style="font-size:14px;color:#0f172a;font-weight:600;margin-bottom:8px">${fill(em.greeting, { name: firstName })}</p>
+            <p style="font-size:14px;color:#0f172a;font-weight:600;margin-bottom:8px">Dear ${firstName},</p>
             <p style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:12px">
-              ${fill(em.bodyIntro, { topic: `<strong>${localizedTopic}</strong>` })}
+              Thank you for reaching out about <strong>${topicLabel}</strong>. We have received your inquiry and will respond within one business day.
             </p>
             <p style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:12px">
-              ${em.directContact} <a href="mailto:${replyTo}" style="color:#2563eb">${replyTo}</a>
+              For direct contact: <a href="mailto:${replyTo}" style="color:#2563eb">${replyTo}</a>
             </p>
             <div style="margin-bottom:20px;padding:10px 14px;background:#f8fafc;border-radius:8px;font-size:12px;color:#64748b">
-              ${em.referenceId} <strong style="color:#0f172a">#${internalId}</strong>
+              Reference ID: <strong style="color:#0f172a">#${internalId}</strong>
             </div>
             <div style="border-top:1px solid #e2e8f0;padding-top:16px;font-size:11px;color:#94a3b8">
-              DES Systems · dessystems.io · ${em.footerTagline}<br>
-              ${em.footerPoweredBy}
+              DES Systems · dessystems.io · Enterprise Solutions &amp; Digital Transformation<br>
+              Powered by DES Business Operating Platform
             </div>
           </div>
           <div style="background:linear-gradient(90deg,#080c14,#1e3a8a);padding:10px 16px;border-radius:0 0 8px 8px;overflow:hidden">

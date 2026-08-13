@@ -1,0 +1,18 @@
+{
+  "commit_hash": "5261764",
+  "tsc_errors": 139,
+  "eslint_errors": 55,
+  "knip_findings": 0,
+  "duplication_pct": 4.43,
+  "audit_high": 0,
+  "db_checks_pass": 5,
+  "db_checks_fail": 0,
+  "db_checks_warn": 1,
+  "ai_risk_score": null,
+  "ai_findings_critical": null,
+  "ai_findings_high": null,
+  "triggered_by": "monday-digest",
+  "overall_score": 43,
+  "persisted": true,
+  "timestamp": "2026-08-03T06-00-01"
+}

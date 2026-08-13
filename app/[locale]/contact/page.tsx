@@ -2,7 +2,7 @@
 import { useState } from "react"
 import type { CSSProperties } from "react"
 import { CheckCircle, ArrowRight, Settings, Factory, Bot, Briefcase, BarChart3 } from "lucide-react"
-import { useTranslations, useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
 import { dxCss } from "@/components/dx-styles"
 
 type Topic = "erp" | "mes" | "automation" | "freelance" | "platform"
@@ -20,7 +20,6 @@ const labelStyle: CSSProperties = { display: "block", fontSize: 11, fontWeight: 
 
 export default function ContactPage() {
   const t = useTranslations("Contact")
-  const locale = useLocale()
   const [topic, setTopic]     = useState<Topic>("platform")
   const [form, setForm]       = useState({ firstName: "", lastName: "", email: "", phone: "", company: "", message: "" })
   const [sending, setSending] = useState(false)
@@ -34,7 +33,7 @@ export default function ContactPage() {
       const r = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, topic, locale }),
+        body: JSON.stringify({ ...form, topic }),
       })
       if (!r.ok) throw new Error("Failed")
       setSent(true)

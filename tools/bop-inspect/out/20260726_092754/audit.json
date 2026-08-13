@@ -1,0 +1,10 @@
+npm warn audit invalid json response body at https://registry.npmjs.org/-/npm/v1/security/advisories/bulk reason: Unexpected token '^_', "^_�^H^@^@^@^@^@^@^C"... is not valid JSON
+npm error audit endpoint returned an error
+{
+  "message": "invalid json response body at https://registry.npmjs.org/-/npm/v1/security/advisories/bulk reason: Unexpected token '\u001f', \"\u001f�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003\"... is not valid JSON",
+  "error": {
+    "summary": "",
+    "detail": ""
+  }
+}
+npm error A complete log of this run can be found in: /root/.npm/_logs/2026-07-26T07_28_20_755Z-debug-0.log

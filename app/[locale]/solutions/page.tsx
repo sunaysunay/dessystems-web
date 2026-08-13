@@ -1,18 +1,12 @@
 import type { Metadata } from "next"
 import { Link } from "@/src/i18n/routing"
 import { getTranslations } from "next-intl/server"
-import { localeAlternates } from "@/src/i18n/seo"
 import { ArrowRight, Check, Settings, Factory, Bot, Webhook } from "lucide-react"
 import { dxCss } from "@/components/dx-styles"
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "Meta" })
-  return {
-    title: t("solutions_title"),
-    description: t("solutions_desc"),
-    alternates: localeAlternates("/solutions"),
-  }
+export const metadata: Metadata = {
+  title: "Solutions — DES Systems",
+  description: "Enterprise ERP consulting, MES integration, automation and custom platform solutions.",
 }
 
 const solutions = [

@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect } from "react"
-import { useTranslations } from "next-intl"
 
 /* ─────────────────────────────────────────────────────────────────────────
    DES BOP V2 — Platform landing (v2, richer).
@@ -262,39 +261,36 @@ const CSS = `
 @media(prefers-reduced-motion:reduce){.bopv2 *{animation:none!important;transition:none!important}}
 `
 
-type Tr = { (key: string, values?: Record<string, unknown>): string; raw: (key: string) => string }
-
-function buildMarkup(t: Tr, locale: string): string {
-  return `
+const MARKUP = `
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="tagpill"><span class="d"></span>${t.raw("hero_tag")}</div>
-      <h1>${t.raw("hero_title")}</h1>
-      <p class="lede">${t.raw("hero_lede")}</p>
-      <p class="sub">${t.raw("hero_sub")}</p>
+      <div class="tagpill"><span class="d"></span>The AI operating platform for vehicle dealers</div>
+      <h1>Run the whole lot<br>from <span class="plate-word">one console.</span></h1>
+      <p class="lede">Plate to invoice, inventory to accounting, Marktplaats to Mobile.de — one login, one data model, one AI working every step.</p>
+      <p class="sub">Purpose-built for the NL/BE/DE trade: RDW lookups, BTW margeregeling, afleverbon, and multichannel publishing, handled where the work already happens.</p>
       <div class="hero-cta">
-        <a href="/${locale}/contact" class="btn btn-primary">${t.raw("hero_cta")}</a>
-        <a href="#numbers" class="btn btn-ghost">${t.raw("hero_cta2")}</a>
+        <a href="/en/contact" class="btn btn-primary">Book a demo →</a>
+        <a href="#numbers" class="btn btn-ghost">See what it saves</a>
       </div>
     </div>
     <div class="console" id="console">
       <div class="console-bar">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="title">${t.raw("console_title")}</span>
-        <span class="live-badge">${t.raw("console_live")}</span>
+        <span class="title">workflow · intake → delivered</span>
+        <span class="live-badge">AI live</span>
       </div>
       <div class="console-body" id="steps">
-        <div class="step" data-i="0"><div class="ico">1</div><div><div class="who">${t.raw("step0_who")}</div><div class="txt">${t.raw("step0_txt")}</div></div></div>
-        <div class="step" data-i="1"><div class="ico">✦</div><div><div class="who ai">${t.raw("step1_who")}</div><div class="txt">${t.raw("step1_txt")}</div></div></div>
-        <div class="step" data-i="2"><div class="ico">✦</div><div><div class="who ai">${t.raw("step2_who")}</div><div class="txt">${t.raw("step2_txt")}</div></div></div>
-        <div class="step" data-i="3"><div class="ico">✦</div><div><div class="who ai">${t.raw("step3_who")}</div><div class="txt">${t.raw("step3_txt")}</div></div></div>
-        <div class="step" data-i="4"><div class="ico">✦</div><div><div class="who ai">${t.raw("step4_who")}</div><div class="txt">${t.raw("step4_txt")}</div></div></div>
-        <div class="step" data-i="5"><div class="ico">↑</div><div><div class="who">${t.raw("step5_who")}</div><div class="txt">${t.raw("step5_txt")}</div></div></div>
-        <div class="step" data-i="6"><div class="ico">✦</div><div><div class="who ai">${t.raw("step6_who")}</div><div class="txt">${t.raw("step6_txt")}</div></div></div>
-        <div class="step" data-i="7"><div class="ico">✓</div><div><div class="who">${t.raw("step7_who")}</div><div class="txt">${t.raw("step7_txt")}</div></div></div>
+        <div class="step" data-i="0"><div class="ico">1</div><div><div class="who">dealer</div><div class="txt">VW Crafter on the lot — plate <span class="yellow">GX-482-K</span> scanned</div></div></div>
+        <div class="step" data-i="1"><div class="ico">✦</div><div><div class="who ai">DES AI · RDW</div><div class="txt">Pulled <b>specs, registration, mass & APK</b> — draft record created</div></div></div>
+        <div class="step" data-i="2"><div class="ico">✦</div><div><div class="who ai">DES AI · vision</div><div class="txt">14 photos <b>de-cluttered, balanced, watermarked</b></div></div></div>
+        <div class="step" data-i="3"><div class="ico">✦</div><div><div class="who ai">DES AI · copy</div><div class="txt">Listing written in <span class="yellow">NL · EN · DE · FR · TR</span>, SEO-tuned</div></div></div>
+        <div class="step" data-i="4"><div class="ico">✦</div><div><div class="who ai">DES AI · pricing</div><div class="txt">Suggested <b>€ 24.950</b> — 40 comparables, 11 days to sell</div></div></div>
+        <div class="step" data-i="5"><div class="ico">↑</div><div><div class="who">publish</div><div class="txt">Pushed to <b>Marktplaats · Mobile.de · AutoScout24</b> + website</div></div></div>
+        <div class="step" data-i="6"><div class="ico">✦</div><div><div class="who ai">DES AI · CRM</div><div class="txt">Lead in. <b>Reply drafted</b>, test-drive slot proposed</div></div></div>
+        <div class="step" data-i="7"><div class="ico">✓</div><div><div class="who">finance</div><div class="txt">Sold. <b>Margeregeling invoice + afleverbon</b>, boekhouding updated</div></div></div>
       </div>
-      <div class="console-foot"><span id="footlabel">${t.raw("idle_text")}</span><span class="prog" id="prog"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="console-foot"><span id="footlabel">idle · press play</span><span class="prog" id="prog"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
     </div>
   </div>
 </section>
@@ -302,20 +298,20 @@ function buildMarkup(t: Tr, locale: string): string {
 <section class="pad">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">${t.raw("sec1_eyebrow")}</div>
-      <h2>${t.raw("sec1_h2")}</h2>
-      <p>${t.raw("sec1_p")}</p>
+      <div class="eyebrow">Inside the platform</div>
+      <h2>One shell. Eight domains. The full dealer lifecycle.</h2>
+      <p>Every module shares the same records, permissions, and AI layer — no switching, no re-typing, no export-import between systems.</p>
     </div>
     <div class="split">
       <div class="copy">
-        <div class="eyebrow">${t.raw("sec1_eyebrow2")}</div>
-        <h3>${t.raw("sec1_h3")}</h3>
-        <p>${t.raw("sec1_p2")}</p>
+        <div class="eyebrow">The console</div>
+        <h3>A fixed shell your team learns once.</h3>
+        <p>SAP-grade structure without the SAP overhead. Six-anchor shell bar, permissioned left-nav, object codes on every screen — the operators' interface, not a consumer app dressed up.</p>
         <ul>
-          <li>${t.raw("sec1_li1")}</li>
-          <li>${t.raw("sec1_li2")}</li>
-          <li>${t.raw("sec1_li3")}</li>
-          <li>${t.raw("sec1_li4")}</li>
+          <li>Overview · Operations · Sales & CRM domains</li>
+          <li>Marketplace · Finance · Intelligence</li>
+          <li>Master Data · Tools — all in one tree</li>
+          <li>Role-based access on every object</li>
         </ul>
       </div>
       <div class="snapwrap">
@@ -323,30 +319,30 @@ function buildMarkup(t: Tr, locale: string): string {
           <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">bop.dessystems.io / console</span></div>
           <div class="mock-nav">
             <div class="mn-side">
-              <div class="mn-group">${t.raw("mock1_g1")}</div>
-              <div class="mn-item sel"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>${t.raw("mock1_i1")}<span class="code">AN001</span></div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${t.raw("mock1_i2")}<span class="code">AN002</span></div>
-              <div class="mn-group">${t.raw("mock1_g2")}</div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>${t.raw("mock1_i3")}<span class="code">AS001</span></div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h10"/></svg>${t.raw("mock1_i4")}<span class="code">IN001</span></div>
-              <div class="mn-group">${t.raw("mock1_g3")}</div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a5 5 0 015-5h2"/></svg>${t.raw("mock1_i5")}<span class="code">CR001</span></div>
-              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>${t.raw("mock1_i6")}<span class="code">SA007</span></div>
+              <div class="mn-group">Overview</div>
+              <div class="mn-item sel"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Exec Dashboard<span class="code">AN001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Conversion Funnel<span class="code">AN002</span></div>
+              <div class="mn-group">Operations</div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>Inventory<span class="code">AS001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Catalog<span class="code">IN001</span></div>
+              <div class="mn-group">Sales & CRM</div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a5 5 0 015-5h2"/></svg>Leads<span class="code">CR001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Appointments<span class="code">SA007</span></div>
             </div>
             <div class="mn-main">
-              <div class="mn-crumb">${t.raw("mock1_crumb")}</div>
+              <div class="mn-crumb">Overview / <b>Exec Dashboard</b></div>
               <div class="mn-tiles">
-                <div class="mn-tile"><div class="tk">${t.raw("tile1_k")}</div><div class="tn">47</div><div class="ts">${t.raw("tile1_s")}</div></div>
-                <div class="mn-tile"><div class="tk">${t.raw("tile2_k")}</div><div class="tn">23</div><div class="ts">${t.raw("tile2_s")}</div></div>
-                <div class="mn-tile"><div class="tk">${t.raw("tile3_k")}</div><div class="tn">18</div><div class="ts">${t.raw("tile3_s")}</div></div>
-                <div class="mn-tile"><div class="tk">${t.raw("tile4_k")}</div><div class="tn">61</div><div class="ts">${t.raw("tile4_s")}</div></div>
-                <div class="mn-tile"><div class="tk">${t.raw("tile5_k")}</div><div class="tn" style="font-size:14px">€41k</div><div class="ts">${t.raw("tile5_s")}</div></div>
-                <div class="mn-tile"><div class="tk">${t.raw("tile6_k")}</div><div class="tn">188</div><div class="ts">${t.raw("tile6_s")}</div></div>
+                <div class="mn-tile"><div class="tk">STOCK</div><div class="tn">47</div><div class="ts">units live</div></div>
+                <div class="mn-tile"><div class="tk">SOLD · MTD</div><div class="tn">23</div><div class="ts">+4 vs target</div></div>
+                <div class="mn-tile"><div class="tk">AVG DAYS</div><div class="tn">18</div><div class="ts">−6 with AI</div></div>
+                <div class="mn-tile"><div class="tk">LEADS</div><div class="tn">61</div><div class="ts">14 open</div></div>
+                <div class="mn-tile"><div class="tk">GROSS · MTD</div><div class="tn" style="font-size:14px">€41k</div><div class="ts">margeregeling</div></div>
+                <div class="mn-tile"><div class="tk">PUBLISHED</div><div class="tn">188</div><div class="ts">4 channels</div></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="snap-cap">${t.raw("snap1_cap")}</div>
+        <div class="snap-cap">Exec Dashboard — the live shell, object codes and all</div>
       </div>
     </div>
   </div>
@@ -354,14 +350,14 @@ function buildMarkup(t: Tr, locale: string): string {
 
 <section class="pad" style="padding-top:56px;padding-bottom:56px">
   <div class="wrap">
-    <div class="eyebrow center" style="margin-bottom:26px">${t.raw("modrow_eyebrow")}</div>
+    <div class="eyebrow center" style="margin-bottom:26px">EVERY MODULE, ONE PLATFORM</div>
     <div class="mods mods3">
-      <div class="mod"><h3>${t.raw("mod1_h")}</h3><p class="mod-desc">${t.raw("mod1_p")}</p></div>
-      <div class="mod"><h3>${t.raw("mod2_h")}</h3><p class="mod-desc">${t.raw("mod2_p")}</p></div>
-      <div class="mod"><h3>${t.raw("mod3_h")}</h3><p class="mod-desc">${t.raw("mod3_p")}</p></div>
-      <div class="mod"><h3>${t.raw("mod4_h")}</h3><p class="mod-desc">${t.raw("mod4_p")}</p></div>
-      <div class="mod"><h3>${t.raw("mod5_h")}</h3><p class="mod-desc">${t.raw("mod5_p")}</p></div>
-      <div class="mod"><h3>${t.raw("mod6_h")}</h3><p class="mod-desc">${t.raw("mod6_p")}</p></div>
+      <div class="mod"><h3>Inventory</h3><p class="mod-desc">Full vehicle lifecycle: intake, RDW specs, condition, photos — one record, every channel.</p></div>
+      <div class="mod"><h3>Marketplace</h3><p class="mod-desc">Publish once to Marktplaats, Mobile.de, AutoScout24 and your own site — synced, not duplicated.</p></div>
+      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, test-drive slots, follow-ups — AI drafts the reply, you close the deal.</p></div>
+      <div class="mod"><h3>Sales</h3><p class="mod-desc">Quotes, orders, contracts, afleverbon — generated, not typed.</p></div>
+      <div class="mod"><h3>Finance</h3><p class="mod-desc">BTW margeregeling, invoicing, profitability — handled the way NL/BE/DE dealers actually work.</p></div>
+      <div class="mod"><h3>AI Intelligence</h3><p class="mod-desc">Pricing, translation, listing copy — embedded in every module, not bolted on.</p></div>
     </div>
   </div>
 </section>
@@ -369,88 +365,88 @@ function buildMarkup(t: Tr, locale: string): string {
 <section class="econ" id="numbers">
   <div class="wrap">
     <div class="econ-head">
-      <div class="t">${t.raw("econ_head")}</div>
-      <div class="note">${t.raw("econ_note")}</div>
+      <div class="t">What it's worth to a mid-size lot — <b>25 cars a month.</b></div>
+      <div class="note">conservative model · override every input in the live calculator</div>
     </div>
     <div class="stat-row">
       <div class="stat hl">
-        <div class="k">${t.raw("stat1_k")}</div>
+        <div class="k">Net saving / year</div>
         <div class="n"><span class="cur">€</span>46.187</div>
-        <div class="sub">${t.raw("stat1_sub")}</div>
+        <div class="sub">Hard cash after the subscription — tools, labour, faster turn.</div>
       </div>
       <div class="stat green">
-        <div class="k">${t.raw("stat2_k")}</div>
+        <div class="k">Net profit uplift</div>
         <div class="n">+34%</div>
-        <div class="sub">${t.raw("stat2_sub")}</div>
+        <div class="sub">At a thin 2.5% margin, the euros land as a big percentage. +56% with growth.</div>
       </div>
       <div class="stat">
-        <div class="k">${t.raw("stat3_k")}</div>
+        <div class="k">Hours reclaimed / month</div>
         <div class="n">91</div>
-        <div class="sub">${t.raw("stat3_sub")}</div>
+        <div class="sub">AI does spec import, copy, translation, photos, publishing, follow-up.</div>
       </div>
       <div class="stat">
-        <div class="k">${t.raw("stat4_k")}</div>
+        <div class="k">Return per € 1 spent</div>
         <div class="n"><span class="cur">€</span>12</div>
-        <div class="sub">${t.raw("stat4_sub")}</div>
+        <div class="sub">Hard benefit only. Payback inside the first month.</div>
       </div>
     </div>
-    <div style="margin-top:20px"><a href="/${locale}/platform/calculator" class="btn btn-primary">${t.raw("calc_btn")}</a></div>
+    <div style="margin-top:20px"><a href="/en/platform/calculator" class="btn btn-primary">Open the savings calculator →</a></div>
   </div>
 </section>
 
 <div class="strip">
   <div class="wrap strip-inner">
-    <span class="lbl">${t.raw("strip_lbl")}</span>
-    <span class="chip">${t.raw("chip1")}</span><span class="chip">${t.raw("chip2")}</span><span class="chip">${t.raw("chip3")}</span>
-    <span class="chip">${t.raw("chip4")}</span><span class="chip">${t.raw("chip5")}</span><span class="chip">${t.raw("chip6")}</span><span class="chip">${t.raw("chip7")}</span>
+    <span class="lbl">Built across the trade</span>
+    <span class="chip">Commercial vans</span><span class="chip">Cars</span><span class="chip">Campers</span>
+    <span class="chip">Motorhomes</span><span class="chip">Auction stock</span><span class="chip">Fleet</span><span class="chip">Import / Export</span>
   </div>
 </div>
 
 <section class="pad">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">${t.raw("sec2_eyebrow")}</div>
-      <h2>${t.raw("sec2_h2")}</h2>
-      <p>${t.raw("sec2_p")}</p>
+      <div class="eyebrow">Not a chatbot in the corner</div>
+      <h2>An <span style="color:var(--live)">Ask AI</span> panel lives on every record.</h2>
+      <p>Context-aware, never a blank box. The AI already knows which vehicle, which lead, which report you're on — so the action is one tap, and the data behind it stays a single source of truth.</p>
     </div>
     <div class="split rev">
       <div class="snapwrap">
         <div class="snap">
-          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">${t.raw("snap2_path")}</span></div>
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">console / inventory · Listing Manager · MP001</span></div>
           <div class="mock-grid">
             <div class="mg-toolbar">
-              <span class="search">${t.raw("grid_search")}</span>
-              <span class="b">${t.raw("grid_cols")}</span>
-              <span class="b ai">${t.raw("grid_ai")}</span>
+              <span class="search">⌕ filter stock…</span>
+              <span class="b">▤ columns</span>
+              <span class="b ai">✦ Ask AI</span>
             </div>
             <table class="mg-table">
-              <thead><tr><th>${t.raw("th1")}</th><th>${t.raw("th2")}</th><th>${t.raw("th3")}</th><th>${t.raw("th4")}</th><th>${t.raw("th5")}</th></tr></thead>
+              <thead><tr><th>Object</th><th>Vehicle</th><th>Plate</th><th>Price</th><th>Status</th></tr></thead>
               <tbody>
-                <tr><td class="pk">VH-1048</td><td>VW Crafter L3H2</td><td>GX-482-K</td><td>€ 24.950</td><td><span class="badge live">${t.raw("badge_live3")}</span></td></tr>
-                <tr><td class="pk">VH-1047</td><td>Mercedes Sprinter</td><td>PJ-119-T</td><td>€ 31.500</td><td><span class="badge live">${t.raw("badge_live3")}</span></td></tr>
-                <tr><td class="pk">VH-1046</td><td>Ford Transit Custom</td><td>RN-770-B</td><td>€ 18.200</td><td><span class="badge draft">${t.raw("badge_draft")}</span></td></tr>
-                <tr><td class="pk">VH-1045</td><td>Renault Master</td><td>SD-205-L</td><td>€ 16.900</td><td><span class="badge sold">${t.raw("badge_sold")}</span></td></tr>
-                <tr><td class="pk">VH-1044</td><td>Fiat Ducato Maxi</td><td>TK-431-M</td><td>€ 21.750</td><td><span class="badge live">${t.raw("badge_live4")}</span></td></tr>
+                <tr><td class="pk">VH-1048</td><td>VW Crafter L3H2</td><td>GX-482-K</td><td>€ 24.950</td><td><span class="badge live">live · 3ch</span></td></tr>
+                <tr><td class="pk">VH-1047</td><td>Mercedes Sprinter</td><td>PJ-119-T</td><td>€ 31.500</td><td><span class="badge live">live · 3ch</span></td></tr>
+                <tr><td class="pk">VH-1046</td><td>Ford Transit Custom</td><td>RN-770-B</td><td>€ 18.200</td><td><span class="badge draft">draft · AI</span></td></tr>
+                <tr><td class="pk">VH-1045</td><td>Renault Master</td><td>SD-205-L</td><td>€ 16.900</td><td><span class="badge sold">sold</span></td></tr>
+                <tr><td class="pk">VH-1044</td><td>Fiat Ducato Maxi</td><td>TK-431-M</td><td>€ 21.750</td><td><span class="badge live">live · 4ch</span></td></tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="snap-cap">${t.raw("snap2_cap")}</div>
+        <div class="snap-cap">Listing Manager — SE16-style grid, AI on the toolbar</div>
       </div>
       <div class="copy">
-        <div class="eyebrow">${t.raw("sec2_eyebrow2")}</div>
-        <h3>${t.raw("sec2_h3")}</h3>
-        <p>${t.raw("sec2_p2")}</p>
+        <div class="eyebrow">Ask AI · in context</div>
+        <h3>Every button can be AI-powered.</h3>
+        <p>Pick a vehicle and the panel already knows it. No copy-pasting into a separate tab, no re-describing the car to a generic assistant.</p>
         <div class="snap" style="margin-top:16px">
           <div class="mock-ai">
-            <div class="mai-head"><span class="spark">✦</span><span class="t">DES AI</span><span class="ctx">${t.raw("mai_ctx")}</span></div>
+            <div class="mai-head"><span class="spark">✦</span><span class="t">DES AI</span><span class="ctx">context · VH-1048</span></div>
             <div class="mai-body">
-              <div class="mai-ctxcard"><div class="l">${t.raw("mai_sel")}</div><div class="v">VW Crafter L3H2 · <span class="plate">GX-482-K</span></div></div>
+              <div class="mai-ctxcard"><div class="l">Selected vehicle</div><div class="v">VW Crafter L3H2 · <span class="plate">GX-482-K</span></div></div>
               <div class="mai-actions">
-                <div class="mai-act"><span class="i">✎</span>${t.raw("mai_a1")}<span class="go">${t.raw("mai_run")}</span></div>
-                <div class="mai-act"><span class="i">◈</span>${t.raw("mai_a2")}<span class="go">${t.raw("mai_run")}</span></div>
-                <div class="mai-act"><span class="i">⇄</span>${t.raw("mai_a3")}<span class="go">${t.raw("mai_run")}</span></div>
-                <div class="mai-act"><span class="i">↑</span>${t.raw("mai_a4")}<span class="go">${t.raw("mai_run")}</span></div>
+                <div class="mai-act"><span class="i">✎</span>Write the listing, translate to 5 languages<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">◈</span>Suggest asking price from live comparables<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">⇄</span>Find similar vehicles in my stock<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">↑</span>Publish to the channels most likely to sell it<span class="go">run</span></div>
               </div>
             </div>
           </div>
@@ -463,23 +459,23 @@ function buildMarkup(t: Tr, locale: string): string {
 <section class="pad">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">${t.raw("sec3_eyebrow")}</div>
-      <h2>${t.raw("sec3_h2")}</h2>
-      <p>${t.raw("sec3_p")}</p>
+      <div class="eyebrow">The stack you're paying for</div>
+      <h2>You don't need more software. You need it to stop being twelve things.</h2>
+      <p>Every quote copied by hand, every listing re-uploaded per channel, every number re-typed into accounting. The tax isn't the subscriptions — it's the switching.</p>
     </div>
     <div class="frag">
       <div>
-        <div class="col-h">${t.raw("sec3_col1")}</div>
+        <div class="col-h">Today · a dealer's desktop</div>
         <div class="tool-cloud">
-          <span>${t.raw("cloud1")}</span><span>${t.raw("cloud2")}</span><span>${t.raw("cloud3")}</span><span>${t.raw("cloud4")}</span><span>${t.raw("cloud5")}</span><span>${t.raw("cloud6")}</span><span>${t.raw("cloud7")}</span><span>${t.raw("cloud8")}</span><span>${t.raw("cloud9")}</span><span>${t.raw("cloud10")}</span><span>${t.raw("cloud11")}</span><span>${t.raw("cloud12")}</span>
+          <span>Excel stock</span><span>WhatsApp</span><span>Outlook</span><span>Mobile.de</span><span>AutoScout24</span><span>Marktplaats</span><span>Accounting</span><span>Invoice tool</span><span>CRM</span><span>Google Drive</span><span>Photo editor</span><span>ChatGPT tab</span>
         </div>
       </div>
-      <div class="frag-arrow"><div class="l">${t.raw("sec3_arrow")}</div><div class="a">→</div></div>
+      <div class="frag-arrow"><div class="l">consolidates into</div><div class="a">→</div></div>
       <div>
-        <div class="col-h">${t.raw("sec3_col2")}</div>
+        <div class="col-h">On DES BOP V2</div>
         <div class="one-panel">
-          <div class="big">${t.raw("sec3_bigh")}</div>
-          <ul><li>${t.raw("sec3_bli1")}</li><li>${t.raw("sec3_bli2")}</li><li>${t.raw("sec3_bli3")}</li><li>${t.raw("sec3_bli4")}</li></ul>
+          <div class="big"><span class="mono">ONE PLATFORM</span>Everything, connected.</div>
+          <ul><li>One data model — no re-typing</li><li>One publish click — every channel</li><li>One assistant — inside every screen</li><li>One invoice flow — BTW handled</li></ul>
         </div>
       </div>
     </div>
@@ -489,19 +485,19 @@ function buildMarkup(t: Tr, locale: string): string {
 <section class="pad" id="modules">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">${t.raw("sec4_eyebrow")}</div>
-      <h2>${t.raw("sec4_h2")}</h2>
-      <p>${t.raw("sec4_p")}</p>
+      <div class="eyebrow">The platform · built and shipped</div>
+      <h2>Eight domains. One console. Nothing bolted on.</h2>
+      <p>This is the live navigation, not a roadmap. Each domain shares records, permissions, and the AI layer.</p>
     </div>
     <div class="mods">
-      <div class="mod"><div class="code">AN·BO</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg><h3>${t.raw("dom1_h")}</h3><div class="items">${t.raw("dom1_items")}</div><div class="ai-tag">${t.raw("dom1_ai")}</div></div>
-      <div class="mod"><div class="code">AS·IN</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg><h3>${t.raw("dom2_h")}</h3><div class="items">${t.raw("dom2_items")}</div><div class="ai-tag">${t.raw("dom2_ai")}</div></div>
-      <div class="mod"><div class="code">MP·PB·AU</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v4H4z"/><path d="M6 8v12h12V8"/><path d="M9 12h6"/></svg><h3>${t.raw("dom3_h")}</h3><div class="items">${t.raw("dom3_items")}</div><div class="ai-tag">${t.raw("dom3_ai")}</div></div>
-      <div class="mod"><div class="code">CR·SA</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M17 11l2 2 4-4"/></svg><h3>${t.raw("dom4_h")}</h3><div class="items">${t.raw("dom4_items")}</div><div class="ai-tag">${t.raw("dom4_ai")}</div></div>
-      <div class="mod"><div class="code">SA</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20"/><path d="M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><h3>${t.raw("dom5_h")}</h3><div class="items">${t.raw("dom5_items")}</div><div class="ai-tag">${t.raw("dom5_ai")}</div></div>
-      <div class="mod"><div class="code">FI</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg><h3>${t.raw("dom6_h")}</h3><div class="items">${t.raw("dom6_items")}</div><div class="ai-tag">${t.raw("dom6_ai")}</div></div>
-      <div class="mod"><div class="code">AI·MK</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg><h3>${t.raw("dom7_h")}</h3><div class="items">${t.raw("dom7_items")}</div><div class="ai-tag">${t.raw("dom7_ai")}</div></div>
-      <div class="mod"><div class="code">MD·OP</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l9 4-9 4-9-4 9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg><h3>${t.raw("dom8_h")}</h3><div class="items">${t.raw("dom8_items")}</div><div class="ai-tag">${t.raw("dom8_ai")}</div></div>
+      <div class="mod"><div class="code">AN·BO</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg><h3>Overview</h3><div class="items">Exec dashboard · Conversion funnel · Session intelligence · Listing performance</div><div class="ai-tag">AI insights</div></div>
+      <div class="mod"><div class="code">AS·IN</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg><h3>Inventory</h3><div class="items">Catalog · Brands · Categories · Suppliers · Model catalog · Taxonomy</div><div class="ai-tag">AI spec import</div></div>
+      <div class="mod"><div class="code">MP·PB·AU</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v4H4z"/><path d="M6 8v12h12V8"/><path d="M9 12h6"/></svg><h3>Marketplace</h3><div class="items">Listing manager · Channel publisher · Publish queue · Auction manager</div><div class="ai-tag">AI channel routing</div></div>
+      <div class="mod"><div class="code">CR·SA</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M17 11l2 2 4-4"/></svg><h3>Sales & CRM</h3><div class="items">Leads · Pipeline · Appointments · Reviews · Rentals · Buyer inbox</div><div class="ai-tag">AI follow-up</div></div>
+      <div class="mod"><div class="code">SA</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20"/><path d="M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><h3>Sales flow</h3><div class="items">Quotations · Quote builder · Orders · Payments · Contracts</div><div class="ai-tag">AI quoting</div></div>
+      <div class="mod"><div class="code">FI</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg><h3>Finance</h3><div class="items">BTW quick calc · Bon scanner · Supplier AP · Payment tracking · Winst & verlies</div><div class="ai-tag">BTW assistent AI</div></div>
+      <div class="mod"><div class="code">AI·MK</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg><h3>Intelligence</h3><div class="items">Command center · Market evaluation · Competitor activity · Prompt manager · Action audit</div><div class="ai-tag">AI core</div></div>
+      <div class="mod"><div class="code">MD·OP</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l9 4-9 4-9-4 9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg><h3>Data & Tools</h3><div class="items">Business partners · Vehicle taxonomy · QR · Flyer builder · Watermark · Photo enhance</div><div class="ai-tag">AI photo tools</div></div>
     </div>
   </div>
 </section>
@@ -510,37 +506,37 @@ function buildMarkup(t: Tr, locale: string): string {
   <div class="wrap">
     <div class="split">
       <div class="copy">
-        <div class="eyebrow">${t.raw("sec5_eyebrow")}</div>
-        <h3>${t.raw("sec5_h3")}</h3>
-        <p>${t.raw("sec5_p")}</p>
+        <div class="eyebrow">Create once · publish everywhere</div>
+        <h3>From plate scan to five languages, in one pass.</h3>
+        <p>Scan the plate, and RDW fills the specs. AI cleans the photos, writes the copy, prices it against live comparables, and pushes it to every channel — the dealer approves, doesn't type.</p>
         <ul>
-          <li>${t.raw("sec5_li1")}</li>
-          <li>${t.raw("sec5_li2")}</li>
-          <li>${t.raw("sec5_li3")}</li>
-          <li>${t.raw("sec5_li4")}</li>
+          <li>RDW auto-fill on plate lookup</li>
+          <li>Photos enhanced and watermarked</li>
+          <li>Copy + SEO in NL · EN · DE · FR · TR</li>
+          <li>One publish click across four channels</li>
         </ul>
       </div>
       <div class="snapwrap">
         <div class="snap">
-          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">${t.raw("snap5_path")}</span></div>
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">listing · VH-1048 · ready to publish</span></div>
           <div class="mock-list">
             <div class="ml-top">
               <div class="ml-photo"><span class="car"><svg width="46" height="30" viewBox="0 0 46 30" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h40M6 20l3-9h20l6 6h5v3M11 20a3 3 0 106 0M29 20a3 3 0 106 0"/></svg></span></div>
               <div class="ml-info">
                 <div class="tt">VW Crafter L3H2 2.0 TDI</div>
-                <div class="meta">${t.raw("ml_meta")}</div>
-                <div class="price">€ 24.950 <small>${t.raw("ml_priced")}</small></div>
+                <div class="meta">2021 · 84.500 km · diesel · GX-482-K</div>
+                <div class="price">€ 24.950 <small>✦ AI-priced · 11d to sell</small></div>
               </div>
             </div>
             <div class="ml-langs">
-              <span class="ml-lang on">NL</span><span class="ml-lang on">EN</span><span class="ml-lang on">DE</span><span class="ml-lang on">FR</span><span class="ml-lang on">TR</span><span class="ml-lang">${t.raw("ml_gen")}</span>
+              <span class="ml-lang on">NL</span><span class="ml-lang on">EN</span><span class="ml-lang on">DE</span><span class="ml-lang on">FR</span><span class="ml-lang on">TR</span><span class="ml-lang">✦ generated</span>
             </div>
             <div class="ml-chan">
               <span>Marktplaats</span><span>Mobile.de</span><span>AutoScout24</span><span>Website</span>
             </div>
           </div>
         </div>
-        <div class="snap-cap">${t.raw("snap5_cap")}</div>
+        <div class="snap-cap">Listing detail — AI-written, AI-priced, one click to four channels</div>
       </div>
     </div>
   </div>
@@ -548,35 +544,35 @@ function buildMarkup(t: Tr, locale: string): string {
 
 <section class="pad">
   <div class="wrap">
-    <div class="sec-head"><div class="eyebrow">${t.raw("sec6_eyebrow")}</div><h2>${t.raw("sec6_h2")}</h2></div>
+    <div class="sec-head"><div class="eyebrow">Before / after</div><h2>What actually changes on a Tuesday morning.</h2></div>
     <div class="cmp">
-      <div class="h old">${t.raw("sec6_old")}</div><div class="h new">${t.raw("sec6_new")}</div>
-      <div class="r old">${t.raw("r1_old")}</div><div class="r new">${t.raw("r1_new")}</div>
-      <div class="r old">${t.raw("r2_old")}</div><div class="r new">${t.raw("r2_new")}</div>
-      <div class="r old">${t.raw("r3_old")}</div><div class="r new">${t.raw("r3_new")}</div>
-      <div class="r old">${t.raw("r4_old")}</div><div class="r new">${t.raw("r4_new")}</div>
-      <div class="r old">${t.raw("r5_old")}</div><div class="r new">${t.raw("r5_new")}</div>
-      <div class="r old">${t.raw("r6_old")}</div><div class="r new">${t.raw("r6_new")}</div>
+      <div class="h old">The way it works now</div><div class="h new">On DES BOP V2</div>
+      <div class="r old">Twelve subscriptions, twelve logins</div><div class="r new">One platform, one login</div>
+      <div class="r old">Type the listing, then re-type it per site</div><div class="r new">AI writes it once, six languages</div>
+      <div class="r old">Upload photos to each marketplace by hand</div><div class="r new">One publish click, every channel</div>
+      <div class="r old">Stock lives in a spreadsheet nobody trusts</div><div class="r new">Live inventory, single source of truth</div>
+      <div class="r old">Chase leads from memory</div><div class="r new">AI drafts the follow-up on time</div>
+      <div class="r old">BTW margeregeling worked out by hand</div><div class="r new">BTW assistent handles the margin invoice</div>
     </div>
   </div>
 </section>
 
 <section class="pad" id="score">
   <div class="wrap">
-    <div class="sec-head"><div class="eyebrow">${t.raw("sec7_eyebrow")}</div><h2>${t.raw("sec7_h2")}</h2><p>${t.raw("sec7_p")}</p></div>
+    <div class="sec-head"><div class="eyebrow">Honest evaluation</div><h2>Where the platform stands today.</h2><p>Coverage is enterprise-grade. The gap was never the product — it was the story on the way in.</p></div>
     <div class="score">
       <div class="score-list" id="scorelist">
-        <div class="score-row"><span class="k">${t.raw("score1")}</span><span class="bar"><i data-w="97"></i></span><span class="v">9.7</span></div>
-        <div class="score-row"><span class="k">${t.raw("score2")}</span><span class="bar"><i data-w="98"></i></span><span class="v">9.8</span></div>
-        <div class="score-row"><span class="k">${t.raw("score3")}</span><span class="bar"><i data-w="95"></i></span><span class="v">9.5</span></div>
-        <div class="score-row"><span class="k">${t.raw("score4")}</span><span class="bar"><i data-w="100"></i></span><span class="v">10</span></div>
-        <div class="score-row"><span class="k">${t.raw("score5")}</span><span class="bar"><i data-w="85"></i></span><span class="v">8.5</span></div>
-        <div class="score-row"><span class="k">${t.raw("score6")}</span><span class="bar"><i data-w="85"></i></span><span class="v">8.5</span></div>
-        <div class="score-row"><span class="k">${t.raw("score7")}</span><span class="bar"><i data-w="90"></i></span><span class="v">9.0</span></div>
+        <div class="score-row"><span class="k">Functional coverage</span><span class="bar"><i data-w="97"></i></span><span class="v">9.7</span></div>
+        <div class="score-row"><span class="k">Dealer-specific fit</span><span class="bar"><i data-w="98"></i></span><span class="v">9.8</span></div>
+        <div class="score-row"><span class="k">ERP capabilities</span><span class="bar"><i data-w="95"></i></span><span class="v">9.5</span></div>
+        <div class="score-row"><span class="k">Marketplace integration</span><span class="bar"><i data-w="100"></i></span><span class="v">10</span></div>
+        <div class="score-row"><span class="k">AI readiness</span><span class="bar"><i data-w="85"></i></span><span class="v">8.5</span></div>
+        <div class="score-row"><span class="k">UX simplicity</span><span class="bar"><i data-w="85"></i></span><span class="v">8.5</span></div>
+        <div class="score-row"><span class="k">Marketing clarity</span><span class="bar"><i data-w="90"></i></span><span class="v">9.0</span></div>
       </div>
       <div class="score-note">
-        <h4>${t.raw("score_note_h")}</h4>
-        <p>${t.raw("score_note_p")}</p>
+        <h4>The weakest part was explaining it. This page fixes that.</h4>
+        <p>Lead with the money and the live console, in the trade's own vocabulary, and the value is shown before it's claimed. A dealer stops thinking "another DMS" and starts thinking "this replaces half my stack."</p>
       </div>
     </div>
   </div>
@@ -584,28 +580,660 @@ function buildMarkup(t: Tr, locale: string): string {
 
 <section class="cta" id="cta">
   <div class="wrap">
-    <h2>${t.raw("cta_h2")}</h2>
-    <p>${t.raw("cta_p")}</p>
+    <h2>Run your entire dealership.<br>Powered by AI.</h2>
+    <p>From plate scan to afleverbon — see it move your real stock in one session.</p>
     <div class="hero-cta">
-      <a href="/${locale}/contact" class="btn btn-primary">${t.raw("cta_btn1")}</a>
-      <a href="/${locale}/platform/calculator" class="btn btn-ghost">${t.raw("cta_btn2")}</a>
+      <a href="/en/contact" class="btn btn-primary">Book a demo →</a>
+      <a href="/en/platform/calculator" class="btn btn-ghost">Open the savings calculator</a>
     </div>
-    <div class="fine">${t.raw("cta_fine")}</div>
+    <div class="fine">No migration marathon · your data model, your channels, your language</div>
   </div>
 </section>
 `
+
+const MARKUP_NL = `
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tagpill"><span class="d"></span>Het AI-platform voor autobedrijven</div>
+      <h1>Run je hele terrein<br>vanuit <span class="plate-word">één console.</span></h1>
+      <p class="lede">Van kenteken tot factuur, van voorraad tot boekhouding, van Marktplaats tot Mobile.de — één login, één datamodel, één AI die bij elke stap meewerkt.</p>
+      <p class="sub">Gebouwd voor de NL/BE/DE-handel: RDW-opvragingen, BTW-margeregeling, afleverbon en publiceren op meerdere kanalen — precies waar het werk al gebeurt.</p>
+      <div class="hero-cta">
+        <a href="/nl/contact" class="btn btn-primary">Plan een demo →</a>
+        <a href="#numbers" class="btn btn-ghost">Bekijk wat het bespaart</a>
+      </div>
+    </div>
+    <div class="console" id="console">
+      <div class="console-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="title">workflow · inname → afgeleverd</span>
+        <span class="live-badge">AI live</span>
+      </div>
+      <div class="console-body" id="steps">
+        <div class="step" data-i="0"><div class="ico">1</div><div><div class="who">dealer</div><div class="txt">VW Crafter op het terrein — kenteken <span class="yellow">GX-482-K</span> gescand</div></div></div>
+        <div class="step" data-i="1"><div class="ico">✦</div><div><div class="who ai">DES AI · RDW</div><div class="txt"><b>Specs, registratie, massa & APK</b> opgehaald — conceptrecord aangemaakt</div></div></div>
+        <div class="step" data-i="2"><div class="ico">✦</div><div><div class="who ai">DES AI · beeld</div><div class="txt">14 foto's <b>opgeschoond, gebalanceerd, gewatermerkt</b></div></div></div>
+        <div class="step" data-i="3"><div class="ico">✦</div><div><div class="who ai">DES AI · tekst</div><div class="txt">Advertentie geschreven in <span class="yellow">NL · EN · DE · FR · TR</span>, SEO-geoptimaliseerd</div></div></div>
+        <div class="step" data-i="4"><div class="ico">✦</div><div><div class="who ai">DES AI · prijs</div><div class="txt">Voorgesteld <b>€ 24.950</b> — 40 vergelijkbare, 11 dagen tot verkoop</div></div></div>
+        <div class="step" data-i="5"><div class="ico">↑</div><div><div class="who">publiceren</div><div class="txt">Gepubliceerd op <b>Marktplaats · Mobile.de · AutoScout24</b> + website</div></div></div>
+        <div class="step" data-i="6"><div class="ico">✦</div><div><div class="who ai">DES AI · CRM</div><div class="txt">Lead binnen. <b>Antwoord opgesteld</b>, proefrit voorgesteld</div></div></div>
+        <div class="step" data-i="7"><div class="ico">✓</div><div><div class="who">financiën</div><div class="txt">Verkocht. <b>Margeregeling-factuur + afleverbon</b>, boekhouding bijgewerkt</div></div></div>
+      </div>
+      <div class="console-foot"><span id="footlabel">inactief · druk op play</span><span class="prog" id="prog"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">In het platform</div>
+      <h2>Eén schil. Acht domeinen. De volledige dealer-lifecycle.</h2>
+      <p>Elke module deelt dezelfde records, rechten en AI-laag — geen wisselen, geen overtypen, geen export-import tussen systemen.</p>
+    </div>
+    <div class="split">
+      <div class="copy">
+        <div class="eyebrow">De console</div>
+        <h3>Een vaste schil die je team één keer leert.</h3>
+        <p>SAP-degelijke structuur zonder de SAP-overhead. Zes-anker balk, links een menu op rechten, objectcodes op elk scherm — de interface voor operators, geen opgepoetste consumenten-app.</p>
+        <ul>
+          <li>Overzicht · Operatie · Sales & CRM-domeinen</li>
+          <li>Marktplaats · Financiën · Intelligence</li>
+          <li>Stamgegevens · Tools — in één boom</li>
+          <li>Rolgebaseerde toegang op elk object</li>
+        </ul>
+      </div>
+      <div class="snapwrap">
+        <div class="snap">
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">bop.dessystems.io / console</span></div>
+          <div class="mock-nav">
+            <div class="mn-side">
+              <div class="mn-group">Overzicht</div>
+              <div class="mn-item sel"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Exec Dashboard<span class="code">AN001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Conversietrechter<span class="code">AN002</span></div>
+              <div class="mn-group">Operatie</div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>Voorraad<span class="code">AS001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Catalogus<span class="code">IN001</span></div>
+              <div class="mn-group">Sales & CRM</div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a5 5 0 015-5h2"/></svg>Leads<span class="code">CR001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Afspraken<span class="code">SA007</span></div>
+            </div>
+            <div class="mn-main">
+              <div class="mn-crumb">Overzicht / <b>Exec Dashboard</b></div>
+              <div class="mn-tiles">
+                <div class="mn-tile"><div class="tk">VOORRAAD</div><div class="tn">47</div><div class="ts">stuks live</div></div>
+                <div class="mn-tile"><div class="tk">VERKOCHT · MTD</div><div class="tn">23</div><div class="ts">+4 vs doel</div></div>
+                <div class="mn-tile"><div class="tk">GEM. DAGEN</div><div class="tn">18</div><div class="ts">−6 met AI</div></div>
+                <div class="mn-tile"><div class="tk">LEADS</div><div class="tn">61</div><div class="ts">14 open</div></div>
+                <div class="mn-tile"><div class="tk">BRUTO · MTD</div><div class="tn" style="font-size:14px">€41k</div><div class="ts">margeregeling</div></div>
+                <div class="mn-tile"><div class="tk">GEPUBL.</div><div class="tn">188</div><div class="ts">4 kanalen</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="snap-cap">Exec Dashboard — de live schil, inclusief objectcodes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:56px;padding-bottom:56px">
+  <div class="wrap">
+    <div class="eyebrow center" style="margin-bottom:26px">ELKE MODULE, ÉÉN PLATFORM</div>
+    <div class="mods mods3">
+      <div class="mod"><h3>Voorraad</h3><p class="mod-desc">Volledige voertuiglevenscyclus: inname, RDW-specs, staat, foto's — één record, elk kanaal.</p></div>
+      <div class="mod"><h3>Marktplaats</h3><p class="mod-desc">Eén keer publiceren naar Marktplaats, Mobile.de, AutoScout24 en je eigen site — gesynchroniseerd, niet gedupliceerd.</p></div>
+      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, proefritslots, opvolging — AI stelt het antwoord op, jij sluit de deal.</p></div>
+      <div class="mod"><h3>Sales</h3><p class="mod-desc">Offertes, orders, contracten, afleverbon — gegenereerd, niet getypt.</p></div>
+      <div class="mod"><h3>Financiën</h3><p class="mod-desc">BTW-margeregeling, facturatie, winstgevendheid — zoals NL/BE/DE-dealers echt werken.</p></div>
+      <div class="mod"><h3>AI Intelligence</h3><p class="mod-desc">Prijsstelling, vertaling, advertentietekst — ingebouwd in elke module, niet erbij geplakt.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="econ" id="numbers">
+  <div class="wrap">
+    <div class="econ-head">
+      <div class="t">Wat het waard is voor een middelgroot terrein — <b>25 auto's per maand.</b></div>
+      <div class="note">conservatief model · pas elke waarde aan in de rekentool</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat hl"><div class="k">Netto besparing / jaar</div><div class="n"><span class="cur">€</span>46.187</div><div class="sub">Harde cash na het abonnement — tools, arbeid, snellere doorloop.</div></div>
+      <div class="stat green"><div class="k">Nettowinst-stijging</div><div class="n">+34%</div><div class="sub">Bij een dunne marge van 2,5% telt elke euro flink door. +56% met groei.</div></div>
+      <div class="stat"><div class="k">Uren teruggewonnen / maand</div><div class="n">91</div><div class="sub">AI doet spec-import, tekst, vertaling, foto's, publiceren, opvolging.</div></div>
+      <div class="stat"><div class="k">Rendement per € 1</div><div class="n"><span class="cur">€</span>12</div><div class="sub">Alleen harde waarde. Terugverdiend binnen de eerste maand.</div></div>
+    </div>
+    <div style="margin-top:20px"><a href="/nl/platform/calculator" class="btn btn-primary">Open de besparingscalculator →</a></div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap strip-inner">
+    <span class="lbl">Door de hele handel gebouwd</span>
+    <span class="chip">Bedrijfswagens</span><span class="chip">Auto's</span><span class="chip">Campers</span>
+    <span class="chip">Kampeerauto's</span><span class="chip">Veilingvoorraad</span><span class="chip">Wagenpark</span><span class="chip">Import / Export</span>
+  </div>
+</div>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Geen chatbot in de hoek</div>
+      <h2>Een <span style="color:var(--live)">Ask AI</span>-paneel op elk record.</h2>
+      <p>Contextbewust, nooit een leeg vak. De AI weet al welk voertuig, welke lead, welk rapport je bekijkt — dus de actie is één tik, en de data eronder blijft één bron van waarheid.</p>
+    </div>
+    <div class="split rev">
+      <div class="snapwrap">
+        <div class="snap">
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">console / voorraad · Advertentiebeheer · MP001</span></div>
+          <div class="mock-grid">
+            <div class="mg-toolbar">
+              <span class="search">⌕ filter voorraad…</span>
+              <span class="b">▤ kolommen</span>
+              <span class="b ai">✦ Ask AI</span>
+            </div>
+            <table class="mg-table">
+              <thead><tr><th>Object</th><th>Voertuig</th><th>Kenteken</th><th>Prijs</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="pk">VH-1048</td><td>VW Crafter L3H2</td><td>GX-482-K</td><td>€ 24.950</td><td><span class="badge live">live · 3k</span></td></tr>
+                <tr><td class="pk">VH-1047</td><td>Mercedes Sprinter</td><td>PJ-119-T</td><td>€ 31.500</td><td><span class="badge live">live · 3k</span></td></tr>
+                <tr><td class="pk">VH-1046</td><td>Ford Transit Custom</td><td>RN-770-B</td><td>€ 18.200</td><td><span class="badge draft">concept · AI</span></td></tr>
+                <tr><td class="pk">VH-1045</td><td>Renault Master</td><td>SD-205-L</td><td>€ 16.900</td><td><span class="badge sold">verkocht</span></td></tr>
+                <tr><td class="pk">VH-1044</td><td>Fiat Ducato Maxi</td><td>TK-431-M</td><td>€ 21.750</td><td><span class="badge live">live · 4k</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="snap-cap">Advertentiebeheer — SE16-achtige grid, AI op de werkbalk</div>
+      </div>
+      <div class="copy">
+        <div class="eyebrow">Ask AI · in context</div>
+        <h3>Elke knop kan AI-aangedreven zijn.</h3>
+        <p>Kies een voertuig en het paneel kent het al. Geen kopiëren naar een apart tabblad, geen auto opnieuw beschrijven aan een generieke assistent.</p>
+        <div class="snap" style="margin-top:16px">
+          <div class="mock-ai">
+            <div class="mai-head"><span class="spark">✦</span><span class="t">DES AI</span><span class="ctx">context · VH-1048</span></div>
+            <div class="mai-body">
+              <div class="mai-ctxcard"><div class="l">Geselecteerd voertuig</div><div class="v">VW Crafter L3H2 · <span class="plate">GX-482-K</span></div></div>
+              <div class="mai-actions">
+                <div class="mai-act"><span class="i">✎</span>Schrijf de advertentie, vertaal naar 5 talen<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">◈</span>Stel vraagprijs voor uit live vergelijkbare<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">⇄</span>Vind vergelijkbare voertuigen in mijn voorraad<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">↑</span>Publiceer op de kanalen die dit het snelst verkopen<span class="go">run</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">De stack waar je voor betaalt</div>
+      <h2>Je hebt geen extra software nodig. Je hebt nodig dat het stopt met twaalf dingen te zijn.</h2>
+      <p>Elke offerte met de hand overgetypt, elke advertentie per kanaal opnieuw geüpload, elk getal opnieuw in de boekhouding getikt. De last zijn niet de abonnementen — het is het schakelen.</p>
+    </div>
+    <div class="frag">
+      <div>
+        <div class="col-h">Vandaag · het bureaublad van een dealer</div>
+        <div class="tool-cloud">
+          <span>Excel-voorraad</span><span>WhatsApp</span><span>Outlook</span><span>Mobile.de</span><span>AutoScout24</span><span>Marktplaats</span><span>Boekhouding</span><span>Facturatietool</span><span>CRM</span><span>Google Drive</span><span>Foto-editor</span><span>ChatGPT-tab</span>
+        </div>
+      </div>
+      <div class="frag-arrow"><div class="l">gaat samen in</div><div class="a">→</div></div>
+      <div>
+        <div class="col-h">Op DES BOP V2</div>
+        <div class="one-panel">
+          <div class="big"><span class="mono">ÉÉN PLATFORM</span>Alles, verbonden.</div>
+          <ul><li>Eén datamodel — geen overtypen</li><li>Eén publiceerklik — elk kanaal</li><li>Eén assistent — in elk scherm</li><li>Eén factuurstroom — BTW geregeld</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="modules">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Het platform · gebouwd en uitgerold</div>
+      <h2>Acht domeinen. Eén console. Niets erbij geplakt.</h2>
+      <p>Dit is de live navigatie, geen roadmap. Elk domein deelt records, rechten en de AI-laag.</p>
+    </div>
+    <div class="mods">
+      <div class="mod"><div class="code">AN·BO</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg><h3>Overzicht</h3><div class="items">Exec dashboard · Conversietrechter · Sessie-intelligentie · Advertentieprestaties</div><div class="ai-tag">AI-inzichten</div></div>
+      <div class="mod"><div class="code">AS·IN</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg><h3>Voorraad</h3><div class="items">Catalogus · Merken · Categorieën · Leveranciers · Modelcatalogus · Taxonomie</div><div class="ai-tag">AI spec-import</div></div>
+      <div class="mod"><div class="code">MP·PB·AU</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v4H4z"/><path d="M6 8v12h12V8"/><path d="M9 12h6"/></svg><h3>Marktplaats</h3><div class="items">Advertentiebeheer · Kanaalpublicatie · Publicatiewachtrij · Veilingbeheer</div><div class="ai-tag">AI-kanaalrouting</div></div>
+      <div class="mod"><div class="code">CR·SA</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M17 11l2 2 4-4"/></svg><h3>Sales & CRM</h3><div class="items">Leads · Pijplijn · Afspraken · Reviews · Verhuur · Kopers-inbox</div><div class="ai-tag">AI-opvolging</div></div>
+      <div class="mod"><div class="code">SA</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20"/><path d="M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><h3>Verkoopstroom</h3><div class="items">Offertes · Offertebouwer · Orders · Betalingen · Contracten</div><div class="ai-tag">AI-offertes</div></div>
+      <div class="mod"><div class="code">FI</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg><h3>Financiën</h3><div class="items">BTW-snelrekenaar · Bonscanner · Inkoop AP · Betaaltracking · Winst & verlies</div><div class="ai-tag">BTW-assistent AI</div></div>
+      <div class="mod"><div class="code">AI·MK</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg><h3>Intelligence</h3><div class="items">Command center · Marktevaluatie · Concurrentie-activiteit · Prompt-beheer · Actie-audit</div><div class="ai-tag">AI-kern</div></div>
+      <div class="mod"><div class="code">MD·OP</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l9 4-9 4-9-4 9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg><h3>Data & Tools</h3><div class="items">Zakenrelaties · Voertuigtaxonomie · QR · Flyer-bouwer · Watermerk · Foto-verbetering</div><div class="ai-tag">AI-fototools</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="split">
+      <div class="copy">
+        <div class="eyebrow">Eén keer maken · overal publiceren</div>
+        <h3>Van kentekenscan tot vijf talen, in één keer.</h3>
+        <p>Scan het kenteken en RDW vult de specs. AI schoont de foto's op, schrijft de tekst, prijst tegen live vergelijkbare en pusht naar elk kanaal — de dealer keurt goed, typt niet.</p>
+        <ul>
+          <li>RDW-autofill bij kentekenopvraging</li>
+          <li>Foto's verbeterd en gewatermerkt</li>
+          <li>Tekst + SEO in NL · EN · DE · FR · TR</li>
+          <li>Eén publiceerklik over vier kanalen</li>
+        </ul>
+      </div>
+      <div class="snapwrap">
+        <div class="snap">
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">advertentie · VH-1048 · klaar om te publiceren</span></div>
+          <div class="mock-list">
+            <div class="ml-top">
+              <div class="ml-photo"><span class="car"><svg width="46" height="30" viewBox="0 0 46 30" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h40M6 20l3-9h20l6 6h5v3M11 20a3 3 0 106 0M29 20a3 3 0 106 0"/></svg></span></div>
+              <div class="ml-info">
+                <div class="tt">VW Crafter L3H2 2.0 TDI</div>
+                <div class="meta">2021 · 84.500 km · diesel · GX-482-K</div>
+                <div class="price">€ 24.950 <small>✦ AI-geprijsd · 11d tot verkoop</small></div>
+              </div>
+            </div>
+            <div class="ml-langs">
+              <span class="ml-lang on">NL</span><span class="ml-lang on">EN</span><span class="ml-lang on">DE</span><span class="ml-lang on">FR</span><span class="ml-lang on">TR</span><span class="ml-lang">✦ gegenereerd</span>
+            </div>
+            <div class="ml-chan">
+              <span>Marktplaats</span><span>Mobile.de</span><span>AutoScout24</span><span>Website</span>
+            </div>
+          </div>
+        </div>
+        <div class="snap-cap">Advertentiedetail — AI-geschreven, AI-geprijsd, één klik naar vier kanalen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Voor / na</div><h2>Wat er echt verandert op een dinsdagochtend.</h2></div>
+    <div class="cmp">
+      <div class="h old">Hoe het nu werkt</div><div class="h new">Op DES BOP V2</div>
+      <div class="r old">Twaalf abonnementen, twaalf logins</div><div class="r new">Eén platform, één login</div>
+      <div class="r old">Advertentie typen, dan per site overtypen</div><div class="r new">AI schrijft het één keer, zes talen</div>
+      <div class="r old">Foto's met de hand naar elke marktplaats uploaden</div><div class="r new">Eén publiceerklik, elk kanaal</div>
+      <div class="r old">Voorraad in een spreadsheet die niemand vertrouwt</div><div class="r new">Live voorraad, één bron van waarheid</div>
+      <div class="r old">Leads uit je hoofd achtervolgen</div><div class="r new">AI stelt de opvolging op tijd op</div>
+      <div class="r old">BTW-margeregeling met de hand uitrekenen</div><div class="r new">BTW-assistent maakt de margefactuur</div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="score">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Eerlijke evaluatie</div><h2>Waar het platform vandaag staat.</h2><p>De dekking is enterprise-waardig. Het gat was nooit het product — het was het verhaal bij binnenkomst.</p></div>
+    <div class="score">
+      <div class="score-list" id="scorelist">
+        <div class="score-row"><span class="k">Functionele dekking</span><span class="bar"><i data-w="97"></i></span><span class="v">9.7</span></div>
+        <div class="score-row"><span class="k">Dealer-specifieke pasvorm</span><span class="bar"><i data-w="98"></i></span><span class="v">9.8</span></div>
+        <div class="score-row"><span class="k">ERP-mogelijkheden</span><span class="bar"><i data-w="95"></i></span><span class="v">9.5</span></div>
+        <div class="score-row"><span class="k">Marktplaats-integratie</span><span class="bar"><i data-w="100"></i></span><span class="v">10</span></div>
+        <div class="score-row"><span class="k">AI-gereedheid</span><span class="bar"><i data-w="85"></i></span><span class="v">8.5</span></div>
+        <div class="score-row"><span class="k">UX-eenvoud</span><span class="bar"><i data-w="85"></i></span><span class="v">8.5</span></div>
+        <div class="score-row"><span class="k">Marketing-duidelijkheid</span><span class="bar"><i data-w="90"></i></span><span class="v">9.0</span></div>
+      </div>
+      <div class="score-note">
+        <h4>Het zwakste deel was de uitleg. Deze pagina lost dat op.</h4>
+        <p>Begin met het geld en de live console, in de taal van de handel, en de waarde wordt getoond vóór ze wordt geclaimd. Een dealer denkt niet meer "weer een DMS" maar "dit vervangt de helft van mijn stack".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="wrap">
+    <h2>Run je hele autobedrijf.<br>Aangedreven door AI.</h2>
+    <p>Van kentekenscan tot afleverbon — zie het je echte voorraad verplaatsen in één sessie.</p>
+    <div class="hero-cta">
+      <a href="/nl/contact" class="btn btn-primary">Plan een demo →</a>
+      <a href="/nl/platform/calculator" class="btn btn-ghost">Open de besparingscalculator</a>
+    </div>
+    <div class="fine">Geen migratiemarathon · jouw datamodel, jouw kanalen, jouw taal</div>
+  </div>
+</section>
+`
+
+const MARKUP_DE = `
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tagpill"><span class="d"></span>Die KI-Plattform für Fahrzeughändler</div>
+      <h1>Führe den ganzen Hof<br>über <span class="plate-word">eine Konsole.</span></h1>
+      <p class="lede">Vom Kennzeichen zur Rechnung, vom Bestand zur Buchhaltung, von Marktplaats bis Mobile.de — ein Login, ein Datenmodell, eine KI bei jedem Schritt.</p>
+      <p class="sub">Gebaut für den NL/BE/DE-Handel: RDW-Abfragen, Differenzbesteuerung, Lieferschein und Multichannel-Veröffentlichung — genau dort, wo die Arbeit passiert.</p>
+      <div class="hero-cta">
+        <a href="/de/contact" class="btn btn-primary">Demo buchen →</a>
+        <a href="#numbers" class="btn btn-ghost">Sehen, was es spart</a>
+      </div>
+    </div>
+    <div class="console" id="console">
+      <div class="console-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="title">Workflow · Annahme → ausgeliefert</span>
+        <span class="live-badge">KI live</span>
+      </div>
+      <div class="console-body" id="steps">
+        <div class="step" data-i="0"><div class="ico">1</div><div><div class="who">Händler</div><div class="txt">VW Crafter auf dem Hof — Kennzeichen <span class="yellow">GX-482-K</span> gescannt</div></div></div>
+        <div class="step" data-i="1"><div class="ico">✦</div><div><div class="who ai">DES KI · RDW</div><div class="txt"><b>Specs, Zulassung, Masse & TÜV</b> abgerufen — Entwurf angelegt</div></div></div>
+        <div class="step" data-i="2"><div class="ico">✦</div><div><div class="who ai">DES KI · Vision</div><div class="txt">14 Fotos <b>bereinigt, ausbalanciert, mit Wasserzeichen</b></div></div></div>
+        <div class="step" data-i="3"><div class="ico">✦</div><div><div class="who ai">DES KI · Text</div><div class="txt">Anzeige verfasst in <span class="yellow">NL · EN · DE · FR · TR</span>, SEO-optimiert</div></div></div>
+        <div class="step" data-i="4"><div class="ico">✦</div><div><div class="who ai">DES KI · Preis</div><div class="txt">Vorschlag <b>€ 24.950</b> — 40 Vergleichswerte, 11 Tage bis Verkauf</div></div></div>
+        <div class="step" data-i="5"><div class="ico">↑</div><div><div class="who">veröffentlichen</div><div class="txt">Veröffentlicht auf <b>Marktplaats · Mobile.de · AutoScout24</b> + Website</div></div></div>
+        <div class="step" data-i="6"><div class="ico">✦</div><div><div class="who ai">DES KI · CRM</div><div class="txt">Lead da. <b>Antwort entworfen</b>, Probefahrt vorgeschlagen</div></div></div>
+        <div class="step" data-i="7"><div class="ico">✓</div><div><div class="who">Finanzen</div><div class="txt">Verkauft. <b>Differenzbesteuerungs-Rechnung + Lieferschein</b>, Buchhaltung aktualisiert</div></div></div>
+      </div>
+      <div class="console-foot"><span id="footlabel">inaktiv · Play drücken</span><span class="prog" id="prog"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">In der Plattform</div>
+      <h2>Eine Hülle. Acht Domänen. Der volle Händler-Lebenszyklus.</h2>
+      <p>Jedes Modul teilt dieselben Datensätze, Rechte und KI-Schicht — kein Wechseln, kein Abtippen, kein Export-Import zwischen Systemen.</p>
+    </div>
+    <div class="split">
+      <div class="copy">
+        <div class="eyebrow">Die Konsole</div>
+        <h3>Eine feste Hülle, die dein Team einmal lernt.</h3>
+        <p>SAP-solide Struktur ohne den SAP-Overhead. Sechs-Anker-Leiste, rechtebasierte Navigation, Objektcodes auf jedem Screen — die Oberfläche für Operatoren, keine aufgehübschte Consumer-App.</p>
+        <ul>
+          <li>Übersicht · Betrieb · Sales & CRM</li>
+          <li>Marktplatz · Finanzen · Intelligence</li>
+          <li>Stammdaten · Tools — in einem Baum</li>
+          <li>Rollenbasierter Zugriff auf jedes Objekt</li>
+        </ul>
+      </div>
+      <div class="snapwrap">
+        <div class="snap">
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">bop.dessystems.io / console</span></div>
+          <div class="mock-nav">
+            <div class="mn-side">
+              <div class="mn-group">Übersicht</div>
+              <div class="mn-item sel"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Exec Dashboard<span class="code">AN001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Conversion-Funnel<span class="code">AN002</span></div>
+              <div class="mn-group">Betrieb</div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>Bestand<span class="code">AS001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Katalog<span class="code">IN001</span></div>
+              <div class="mn-group">Sales & CRM</div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a5 5 0 015-5h2"/></svg>Leads<span class="code">CR001</span></div>
+              <div class="mn-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Termine<span class="code">SA007</span></div>
+            </div>
+            <div class="mn-main">
+              <div class="mn-crumb">Übersicht / <b>Exec Dashboard</b></div>
+              <div class="mn-tiles">
+                <div class="mn-tile"><div class="tk">BESTAND</div><div class="tn">47</div><div class="ts">Stück live</div></div>
+                <div class="mn-tile"><div class="tk">VERKAUFT · MTD</div><div class="tn">23</div><div class="ts">+4 vs Ziel</div></div>
+                <div class="mn-tile"><div class="tk">Ø TAGE</div><div class="tn">18</div><div class="ts">−6 mit KI</div></div>
+                <div class="mn-tile"><div class="tk">LEADS</div><div class="tn">61</div><div class="ts">14 offen</div></div>
+                <div class="mn-tile"><div class="tk">BRUTTO · MTD</div><div class="tn" style="font-size:14px">€41k</div><div class="ts">Differenzbest.</div></div>
+                <div class="mn-tile"><div class="tk">VERÖFF.</div><div class="tn">188</div><div class="ts">4 Kanäle</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="snap-cap">Exec Dashboard — die Live-Hülle, samt Objektcodes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" style="padding-top:56px;padding-bottom:56px">
+  <div class="wrap">
+    <div class="eyebrow center" style="margin-bottom:26px">JEDES MODUL, EINE PLATTFORM</div>
+    <div class="mods mods3">
+      <div class="mod"><h3>Bestand</h3><p class="mod-desc">Voller Fahrzeuglebenszyklus: Annahme, RDW-Specs, Zustand, Fotos — ein Datensatz, jeder Kanal.</p></div>
+      <div class="mod"><h3>Marktplatz</h3><p class="mod-desc">Einmal veröffentlichen auf Marktplaats, Mobile.de, AutoScout24 und der eigenen Seite — synchronisiert, nicht dupliziert.</p></div>
+      <div class="mod"><h3>CRM</h3><p class="mod-desc">Leads, Probefahrt-Termine, Nachfassen — KI entwirft die Antwort, Sie schließen den Deal ab.</p></div>
+      <div class="mod"><h3>Sales</h3><p class="mod-desc">Angebote, Aufträge, Verträge, Lieferschein — generiert, nicht getippt.</p></div>
+      <div class="mod"><h3>Finanzen</h3><p class="mod-desc">Differenzbesteuerung, Rechnungsstellung, Profitabilität — so wie NL/BE/DE-Händler tatsächlich arbeiten.</p></div>
+      <div class="mod"><h3>KI Intelligence</h3><p class="mod-desc">Preisgestaltung, Übersetzung, Anzeigentext — in jedem Modul eingebettet, nicht angeflanscht.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="econ" id="numbers">
+  <div class="wrap">
+    <div class="econ-head">
+      <div class="t">Was es einem mittelgroßen Hof bringt — <b>25 Autos pro Monat.</b></div>
+      <div class="note">konservatives Modell · jeden Wert im Live-Rechner anpassen</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat hl"><div class="k">Nettoersparnis / Jahr</div><div class="n"><span class="cur">€</span>46.187</div><div class="sub">Harte Ersparnis nach dem Abo — Tools, Arbeit, schnellerer Umschlag.</div></div>
+      <div class="stat green"><div class="k">Nettogewinn-Anstieg</div><div class="n">+34%</div><div class="sub">Bei dünnen 2,5% Marge schlägt jeder Euro stark durch. +56% mit Wachstum.</div></div>
+      <div class="stat"><div class="k">Stunden zurückgewonnen / Monat</div><div class="n">91</div><div class="sub">KI erledigt Spec-Import, Text, Übersetzung, Fotos, Veröffentlichung, Nachfassen.</div></div>
+      <div class="stat"><div class="k">Rendite pro € 1</div><div class="n"><span class="cur">€</span>12</div><div class="sub">Nur harter Nutzen. Amortisiert im ersten Monat.</div></div>
+    </div>
+    <div style="margin-top:20px"><a href="/de/platform/calculator" class="btn btn-primary">Sparrechner öffnen →</a></div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap strip-inner">
+    <span class="lbl">Über den ganzen Handel gebaut</span>
+    <span class="chip">Transporter</span><span class="chip">Autos</span><span class="chip">Camper</span>
+    <span class="chip">Wohnmobile</span><span class="chip">Auktionsbestand</span><span class="chip">Flotte</span><span class="chip">Import / Export</span>
+  </div>
+</div>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Kein Chatbot in der Ecke</div>
+      <h2>Ein <span style="color:var(--live)">Ask AI</span>-Panel auf jedem Datensatz.</h2>
+      <p>Kontextbewusst, nie ein leeres Feld. Die KI weiß bereits, welches Fahrzeug, welcher Lead, welcher Bericht — die Aktion ist ein Tipp, und die Daten bleiben eine einzige Quelle der Wahrheit.</p>
+    </div>
+    <div class="split rev">
+      <div class="snapwrap">
+        <div class="snap">
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">Konsole / Bestand · Anzeigenmanager · MP001</span></div>
+          <div class="mock-grid">
+            <div class="mg-toolbar">
+              <span class="search">⌕ Bestand filtern…</span>
+              <span class="b">▤ Spalten</span>
+              <span class="b ai">✦ Ask AI</span>
+            </div>
+            <table class="mg-table">
+              <thead><tr><th>Objekt</th><th>Fahrzeug</th><th>Kennz.</th><th>Preis</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="pk">VH-1048</td><td>VW Crafter L3H2</td><td>GX-482-K</td><td>€ 24.950</td><td><span class="badge live">live · 3K</span></td></tr>
+                <tr><td class="pk">VH-1047</td><td>Mercedes Sprinter</td><td>PJ-119-T</td><td>€ 31.500</td><td><span class="badge live">live · 3K</span></td></tr>
+                <tr><td class="pk">VH-1046</td><td>Ford Transit Custom</td><td>RN-770-B</td><td>€ 18.200</td><td><span class="badge draft">Entwurf · KI</span></td></tr>
+                <tr><td class="pk">VH-1045</td><td>Renault Master</td><td>SD-205-L</td><td>€ 16.900</td><td><span class="badge sold">verkauft</span></td></tr>
+                <tr><td class="pk">VH-1044</td><td>Fiat Ducato Maxi</td><td>TK-431-M</td><td>€ 21.750</td><td><span class="badge live">live · 4K</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="snap-cap">Anzeigenmanager — SE16-artiges Grid, KI in der Toolbar</div>
+      </div>
+      <div class="copy">
+        <div class="eyebrow">Ask AI · im Kontext</div>
+        <h3>Jeder Button kann KI-gestützt sein.</h3>
+        <p>Wähle ein Fahrzeug und das Panel kennt es schon. Kein Kopieren in einen separaten Tab, kein erneutes Beschreiben für einen generischen Assistenten.</p>
+        <div class="snap" style="margin-top:16px">
+          <div class="mock-ai">
+            <div class="mai-head"><span class="spark">✦</span><span class="t">DES KI</span><span class="ctx">Kontext · VH-1048</span></div>
+            <div class="mai-body">
+              <div class="mai-ctxcard"><div class="l">Ausgewähltes Fahrzeug</div><div class="v">VW Crafter L3H2 · <span class="plate">GX-482-K</span></div></div>
+              <div class="mai-actions">
+                <div class="mai-act"><span class="i">✎</span>Anzeige schreiben, in 5 Sprachen übersetzen<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">◈</span>Angebotspreis aus Live-Vergleichen vorschlagen<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">⇄</span>Ähnliche Fahrzeuge im Bestand finden<span class="go">run</span></div>
+                <div class="mai-act"><span class="i">↑</span>Auf den Kanälen veröffentlichen, die es am schnellsten verkaufen<span class="go">run</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Der Stack, für den du zahlst</div>
+      <h2>Du brauchst keine weitere Software. Du brauchst, dass sie aufhört, zwölf Dinge zu sein.</h2>
+      <p>Jedes Angebot von Hand kopiert, jede Anzeige pro Kanal neu hochgeladen, jede Zahl neu in die Buchhaltung getippt. Die Last sind nicht die Abos — es ist das Umschalten.</p>
+    </div>
+    <div class="frag">
+      <div>
+        <div class="col-h">Heute · der Desktop eines Händlers</div>
+        <div class="tool-cloud">
+          <span>Excel-Bestand</span><span>WhatsApp</span><span>Outlook</span><span>Mobile.de</span><span>AutoScout24</span><span>Marktplaats</span><span>Buchhaltung</span><span>Rechnungstool</span><span>CRM</span><span>Google Drive</span><span>Foto-Editor</span><span>ChatGPT-Tab</span>
+        </div>
+      </div>
+      <div class="frag-arrow"><div class="l">wird zu</div><div class="a">→</div></div>
+      <div>
+        <div class="col-h">Auf DES BOP V2</div>
+        <div class="one-panel">
+          <div class="big"><span class="mono">EINE PLATTFORM</span>Alles, verbunden.</div>
+          <ul><li>Ein Datenmodell — kein Abtippen</li><li>Ein Klick — jeder Kanal</li><li>Ein Assistent — in jedem Screen</li><li>Ein Rechnungsfluss — MwSt geregelt</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="modules">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Die Plattform · gebaut und ausgerollt</div>
+      <h2>Acht Domänen. Eine Konsole. Nichts aufgesetzt.</h2>
+      <p>Das ist die Live-Navigation, keine Roadmap. Jede Domäne teilt Datensätze, Rechte und die KI-Schicht.</p>
+    </div>
+    <div class="mods">
+      <div class="mod"><div class="code">AN·BO</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg><h3>Übersicht</h3><div class="items">Exec Dashboard · Conversion-Funnel · Sitzungs-Intelligenz · Anzeigen-Performance</div><div class="ai-tag">KI-Insights</div></div>
+      <div class="mod"><div class="code">AS·IN</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg><h3>Bestand</h3><div class="items">Katalog · Marken · Kategorien · Lieferanten · Modellkatalog · Taxonomie</div><div class="ai-tag">KI Spec-Import</div></div>
+      <div class="mod"><div class="code">MP·PB·AU</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v4H4z"/><path d="M6 8v12h12V8"/><path d="M9 12h6"/></svg><h3>Marktplatz</h3><div class="items">Anzeigenmanager · Kanal-Publisher · Publikationswarteschlange · Auktionsmanager</div><div class="ai-tag">KI-Kanalrouting</div></div>
+      <div class="mod"><div class="code">CR·SA</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M17 11l2 2 4-4"/></svg><h3>Sales & CRM</h3><div class="items">Leads · Pipeline · Termine · Bewertungen · Vermietung · Käufer-Inbox</div><div class="ai-tag">KI-Nachfassen</div></div>
+      <div class="mod"><div class="code">SA</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20"/><path d="M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><h3>Verkaufsfluss</h3><div class="items">Angebote · Angebotsbuilder · Aufträge · Zahlungen · Verträge</div><div class="ai-tag">KI-Angebote</div></div>
+      <div class="mod"><div class="code">FI</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg><h3>Finanzen</h3><div class="items">MwSt-Schnellrechner · Beleg-Scanner · Lieferanten-AP · Zahlungstracking · Gewinn & Verlust</div><div class="ai-tag">MwSt-Assistent KI</div></div>
+      <div class="mod"><div class="code">AI·MK</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg><h3>Intelligence</h3><div class="items">Command Center · Marktbewertung · Wettbewerbsaktivität · Prompt-Manager · Aktions-Audit</div><div class="ai-tag">KI-Kern</div></div>
+      <div class="mod"><div class="code">MD·OP</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l9 4-9 4-9-4 9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg><h3>Data & Tools</h3><div class="items">Geschäftspartner · Fahrzeugtaxonomie · QR · Flyer-Builder · Wasserzeichen · Foto-Optimierung</div><div class="ai-tag">KI-Fototools</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="split">
+      <div class="copy">
+        <div class="eyebrow">Einmal erstellen · überall veröffentlichen</div>
+        <h3>Vom Kennzeichen-Scan zu fünf Sprachen, in einem Durchgang.</h3>
+        <p>Scanne das Kennzeichen und RDW füllt die Specs. KI säubert die Fotos, schreibt den Text, bepreist gegen Live-Vergleiche und pusht auf jeden Kanal — der Händler bestätigt, tippt nicht.</p>
+        <ul>
+          <li>RDW-Autofill bei Kennzeichenabfrage</li>
+          <li>Fotos optimiert und mit Wasserzeichen</li>
+          <li>Text + SEO in NL · EN · DE · FR · TR</li>
+          <li>Ein Klick über vier Kanäle</li>
+        </ul>
+      </div>
+      <div class="snapwrap">
+        <div class="snap">
+          <div class="snap-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="p">Anzeige · VH-1048 · bereit zur Veröffentlichung</span></div>
+          <div class="mock-list">
+            <div class="ml-top">
+              <div class="ml-photo"><span class="car"><svg width="46" height="30" viewBox="0 0 46 30" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 20h40M6 20l3-9h20l6 6h5v3M11 20a3 3 0 106 0M29 20a3 3 0 106 0"/></svg></span></div>
+              <div class="ml-info">
+                <div class="tt">VW Crafter L3H2 2.0 TDI</div>
+                <div class="meta">2021 · 84.500 km · Diesel · GX-482-K</div>
+                <div class="price">€ 24.950 <small>✦ KI-bepreist · 11T bis Verkauf</small></div>
+              </div>
+            </div>
+            <div class="ml-langs">
+              <span class="ml-lang on">NL</span><span class="ml-lang on">EN</span><span class="ml-lang on">DE</span><span class="ml-lang on">FR</span><span class="ml-lang on">TR</span><span class="ml-lang">✦ generiert</span>
+            </div>
+            <div class="ml-chan">
+              <span>Marktplaats</span><span>Mobile.de</span><span>AutoScout24</span><span>Website</span>
+            </div>
+          </div>
+        </div>
+        <div class="snap-cap">Anzeigendetail — KI-geschrieben, KI-bepreist, ein Klick auf vier Kanäle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Vorher / nachher</div><h2>Was sich an einem Dienstagmorgen wirklich ändert.</h2></div>
+    <div class="cmp">
+      <div class="h old">Wie es heute läuft</div><div class="h new">Auf DES BOP V2</div>
+      <div class="r old">Zwölf Abos, zwölf Logins</div><div class="r new">Eine Plattform, ein Login</div>
+      <div class="r old">Anzeige tippen, dann pro Seite neu tippen</div><div class="r new">KI schreibt sie einmal, sechs Sprachen</div>
+      <div class="r old">Fotos von Hand auf jeden Marktplatz laden</div><div class="r new">Ein Klick, jeder Kanal</div>
+      <div class="r old">Bestand in einer Tabelle, der niemand traut</div><div class="r new">Live-Bestand, eine Quelle der Wahrheit</div>
+      <div class="r old">Leads aus dem Gedächtnis verfolgen</div><div class="r new">KI entwirft das Nachfassen pünktlich</div>
+      <div class="r old">Differenzbesteuerung von Hand rechnen</div><div class="r new">MwSt-Assistent erstellt die Differenz-Rechnung</div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="score">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Ehrliche Bewertung</div><h2>Wo die Plattform heute steht.</h2><p>Die Abdeckung ist Enterprise-Niveau. Die Lücke war nie das Produkt — es war die Geschichte beim Einstieg.</p></div>
+    <div class="score">
+      <div class="score-list" id="scorelist">
+        <div class="score-row"><span class="k">Funktionsabdeckung</span><span class="bar"><i data-w="97"></i></span><span class="v">9.7</span></div>
+        <div class="score-row"><span class="k">Händler-Passung</span><span class="bar"><i data-w="98"></i></span><span class="v">9.8</span></div>
+        <div class="score-row"><span class="k">ERP-Fähigkeiten</span><span class="bar"><i data-w="95"></i></span><span class="v">9.5</span></div>
+        <div class="score-row"><span class="k">Marktplatz-Integration</span><span class="bar"><i data-w="100"></i></span><span class="v">10</span></div>
+        <div class="score-row"><span class="k">KI-Reife</span><span class="bar"><i data-w="85"></i></span><span class="v">8.5</span></div>
+        <div class="score-row"><span class="k">UX-Einfachheit</span><span class="bar"><i data-w="85"></i></span><span class="v">8.5</span></div>
+        <div class="score-row"><span class="k">Marketing-Klarheit</span><span class="bar"><i data-w="90"></i></span><span class="v">9.0</span></div>
+      </div>
+      <div class="score-note">
+        <h4>Das Schwächste war die Erklärung. Diese Seite löst das.</h4>
+        <p>Beginne mit dem Geld und der Live-Konsole, in der Sprache des Handels, und der Wert wird gezeigt, bevor er behauptet wird. Ein Händler denkt nicht mehr "noch ein DMS", sondern "das ersetzt die Hälfte meines Stacks".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="wrap">
+    <h2>Führe dein ganzes Autohaus.<br>Angetrieben von KI.</h2>
+    <p>Vom Kennzeichen-Scan bis zum Lieferschein — sieh zu, wie es deinen echten Bestand in einer Sitzung bewegt.</p>
+    <div class="hero-cta">
+      <a href="/de/contact" class="btn btn-primary">Demo buchen →</a>
+      <a href="/de/platform/calculator" class="btn btn-ghost">Sparrechner öffnen</a>
+    </div>
+    <div class="fine">Kein Migrationsmarathon · dein Datenmodell, deine Kanäle, deine Sprache</div>
+  </div>
+</section>
+`
+
+const MARKUPS: Record<string, string> = { en: MARKUP, nl: MARKUP_NL, de: MARKUP_DE }
+const RUN_LABELS: Record<string, string[]> = {
+  en: ["plate scanned","RDW specs pulled","photos enhanced","listing written · 5 langs","price suggested","published · 3 channels","lead handled","sold · invoiced"],
+  nl: ["kenteken gescand","RDW-specs opgehaald","foto's verbeterd","advertentie geschreven · 5 talen","prijs voorgesteld","gepubliceerd · 3 kanalen","lead afgehandeld","verkocht · gefactureerd"],
+  de: ["Kennzeichen gescannt","RDW-Specs abgerufen","Fotos optimiert","Anzeige verfasst · 5 Sprachen","Preis vorgeschlagen","veröffentlicht · 3 Kanäle","Lead bearbeitet","verkauft · fakturiert"],
+}
+const RUNNING_TXT: Record<string, string> = { en: "running · ", nl: "bezig · ", de: "läuft · " }
+const CYCLE_TXT: Record<string, (n: number) => string> = {
+  en: (n) => "cycle complete · " + n + " steps automated",
+  nl: (n) => "cyclus voltooid · " + n + " stappen geautomatiseerd",
+  de: (n) => "Zyklus abgeschlossen · " + n + " Schritte automatisiert",
 }
 
 export default function PlatformClient({ locale = "en" }: { locale?: string }) {
-  const t = useTranslations("bop_platform") as unknown as Tr
-
-  const runLabels = [
-    t("run1"), t("run2"), t("run3"), t("run4"),
-    t("run5"), t("run6"), t("run7"), t("run8"),
-  ]
-  const runningTxt = t("run_running")
-  const cycleTxt = (n: number) => t("run_cycle", { n })
-
+  const lang = MARKUPS[locale] ? locale : "en"
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = []
     const observers: IntersectionObserver[] = []
@@ -616,6 +1244,7 @@ export default function PlatformClient({ locale = "en" }: { locale?: string }) {
       const steps = Array.from(document.querySelectorAll<HTMLElement>(".bopv2 .step"))
       const prog = Array.from(document.querySelectorAll<HTMLElement>(".bopv2 #prog i"))
       const foot = document.getElementById("footlabel")
+      const labels = RUN_LABELS[lang]
       let i = -1
       let started = false
       const reset = () => { steps.forEach(s => s.classList.remove("active","done")); prog.forEach(p => p.classList.remove("on")); i = -1 }
@@ -623,13 +1252,13 @@ export default function PlatformClient({ locale = "en" }: { locale?: string }) {
         if (i >= 0) { steps[i].classList.remove("active"); steps[i].classList.add("done") }
         i++
         if (i >= steps.length) {
-          if (foot) foot.textContent = cycleTxt(steps.length)
+          if (foot) foot.textContent = CYCLE_TXT[lang](steps.length)
           timers.push(setTimeout(() => { reset(); timers.push(setTimeout(tick, 700)) }, 2600))
           return
         }
         steps[i].classList.add("active")
         if (prog[i]) prog[i].classList.add("on")
-        if (foot) foot.textContent = runningTxt + runLabels[i]
+        if (foot) foot.textContent = RUNNING_TXT[lang] + labels[i]
         timers.push(setTimeout(tick, i === 0 ? 900 : 1150))
       }
       const io = new IntersectionObserver((e) => {
@@ -651,13 +1280,17 @@ export default function PlatformClient({ locale = "en" }: { locale?: string }) {
     }
 
     return () => { timers.forEach(clearTimeout); observers.forEach(o => o.disconnect()) }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locale])
+  }, [lang])
+
+  // en template is the fallback for tr/fr — rewrite its /en/ links to the active locale
+  const html = lang === "en" && locale !== "en"
+    ? MARKUPS.en.split("/en/").join("/" + locale + "/")
+    : MARKUPS[lang]
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div className="bopv2" dangerouslySetInnerHTML={{ __html: buildMarkup(t, locale) }} />
+      <div className="bopv2" dangerouslySetInnerHTML={{ __html: html }} />
     </>
   )
 }

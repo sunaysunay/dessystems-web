@@ -1,0 +1,463 @@
+'use client';
+import { useState, useEffect } from 'react';
+import { ScreenHeader } from '@/components/ScreenBadge';
+import { useScope } from '@/lib/scope-context';
+import { BopSelect } from '@/components/BopSelect';
+
+const CHANNELS = ['des','mobile_de','marktplaats','autoscout24','facebook','kleinanzeigen','leboncoin','other'] as const;
+type Channel = typeof CHANNELS[number];
+
+const STATUSES = ['draft','published','paused','sold','expired'] as const;
+
+const CHANNEL_LABEL: Record<string, string> = {
+  des: 'DES', mobile_de: 'Mobile.de', marktplaats: 'Marktplaats',
+  autoscout24: 'Autoscout24', facebook: 'Facebook', kleinanzeigen: 'Kleinanzeigen',
+  leboncoin: 'Leboncoin', other: 'Other',
+};
+
+const CHANNEL_COLOR: Record<string, string> = {
+  des:          'bg-blue-100 text-blue-700',
+  mobile_de:    'bg-orange-100 text-orange-700',
+  marktplaats:  'bg-red-100 text-red-700',
+  autoscout24:  'bg-yellow-100 text-yellow-700',
+  facebook:     'bg-indigo-100 text-indigo-700',
+  kleinanzeigen:'bg-green-100 text-green-700',
+  leboncoin:    'bg-rose-100 text-rose-700',
+  other:        'bg-slate-100 text-slate-500',
+};
+
+const STATUS_COLOR: Record<string, string> = {
+  draft:     'bg-slate-100 text-slate-500',
+  published: 'bg-emerald-100 text-emerald-700',
+  paused:    'bg-amber-100 text-amber-700',
+  sold:      'bg-blue-100 text-blue-700',
+  expired:   'bg-red-100 text-red-500',
+};
+
+const TYPE_ICON: Record<string, string> = {
+  car:'🚗', van:'🚐', truck:'🚛', camper:'🚌',
+  caravan:'🏕️', boat:'⛵', machinery:'🏗️', other:'📦',
+};
+
+const EMPTY_FORM = {
+  title: '', description: '', price: '',
+  channels: [] as string[], asset_id: '',
+};
+
+export default function MP001Page() {
+  const { unit } = useScope();
+  const [listings, setListings] = useState<any[]>([]);
+  const [assets, setAssets] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [channelFilter, setChannelFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [editing, setEditing] = useState<any>(null);
+  const [form, setForm] = useState<any>(EMPTY_FORM);
+  const [saving, setSaving] = useState(false);
+  const [toast, setToast] = useState('');
+  const [view, setView] = useState<'list'|'channel'>('list');
+
+  function showToast(m: string) { setToast(m); setTimeout(() => setToast(''), 2500); }
+  function f(k: string, v: any) { setForm((p: any) => ({ ...p, [k]: v })); }
+
+  async function load() {
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (channelFilter) params.set('channel', channelFilter);
+    if (statusFilter) params.set('status', statusFilter);
+    const j = await fetch(`/api/bop/mkp/listings?${params}`).then(r => r.json());
+    setListings(j.listings ?? []);
+    setLoading(false);
+  }
+
+  useEffect(() => { load(); }, [channelFilter, statusFilter]);
+
+  useEffect(() => {
+    fetch('/api/bop/ast/assets?limit=200').then(r => r.json()).then(j => {
+      setAssets((j.assets ?? []).filter((a: any) => !['sold','delivered'].includes(a.status)));
+    });
+  }, []);
+
+  function toggleChannel(ch: string) {
+    setForm((p: any) => ({
+      ...p,
+      channels: p.channels.includes(ch) ? p.channels.filter((c: string) => c !== ch) : [...p.channels, ch],
+    }));
+  }
+
+  function openNew(assetId?: string) {
+    setEditing(null);
+    const asset = assets.find(a => a.id === assetId);
+    setForm({
+      ...EMPTY_FORM,
+      asset_id: assetId ?? '',
+      title: asset ? `${asset.make} ${asset.model} ${asset.year}` : '',
+      price: asset?.asking_price ?? '',
+      tenant_id: unit.id,
+    });
+    setDrawerOpen(true);
+  }
+
+  function openEdit(l: any) {
+    setEditing(l);
+    setForm({
+      title: l.title ?? '',
+      description: l.description ?? '',
+      price: l.price ?? '',
+      channels: [l.channel],
+      asset_id: l.asset_id ?? '',
+      status: l.status,
+    });
+    setDrawerOpen(true);
+  }
+
+  async function save() {
+    if (!form.asset_id) return;
+    setSaving(true);
+    if (editing) {
+      await fetch(`/api/bop/mkp/listings/${editing.id}`, {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: form.title, description: form.description, price: parseFloat(form.price), status: form.status }),
+      });
+      showToast('Listing updated');
+    } else {
+      if (!form.channels.length) { setSaving(false); return; }
+      await fetch('/api/bop/mkp/listings', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          asset_id: form.asset_id,
+          title: form.title,
+          description: form.description,
+          price: form.price ? parseFloat(form.price) : null,
+          tenant_id: unit.id,
+          channels: form.channels,
+        }),
+      });
+      showToast(`${form.channels.length} listing(s) created`);
+    }
+    setSaving(false);
+    setDrawerOpen(false);
+    load();
+  }
+
+  async function setStatus(id: string, status: string) {
+    await fetch(`/api/bop/mkp/listings/${id}`, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, ...(status === 'published' ? { published_at: new Date().toISOString() } : {}) }),
+    });
+    setListings(prev => prev.map(l => l.id === id ? { ...l, status } : l));
+    showToast(`Listing ${status}`);
+  }
+
+  // Stats
+  const published = listings.filter(l => l.status === 'published').length;
+  const draft     = listings.filter(l => l.status === 'draft').length;
+  const byChannel = CHANNELS.reduce((acc, ch) => {
+    acc[ch] = listings.filter(l => l.channel === ch);
+    return acc;
+  }, {} as Record<Channel, any[]>);
+
+  return (
+    <div>
+      <ScreenHeader title="Listing Manager" description="Publish vehicles to multiple marketplace channels — one asset, many listings" />
+
+      {toast && (
+        <div className="fixed top-5 right-5 z-50 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white shadow-xl">{toast}</div>
+      )}
+
+      {/* KPI strip */}
+      <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="rounded-xl border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Total Listings</p>
+          <p className="text-2xl font-bold text-slate-800">{listings.length}</p>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Published</p>
+          <p className="text-2xl font-bold text-emerald-600">{published}</p>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Draft</p>
+          <p className="text-2xl font-bold text-slate-400">{draft}</p>
+        </div>
+        <div className="rounded-xl border border-slate-200 bg-white p-3">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Channels Active</p>
+          <p className="text-2xl font-bold text-blue-600">
+            {CHANNELS.filter(ch => byChannel[ch]?.some(l => l.status === 'published')).length}
+          </p>
+        </div>
+      </div>
+
+      {/* Channel pills */}
+      <div className="mb-4 flex flex-wrap gap-2">
+        {CHANNELS.map(ch => {
+          const count = byChannel[ch]?.length ?? 0;
+          if (count === 0) return null;
+          return (
+            <button key={ch} onClick={() => setChannelFilter(channelFilter === ch ? '' : ch)}
+              className={`flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold transition-all ${
+                channelFilter === ch ? CHANNEL_COLOR[ch] + ' border-current shadow-sm' : 'border-slate-200 text-slate-500 hover:border-slate-300'
+              }`}>
+              {CHANNEL_LABEL[ch]}
+              <span className="rounded-full bg-white/60 px-1 text-[10px]">{count}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Toolbar */}
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <BopSelect value={statusFilter} onChange={setStatusFilter}
+          options={[{value:'',label:'All status'}, ...STATUSES.map(s => ({value:s, label:s}))]}
+          placeholder="All status" className="w-36" />
+        <div className="flex rounded-lg border border-slate-200 overflow-hidden">
+          <button onClick={() => setView('list')} className={`px-3 py-1.5 text-sm ${view==='list' ? 'bg-slate-800 text-white' : 'bg-white text-slate-500'}`}>≡ List</button>
+          <button onClick={() => setView('channel')} className={`px-3 py-1.5 text-sm ${view==='channel' ? 'bg-slate-800 text-white' : 'bg-white text-slate-500'}`}>⊞ By Channel</button>
+        </div>
+        <span className="ml-auto text-xs text-slate-400">{listings.length} listings</span>
+        <button onClick={() => openNew()}
+          className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">
+          + New Listing
+        </button>
+      </div>
+
+      {loading ? (
+        <div className="flex h-48 items-center justify-center text-sm text-slate-400">Loading…</div>
+      ) : (
+        <>
+          {/* LIST VIEW */}
+          {view === 'list' && (
+            <div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-slate-50 text-xs font-semibold uppercase text-slate-400">
+                  <tr>
+                    <th className="px-4 py-3 text-left">Vehicle</th>
+                    <th className="px-4 py-3 text-left">Channel</th>
+                    <th className="px-4 py-3 text-left">Title</th>
+                    <th className="px-4 py-3 text-right">Price</th>
+                    <th className="px-4 py-3 text-left">Status</th>
+                    <th className="px-4 py-3 text-left">Published</th>
+                    <th className="px-4 py-3 text-left"></th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50">
+                  {listings.length === 0 ? (
+                    <tr><td colSpan={7} className="px-4 py-12 text-center text-slate-400">
+                      No listings yet — click <strong>+ New Listing</strong> to publish a vehicle
+                    </td></tr>
+                  ) : listings.map(l => (
+                    <tr key={l.id} className="hover:bg-slate-50 cursor-pointer" onClick={() => openEdit(l)}>
+                      <td className="px-4 py-3">
+                        {l.ast_assets ? (
+                          <div>
+                            <span className="mr-1">{TYPE_ICON[l.ast_assets.vehicle_type]}</span>
+                            <span className="font-medium text-slate-800">{l.ast_assets.make} {l.ast_assets.model}</span>
+                            <span className="ml-1 text-xs text-slate-400">{l.ast_assets.year}</span>
+                          </div>
+                        ) : <span className="text-slate-300">—</span>}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${CHANNEL_COLOR[l.channel]}`}>
+                          {CHANNEL_LABEL[l.channel]}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-xs text-slate-600 max-w-xs truncate">{l.title || '—'}</td>
+                      <td className="px-4 py-3 text-right font-semibold text-slate-800">
+                        {l.price ? `€${Number(l.price).toLocaleString('nl-NL')}` : '—'}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${STATUS_COLOR[l.status]}`}>
+                          {l.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-xs text-slate-400">
+                        {l.published_at ? new Date(l.published_at).toLocaleDateString('nl-NL') : '—'}
+                      </td>
+                      <td className="px-4 py-3 text-right" onClick={e => e.stopPropagation()}>
+                        <div className="flex justify-end gap-1">
+                          {l.status === 'draft' && (
+                            <button onClick={() => setStatus(l.id, 'published')}
+                              className="rounded px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-600 hover:bg-emerald-100">
+                              Publish
+                            </button>
+                          )}
+                          {l.status === 'published' && (
+                            <button onClick={() => setStatus(l.id, 'paused')}
+                              className="rounded px-2 py-0.5 text-[10px] font-bold bg-amber-50 text-amber-600 hover:bg-amber-100">
+                              Pause
+                            </button>
+                          )}
+                          {l.status === 'paused' && (
+                            <button onClick={() => setStatus(l.id, 'published')}
+                              className="rounded px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-600 hover:bg-emerald-100">
+                              Resume
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* CHANNEL VIEW */}
+          {view === 'channel' && (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {CHANNELS.map(ch => {
+                const items = byChannel[ch] ?? [];
+                if (items.length === 0) return null;
+                const pubCount = items.filter(l => l.status === 'published').length;
+                return (
+                  <div key={ch} className="rounded-xl border border-slate-200 bg-white overflow-hidden">
+                    <div className={`flex items-center justify-between px-4 py-3 ${CHANNEL_COLOR[ch]}`}>
+                      <span className="text-sm font-bold">{CHANNEL_LABEL[ch]}</span>
+                      <span className="text-xs font-semibold">{pubCount}/{items.length} live</span>
+                    </div>
+                    <div className="divide-y divide-slate-50">
+                      {items.map(l => (
+                        <div key={l.id} onClick={() => openEdit(l)}
+                          className="flex cursor-pointer items-center justify-between px-4 py-2.5 hover:bg-slate-50">
+                          <div>
+                            <p className="text-xs font-medium text-slate-700">
+                              {l.ast_assets ? `${l.ast_assets.make} ${l.ast_assets.model} ${l.ast_assets.year}` : l.title}
+                            </p>
+                            <p className="text-[10px] text-slate-400">{l.price ? `€${Number(l.price).toLocaleString('nl-NL')}` : 'No price'}</p>
+                          </div>
+                          <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold ${STATUS_COLOR[l.status]}`}>{l.status}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+              {CHANNELS.every(ch => (byChannel[ch]?.length ?? 0) === 0) && (
+                <div className="col-span-3 py-12 text-center text-slate-400">No listings yet</div>
+              )}
+            </div>
+          )}
+        </>
+      )}
+
+      {/* DRAWER */}
+      {drawerOpen && (
+        <div className="fixed inset-0 z-40 flex justify-end">
+          <div className="absolute inset-0 bg-black/30" onClick={() => setDrawerOpen(false)} />
+          <div className="relative z-50 flex h-full w-full max-w-xl flex-col bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+              <div>
+                <h2 className="text-lg font-bold text-slate-900">{editing ? 'Edit Listing' : 'New Listing'}</h2>
+                <p className="text-xs text-slate-400">MP001/MP002 — Listing Manager</p>
+              </div>
+              <button onClick={() => setDrawerOpen(false)} className="rounded-lg p-2 hover:bg-slate-100">
+                <svg className="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
+
+              {/* Vehicle selection */}
+              <div>
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Vehicle</p>
+                {editing ? (
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600">
+                    {editing.ast_assets ? `${editing.ast_assets.make} ${editing.ast_assets.model} ${editing.ast_assets.year}` : 'Unknown vehicle'}
+                  </div>
+                ) : (
+                  <select value={form.asset_id} onChange={e => {
+                    const asset = assets.find(a => a.id === e.target.value);
+                    f('asset_id', e.target.value);
+                    if (asset) {
+                      f('title', `${asset.make} ${asset.model} ${asset.year}`);
+                      f('price', asset.asking_price ?? '');
+                    }
+                  }}
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none">
+                    <option value="">— Select a vehicle —</option>
+                    {assets.map(a => (
+                      <option key={a.id} value={a.id}>
+                        {TYPE_ICON[a.vehicle_type]} {a.make} {a.model} {a.year} — €{Number(a.asking_price ?? 0).toLocaleString('nl-NL')}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+
+              {/* Channels — only for new */}
+              {!editing && (
+                <div>
+                  <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                    Publish to Channels <span className="text-slate-300 font-normal">(select one or more)</span>
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {CHANNELS.map(ch => {
+                      const active = form.channels.includes(ch);
+                      return (
+                        <button key={ch} onClick={() => toggleChannel(ch)}
+                          className={`rounded-xl border px-3 py-2 text-left text-xs font-semibold transition-all ${
+                            active ? CHANNEL_COLOR[ch] + ' border-current shadow-sm' : 'border-slate-200 text-slate-400 hover:border-slate-300'
+                          }`}>
+                          {CHANNEL_LABEL[ch]}
+                          {active && <span className="ml-1">✓</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Status — only for editing */}
+              {editing && (
+                <div>
+                  <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Status</p>
+                  <div className="flex gap-2">
+                    {STATUSES.map(s => (
+                      <button key={s} onClick={() => f('status', s)}
+                        className={`rounded-full border px-3 py-1 text-[10px] font-bold transition-all ${
+                          form.status === s ? STATUS_COLOR[s] + ' border-current' : 'border-slate-200 text-slate-400'
+                        }`}>{s}</button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Listing content */}
+              <div>
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Listing Content</p>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">Title</label>
+                    <input value={form.title} onChange={e => f('title', e.target.value)}
+                      placeholder="Ad title shown on marketplace"
+                      className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">Price (€)</label>
+                    <input type="number" value={form.price} onChange={e => f('price', e.target.value)}
+                      className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">Description</label>
+                    <textarea value={form.description} onChange={e => f('description', e.target.value)}
+                      rows={6} placeholder="Vehicle description for the ad…"
+                      className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-slate-100 px-6 py-4 flex justify-end gap-3">
+              <button onClick={() => setDrawerOpen(false)}
+                className="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50">Cancel</button>
+              <button onClick={save} disabled={saving || !form.asset_id || (!editing && form.channels.length === 0)}
+                className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50">
+                {saving ? 'Saving…' : editing ? 'Save Changes' : `Create ${form.channels.length || ''} Listing(s)`}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

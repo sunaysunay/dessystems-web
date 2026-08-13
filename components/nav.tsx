@@ -9,15 +9,24 @@ import { useRouter, usePathname } from "@/src/i18n/routing"
 import { useRef } from "react"
 import { Globe } from "lucide-react"
 
-import { LOCALE_REGISTRY } from "@/src/i18n/routing"
-
-const LOCALES = LOCALE_REGISTRY
+const LOCALES = [
+  { code: "en", name: "English",    flag: null },
+  { code: "nl", name: "Nederlands", flag: "nl" },
+  { code: "de", name: "Deutsch",    flag: "de" },
+  { code: "fr", name: "Français",   flag: "fr" },
+  { code: "tr", name: "Türkçe",     flag: "tr" },
+  { code: "ro", name: "Română",     flag: "ro" },
+  { code: "bg", name: "Български",  flag: "bg" },
+  { code: "el", name: "Ελληνικά",   flag: "gr" },
+  { code: "es", name: "Español",    flag: "es" },
+  { code: "it", name: "Italiano",   flag: "it" },
+]
 
 function FlagImg({ cc }: { cc: string }) {
   return (
     <img
-      src={"/flags/" + cc + ".png"}
-      srcSet={"/flags/" + cc + "@2x.png 2x"}
+      src={"https://flagcdn.com/w20/" + cc + ".png"}
+      srcSet={"https://flagcdn.com/w40/" + cc + ".png 2x"}
       width={20}
       height={14}
       alt={cc}
@@ -28,9 +37,7 @@ function FlagImg({ cc }: { cc: string }) {
 }
 
 function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
-  const t = useTranslations("Nav")
   const locale   = useLocale()
-  const router   = useRouter()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -47,7 +54,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   function switchLocale(code: string) {
     document.cookie = "NEXT_LOCALE=" + code + "; path=/; max-age=" + (60 * 60 * 24 * 365)
     setOpen(false)
-    router.replace(pathname, { locale: code })
+    window.location.href = "/" + code + pathname
   }
 
   function resetToGeo() {
@@ -62,7 +69,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
     return (
       <div className="py-4 border-t" style={{ borderColor: "rgba(255,255,255,0.10)", marginTop: "8px" }}>
         <p className="mb-3 text-[10px] font-semibold tracking-[0.14em] uppercase" style={{ color: "rgba(255,255,255,0.52)" }}>
-          {t("language")}
+          Language
         </p>
         <div className="flex flex-wrap gap-2">
           {LOCALES.map(({ code, name, flag }) => {
@@ -92,7 +99,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   }
 
   return (
-    <div ref={ref} className="relative lg:block max-lg:hidden">
+    <div ref={ref} className="relative hidden lg:block">
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
@@ -153,7 +160,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
                 <span className="w-5 flex-none flex items-center justify-center">
                   <Globe size={15} strokeWidth={1.6} style={{ color: "rgba(255,255,255,0.4)" }} />
                 </span>
-                <span className="text-[12px] italic">{t("autoDetect")}</span>
+                <span className="text-[12px] italic">Auto-detect</span>
               </button>
             </div>
           </div>
@@ -207,7 +214,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop */}
-        <nav className="lg:flex max-lg:hidden items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-7">
           {links.map(l => (
             <Link key={l.href} href={l.href}
               className="text-[13px] transition-colors hover:opacity-100"
@@ -217,7 +224,7 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="lg:flex max-lg:hidden items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <Link href="/deslab"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
             style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>

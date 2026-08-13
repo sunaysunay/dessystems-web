@@ -21,7 +21,7 @@ export default function HeroPanels() {
   return (
     <>
       {/* ── Desktop (lg+): expanding panel row ───────────────────────────────── */}
-      <section className="lg:flex max-lg:hidden overflow-hidden" style={{ height: "62vh", minHeight: "480px" }}>
+      <section className="hidden lg:flex overflow-hidden" style={{ height: "62vh", minHeight: "480px" }}>
         {panels.map((p, i) => (
           <motion.div
             key={p.title}

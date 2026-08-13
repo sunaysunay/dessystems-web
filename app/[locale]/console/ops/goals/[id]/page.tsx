@@ -400,7 +400,7 @@ function OverviewTab({ goal, snapshots }: { goal: Goal; snapshots: GoalSnapshot[
                     {s.source}
                   </span>
                   <span className="text-[11px] text-[var(--text3)]">
-                    {new Date(s.measured_at).toLocaleDateString()}
+                    {s.measured_at ? new Date(s.measured_at).toLocaleDateString() : ''}
                   </span>
                 </div>
               </div>
@@ -585,7 +585,7 @@ function KeyResultsTab({
                       className="rounded bg-[var(--bg3)] px-2 py-1 text-[11px] text-[var(--text2)]"
                       title={s.note ?? undefined}
                     >
-                      {s.current_value} — {new Date(s.measured_at).toLocaleDateString()}
+                      {s.current_value} — {s.measured_at ? new Date(s.measured_at).toLocaleDateString() : ''}
                     </span>
                   ))}
                 </div>

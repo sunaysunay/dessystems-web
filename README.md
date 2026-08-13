@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DES Systems Console — `dessystems.io` (DESPANEL-V2)
 
-## Getting Started
+The mother console over all DES platforms. Standalone app — own `.next`, own pm2 process,
+fully isolated from the shared-repo per-site apps.
 
-First, run the development server:
+## Run it locally (safe — never touches the VPS)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd despanel-v2/dessystems-app
+npm install
+npm run dev        # http://localhost:4400  → redirects to /console/listings
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Runs on **mock data** out of the box (no DB needed). The header platform + tenant
+switchers, env badge, Quick Create, Errors tab, channel-status dots, and RBAC-gated
+buttons are all live.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Status (see ../MANIFEST.md)
+- ✅ Phase 1b — standalone app scaffold (this)
+- ⏳ Phase 2 — fill `.env.local` (Supabase) → swap mock for real, scoped queries + SSO
+- ⏳ Phase 3–5 — channel data, dashboard, Systems/Admin/Audit
+- ⏳ Phase 6 — deploy to dessystems.io (own dir, own build/restart)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## To wire real data
+1. `cp .env.local.example .env.local` and fill Supabase URL + anon key.
+2. Tell Claude your table names + whether `platform_id`/`tenant_id` columns exist.
+3. Claude replaces `data/mock.ts` reads with scoped Supabase queries (`lib/supabase.ts`).
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Nothing here builds or deploys to the VPS. The old panel stays fully live as backup.

@@ -3,7 +3,7 @@
 **Version:** 2.2 · 2026-08-10  
 **Scope:** Operations Cockpit (OP001 Tasks) + Strategy Cockpit (OP002 Goals & OKRs)  
 **Tables:** 14 new (6 with tenant_id, 9 without) · ~15 PBAC permissions · 3 cron workers  
-**Status:** OPS-P1 ✅ · STR-P1 ✅ · OPS-P2 ✅ · STR-P2 ✅ · OPS-P3 Deferred · STR-P3 Deferred
+**Status:** OPS-P1 ✅ · STR-P1 ✅ · OPS-P2 ✅ · STR-P2 ✅ · OPS-P3 ✅ · STR-P3 ✅
 
 ---
 
@@ -157,31 +157,49 @@ Dependencies, audit trail, comments, attachments, checklist, SLA engine, automat
 
 | P | Task | Type | Deliverables | Status |
 |---|------|------|-------------|--------|
-| P1 | **T4.1** Create `op_goal_metrics_catalog` — code PK, name_i18n JSONB, metric_type, unit_label, entity_scoped, query_key. No tenant_id (system-wide reference). 9 initial codes. | schema | DB_TABLE, seed rows | ✅ |
-| P1 | **T4.2** `computeMetric()` service — 9 QUERIES dispatch map. Entity-scoped + period-filtered. | api | SERVICE | ✅ |
-| P1 | **T4.3** Nightly computation + snapshots cron — PM2 daily at 02:00. WebSocket transport for Node 20. | infra | CRON, TELEGRAM | ✅ |
-| P1 | **T4.4** `op_tasks.goal_kr_id` FK bridge — ADD COLUMN goal_kr_id UUID FK. | schema | MIGRATION, SCREEN x2 | ✅ |
-| P1 | **T4.5** Executive dashboard (OP012) — Vision banner, ProgressRing, EntityLane, AtRiskPanel, KpiStrip, TrendCharts. | screen | SCREEN, I18N_KEY | ✅ |
-| P2 | **T4.6** Monday check-in Telegram prompt — PM2 cron Mon 08:00. | infra | TELEGRAM, CRON | ✅ |
-| P2 | **T4.7** KR sparklines + metric chips — CockpitKit Spark, PaceArrow, ⟳ Compute button. | screen | SCREEN | ✅ |
+| P1 | **T4.1** Create `op_goal_metrics_catalog` — code PK, name_i18n JSONB, metric_type, unit_label, entity_scoped, query_key. No tenant_id (system-wide reference). 9 initial codes: vans_sold, revenue_invoiced, gross_margin_sum, avg_days_to_sale, inquiries_count, inquiry_to_sale_conversion, nps_avg, review_score_avg, stock_count. | schema | DB_TABLE, seed rows | ✅ |
+| P1 | **T4.2** `computeMetric()` service — Switch on query_key. Reads: ast_assets (sold count, days-to-sale, stock), fin_invoices (revenue, margin), crm_leads (lead volume, conversion), sal_surveys (NPS, review score). All entity-scoped + period-filtered. 9 QUERIES dispatch map. | api | SERVICE | ✅ |
+| P1 | **T4.3** Nightly computation + snapshots cron — PM2 daily at 02:00. For each active auto-KR: computeMetric → update current_value → INSERT snapshot. Recompute roll-up. Health recalc. Telegram on transitions. WebSocket transport for Node 20. | infra | CRON, TELEGRAM | ✅ |
+| P1 | **T4.4** `op_tasks.goal_kr_id` FK bridge — ADD COLUMN goal_kr_id UUID FK → op_goal_key_results ON DELETE SET NULL. Task detail shows KR chip. KR detail lists linked tasks. | schema | MIGRATION, SCREEN x2 | ✅ |
+| P1 | **T4.5** Executive dashboard (OP012) — Vision banner (editable PATCH). ProgressRing SVG. EntityLane with health dots. AtRiskPanel. KpiStrip (5 cards: Active Goals, Avg Progress, On Track, At Risk, Auto KRs). TrendCharts from snapshots via CockpitKit Spark. | screen | SCREEN, I18N_KEY | ✅ |
+| P2 | **T4.6** Monday check-in Telegram prompt — PM2 cron Mon 08:00. Active objectives + current % + health icons. Deep link to dashboard. | infra | TELEGRAM, CRON | ✅ |
+| P2 | **T4.7** KR sparklines + metric chips — Last 30 snapshots as sparkline via CockpitKit Spark. Auto·{code} / Manual chip. PaceArrow component. ⟳ Compute button for on-demand metric refresh. | screen | SCREEN | ✅ |
+
+**Key files delivered:**
+- `lib/ops/compute-metric.ts` — computeMetric() service with 9 query functions
+- `scripts/ops-goals-cron.mjs` — PM2 nightly cron + Monday check-in (WebSocket transport)
+- `app/console/ops/goals/dashboard/page.tsx` — OP012 Executive Dashboard
+- `app/console/ops/goals/[id]/detail-sections.tsx` — Extracted GoalHeader/ChildrenList/LinkedTasks
+- `app/api/bop/ops/goals/route.ts` — Extended with compute_kr, rollup, exec-summary, metrics-catalog views
+- `sql_bop_v2_89_metrics_catalog.sql` — op_goal_metrics_catalog table + 9 seed rows
+- `sql_bop_v2_90_goal_kr_bridge.sql` — op_tasks.goal_kr_id FK + metric_code on KRs
 
 ---
 
-### Phase OPS-P3 + STR-P3 — Advanced (Deferred)
+### Phase OPS-P3 + STR-P3 — Advanced ✅ COMPLETED 2026-08-13
 
-**Go-signal:** 8-10 vehicles/month or first staff hire.
+| Task | Phase | Status |
+|------|-------|--------|
+| **T5.1** Dependencies UI + Timeline/Gantt view | OPS-P3 | ✅ Add/remove deps on detail page; Gantt timeline with SVG arrows |
+| **T5.2** Recurrence engine (RFC 5545 RRULE) | OPS-P3 | ✅ Daily cron + RRULE parser + quick-add UI |
+| **T5.3** Time tracking: start/stop + estimate vs actual | OPS-P3 | ✅ Timer RPCs + detail page UI + progress bar |
+| **T5.4** Telegram inline actions (Done/Snooze buttons) | OPS-P3 | ✅ Inline keyboard + webhook handler |
+| **T5.5** Analytics: completed/week, SLA %, workload | OPS-P3 | ✅ Full dashboard: KPIs, charts, gauges, workload |
+| **T6.1** Period close-out + historical ledger | STR-P3 | ✅ Ledger page + period ledger table + auto-snapshot on close-out |
+| **T6.2** Budget linkage to boekhouding | STR-P3 | ✅ AP/AR from fin_invoices + monthly breakdown chart |
+| **T6.3** Forecast projection lines | STR-P3 | ✅ Forecast API + projection panel on goal overview |
+| **T6.4** Entity scorecards | STR-P3 | ✅ Radar chart + health donut + entity-scorecard API |
 
-| Task | Phase | Est |
-|------|-------|-----|
-| **T5.1** Dependencies UI + Timeline/Gantt view | OPS-P3 | 8h |
-| **T5.2** Recurrence engine (RFC 5545 RRULE) | OPS-P3 | 4h |
-| **T5.3** Time tracking: start/stop + estimate vs actual | OPS-P3 | 4h |
-| **T5.4** Telegram inline actions (Done/Snooze buttons) | OPS-P3 | 3h |
-| **T5.5** Analytics: completed/week, SLA %, workload | OPS-P3 | 8h |
-| **T6.1** Period close-out + historical ledger | STR-P3 | 4h |
-| **T6.2** Budget linkage to boekhouding | STR-P3 | 4h |
-| **T6.3** Forecast projection lines | STR-P3 | 3h |
-| **T6.4** Entity scorecards | STR-P3 | 6h |
+**Key files delivered (P3):**
+- `app/console/ops/tasks/[id]/page.tsx` — Task detail with inline edit + dependency add/remove
+- `app/console/ops/tasks/timeline/page.tsx` — Gantt timeline with dependency arrows
+- `app/console/ops/tasks/analytics/page.tsx` — Full analytics dashboard
+- `scripts/ops-recurrence-cron.mjs` — RFC 5545 RRULE recurrence engine
+- `app/api/bop/ops/telegram-webhook/route.ts` — Telegram callback handler
+- `app/console/ops/goals/ledger/page.tsx` — Historical ledger page
+- `app/api/bop/ops/goals/route.ts` — Extended: historical-ledger, forecast, entity-scorecard, budget-monthly views
+- `app/console/ops/goals/scorecard/page.tsx` — Entity scorecards with radar + donut
+- `sql_bop_v2_94_period_ledger.sql` — Period ledger table for close-out snapshots
 
 ---
 

@@ -1,0 +1,7221 @@
+{
+  "duplicates": [
+    {
+      "firstFile": {
+        "end": 10,
+        "endLoc": {
+          "column": 47,
+          "line": 10,
+          "position": 423
+        },
+        "name": "api/analytics/ga4/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 10,
+        "endLoc": {
+          "column": 47,
+          "line": 10,
+          "position": 423
+        },
+        "name": "api/analytics/listings-perf/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 84
+    },
+    {
+      "firstFile": {
+        "end": 10,
+        "endLoc": {
+          "column": 7,
+          "line": 10,
+          "position": 383
+        },
+        "name": "api/analytics/ga4/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 10,
+        "endLoc": {
+          "column": 7,
+          "line": 10,
+          "position": 383
+        },
+        "name": "api/analytics/realtime/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 10,
+        "endLoc": {
+          "column": 47,
+          "line": 10,
+          "position": 423
+        },
+        "name": "api/analytics/ga4/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 10,
+        "endLoc": {
+          "column": 44,
+          "line": 10,
+          "position": 420
+        },
+        "name": "api/analytics/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 84
+    },
+    {
+      "firstFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 7,
+          "line": 12,
+          "position": 439
+        },
+        "name": "api/analytics/ga4/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 7,
+          "line": 12,
+          "position": 438
+        },
+        "name": "api/analytics/sessions/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 87
+    },
+    {
+      "firstFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 7,
+          "line": 12,
+          "position": 439
+        },
+        "name": "api/analytics/ga4/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 7,
+          "line": 12,
+          "position": 439
+        },
+        "name": "api/crm/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 87
+    },
+    {
+      "firstFile": {
+        "end": 10,
+        "endLoc": {
+          "column": 7,
+          "line": 10,
+          "position": 383
+        },
+        "name": "api/analytics/ga4/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 10,
+        "endLoc": {
+          "column": 7,
+          "line": 10,
+          "position": 383
+        },
+        "name": "api/orders/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 40,
+          "line": 31,
+          "position": 1337
+        },
+        "name": "api/bop/ai/agents/[id]/route.ts",
+        "start": 23,
+        "startLoc": {
+          "column": 69,
+          "line": 23,
+          "position": 985
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 40,
+          "line": 17,
+          "position": 718
+        },
+        "name": "api/bop/int/connectors/[id]/route.ts",
+        "start": 9,
+        "startLoc": {
+          "column": 61,
+          "line": 9,
+          "position": 395
+        }
+      },
+      "tokens": 89
+    },
+    {
+      "firstFile": {
+        "end": 30,
+        "endLoc": {
+          "column": 37,
+          "line": 30,
+          "position": 1296
+        },
+        "name": "api/bop/ai/agents/[id]/route.ts",
+        "start": 23,
+        "startLoc": {
+          "column": 55,
+          "line": 23,
+          "position": 971
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 37,
+          "line": 19,
+          "position": 933
+        },
+        "name": "api/bop/mkp/brands/[id]/route.ts",
+        "start": 12,
+        "startLoc": {
+          "column": 52,
+          "line": 12,
+          "position": 550
+        }
+      },
+      "tokens": 84
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 55,
+          "line": 31,
+          "position": 1352
+        },
+        "name": "api/bop/ai/agents/[id]/route.ts",
+        "start": 23,
+        "startLoc": {
+          "column": 55,
+          "line": 23,
+          "position": 971
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 20,
+        "endLoc": {
+          "column": 46,
+          "line": 20,
+          "position": 886
+        },
+        "name": "api/bop/mkp/models/[id]/route.ts",
+        "start": 12,
+        "startLoc": {
+          "column": 52,
+          "line": 12,
+          "position": 538
+        }
+      },
+      "tokens": 95
+    },
+    {
+      "firstFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 30,
+          "line": 81,
+          "position": 3393
+        },
+        "name": "api/bop/ai/chat/route.ts",
+        "start": 73,
+        "startLoc": {
+          "column": 98,
+          "line": 73,
+          "position": 2981
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 43,
+        "endLoc": {
+          "column": 28,
+          "line": 43,
+          "position": 2893
+        },
+        "name": "api/bop/comm/ai/action/route.ts",
+        "start": 37,
+        "startLoc": {
+          "column": 91,
+          "line": 37,
+          "position": 2502
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 10,
+          "line": 12,
+          "position": 511
+        },
+        "name": "api/bop/comm/automation/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 10,
+          "line": 12,
+          "position": 514
+        },
+        "name": "api/bop/comm/templates/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 74
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 40,
+          "line": 32,
+          "position": 1534
+        },
+        "name": "api/bop/comm/automation/route.ts",
+        "start": 24,
+        "startLoc": {
+          "column": 39,
+          "line": 24,
+          "position": 1250
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 35,
+        "endLoc": {
+          "column": 40,
+          "line": 35,
+          "position": 1636
+        },
+        "name": "api/bop/comm/templates/route.ts",
+        "start": 26,
+        "startLoc": {
+          "column": 37,
+          "line": 26,
+          "position": 1300
+        }
+      },
+      "tokens": 78
+    },
+    {
+      "firstFile": {
+        "end": 13,
+        "endLoc": {
+          "column": 68,
+          "line": 13,
+          "position": 710
+        },
+        "name": "api/bop/comm/compose/preview/route.ts",
+        "start": 4,
+        "startLoc": {
+          "column": 56,
+          "line": 4,
+          "position": 274
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 15,
+        "endLoc": {
+          "column": 68,
+          "line": 15,
+          "position": 758
+        },
+        "name": "api/bop/comm/compose/send/route.ts",
+        "start": 3,
+        "startLoc": {
+          "column": 62,
+          "line": 3,
+          "position": 182
+        }
+      },
+      "tokens": 71
+    },
+    {
+      "firstFile": {
+        "end": 34,
+        "endLoc": {
+          "column": 68,
+          "line": 34,
+          "position": 2002
+        },
+        "name": "api/bop/comm/compose/preview/route.ts",
+        "start": 25,
+        "startLoc": {
+          "column": 103,
+          "line": 25,
+          "position": 1397
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 96,
+        "endLoc": {
+          "column": 66,
+          "line": 96,
+          "position": 5052
+        },
+        "name": "comm/send.ts",
+        "start": 74,
+        "startLoc": {
+          "column": 98,
+          "line": 74,
+          "position": 3608
+        }
+      },
+      "tokens": 159
+    },
+    {
+      "firstFile": {
+        "end": 18,
+        "endLoc": {
+          "column": 34,
+          "line": 18,
+          "position": 723
+        },
+        "name": "api/bop/dae/profiles/route.ts",
+        "start": 11,
+        "startLoc": {
+          "column": 33,
+          "line": 11,
+          "position": 463
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 18,
+        "endLoc": {
+          "column": 34,
+          "line": 18,
+          "position": 661
+        },
+        "name": "api/bop/dae/sources/route.ts",
+        "start": 11,
+        "startLoc": {
+          "column": 36,
+          "line": 11,
+          "position": 401
+        }
+      },
+      "tokens": 74
+    },
+    {
+      "firstFile": {
+        "end": 8,
+        "endLoc": {
+          "column": 47,
+          "line": 8,
+          "position": 400
+        },
+        "name": "api/bop/fin/ap/invoices/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 12,
+          "line": 12,
+          "position": 416
+        },
+        "name": "api/bop/fin/invoices/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 82
+    },
+    {
+      "firstFile": {
+        "end": 8,
+        "endLoc": {
+          "column": 24,
+          "line": 8,
+          "position": 377
+        },
+        "name": "api/bop/fin/ap/invoices/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 11,
+        "endLoc": {
+          "column": 10,
+          "line": 11,
+          "position": 388
+        },
+        "name": "api/bop/sal/quotations/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 14,
+        "endLoc": {
+          "column": 28,
+          "line": 14,
+          "position": 766
+        },
+        "name": "api/bop/fin/ap/invoices/route.ts",
+        "start": 9,
+        "startLoc": {
+          "column": 19,
+          "line": 9,
+          "position": 469
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 21,
+        "endLoc": {
+          "column": 28,
+          "line": 21,
+          "position": 816
+        },
+        "name": "api/bop/sal/quotations/route.ts",
+        "start": 12,
+        "startLoc": {
+          "column": 97,
+          "line": 12,
+          "position": 503
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 40,
+          "line": 17,
+          "position": 718
+        },
+        "name": "api/bop/int/connectors/[id]/route.ts",
+        "start": 9,
+        "startLoc": {
+          "column": 21,
+          "line": 9,
+          "position": 355
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 57,
+        "endLoc": {
+          "column": 40,
+          "line": 57,
+          "position": 2240
+        },
+        "name": "api/bop/mkp/auctions/[id]/route.ts",
+        "start": 49,
+        "startLoc": {
+          "column": 38,
+          "line": 49,
+          "position": 1877
+        }
+      },
+      "tokens": 101
+    },
+    {
+      "firstFile": {
+        "end": 37,
+        "endLoc": {
+          "column": 19,
+          "line": 37,
+          "position": 1554
+        },
+        "name": "api/bop/int/lookup-values/route.ts",
+        "start": 27,
+        "startLoc": {
+          "column": 28,
+          "line": 27,
+          "position": 1161
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 40,
+        "endLoc": {
+          "column": 19,
+          "line": 40,
+          "position": 1641
+        },
+        "name": "api/bop/int/mappings/route.ts",
+        "start": 30,
+        "startLoc": {
+          "column": 33,
+          "line": 30,
+          "position": 1248
+        }
+      },
+      "tokens": 110
+    },
+    {
+      "firstFile": {
+        "end": 48,
+        "endLoc": {
+          "column": 40,
+          "line": 48,
+          "position": 2172
+        },
+        "name": "api/bop/int/lookup-values/route.ts",
+        "start": 39,
+        "startLoc": {
+          "column": 65,
+          "line": 39,
+          "position": 1763
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 51,
+        "endLoc": {
+          "column": 40,
+          "line": 51,
+          "position": 2306
+        },
+        "name": "api/bop/int/mappings/route.ts",
+        "start": 42,
+        "startLoc": {
+          "column": 60,
+          "line": 42,
+          "position": 1897
+        }
+      },
+      "tokens": 117
+    },
+    {
+      "firstFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 84,
+          "line": 12,
+          "position": 575
+        },
+        "name": "api/bop/mkp/brands/[id]/models/[modelId]/route.ts",
+        "start": 7,
+        "startLoc": {
+          "column": 77,
+          "line": 7,
+          "position": 287
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 84,
+          "line": 12,
+          "position": 570
+        },
+        "name": "api/bop/mkp/models/[id]/route.ts",
+        "start": 7,
+        "startLoc": {
+          "column": 72,
+          "line": 7,
+          "position": 282
+        }
+      },
+      "tokens": 86
+    },
+    {
+      "firstFile": {
+        "end": 27,
+        "endLoc": {
+          "column": 1,
+          "line": 27,
+          "position": 1414
+        },
+        "name": "api/bop/mkp/brands/[id]/models/route.ts",
+        "start": 22,
+        "startLoc": {
+          "column": 30,
+          "line": 22,
+          "position": 1128
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 57,
+        "endLoc": {
+          "column": 1,
+          "line": 57,
+          "position": 2816
+        },
+        "name": "api/bop/mkp/models/route.ts",
+        "start": 52,
+        "startLoc": {
+          "column": 31,
+          "line": 52,
+          "position": 2530
+        }
+      },
+      "tokens": 90
+    },
+    {
+      "firstFile": {
+        "end": 11,
+        "endLoc": {
+          "column": 26,
+          "line": 11,
+          "position": 423
+        },
+        "name": "api/bop/mkp/brands/[id]/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 11,
+        "endLoc": {
+          "column": 26,
+          "line": 11,
+          "position": 417
+        },
+        "name": "api/bop/mkp/models/[id]/route.ts",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 118,
+        "endLoc": {
+          "column": 3,
+          "line": 118,
+          "position": 6422
+        },
+        "name": "api/bop/mkp/media/upload/route.ts",
+        "start": 113,
+        "startLoc": {
+          "column": 137,
+          "line": 113,
+          "position": 6170
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 130,
+        "endLoc": {
+          "column": 1,
+          "line": 130,
+          "position": 7134
+        },
+        "name": "api/bop/mkp/media/upload/route.ts",
+        "start": 125,
+        "startLoc": {
+          "column": 110,
+          "line": 125,
+          "position": 6892
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 16,
+        "endLoc": {
+          "column": 7,
+          "line": 16,
+          "position": 655
+        },
+        "name": "api/bop/mkt/studio/images/[id]/rerun/route.ts",
+        "start": 6,
+        "startLoc": {
+          "column": 47,
+          "line": 6,
+          "position": 337
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 7,
+          "line": 19,
+          "position": 795
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/upload/route.ts",
+        "start": 6,
+        "startLoc": {
+          "column": 43,
+          "line": 6,
+          "position": 332
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 7,
+          "line": 17,
+          "position": 630
+        },
+        "name": "api/bop/mkt/studio/images/[id]/route.ts",
+        "start": 9,
+        "startLoc": {
+          "column": 0,
+          "line": 9,
+          "position": 322
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 35,
+        "endLoc": {
+          "column": 7,
+          "line": 35,
+          "position": 1224
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/route.ts",
+        "start": 28,
+        "startLoc": {
+          "column": 0,
+          "line": 28,
+          "position": 955
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 16,
+        "endLoc": {
+          "column": 12,
+          "line": 16,
+          "position": 659
+        },
+        "name": "api/bop/mkt/studio/preset-backgrounds/[id]/route.ts",
+        "start": 9,
+        "startLoc": {
+          "column": 27,
+          "line": 9,
+          "position": 365
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 44,
+        "endLoc": {
+          "column": 12,
+          "line": 44,
+          "position": 1483
+        },
+        "name": "api/bop/mkt/studio/preset-backgrounds/[id]/route.ts",
+        "start": 37,
+        "startLoc": {
+          "column": 28,
+          "line": 37,
+          "position": 1189
+        }
+      },
+      "tokens": 74
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 23,
+          "line": 17,
+          "position": 639
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/finalize/route.ts",
+        "start": 4,
+        "startLoc": {
+          "column": 0,
+          "line": 4,
+          "position": 165
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 15,
+        "endLoc": {
+          "column": 23,
+          "line": 15,
+          "position": 569
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/reset/route.ts",
+        "start": 2,
+        "startLoc": {
+          "column": 0,
+          "line": 2,
+          "position": 95
+        }
+      },
+      "tokens": 100
+    },
+    {
+      "firstFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 12,
+          "line": 19,
+          "position": 711
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/finalize/route.ts",
+        "start": 9,
+        "startLoc": {
+          "column": 37,
+          "line": 9,
+          "position": 402
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 22,
+        "endLoc": {
+          "column": 12,
+          "line": 22,
+          "position": 909
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/process/route.ts",
+        "start": 12,
+        "startLoc": {
+          "column": 85,
+          "line": 12,
+          "position": 600
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 21,
+        "endLoc": {
+          "column": 15,
+          "line": 21,
+          "position": 822
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/reset/route.ts",
+        "start": 10,
+        "startLoc": {
+          "column": 26,
+          "line": 10,
+          "position": 362
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 65,
+        "endLoc": {
+          "column": 15,
+          "line": 65,
+          "position": 2325
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/route.ts",
+        "start": 52,
+        "startLoc": {
+          "column": 28,
+          "line": 52,
+          "position": 1811
+        }
+      },
+      "tokens": 116
+    },
+    {
+      "firstFile": {
+        "end": 18,
+        "endLoc": {
+          "column": 82,
+          "line": 18,
+          "position": 768
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/reset/route.ts",
+        "start": 11,
+        "startLoc": {
+          "column": 2,
+          "line": 11,
+          "position": 403
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 112,
+        "endLoc": {
+          "column": 82,
+          "line": 112,
+          "position": 4393
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/route.ts",
+        "start": 105,
+        "startLoc": {
+          "column": 2,
+          "line": 105,
+          "position": 4028
+        }
+      },
+      "tokens": 100
+    },
+    {
+      "firstFile": {
+        "end": 59,
+        "endLoc": {
+          "column": 1,
+          "line": 59,
+          "position": 2225
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/reset/route.ts",
+        "start": 43,
+        "startLoc": {
+          "column": 4,
+          "line": 43,
+          "position": 1662
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 17,
+      "secondFile": {
+        "end": 150,
+        "endLoc": {
+          "column": 1,
+          "line": 150,
+          "position": 5807
+        },
+        "name": "api/bop/mkt/studio/sessions/[id]/route.ts",
+        "start": 134,
+        "startLoc": {
+          "column": 4,
+          "line": 134,
+          "position": 5242
+        }
+      },
+      "tokens": 140
+    },
+    {
+      "firstFile": {
+        "end": 200,
+        "endLoc": {
+          "column": 21,
+          "line": 200,
+          "position": 9332
+        },
+        "name": "api/bop/mkt/studio/worker/route.ts",
+        "start": 189,
+        "startLoc": {
+          "column": 33,
+          "line": 189,
+          "position": 9023
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 242,
+        "endLoc": {
+          "column": 21,
+          "line": 242,
+          "position": 11225
+        },
+        "name": "api/bop/mkt/studio/worker/route.ts",
+        "start": 231,
+        "startLoc": {
+          "column": 30,
+          "line": 231,
+          "position": 10928
+        }
+      },
+      "tokens": 74
+    },
+    {
+      "firstFile": {
+        "end": 21,
+        "endLoc": {
+          "column": 81,
+          "line": 21,
+          "position": 848
+        },
+        "name": "console/ai/audit/page.tsx",
+        "start": 15,
+        "startLoc": {
+          "column": 44,
+          "line": 15,
+          "position": 574
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 37,
+        "endLoc": {
+          "column": 81,
+          "line": 37,
+          "position": 1540
+        },
+        "name": "console/sys/audit/page.tsx",
+        "start": 31,
+        "startLoc": {
+          "column": 17,
+          "line": 31,
+          "position": 1266
+        }
+      },
+      "tokens": 71
+    },
+    {
+      "firstFile": {
+        "end": 52,
+        "endLoc": {
+          "column": 6,
+          "line": 52,
+          "position": 2126
+        },
+        "name": "console/ai/audit/page.tsx",
+        "start": 43,
+        "startLoc": {
+          "column": 56,
+          "line": 43,
+          "position": 1767
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 70,
+        "endLoc": {
+          "column": 6,
+          "line": 70,
+          "position": 3018
+        },
+        "name": "console/sys/audit/page.tsx",
+        "start": 61,
+        "startLoc": {
+          "column": 168,
+          "line": 61,
+          "position": 2661
+        }
+      },
+      "tokens": 80
+    },
+    {
+      "firstFile": {
+        "end": 52,
+        "endLoc": {
+          "column": 21,
+          "line": 52,
+          "position": 2141
+        },
+        "name": "console/ai/audit/page.tsx",
+        "start": 43,
+        "startLoc": {
+          "column": 56,
+          "line": 43,
+          "position": 1767
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 70,
+        "endLoc": {
+          "column": 21,
+          "line": 70,
+          "position": 2768
+        },
+        "name": "console/sys/overview/page.tsx",
+        "start": 61,
+        "startLoc": {
+          "column": 73,
+          "line": 61,
+          "position": 2396
+        }
+      },
+      "tokens": 84
+    },
+    {
+      "firstFile": {
+        "end": 66,
+        "endLoc": {
+          "column": 41,
+          "line": 66,
+          "position": 2884
+        },
+        "name": "console/ai/audit/page.tsx",
+        "start": 57,
+        "startLoc": {
+          "column": 16,
+          "line": 57,
+          "position": 2484
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 84,
+        "endLoc": {
+          "column": 41,
+          "line": 84,
+          "position": 3954
+        },
+        "name": "console/sys/audit/page.tsx",
+        "start": 75,
+        "startLoc": {
+          "column": 210,
+          "line": 75,
+          "position": 3554
+        }
+      },
+      "tokens": 84
+    },
+    {
+      "firstFile": {
+        "end": 66,
+        "endLoc": {
+          "column": 8,
+          "line": 66,
+          "position": 2851
+        },
+        "name": "console/ai/audit/page.tsx",
+        "start": 57,
+        "startLoc": {
+          "column": 16,
+          "line": 57,
+          "position": 2484
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 74,
+        "endLoc": {
+          "column": 8,
+          "line": 74,
+          "position": 2888
+        },
+        "name": "console/sys/security/page.tsx",
+        "start": 65,
+        "startLoc": {
+          "column": 51,
+          "line": 65,
+          "position": 2521
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 9,
+          "line": 31,
+          "position": 1295
+        },
+        "name": "console/ai/prompts/page.tsx",
+        "start": 23,
+        "startLoc": {
+          "column": 47,
+          "line": 23,
+          "position": 1021
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 27,
+        "endLoc": {
+          "column": 9,
+          "line": 27,
+          "position": 1289
+        },
+        "name": "console/crm/activities/page.tsx",
+        "start": 20,
+        "startLoc": {
+          "column": 44,
+          "line": 20,
+          "position": 1022
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 76,
+          "line": 31,
+          "position": 1362
+        },
+        "name": "console/ai/prompts/page.tsx",
+        "start": 24,
+        "startLoc": {
+          "column": 24,
+          "line": 24,
+          "position": 1048
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 68,
+        "endLoc": {
+          "column": 57,
+          "line": 68,
+          "position": 2360
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 60,
+        "startLoc": {
+          "column": 32,
+          "line": 60,
+          "position": 2029
+        }
+      },
+      "tokens": 101
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 9,
+          "line": 31,
+          "position": 1295
+        },
+        "name": "console/ai/prompts/page.tsx",
+        "start": 24,
+        "startLoc": {
+          "column": 45,
+          "line": 24,
+          "position": 1069
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 35,
+        "endLoc": {
+          "column": 9,
+          "line": 35,
+          "position": 1576
+        },
+        "name": "console/mdm/partners/[id]/page.tsx",
+        "start": 28,
+        "startLoc": {
+          "column": 42,
+          "line": 28,
+          "position": 1350
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 94,
+          "line": 19,
+          "position": 1252
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 19,
+      "secondFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 94,
+          "line": 19,
+          "position": 1252
+        },
+        "name": "console/anl/click-events/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 237
+    },
+    {
+      "firstFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 94,
+          "line": 19,
+          "position": 1252
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 19,
+      "secondFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 94,
+          "line": 19,
+          "position": 1252
+        },
+        "name": "console/anl/form-submits/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 237
+    },
+    {
+      "firstFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 94,
+          "line": 19,
+          "position": 1252
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 19,
+      "secondFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 94,
+          "line": 19,
+          "position": 1252
+        },
+        "name": "console/anl/recent-activity/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 237
+    },
+    {
+      "firstFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 94,
+          "line": 19,
+          "position": 1252
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 19,
+      "secondFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 94,
+          "line": 19,
+          "position": 1252
+        },
+        "name": "console/anl/view-events/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 237
+    },
+    {
+      "firstFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 30,
+          "line": 19,
+          "position": 1188
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 9,
+        "startLoc": {
+          "column": 28,
+          "line": 9,
+          "position": 865
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 24,
+        "endLoc": {
+          "column": 30,
+          "line": 24,
+          "position": 825
+        },
+        "name": "console/anl/security-events/page.tsx",
+        "start": 14,
+        "startLoc": {
+          "column": 42,
+          "line": 14,
+          "position": 502
+        }
+      },
+      "tokens": 89
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1625
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 112,
+          "line": 19,
+          "position": 1270
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1628
+        },
+        "name": "console/anl/click-events/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 115,
+          "line": 19,
+          "position": 1273
+        }
+      },
+      "tokens": 109
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1625
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 112,
+          "line": 19,
+          "position": 1270
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1628
+        },
+        "name": "console/anl/form-submits/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 115,
+          "line": 19,
+          "position": 1273
+        }
+      },
+      "tokens": 109
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1625
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 112,
+          "line": 19,
+          "position": 1270
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1622
+        },
+        "name": "console/anl/recent-activity/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 109,
+          "line": 19,
+          "position": 1267
+        }
+      },
+      "tokens": 109
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1625
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 112,
+          "line": 19,
+          "position": 1270
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 26,
+          "line": 31,
+          "position": 1010
+        },
+        "name": "console/anl/sessions/page.tsx",
+        "start": 18,
+        "startLoc": {
+          "column": 91,
+          "line": 18,
+          "position": 655
+        }
+      },
+      "tokens": 109
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1625
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 112,
+          "line": 19,
+          "position": 1270
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 26,
+          "line": 32,
+          "position": 1629
+        },
+        "name": "console/anl/view-events/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 116,
+          "line": 19,
+          "position": 1274
+        }
+      },
+      "tokens": 109
+    },
+    {
+      "firstFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 1,
+          "line": 82,
+          "position": 4639
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 92,
+          "line": 32,
+          "position": 1691
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 51,
+      "secondFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 1,
+          "line": 82,
+          "position": 4636
+        },
+        "name": "console/anl/click-events/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 86,
+          "line": 32,
+          "position": 1688
+        }
+      },
+      "tokens": 538
+    },
+    {
+      "firstFile": {
+        "end": 42,
+        "endLoc": {
+          "column": 9,
+          "line": 42,
+          "position": 2167
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 92,
+          "line": 32,
+          "position": 1691
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 69,
+        "endLoc": {
+          "column": 9,
+          "line": 69,
+          "position": 3011
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 59,
+        "startLoc": {
+          "column": 107,
+          "line": 59,
+          "position": 2535
+        }
+      },
+      "tokens": 86
+    },
+    {
+      "firstFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 1,
+          "line": 82,
+          "position": 4639
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 92,
+          "line": 32,
+          "position": 1691
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 51,
+      "secondFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 1,
+          "line": 82,
+          "position": 4646
+        },
+        "name": "console/anl/form-submits/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 96,
+          "line": 32,
+          "position": 1698
+        }
+      },
+      "tokens": 538
+    },
+    {
+      "firstFile": {
+        "end": 42,
+        "endLoc": {
+          "column": 40,
+          "line": 42,
+          "position": 2198
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 92,
+          "line": 32,
+          "position": 1691
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 62,
+        "endLoc": {
+          "column": 13,
+          "line": 62,
+          "position": 2684
+        },
+        "name": "console/anl/locations/page.tsx",
+        "start": 51,
+        "startLoc": {
+          "column": 109,
+          "line": 51,
+          "position": 2131
+        }
+      },
+      "tokens": 95
+    },
+    {
+      "firstFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 1,
+          "line": 82,
+          "position": 4639
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 92,
+          "line": 32,
+          "position": 1691
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 51,
+      "secondFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 1,
+          "line": 82,
+          "position": 4644
+        },
+        "name": "console/anl/recent-activity/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 100,
+          "line": 32,
+          "position": 1696
+        }
+      },
+      "tokens": 538
+    },
+    {
+      "firstFile": {
+        "end": 42,
+        "endLoc": {
+          "column": 40,
+          "line": 42,
+          "position": 2198
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 92,
+          "line": 32,
+          "position": 1691
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 69,
+        "endLoc": {
+          "column": 13,
+          "line": 69,
+          "position": 2560
+        },
+        "name": "console/anl/sources/page.tsx",
+        "start": 58,
+        "startLoc": {
+          "column": 104,
+          "line": 58,
+          "position": 2007
+        }
+      },
+      "tokens": 95
+    },
+    {
+      "firstFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 1,
+          "line": 82,
+          "position": 4639
+        },
+        "name": "console/anl/404-errors/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 92,
+          "line": 32,
+          "position": 1691
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 51,
+      "secondFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 1,
+          "line": 82,
+          "position": 4632
+        },
+        "name": "console/anl/view-events/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 81,
+          "line": 32,
+          "position": 1684
+        }
+      },
+      "tokens": 538
+    },
+    {
+      "firstFile": {
+        "end": 44,
+        "endLoc": {
+          "column": 8,
+          "line": 44,
+          "position": 1909
+        },
+        "name": "console/anl/cf-ga-compare/page.tsx",
+        "start": 36,
+        "startLoc": {
+          "column": 108,
+          "line": 36,
+          "position": 1421
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 40,
+        "endLoc": {
+          "column": 8,
+          "line": 40,
+          "position": 1913
+        },
+        "name": "console/anl/cloudflare/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 101,
+          "line": 32,
+          "position": 1425
+        }
+      },
+      "tokens": 93
+    },
+    {
+      "firstFile": {
+        "end": 44,
+        "endLoc": {
+          "column": 8,
+          "line": 44,
+          "position": 1909
+        },
+        "name": "console/anl/cf-ga-compare/page.tsx",
+        "start": 36,
+        "startLoc": {
+          "column": 108,
+          "line": 36,
+          "position": 1421
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 42,
+        "endLoc": {
+          "column": 8,
+          "line": 42,
+          "position": 1921
+        },
+        "name": "console/anl/ga4/page.tsx",
+        "start": 34,
+        "startLoc": {
+          "column": 77,
+          "line": 34,
+          "position": 1433
+        }
+      },
+      "tokens": 93
+    },
+    {
+      "firstFile": {
+        "end": 15,
+        "endLoc": {
+          "column": 30,
+          "line": 15,
+          "position": 508
+        },
+        "name": "console/anl/click-analytics/page.tsx",
+        "start": 6,
+        "startLoc": {
+          "column": 42,
+          "line": 6,
+          "position": 229
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 30,
+          "line": 17,
+          "position": 667
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 8,
+        "startLoc": {
+          "column": 28,
+          "line": 8,
+          "position": 388
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 56,
+        "endLoc": {
+          "column": 33,
+          "line": 56,
+          "position": 3238
+        },
+        "name": "console/anl/cloudflare/page.tsx",
+        "start": 47,
+        "startLoc": {
+          "column": 125,
+          "line": 47,
+          "position": 2790
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 59,
+        "endLoc": {
+          "column": 33,
+          "line": 59,
+          "position": 3177
+        },
+        "name": "console/anl/ga4/page.tsx",
+        "start": 50,
+        "startLoc": {
+          "column": 95,
+          "line": 50,
+          "position": 2729
+        }
+      },
+      "tokens": 84
+    },
+    {
+      "firstFile": {
+        "end": 70,
+        "endLoc": {
+          "column": 55,
+          "line": 70,
+          "position": 4062
+        },
+        "name": "console/anl/cloudflare/page.tsx",
+        "start": 57,
+        "startLoc": {
+          "column": 117,
+          "line": 57,
+          "position": 3408
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 73,
+        "endLoc": {
+          "column": 55,
+          "line": 73,
+          "position": 3997
+        },
+        "name": "console/anl/ga4/page.tsx",
+        "start": 60,
+        "startLoc": {
+          "column": 107,
+          "line": 60,
+          "position": 3343
+        }
+      },
+      "tokens": 119
+    },
+    {
+      "firstFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 58,
+          "line": 81,
+          "position": 4705
+        },
+        "name": "console/anl/cloudflare/page.tsx",
+        "start": 74,
+        "startLoc": {
+          "column": 62,
+          "line": 74,
+          "position": 4348
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 85,
+        "endLoc": {
+          "column": 58,
+          "line": 85,
+          "position": 4714
+        },
+        "name": "console/anl/ga4/page.tsx",
+        "start": 78,
+        "startLoc": {
+          "column": 67,
+          "line": 78,
+          "position": 4357
+        }
+      },
+      "tokens": 74
+    },
+    {
+      "firstFile": {
+        "end": 7,
+        "endLoc": {
+          "column": 14,
+          "line": 7,
+          "position": 373
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 7,
+        "endLoc": {
+          "column": 14,
+          "line": 7,
+          "position": 373
+        },
+        "name": "console/anl/locations/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 87
+    },
+    {
+      "firstFile": {
+        "end": 6,
+        "endLoc": {
+          "column": 171,
+          "line": 6,
+          "position": 358
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 6,
+        "endLoc": {
+          "column": 171,
+          "line": 6,
+          "position": 358
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 84
+    },
+    {
+      "firstFile": {
+        "end": 7,
+        "endLoc": {
+          "column": 14,
+          "line": 7,
+          "position": 373
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 7,
+        "endLoc": {
+          "column": 14,
+          "line": 7,
+          "position": 373
+        },
+        "name": "console/anl/sources/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 87
+    },
+    {
+      "firstFile": {
+        "end": 14,
+        "endLoc": {
+          "column": 17,
+          "line": 14,
+          "position": 706
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 94,
+          "line": 17,
+          "position": 731
+        },
+        "name": "console/anl/top-pages/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 175
+    },
+    {
+      "firstFile": {
+        "end": 14,
+        "endLoc": {
+          "column": 17,
+          "line": 14,
+          "position": 706
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 94,
+          "line": 17,
+          "position": 731
+        },
+        "name": "console/anl/top-viewed/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 175
+    },
+    {
+      "firstFile": {
+        "end": 14,
+        "endLoc": {
+          "column": 17,
+          "line": 14,
+          "position": 706
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 94,
+          "line": 17,
+          "position": 731
+        },
+        "name": "console/anl/visitors/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 175
+    },
+    {
+      "firstFile": {
+        "end": 27,
+        "endLoc": {
+          "column": 50,
+          "line": 27,
+          "position": 1301
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 20,
+        "startLoc": {
+          "column": 0,
+          "line": 20,
+          "position": 1045
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 22,
+        "endLoc": {
+          "column": 50,
+          "line": 22,
+          "position": 896
+        },
+        "name": "console/anl/sources/page.tsx",
+        "start": 15,
+        "startLoc": {
+          "column": 0,
+          "line": 15,
+          "position": 640
+        }
+      },
+      "tokens": 71
+    },
+    {
+      "firstFile": {
+        "end": 27,
+        "endLoc": {
+          "column": 50,
+          "line": 27,
+          "position": 1301
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 0,
+          "line": 22,
+          "position": 1048
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 14,
+        "endLoc": {
+          "column": 50,
+          "line": 14,
+          "position": 659
+        },
+        "name": "console/anl/locations/page.tsx",
+        "start": 9,
+        "startLoc": {
+          "column": 0,
+          "line": 9,
+          "position": 406
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 45,
+        "endLoc": {
+          "column": 21,
+          "line": 45,
+          "position": 1837
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 110,
+          "line": 32,
+          "position": 1496
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 21,
+          "line": 32,
+          "position": 1198
+        },
+        "name": "console/anl/locations/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 112,
+          "line": 19,
+          "position": 857
+        }
+      },
+      "tokens": 104
+    },
+    {
+      "firstFile": {
+        "end": 43,
+        "endLoc": {
+          "column": 23,
+          "line": 43,
+          "position": 1792
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 110,
+          "line": 32,
+          "position": 1496
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 28,
+        "endLoc": {
+          "column": 23,
+          "line": 28,
+          "position": 1046
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 17,
+        "startLoc": {
+          "column": 113,
+          "line": 17,
+          "position": 750
+        }
+      },
+      "tokens": 95
+    },
+    {
+      "firstFile": {
+        "end": 45,
+        "endLoc": {
+          "column": 21,
+          "line": 45,
+          "position": 1837
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 110,
+          "line": 32,
+          "position": 1496
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 40,
+        "endLoc": {
+          "column": 21,
+          "line": 40,
+          "position": 1434
+        },
+        "name": "console/anl/sources/page.tsx",
+        "start": 27,
+        "startLoc": {
+          "column": 110,
+          "line": 27,
+          "position": 1093
+        }
+      },
+      "tokens": 104
+    },
+    {
+      "firstFile": {
+        "end": 51,
+        "endLoc": {
+          "column": 45,
+          "line": 51,
+          "position": 2173
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 110,
+          "line": 32,
+          "position": 1496
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 20,
+      "secondFile": {
+        "end": 36,
+        "endLoc": {
+          "column": 26,
+          "line": 36,
+          "position": 1281
+        },
+        "name": "console/anl/top-pages/page.tsx",
+        "start": 17,
+        "startLoc": {
+          "column": 112,
+          "line": 17,
+          "position": 749
+        }
+      },
+      "tokens": 189
+    },
+    {
+      "firstFile": {
+        "end": 44,
+        "endLoc": {
+          "column": 22,
+          "line": 44,
+          "position": 1815
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 110,
+          "line": 32,
+          "position": 1496
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 28,
+        "endLoc": {
+          "column": 36,
+          "line": 28,
+          "position": 1062
+        },
+        "name": "console/anl/top-viewed/page.tsx",
+        "start": 17,
+        "startLoc": {
+          "column": 116,
+          "line": 17,
+          "position": 753
+        }
+      },
+      "tokens": 100
+    },
+    {
+      "firstFile": {
+        "end": 44,
+        "endLoc": {
+          "column": 22,
+          "line": 44,
+          "position": 1815
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 32,
+        "startLoc": {
+          "column": 110,
+          "line": 32,
+          "position": 1496
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 28,
+        "endLoc": {
+          "column": 36,
+          "line": 28,
+          "position": 1057
+        },
+        "name": "console/anl/visitors/page.tsx",
+        "start": 17,
+        "startLoc": {
+          "column": 111,
+          "line": 17,
+          "position": 748
+        }
+      },
+      "tokens": 100
+    },
+    {
+      "firstFile": {
+        "end": 54,
+        "endLoc": {
+          "column": 35,
+          "line": 54,
+          "position": 2260
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 49,
+        "startLoc": {
+          "column": 6,
+          "line": 49,
+          "position": 2088
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 54,
+        "endLoc": {
+          "column": 35,
+          "line": 54,
+          "position": 1880
+        },
+        "name": "console/anl/sources/page.tsx",
+        "start": 49,
+        "startLoc": {
+          "column": 6,
+          "line": 49,
+          "position": 1708
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 86,
+        "endLoc": {
+          "column": 63,
+          "line": 86,
+          "position": 4041
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 73,
+        "startLoc": {
+          "column": 36,
+          "line": 73,
+          "position": 3446
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 85,
+        "endLoc": {
+          "column": 52,
+          "line": 85,
+          "position": 3595
+        },
+        "name": "console/anl/sources/page.tsx",
+        "start": 72,
+        "startLoc": {
+          "column": 125,
+          "line": 72,
+          "position": 3011
+        }
+      },
+      "tokens": 86
+    },
+    {
+      "firstFile": {
+        "end": 86,
+        "endLoc": {
+          "column": 30,
+          "line": 86,
+          "position": 4008
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 76,
+        "startLoc": {
+          "column": 14,
+          "line": 76,
+          "position": 3498
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 53,
+        "endLoc": {
+          "column": 30,
+          "line": 53,
+          "position": 2237
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 43,
+        "startLoc": {
+          "column": 11,
+          "line": 43,
+          "position": 1727
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 99,
+        "endLoc": {
+          "column": 34,
+          "line": 99,
+          "position": 4786
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 86,
+        "startLoc": {
+          "column": 90,
+          "line": 86,
+          "position": 4068
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 96,
+        "endLoc": {
+          "column": 34,
+          "line": 96,
+          "position": 4616
+        },
+        "name": "console/anl/locations/page.tsx",
+        "start": 83,
+        "startLoc": {
+          "column": 64,
+          "line": 83,
+          "position": 3898
+        }
+      },
+      "tokens": 150
+    },
+    {
+      "firstFile": {
+        "end": 112,
+        "endLoc": {
+          "column": 4,
+          "line": 112,
+          "position": 5430
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 86,
+        "startLoc": {
+          "column": 98,
+          "line": 86,
+          "position": 4076
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 27,
+      "secondFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 1,
+          "line": 81,
+          "position": 3606
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 53,
+        "startLoc": {
+          "column": 56,
+          "line": 53,
+          "position": 2263
+        }
+      },
+      "tokens": 273
+    },
+    {
+      "firstFile": {
+        "end": 101,
+        "endLoc": {
+          "column": 84,
+          "line": 101,
+          "position": 4982
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 86,
+        "startLoc": {
+          "column": 97,
+          "line": 86,
+          "position": 4075
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 16,
+      "secondFile": {
+        "end": 100,
+        "endLoc": {
+          "column": 84,
+          "line": 100,
+          "position": 4553
+        },
+        "name": "console/anl/sources/page.tsx",
+        "start": 85,
+        "startLoc": {
+          "column": 114,
+          "line": 85,
+          "position": 3657
+        }
+      },
+      "tokens": 176
+    },
+    {
+      "firstFile": {
+        "end": 112,
+        "endLoc": {
+          "column": 4,
+          "line": 112,
+          "position": 5430
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 86,
+        "startLoc": {
+          "column": 98,
+          "line": 86,
+          "position": 4076
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 27,
+      "secondFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 1,
+          "line": 81,
+          "position": 3621
+        },
+        "name": "console/anl/top-viewed/page.tsx",
+        "start": 53,
+        "startLoc": {
+          "column": 59,
+          "line": 53,
+          "position": 2278
+        }
+      },
+      "tokens": 273
+    },
+    {
+      "firstFile": {
+        "end": 112,
+        "endLoc": {
+          "column": 4,
+          "line": 112,
+          "position": 5430
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 86,
+        "startLoc": {
+          "column": 98,
+          "line": 86,
+          "position": 4076
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 27,
+      "secondFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 1,
+          "line": 81,
+          "position": 3602
+        },
+        "name": "console/anl/visitors/page.tsx",
+        "start": 53,
+        "startLoc": {
+          "column": 59,
+          "line": 53,
+          "position": 2259
+        }
+      },
+      "tokens": 273
+    },
+    {
+      "firstFile": {
+        "end": 114,
+        "endLoc": {
+          "column": 1,
+          "line": 114,
+          "position": 5443
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 101,
+        "startLoc": {
+          "column": 124,
+          "line": 101,
+          "position": 5022
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 111,
+        "endLoc": {
+          "column": 1,
+          "line": 111,
+          "position": 5253
+        },
+        "name": "console/anl/locations/page.tsx",
+        "start": 98,
+        "startLoc": {
+          "column": 115,
+          "line": 98,
+          "position": 4832
+        }
+      },
+      "tokens": 97
+    },
+    {
+      "firstFile": {
+        "end": 114,
+        "endLoc": {
+          "column": 1,
+          "line": 114,
+          "position": 5443
+        },
+        "name": "console/anl/devices/page.tsx",
+        "start": 101,
+        "startLoc": {
+          "column": 124,
+          "line": 101,
+          "position": 5022
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 113,
+        "endLoc": {
+          "column": 1,
+          "line": 113,
+          "position": 5007
+        },
+        "name": "console/anl/sources/page.tsx",
+        "start": 100,
+        "startLoc": {
+          "column": 117,
+          "line": 100,
+          "position": 4586
+        }
+      },
+      "tokens": 97
+    },
+    {
+      "firstFile": {
+        "end": 36,
+        "endLoc": {
+          "column": 26,
+          "line": 36,
+          "position": 1282
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 28,
+        "startLoc": {
+          "column": 42,
+          "line": 28,
+          "position": 1065
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 36,
+        "endLoc": {
+          "column": 26,
+          "line": 36,
+          "position": 1294
+        },
+        "name": "console/anl/top-viewed/page.tsx",
+        "start": 28,
+        "startLoc": {
+          "column": 51,
+          "line": 28,
+          "position": 1077
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 36,
+        "endLoc": {
+          "column": 26,
+          "line": 36,
+          "position": 1282
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 28,
+        "startLoc": {
+          "column": 42,
+          "line": 28,
+          "position": 1065
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 36,
+        "endLoc": {
+          "column": 26,
+          "line": 36,
+          "position": 1286
+        },
+        "name": "console/anl/visitors/page.tsx",
+        "start": 28,
+        "startLoc": {
+          "column": 48,
+          "line": 28,
+          "position": 1069
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 1,
+          "line": 81,
+          "position": 3606
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 36,
+        "startLoc": {
+          "column": 92,
+          "line": 36,
+          "position": 1348
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 46,
+      "secondFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 1,
+          "line": 81,
+          "position": 3600
+        },
+        "name": "console/anl/top-pages/page.tsx",
+        "start": 36,
+        "startLoc": {
+          "column": 87,
+          "line": 36,
+          "position": 1342
+        }
+      },
+      "tokens": 418
+    },
+    {
+      "firstFile": {
+        "end": 53,
+        "endLoc": {
+          "column": 52,
+          "line": 53,
+          "position": 2259
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 36,
+        "startLoc": {
+          "column": 92,
+          "line": 36,
+          "position": 1348
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 18,
+      "secondFile": {
+        "end": 53,
+        "endLoc": {
+          "column": 52,
+          "line": 53,
+          "position": 2271
+        },
+        "name": "console/anl/top-viewed/page.tsx",
+        "start": 36,
+        "startLoc": {
+          "column": 92,
+          "line": 36,
+          "position": 1360
+        }
+      },
+      "tokens": 144
+    },
+    {
+      "firstFile": {
+        "end": 53,
+        "endLoc": {
+          "column": 52,
+          "line": 53,
+          "position": 2259
+        },
+        "name": "console/anl/page-views/page.tsx",
+        "start": 36,
+        "startLoc": {
+          "column": 92,
+          "line": 36,
+          "position": 1348
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 18,
+      "secondFile": {
+        "end": 53,
+        "endLoc": {
+          "column": 52,
+          "line": 53,
+          "position": 2252
+        },
+        "name": "console/anl/visitors/page.tsx",
+        "start": 36,
+        "startLoc": {
+          "column": 81,
+          "line": 36,
+          "position": 1341
+        }
+      },
+      "tokens": 144
+    },
+    {
+      "firstFile": {
+        "end": 48,
+        "endLoc": {
+          "column": 84,
+          "line": 48,
+          "position": 1997
+        },
+        "name": "console/anl/security-events/page.tsx",
+        "start": 43,
+        "startLoc": {
+          "column": 39,
+          "line": 43,
+          "position": 1620
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 39,
+        "endLoc": {
+          "column": 84,
+          "line": 39,
+          "position": 1669
+        },
+        "name": "console/anl/sessions/page.tsx",
+        "start": 34,
+        "startLoc": {
+          "column": 52,
+          "line": 34,
+          "position": 1292
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 26,
+        "endLoc": {
+          "column": 7,
+          "line": 26,
+          "position": 955
+        },
+        "name": "console/anl/top-viewed/page.tsx",
+        "start": 12,
+        "startLoc": {
+          "column": 45,
+          "line": 12,
+          "position": 560
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 15,
+      "secondFile": {
+        "end": 28,
+        "endLoc": {
+          "column": 7,
+          "line": 28,
+          "position": 1476
+        },
+        "name": "console/anl/view-events/page.tsx",
+        "start": 14,
+        "startLoc": {
+          "column": 41,
+          "line": 14,
+          "position": 1081
+        }
+      },
+      "tokens": 103
+    },
+    {
+      "firstFile": {
+        "end": 20,
+        "endLoc": {
+          "column": 105,
+          "line": 20,
+          "position": 1025
+        },
+        "name": "console/ast/catalog/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 68,
+          "line": 7,
+          "position": 296
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 24,
+        "endLoc": {
+          "column": 105,
+          "line": 24,
+          "position": 1228
+        },
+        "name": "console/mkp/analytics/page.tsx",
+        "start": 11,
+        "startLoc": {
+          "column": 78,
+          "line": 11,
+          "position": 499
+        }
+      },
+      "tokens": 200
+    },
+    {
+      "firstFile": {
+        "end": 20,
+        "endLoc": {
+          "column": 8,
+          "line": 20,
+          "position": 928
+        },
+        "name": "console/ast/catalog/page.tsx",
+        "start": 12,
+        "startLoc": {
+          "column": 134,
+          "line": 12,
+          "position": 570
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 18,
+        "endLoc": {
+          "column": 8,
+          "line": 18,
+          "position": 895
+        },
+        "name": "console/dae/pricing/page.tsx",
+        "start": 10,
+        "startLoc": {
+          "column": 134,
+          "line": 10,
+          "position": 537
+        }
+      },
+      "tokens": 106
+    },
+    {
+      "firstFile": {
+        "end": 46,
+        "endLoc": {
+          "column": 7,
+          "line": 46,
+          "position": 2227
+        },
+        "name": "console/ast/catalog/page.tsx",
+        "start": 40,
+        "startLoc": {
+          "column": 37,
+          "line": 40,
+          "position": 1987
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 71,
+        "endLoc": {
+          "column": 7,
+          "line": 71,
+          "position": 3188
+        },
+        "name": "console/crm/lead-stats/page.tsx",
+        "start": 65,
+        "startLoc": {
+          "column": 40,
+          "line": 65,
+          "position": 2948
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 46,
+        "endLoc": {
+          "column": 7,
+          "line": 46,
+          "position": 2227
+        },
+        "name": "console/ast/catalog/page.tsx",
+        "start": 40,
+        "startLoc": {
+          "column": 37,
+          "line": 40,
+          "position": 1987
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 115,
+        "endLoc": {
+          "column": 7,
+          "line": 115,
+          "position": 5611
+        },
+        "name": "console/dae/pricing/page.tsx",
+        "start": 109,
+        "startLoc": {
+          "column": 37,
+          "line": 109,
+          "position": 5373
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 46,
+        "endLoc": {
+          "column": 7,
+          "line": 46,
+          "position": 2227
+        },
+        "name": "console/ast/catalog/page.tsx",
+        "start": 40,
+        "startLoc": {
+          "column": 37,
+          "line": 40,
+          "position": 1987
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 91,
+        "endLoc": {
+          "column": 7,
+          "line": 91,
+          "position": 4417
+        },
+        "name": "console/mkp/analytics/page.tsx",
+        "start": 85,
+        "startLoc": {
+          "column": 39,
+          "line": 85,
+          "position": 4177
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 69,
+        "endLoc": {
+          "column": 75,
+          "line": 69,
+          "position": 3769
+        },
+        "name": "console/ast/catalog/page.tsx",
+        "start": 62,
+        "startLoc": {
+          "column": 69,
+          "line": 62,
+          "position": 3424
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 94,
+        "endLoc": {
+          "column": 75,
+          "line": 94,
+          "position": 4804
+        },
+        "name": "console/crm/lead-stats/page.tsx",
+        "start": 87,
+        "startLoc": {
+          "column": 97,
+          "line": 87,
+          "position": 4465
+        }
+      },
+      "tokens": 81
+    },
+    {
+      "firstFile": {
+        "end": 69,
+        "endLoc": {
+          "column": 75,
+          "line": 69,
+          "position": 3769
+        },
+        "name": "console/ast/catalog/page.tsx",
+        "start": 62,
+        "startLoc": {
+          "column": 69,
+          "line": 62,
+          "position": 3424
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 115,
+        "endLoc": {
+          "column": 75,
+          "line": 115,
+          "position": 6085
+        },
+        "name": "console/mkp/analytics/page.tsx",
+        "start": 108,
+        "startLoc": {
+          "column": 89,
+          "line": 108,
+          "position": 5746
+        }
+      },
+      "tokens": 81
+    },
+    {
+      "firstFile": {
+        "end": 75,
+        "endLoc": {
+          "column": 21,
+          "line": 75,
+          "position": 3847
+        },
+        "name": "console/ast/inventory/[id]/page.tsx",
+        "start": 65,
+        "startLoc": {
+          "column": 43,
+          "line": 65,
+          "position": 3380
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 21,
+          "line": 81,
+          "position": 4065
+        },
+        "name": "console/fin/invoices/[id]/page.tsx",
+        "start": 71,
+        "startLoc": {
+          "column": 45,
+          "line": 71,
+          "position": 3598
+        }
+      },
+      "tokens": 82
+    },
+    {
+      "firstFile": {
+        "end": 89,
+        "endLoc": {
+          "column": 21,
+          "line": 89,
+          "position": 4770
+        },
+        "name": "console/ast/inventory/[id]/page.tsx",
+        "start": 80,
+        "startLoc": {
+          "column": 132,
+          "line": 80,
+          "position": 4439
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 75,
+        "endLoc": {
+          "column": 21,
+          "line": 75,
+          "position": 3723
+        },
+        "name": "console/fin/ap/page.tsx",
+        "start": 66,
+        "startLoc": {
+          "column": 99,
+          "line": 66,
+          "position": 3392
+        }
+      },
+      "tokens": 78
+    },
+    {
+      "firstFile": {
+        "end": 90,
+        "endLoc": {
+          "column": 9,
+          "line": 90,
+          "position": 4798
+        },
+        "name": "console/ast/inventory/[id]/page.tsx",
+        "start": 80,
+        "startLoc": {
+          "column": 132,
+          "line": 80,
+          "position": 4439
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 55,
+        "endLoc": {
+          "column": 9,
+          "line": 55,
+          "position": 2581
+        },
+        "name": "console/sal/orders/page.tsx",
+        "start": 45,
+        "startLoc": {
+          "column": 106,
+          "line": 45,
+          "position": 2199
+        }
+      },
+      "tokens": 82
+    },
+    {
+      "firstFile": {
+        "end": 89,
+        "endLoc": {
+          "column": 21,
+          "line": 89,
+          "position": 4770
+        },
+        "name": "console/ast/inventory/[id]/page.tsx",
+        "start": 81,
+        "startLoc": {
+          "column": 8,
+          "line": 81,
+          "position": 4450
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 72,
+        "endLoc": {
+          "column": 21,
+          "line": 72,
+          "position": 3743
+        },
+        "name": "console/mdm/partners/[id]/page.tsx",
+        "start": 64,
+        "startLoc": {
+          "column": 286,
+          "line": 64,
+          "position": 3423
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 49,
+        "endLoc": {
+          "column": 7,
+          "line": 49,
+          "position": 2196
+        },
+        "name": "console/ast/inventory/page.tsx",
+        "start": 42,
+        "startLoc": {
+          "column": 34,
+          "line": 42,
+          "position": 1870
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 46,
+        "endLoc": {
+          "column": 7,
+          "line": 46,
+          "position": 1802
+        },
+        "name": "console/mdm/partners/page.tsx",
+        "start": 39,
+        "startLoc": {
+          "column": 34,
+          "line": 39,
+          "position": 1476
+        }
+      },
+      "tokens": 86
+    },
+    {
+      "firstFile": {
+        "end": 48,
+        "endLoc": {
+          "column": 41,
+          "line": 48,
+          "position": 2188
+        },
+        "name": "console/ast/inventory/page.tsx",
+        "start": 43,
+        "startLoc": {
+          "column": 38,
+          "line": 43,
+          "position": 1926
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 47,
+          "line": 17,
+          "position": 888
+        },
+        "name": "console/master-data/equipment/page.tsx",
+        "start": 12,
+        "startLoc": {
+          "column": 32,
+          "line": 12,
+          "position": 606
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 57,
+        "endLoc": {
+          "column": 27,
+          "line": 57,
+          "position": 2525
+        },
+        "name": "console/ast/inventory/page.tsx",
+        "start": 43,
+        "startLoc": {
+          "column": 38,
+          "line": 43,
+          "position": 1926
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 15,
+      "secondFile": {
+        "end": 24,
+        "endLoc": {
+          "column": 45,
+          "line": 24,
+          "position": 1113
+        },
+        "name": "console/mdm/taxonomy/page.tsx",
+        "start": 12,
+        "startLoc": {
+          "column": 34,
+          "line": 12,
+          "position": 550
+        }
+      },
+      "tokens": 167
+    },
+    {
+      "firstFile": {
+        "end": 283,
+        "endLoc": {
+          "column": 15,
+          "line": 283,
+          "position": 14210
+        },
+        "name": "console/ast/inventory/page.tsx",
+        "start": 273,
+        "startLoc": {
+          "column": 75,
+          "line": 273,
+          "position": 13694
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 326,
+        "endLoc": {
+          "column": 15,
+          "line": 326,
+          "position": 15519
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 316,
+        "startLoc": {
+          "column": 81,
+          "line": 316,
+          "position": 14999
+        }
+      },
+      "tokens": 87
+    },
+    {
+      "firstFile": {
+        "end": 280,
+        "endLoc": {
+          "column": 72,
+          "line": 280,
+          "position": 14153
+        },
+        "name": "console/ast/inventory/page.tsx",
+        "start": 273,
+        "startLoc": {
+          "column": 75,
+          "line": 273,
+          "position": 13694
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 213,
+        "endLoc": {
+          "column": 72,
+          "line": 213,
+          "position": 9400
+        },
+        "name": "console/mdm/partners/page.tsx",
+        "start": 206,
+        "startLoc": {
+          "column": 87,
+          "line": 206,
+          "position": 8941
+        }
+      },
+      "tokens": 82
+    },
+    {
+      "firstFile": {
+        "end": 283,
+        "endLoc": {
+          "column": 14,
+          "line": 283,
+          "position": 14209
+        },
+        "name": "console/ast/inventory/page.tsx",
+        "start": 273,
+        "startLoc": {
+          "column": 75,
+          "line": 273,
+          "position": 13694
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 279,
+        "endLoc": {
+          "column": 14,
+          "line": 279,
+          "position": 12592
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 269,
+        "startLoc": {
+          "column": 87,
+          "line": 269,
+          "position": 12081
+        }
+      },
+      "tokens": 86
+    },
+    {
+      "firstFile": {
+        "end": 122,
+        "endLoc": {
+          "column": 66,
+          "line": 122,
+          "position": 6808
+        },
+        "name": "console/ast/models/page.tsx",
+        "start": 112,
+        "startLoc": {
+          "column": 16,
+          "line": 112,
+          "position": 6384
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 127,
+        "endLoc": {
+          "column": 66,
+          "line": 127,
+          "position": 6897
+        },
+        "name": "console/mkp/auctions/page.tsx",
+        "start": 117,
+        "startLoc": {
+          "column": 123,
+          "line": 117,
+          "position": 6473
+        }
+      },
+      "tokens": 74
+    },
+    {
+      "firstFile": {
+        "end": 122,
+        "endLoc": {
+          "column": 66,
+          "line": 122,
+          "position": 6808
+        },
+        "name": "console/ast/models/page.tsx",
+        "start": 112,
+        "startLoc": {
+          "column": 16,
+          "line": 112,
+          "position": 6384
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 307,
+        "endLoc": {
+          "column": 66,
+          "line": 307,
+          "position": 20063
+        },
+        "name": "console/mkp/listings/page.tsx",
+        "start": 297,
+        "startLoc": {
+          "column": 133,
+          "line": 297,
+          "position": 19639
+        }
+      },
+      "tokens": 74
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 937
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 927
+        },
+        "name": "console/fin/customers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 91,
+          "line": 7,
+          "position": 259
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 937
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 930
+        },
+        "name": "console/fin/expenses/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 95,
+          "line": 7,
+          "position": 262
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 937
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 951
+        },
+        "name": "console/pub/overview/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 110,
+          "line": 7,
+          "position": 283
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 18,
+        "endLoc": {
+          "column": 50,
+          "line": 18,
+          "position": 1001
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 18,
+        "endLoc": {
+          "column": 50,
+          "line": 18,
+          "position": 1007
+        },
+        "name": "console/pub/queue/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 102,
+          "line": 7,
+          "position": 276
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 937
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 930
+        },
+        "name": "console/sal/appointments/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 89,
+          "line": 7,
+          "position": 262
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 937
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 925
+        },
+        "name": "console/sal/payments/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 88,
+          "line": 7,
+          "position": 257
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 50,
+          "line": 19,
+          "position": 1064
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 50,
+          "line": 19,
+          "position": 1065
+        },
+        "name": "console/sal/quote-submissions/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 98,
+          "line": 7,
+          "position": 276
+        }
+      },
+      "tokens": 100
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 937
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 934
+        },
+        "name": "console/sal/quotes/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 92,
+          "line": 7,
+          "position": 266
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 937
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 927
+        },
+        "name": "console/sal/rentals/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 91,
+          "line": 7,
+          "position": 259
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 937
+        },
+        "name": "console/ast/suppliers/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 99,
+          "line": 7,
+          "position": 269
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 50,
+          "line": 17,
+          "position": 927
+        },
+        "name": "console/sal/reviews/page.tsx",
+        "start": 7,
+        "startLoc": {
+          "column": 91,
+          "line": 7,
+          "position": 259
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 28,
+        "endLoc": {
+          "column": 8,
+          "line": 28,
+          "position": 1330
+        },
+        "name": "console/crm/activities/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 46,
+          "line": 19,
+          "position": 975
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 8,
+          "line": 31,
+          "position": 1469
+        },
+        "name": "console/fin/ap/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 136,
+          "line": 22,
+          "position": 1114
+        }
+      },
+      "tokens": 109
+    },
+    {
+      "firstFile": {
+        "end": 28,
+        "endLoc": {
+          "column": 8,
+          "line": 28,
+          "position": 1330
+        },
+        "name": "console/crm/activities/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 46,
+          "line": 19,
+          "position": 975
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 25,
+        "endLoc": {
+          "column": 8,
+          "line": 25,
+          "position": 1153
+        },
+        "name": "console/master-data/equipment/page.tsx",
+        "start": 15,
+        "startLoc": {
+          "column": 53,
+          "line": 15,
+          "position": 787
+        }
+      },
+      "tokens": 109
+    },
+    {
+      "firstFile": {
+        "end": 29,
+        "endLoc": {
+          "column": 18,
+          "line": 29,
+          "position": 1392
+        },
+        "name": "console/crm/activities/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 46,
+          "line": 19,
+          "position": 975
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 73,
+        "endLoc": {
+          "column": 26,
+          "line": 73,
+          "position": 2256
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 62,
+        "startLoc": {
+          "column": 50,
+          "line": 62,
+          "position": 1824
+        }
+      },
+      "tokens": 126
+    },
+    {
+      "firstFile": {
+        "end": 21,
+        "endLoc": {
+          "column": 38,
+          "line": 21,
+          "position": 856
+        },
+        "name": "console/crm/lead-stats/page.tsx",
+        "start": 16,
+        "startLoc": {
+          "column": 101,
+          "line": 16,
+          "position": 597
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 29,
+        "endLoc": {
+          "column": 38,
+          "line": 29,
+          "position": 1503
+        },
+        "name": "console/mkp/analytics/page.tsx",
+        "start": 24,
+        "startLoc": {
+          "column": 121,
+          "line": 24,
+          "position": 1244
+        }
+      },
+      "tokens": 71
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 44,
+          "line": 31,
+          "position": 1309
+        },
+        "name": "console/crm/lead-stats/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 86,
+          "line": 22,
+          "position": 990
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 39,
+        "endLoc": {
+          "column": 44,
+          "line": 39,
+          "position": 1973
+        },
+        "name": "console/mkp/analytics/page.tsx",
+        "start": 30,
+        "startLoc": {
+          "column": 124,
+          "line": 30,
+          "position": 1654
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 121,
+        "endLoc": {
+          "column": 74,
+          "line": 121,
+          "position": 6256
+        },
+        "name": "console/crm/lead-stats/page.tsx",
+        "start": 112,
+        "startLoc": {
+          "column": 15,
+          "line": 112,
+          "position": 5922
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 147,
+        "endLoc": {
+          "column": 74,
+          "line": 147,
+          "position": 7803
+        },
+        "name": "console/mkp/analytics/page.tsx",
+        "start": 138,
+        "startLoc": {
+          "column": 16,
+          "line": 138,
+          "position": 7466
+        }
+      },
+      "tokens": 80
+    },
+    {
+      "firstFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 97,
+          "line": 82,
+          "position": 4216
+        },
+        "name": "console/crm/leads/[id]/page.tsx",
+        "start": 69,
+        "startLoc": {
+          "column": 52,
+          "line": 69,
+          "position": 3550
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 85,
+        "endLoc": {
+          "column": 97,
+          "line": 85,
+          "position": 4337
+        },
+        "name": "console/fin/invoices/[id]/page.tsx",
+        "start": 72,
+        "startLoc": {
+          "column": 53,
+          "line": 72,
+          "position": 3671
+        }
+      },
+      "tokens": 86
+    },
+    {
+      "firstFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 97,
+          "line": 82,
+          "position": 4216
+        },
+        "name": "console/crm/leads/[id]/page.tsx",
+        "start": 70,
+        "startLoc": {
+          "column": 155,
+          "line": 70,
+          "position": 3710
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 75,
+        "endLoc": {
+          "column": 97,
+          "line": 75,
+          "position": 3852
+        },
+        "name": "console/sal/quotations/[id]/page.tsx",
+        "start": 63,
+        "startLoc": {
+          "column": 175,
+          "line": 63,
+          "position": 3346
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 89,
+        "endLoc": {
+          "column": 80,
+          "line": 89,
+          "position": 4749
+        },
+        "name": "console/crm/leads/[id]/page.tsx",
+        "start": 82,
+        "startLoc": {
+          "column": 104,
+          "line": 82,
+          "position": 4223
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 92,
+        "endLoc": {
+          "column": 80,
+          "line": 92,
+          "position": 4870
+        },
+        "name": "console/fin/invoices/[id]/page.tsx",
+        "start": 85,
+        "startLoc": {
+          "column": 104,
+          "line": 85,
+          "position": 4344
+        }
+      },
+      "tokens": 82
+    },
+    {
+      "firstFile": {
+        "end": 89,
+        "endLoc": {
+          "column": 18,
+          "line": 89,
+          "position": 4687
+        },
+        "name": "console/crm/leads/[id]/page.tsx",
+        "start": 82,
+        "startLoc": {
+          "column": 104,
+          "line": 82,
+          "position": 4223
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 18,
+          "line": 81,
+          "position": 3997
+        },
+        "name": "console/sal/orders/[id]/page.tsx",
+        "start": 74,
+        "startLoc": {
+          "column": 105,
+          "line": 74,
+          "position": 3533
+        }
+      },
+      "tokens": 71
+    },
+    {
+      "firstFile": {
+        "end": 409,
+        "endLoc": {
+          "column": 41,
+          "line": 409,
+          "position": 18892
+        },
+        "name": "console/dae/cockpit/page.tsx",
+        "start": 402,
+        "startLoc": {
+          "column": 136,
+          "line": 402,
+          "position": 18619
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 72,
+        "endLoc": {
+          "column": 41,
+          "line": 72,
+          "position": 2521
+        },
+        "name": "console/dae/sources/page.tsx",
+        "start": 65,
+        "startLoc": {
+          "column": 129,
+          "line": 65,
+          "position": 2248
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 28,
+          "line": 32,
+          "position": 961
+        },
+        "name": "console/dae/profiles/page.tsx",
+        "start": 24,
+        "startLoc": {
+          "column": 44,
+          "line": 24,
+          "position": 689
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 39,
+        "endLoc": {
+          "column": 28,
+          "line": 39,
+          "position": 1086
+        },
+        "name": "console/dae/sources/page.tsx",
+        "start": 31,
+        "startLoc": {
+          "column": 47,
+          "line": 31,
+          "position": 814
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 81,
+        "endLoc": {
+          "column": 9,
+          "line": 81,
+          "position": 3589
+        },
+        "name": "console/dae/runs/page.tsx",
+        "start": 69,
+        "startLoc": {
+          "column": 155,
+          "line": 69,
+          "position": 3046
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 88,
+        "endLoc": {
+          "column": 9,
+          "line": 88,
+          "position": 3511
+        },
+        "name": "console/dae/sources/page.tsx",
+        "start": 76,
+        "startLoc": {
+          "column": 70,
+          "line": 76,
+          "position": 2968
+        }
+      },
+      "tokens": 140
+    },
+    {
+      "firstFile": {
+        "end": 27,
+        "endLoc": {
+          "column": 19,
+          "line": 27,
+          "position": 965
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 20,
+        "startLoc": {
+          "column": 0,
+          "line": 20,
+          "position": 623
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 27,
+        "endLoc": {
+          "column": 19,
+          "line": 27,
+          "position": 922
+        },
+        "name": "console/dev/queue/page.tsx",
+        "start": 20,
+        "startLoc": {
+          "column": 0,
+          "line": 20,
+          "position": 580
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 42,
+        "endLoc": {
+          "column": 1,
+          "line": 42,
+          "position": 1836
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 33,
+        "startLoc": {
+          "column": 17,
+          "line": 33,
+          "position": 1361
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 42,
+        "endLoc": {
+          "column": 1,
+          "line": 42,
+          "position": 1786
+        },
+        "name": "console/dev/queue/page.tsx",
+        "start": 33,
+        "startLoc": {
+          "column": 13,
+          "line": 33,
+          "position": 1311
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 58,
+        "endLoc": {
+          "column": 58,
+          "line": 58,
+          "position": 2455
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 50,
+        "startLoc": {
+          "column": 45,
+          "line": 50,
+          "position": 2124
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 84,
+        "endLoc": {
+          "column": 60,
+          "line": 84,
+          "position": 3625
+        },
+        "name": "console/dev/queue/page.tsx",
+        "start": 74,
+        "startLoc": {
+          "column": 56,
+          "line": 74,
+          "position": 3274
+        }
+      },
+      "tokens": 80
+    },
+    {
+      "firstFile": {
+        "end": 91,
+        "endLoc": {
+          "column": 66,
+          "line": 91,
+          "position": 3724
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 85,
+        "startLoc": {
+          "column": 62,
+          "line": 85,
+          "position": 3192
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 156,
+        "endLoc": {
+          "column": 66,
+          "line": 156,
+          "position": 6293
+        },
+        "name": "console/dev/queue/page.tsx",
+        "start": 150,
+        "startLoc": {
+          "column": 25,
+          "line": 150,
+          "position": 5759
+        }
+      },
+      "tokens": 172
+    },
+    {
+      "firstFile": {
+        "end": 100,
+        "endLoc": {
+          "column": 38,
+          "line": 100,
+          "position": 4237
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 95,
+        "startLoc": {
+          "column": 21,
+          "line": 95,
+          "position": 3813
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 52,
+        "endLoc": {
+          "column": 36,
+          "line": 52,
+          "position": 2346
+        },
+        "name": "console/dev/queue/page.tsx",
+        "start": 47,
+        "startLoc": {
+          "column": 15,
+          "line": 47,
+          "position": 1926
+        }
+      },
+      "tokens": 97
+    },
+    {
+      "firstFile": {
+        "end": 145,
+        "endLoc": {
+          "column": 6,
+          "line": 145,
+          "position": 6310
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 136,
+        "startLoc": {
+          "column": 82,
+          "line": 136,
+          "position": 5947
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 69,
+        "endLoc": {
+          "column": 6,
+          "line": 69,
+          "position": 2732
+        },
+        "name": "console/dev/deployments/page.tsx",
+        "start": 60,
+        "startLoc": {
+          "column": 98,
+          "line": 60,
+          "position": 2369
+        }
+      },
+      "tokens": 78
+    },
+    {
+      "firstFile": {
+        "end": 147,
+        "endLoc": {
+          "column": 12,
+          "line": 147,
+          "position": 6474
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 136,
+        "startLoc": {
+          "column": 82,
+          "line": 136,
+          "position": 5947
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 59,
+        "endLoc": {
+          "column": 26,
+          "line": 59,
+          "position": 2395
+        },
+        "name": "console/dev/releases/page.tsx",
+        "start": 49,
+        "startLoc": {
+          "column": 78,
+          "line": 49,
+          "position": 1949
+        }
+      },
+      "tokens": 90
+    },
+    {
+      "firstFile": {
+        "end": 155,
+        "endLoc": {
+          "column": 9,
+          "line": 155,
+          "position": 7166
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 148,
+        "startLoc": {
+          "column": 255,
+          "line": 148,
+          "position": 6752
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 163,
+        "endLoc": {
+          "column": 9,
+          "line": 163,
+          "position": 7774
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 156,
+        "startLoc": {
+          "column": 168,
+          "line": 156,
+          "position": 7360
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 164,
+        "endLoc": {
+          "column": 20,
+          "line": 164,
+          "position": 7895
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 154,
+        "startLoc": {
+          "column": 13,
+          "line": 154,
+          "position": 7155
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 348,
+        "endLoc": {
+          "column": 20,
+          "line": 348,
+          "position": 16462
+        },
+        "name": "console/dev/queue/page.tsx",
+        "start": 338,
+        "startLoc": {
+          "column": 126,
+          "line": 338,
+          "position": 15722
+        }
+      },
+      "tokens": 163
+    },
+    {
+      "firstFile": {
+        "end": 175,
+        "endLoc": {
+          "column": 10,
+          "line": 175,
+          "position": 9197
+        },
+        "name": "console/dev/commits/page.tsx",
+        "start": 166,
+        "startLoc": {
+          "column": 248,
+          "line": 166,
+          "position": 8484
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 359,
+        "endLoc": {
+          "column": 10,
+          "line": 359,
+          "position": 17764
+        },
+        "name": "console/dev/queue/page.tsx",
+        "start": 350,
+        "startLoc": {
+          "column": 248,
+          "line": 350,
+          "position": 17051
+        }
+      },
+      "tokens": 149
+    },
+    {
+      "firstFile": {
+        "end": 26,
+        "endLoc": {
+          "column": 5,
+          "line": 26,
+          "position": 893
+        },
+        "name": "console/dev/enhancements/page.tsx",
+        "start": 6,
+        "startLoc": {
+          "column": 92,
+          "line": 6,
+          "position": 261
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 21,
+      "secondFile": {
+        "end": 23,
+        "endLoc": {
+          "column": 5,
+          "line": 23,
+          "position": 746
+        },
+        "name": "console/dev/page.tsx",
+        "start": 3,
+        "startLoc": {
+          "column": 55,
+          "line": 3,
+          "position": 114
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 2,
+          "line": 12,
+          "position": 580
+        },
+        "name": "console/fin/ap/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 16,
+        "endLoc": {
+          "column": 2,
+          "line": 16,
+          "position": 612
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 88
+    },
+    {
+      "firstFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 6,
+          "line": 32,
+          "position": 1525
+        },
+        "name": "console/fin/ap/page.tsx",
+        "start": 25,
+        "startLoc": {
+          "column": 57,
+          "line": 25,
+          "position": 1263
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 69,
+        "endLoc": {
+          "column": 9,
+          "line": 69,
+          "position": 2370
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 62,
+        "startLoc": {
+          "column": 57,
+          "line": 62,
+          "position": 2105
+        }
+      },
+      "tokens": 80
+    },
+    {
+      "firstFile": {
+        "end": 140,
+        "endLoc": {
+          "column": 61,
+          "line": 140,
+          "position": 9090
+        },
+        "name": "console/fin/ap/page.tsx",
+        "start": 135,
+        "startLoc": {
+          "column": 69,
+          "line": 135,
+          "position": 8602
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 168,
+        "endLoc": {
+          "column": 63,
+          "line": 168,
+          "position": 10114
+        },
+        "name": "console/master-data/equipment/page.tsx",
+        "start": 162,
+        "startLoc": {
+          "column": 87,
+          "line": 162,
+          "position": 9605
+        }
+      },
+      "tokens": 74
+    },
+    {
+      "firstFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 1587
+        },
+        "name": "console/fin/customers/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 62,
+          "line": 22,
+          "position": 1252
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 1605
+        },
+        "name": "console/pub/overview/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 56,
+          "line": 22,
+          "position": 1270
+        }
+      },
+      "tokens": 80
+    },
+    {
+      "firstFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 1587
+        },
+        "name": "console/fin/customers/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 62,
+          "line": 22,
+          "position": 1252
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 1589
+        },
+        "name": "console/sal/quotes/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 57,
+          "line": 22,
+          "position": 1254
+        }
+      },
+      "tokens": 80
+    },
+    {
+      "firstFile": {
+        "end": 40,
+        "endLoc": {
+          "column": 1,
+          "line": 40,
+          "position": 1220
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 27,
+        "startLoc": {
+          "column": 84,
+          "line": 27,
+          "position": 833
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 14,
+      "secondFile": {
+        "end": 51,
+        "endLoc": {
+          "column": 1,
+          "line": 51,
+          "position": 1334
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 35,
+        "startLoc": {
+          "column": 0,
+          "line": 35,
+          "position": 931
+        }
+      },
+      "tokens": 129
+    },
+    {
+      "firstFile": {
+        "end": 56,
+        "endLoc": {
+          "column": 40,
+          "line": 56,
+          "position": 1846
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 51,
+        "startLoc": {
+          "column": 26,
+          "line": 51,
+          "position": 1569
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 62,
+        "endLoc": {
+          "column": 40,
+          "line": 62,
+          "position": 1814
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 57,
+        "startLoc": {
+          "column": 26,
+          "line": 57,
+          "position": 1537
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 78,
+        "endLoc": {
+          "column": 15,
+          "line": 78,
+          "position": 2712
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 70,
+        "startLoc": {
+          "column": 27,
+          "line": 70,
+          "position": 2470
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 15,
+          "line": 82,
+          "position": 2583
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 74,
+        "startLoc": {
+          "column": 27,
+          "line": 74,
+          "position": 2341
+        }
+      },
+      "tokens": 72
+    },
+    {
+      "firstFile": {
+        "end": 113,
+        "endLoc": {
+          "column": 128,
+          "line": 113,
+          "position": 3976
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 99,
+        "startLoc": {
+          "column": 17,
+          "line": 99,
+          "position": 3453
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 15,
+      "secondFile": {
+        "end": 116,
+        "endLoc": {
+          "column": 3,
+          "line": 116,
+          "position": 3802
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 100,
+        "startLoc": {
+          "column": 15,
+          "line": 100,
+          "position": 3273
+        }
+      },
+      "tokens": 174
+    },
+    {
+      "firstFile": {
+        "end": 212,
+        "endLoc": {
+          "column": 58,
+          "line": 212,
+          "position": 8499
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 200,
+        "startLoc": {
+          "column": 68,
+          "line": 200,
+          "position": 7940
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 191,
+        "endLoc": {
+          "column": 58,
+          "line": 191,
+          "position": 7177
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 179,
+        "startLoc": {
+          "column": 125,
+          "line": 179,
+          "position": 6618
+        }
+      },
+      "tokens": 95
+    },
+    {
+      "firstFile": {
+        "end": 315,
+        "endLoc": {
+          "column": 92,
+          "line": 315,
+          "position": 14866
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 304,
+        "startLoc": {
+          "column": 15,
+          "line": 304,
+          "position": 14325
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 268,
+        "endLoc": {
+          "column": 92,
+          "line": 268,
+          "position": 11940
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 257,
+        "startLoc": {
+          "column": 17,
+          "line": 257,
+          "position": 11399
+        }
+      },
+      "tokens": 72
+    },
+    {
+      "firstFile": {
+        "end": 343,
+        "endLoc": {
+          "column": 20,
+          "line": 343,
+          "position": 16787
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 333,
+        "startLoc": {
+          "column": 16,
+          "line": 333,
+          "position": 16202
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 286,
+        "endLoc": {
+          "column": 20,
+          "line": 286,
+          "position": 13125
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 276,
+        "startLoc": {
+          "column": 72,
+          "line": 276,
+          "position": 12540
+        }
+      },
+      "tokens": 110
+    },
+    {
+      "firstFile": {
+        "end": 362,
+        "endLoc": {
+          "column": 19,
+          "line": 362,
+          "position": 17826
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 345,
+        "startLoc": {
+          "column": 86,
+          "line": 345,
+          "position": 16975
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 18,
+      "secondFile": {
+        "end": 311,
+        "endLoc": {
+          "column": 19,
+          "line": 311,
+          "position": 14723
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 294,
+        "startLoc": {
+          "column": 92,
+          "line": 294,
+          "position": 13872
+        }
+      },
+      "tokens": 146
+    },
+    {
+      "firstFile": {
+        "end": 392,
+        "endLoc": {
+          "column": 31,
+          "line": 392,
+          "position": 20285
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 362,
+        "startLoc": {
+          "column": 37,
+          "line": 362,
+          "position": 17844
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 31,
+      "secondFile": {
+        "end": 341,
+        "endLoc": {
+          "column": 31,
+          "line": 341,
+          "position": 17174
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 311,
+        "startLoc": {
+          "column": 29,
+          "line": 311,
+          "position": 14733
+        }
+      },
+      "tokens": 336
+    },
+    {
+      "firstFile": {
+        "end": 426,
+        "endLoc": {
+          "column": 14,
+          "line": 426,
+          "position": 22083
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 392,
+        "startLoc": {
+          "column": 57,
+          "line": 392,
+          "position": 20311
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 35,
+      "secondFile": {
+        "end": 375,
+        "endLoc": {
+          "column": 14,
+          "line": 375,
+          "position": 18964
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 341,
+        "startLoc": {
+          "column": 49,
+          "line": 341,
+          "position": 17192
+        }
+      },
+      "tokens": 258
+    },
+    {
+      "firstFile": {
+        "end": 439,
+        "endLoc": {
+          "column": 66,
+          "line": 439,
+          "position": 23054
+        },
+        "name": "console/fin/invoices/page.tsx",
+        "start": 430,
+        "startLoc": {
+          "column": 18,
+          "line": 430,
+          "position": 22369
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 389,
+        "endLoc": {
+          "column": 66,
+          "line": 389,
+          "position": 19952
+        },
+        "name": "console/sal/quotations/page.tsx",
+        "start": 380,
+        "startLoc": {
+          "column": 18,
+          "line": 380,
+          "position": 19267
+        }
+      },
+      "tokens": 77
+    },
+    {
+      "firstFile": {
+        "end": 30,
+        "endLoc": {
+          "column": 15,
+          "line": 30,
+          "position": 1173
+        },
+        "name": "console/int/lookup/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 41,
+          "line": 22,
+          "position": 910
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 45,
+        "endLoc": {
+          "column": 15,
+          "line": 45,
+          "position": 1789
+        },
+        "name": "console/int/mappings/page.tsx",
+        "start": 37,
+        "startLoc": {
+          "column": 44,
+          "line": 37,
+          "position": 1526
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 26,
+        "endLoc": {
+          "column": 6,
+          "line": 26,
+          "position": 1197
+        },
+        "name": "console/master-data/equipment/page.tsx",
+        "start": 19,
+        "startLoc": {
+          "column": 57,
+          "line": 19,
+          "position": 947
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 25,
+        "endLoc": {
+          "column": 9,
+          "line": 25,
+          "position": 1123
+        },
+        "name": "console/mdm/taxonomy/page.tsx",
+        "start": 18,
+        "startLoc": {
+          "column": 57,
+          "line": 18,
+          "position": 870
+        }
+      },
+      "tokens": 80
+    },
+    {
+      "firstFile": {
+        "end": 15,
+        "endLoc": {
+          "column": 5,
+          "line": 15,
+          "position": 712
+        },
+        "name": "console/mdm/partners/[id]/page.tsx",
+        "start": 4,
+        "startLoc": {
+          "column": 55,
+          "line": 4,
+          "position": 170
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 27,
+        "endLoc": {
+          "column": 5,
+          "line": 27,
+          "position": 969
+        },
+        "name": "console/mdm/partners/page.tsx",
+        "start": 8,
+        "startLoc": {
+          "column": 36,
+          "line": 8,
+          "position": 370
+        }
+      },
+      "tokens": 72
+    },
+    {
+      "firstFile": {
+        "end": 93,
+        "endLoc": {
+          "column": 16,
+          "line": 93,
+          "position": 5033
+        },
+        "name": "console/mdm/partners/[id]/page.tsx",
+        "start": 86,
+        "startLoc": {
+          "column": 141,
+          "line": 86,
+          "position": 4594
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 110,
+        "endLoc": {
+          "column": 16,
+          "line": 110,
+          "position": 6385
+        },
+        "name": "console/mdm/partners/[id]/page.tsx",
+        "start": 103,
+        "startLoc": {
+          "column": 176,
+          "line": 103,
+          "position": 5946
+        }
+      },
+      "tokens": 95
+    },
+    {
+      "firstFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 1605
+        },
+        "name": "console/pub/overview/page.tsx",
+        "start": 21,
+        "startLoc": {
+          "column": 55,
+          "line": 21,
+          "position": 1208
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 1605
+        },
+        "name": "console/sal/quote-submissions/page.tsx",
+        "start": 21,
+        "startLoc": {
+          "column": 59,
+          "line": 21,
+          "position": 1208
+        }
+      },
+      "tokens": 92
+    },
+    {
+      "firstFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 1581
+        },
+        "name": "console/sal/appointments/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 58,
+          "line": 22,
+          "position": 1247
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 1,
+          "line": 33,
+          "position": 1579
+        },
+        "name": "console/sal/reviews/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 54,
+          "line": 22,
+          "position": 1245
+        }
+      },
+      "tokens": 80
+    },
+    {
+      "firstFile": {
+        "end": 83,
+        "endLoc": {
+          "column": 86,
+          "line": 83,
+          "position": 4276
+        },
+        "name": "console/sal/orders/[id]/page.tsx",
+        "start": 67,
+        "startLoc": {
+          "column": 14,
+          "line": 67,
+          "position": 3216
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 17,
+      "secondFile": {
+        "end": 90,
+        "endLoc": {
+          "column": 97,
+          "line": 90,
+          "position": 4686
+        },
+        "name": "console/sal/quotations/[id]/page.tsx",
+        "start": 68,
+        "startLoc": {
+          "column": 122,
+          "line": 68,
+          "position": 3543
+        }
+      },
+      "tokens": 166
+    },
+    {
+      "firstFile": {
+        "end": 34,
+        "endLoc": {
+          "column": 1,
+          "line": 34,
+          "position": 1637
+        },
+        "name": "console/sal/payments/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 54,
+          "line": 22,
+          "position": 1240
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 34,
+        "endLoc": {
+          "column": 1,
+          "line": 34,
+          "position": 1639
+        },
+        "name": "console/sal/rentals/page.tsx",
+        "start": 22,
+        "startLoc": {
+          "column": 55,
+          "line": 22,
+          "position": 1242
+        }
+      },
+      "tokens": 92
+    },
+    {
+      "firstFile": {
+        "end": 87,
+        "endLoc": {
+          "column": 9,
+          "line": 87,
+          "position": 4002
+        },
+        "name": "console/sys/access-request/page.tsx",
+        "start": 77,
+        "startLoc": {
+          "column": 53,
+          "line": 77,
+          "position": 3609
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 88,
+        "endLoc": {
+          "column": 9,
+          "line": 88,
+          "position": 3449
+        },
+        "name": "console/sys/sessions/page.tsx",
+        "start": 78,
+        "startLoc": {
+          "column": 63,
+          "line": 78,
+          "position": 3056
+        }
+      },
+      "tokens": 85
+    },
+    {
+      "firstFile": {
+        "end": 93,
+        "endLoc": {
+          "column": 50,
+          "line": 93,
+          "position": 4494
+        },
+        "name": "console/sys/audit/page.tsx",
+        "start": 83,
+        "startLoc": {
+          "column": 14,
+          "line": 83,
+          "position": 3912
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 89,
+        "endLoc": {
+          "column": 50,
+          "line": 89,
+          "position": 3734
+        },
+        "name": "console/sys/security/page.tsx",
+        "start": 79,
+        "startLoc": {
+          "column": 10,
+          "line": 79,
+          "position": 3152
+        }
+      },
+      "tokens": 78
+    },
+    {
+      "firstFile": {
+        "end": 17,
+        "endLoc": {
+          "column": 5,
+          "line": 17,
+          "position": 964
+        },
+        "name": "console/sys/comm/automation/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 17,
+      "secondFile": {
+        "end": 15,
+        "endLoc": {
+          "column": 5,
+          "line": 15,
+          "position": 808
+        },
+        "name": "console/sys/comm/templates/page.tsx",
+        "start": 1,
+        "startLoc": {
+          "column": 0,
+          "line": 1,
+          "position": 0
+        }
+      },
+      "tokens": 78
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 23,
+          "line": 31,
+          "position": 1478
+        },
+        "name": "console/sys/docs/page.tsx",
+        "start": 14,
+        "startLoc": {
+          "column": 42,
+          "line": 14,
+          "position": 865
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 18,
+      "secondFile": {
+        "end": 34,
+        "endLoc": {
+          "column": 23,
+          "line": 34,
+          "position": 1487
+        },
+        "name": "console/sys/processes/page.tsx",
+        "start": 16,
+        "startLoc": {
+          "column": 1,
+          "line": 16,
+          "position": 823
+        }
+      },
+      "tokens": 196
+    },
+    {
+      "firstFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 6,
+          "line": 31,
+          "position": 1461
+        },
+        "name": "console/sys/docs/page.tsx",
+        "start": 14,
+        "startLoc": {
+          "column": 42,
+          "line": 14,
+          "position": 865
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 18,
+      "secondFile": {
+        "end": 21,
+        "endLoc": {
+          "column": 6,
+          "line": 21,
+          "position": 764
+        },
+        "name": "HelpPanel.tsx",
+        "start": 3,
+        "startLoc": {
+          "column": 28,
+          "line": 3,
+          "position": 87
+        }
+      },
+      "tokens": 194
+    },
+    {
+      "firstFile": {
+        "end": 172,
+        "endLoc": {
+          "column": 85,
+          "line": 172,
+          "position": 8959
+        },
+        "name": "console/sys/modules/page.tsx",
+        "start": 161,
+        "startLoc": {
+          "column": 17,
+          "line": 161,
+          "position": 8424
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 220,
+        "endLoc": {
+          "column": 85,
+          "line": 220,
+          "position": 10709
+        },
+        "name": "console/sys/roles/page.tsx",
+        "start": 209,
+        "startLoc": {
+          "column": 14,
+          "line": 209,
+          "position": 10174
+        }
+      },
+      "tokens": 72
+    },
+    {
+      "firstFile": {
+        "end": 177,
+        "endLoc": {
+          "column": 27,
+          "line": 177,
+          "position": 9377
+        },
+        "name": "console/sys/modules/page.tsx",
+        "start": 172,
+        "startLoc": {
+          "column": 114,
+          "line": 172,
+          "position": 8988
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 225,
+        "endLoc": {
+          "column": 27,
+          "line": 225,
+          "position": 11123
+        },
+        "name": "console/sys/roles/page.tsx",
+        "start": 220,
+        "startLoc": {
+          "column": 110,
+          "line": 220,
+          "position": 10734
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 217,
+        "endLoc": {
+          "column": 66,
+          "line": 217,
+          "position": 12066
+        },
+        "name": "console/sys/modules/page.tsx",
+        "start": 205,
+        "startLoc": {
+          "column": 79,
+          "line": 205,
+          "position": 11582
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 258,
+        "endLoc": {
+          "column": 66,
+          "line": 258,
+          "position": 13287
+        },
+        "name": "console/sys/roles/page.tsx",
+        "start": 246,
+        "startLoc": {
+          "column": 92,
+          "line": 246,
+          "position": 12798
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 111,
+        "endLoc": {
+          "column": 32,
+          "line": 111,
+          "position": 5575
+        },
+        "name": "console/sys/quality/page.tsx",
+        "start": 102,
+        "startLoc": {
+          "column": 134,
+          "line": 102,
+          "position": 5071
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 10,
+      "secondFile": {
+        "end": 157,
+        "endLoc": {
+          "column": 32,
+          "line": 157,
+          "position": 7810
+        },
+        "name": "console/sys/quality/page.tsx",
+        "start": 148,
+        "startLoc": {
+          "column": 114,
+          "line": 148,
+          "position": 7306
+        }
+      },
+      "tokens": 82
+    },
+    {
+      "firstFile": {
+        "end": 118,
+        "endLoc": {
+          "column": 63,
+          "line": 118,
+          "position": 6115
+        },
+        "name": "console/sys/quality/page.tsx",
+        "start": 111,
+        "startLoc": {
+          "column": 82,
+          "line": 111,
+          "position": 5625
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 164,
+        "endLoc": {
+          "column": 63,
+          "line": 164,
+          "position": 8352
+        },
+        "name": "console/sys/quality/page.tsx",
+        "start": 157,
+        "startLoc": {
+          "column": 84,
+          "line": 157,
+          "position": 7862
+        }
+      },
+      "tokens": 101
+    },
+    {
+      "firstFile": {
+        "end": 33,
+        "endLoc": {
+          "column": 8,
+          "line": 33,
+          "position": 1822
+        },
+        "name": "console/sys/suim/page.tsx",
+        "start": 21,
+        "startLoc": {
+          "column": 90,
+          "line": 21,
+          "position": 1259
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 39,
+        "endLoc": {
+          "column": 8,
+          "line": 39,
+          "position": 2043
+        },
+        "name": "console/sys/users/page.tsx",
+        "start": 29,
+        "startLoc": {
+          "column": 76,
+          "line": 29,
+          "position": 1701
+        }
+      },
+      "tokens": 110
+    },
+    {
+      "firstFile": {
+        "end": 38,
+        "endLoc": {
+          "column": 1,
+          "line": 38,
+          "position": 1531
+        },
+        "name": "console/sys/support/page.tsx",
+        "start": 28,
+        "startLoc": {
+          "column": 74,
+          "line": 28,
+          "position": 1241
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 470,
+        "endLoc": {
+          "column": 3,
+          "line": 470,
+          "position": 26664
+        },
+        "name": "Shell.tsx",
+        "start": 460,
+        "startLoc": {
+          "column": 45,
+          "line": 460,
+          "position": 26358
+        }
+      },
+      "tokens": 96
+    },
+    {
+      "firstFile": {
+        "end": 38,
+        "endLoc": {
+          "column": 1,
+          "line": 38,
+          "position": 1531
+        },
+        "name": "console/sys/support/page.tsx",
+        "start": 28,
+        "startLoc": {
+          "column": 74,
+          "line": 28,
+          "position": 1241
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 11,
+      "secondFile": {
+        "end": 39,
+        "endLoc": {
+          "column": 1,
+          "line": 39,
+          "position": 1483
+        },
+        "name": "SupportDrawer.tsx",
+        "start": 29,
+        "startLoc": {
+          "column": 74,
+          "line": 29,
+          "position": 1193
+        }
+      },
+      "tokens": 96
+    },
+    {
+      "firstFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 17,
+          "line": 82,
+          "position": 3170
+        },
+        "name": "console/sys/support/page.tsx",
+        "start": 71,
+        "startLoc": {
+          "column": 2,
+          "line": 71,
+          "position": 2809
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 12,
+      "secondFile": {
+        "end": 122,
+        "endLoc": {
+          "column": 17,
+          "line": 122,
+          "position": 4625
+        },
+        "name": "SupportDrawer.tsx",
+        "start": 111,
+        "startLoc": {
+          "column": 2,
+          "line": 111,
+          "position": 4264
+        }
+      },
+      "tokens": 79
+    },
+    {
+      "firstFile": {
+        "end": 18,
+        "endLoc": {
+          "column": 9,
+          "line": 18,
+          "position": 803
+        },
+        "name": "AccountSecurity.tsx",
+        "start": 11,
+        "startLoc": {
+          "column": 46,
+          "line": 11,
+          "position": 494
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 8,
+      "secondFile": {
+        "end": 41,
+        "endLoc": {
+          "column": 9,
+          "line": 41,
+          "position": 2080
+        },
+        "name": "SystemMenu.tsx",
+        "start": 34,
+        "startLoc": {
+          "column": 60,
+          "line": 34,
+          "position": 1771
+        }
+      },
+      "tokens": 81
+    },
+    {
+      "firstFile": {
+        "end": 37,
+        "endLoc": {
+          "column": 9,
+          "line": 37,
+          "position": 1229
+        },
+        "name": "BopSelect.tsx",
+        "start": 29,
+        "startLoc": {
+          "column": 54,
+          "line": 29,
+          "position": 948
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 445,
+        "endLoc": {
+          "column": 9,
+          "line": 445,
+          "position": 25779
+        },
+        "name": "Shell.tsx",
+        "start": 437,
+        "startLoc": {
+          "column": 21,
+          "line": 437,
+          "position": 25498
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 37,
+        "endLoc": {
+          "column": 9,
+          "line": 37,
+          "position": 1229
+        },
+        "name": "BopSelect.tsx",
+        "start": 29,
+        "startLoc": {
+          "column": 54,
+          "line": 29,
+          "position": 948
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 9,
+      "secondFile": {
+        "end": 595,
+        "endLoc": {
+          "column": 9,
+          "line": 595,
+          "position": 33133
+        },
+        "name": "Shell.tsx",
+        "start": 588,
+        "startLoc": {
+          "column": 41,
+          "line": 588,
+          "position": 32853
+        }
+      },
+      "tokens": 70
+    },
+    {
+      "firstFile": {
+        "end": 278,
+        "endLoc": {
+          "column": 10,
+          "line": 278,
+          "position": 15301
+        },
+        "name": "Shell.tsx",
+        "start": 261,
+        "startLoc": {
+          "column": 98,
+          "line": 261,
+          "position": 14632
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 18,
+      "secondFile": {
+        "end": 357,
+        "endLoc": {
+          "column": 10,
+          "line": 357,
+          "position": 20032
+        },
+        "name": "Shell.tsx",
+        "start": 340,
+        "startLoc": {
+          "column": 54,
+          "line": 340,
+          "position": 19363
+        }
+      },
+      "tokens": 212
+    },
+    {
+      "firstFile": {
+        "end": 294,
+        "endLoc": {
+          "column": 79,
+          "line": 294,
+          "position": 16347
+        },
+        "name": "Shell.tsx",
+        "start": 288,
+        "startLoc": {
+          "column": 78,
+          "line": 288,
+          "position": 15841
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 371,
+        "endLoc": {
+          "column": 79,
+          "line": 371,
+          "position": 21323
+        },
+        "name": "Shell.tsx",
+        "start": 365,
+        "startLoc": {
+          "column": 79,
+          "line": 365,
+          "position": 20817
+        }
+      },
+      "tokens": 99
+    },
+    {
+      "firstFile": {
+        "end": 311,
+        "endLoc": {
+          "column": 8,
+          "line": 311,
+          "position": 17624
+        },
+        "name": "Shell.tsx",
+        "start": 299,
+        "startLoc": {
+          "column": 12,
+          "line": 299,
+          "position": 16796
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 13,
+      "secondFile": {
+        "end": 408,
+        "endLoc": {
+          "column": 8,
+          "line": 408,
+          "position": 24280
+        },
+        "name": "Shell.tsx",
+        "start": 396,
+        "startLoc": {
+          "column": 12,
+          "line": 396,
+          "position": 23452
+        }
+      },
+      "tokens": 110
+    },
+    {
+      "firstFile": {
+        "end": 112,
+        "endLoc": {
+          "column": 17,
+          "line": 112,
+          "position": 7091
+        },
+        "name": "SystemMenu.tsx",
+        "start": 107,
+        "startLoc": {
+          "column": 124,
+          "line": 107,
+          "position": 6619
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 126,
+        "endLoc": {
+          "column": 17,
+          "line": 126,
+          "position": 8103
+        },
+        "name": "SystemMenu.tsx",
+        "start": 121,
+        "startLoc": {
+          "column": 124,
+          "line": 121,
+          "position": 7631
+        }
+      },
+      "tokens": 71
+    },
+    {
+      "firstFile": {
+        "end": 112,
+        "endLoc": {
+          "column": 17,
+          "line": 112,
+          "position": 7091
+        },
+        "name": "SystemMenu.tsx",
+        "start": 107,
+        "startLoc": {
+          "column": 118,
+          "line": 107,
+          "position": 6613
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 153,
+        "endLoc": {
+          "column": 17,
+          "line": 153,
+          "position": 10240
+        },
+        "name": "SystemMenu.tsx",
+        "start": 148,
+        "startLoc": {
+          "column": 118,
+          "line": 148,
+          "position": 9762
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 112,
+        "endLoc": {
+          "column": 17,
+          "line": 112,
+          "position": 7091
+        },
+        "name": "SystemMenu.tsx",
+        "start": 107,
+        "startLoc": {
+          "column": 118,
+          "line": 107,
+          "position": 6613
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 166,
+        "endLoc": {
+          "column": 17,
+          "line": 166,
+          "position": 11186
+        },
+        "name": "SystemMenu.tsx",
+        "start": 161,
+        "startLoc": {
+          "column": 126,
+          "line": 161,
+          "position": 10708
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 58,
+        "endLoc": {
+          "column": 72,
+          "line": 58,
+          "position": 2746
+        },
+        "name": "screens.tsx",
+        "start": 53,
+        "startLoc": {
+          "column": 188,
+          "line": 53,
+          "position": 2425
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 85,
+        "endLoc": {
+          "column": 72,
+          "line": 85,
+          "position": 3946
+        },
+        "name": "screens.tsx",
+        "start": 80,
+        "startLoc": {
+          "column": 160,
+          "line": 80,
+          "position": 3625
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 59,
+        "endLoc": {
+          "column": 58,
+          "line": 59,
+          "position": 2815
+        },
+        "name": "screens.tsx",
+        "start": 53,
+        "startLoc": {
+          "column": 188,
+          "line": 53,
+          "position": 2425
+        }
+      },
+      "format": "tsx",
+      "fragment": "",
+      "lines": 7,
+      "secondFile": {
+        "end": 164,
+        "endLoc": {
+          "column": 58,
+          "line": 164,
+          "position": 7601
+        },
+        "name": "screens.tsx",
+        "start": 158,
+        "startLoc": {
+          "column": 135,
+          "line": 158,
+          "position": 7211
+        }
+      },
+      "tokens": 95
+    },
+    {
+      "firstFile": {
+        "end": 120,
+        "endLoc": {
+          "column": 55,
+          "line": 120,
+          "position": 5405
+        },
+        "name": "integration/connectors/autoscout24.ts",
+        "start": 115,
+        "startLoc": {
+          "column": 89,
+          "line": 115,
+          "position": 4947
+        }
+      },
+      "format": "typescript",
+      "fragment": "",
+      "lines": 6,
+      "secondFile": {
+        "end": 132,
+        "endLoc": {
+          "column": 55,
+          "line": 132,
+          "position": 6266
+        },
+        "name": "integration/connectors/autoscout24.ts",
+        "start": 127,
+        "startLoc": {
+          "column": 51,
+          "line": 127,
+          "position": 5808
+        }
+      },
+      "tokens": 85
+    }
+  ],
+  "statistics": {
+    "detectionDate": "2026-07-24T10:55:36.742Z",
+    "formats": {
+      "css": {
+        "clones": 0,
+        "duplicatedLines": 0,
+        "duplicatedTokens": 0,
+        "lines": 363,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 0.0,
+        "percentageTokens": 0.0,
+        "sources": 1,
+        "tokens": 8455
+      },
+      "tsx": {
+        "clones": 164,
+        "duplicatedLines": 1934,
+        "duplicatedTokens": 19477,
+        "lines": 33312,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 5.805715658021134,
+        "percentageTokens": 5.741803109541469,
+        "sources": 193,
+        "tokens": 339214
+      },
+      "typescript": {
+        "clones": 35,
+        "duplicatedLines": 302,
+        "duplicatedTokens": 3121,
+        "lines": 13964,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 2.1627040962474937,
+        "percentageTokens": 2.363785085659754,
+        "sources": 227,
+        "tokens": 132034
+      }
+    },
+    "total": {
+      "clones": 199,
+      "duplicatedLines": 2236,
+      "duplicatedTokens": 22598,
+      "lines": 47639,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 4.693633367618967,
+      "percentageTokens": 4.710831493653365,
+      "sources": 421,
+      "tokens": 479703
+    }
+  }
+}

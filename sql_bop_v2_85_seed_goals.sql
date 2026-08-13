@@ -5,7 +5,7 @@
 
 DO $$
 DECLARE
-  v_tid uuid;
+  v_tid integer;
   v_gid uuid;
 BEGIN
   -- Use the tenant_id from an existing op_tasks row (same tenant the app uses)

@@ -1,0 +1,352 @@
+
+/opt/dessystems-console-dev/app/api/bop/crm/deals/[id]/route.ts
+  103:11  error  '_actor_email' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/opt/dessystems-console-dev/app/api/bop/crm/inbox-sync/route.ts
+  119:8  error  Async function 'POST' has a complexity of 33. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/mkp/bop-listings/[id]/route.ts
+  85:8  error  Async function 'PATCH' has a complexity of 36. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/mkp/media/upload/route.ts
+  34:8  error  Async function 'POST' has a complexity of 32. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/mkt/studio/worker/route.ts
+  68:1  error  Async function 'processJob' has a complexity of 50. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/sal/handover/[id]/route.ts
+  6:8  error  Async function 'GET' has a complexity of 37. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/sal/handover/[id]/sign/route.ts
+  11:8  error  Async function 'POST' has a complexity of 55. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/sal/orders/[id]/send/route.ts
+   5:10  error  'renderDocumentPdf' is defined but never used   @typescript-eslint/no-unused-vars
+  11:76  error  'attachPdf' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/opt/dessystems-console-dev/app/api/bop/sal/surveys/[id]/submit/route.ts
+  7:17  error  Expected '===' and instead saw '=='  eqeqeq
+  7:35  error  Expected '===' and instead saw '=='  eqeqeq
+
+/opt/dessystems-console-dev/app/api/bop/suim/route.ts
+  10:8  error  Async function 'GET' has a complexity of 53. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/sys/counters/route.ts
+  19:22  error  Expected '===' and instead saw '=='  eqeqeq
+
+/opt/dessystems-console-dev/app/api/bop/sys/dealer-applications/route.ts
+  46:8  error  Async function 'POST' has a complexity of 36. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/sys/explorer/route.ts
+  30:8  error  Async function 'GET' has a complexity of 32. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/api/bop/sys/impl/route.ts
+   7:8  error  Async function 'GET' has a complexity of 38. Maximum allowed is 30      complexity
+  97:8  error  Async function 'POST' has too many lines (225). Maximum allowed is 200  max-lines-per-function
+  97:8  error  Async function 'POST' has a complexity of 90. Maximum allowed is 30     complexity
+
+/opt/dessystems-console-dev/app/api/bop/sys/site-features/route.ts
+  56:34  error  Expected '!==' and instead saw '!='  eqeqeq
+
+/opt/dessystems-console-dev/app/console/ast/inventory/page.tsx
+  37:16  error  Function 'AS001Page' has too many lines (396). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/crm/deals/[id]/page.tsx
+  59:16  error  Function 'DealWorkspacePage' has too many lines (304). Maximum allowed is 200  max-lines-per-function
+  59:16  error  Function 'DealWorkspacePage' has a complexity of 37. Maximum allowed is 30     complexity
+
+/opt/dessystems-console-dev/app/console/crm/deals/page.tsx
+   6:32  error  'Plus' is defined but never used                   @typescript-eslint/no-unused-vars
+  35:9   error  'searchParams' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/opt/dessystems-console-dev/app/console/crm/leads/[id]/page.tsx
+  17:16  error  Function 'CR002Page' has too many lines (234). Maximum allowed is 200  max-lines-per-function
+  17:16  error  Function 'CR002Page' has a complexity of 38. Maximum allowed is 30     complexity
+
+/opt/dessystems-console-dev/app/console/dae/cockpit/page.tsx
+  142:1  error  Function 'DetailPanel' has a complexity of 33. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/console/dev/commits/page.tsx
+  44:16  error  Function 'CommitsPage' has too many lines (236). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/dev/definition-audit/page.tsx
+  52:51  error  Arrow function has a complexity of 32. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/console/dev/queue/page.tsx
+  61:16  error  Function 'ProductionQueuePage' has too many lines (432). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/fin/invoices/[id]/page.tsx
+  17:16  error  Function 'FI002Page' has too many lines (211). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/fin/invoices/page.tsx
+  47:16  error  Function 'FI001Page' has too many lines (383). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/int/connectors/page.tsx
+  17:16  error  Function 'ConnectorManagerPage' has too many lines (220). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/int/lookup/page.tsx
+  6:16  error  Function 'IT006Page' has too many lines (223). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/mdm/partners/page.tsx
+  33:16  error  Function 'MD001Page' has too many lines (300). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/mkp/listings/[id]/page.tsx
+  130:16  error  Function 'MP003Editor' has too many lines (452). Maximum allowed is 200   max-lines-per-function
+  130:16  error  Function 'MP003Editor' has a complexity of 56. Maximum allowed is 30      complexity
+  142:10  error  'saving' is assigned a value but never used                               @typescript-eslint/no-unused-vars
+  269:12  error  'tryCoreSave' is defined but never used                                   @typescript-eslint/no-unused-vars
+  567:1   error  File has too many lines (907). Maximum allowed is 500                     max-lines
+  691:35  error  'onSave' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  691:43  error  'saving' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  783:1   error  Function 'MediaTab' has too many lines (226). Maximum allowed is 200      max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/mkp/listings/[id]/preview/page.tsx
+  27:16  error  Function 'ListingPreviewPage' has a complexity of 37. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/console/mkp/listings/page.tsx
+  51:16  error  Function 'MP001Page' has too many lines (315). Maximum allowed is 200  max-lines-per-function
+  51:16  error  Function 'MP001Page' has a complexity of 36. Maximum allowed is 30     complexity
+
+/opt/dessystems-console-dev/app/console/mkt/banner-terms/page.tsx
+  178:16  error  Function 'BannerTermsPage' has too many lines (218). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/mkt/campaigns/page.tsx
+  16:16  error  Function 'CockpitPage' has too many lines (226). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/mkt/studio/page.tsx
+  56:3  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+
+/opt/dessystems-console-dev/app/console/mkt/studio/preset-backgrounds/page.tsx
+  2:1  warning  Unused eslint-disable directive (no problems were reported from 'max-lines-per-function')
+
+/opt/dessystems-console-dev/app/console/sal/appointments/page.tsx
+    4:77  error  'Clock' is defined but never used                                                                                                                                   @typescript-eslint/no-unused-vars
+   52:16  error  Function 'Page' has too many lines (404). Maximum allowed is 200                                                                                                    max-lines-per-function
+   85:21  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  171:7   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  217:25  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  245:37  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  269:77  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  403:47  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  430:31  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  434:31  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  469:31  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+
+/opt/dessystems-console-dev/app/console/sal/buyer-inbox/[id]/page.tsx
+  7:16  error  Function 'BuyerThreadPage' has a complexity of 40. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/console/sal/cases/[id]/page.tsx
+   60:21  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  111:30  error  Expected '!==' and instead saw '!='                                                                                                                                 eqeqeq
+
+/opt/dessystems-console-dev/app/console/sal/cases/page.tsx
+  33:21  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+
+/opt/dessystems-console-dev/app/console/sal/handovers/[id]/page.tsx
+   20:16  error  Function 'SA019Page' has too many lines (251). Maximum allowed is 200                                                                                               max-lines-per-function
+  171:20  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  181:86  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  195:80  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  215:21  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  232:20  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  236:20  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  245:20  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+
+/opt/dessystems-console-dev/app/console/sal/orders/[id]/page.tsx
+   15:16  error  Function 'SA010Page' has too many lines (227). Maximum allowed is 200              max-lines-per-function
+   15:16  error  Function 'SA010Page' has a complexity of 44. Maximum allowed is 30                 complexity
+  103:27  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+  112:47  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+  156:31  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+
+/opt/dessystems-console-dev/app/console/sal/quotations/[id]/page.tsx
+   14:16  error  Function 'SA002Page' has a complexity of 34. Maximum allowed is 30                 complexity
+   94:27  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+  100:27  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+  114:47  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+
+/opt/dessystems-console-dev/app/console/sal/quotations/page.tsx
+  53:16  error  Function 'SA001Page' has too many lines (320). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/sal/sell-leads/page.tsx
+   61:14  error  Expected '===' and instead saw '=='                                                eqeqeq
+  145:25  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+  157:23  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+  178:37  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+  184:27  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+
+/opt/dessystems-console-dev/app/console/sal/surveys/page.tsx
+  13:13  error  Expected '===' and instead saw '=='          eqeqeq
+  26:9   error  'router' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/opt/dessystems-console-dev/app/console/sal/warranties/[id]/page.tsx
+  104:59  error  Expected '!==' and instead saw '!='  eqeqeq
+  105:23  error  Expected '!==' and instead saw '!='  eqeqeq
+
+/opt/dessystems-console-dev/app/console/sys/access-audit/page.tsx
+  27:16  error  Function 'AccessAuditPage' has a complexity of 32. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/app/console/sys/comm/templates/page.tsx
+  31:16  error  Function 'CM004Page' has too many lines (210). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/sys/counters/page.tsx
+  13:16  error  Function 'SY013Page' has too many lines (243). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/sys/data-explorer/page.tsx
+  394:16  error  Function 'SY029Page' has too many lines (336). Maximum allowed is 200  max-lines-per-function
+  537:1   error  File has too many lines (708). Maximum allowed is 500                  max-lines
+
+/opt/dessystems-console-dev/app/console/sys/flow-map/page.tsx
+  44:16  error  Function 'FlowMapPage' has too many lines (308). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/sys/impl/page.tsx
+  132:21   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  137:32   error  Promise returned in function argument where a void return was expected                                                                                              @typescript-eslint/no-misused-promises
+  163:16   error  Function 'SY051Page' has too many lines (742). Maximum allowed is 200                                                                                               max-lines-per-function
+  163:16   error  Function 'SY051Page' has a complexity of 38. Maximum allowed is 30                                                                                                  complexity
+  257:40   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  267:57   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  274:21   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  277:7    error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  277:35   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  287:28   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  294:60   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  303:5    error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  303:31   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  303:59   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  318:5    error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  318:33   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  333:7    error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  333:41   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  353:5    error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  358:50   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  362:48   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  362:76   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  366:47   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  366:75   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  370:76   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  370:112  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  370:140  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  373:76   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  373:102  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  373:130  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  376:74   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  376:102  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  391:36   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  391:72   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  391:100  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  431:31   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  435:31   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  439:68   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  470:35   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  478:28   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  510:33   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  529:77   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  550:1    error  File has too many lines (888). Maximum allowed is 500                                                                                                               max-lines
+  551:74   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  556:74   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  598:85   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  798:41   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  830:76   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  836:105  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  854:80   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  857:53   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  891:84   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  918:73   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  927:73   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  937:73   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  949:73   error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+
+/opt/dessystems-console-dev/app/console/sys/impl/tasks/page.tsx
+   98:16  error  Function 'SY053Page' has too many lines (372). Maximum allowed is 200                                                                                               max-lines-per-function
+  142:5   error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  252:38  error  Expected '!==' and instead saw '!='                                                                                                                                 eqeqeq
+  283:27  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  341:37  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  348:37  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+  449:29  error  Promise-returning function provided to attribute where a void return was expected                                                                                   @typescript-eslint/no-misused-promises
+
+/opt/dessystems-console-dev/app/console/sys/object-explorer/page.tsx
+  183:16  error  Function 'SY028Page' has too many lines (394). Maximum allowed is 200  max-lines-per-function
+  183:16  error  Function 'SY028Page' has a complexity of 51. Maximum allowed is 30     complexity
+  550:1   error  File has too many lines (553). Maximum allowed is 500                  max-lines
+
+/opt/dessystems-console-dev/app/console/sys/quality/page.tsx
+  179:16  error  Function 'SY042Page' has too many lines (252). Maximum allowed is 200  max-lines-per-function
+  179:16  error  Function 'SY042Page' has a complexity of 61. Maximum allowed is 30     complexity
+
+/opt/dessystems-console-dev/app/console/sys/roles/page.tsx
+  15:16  error  Function 'SY002Page' has too many lines (241). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/sys/screen-explorer/page.tsx
+  142:16  error  Function 'ScreenExplorerPage' has too many lines (729). Maximum allowed is 200  max-lines-per-function
+  142:16  error  Function 'ScreenExplorerPage' has a complexity of 139. Maximum allowed is 30    complexity
+  532:1   error  File has too many lines (861). Maximum allowed is 500                           max-lines
+
+/opt/dessystems-console-dev/app/console/sys/suim/page.tsx
+  66:16  error  Function 'SuimPage' has too many lines (412). Maximum allowed is 200  max-lines-per-function
+  66:16  error  Function 'SuimPage' has a complexity of 93. Maximum allowed is 30     complexity
+
+/opt/dessystems-console-dev/app/console/sys/support/page.tsx
+  40:16  error  Function 'SY040Page' has too many lines (228). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/app/console/sys/sy050/page.tsx
+  191:16  error  Function 'SY050Page' has too many lines (468). Maximum allowed is 200  max-lines-per-function
+  488:31  error  Arrow function has a complexity of 40. Maximum allowed is 30           complexity
+  550:1   error  File has too many lines (632). Maximum allowed is 500                  max-lines
+
+/opt/dessystems-console-dev/app/console/sys/tenants/page.tsx
+   46:16  error  Function 'SY003Page' has a complexity of 36. Maximum allowed is 30           complexity
+  256:1   error  Function 'HeroImagesPanel' has too many lines (285). Maximum allowed is 200  max-lines-per-function
+  558:1   error  File has too many lines (615). Maximum allowed is 500                        max-lines
+
+/opt/dessystems-console-dev/app/console/sys/user-cockpit/page.tsx
+  15:16  error  Function 'SY015Page' has too many lines (376). Maximum allowed is 200  max-lines-per-function
+  15:16  error  Function 'SY015Page' has a complexity of 66. Maximum allowed is 30     complexity
+
+/opt/dessystems-console-dev/app/console/sys/users/page.tsx
+   66:16  error  Function 'UsersPage' has too many lines (468). Maximum allowed is 200  max-lines-per-function
+  249:38  error  Arrow function has a complexity of 34. Maximum allowed is 30           complexity
+  531:1   error  File has too many lines (526). Maximum allowed is 500                  max-lines
+
+/opt/dessystems-console-dev/app/p/[locale]/[docType]/[docId]/page.tsx
+    4:10  error  'LOCALE_LABELS' is defined but never used                                          @typescript-eslint/no-unused-vars
+   10:14  error  Expected '===' and instead saw '=='                                                eqeqeq
+  137:16  error  Async function 'PublicDocumentPage' has a complexity of 45. Maximum allowed is 30  complexity
+  207:35  error  Expected '!==' and instead saw '!='                                                eqeqeq
+
+/opt/dessystems-console-dev/components/RichEmailComposer.tsx
+  120:16  error  Function 'RichEmailComposer' has too many lines (351). Maximum allowed is 200      max-lines-per-function
+  459:29  error  Promise-returning function provided to attribute where a void return was expected  @typescript-eslint/no-misused-promises
+
+/opt/dessystems-console-dev/components/Shell.tsx
+    29:1   error  Function 'makeNav' has too many lines (211). Maximum allowed is 200  max-lines-per-function
+   542:1   error  File has too many lines (1634). Maximum allowed is 500               max-lines
+  1102:16  error  Function 'Shell' has too many lines (627). Maximum allowed is 200    max-lines-per-function
+  1102:16  error  Function 'Shell' has a complexity of 38. Maximum allowed is 30       complexity
+
+/opt/dessystems-console-dev/components/SupportDrawer.tsx
+  52:8  error  Function 'SupportDrawer' has too many lines (279). Maximum allowed is 200  max-lines-per-function
+
+/opt/dessystems-console-dev/lib/bop/manifests/index.ts
+  515:1  error  File has too many lines (673). Maximum allowed is 500  max-lines
+
+/opt/dessystems-console-dev/lib/comm/context-bindings.ts
+  201:54  error  'tenantId' is defined but never used. Allowed unused args must match /^_/u         @typescript-eslint/no-unused-vars
+  241:1   error  Async function 'loadCrmLeadContext' has a complexity of 37. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/lib/comm/handover-context.ts
+  4:8  error  Async function 'loadHandoverContext' has a complexity of 43. Maximum allowed is 30  complexity
+
+/opt/dessystems-console-dev/lib/comm/resolve-locale.ts
+  69:24  error  Expected '!==' and instead saw '!='  eqeqeq
+
+/opt/dessystems-console-dev/lib/documents/handover-template.ts
+  205:48  error  Expected '!==' and instead saw '!='  eqeqeq
+
+/opt/dessystems-console-dev/lib/documents/pdf-renderer.ts
+  95:1  error  Function 'buildDocumentHtml' has too many lines (293). Maximum allowed is 200  max-lines-per-function
+
+✖ 202 problems (200 errors, 2 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+

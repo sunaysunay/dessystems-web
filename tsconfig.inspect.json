@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo-inspect"
+  },
+  "exclude": [
+    "node_modules",
+    "tools/bop-inspect"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "commit_hash": "22ac95d",
+  "tsc_errors": 119,
+  "eslint_errors": 55,
+  "knip_findings": 0,
+  "duplication_pct": 4.57,
+  "audit_high": 0,
+  "db_checks_pass": 5,
+  "db_checks_fail": 0,
+  "db_checks_warn": 1,
+  "ai_risk_score": null,
+  "ai_findings_critical": null,
+  "ai_findings_high": null,
+  "triggered_by": "monday-digest",
+  "overall_score": 43,
+  "persisted": true,
+  "timestamp": "2026-07-27T06-00-01"
+}

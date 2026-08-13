@@ -1,0 +1,18 @@
+{
+  "commit_hash": "b9dbe04",
+  "tsc_errors": 125,
+  "eslint_errors": 507,
+  "knip_findings": 0,
+  "duplication_pct": 4.81,
+  "audit_high": 1,
+  "db_checks_pass": 4,
+  "db_checks_fail": 0,
+  "db_checks_warn": 0,
+  "ai_risk_score": null,
+  "ai_findings_critical": null,
+  "ai_findings_high": null,
+  "triggered_by": "phase4-init",
+  "overall_score": 30,
+  "persisted": false,
+  "timestamp": "2026-07-23T00-48-17"
+}

@@ -35,7 +35,9 @@ const AUDIENCE_MAP: Record<string, string> = {
 };
 
 const CTX_MAP: Record<string, string> = {
-  dm_accounts: 'logged_in', save_search: 'logged_in', save_search_email: 'logged_in',
+  // dm_accounts is intentionally 'any' — 'logged_in' would hide the login menu
+  // from anonymous storefront visitors (see sql/bop_v2/57_site_features_groups.sql)
+  save_search: 'logged_in', save_search_email: 'logged_in',
 };
 
 // Protection fallback (until migration 58 adds is_locked/is_critical columns)

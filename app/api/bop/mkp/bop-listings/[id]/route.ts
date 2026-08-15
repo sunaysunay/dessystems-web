@@ -55,7 +55,8 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
       bop_listing_docs (*),
       bop_listing_attrs (*),
       bop_listing_channels (*),
-      bop_listing_features ( feature_id )
+      bop_listing_features ( feature_id ),
+      bop_listing_delivery (*)
     `)
     .eq('id', id)
     .single();
@@ -75,6 +76,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
       docs: data.bop_listing_docs ?? [],
       attrs: data.bop_listing_attrs ?? [],
       channels: data.bop_listing_channels ?? [],
+      delivery: one(data.bop_listing_delivery) ?? {},
       feature_ids: (data.bop_listing_features ?? []).map((f: any) => f.feature_id),
       spec: spec ?? {},
       spec_table: specTable,
@@ -182,6 +184,11 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         const { error } = await supabase.from('bop_listing_docs').insert(rows);
         if (error) throw error;
       }
+    }
+    else if (section === 'delivery') {
+      const { error } = await supabase.from('bop_listing_delivery')
+        .upsert({ listing_id: id, ...data, updated_at: new Date().toISOString() }, { onConflict: 'listing_id' });
+      if (error) throw error;
     }
     else if (section === 'channels') {
       // upsert per channel; preserve views/messages by not overwriting when absent

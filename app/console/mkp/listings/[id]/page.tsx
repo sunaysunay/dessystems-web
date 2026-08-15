@@ -116,9 +116,10 @@ const TRUST_KEYS = ['verified','service_history','export_ready','finance','warra
 // gallery photo classification (mobile.de/CarGurus style) — vehicle + camper sets
 const MEDIA_CATEGORIES = ['exterior','interior','cockpit','seats','engine','tyres','odometer','damage','documents','accessories','kitchen','bathroom','bed','dinette','garage','solar','roof','awning','heating'];
 
-const TABS = ['Core','Pricing','Specs','Features','Media','Content','Documents','Trust','Channels'] as const;
+const TRANSPORT_OPTIONS = ['flatbed','driven','shipped','container','tow'];
+const TABS = ['Core','Pricing','Specs','Features','Media','Content','Documents','Trust','Delivery','Channels'] as const;
 type Tab = typeof TABS[number];
-const SECTION_MAP: Record<Tab, string> = { Core:'core', Pricing:'pricing', Specs:'specs', Features:'features', Media:'media', Content:'content', Documents:'docs', Trust:'attrs', Channels:'channels' };
+const SECTION_MAP: Record<Tab, string> = { Core:'core', Pricing:'pricing', Specs:'specs', Features:'features', Media:'media', Content:'content', Documents:'docs', Trust:'attrs', Delivery:'delivery', Channels:'channels' };
 
 function scoreColor(s: number) {
   if (s >= 80) return 'text-emerald-600'; if (s >= 50) return 'text-amber-600'; return 'text-red-500';
@@ -146,6 +147,7 @@ export default function MP003Editor() {
   const [confirmCat, setConfirmCat] = useState(false);
   const [dirty, setDirty] = useState<Set<string>>(new Set());
   const [savingAll, setSavingAll] = useState(false);
+  const [matchedLayout, setMatchedLayout] = useState<{ id: number; name: string; category: string; body_type_code: number | null } | null>(null);
   function markDirty(section: string) { setDirty(p => { const s = new Set(p); s.add(section); return s; }); }
 
   function showToast(m: string) { setToast(m); setTimeout(() => setToast(''), 2500); }
@@ -240,7 +242,18 @@ export default function MP003Editor() {
   useEffect(() => {
     if (!L?.category) return;
     void fetch(`/api/bop/mkp/bop-listings/meta?category=${L.category}`).then(r => r.json()).then(meta => setBodyTypes(meta.body_types ?? []));
-  }, [L?.category]);
+    void fetchLayout(L.category, L.body_type_code);
+  }, [L?.category, L?.body_type_code]);
+
+  async function fetchLayout(cat: string, bodyCode: number | null) {
+    const res = await fetch(`/api/bop/mkp/listing-layouts?tenant_id=300&category=${cat}`);
+    const j = await res.json();
+    const rows = j.layouts ?? [];
+    const exact = bodyCode ? rows.find((r: any) => r.body_type_code === bodyCode) : null;
+    const fallback = rows.find((r: any) => r.body_type_code === null);
+    const match = exact ?? fallback ?? null;
+    setMatchedLayout(match ? { id: match.id, name: match.name, category: match.category, body_type_code: match.body_type_code } : null);
+  }
 
   // silent=true is used for background refreshes (e.g. after a media upload) — it must
   // NOT flip the page to the full "Loading…" placeholder, which would unmount MediaTab
@@ -259,6 +272,7 @@ export default function MP003Editor() {
       setLoading(false);
       const meta = await fetch(`/api/bop/mkp/bop-listings/meta?category=${j.listing.category}`).then(r => r.json());
       setCatalog(meta.features ?? []); setBrands(meta.brands ?? []); setBodyTypes(meta.body_types ?? []); setCats(meta.categories ?? []);
+      void fetchLayout(j.listing.category, j.listing.body_type_code);
     } else {
       setScore(j.listing.des_score ?? 0);
     }
@@ -298,7 +312,7 @@ export default function MP003Editor() {
     if (readOnly) { showToast(`✗ Read-only — locked by ${heldLock?.locked_by ?? 'another session'}`); return; }
     if (dirty.size === 0) { showToast('Nothing to save'); return; }
     setSavingAll(true);
-    const ORDER = ['core','pricing','specs','features','content','docs','attrs','channels'];
+    const ORDER = ['core','pricing','specs','features','content','docs','attrs','delivery','channels'];
     const toSave = ORDER.filter(s => dirty.has(s));
     let failed = 0;
     for (const section of toSave) {
@@ -310,6 +324,7 @@ export default function MP003Editor() {
       else if (section === 'content') data = L.content;
       else if (section === 'docs') data = L.docs;
       else if (section === 'attrs') data = L.attrs;
+      else if (section === 'delivery') data = L.delivery;
       else if (section === 'channels') data = L.channels;
       else continue;
       const ok = await save(section, data, true);
@@ -324,6 +339,7 @@ export default function MP003Editor() {
   function setCore(k: string, v: any) { setL((p: any) => ({ ...p, [k]: v })); markDirty('core'); }
   function setPricing(k: string, v: any) { setL((p: any) => ({ ...p, pricing: { ...p.pricing, [k]: v } })); markDirty('pricing'); }
   function setSpec(k: string, v: any) { setL((p: any) => ({ ...p, spec: { ...p.spec, [k]: v } })); markDirty('specs'); }
+  function setDelivery(k: string, v: any) { setL((p: any) => ({ ...p, delivery: { ...p.delivery, [k]: v } })); markDirty('delivery'); }
 
   if (loading) return <div className="p-6 text-slate-400">Loading…</div>;
   if (!L) return (
@@ -447,6 +463,14 @@ export default function MP003Editor() {
             <div><label className={lbl}>Ref no</label><input className={`${inp} text-slate-400`} value={L.ref_no ?? '(auto on save)'} readOnly disabled /></div>
             <div className="flex items-end pb-2"><label className="flex items-center gap-2 text-sm text-slate-600"><input type="checkbox" checked={!!L.is_verified} onChange={e => setCore('is_verified', e.target.checked)} className="h-4 w-4 accent-emerald-600" /> Verified</label></div>
           </div>
+          {matchedLayout && (
+            <div className="mt-4 flex items-center gap-3 rounded-lg border border-blue-100 bg-blue-50 px-4 py-2.5">
+              <span className="text-xs font-semibold text-blue-700">Detail Layout</span>
+              <span className="text-xs text-blue-600">{matchedLayout.name}</span>
+              <span className="text-[10px] text-blue-400">{matchedLayout.body_type_code ? `body type ${matchedLayout.body_type_code}` : 'category default'}</span>
+              <a href="/console/mkp/layout-manager" className="ml-auto text-[11px] font-medium text-blue-600 underline decoration-blue-300 hover:decoration-blue-600">Edit in Layout Manager →</a>
+            </div>
+          )}
         </Section>
       )}
 
@@ -548,6 +572,47 @@ export default function MP003Editor() {
                 </label>
               );
             })}
+          </div>
+        </Section>
+      )}
+
+      {/* ── DELIVERY ── */}
+      {tab === 'Delivery' && (
+        <Section>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+            <div className="flex items-end"><label className="flex items-center gap-2 text-sm text-slate-600"><input type="checkbox" checked={!!L.delivery?.delivery_available} onChange={e => setDelivery('delivery_available', e.target.checked)} className="h-4 w-4 accent-blue-600" /> Delivery available</label></div>
+            <div className="flex items-end"><label className="flex items-center gap-2 text-sm text-slate-600"><input type="checkbox" checked={!!L.delivery?.delivery_included} onChange={e => setDelivery('delivery_included', e.target.checked)} className="h-4 w-4 accent-blue-600" /> Delivery included in price</label></div>
+            <div><label className={lbl}>Delivery price</label><input className={inp} type="number" value={L.delivery?.delivery_price ?? ''} onChange={e => setDelivery('delivery_price', e.target.value ? Number(e.target.value) : null)} /></div>
+            <div><label className={lbl}>Currency</label>
+              <BopSelect size="md" value={L.delivery?.delivery_currency ?? 'EUR'} onChange={v => setDelivery('delivery_currency', v)}
+                options={CURRENCIES.map(c => ({ value: c.code, label: `${c.code} - ${c.label}` }))} /></div>
+            <div><label className={lbl}>Delivery radius (km)</label><input className={inp} type="number" value={L.delivery?.delivery_radius_km ?? ''} onChange={e => setDelivery('delivery_radius_km', e.target.value ? Number(e.target.value) : null)} /></div>
+            <div><label className={lbl}>Delivery time (days)</label><input className={inp} type="number" value={L.delivery?.delivery_time_days ?? ''} onChange={e => setDelivery('delivery_time_days', e.target.value ? Number(e.target.value) : null)} /></div>
+            <div className="flex items-end"><label className="flex items-center gap-2 text-sm text-slate-600"><input type="checkbox" checked={L.delivery?.pickup_available !== false} onChange={e => setDelivery('pickup_available', e.target.checked)} className="h-4 w-4 accent-blue-600" /> Pickup available</label></div>
+            <div className="col-span-2"><label className={lbl}>Pickup location</label><input className={inp} type="text" value={L.delivery?.pickup_location ?? ''} onChange={e => setDelivery('pickup_location', e.target.value || null)} /></div>
+            <div className="flex items-end"><label className="flex items-center gap-2 text-sm text-slate-600"><input type="checkbox" checked={!!L.delivery?.export_ready} onChange={e => setDelivery('export_ready', e.target.checked)} className="h-4 w-4 accent-blue-600" /> Export ready</label></div>
+          </div>
+          <div className="mt-4">
+            <label className={lbl}>Transport options</label>
+            <div className="flex flex-wrap gap-2">
+              {TRANSPORT_OPTIONS.map(opt => {
+                const on = (L.delivery?.transport_options ?? []).includes(opt);
+                return (
+                  <label key={opt} className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm capitalize ${on ? 'border-blue-300 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                    <input type="checkbox" checked={on} className="h-4 w-4 accent-blue-600"
+                      onChange={e => {
+                        const cur = L.delivery?.transport_options ?? [];
+                        setDelivery('transport_options', e.target.checked ? [...cur, opt] : cur.filter((o: string) => o !== opt));
+                      }} />
+                    {opt.replace(/_/g, ' ')}
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+          <div className="mt-4">
+            <label className={lbl}>Delivery notes</label>
+            <textarea className={`${inp} min-h-[80px]`} value={L.delivery?.delivery_notes ?? ''} onChange={e => setDelivery('delivery_notes', e.target.value || null)} />
           </div>
         </Section>
       )}

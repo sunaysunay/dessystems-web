@@ -1019,6 +1019,108 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, status: newStatus })
   }
 
+  // ── trigger_cycle — manually open a review cycle for a goal ──
+  if (action === "trigger_cycle") {
+    const goalId = body.goal_id as string
+    if (!goalId)
+      return NextResponse.json({ error: "goal_id required" }, { status: 400 })
+
+    const { data: goal } = await supabaseAdmin
+      .from("op_goals")
+      .select("id, tenant_id, entity, period_start, period_end, progress_pct, health, checkin_frequency")
+      .eq("id", goalId)
+      .single()
+
+    if (!goal)
+      return NextResponse.json({ error: "Goal not found" }, { status: 404 })
+
+    // Check for an already-open cycle
+    const { data: openCycle } = await supabaseAdmin
+      .from("op_goal_cycles")
+      .select("id, cycle_number")
+      .eq("goal_id", goalId)
+      .eq("status", "open")
+      .limit(1)
+      .single()
+
+    if (openCycle)
+      return NextResponse.json(
+        { error: `Cycle #${openCycle.cycle_number} is already open`, cycle_id: openCycle.id },
+        { status: 409 },
+      )
+
+    // Compute expected progress from period
+    const now = Date.now()
+    const ps = goal.period_start ? new Date(goal.period_start).getTime() : now
+    const pe = goal.period_end ? new Date(goal.period_end).getTime() : now
+    const expectedPct = pe > ps ? Math.max(0, Math.min(100, Math.round(((now - ps) / (pe - ps)) * 10000) / 100)) : 50
+    const actualPct = Number(goal.progress_pct ?? 0)
+    const gapPct = Math.round((actualPct - expectedPct) * 100) / 100
+
+    // Find bottleneck KR
+    const { data: krs } = await supabaseAdmin
+      .from("op_goal_key_results")
+      .select("id, progress_pct, weight, title, kr_number")
+      .eq("goal_id", goalId)
+      .is("deleted_at", null)
+
+    let bottleneckId: string | null = null
+    if (krs?.length) {
+      let worstGap = Infinity
+      for (const kr of krs) {
+        const progress = Number(kr.progress_pct ?? 0)
+        const weight = Number(kr.weight ?? 1)
+        const weightedGap = (progress - expectedPct) * weight
+        if (weightedGap < worstGap) {
+          worstGap = weightedGap
+          bottleneckId = kr.id
+        }
+      }
+    }
+
+    // Next cycle number
+    const { data: lastCycle } = await supabaseAdmin
+      .from("op_goal_cycles")
+      .select("cycle_number")
+      .eq("goal_id", goalId)
+      .order("cycle_number", { ascending: false })
+      .limit(1)
+      .single()
+
+    const cycleNumber = (lastCycle?.cycle_number ?? 0) + 1
+
+    const { data: newCycle, error: insertErr } = await supabaseAdmin
+      .from("op_goal_cycles")
+      .insert({
+        tenant_id: goal.tenant_id,
+        goal_id: goalId,
+        cycle_number: cycleNumber,
+        expected_progress: expectedPct,
+        actual_progress: actualPct,
+        gap_pct: gapPct,
+        health_at_review: goal.health,
+        bottleneck_kr_id: bottleneckId,
+      })
+      .select()
+      .single()
+
+    if (insertErr)
+      return NextResponse.json({ error: insertErr.message }, { status: 500 })
+
+    // Advance next_review_at
+    const CADENCE_DAYS: Record<string, number> = { daily: 1, weekly: 7, biweekly: 14, monthly: 30 }
+    const days = CADENCE_DAYS[goal.checkin_frequency ?? "weekly"] ?? 7
+    await supabaseAdmin
+      .from("op_goals")
+      .update({
+        next_review_at: new Date(Date.now() + days * 86400000).toISOString(),
+        last_review_at: new Date().toISOString(),
+      })
+      .eq("id", goalId)
+
+    return NextResponse.json({ ok: true, cycle: newCycle, cycle_number: cycleNumber })
+  }
+
   // ── Default: create goal ──
   const createBody = body as unknown as GoalCreateInput
   if (!createBody.title?.trim()) {

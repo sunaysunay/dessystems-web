@@ -411,6 +411,21 @@ export default function GoalDetailPage() {
     void load();
   }
 
+  async function triggerCycle() {
+    const res = await fetch('/api/bop/ops/goals', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'trigger_cycle', goal_id: id }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      showToast(data.error ?? 'Failed to trigger cycle');
+      return;
+    }
+    showToast(`Cycle #${data.cycle_number} opened`);
+    void load();
+  }
+
   function closeOut() {
     setShowCloseOut(true);
   }
@@ -561,7 +576,18 @@ export default function GoalDetailPage() {
 
       {/* Tab: Cycles */}
       {tab === 'cycles' && (
-        <CycleHistory cycles={cycles} />
+        <div className="space-y-4">
+          {!openCycle && goal.status === 'active' && (
+            <div className="flex items-center justify-between rounded-xl border border-dashed border-indigo-300 bg-indigo-50/50 px-4 py-3">
+              <span className="text-xs text-indigo-600">No open review cycle. Start one manually to review progress now.</span>
+              <button onClick={() => void triggerCycle()}
+                className="rounded-lg bg-indigo-600 px-4 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700 shadow-sm">
+                Trigger Review Cycle
+              </button>
+            </div>
+          )}
+          <CycleHistory cycles={cycles} />
+        </div>
       )}
 
       {/* Tab: Budget */}

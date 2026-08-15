@@ -131,6 +131,7 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/mkp/analytics': { id: 'MP002', title: 'Channel Analytics', mod: 'MKP' },
   '/console/mkp/listings/[id]': { id: 'MP003', title: 'Listing Detail', mod: 'MKP' },
   '/console/mkp/publish': { id: 'MP004', title: 'Channel Publisher', mod: 'MKP' },
+  '/console/mkp/layout-manager': { id: 'MP005', title: 'Layout Manager', mod: 'MKP' },
   '/menu/intelligence': { id: 'MK000', title: 'Intelligence Menu', mod: 'MKT' },
   '/console/mkt/overview': { id: 'MK001', title: 'AI Overview', mod: 'MKT' },
   '/console/mkt/market': { id: 'MK002', title: 'Market Evaluation', mod: 'MKT' },

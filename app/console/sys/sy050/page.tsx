@@ -208,6 +208,53 @@ export default function SY050Page() {
   const [confirmModal, setConfirmModal] = useState<{ feature: FeatureRow; newValue: boolean } | null>(null);
   const [confirmText, setConfirmText] = useState('');
 
+  // Preview mode state
+  const [previewMode, setPreviewMode] = useState(false);
+  const [previewOverrides, setPreviewOverrides] = useState<Record<string, boolean>>({});
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const [previewPage, setPreviewPage] = useState('/nl');
+
+  const previewCount = Object.keys(previewOverrides).length;
+
+  function togglePreviewOverride(key: string, currentEnabled: boolean) {
+    setPreviewOverrides(prev => {
+      const next = { ...prev };
+      if (key in next) {
+        delete next[key];
+      } else {
+        next[key] = !currentEnabled;
+      }
+      return next;
+    });
+  }
+
+  async function openPreview() {
+    if (previewCount === 0) return;
+    setPreviewLoading(true);
+    try {
+      const res = await fetch('/api/bop/sys/ff-preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ overrides: previewOverrides, page: previewPage }),
+      });
+      const j = await res.json();
+      if (j.url) {
+        window.open(j.url, '_blank');
+        showToast(`Preview opened with ${previewCount} override(s)`);
+      } else {
+        showToast(j.error ?? 'Preview failed');
+      }
+    } catch {
+      showToast('Preview request failed');
+    }
+    setPreviewLoading(false);
+  }
+
+  function exitPreviewMode() {
+    setPreviewMode(false);
+    setPreviewOverrides({});
+  }
+
   function showToast(m: string) { setToast(m); setTimeout(() => setToast(''), 2500); }
 
   useEffect(() => {
@@ -313,6 +360,20 @@ export default function SY050Page() {
         <div className="flex-1 min-w-0">
           <ScreenHeader title="Feature Matrix" description="Per-tenant feature control — SY050" />
         </div>
+        <button
+          onClick={() => { if (previewMode) exitPreviewMode(); else setPreviewMode(true); }}
+          className={`shrink-0 mt-1 flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+            previewMode
+              ? 'border-violet-300 bg-violet-50 text-violet-700 hover:bg-violet-100'
+              : 'border-slate-200 text-slate-500 hover:bg-slate-50'
+          }`}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          {previewMode ? 'Exit Preview' : 'Preview Mode'}
+        </button>
       </div>
 
       <div className="mb-4 flex items-center gap-3 flex-wrap">
@@ -460,6 +521,78 @@ export default function SY050Page() {
         </button>
       </div>
 
+      {/* Preview toolbar */}
+      {previewMode && (
+        <div className="mb-4 rounded-xl border-2 border-violet-200 bg-violet-50/50 p-4">
+          <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-2">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-600 text-[10px] font-bold text-white">
+                {previewCount}
+              </span>
+              <span className="text-sm font-semibold text-violet-800">
+                {previewCount === 0 ? 'Click toggles to compose overrides' : `${previewCount} override${previewCount === 1 ? '' : 's'} staged`}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 ml-auto">
+              <select
+                value={previewPage}
+                onChange={e => setPreviewPage(e.target.value)}
+                className="rounded-lg border border-violet-200 bg-white px-2 py-1.5 text-xs text-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-400"
+              >
+                <option value="/nl">Homepage (NL)</option>
+                <option value="/nl/vehicles">Vehicles listing</option>
+                <option value="/en">Homepage (EN)</option>
+                <option value="/en/vehicles">Vehicles (EN)</option>
+                <option value="/de">Homepage (DE)</option>
+              </select>
+              <button
+                onClick={openPreview}
+                disabled={previewCount === 0 || previewLoading}
+                className="rounded-lg bg-violet-600 px-4 py-1.5 text-xs font-semibold text-white hover:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                {previewLoading ? 'Opening…' : 'Open Preview →'}
+              </button>
+              {previewCount > 0 && (
+                <button
+                  onClick={() => setPreviewOverrides({})}
+                  className="rounded-lg border border-violet-200 px-3 py-1.5 text-xs font-medium text-violet-600 hover:bg-violet-100 transition-colors"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+          </div>
+
+          {previewCount > 0 && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {Object.entries(previewOverrides).map(([key, val]) => (
+                <span
+                  key={key}
+                  className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ${
+                    val
+                      ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                      : 'border-red-200 bg-red-50 text-red-700'
+                  }`}
+                >
+                  {key}: {val ? 'ON' : 'OFF'}
+                  <button
+                    onClick={() => setPreviewOverrides(prev => { const n = { ...prev }; delete n[key]; return n; })}
+                    className="ml-0.5 hover:opacity-60"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
+
+          <p className="mt-2 text-[10px] text-violet-500">
+            Preview opens dev.desmobil.com with a 4-hour preview cookie. Only you see the overrides — live visitors are unaffected.
+          </p>
+        </div>
+      )}
+
       {/* Feature matrix */}
       {loading ? (
         <div className="rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-400">
@@ -493,11 +626,14 @@ export default function SY050Page() {
                     const svgKey     = SVG_KEY_MAP[f.feature_key];
                     const svgHtml    = svgKey ? SF_SVG_PREVIEWS[svgKey] : null;
                     const detail     = SF_DETAIL[f.feature_key] ?? null;
+                    const hasOverride = previewMode && f.feature_key in previewOverrides;
+                    const displayEnabled = hasOverride ? previewOverrides[f.feature_key] : f.enabled;
 
                     return (
                       <div
                         key={f.feature_key}
                         className={`px-5 py-4 transition-colors ${
+                          hasOverride ? 'bg-violet-50/50 hover:bg-violet-50/80' :
                           locked ? 'bg-red-50/30 hover:bg-red-50/50' :
                           critical ? 'hover:bg-amber-50/30' :
                           'hover:bg-slate-50/50'
@@ -506,23 +642,36 @@ export default function SY050Page() {
                         <div className="flex items-start gap-4">
                           {/* Toggle */}
                           <button
-                            onClick={() => handleToggleAttempt(f, !f.enabled)}
-                            disabled={locked || savingKey === f.feature_key}
+                            onClick={() => {
+                              if (previewMode) {
+                                togglePreviewOverride(f.feature_key, f.enabled);
+                              } else {
+                                handleToggleAttempt(f, !f.enabled);
+                              }
+                            }}
+                            disabled={!previewMode && (locked || savingKey === f.feature_key)}
                             title={
+                              previewMode ? (hasOverride ? 'Click to remove override' : 'Click to add preview override') :
                               locked ? getLockReason(f) :
                               critical ? 'Critical feature — requires confirmation to change' :
                               f.enabled ? 'Click to disable' : 'Click to enable'
                             }
-                            className={`relative mt-0.5 flex-none rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-                              locked ? 'opacity-40 cursor-not-allowed' :
-                              savingKey === f.feature_key ? 'opacity-50 cursor-wait' :
+                            className={`relative mt-0.5 flex-none rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                              previewMode ? 'focus:ring-violet-500' : 'focus:ring-blue-500'
+                            } ${
+                              !previewMode && locked ? 'opacity-40 cursor-not-allowed' :
+                              !previewMode && savingKey === f.feature_key ? 'opacity-50 cursor-wait' :
                               'cursor-pointer'
-                            } ${f.enabled ? (locked ? 'bg-slate-400' : 'bg-emerald-500') : 'bg-slate-200'}`}
+                            } ${
+                              hasOverride
+                                ? (displayEnabled ? 'bg-violet-500 ring-2 ring-violet-300' : 'bg-violet-200 ring-2 ring-violet-300')
+                                : (displayEnabled ? (locked ? 'bg-slate-400' : 'bg-emerald-500') : 'bg-slate-200')
+                            }`}
                             style={{ width: 40, height: 22 }}
                           >
                             <span
                               className={`absolute top-0.5 block h-[18px] w-[18px] rounded-full bg-white shadow transition-transform duration-200 ${
-                                f.enabled ? 'translate-x-[20px]' : 'translate-x-0.5'
+                                displayEnabled ? 'translate-x-[20px]' : 'translate-x-0.5'
                               }`}
                             />
                           </button>
@@ -555,6 +704,11 @@ export default function SY050Page() {
                               {locked && (
                                 <span className="rounded border border-red-200 bg-red-50 px-1.5 py-0.5 text-[10px] font-bold text-red-600">
                                   LOCKED
+                                </span>
+                              )}
+                              {hasOverride && (
+                                <span className={`rounded border border-violet-300 bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700`}>
+                                  {displayEnabled ? '→ ON' : '→ OFF'}
                                 </span>
                               )}
                             </div>

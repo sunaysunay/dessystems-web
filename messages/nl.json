@@ -190,7 +190,8 @@
     "shopClaims": "Claims",
     "shopWarranty": "Garantie",
     "shopSupplierRma": "Leverancier RMA",
-    "shopTracking": "Ordertracering"
+    "shopTracking": "Ordertracering",
+    "layoutManager": "Layoutbeheer"
   },
   "sal": {
     "orders": "Bestellingen",
@@ -544,7 +545,8 @@
     "SA018": "Vraagdetail",
     "SY050": "Functievlaggen",
     "SY051": "Implementatie Cockpit",
-    "SY053": "Taakdetail"
+    "SY053": "Taakdetail",
+    "MP005": "Layoutbeheer"
   },
   "support": {
     "title": "Support",

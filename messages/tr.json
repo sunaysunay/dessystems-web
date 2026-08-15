@@ -253,7 +253,8 @@
     "shopClaims": "Talepler",
     "shopWarranty": "Garanti",
     "shopSupplierRma": "Tedarikçi RMA",
-    "shopTracking": "Sipariş Takibi"
+    "shopTracking": "Sipariş Takibi",
+    "layoutManager": "Düzen Yöneticisi"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -401,7 +402,8 @@
     "SA018": "Sorgu Detayı",
     "SY050": "Özellik Bayrakları",
     "SY051": "Uygulama Kokpiti",
-    "SY053": "Görev Detayı"
+    "SY053": "Görev Detayı",
+    "MP005": "Düzen Yöneticisi"
   },
   "support": {
     "title": "Destek",

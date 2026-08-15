@@ -244,6 +244,9 @@ export default function SY051Page() {
   const [programOpGoal, setProgramOpGoal] = useState<{ id: string; goal_number: string; title: string; status: string; health: string; progress_pct: number } | null>(null);
   const [linkingGoal, setLinkingGoal] = useState(false);
 
+  // Track if OP link just changed (to highlight Save)
+  const [linkDirty, setLinkDirty] = useState(false);
+
   // Status change state
   const [statusEdit, setStatusEdit] = useState<{ type: 'program' | 'phase'; id: string; current: string } | null>(null);
   const [statusNew, setStatusNew] = useState('');
@@ -264,7 +267,7 @@ export default function SY051Page() {
 
   const loadPrograms = useCallback(async () => {
     setLoading(true);
-    const res = await fetch('/api/bop/sys/impl?scope=programs');
+    const res = await fetch(`/api/bop/sys/impl?scope=programs&_t=${Date.now()}`, { cache: 'no-store' });
     const { programs: data } = await res.json();
     setPrograms(data ?? []);
     if (selProgramId) {
@@ -275,12 +278,13 @@ export default function SY051Page() {
   }, [selProgramId, scopeDirty]);
 
   const loadFullTree = useCallback(async (programId: string) => {
-    const pRes = await fetch(`/api/bop/sys/impl?scope=phases&program_id=${programId}`);
+    const ts = Date.now();
+    const pRes = await fetch(`/api/bop/sys/impl?scope=phases&program_id=${programId}&_t=${ts}`, { cache: 'no-store' });
     const { phases: ph } = await pRes.json();
     setPhases(ph ?? []);
     const tbp: Record<string, Task[]> = {};
     for (const p of (ph ?? [])) {
-      const tRes = await fetch(`/api/bop/sys/impl?scope=tasks&phase_id=${p.phase_id}`);
+      const tRes = await fetch(`/api/bop/sys/impl?scope=tasks&phase_id=${p.phase_id}&_t=${ts}`, { cache: 'no-store' });
       const { tasks: tks } = await tRes.json();
       tbp[p.phase_id] = tks ?? [];
     }
@@ -294,7 +298,7 @@ export default function SY051Page() {
   }, []);
 
   const loadDeliverables = useCallback(async (taskId: string) => {
-    const res = await fetch(`/api/bop/sys/impl?scope=deliverables&task_id=${taskId}`);
+    const res = await fetch(`/api/bop/sys/impl?scope=deliverables&task_id=${taskId}&_t=${Date.now()}`, { cache: 'no-store' });
     const { deliverables: data } = await res.json();
     setDelivsByTask(prev => ({ ...prev, [taskId]: data ?? [] }));
   }, []);
@@ -409,6 +413,7 @@ export default function SY051Page() {
   const saveHeader = async () => {
     if (scopeDirty) await saveScope();
     if (statusEdit) await saveStatus();
+    if (linkDirty) { setLinkDirty(false); loadPrograms(); showToast('Saved'); return; }
     if (!scopeDirty && !statusEdit) showToast('Nothing to save');
   };
 
@@ -456,7 +461,7 @@ export default function SY051Page() {
       <div className="flex items-center justify-between">
         <ScreenHeader title="Implementation Cockpit" description="Track implementation programs, phases, tasks and deliverables — SY051" />
         <div className="flex items-center gap-2">
-          <button onClick={() => { loadPrograms(); if (selProgramId) { loadFullTree(selProgramId); loadDocs(selProgramId); } showToast('Refreshed'); }}
+          <button onClick={async () => { await loadPrograms(); if (selProgramId) { await loadFullTree(selProgramId); loadDocs(selProgramId); } showToast('Refreshed'); }}
             className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 shadow-sm hover:bg-slate-50">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
             Refresh
@@ -538,6 +543,7 @@ export default function SY051Page() {
                   <button onClick={async () => {
                     await api({ action: 'link_op_task', program_id: selProgram.program_id, op_task_id: null });
                     setProgramOpTask(null);
+                    setLinkDirty(true);
                     showToast('OP001 unlinked');
                   }} className="rounded px-1 py-0.5 text-[8px] text-red-400 hover:bg-red-50">×</button>
                 </>
@@ -548,7 +554,7 @@ export default function SY051Page() {
                     if (r.error) { showToast(r.error); return; }
                     const op = await api({ action: 'fetch_op_task', task_id: opId });
                     if (op.op_task) setProgramOpTask(op.op_task);
-                    setLinkingProgram(false); showToast('OP001 linked');
+                    setLinkingProgram(false); setLinkDirty(true); showToast('OP001 linked');
                   }}
                   onCancel={() => setLinkingProgram(false)}
                 />
@@ -570,6 +576,7 @@ export default function SY051Page() {
                   <button onClick={async () => {
                     await api({ action: 'link_op_goal', program_id: selProgram.program_id, op_goal_id: null });
                     setProgramOpGoal(null);
+                    setLinkDirty(true);
                     showToast('OP002 unlinked');
                   }} className="rounded px-1 py-0.5 text-[8px] text-red-400 hover:bg-red-50">×</button>
                 </>
@@ -580,7 +587,7 @@ export default function SY051Page() {
                     if (r.error) { showToast(r.error); return; }
                     const g = await api({ action: 'fetch_program_op_goal', program_id: selProgram.program_id });
                     if (g.op_goal) setProgramOpGoal(g.op_goal);
-                    setLinkingGoal(false); showToast('OP002 linked');
+                    setLinkingGoal(false); setLinkDirty(true); showToast('OP002 linked');
                   }}
                   onCancel={() => setLinkingGoal(false)}
                 />
@@ -597,7 +604,7 @@ export default function SY051Page() {
                 <span className="text-xs font-bold text-slate-700">{selProgram.pct}%</span>
               </div>
               <button onClick={saveHeader} disabled={scopeSaving || statusSaving}
-                className={`rounded-lg px-3 py-1 text-xs font-semibold shadow-sm transition-all ${scopeDirty ? 'bg-blue-600 text-white hover:bg-blue-700' : 'border border-slate-200 bg-white text-slate-500 hover:bg-slate-50'} disabled:opacity-50`}>
+                className={`rounded-lg px-3 py-1 text-xs font-semibold shadow-sm transition-all ${scopeDirty || linkDirty ? 'bg-blue-600 text-white hover:bg-blue-700' : 'border border-slate-200 bg-white text-slate-500 hover:bg-slate-50'} disabled:opacity-50`}>
                 {scopeSaving || statusSaving ? '...' : 'Save'}
               </button>
             </div>

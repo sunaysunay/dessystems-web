@@ -36,7 +36,10 @@ UPDATE tenant_site_features SET group_key='ux',         audience='both',      us
 UPDATE tenant_site_features SET group_key='pricing',    audience='b2c',       user_context='any',       importance_level='P1' WHERE feature_key='show_financing_teaser';
 UPDATE tenant_site_features SET group_key='pricing',    audience='both',      user_context='any',       importance_level='P2' WHERE feature_key='show_deal_score';
 UPDATE tenant_site_features SET group_key='conversion', audience='both',      user_context='any',       importance_level='P0' WHERE feature_key='sell_funnel';
-UPDATE tenant_site_features SET group_key='accounts',   audience='both',      user_context='logged_in', importance_level='P0' WHERE feature_key='dm_accounts';
+-- dm_accounts must stay user_context='any': the storefront layout fetches flags
+-- with context 'any', and a 'logged_in' value would hide the login/account menu
+-- from anonymous visitors (nobody could sign in).
+UPDATE tenant_site_features SET group_key='accounts',   audience='both',      user_context='any',       importance_level='P0' WHERE feature_key='dm_accounts';
 UPDATE tenant_site_features SET group_key='accounts',   audience='both',      user_context='logged_in', importance_level='P2' WHERE feature_key='save_search';
 UPDATE tenant_site_features SET group_key='accounts',   audience='both',      user_context='logged_in', importance_level='P3' WHERE feature_key='save_search_email';
 

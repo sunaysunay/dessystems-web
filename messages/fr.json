@@ -253,7 +253,8 @@
     "shopClaims": "Réclamations",
     "shopWarranty": "Garantie",
     "shopSupplierRma": "RMA fournisseur",
-    "shopTracking": "Suivi de commande"
+    "shopTracking": "Suivi de commande",
+    "layoutManager": "Gestionnaire de mise en page"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -401,7 +402,8 @@
     "SA018": "Détail demande",
     "SY050": "Feature Flags",
     "SY051": "Cockpit Implémentation",
-    "SY053": "Détail Tâche"
+    "SY053": "Détail Tâche",
+    "MP005": "Gestionnaire de mise en page"
   },
   "support": {
     "title": "Support",

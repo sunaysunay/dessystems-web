@@ -127,7 +127,7 @@ const VARIANT_STYLES: Record<ToastVariant, { bg: string; icon: typeof CheckCircl
 
 function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: RemoveToast }) {
   const [exiting, setExiting] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     const dur = toast.duration ?? 4000;

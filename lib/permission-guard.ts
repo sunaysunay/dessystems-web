@@ -1,7 +1,8 @@
 // BOP — permission enforcement for API routes.
 //
 // Resolution order (deny by default at every step):
-//   1. bop_uid cookie identifies the caller. No uid → 401.
+//   1. The caller is resolved from the verified Supabase session, NOT from a
+//      cookie the client can write. No verified user → 401.
 //   2. Roles come from the DB, never from the bop_role cookie — bop_user_roles
 //      (within its valid_from/valid_to window), falling back to the single
 //      bop_user_profiles.role column for users predating bop_user_roles.
@@ -9,15 +10,11 @@
 //   4. The permission id must exist in bop_permissions; unknown ids deny.
 //   5. bop_role_permissions must link one of the caller's roles to that id.
 //
-// NOTE: bop_role_permissions currently has NO shop.* rows, so every non
-// super_admin caller is denied on the shop surface until those grants are
-// seeded. That is the correct fail-closed behaviour, not a bug in this guard.
-//
 // NOTE: bop_user_permissions is a per-screen (screen_id / can_read / can_write)
 // override table, not a per-permission one, so it takes no part here.
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 import { getServerClient } from '@/lib/supabase-server';
+import { getVerifiedUser } from '@/lib/supabase-session';
 
 export type PermissionResult =
   | { ok: true; uid: string }
@@ -71,10 +68,11 @@ async function callerRoles(uid: string): Promise<{ ids: string[]; names: string[
  *   if (!guard.ok) return guard.response;
  */
 export async function requirePermission(permissionId: string): Promise<PermissionResult> {
-  const store = await cookies();
-  const uid = store.get('bop_uid')?.value ?? '';
+  const caller = await getVerifiedUser();
 
-  if (!uid) return deny(401, 'unauthenticated');
+  if (!caller) return deny(401, 'unauthenticated');
+
+  const uid = caller.id;
 
   const { ids, names } = await callerRoles(uid);
 

@@ -1,17 +1,23 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
+import { getVerifiedUser } from '@/lib/supabase-session';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const sb = getServerClient();
 
-  // Accept uid from query param (client already validated session via Supabase JS SDK)
-  const uid = req.nextUrl.searchParams.get('uid');
-  if (!uid) return NextResponse.json({ error: 'uid required' }, { status: 400 });
-
-  // Basic UUID validation
-  if (!/^[0-9a-f-]{36}$/.test(uid)) {
-    return NextResponse.json({ error: 'Invalid uid' }, { status: 400 });
+  // This route used to take `uid` from a query parameter, with only a
+  // UUID-shape check and a comment that the client had "already validated"
+  // the session. It was therefore unauthenticated: anyone could read any
+  // user's email, role and profile by supplying a uuid — and the role it
+  // returned is exactly what lib/auth.ts then wrote into the bop_role cookie.
+  //
+  // The caller is now whoever the verified Supabase session says they are,
+  // and any uid parameter is ignored.
+  const caller = await getVerifiedUser();
+  if (!caller) {
+    return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   }
+  const uid = caller.id;
 
   const { data: profile } = await sb
     .from('bop_user_profiles')

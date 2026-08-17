@@ -10,18 +10,20 @@ export type NavSection  = { group: string; items: NavItem[] };
 type DbRow = { screen_id: string; route: string; title: string; nav_group: string; nav_subgroup: string | null; nav_order: number; nav_visible: boolean };
 type ApiTree = Record<string, Record<string, DbRow[]>>;
 
-const GROUP_ORDER = ["overview","operations","salesCrm","marketplace","sales","finance","intelligence","masterData","tools","system"];
+const GROUP_ORDER = ["overview","operations","salesCrm","marketplace","sales","finance","intelligence","shop","masterData","tools","system"];
 const GROUP_LABELS: Record<string, string> = {
   overview:"Overview", operations:"Operations", salesCrm:"Sales & CRM",
   marketplace:"Marketplace", sales:"Sales", finance:"Finance",
-  intelligence:"Intelligence", masterData:"Master Data", tools:"Tools", system:"System",
+  intelligence:"Intelligence", shop:"Shop", masterData:"Master Data", tools:"Tools", system:"System",
 };
 const SUBGROUP_PARENT: Record<string, string> = {
   overview: "/console/anl/overview",
   system:   "/console/sys/dashboard",
+  shop:     "/console/shp/products",
 };
 const SUBGROUP_PARENT_LABEL: Record<string, string> = {
   overview: "Detailed Reports",
+  shop:     "Modules",
 };
 const SUBGROUP_LABELS: Record<string, string> = {
   development: "Development",
@@ -31,6 +33,14 @@ const SUBGROUP_LABELS: Record<string, string> = {
   configuration:"Configuration",
   infrastructure:"Infrastructure",
   dataAcquisition:"Data Acquisition",
+  "1_masterdata":  "Master Data",
+  "2_procurement": "Procurement",
+  "3_warehouse":   "Warehouse",
+  "4_sales":       "Sales",
+  "5_shipping":    "Shipping",
+  "6_finance":     "Finance",
+  "7_aftersales":  "After-Sales",
+  "8_compliance":  "Compliance",
 };
 
 // Groups whose subgroups render as AdminSubMenu (subitems) not AnalyticsNav (subgroups)

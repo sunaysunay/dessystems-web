@@ -158,11 +158,58 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
 
   { group: tg('shop'), items: [
     { label: tn('shopDashboard'),    href: '/console/shp/dashboard' },
-    { label: tn('shopProducts'),     href: '/console/shp/products' },
-    { label: tn('shopOrders'),       href: '/console/shp/orders' },
-    { label: tn('shopInventory'),    href: '/console/shp/inventory' },
-    { label: tn('shopCustomers'),    href: '/console/shp/customers' },
-    { label: tn('shopBrands'),       href: '/console/shp/brands' },
+    { label: tn('shopMonitor'),      href: '/console/shp/monitor' },
+    { label: tn('shopProducts'), href: '/console/shp/products',
+      subgroups: [
+        { subgroup: tg('shopCatalog'), items: [
+          { label: tn('shopProducts'),     href: '/console/shp/products' },
+          { label: tn('shopBrands'),       href: '/console/shp/brands' },
+          { label: tn('shopInventory'),    href: '/console/shp/inventory' },
+          { label: tn('shopDocuments'),    href: '/console/shp/documents' },
+          { label: tn('shopCollections'),  href: '/console/shp/collections' },
+          { label: tn('shopImport'),       href: '/console/shp/import' },
+        ]},
+        { subgroup: tg('shopOrdersMgmt'), items: [
+          { label: tn('shopOrders'),       href: '/console/shp/orders' },
+          { label: tn('shopCustomers'),    href: '/console/shp/customers' },
+          { label: tn('shopTracking'),     href: '/console/shp/tracking' },
+        ]},
+        { subgroup: tg('shopFulfilment'), items: [
+          { label: tn('shopFulfilOrders'), href: '/console/shp/fulfil/orders' },
+          { label: tn('shopAllocations'),  href: '/console/shp/fulfil/allocations' },
+          { label: tn('shopPickLists'),    href: '/console/shp/fulfil/pick' },
+          { label: tn('shopPackStation'),  href: '/console/shp/fulfil/pack' },
+          { label: tn('shopShipments'),    href: '/console/shp/fulfil/shipments' },
+          { label: tn('shopBackorders'),   href: '/console/shp/fulfil/backorders' },
+        ]},
+        { subgroup: tg('shopProcurement'), items: [
+          { label: tn('shopSuppliers'),       href: '/console/shp/procure/suppliers' },
+          { label: tn('shopSupplierCatalog'), href: '/console/shp/procure/catalog' },
+          { label: tn('shopPurchaseOrders'),  href: '/console/shp/procure/po' },
+          { label: tn('shopGoodsReceipt'),    href: '/console/shp/procure/receive' },
+          { label: tn('shopCycleCount'),      href: '/console/shp/procure/count' },
+          { label: tn('shopDropship'),        href: '/console/shp/procure/dropship' },
+        ]},
+        { subgroup: tg('shopFinanceGrp'), items: [
+          { label: tn('shopVat'),          href: '/console/shp/finance/vat' },
+          { label: tn('shopSettlements'),  href: '/console/shp/finance/settlements' },
+          { label: tn('shopInvoices'),     href: '/console/shp/finance/invoices' },
+          { label: tn('shopCreditNotes'),  href: '/console/shp/finance/credit-notes' },
+          { label: tn('shopPayments'),     href: '/console/shp/finance/payments' },
+          { label: tn('shopMargin'),       href: '/console/shp/finance/margin' },
+        ]},
+        { subgroup: tg('shopAfterSalesGrp'), items: [
+          { label: tn('shopReturns'),        href: '/console/shp/aftersales/returns' },
+          { label: tn('shopClaims'),         href: '/console/shp/aftersales/claims' },
+          { label: tn('shopCarrierDamage'),  href: '/console/shp/aftersales/damage' },
+          { label: tn('shopReplacements'),   href: '/console/shp/aftersales/replacements' },
+        ]},
+        { subgroup: tg('shopComplianceGrp'), items: [
+          { label: tn('shopCompliance'),  href: '/console/shp/compliance/registrations' },
+          { label: tn('shopHazards'),     href: '/console/shp/compliance/hazards' },
+          { label: tn('shopGdpr'),        href: '/console/shp/compliance/gdpr' },
+        ]},
+      ]},
     { label: tn('shopSettings'),     href: '/console/shp/settings' },
   ]},
 

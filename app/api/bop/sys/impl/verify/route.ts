@@ -158,6 +158,7 @@ export async function POST(req: NextRequest) {
           is_verified: r.is_verified,
           verified_at: r.is_verified ? new Date().toISOString() : null,
           verified_by: 'auto-verifier',
+          updated_at: new Date().toISOString(),
           verify_evidence: r.verify_evidence,
           verify_error: r.verify_error,
         })

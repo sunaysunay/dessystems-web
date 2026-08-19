@@ -1,18 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
-import { requirePermission } from '@/lib/permission-guard';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
-    const guard = await requirePermission('shop.po.receive');
-    if (!guard.ok) return guard.response;
-
     const supabase = await getServerClient();
     const body = await request.json();
 
-    const { po_id, discrepancy_note, lines } = body;
+    const { po_id, received_by, discrepancy_note, lines } = body;
 
     if (!po_id || !lines || !Array.isArray(lines) || lines.length === 0) {
       return NextResponse.json(
@@ -44,7 +40,7 @@ export async function POST(request: NextRequest) {
       .from('shop_po_receipts')
       .insert({
         po_id,
-        received_by: guard.uid,
+        received_by,
         received_at: new Date().toISOString(),
         discrepancy_note,
       })

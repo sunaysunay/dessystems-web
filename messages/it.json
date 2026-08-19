@@ -435,5 +435,18 @@
     "foot_note": "Beneficio reale = abbonamenti software sostituiti + ore di lavoro recuperate (importazione IA, testo, traduzione, pulizia foto, pubblicazione, follow-up, BTW) valutate alla tua tariffa oraria + costi di mantenimento evitati per rotazione più veloce, meno i 349 €/mese di abbonamento a BOP. Crescita = auto extra × margine lordo. Le tariffe dei marketplace (Marktplaats, Mobile.de) <b>non</b> vengono considerate come risparmio — questi canali continuano. Standard di settore: i concessionari usano in media ~6,8 software per vendita e hanno margini netti sottili del ~2-3%, perciò un modesto risparmio assoluto rappresenta una grande percentuale dell'utile. Tutti i numeri sono stime — modifica ogni valore con i tuoi dati.",
     "page_title": "Calcolatore di Risparmio e Profitto — DES BOP V2",
     "page_desc": "Modella il valore della Piattaforma Operativa DES per la tua concessionaria — contanti risparmiati, ore recuperate e crescita del profitto netto."
+  },
+  "nav": {
+    "cbtCorridors": "Corridors",
+    "cbtCountries": "Countries",
+    "cbtPrices": "Market Prices",
+    "cbtDistributions": "Distributions",
+    "cbtOpportunities": "Opportunities",
+    "cbtTradeLog": "Trade Log",
+    "cbtTradingDash": "Trading Dashboard",
+    "cbtDealerFeed": "Dealer Feed"
+  },
+  "groups": {
+    "markets": "Markets"
   }
 }

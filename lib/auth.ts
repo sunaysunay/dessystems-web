@@ -13,19 +13,17 @@ export async function getSession(): Promise<Session> {
   const user = data.session?.user;
   if (!user) return null;
 
-  // Profile lookup. /api/bop/user/me now resolves the caller from the verified
-  // Supabase session cookie, so no uid is passed — it used to be, and the route
-  // trusted it, which made any user's profile and role readable by uuid.
+  // Role lookup via server API (service role key — secure, server-side only)
+  // Pass uid so server can look up profile without needing cookie-based session
   try {
-    const res = await fetch('/api/bop/user/me');
+    const res = await fetch(`/api/bop/user/me?uid=${user.id}`);
     if (res.ok) {
       const profile = await res.json();
-      // bop_role / bop_uid are deliberately no longer written. They were set
-      // from client-side JS and then trusted server-side for authorization, so
-      // setting bop_role=super_admin in devtools passed every isSuperAdmin()
-      // check. Authorization now derives from the verified session — see
-      // lib/api-guard.ts and lib/supabase-session.ts. bop_locale stays: it is
-      // a display preference and grants nothing.
+      // Set bop_role cookie for middleware enforcement
+      if (profile.role) {
+        document.cookie = `bop_role=${profile.role};path=/;max-age=31536000;samesite=lax`;
+        document.cookie = `bop_uid=${user.id};path=/;max-age=31536000;samesite=lax`;
+      }
       if (profile.language) {
         document.cookie = `bop_locale=${profile.language};path=/;max-age=31536000;samesite=lax`;
       }

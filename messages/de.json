@@ -82,7 +82,8 @@
     "development": "Entwicklung",
     "dataAcquisition": "Datenerfassung",
     "integration": "Integration",
-    "shop": "Shop"
+    "shop": "Shop",
+    "markets": "Märkte"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -254,7 +255,15 @@
     "shopWarranty": "Garantie",
     "shopSupplierRma": "Lieferanten-RMA",
     "shopTracking": "Sendungsverfolgung",
-    "layoutManager": "Layout-Verwaltung"
+    "layoutManager": "Layout-Verwaltung",
+    "cbtCorridors": "Korridore",
+    "cbtCountries": "Länder",
+    "cbtPrices": "Marktpreise",
+    "cbtDistributions": "Verteilungen",
+    "cbtOpportunities": "Chancen",
+    "cbtTradeLog": "Handelsprotokoll",
+    "cbtTradingDash": "Handels-Dashboard",
+    "cbtDealerFeed": "Händler-Feed"
   },
   "screens": {
     "IN006": "Modellkatalog",
@@ -360,7 +369,7 @@
     "SY007": "Scheduled Jobs",
     "SY008": "Admin Dashboard",
     "SY009": "MCP",
-    "SY010": "Drive",
+    "SY010": "Google-Drive-Speicher",
     "SY011": "Access Control",
     "SY012": "Audit Log",
     "SY013": "Zähler",
@@ -476,5 +485,24 @@
     "customers": "Kunden",
     "settings": "Einstellungen",
     "inventory": "Bestandsverwaltung"
+  },
+  "st": {
+    "title": "Google-Drive-Speicher",
+    "description": "SY010 — Google-Drive-Verbindung, Kontingent und Dateiverwaltung pro Mandant",
+    "connect": "Verbinden",
+    "connected": "Verbunden",
+    "notConnected": "Nicht verbunden",
+    "upload": "Hochladen",
+    "download": "Herunterladen",
+    "open": "Öffnen",
+    "trash": "Papierkorb",
+    "refresh": "Aktualisieren",
+    "name": "Name",
+    "size": "Größe",
+    "modified": "Geändert",
+    "actions": "Aktionen",
+    "noFiles": "Keine Dateien in diesem Ordner",
+    "deleteConfirm": "Diese Datei in den Drive-Papierkorb verschieben?",
+    "setup": "Einrichtungsanleitung"
   }
 }

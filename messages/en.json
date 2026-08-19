@@ -214,7 +214,15 @@
     "shopWarranty": "Warranty",
     "shopSupplierRma": "Supplier RMA",
     "shopTracking": "Order Tracking",
-    "layoutManager": "Layout Manager"
+    "layoutManager": "Layout Manager",
+    "cbtCorridors": "Corridors",
+    "cbtCountries": "Countries",
+    "cbtPrices": "Market Prices",
+    "cbtDistributions": "Distributions",
+    "cbtOpportunities": "Opportunities",
+    "cbtTradeLog": "Trade Log",
+    "cbtTradingDash": "Trading Dashboard",
+    "cbtDealerFeed": "Dealer Feed"
   },
   "sal": {
     "orders": "Orders",
@@ -427,7 +435,8 @@
     "shopFinanceGrp": "Finance",
     "shopAfterSalesGrp": "After-Sales",
     "shopProcurement": "Procurement",
-    "shopComplianceGrp": "Compliance"
+    "shopComplianceGrp": "Compliance",
+    "markets": "Markets"
   },
   "screens": {
     "IN006": "Model Catalog",

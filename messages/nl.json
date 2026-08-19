@@ -214,7 +214,15 @@
     "shopWarranty": "Garantie",
     "shopSupplierRma": "Leverancier RMA",
     "shopTracking": "Ordertracering",
-    "layoutManager": "Layoutbeheer"
+    "layoutManager": "Layoutbeheer",
+    "cbtCorridors": "Corridors",
+    "cbtCountries": "Landen",
+    "cbtPrices": "Marktprijzen",
+    "cbtDistributions": "Distributies",
+    "cbtOpportunities": "Kansen",
+    "cbtTradeLog": "Handelslog",
+    "cbtTradingDash": "Handelsdashboard",
+    "cbtDealerFeed": "Dealer Feed"
   },
   "sal": {
     "orders": "Bestellingen",
@@ -427,7 +435,8 @@
     "shopFinanceGrp": "Financiën",
     "shopAfterSalesGrp": "Nazorg",
     "shopProcurement": "Inkoop",
-    "shopComplianceGrp": "Compliance"
+    "shopComplianceGrp": "Compliance",
+    "markets": "Markten"
   },
   "screens": {
     "IN006": "Modellencatalogus",

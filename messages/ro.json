@@ -435,5 +435,18 @@
     "foot_note": "Beneficiu real = abonamente instrumente înlocuite + ore de muncă recuperate (import specific AI, copie listare, traducere, curățare foto, publicare, răspunsuri la lead-uri, pregătire BTW) evaluate la rata dvs. + cost de deținere evitat prin rotație mai rapidă, minus abonamentul BOP de 349 €/lună. Creștere = unități incrementale × brut pe mașină (creștere potențială). Taxele pentru listările de pe piață (Marktplaats, Mobile.de) <b>nu</b> sunt luate în calcul ca economii — aceste canale continuă indiferent. Standarde: dealerii au în medie ~6,8 integrări software pe vânzare și marje nete subțiri de ~2-3%, astfel încât o economie absolută modestă reprezintă o cotă mare din profit. Toate cifrele sunt estimări — suprascrieți fiecare intrare cu propria valoare.",
     "page_title": "Calculator de Economii & Profit — DES BOP V2",
     "page_desc": "Modelați valoarea Platformei de Operare DES pentru reprezentanța dumneavoastră — bani lichizi economisiți, ore recuperate și creșterea profitului net."
+  },
+  "nav": {
+    "cbtCorridors": "Corridors",
+    "cbtCountries": "Countries",
+    "cbtPrices": "Market Prices",
+    "cbtDistributions": "Distributions",
+    "cbtOpportunities": "Opportunities",
+    "cbtTradeLog": "Trade Log",
+    "cbtTradingDash": "Trading Dashboard",
+    "cbtDealerFeed": "Dealer Feed"
+  },
+  "groups": {
+    "markets": "Markets"
   }
 }

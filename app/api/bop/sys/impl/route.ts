@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
     // Enrich with discrepancy_note + tested from sy_tasks
     const ids = (data ?? []).map((t: Record<string, unknown>) => t.task_id);
     if (ids.length) {
-      const { data: raw } = await supabase.from('sy_tasks').select('id, discrepancy_note, tested, tested_at, tested_by').in('id', ids);
+      const { data: raw } = await supabase.from('sy_tasks').select('id, discrepancy_note, tested, tested_at, tested_by, created_at, updated_at').in('id', ids);
       const map = Object.fromEntries((raw ?? []).map((r: Record<string, unknown>) => [r.id, r]));
       for (const t of (data ?? [])) {
         const r = map[(t as Record<string, unknown>).task_id as string];
@@ -58,6 +58,8 @@ export async function GET(req: NextRequest) {
         (t as Record<string, unknown>).tested = r?.tested ?? false;
         (t as Record<string, unknown>).tested_at = r?.tested_at ?? null;
         (t as Record<string, unknown>).tested_by = r?.tested_by ?? null;
+        (t as Record<string, unknown>).created_at = r?.created_at ?? null;
+        (t as Record<string, unknown>).updated_at = r?.updated_at ?? null;
       }
     }
     return NextResponse.json({ tasks: data ?? [] });
@@ -108,7 +110,7 @@ export async function POST(req: NextRequest) {
 
   if (action === 'upsert_program') {
     const { id, code, title, owner, status, spec_doc_path, total_fte_days, target_date } = body;
-    const row: Record<string, unknown> = { code, title, owner, status, spec_doc_path, total_fte_days, target_date };
+    const row: Record<string, unknown> = { code, title, owner, status, spec_doc_path, total_fte_days, target_date, updated_at: new Date().toISOString() };
     if (id) row.id = id;
     const { data, error } = await supabase
       .from('sy_programs')
@@ -121,7 +123,7 @@ export async function POST(req: NextRequest) {
 
   if (action === 'upsert_phase') {
     const { id, program_id, seq, code, title, fte_days, gate_criteria, status, go_signal } = body;
-    const row: Record<string, unknown> = { program_id, seq, code, title, fte_days, gate_criteria, status, go_signal };
+    const row: Record<string, unknown> = { program_id, seq, code, title, fte_days, gate_criteria, status, go_signal, updated_at: new Date().toISOString() };
     if (id) row.id = id;
     const { data, error } = await supabase
       .from('sy_phases')
@@ -134,7 +136,7 @@ export async function POST(req: NextRequest) {
 
   if (action === 'upsert_task') {
     const { id, phase_id, seq, code, title, task_type, blocked_reason, estimate_h, ref_spec_section, impl_notes } = body;
-    const row: Record<string, unknown> = { phase_id, seq, code, title, task_type, blocked_reason, estimate_h, ref_spec_section, impl_notes };
+    const row: Record<string, unknown> = { phase_id, seq, code, title, task_type, blocked_reason, estimate_h, ref_spec_section, impl_notes, updated_at: new Date().toISOString() };
     if (id) row.id = id;
     const { data, error } = await supabase
       .from('sy_tasks')
@@ -147,7 +149,7 @@ export async function POST(req: NextRequest) {
 
   if (action === 'upsert_deliverable') {
     const { id, task_id, kind, ref, verify_mode, sort_order } = body;
-    const row: Record<string, unknown> = { task_id, kind, ref, verify_mode, sort_order };
+    const row: Record<string, unknown> = { task_id, kind, ref, verify_mode, sort_order, updated_at: new Date().toISOString() };
     if (id) row.id = id;
     const { data, error } = await supabase
       .from('sy_deliverables')
@@ -188,7 +190,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const { error } = await supabase.from('sy_programs').update({ status, status_note: status_note || null }).eq('id', program_id);
+    const { error } = await supabase.from('sy_programs').update({ status, status_note: status_note || null, updated_at: new Date().toISOString() }).eq('id', program_id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
     // Log event — find any task in this program to attach the event
@@ -212,7 +214,7 @@ export async function POST(req: NextRequest) {
     const { phase_id, status, status_note, actor } = body;
     if (!phase_id || !status) return NextResponse.json({ error: 'phase_id and status required' }, { status: 400 });
 
-    const { error } = await supabase.from('sy_phases').update({ status, status_note: status_note || null }).eq('id', phase_id);
+    const { error } = await supabase.from('sy_phases').update({ status, status_note: status_note || null, updated_at: new Date().toISOString() }).eq('id', phase_id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
     // Log event on first task in phase
@@ -323,6 +325,7 @@ export async function POST(req: NextRequest) {
       is_verified: is_verified !== false,
       verified_at: is_verified !== false ? new Date().toISOString() : null,
       verify_error: null,
+      updated_at: new Date().toISOString(),
     }).eq('id', id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ ok: true });
@@ -335,6 +338,7 @@ export async function POST(req: NextRequest) {
       is_verified: true,
       verified_at: new Date().toISOString(),
       verify_error: null,
+      updated_at: new Date().toISOString(),
     }).in('id', ids);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ ok: true, count: ids.length });
@@ -369,7 +373,7 @@ export async function POST(req: NextRequest) {
   if (action === 'update_scope') {
     const { program_id, scope } = body;
     if (!program_id) return NextResponse.json({ error: 'program_id required' }, { status: 400 });
-    const { error } = await supabase.from('sy_programs').update({ scope: scope || null }).eq('id', program_id);
+    const { error } = await supabase.from('sy_programs').update({ scope: scope || null, updated_at: new Date().toISOString() }).eq('id', program_id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ ok: true });
   }
@@ -381,6 +385,7 @@ export async function POST(req: NextRequest) {
       tested: !!tested,
       tested_at: tested ? new Date().toISOString() : null,
       tested_by: tested ? (actor || 'user') : null,
+      updated_at: new Date().toISOString(),
     }).eq('id', task_id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     await supabase.from('sy_task_events').insert({
@@ -393,7 +398,7 @@ export async function POST(req: NextRequest) {
   if (action === 'update_discrepancy_note') {
     const { task_id, discrepancy_note } = body;
     if (!task_id) return NextResponse.json({ error: 'task_id required' }, { status: 400 });
-    const { error } = await supabase.from('sy_tasks').update({ discrepancy_note: discrepancy_note || null }).eq('id', task_id);
+    const { error } = await supabase.from('sy_tasks').update({ discrepancy_note: discrepancy_note || null, updated_at: new Date().toISOString() }).eq('id', task_id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ ok: true });
   }

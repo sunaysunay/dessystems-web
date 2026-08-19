@@ -435,5 +435,18 @@
     "foot_note": "Beneficio real = suscripciones reemplazadas + horas recuperadas (importación IA, texto, traducción, limpieza de fotos, publicación, seguimiento, BTW) a su tarifa por hora + costes evitados por rotación más rápida, menos los 349 €/mes de suscripción a BOP. Crecimiento = coches extra × margen bruto. Las tarifas de los mercados (Marktplaats, Mobile.de) <b>no</b> se consideran ahorro — esos canales continúan. Datos: los concesionarios promedian ~6,8 herramientas de software por venta y tienen márgenes netos reducidos del ~2-3%, por lo que un ahorro absoluto modesto representa una gran parte del beneficio. Todos los números son estimaciones — reemplace cada valor con sus propios datos.",
     "page_title": "Calculadora de Ahorro y Beneficio — DES BOP V2",
     "page_desc": "Modele el valor de la Plataforma Operativa DES para su concesionario — efectivo ahorrado, horas recuperadas y crecimiento del beneficio neto."
+  },
+  "nav": {
+    "cbtCorridors": "Corridors",
+    "cbtCountries": "Countries",
+    "cbtPrices": "Market Prices",
+    "cbtDistributions": "Distributions",
+    "cbtOpportunities": "Opportunities",
+    "cbtTradeLog": "Trade Log",
+    "cbtTradingDash": "Trading Dashboard",
+    "cbtDealerFeed": "Dealer Feed"
+  },
+  "groups": {
+    "markets": "Markets"
   }
 }

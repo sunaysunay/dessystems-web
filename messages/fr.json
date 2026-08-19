@@ -82,7 +82,8 @@
     "development": "Développement",
     "dataAcquisition": "Acquisition de Données",
     "integration": "Intégration",
-    "shop": "Boutique"
+    "shop": "Boutique",
+    "markets": "Markets"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -254,7 +255,15 @@
     "shopWarranty": "Garantie",
     "shopSupplierRma": "RMA fournisseur",
     "shopTracking": "Suivi de commande",
-    "layoutManager": "Gestionnaire de mise en page"
+    "layoutManager": "Gestionnaire de mise en page",
+    "cbtCorridors": "Corridors",
+    "cbtCountries": "Countries",
+    "cbtPrices": "Market Prices",
+    "cbtDistributions": "Distributions",
+    "cbtOpportunities": "Opportunities",
+    "cbtTradeLog": "Trade Log",
+    "cbtTradingDash": "Trading Dashboard",
+    "cbtDealerFeed": "Dealer Feed"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -360,7 +369,7 @@
     "SY007": "Scheduled Jobs",
     "SY008": "Admin Dashboard",
     "SY009": "MCP",
-    "SY010": "Drive",
+    "SY010": "Stockage Google Drive",
     "SY011": "Access Control",
     "SY012": "Audit Log",
     "SY013": "Compteurs",
@@ -476,5 +485,24 @@
     "customers": "Clients",
     "settings": "Paramètres",
     "inventory": "Gestion des stocks"
+  },
+  "st": {
+    "title": "Stockage Google Drive",
+    "description": "SY010 — Connexion Google Drive, quota et gestion de fichiers par tenant",
+    "connect": "Connecter",
+    "connected": "Connecté",
+    "notConnected": "Non connecté",
+    "upload": "Téléverser",
+    "download": "Télécharger",
+    "open": "Ouvrir",
+    "trash": "Corbeille",
+    "refresh": "Actualiser",
+    "name": "Nom",
+    "size": "Taille",
+    "modified": "Modifié",
+    "actions": "Actions",
+    "noFiles": "Aucun fichier dans ce dossier",
+    "deleteConfirm": "Déplacer ce fichier vers la corbeille Drive ?",
+    "setup": "Guide d'installation"
   }
 }

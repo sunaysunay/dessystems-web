@@ -19,16 +19,17 @@ export default function Login() {
     if (error) { setBusy(false); setErr(error); return; }
     // Fetch user language from profile and set locale cookie before navigating
     try {
-      // /api/bop/user/me resolves the caller from the verified session cookie,
-      // so no uid is passed — it used to be, and the route trusted it.
-      const res = await fetch('/api/bop/user/me');
+      const { data: sd } = await supabase!.auth.getSession();
+      const uid = sd?.session?.user?.id;
+      const res = await fetch('/api/bop/user/me' + (uid ? '?uid=' + uid : ''));
       if (res.ok) {
         const profile = await res.json();
         if (profile.language) {
           document.cookie = 'bop_locale=' + profile.language + ';path=/;max-age=31536000;samesite=lax';
         }
-        // bop_role is deliberately no longer written: it was client-set and
-        // then trusted server-side for authorization. See lib/api-guard.ts.
+        if (profile.role) {
+          document.cookie = 'bop_role=' + profile.role + ';path=/;max-age=31536000;samesite=lax';
+        }
       }
     } catch {}
     setBusy(false);

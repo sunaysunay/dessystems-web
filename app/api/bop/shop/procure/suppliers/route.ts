@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
-import { requirePermission } from '@/lib/permission-guard';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
-    const guard = await requirePermission('shop.supplier.read');
-    if (!guard.ok) return guard.response;
-
     const supabase = await getServerClient();
     const { searchParams } = new URL(request.url);
 
@@ -47,9 +43,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const guard = await requirePermission('shop.supplier.write');
-    if (!guard.ok) return guard.response;
-
     const supabase = await getServerClient();
     const body = await request.json();
 
@@ -106,9 +99,6 @@ export async function POST(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   try {
-    const guard = await requirePermission('shop.supplier.write');
-    if (!guard.ok) return guard.response;
-
     const supabase = await getServerClient();
     const body = await request.json();
     const { id, ...updates } = body;

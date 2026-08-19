@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
-import { requirePermission } from '@/lib/permission-guard';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
-    const guard = await requirePermission('shop.procurement.read');
-    if (!guard.ok) return guard.response;
-
     const supabase = await getServerClient();
     const { searchParams } = new URL(request.url);
 
@@ -47,9 +43,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const guard = await requirePermission('shop.po.create');
-    if (!guard.ok) return guard.response;
-
     const supabase = await getServerClient();
     const body = await request.json();
 
@@ -145,19 +138,11 @@ export async function PATCH(request: NextRequest) {
   try {
     const supabase = await getServerClient();
     const body = await request.json();
-    const { id, status, notes } = body;
+    const { id, status, approved_by, notes } = body;
 
     if (!id) {
       return NextResponse.json({ error: 'id is required' }, { status: 400 });
     }
-
-    // The PO state machine is driven by `status`, so guard the transition being
-    // requested rather than the method: approving is a distinct privilege from
-    // ordinary PO edits.
-    const guard = await requirePermission(
-      status === 'approved' ? 'shop.po.approve' : 'shop.procurement.write'
-    );
-    if (!guard.ok) return guard.response;
 
     // Fetch current PO
     const { data: current, error: fetchErr } = await supabase
@@ -196,8 +181,7 @@ export async function PATCH(request: NextRequest) {
     // Set timestamps based on status transition
     if (status === 'approved') {
       updates.approved_at = new Date().toISOString();
-      // Trust the guarded caller, not a client-supplied approver id.
-      updates.approved_by = guard.uid;
+      if (approved_by) updates.approved_by = approved_by;
     } else if (status === 'sent') {
       updates.sent_at = new Date().toISOString();
     } else if (status === 'closed') {

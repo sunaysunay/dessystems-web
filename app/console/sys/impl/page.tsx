@@ -28,6 +28,8 @@ interface Task {
   tested: boolean;
   tested_at: string | null;
   tested_by: string | null;
+  created_at: string | null;
+  updated_at: string | null;
 }
 interface OpTask {
   id: string; title: string; status: string; priority: string;
@@ -36,6 +38,7 @@ interface Deliverable {
   id: string; task_id: string; kind: string; ref: string;
   verify_mode: string; is_verified: boolean;
   verified_at: string | null; verify_error: string | null;
+  created_at: string | null; updated_at: string | null;
 }
 interface DocFile {
   name: string; path: string; size: number; mimetype: string; created_at: string;
@@ -948,7 +951,12 @@ export default function SY051Page() {
                             <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${TC[tk.task_type] ?? TC.general}`}>{tk.task_type}</span>
                             <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${SC[tk.derived_status] ?? SC.not_started}`}>{tk.derived_status?.replace(/_/g, ' ')}</span>
                             {tk.blocked_reason && <span className="text-[10px] text-red-500 truncate max-w-[120px]">{tk.blocked_reason}</span>}
-                            <span className="text-[10px] text-slate-400 ml-auto mr-2">{tk.verified_deliverables}/{tk.total_deliverables}</span>
+                            {tk.updated_at && (
+                              <span className="text-[9px] text-slate-300 ml-auto flex-shrink-0" title={`Created ${tk.created_at ? new Date(tk.created_at).toLocaleString() : '—'} · Updated ${new Date(tk.updated_at).toLocaleString()}`}>
+                                upd {new Date(tk.updated_at).toLocaleDateString()}
+                              </span>
+                            )}
+                            <span className={`text-[10px] text-slate-400 mr-2 ${tk.updated_at ? 'ml-2' : 'ml-auto'}`}>{tk.verified_deliverables}/{tk.total_deliverables}</span>
                             <div className="w-16"><Bar pct={tk.pct} h="h-1.5" /></div>
                             <span className="text-[10px] font-bold text-slate-500 w-8 text-right">{tk.pct}%</span>
                             <div className="flex items-center gap-1 ml-1">
@@ -1030,6 +1038,11 @@ export default function SY051Page() {
                                   <span className="text-xs font-mono text-slate-600 truncate flex-1">{d.ref}</span>
                                   <span className={`text-[9px] ${d.verify_mode === 'auto' ? 'text-blue-400' : 'text-slate-400'}`}>{d.verify_mode}</span>
                                   {d.verified_at && <span className="text-[9px] text-slate-400">{new Date(d.verified_at).toLocaleDateString()}</span>}
+                                  {d.updated_at && (
+                                    <span className="text-[9px] text-slate-300" title={`Created ${d.created_at ? new Date(d.created_at).toLocaleString() : '—'} · Updated ${new Date(d.updated_at).toLocaleString()}`}>
+                                      upd {new Date(d.updated_at).toLocaleDateString()}
+                                    </span>
+                                  )}
                                   {d.verify_error && <span className="text-[9px] text-red-400 truncate max-w-[100px]" title={d.verify_error}>err</span>}
                                   <button onClick={() => { if (confirm('Delete?')) deleteDeliv(d.id, tk.task_id); }}
                                     className="rounded p-0.5 text-red-300 hover:bg-red-50 hover:text-red-500">

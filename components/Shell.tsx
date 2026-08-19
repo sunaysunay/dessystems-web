@@ -156,6 +156,17 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     { label: tn('presetBg'),         href: '/console/mkt/studio/preset-backgrounds' },
   ]},
 
+  { group: tg('markets'), items: [
+    { label: tn('cbtCorridors'),       href: '/console/mkt/corridors' },
+    { label: tn('cbtCountries'),       href: '/console/mkt/countries' },
+    { label: tn('cbtPrices'),          href: '/console/mkt/prices' },
+    { label: tn('cbtDistributions'),   href: '/console/mkt/distributions' },
+    { label: tn('cbtOpportunities'),   href: '/console/mkt/opportunities' },
+    { label: tn('cbtTradeLog'),        href: '/console/mkt/trades' },
+    { label: tn('cbtTradingDash'),     href: '/console/mkt/trading' },
+    { label: tn('cbtDealerFeed'),      href: '/console/mkt/dealer-feed' },
+  ]},
+
   { group: tg('shop'), items: [
     { label: tn('shopDashboard'),    href: '/console/shp/dashboard' },
     { label: tn('shopMonitor'),      href: '/console/shp/monitor' },
@@ -255,6 +266,8 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
       { label: tn('moduleManager'),   href: '/console/sys/modules' },
       { label: tn('menuConfig'),      href: '/console/sys/menu-config' },
       { label: tn('counters'),        href: '/console/sys/counters' },
+      { label: 'Content Engine',      href: '/console/config/content-engine' },
+      { label: 'Tab Templates',       href: '/console/config/content-engine/templates' },
     ]},
     { label: tg("development"), subitems: [
       { label: tn("devDashboard"),    href: "/console/dev" },

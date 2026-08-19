@@ -82,7 +82,8 @@
     "development": "Geliştirme",
     "dataAcquisition": "Veri Toplama",
     "integration": "Entegrasyon",
-    "shop": "Mağaza"
+    "shop": "Mağaza",
+    "markets": "Markets"
   },
   "nav": {
     "dashboard": "Gösterge Paneli",
@@ -254,7 +255,15 @@
     "shopWarranty": "Garanti",
     "shopSupplierRma": "Tedarikçi RMA",
     "shopTracking": "Sipariş Takibi",
-    "layoutManager": "Düzen Yöneticisi"
+    "layoutManager": "Düzen Yöneticisi",
+    "cbtCorridors": "Corridors",
+    "cbtCountries": "Countries",
+    "cbtPrices": "Market Prices",
+    "cbtDistributions": "Distributions",
+    "cbtOpportunities": "Opportunities",
+    "cbtTradeLog": "Trade Log",
+    "cbtTradingDash": "Trading Dashboard",
+    "cbtDealerFeed": "Dealer Feed"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -360,7 +369,7 @@
     "SY007": "Scheduled Jobs",
     "SY008": "Admin Dashboard",
     "SY009": "MCP",
-    "SY010": "Drive",
+    "SY010": "Google Drive Depolama",
     "SY011": "Access Control",
     "SY012": "Audit Log",
     "SY013": "Sayaçlar",
@@ -476,5 +485,24 @@
     "customers": "Müşteriler",
     "settings": "Ayarlar",
     "inventory": "Stok Yönetimi"
+  },
+  "st": {
+    "title": "Google Drive Depolama",
+    "description": "SY010 — Kiracı başına Google Drive bağlantısı, kota ve dosya yönetimi",
+    "connect": "Bağlan",
+    "connected": "Bağlı",
+    "notConnected": "Bağlı değil",
+    "upload": "Yükle",
+    "download": "İndir",
+    "open": "Aç",
+    "trash": "Çöp kutusu",
+    "refresh": "Yenile",
+    "name": "Ad",
+    "size": "Boyut",
+    "modified": "Değiştirilme",
+    "actions": "İşlemler",
+    "noFiles": "Bu klasörde dosya yok",
+    "deleteConfirm": "Bu dosya Drive çöp kutusuna taşınsın mı?",
+    "setup": "Kurulum kılavuzu"
   }
 }

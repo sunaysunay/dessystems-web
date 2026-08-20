@@ -7,7 +7,7 @@ import { BopSelect } from '@/components/BopSelect';
 import { ScreenHeader } from '@/components/ScreenBadge';
 import { MODULE_NAMES } from '@/lib/module-labels';
 
-const MODULES = ['', 'AIM', 'ANL', 'AST', 'AUC', 'BOP', 'COM', 'CRM', 'DAE', 'DEV', 'FIN', 'INT', 'LOG', 'MDM', 'MKP', 'MKT', 'OPS', 'PUB', 'SAL', 'SYS', 'WFL', 'WRK'];
+const MODULES = ['', 'AIM', 'ANL', 'AST', 'AUC', 'BOP', 'COM', 'CRM', 'DAE', 'DEV', 'FIN', 'INT', 'LOG', 'MDM', 'MKP', 'MKT', 'OPS', 'PUB', 'SAL', 'SHP', 'SYS', 'WFL', 'WRK'];
 
 const VISUAL_FLOW_MAP: Record<string, { route: string; screen: string }> = {
   'trade-flow-engine': { route: '/console/sys/tfe-flow', screen: 'SY043' },

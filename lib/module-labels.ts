@@ -20,6 +20,7 @@ export const MODULE_NAMES: Record<string, string> = {
   PRT: 'Partner',
   PUB: 'Publishing',
   SAL: 'Sales',
+  SHP: 'DesShop E-Commerce',
   SYS: 'System / Admin',
   WFL: 'Workflow',
   WRK: 'Workshop',

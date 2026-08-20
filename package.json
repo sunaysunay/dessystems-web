@@ -30,6 +30,7 @@
     "blurhash": "^2.0.5",
     "framer-motion": "^12.43.0",
     "geoip-lite": "^2.0.3",
+    "googleapis": "^176.0.0",
     "imapflow": "^1.6.6",
     "lucide-react": "^1.17.0",
     "mailparser": "^3.9.15",

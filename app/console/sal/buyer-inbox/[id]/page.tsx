@@ -4,9 +4,8 @@ import { useState, useEffect, useCallback, useRef, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { ScreenHeader } from '@/components/ScreenBadge';
 
-export default function BuyerThreadPage({ params }: { params: Promise<{ id: string }> | { id: string } }) {
-  // Next <15 passes params as a plain object; use() only accepts promises
-  const resolved: any = typeof (params as any)?.then === 'function' ? use(params as any) : params;
+export default function BuyerThreadPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolved = use(params);
   const id: string = resolved.id;
   const router = useRouter();
   const [data, setData] = useState<any>(null);

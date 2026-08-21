@@ -170,6 +170,7 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
   { group: tg('shop'), items: [
     { label: tn('shopDashboard'),    href: '/console/shp/dashboard' },
     { label: tn('shopMonitor'),      href: '/console/shp/monitor' },
+    { label: tn('shopGuide'),        href: '/console/shp/guide' },
     { label: tn('shopProducts'), href: '/console/shp/products',
       subgroups: [
         { subgroup: tg('shopCatalog'), items: [

@@ -43,8 +43,8 @@ function RowItem({ label, value }: { label: string; value: unknown }) {
   );
 }
 
-export default function InquiryDetailPage({ params }: { params: Promise<{ id: string }> | { id: string } }) {
-  const resolved: any = typeof (params as any)?.then === 'function' ? use(params as any) : params;
+export default function InquiryDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolved = use(params);
   const id: string = resolved.id;
   const router = useRouter();
   const { unit } = useScope();

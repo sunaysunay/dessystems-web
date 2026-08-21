@@ -222,7 +222,8 @@
     "cbtOpportunities": "Opportunities",
     "cbtTradeLog": "Trade Log",
     "cbtTradingDash": "Trading Dashboard",
-    "cbtDealerFeed": "Dealer Feed"
+    "cbtDealerFeed": "Dealer Feed",
+    "shopGuide": "Operations Guide"
   },
   "sal": {
     "orders": "Orders",

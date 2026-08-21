@@ -57,65 +57,30 @@ export default function ShopGuidePage() {
   const selectedModule = MODULES.find(m => m.key === selected)!;
 
   return (
-    <div className="p-6 space-y-6 max-w-[1200px]">
+    <div className="p-6 space-y-5">
       <ScreenHeader />
 
-      <div>
-        <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">Shop Operations Guide</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-          Step-by-step guidance for every shop module. Click a module to browse its guide steps, or start the interactive tour.
-        </p>
-      </div>
-
-      {/* Staff Operations Guide link */}
-      <a
-        href="/docs/operations/staff-guide.html"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-3 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-900/20 p-4 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
-      >
-        <div className="w-10 h-10 rounded-lg bg-indigo-500 flex items-center justify-center text-white text-lg flex-shrink-0">
-          &#9776;
-        </div>
-        <div className="flex-1 min-w-0">
-          <span className="text-sm font-semibold text-indigo-700 dark:text-indigo-300">Staff Operations Guide</span>
-          <p className="text-[11px] text-indigo-500/70 dark:text-indigo-400/70 mt-0.5">
-            Full interactive reference — stock flows, order FSM, returns, checkout, security, country matrix
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">Shop Operations Guide</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Click a module to view its steps. {completedCount}/{MODULES.length} modules completed &middot; {totalSteps} total steps
           </p>
         </div>
-        <span className="text-xs text-indigo-400">&rarr;</span>
-      </a>
-
-      {/* Progress bar */}
-      <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 p-4">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-            Tour Progress
-          </span>
-          <span className="text-xs text-slate-400">
-            {completedCount} of {MODULES.length} modules completed &middot; {totalSteps} total steps
-          </span>
-        </div>
-        <div className="h-2 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
-          <div
-            className="h-full rounded-full bg-emerald-500 transition-all duration-500"
-            style={{ width: MODULES.length > 0 ? `${(completedCount / MODULES.length) * 100}%` : '0%' }}
-          />
-        </div>
-        <div className="flex gap-1 mt-2">
+        <div className="flex gap-1 items-center flex-shrink-0">
           {MODULES.map(m => (
             <div
               key={m.key}
-              className={`h-1.5 flex-1 rounded-full ${data[m.key]?.completed ? 'bg-emerald-400' : 'bg-slate-200 dark:bg-slate-600'}`}
+              className={`w-5 h-1.5 rounded-full ${data[m.key]?.completed ? 'bg-emerald-400' : 'bg-slate-200 dark:bg-slate-600'}`}
               title={`${m.label}: ${data[m.key]?.completed ? 'completed' : 'not started'}`}
             />
           ))}
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-5">
-        {/* Module list — left */}
-        <div className="col-span-12 lg:col-span-4 space-y-2">
+      <div className="flex gap-5 items-start">
+        {/* Module list — left, sticky */}
+        <div className="w-[260px] flex-shrink-0 sticky top-4 space-y-1">
           {MODULES.map(m => {
             const d = data[m.key];
             const isSelected = selected === m.key;
@@ -123,59 +88,54 @@ export default function ShopGuidePage() {
               <button
                 key={m.key}
                 onClick={() => setSelected(m.key)}
-                className={`w-full text-left rounded-xl border p-3.5 transition-all ${
+                className={`w-full text-left rounded-lg border px-3 py-2 transition-all ${
                   isSelected
                     ? 'border-indigo-300 dark:border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 shadow-sm'
-                    : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 hover:border-slate-300 dark:hover:border-slate-600'
+                    : 'border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/40'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${
+                <div className="flex items-center gap-2.5">
+                  <div className={`w-7 h-7 rounded flex items-center justify-center text-[11px] font-bold flex-shrink-0 ${
                     isSelected ? 'bg-indigo-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
                   }`}>
                     {m.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className={`text-sm font-semibold ${isSelected ? 'text-indigo-700 dark:text-indigo-300' : 'text-slate-700 dark:text-slate-200'}`}>
-                        {m.label}
-                      </span>
-                      {d?.completed && (
-                        <span className="rounded-full bg-emerald-100 dark:bg-emerald-900/40 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-600 dark:text-emerald-400">
-                          DONE
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-[11px] text-slate-400 truncate">{m.desc}</p>
+                    <span className={`text-[13px] font-semibold leading-tight ${isSelected ? 'text-indigo-700 dark:text-indigo-300' : 'text-slate-700 dark:text-slate-200'}`}>
+                      {m.label}
+                    </span>
+                    <p className="text-[10px] text-slate-400 truncate leading-tight mt-0.5">{m.desc}</p>
                   </div>
-                  <span className="text-[11px] text-slate-400">{d?.steps.length ?? 0} steps</span>
+                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                    {d?.completed && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" title="Completed" />
+                    )}
+                    <span className="text-[10px] text-slate-400">{d?.steps.length ?? 0}</span>
+                  </div>
                 </div>
               </button>
             );
           })}
-
         </div>
 
-        {/* Step detail — right */}
-        <div className="col-span-12 lg:col-span-8">
+        {/* Step detail — right, scrolls independently */}
+        <div className="flex-1 min-w-0">
           {loading ? (
             <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 p-8 text-center">
               <p className="text-sm text-slate-400">Loading guide steps...</p>
             </div>
           ) : selectedData ? (
             <div className="space-y-3">
-              {/* Module header */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-1">
                 <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">{selectedModule.label}</h2>
                 <button
                   onClick={() => setTourModule(selected)}
-                  className="text-xs px-3 py-1.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500 transition-colors"
+                  className="text-[11px] px-3 py-1.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500 transition-colors"
                 >
                   Start Interactive Tour
                 </button>
               </div>
 
-              {/* Steps */}
               {selectedData.steps.map((step, i) => (
                 <div
                   key={step.id}
@@ -187,8 +147,8 @@ export default function ShopGuidePage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-100 mb-1">{step.title}</h3>
-                      <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{step.body}</p>
-                      <div className="flex items-center gap-4 mt-2.5">
+                      <p className="text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed">{step.body}</p>
+                      <div className="flex items-center gap-4 mt-2">
                         {step.screen_path && (
                           <Link
                             href={step.screen_path}
@@ -202,7 +162,7 @@ export default function ShopGuidePage() {
                             href={step.doc_link}
                             className="text-[11px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
                           >
-                            Full documentation &rarr;
+                            Documentation &rarr;
                           </Link>
                         )}
                       </div>
@@ -221,7 +181,6 @@ export default function ShopGuidePage() {
         </div>
       </div>
 
-      {/* Guided tour overlay */}
       {tourModule && (
         <GuidedTour
           moduleCode="SHP"

@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
   const sb = getServerClient();
   const section = req.nextUrl.searchParams.get('section');
-  let q = sb.from('field_definitions').select('*').order('sort_order', { ascending: true });
+  let q = sb.from('field_definitions').select('*').order('sort', { ascending: true });
   if (section) q = q.eq('section', section);
   const { data, error } = await q;
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });

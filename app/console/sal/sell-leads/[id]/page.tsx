@@ -15,9 +15,8 @@ const TRANSITIONS: Record<string, string[]> = {
   purchased: [], declined_by_us: [], rejected_by_seller: [], expired: [], lost: [],
 };
 
-export default function SellLeadDetailPage({ params }: { params: Promise<{ id: string }> | { id: string } }) {
-  // Next <15 passes params as a plain object; use() only accepts promises
-  const resolved: any = typeof (params as any)?.then === 'function' ? use(params as any) : params;
+export default function SellLeadDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolved = use(params);
   const id: string = resolved.id;
   const router = useRouter();
   const [lead, setLead] = useState<any>(null);

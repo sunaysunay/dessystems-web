@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ScreenHeader } from '@/components/ScreenBadge';
+import GuidedTour from '@/components/GuidedTour';
 
 type Screen = {
   screen_id: string;
@@ -30,6 +31,8 @@ const MODULES: { key: string; label: string; sap: string }[] = [
 export default function SH000Launchpad() {
   const [screens, setScreens] = useState<Screen[]>([]);
   const [loading, setLoading] = useState(true);
+  const [tourSubmodule, setTourSubmodule] = useState<string | null>(null);
+  const [tourForceStart, setTourForceStart] = useState(false);
 
   useEffect(() => {
     fetch('/api/bop/shop/screens')
@@ -67,6 +70,13 @@ export default function SH000Launchpad() {
             <div className="flex items-baseline gap-2 mb-2">
               <h2 className="text-sm font-bold uppercase tracking-wide text-slate-600 dark:text-slate-300">{m.label}</h2>
               <span className="font-mono text-[10px] text-slate-400">≈ SAP {m.sap}</span>
+              <button
+                onClick={() => { setTourSubmodule(m.key); setTourForceStart(true); }}
+                className="text-xs text-slate-400 hover:text-indigo-500 ml-1"
+                title={`Start ${m.label} guided tour`}
+              >
+                ?
+              </button>
               <span className="text-[11px] text-slate-400 ml-auto">{activeCount}/{items.length} active</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
@@ -75,6 +85,15 @@ export default function SH000Launchpad() {
           </section>
         );
       })}
+
+      {tourSubmodule && (
+        <GuidedTour
+          moduleCode="SHP"
+          submodule={tourSubmodule}
+          forceStart={tourForceStart}
+          onClose={() => { setTourSubmodule(null); setTourForceStart(false); }}
+        />
+      )}
     </div>
   );
 }

@@ -11,7 +11,12 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
   const [showWelcome, setShowWelcome] = useState(false);
 
   useEffect(() => {
-    void getSession().then(s => {
+    // A hung session check (stale token refresh loop, dead network) must
+    // never strand the user on "Authenticating…" — fall through to /login.
+    const timeout = new Promise<null>(resolve => setTimeout(() => resolve(null), 8000));
+    let cancelled = false;
+    void Promise.race([getSession().catch(() => null), timeout]).then(s => {
+      if (cancelled) return;
       if (!s) { router.replace('/login'); return; }
       setOk(true);
       const seen = sessionStorage.getItem('bop_welcomed');
@@ -20,6 +25,7 @@ export default function ConsoleLayout({ children }: { children: React.ReactNode 
         sessionStorage.setItem('bop_welcomed', '1');
       }
     });
+    return () => { cancelled = true; };
   }, [router]);
 
   if (!ok) return <div className="flex h-screen items-center justify-center text-sm text-slate-400">Authenticating…</div>;

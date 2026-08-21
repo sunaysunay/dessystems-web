@@ -67,6 +67,25 @@ export default function ShopGuidePage() {
         </p>
       </div>
 
+      {/* Staff Operations Guide link */}
+      <a
+        href="/docs/operations/staff-guide.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-3 rounded-xl border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-900/20 p-4 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
+      >
+        <div className="w-10 h-10 rounded-lg bg-indigo-500 flex items-center justify-center text-white text-lg flex-shrink-0">
+          &#9776;
+        </div>
+        <div className="flex-1 min-w-0">
+          <span className="text-sm font-semibold text-indigo-700 dark:text-indigo-300">Staff Operations Guide</span>
+          <p className="text-[11px] text-indigo-500/70 dark:text-indigo-400/70 mt-0.5">
+            Full interactive reference — stock flows, order FSM, returns, checkout, security, country matrix
+          </p>
+        </div>
+        <span className="text-xs text-indigo-400">&rarr;</span>
+      </a>
+
       {/* Progress bar */}
       <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60 p-4">
         <div className="flex items-center justify-between mb-2">
@@ -135,18 +154,6 @@ export default function ShopGuidePage() {
             );
           })}
 
-          {/* Full guide link */}
-          <div className="rounded-xl border border-dashed border-slate-200 dark:border-slate-700 p-3 mt-3">
-            <p className="text-[11px] text-slate-400 mb-1.5">Full interactive reference:</p>
-            <a
-              href="https://claude.ai/code/artifact/74478649-a66c-4b71-9770-e08fdb5952b6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-indigo-500 hover:text-indigo-400 font-medium"
-            >
-              Open Staff Operations Guide &rarr;
-            </a>
-          </div>
         </div>
 
         {/* Step detail — right */}

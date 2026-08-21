@@ -222,6 +222,7 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
         ]},
       ]},
     { label: tn('shopSettings'),     href: '/console/shp/settings' },
+    { label: tn('shopGuide'),        href: '/console/shp/guide' },
   ]},
 
   { group: tg('masterData'), items: [

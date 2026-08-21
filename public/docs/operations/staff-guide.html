@@ -1,0 +1,718 @@
+<title>DESSHOP Operations Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-alt: #f5f5f4;
+  --border: #e7e5e4;
+  --text: #1c1917;
+  --text-muted: #78716c;
+  --accent: #2563eb;
+  --accent-light: #dbeafe;
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --amber: #d97706;
+  --amber-light: #fef3c7;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+  --purple: #7c3aed;
+  --purple-light: #ede9fe;
+  --cyan: #0891b2;
+  --cyan-light: #cffafe;
+  --nav-bg: #1c1917;
+  --nav-text: #fafaf9;
+  --nav-active: #2563eb;
+  --code-bg: #f5f5f4;
+  --shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg: #0c0a09;
+  --surface: #1c1917;
+  --surface-alt: #292524;
+  --border: #44403c;
+  --text: #fafaf9;
+  --text-muted: #a8a29e;
+  --accent: #60a5fa;
+  --accent-light: #1e3a5f;
+  --green: #4ade80;
+  --green-light: #14532d;
+  --amber: #fbbf24;
+  --amber-light: #451a03;
+  --red: #f87171;
+  --red-light: #450a0a;
+  --purple: #a78bfa;
+  --purple-light: #2e1065;
+  --cyan: #22d3ee;
+  --cyan-light: #083344;
+  --nav-bg: #1c1917;
+  --nav-text: #e7e5e4;
+  --code-bg: #292524;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --bg: #0c0a09;
+  --surface: #1c1917;
+  --surface-alt: #292524;
+  --border: #44403c;
+  --text: #fafaf9;
+  --text-muted: #a8a29e;
+  --accent: #60a5fa;
+  --accent-light: #1e3a5f;
+  --green: #4ade80;
+  --green-light: #14532d;
+  --amber: #fbbf24;
+  --amber-light: #451a03;
+  --red: #f87171;
+  --red-light: #450a0a;
+  --purple: #a78bfa;
+  --purple-light: #2e1065;
+  --cyan: #22d3ee;
+  --cyan-light: #083344;
+  --nav-bg: #1c1917;
+  --nav-text: #e7e5e4;
+  --code-bg: #292524;
+  --shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--nav-bg); color: var(--nav-text);
+  display: flex; align-items: center; gap: 0;
+  padding: 0 1rem; height: 52px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.nav-brand {
+  font-weight: 700; font-size: .95rem; white-space: nowrap;
+  margin-right: 1.5rem; flex-shrink: 0;
+  letter-spacing: -.02em;
+}
+.nav button {
+  background: none; border: none; color: var(--nav-text);
+  font: inherit; font-size: .82rem; font-weight: 500;
+  padding: .5rem .75rem; cursor: pointer; white-space: nowrap;
+  border-radius: 6px; transition: background .15s;
+}
+.nav button:hover { background: rgba(255,255,255,.1); }
+.nav button.active { background: var(--nav-active); color: #fff; }
+
+/* MAIN */
+main {
+  max-width: 860px; margin: 68px auto 3rem; padding: 0 1.25rem;
+}
+section { display: none; }
+section.active { display: block; }
+h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: .25rem; letter-spacing: -.03em; }
+.subtitle { color: var(--text-muted); font-size: .9rem; margin-bottom: 1.5rem; }
+h2 { font-size: 1.15rem; font-weight: 700; margin: 2rem 0 .75rem; letter-spacing: -.02em; }
+h3 { font-size: .95rem; font-weight: 700; margin: 1.25rem 0 .5rem; }
+
+/* CARDS */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
+.card-header {
+  display: flex; align-items: center; gap: .5rem;
+  margin-bottom: .75rem; font-weight: 700; font-size: .95rem;
+}
+
+/* FSM DIAGRAM */
+.fsm { overflow-x: auto; margin: 1rem 0; }
+.fsm svg { display: block; margin: 0 auto; }
+.fsm-node {
+  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+  cursor: pointer;
+}
+.fsm-node rect { rx: 6; ry: 6; stroke-width: 1.5; transition: filter .2s; }
+.fsm-node:hover rect { filter: brightness(1.1); }
+.fsm-edge { stroke-width: 1.2; fill: none; marker-end: url(#arrow); }
+
+/* BADGES */
+.badge {
+  display: inline-block; font-size: .72rem; font-weight: 600;
+  padding: .15rem .5rem; border-radius: 99px; letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.badge-green { background: var(--green-light); color: var(--green); }
+.badge-amber { background: var(--amber-light); color: var(--amber); }
+.badge-red { background: var(--red-light); color: var(--red); }
+.badge-purple { background: var(--purple-light); color: var(--purple); }
+.badge-cyan { background: var(--cyan-light); color: var(--cyan); }
+.badge-accent { background: var(--accent-light); color: var(--accent); }
+
+/* TABLE */
+.tbl-wrap { overflow-x: auto; margin: .75rem 0; }
+table {
+  width: 100%; border-collapse: collapse; font-size: .82rem;
+}
+th { text-align: left; font-weight: 600; padding: .5rem .75rem; background: var(--surface-alt); border-bottom: 2px solid var(--border); white-space: nowrap; }
+td { padding: .5rem .75rem; border-bottom: 1px solid var(--border); }
+
+/* CALLOUT */
+.callout {
+  display: flex; gap: .75rem; padding: .85rem 1rem;
+  border-radius: 8px; font-size: .85rem; margin: .75rem 0;
+  align-items: flex-start;
+}
+.callout-warn { background: var(--amber-light); border-left: 3px solid var(--amber); }
+.callout-info { background: var(--accent-light); border-left: 3px solid var(--accent); }
+.callout-danger { background: var(--red-light); border-left: 3px solid var(--red); }
+.callout-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 1.5rem; margin: 1rem 0; }
+.timeline::before {
+  content: ''; position: absolute; left: .45rem; top: .5rem; bottom: .5rem;
+  width: 2px; background: var(--border);
+}
+.tl-step {
+  position: relative; margin-bottom: 1rem; font-size: .85rem;
+}
+.tl-step::before {
+  content: ''; position: absolute; left: -1.3rem; top: .45rem;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--surface);
+}
+.tl-step strong { display: block; font-size: .88rem; }
+
+code {
+  font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+  background: var(--code-bg); padding: .15rem .35rem; border-radius: 4px;
+}
+
+/* ACCORDION */
+.acc-toggle {
+  width: 100%; background: var(--surface-alt); border: 1px solid var(--border);
+  border-radius: 8px; padding: .65rem 1rem;
+  font: inherit; font-size: .88rem; font-weight: 600;
+  text-align: left; cursor: pointer; color: var(--text);
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: .25rem;
+}
+.acc-toggle::after { content: '+'; font-size: 1.1rem; font-weight: 400; color: var(--text-muted); }
+.acc-toggle.open::after { content: '−'; }
+.acc-body { display: none; padding: .5rem 1rem .75rem; font-size: .85rem; }
+.acc-body.open { display: block; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+@media(max-width:640px){ .grid-2 { grid-template-columns: 1fr; } }
+
+/* SEARCH */
+.search-box {
+  width: 100%; padding: .55rem .85rem; font: inherit; font-size: .88rem;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface); color: var(--text);
+  margin-bottom: 1rem;
+}
+.search-box:focus { outline: 2px solid var(--accent); border-color: transparent; }
+</style>
+
+<nav class="nav" role="navigation" aria-label="Main">
+  <span class="nav-brand">DESSHOP Ops</span>
+  <button class="active" onclick="show('overview')">Overview</button>
+  <button onclick="show('stock')">Stock</button>
+  <button onclick="show('orders')">Orders</button>
+  <button onclick="show('returns')">Returns</button>
+  <button onclick="show('checkout')">Checkout</button>
+  <button onclick="show('finance')">Finance</button>
+  <button onclick="show('countries')">Countries</button>
+  <button onclick="show('security')">Security</button>
+  <button onclick="show('ref')">Quick Ref</button>
+  <button onclick="show('issues')">Known Issues</button>
+</nav>
+
+<main>
+
+<!-- ==================== OVERVIEW ==================== -->
+<section id="overview" class="active">
+<h1>DESSHOP Operational Guide</h1>
+<p class="subtitle">Interactive reference for shop staff &amp; administrators &mdash; DES Hold B.V.</p>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header">Stock Management</div>
+    <p style="font-size:.85rem">Track inventory across locations. Reservations auto-expire after 60 min. Monitor on-hand vs reserved vs available.</p>
+  </div>
+  <div class="card">
+    <div class="card-header">Order Lifecycle</div>
+    <p style="font-size:.85rem">9-state order flow from draft to completion. Admin can set 5 states directly. On-hold is the escape hatch.</p>
+  </div>
+  <div class="card">
+    <div class="card-header">Returns &amp; Refunds</div>
+    <p style="font-size:.85rem">9-state return FSM. 14-day refund clock starts at approval. Inspection required before resolution.</p>
+  </div>
+  <div class="card">
+    <div class="card-header">EU Compliance</div>
+    <p style="font-size:.85rem">OSS threshold tracking, country capability matrix, GPSR, CRD withdrawal rights, Geo-blocking Reg. conformance.</p>
+  </div>
+</div>
+
+<div class="callout callout-info">
+  <span class="callout-icon">ℹ</span>
+  <div>Use the navigation tabs above to jump to each topic. Each section has expandable details for procedures and edge cases.</div>
+</div>
+</section>
+
+<!-- ==================== STOCK ==================== -->
+<section id="stock">
+<h1>Stock Management</h1>
+<p class="subtitle">Inventory tracking, reservations, and the 60-minute auto-cancel rule</p>
+
+<h2>Stock Concepts</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td><code>on_hand</code></td><td>Physical units at the location (warehouse shelf count)</td></tr>
+<tr><td><code>reserved</code></td><td>Units held for in-flight checkouts and pending orders (reservations are created at checkout, not on add-to-cart)</td></tr>
+<tr><td><strong>Available</strong></td><td><code>on_hand − reserved</code> = what can be added to a new cart</td></tr>
+</table>
+</div>
+
+<h2>Reservation Lifecycle</h2>
+<div class="card">
+<div class="timeline">
+  <div class="tl-step"><strong>1. Reserve</strong> Customer starts checkout → <code>shop_reserve_stock</code> creates rows with state <span class="badge badge-accent">held</span> and 60-min TTL (adding to cart does NOT reserve stock)</div>
+  <div class="tl-step"><strong>2. Link</strong> At checkout → <code>shop_link_reservations</code> attaches reservation to the new order</div>
+  <div class="tl-step"><strong>3a. Payment succeeds</strong> → <code>shop_consume_stock</code> sets state <span class="badge badge-green">committed</span>, decrements both <code>on_hand</code> and <code>reserved</code></div>
+  <div class="tl-step"><strong>3b. Payment fails / abandoned</strong> → <code>shop_release_stock</code> sets state <span class="badge badge-purple">released</span>, units return to available pool</div>
+  <div class="tl-step"><strong>3c. 60 min expires</strong> → cron calls <code>shop_release_expired_reservations</code> → state becomes <span class="badge badge-purple">released</span>, stock freed. If linked to an unpaid order in <code>draft</code>/<code>pending_payment</code>, that order is auto-cancelled with a <code>reservation_expired</code> event</div>
+</div>
+</div>
+
+<div class="callout callout-warn">
+  <span class="callout-icon">⚠</span>
+  <div><strong>Critical:</strong> The 10-minute stock maintenance cron (<code>POST /api/admin/stock-maintenance</code>) must be running. Without it, expired reservations are never cleaned up and available stock shrinks until manually released.</div>
+</div>
+
+<h2>Reservation States</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>State</th><th>Meaning</th><th>Stock Impact</th></tr>
+<tr><td><span class="badge badge-accent">held</span></td><td>Reserved, waiting for payment</td><td><code>reserved</code> count increased</td></tr>
+<tr><td><span class="badge badge-green">committed</span></td><td>Paid — stock permanently deducted</td><td><code>on_hand</code> and <code>reserved</code> both decreased</td></tr>
+<tr><td><span class="badge badge-purple">released</span></td><td>Manually or automatically freed</td><td><code>reserved</code> decreased — back to available</td></tr>
+<tr><td><span class="badge badge-red">expired</span></td><td>Defined in schema but never set — the TTL sweep marks rows <code>released</code> instead. Don't search for this state when auditing</td><td>—</td></tr>
+</table>
+</div>
+
+<button class="acc-toggle" onclick="toggleAcc(this)">What happens when stock runs out mid-checkout?</button>
+<div class="acc-body">
+  <p>The <code>shop_reserve_stock</code> function uses <code>SELECT ... FOR UPDATE</code> to lock inventory rows — two buyers of the last unit cannot both succeed. If available stock is insufficient, that variant's allocation rolls back and any reservations made for earlier cart lines are released by the checkout code. The customer gets HTTP 409 naming the first unavailable SKU.</p>
+</div>
+</section>
+
+<!-- ==================== ORDERS ==================== -->
+<section id="orders">
+<h1>Order Lifecycle</h1>
+<p class="subtitle">9-state finite state machine with admin overrides</p>
+
+<h2>State Diagram</h2>
+<div class="fsm">
+<pre class="mermaid">
+stateDiagram-v2
+  direction LR
+  [*] --> draft
+  draft --> pending_payment
+  draft --> paid
+  draft --> cancelled
+  draft --> on_hold
+  pending_payment --> paid
+  pending_payment --> draft
+  pending_payment --> cancelled
+  pending_payment --> on_hold
+  paid --> partially_shipped
+  paid --> shipped
+  paid --> cancelled
+  paid --> on_hold
+  partially_shipped --> shipped
+  partially_shipped --> on_hold
+  shipped --> delivered
+  shipped --> completed
+  shipped --> on_hold
+  delivered --> completed
+  on_hold --> draft
+  on_hold --> pending_payment
+  on_hold --> paid
+  on_hold --> partially_shipped
+  on_hold --> shipped
+  on_hold --> cancelled
+  completed --> [*]
+  cancelled --> [*]
+</pre>
+</div>
+
+<h2>Admin-Settable States</h2>
+<p style="font-size:.85rem;margin-bottom:.75rem">Admins can directly set an order to any of these 5 states (if the transition is valid):</p>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem">
+  <span class="badge badge-red">cancelled</span>
+  <span class="badge badge-amber">on_hold</span>
+  <span class="badge badge-green">completed</span>
+  <span class="badge badge-accent">paid</span>
+  <span class="badge badge-cyan">shipped</span>
+</div>
+
+<div class="callout callout-info">
+  <span class="callout-icon">ℹ</span>
+  <div><strong>on_hold</strong> is the escape hatch. It can be entered from almost any state and can transition to almost any state. Use it when you need to pause an order for investigation.</div>
+</div>
+
+<h2>Key Rules</h2>
+<div class="card">
+<ul style="font-size:.85rem;padding-left:1.25rem">
+  <li><strong>Same-state writes</strong> are idempotent no-ops (won't error)</li>
+  <li><strong>Invalid transitions</strong> return HTTP 409 Conflict</li>
+  <li><strong>Terminal states</strong>: <code>completed</code> and <code>cancelled</code> — no transitions out</li>
+  <li>Payment webhook moves <code>draft</code> → <code>paid</code> and triggers invoice generation</li>
+  <li>Stock deduction is intended at <code>paid</code> (currently broken — see Known Issues)</li>
+  <li><code>delivered</code> is NOT admin-settable — it comes only from the carrier webhook</li>
+</ul>
+</div>
+
+<button class="acc-toggle" onclick="toggleAcc(this)">When should I use on_hold?</button>
+<div class="acc-body">
+  <p>Use on_hold when: a customer requests a change after payment, you need to investigate a suspicious order, a shipping issue needs resolution, or you need to wait for stock from a supplier. From on_hold, you can resume the order to any appropriate state.</p>
+</div>
+
+<button class="acc-toggle" onclick="toggleAcc(this)">Can I cancel a shipped order?</button>
+<div class="acc-body">
+  <p>No. <code>shipped</code> can only transition to <code>delivered</code>, <code>completed</code>, or <code>on_hold</code>. If a customer wants to return a shipped item, use the Returns flow instead. You can put it on_hold first, then process the return, then complete or cancel from on_hold.</p>
+</div>
+</section>
+
+<!-- ==================== RETURNS ==================== -->
+<section id="returns">
+<h1>Returns &amp; RMA Flow</h1>
+<p class="subtitle">9-state return FSM with CRD 14-day refund clock</p>
+
+<h2>Return State Diagram</h2>
+<div class="fsm">
+<pre class="mermaid">
+stateDiagram-v2
+  direction LR
+  [*] --> requested
+  requested --> approved
+  requested --> rejected
+  requested --> cancelled
+  approved --> label_sent
+  approved --> in_transit
+  approved --> received
+  approved --> cancelled
+  label_sent --> in_transit
+  label_sent --> received
+  label_sent --> cancelled
+  in_transit --> received
+  received --> inspected
+  inspected --> refund_approved
+  inspected --> rejected
+  refund_approved --> [*]
+  rejected --> [*]
+  cancelled --> [*]
+</pre>
+</div>
+
+<h2>The 14-Day Refund Clock</h2>
+<div class="callout callout-danger">
+  <span class="callout-icon">⏰</span>
+  <div><strong>CRD Art. 13(1):</strong> The refund deadline runs 14 days from the customer's <em>request</em>. The refund dashboard (<code>GET /api/admin/refunds?due=1</code>) flags returns at <strong>10 days after the request</strong> with no refund executed. <strong>Rule of thumb: refund within 14 days of the request date.</strong> Note: the return record also stores <code>refund_due_at</code> = approval + 14 days — when in doubt, use the earlier (request-based) date.</div>
+</div>
+
+<h2>Step-by-Step Procedure</h2>
+<div class="card">
+<div class="timeline">
+  <div class="tl-step"><strong>1. Customer requests return</strong> via the storefront → state: <span class="badge badge-accent">requested</span></div>
+  <div class="tl-step"><strong>2. Review &amp; approve/reject</strong> Admin PATCH with action <code>transition</code>, target <code>approved</code>. Rejection <strong>requires a documented reason</strong> (400 error without one). State: <span class="badge badge-green">approved</span> — but remember the CRD refund clock already started at the customer's request</div>
+  <div class="tl-step"><strong>3. Send return label</strong> PATCH action <code>create_return_label</code> → Sendcloud creates return parcel, customer gets email with label URL. State: <span class="badge badge-cyan">label_sent</span></div>
+  <div class="tl-step"><strong>4. Package in transit</strong> Track via Sendcloud. State: <span class="badge badge-purple">in_transit</span></div>
+  <div class="tl-step"><strong>5. Receive package</strong> Transition to <code>received</code> — sets <code>received_at</code> timestamp</div>
+  <div class="tl-step"><strong>6. Inspect</strong> PATCH action <code>inspect</code> with outcome + notes. Creates inspection record. State: <span class="badge badge-amber">inspected</span></div>
+  <div class="tl-step"><strong>7. Resolve</strong> Transition to <span class="badge badge-green">refund_approved</span> or <span class="badge badge-red">rejected</span>. Rejection requires reason. Customer receives email notification either way.</div>
+</div>
+</div>
+
+<h2>Refund Execution</h2>
+<div class="card">
+<ul style="font-size:.85rem;padding-left:1.25rem">
+  <li>Execute via <code>POST /api/admin/refunds</code> with <code>order_id</code>, <code>amount_cents</code>, <code>reason</code></li>
+  <li><strong>Withhold gate (CRD Art. 13(3)):</strong> Refund is blocked if any return for that order is in <code>requested</code>, <code>approved</code>, <code>label_sent</code>, or <code>in_transit</code>. The gate opens as soon as the parcel is <code>received</code> — inspection is not required before refunding. Override with <code>override_withhold_reason</code> (triggers Telegram alert)</li>
+  <li>Amount capped at: paid amount minus sum of already-pending/refunded amounts</li>
+  <li>Refund executes at Mollie, credit note auto-generated and emailed to customer</li>
+</ul>
+</div>
+</section>
+
+<!-- ==================== CHECKOUT ==================== -->
+<section id="checkout">
+<h1>Checkout Flow</h1>
+<p class="subtitle">From cart to order — step-by-step validation and creation</p>
+
+<div class="card">
+<div class="timeline">
+  <div class="tl-step"><strong>1. CSRF + Rate Limit</strong> Validates CSRF token, checks 10 requests/hour limit per IP</div>
+  <div class="tl-step"><strong>2. Validate Inputs</strong> Email, billing address, <code>terms_accepted</code> (CRD Art. 8(2) — order not binding without it)</div>
+  <div class="tl-step"><strong>3. Load Cart</strong> Fetch active cart by token, load lines with variant pricing</div>
+  <div class="tl-step"><strong>4. Coupon Re-validation</strong> Server-side — client-supplied discount is never trusted</div>
+  <div class="tl-step"><strong>5. Reserve Stock</strong> 60-min TTL per variant. On insufficient stock → all reservations rolled back, HTTP 409</div>
+  <div class="tl-step"><strong>6. Country Check</strong> Queries <code>shop_country_capabilities.can_order</code> — blocks if false</div>
+  <div class="tl-step"><strong>7. VAT Verification</strong> If VAT ID provided: VIES check. Failure → charged as B2C (logged for review)</div>
+  <div class="tl-step"><strong>8. OSS Threshold</strong> Below €10k EU B2C → NL VAT rates. Above → destination country rates</div>
+  <div class="tl-step"><strong>9. Tax + Shipping</strong> Compute totals, fetch eligible shipping methods</div>
+  <div class="tl-step"><strong>10. Create Order</strong> Insert <code>shop_orders</code> (state: draft, payment: unpaid), link reservations, insert lines</div>
+  <div class="tl-step"><strong>11. Record Agreements</strong> T&amp;C acceptance logged with doc version, SHA-256, IP, user-agent</div>
+  <div class="tl-step"><strong>12. Finalize</strong> Consume coupon, mark cart converted, return order details</div>
+</div>
+</div>
+
+<div class="callout callout-warn">
+  <span class="callout-icon">⚠</span>
+  <div>If anything fails after stock reservation (steps 6–12), all reservations are automatically released. No stock is lost on checkout errors.</div>
+</div>
+</section>
+
+<!-- ==================== FINANCE ==================== -->
+<section id="finance">
+<h1>Finance &amp; Tax</h1>
+<p class="subtitle">Invoicing, credit notes, OSS threshold, and VAT regimes</p>
+
+<h2>Invoice</h2>
+<div class="card">
+<ul style="font-size:.85rem;padding-left:1.25rem">
+  <li><strong>Seller:</strong> DES Hold B.V., KVK 94872635, BTW NL866349271B01</li>
+  <li><strong>Numbering:</strong> gapless DB sequence — voided numbers logged, never reused</li>
+  <li><strong>Immutability:</strong> DB trigger prevents mutation of fiscal fields. Corrections only via credit note</li>
+  <li><strong>Generated:</strong> automatically when payment webhook confirms order is paid</li>
+  <li><strong>Storage:</strong> PDF in Supabase bucket <code>invoices/{order_id}/{number}.pdf</code></li>
+  <li><strong>Format:</strong> bilingual FACTUUR / INVOICE with per-line VAT breakdown</li>
+</ul>
+</div>
+
+<h2>Credit Note</h2>
+<div class="card">
+<ul style="font-size:.85rem;padding-left:1.25rem">
+  <li><strong>Numbering:</strong> separate gapless sequence from invoices</li>
+  <li><strong>Generated:</strong> automatically on every refund execution</li>
+  <li>Supports line-level partial refunds or proportional distribution</li>
+  <li>References original invoice, linked to refund record</li>
+  <li>Emailed to customer with PDF attachment (nl/en/de)</li>
+</ul>
+</div>
+
+<h2>OSS Threshold</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Regime</th><th>When</th><th>VAT Rates Applied</th></tr>
+<tr><td><code>nl_micro</code></td><td>Cross-border B2C &lt; €10,000/year</td><td>NL rates on everything</td></tr>
+<tr><td><code>oss_b2c</code></td><td>Cross-border B2C ≥ €10,000/year or opt-in</td><td>Destination country rates</td></tr>
+<tr><td><code>oss_b2c_nl_rates</code></td><td>OSS order but destination rates not configured</td><td>NL stopgap rates (relabelled for OSS filing)</td></tr>
+<tr><td><code>eu_b2b_reverse</code></td><td>Valid VAT ID verified via VIES</td><td>Reverse charge (0%)</td></tr>
+<tr><td><code>nl_domestic</code></td><td>Customer in NL</td><td>NL rates</td></tr>
+<tr><td><code>export_zero</code></td><td>Non-EU customer</td><td>Zero-rated</td></tr>
+</table>
+</div>
+
+<div class="callout callout-info">
+  <span class="callout-icon">ℹ</span>
+  <div>Monitor OSS status via <code>GET /api/admin/oss</code>. Quarterly export generates per-country net/VAT totals for the OSS filing. Opt-in available if you want destination rates before reaching €10k.</div>
+</div>
+</section>
+
+<!-- ==================== COUNTRIES ==================== -->
+<section id="countries">
+<h1>Country Matrix</h1>
+<p class="subtitle">Geo-blocking Regulation compliant — who can browse, who can order</p>
+
+<h2>Service Tiers</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Country</th><th>Browse</th><th>Order</th><th>Deliver</th><th>Notes</th></tr>
+<tr><td>🇳🇱 Netherlands</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td>Domestic — full service</td></tr>
+<tr><td>🇩🇪 Germany</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td>Key market</td></tr>
+<tr><td>🇧🇪 Belgium</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td>Benelux</td></tr>
+<tr><td>🇮🇪 Ireland</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td>EN locale available</td></tr>
+<tr><td>🇦🇹 Austria</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td>Legal docs partial (DE)</td></tr>
+<tr><td>🇱🇺 Luxembourg</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-green">yes</span></td><td>Benelux — via NL/DE/EN</td></tr>
+<tr><td>🇫🇷 France</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-red">no</span></td><td><span class="badge badge-red">no</span></td><td>FR locale descoped</td></tr>
+<tr><td>🇮🇹🇪🇸🇵🇹 IT/ES/PT</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-red">no</span></td><td><span class="badge badge-red">no</span></td><td>VAT OK, no legal docs</td></tr>
+<tr><td>Other EU (17)</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-red">no</span></td><td><span class="badge badge-red">no</span></td><td>Browse per Geo-blocking Reg.</td></tr>
+<tr><td>🇬🇧🇨🇭🇺🇸🇹🇷</td><td><span class="badge badge-green">yes</span></td><td><span class="badge badge-red">no</span></td><td><span class="badge badge-red">no</span></td><td>Non-EU — not configured</td></tr>
+</table>
+</div>
+
+<div class="callout callout-info">
+  <span class="callout-icon">ℹ</span>
+  <div><strong>Geo-blocking Regulation (2018/302):</strong> All EU countries must be able to browse. There is no obligation to deliver — only to not block access or discriminate on payment. Manage the matrix via <code>PATCH /api/admin/countries</code>.</div>
+</div>
+</section>
+
+<!-- ==================== SECURITY ==================== -->
+<section id="security">
+<h1>Security &amp; Rate Limits</h1>
+<p class="subtitle">Protection measures, alerts, and admin identity</p>
+
+<h2>Rate Limits</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Route</th><th>Limit</th><th>Window</th><th>Key</th></tr>
+<tr><td>Login (<code>/api/auth</code>)</td><td>5 requests</td><td>15 min</td><td>IP + email</td></tr>
+<tr><td>Checkout</td><td>10 requests</td><td>1 hour</td><td>IP</td></tr>
+<tr><td>Coupon validation</td><td>20 requests</td><td>1 hour</td><td>IP</td></tr>
+<tr><td>Track + Returns lookup</td><td>10 requests</td><td>1 hour</td><td>IP</td></tr>
+<tr><td>Admin auth</td><td>5 requests</td><td>15 min</td><td>IP</td></tr>
+</table>
+</div>
+<p style="font-size:.85rem;margin-top:.5rem">Exceeded limits return HTTP 429 with <code>Retry-After</code> header.</p>
+
+<h2>CSRF Protection</h2>
+<div class="card" style="font-size:.85rem">
+  <p>Double-submit cookie: <code>desshop_csrf</code> (SameSite=Strict). All state-changing routes require matching <code>x-csrf-token</code> header. Constant-time comparison via <code>crypto.timingSafeEqual</code>.</p>
+  <p style="margin-top:.5rem"><strong>Exception:</strong> Consent/cookie route — <code>sendBeacon</code> can't set custom headers.</p>
+</div>
+
+<h2>Telegram Alerts</h2>
+<div class="card" style="font-size:.85rem">
+  <p>Security events fire alerts to the configured Telegram chat via DesAssistant22bot:</p>
+  <ul style="padding-left:1.25rem;margin-top:.5rem">
+    <li>Login lockout (5 failed attempts)</li>
+    <li>Admin auth lockout</li>
+    <li>Admin state overrides</li>
+    <li>Refund executions</li>
+    <li>Withhold gate overrides</li>
+    <li>Webhook signature failures</li>
+  </ul>
+</div>
+
+<h2>Admin Identity</h2>
+<div class="card" style="font-size:.85rem">
+  <p>Set <code>ADMIN_USERS</code> env var as a JSON map: <code>{"username": "Display Name"}</code>. All admin event logs carry the named actor instead of a generic "staff" label.</p>
+</div>
+</section>
+
+<!-- ==================== QUICK REF ==================== -->
+<section id="ref">
+<h1>Quick Reference</h1>
+<p class="subtitle">Searchable list of admin endpoints, actions, and environment variables</p>
+
+<input type="text" class="search-box" placeholder="Search endpoints, actions, env vars..." oninput="filterRef(this.value)">
+
+<h2>Admin Endpoints</h2>
+<div class="tbl-wrap">
+<table id="ref-table">
+<tr><th>Endpoint</th><th>Method</th><th>Purpose</th></tr>
+<tr><td><code>/api/admin/refunds</code></td><td>GET</td><td>List refunds for order; <code>?due=1</code> for approaching deadlines</td></tr>
+<tr><td><code>/api/admin/refunds</code></td><td>POST</td><td>Execute refund via Mollie (amount_cents, reason required)</td></tr>
+<tr><td><code>/api/admin/returns</code></td><td>GET</td><td>List returns; <code>?status=X</code> filter; <code>?return_id=X</code> for details</td></tr>
+<tr><td><code>/api/admin/returns</code></td><td>PATCH</td><td>Actions: <code>transition</code>, <code>inspect</code>, <code>create_return_label</code></td></tr>
+<tr><td><code>/api/admin/oss</code></td><td>GET</td><td>OSS threshold status, quarterly export</td></tr>
+<tr><td><code>/api/admin/oss</code></td><td>POST</td><td>Toggle OSS opt-in</td></tr>
+<tr><td><code>/api/admin/countries</code></td><td>GET</td><td>Country capability matrix</td></tr>
+<tr><td><code>/api/admin/countries</code></td><td>PATCH</td><td>Update country flags</td></tr>
+<tr><td><code>/api/admin/stock-maintenance</code></td><td>POST</td><td>Release expired reservations + auto-cancel unpaid orders (run via cron)</td></tr>
+<tr><td><code>/api/admin/orders</code></td><td>GET/PATCH</td><td>Order list + admin state override (5 settable states)</td></tr>
+<tr><td><code>/api/admin/fulfil</code></td><td>POST</td><td>Ship order lines, create Sendcloud outbound label</td></tr>
+<tr><td><code>/api/admin/legal</code></td><td>POST</td><td>Publish new legal document version (immutable, auto-increment)</td></tr>
+<tr><td><code>/api/admin/compliance</code></td><td>GET/PATCH</td><td>GPSR compliance record review</td></tr>
+<tr><td><code>/api/admin/import</code></td><td>POST</td><td>CSV product import — invalid GPSR data downgrades product to draft</td></tr>
+</table>
+</div>
+
+<h2>Environment Variables</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Variable</th><th>Purpose</th></tr>
+<tr><td><code>ADMIN_USER</code> / <code>ADMIN_PASS</code></td><td>Basic-auth gate for the entire admin surface — unset means admin returns 503 (fail-closed)</td></tr>
+<tr><td><code>MOLLIE_API_KEY</code></td><td>Mollie payments API key</td></tr>
+<tr><td><code>ORDER_TOKEN_SECRET</code></td><td>Signs customer order-status tokens</td></tr>
+<tr><td><code>EMAIL_FROM</code></td><td>Sender address for transactional email</td></tr>
+<tr><td><code>NEXT_PUBLIC_SUPABASE_URL</code> / <code>..._ANON_KEY</code> / <code>SUPABASE_SERVICE_ROLE_KEY</code></td><td>Supabase connection</td></tr>
+<tr><td><code>ADMIN_USERS</code></td><td>JSON map of admin usernames → display names</td></tr>
+<tr><td><code>TELEGRAM_BOT_TOKEN</code></td><td>Bot token for DesAssistant22bot security alerts</td></tr>
+<tr><td><code>TELEGRAM_CHAT_ID</code></td><td>Chat ID for alert destination</td></tr>
+<tr><td><code>SENDCLOUD_PUBLIC_KEY</code></td><td>Sendcloud API public key</td></tr>
+<tr><td><code>SENDCLOUD_SECRET_KEY</code></td><td>Sendcloud API secret key</td></tr>
+<tr><td><code>SENDCLOUD_WEBHOOK_SECRET</code></td><td>Sendcloud webhook verification secret</td></tr>
+<tr><td><code>RESEND_API_KEY</code></td><td>Resend email service API key</td></tr>
+</table>
+</div>
+
+<h2>Cron Jobs</h2>
+<div class="card" style="font-size:.85rem">
+  <p><strong>Stock maintenance (required):</strong> Every 10 minutes recommended (TTL is 60 min; a hold can then live up to ~70 min before release)</p>
+  <code style="display:block;margin-top:.5rem">*/10 * * * * curl -s -X POST https://your-domain/api/admin/stock-maintenance -H "Authorization: Basic ..."</code>
+</div>
+</section>
+
+<!-- ==================== KNOWN ISSUES ==================== -->
+<section id="issues">
+<h1>Known Issues</h1>
+<p class="subtitle">Confirmed by deep audit (2026-08-21) — operate around these until fixed</p>
+
+<div class="callout callout-danger">
+  <span class="callout-icon">🔴</span>
+  <div><strong>Stock is never deducted on sale.</strong> <code>shop_consume_stock</code> is defined but never called by the payment webhook. Paid orders keep their reservations as <code>held</code> and <code>on_hand</code> is never decremented. Until fixed: reconcile <code>reserved</code>/<code>on_hand</code> manually against shipped orders.</div>
+</div>
+<div class="callout callout-danger">
+  <span class="callout-icon">🔴</span>
+  <div><strong>CSRF cookie never issued.</strong> The guard is enforced but nothing sets <code>desshop_csrf</code> or sends the header from the client — production POSTs (login, checkout, returns) will 403 until an issuer + client wrapper is added.</div>
+</div>
+<div class="callout callout-danger">
+  <span class="callout-icon">🔴</span>
+  <div><strong>Admin lockout bug.</strong> The admin rate limit (5/15 min) counts <em>every</em> admin request, not just failed logins — a normal dashboard session locks you out and fires a false Telegram alert.</div>
+</div>
+<div class="callout callout-danger">
+  <span class="callout-icon">🔴</span>
+  <div><strong>OSS turnover never accumulates.</strong> Below-threshold orders are tagged <code>tax_country = 'NL'</code> and then excluded by the NL filter — the €10k threshold can never trip organically and nl_micro orders are missing from the quarterly export.</div>
+</div>
+<div class="callout callout-warn">
+  <span class="callout-icon">⚠</span>
+  <div><strong>T&amp;C not yet seeded.</strong> Until a terms document is published via <code>/api/admin/legal</code>, checkout silently skips the agreement record and the confirmation email has no T&amp;C PDF — legal evidence gap on every order.</div>
+</div>
+<div class="callout callout-warn">
+  <span class="callout-icon">⚠</span>
+  <div><strong>Refund-due worklist quirks.</strong> Cancelled returns appear on the <code>?due=1</code> list (they need no refund) and the two refund clocks disagree (request+14d vs approval+14d). Use the request-based date.</div>
+</div>
+<div class="callout callout-warn">
+  <span class="callout-icon">⚠</span>
+  <div><strong>Concurrent refunds can exceed the cap.</strong> Two simultaneous refund submissions can both pass the amount check. Only one staff member should execute refunds for a given order at a time.</div>
+</div>
+<div class="callout callout-warn">
+  <span class="callout-icon">⚠</span>
+  <div><strong>Countries with no matrix row can order.</strong> The checkout gate fails open for countries missing from <code>shop_country_capabilities</code> — keep the matrix complete.</div>
+</div>
+</section>
+
+</main>
+
+<script>
+function show(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function toggleAcc(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function filterRef(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('#ref-table tr:not(:first-child)').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+</script>

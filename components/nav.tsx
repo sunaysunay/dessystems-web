@@ -11,30 +11,16 @@ import { Globe } from "lucide-react"
 
 const LOCALES = [
   { code: "en", name: "English",    flag: null },
-  { code: "nl", name: "Nederlands", flag: "nl" },
-  { code: "de", name: "Deutsch",    flag: "de" },
-  { code: "fr", name: "Français",   flag: "fr" },
-  { code: "tr", name: "Türkçe",     flag: "tr" },
-  { code: "ro", name: "Română",     flag: "ro" },
-  { code: "bg", name: "Български",  flag: "bg" },
-  { code: "el", name: "Ελληνικά",   flag: "gr" },
-  { code: "es", name: "Español",    flag: "es" },
-  { code: "it", name: "Italiano",   flag: "it" },
+  { code: "nl", name: "Nederlands", flag: "\u{1F1F3}\u{1F1F1}" },
+  { code: "de", name: "Deutsch",    flag: "\u{1F1E9}\u{1F1EA}" },
+  { code: "fr", name: "Français",   flag: "\u{1F1EB}\u{1F1F7}" },
+  { code: "tr", name: "Türkçe",     flag: "\u{1F1F9}\u{1F1F7}" },
+  { code: "ro", name: "Română",     flag: "\u{1F1F7}\u{1F1F4}" },
+  { code: "bg", name: "Български",  flag: "\u{1F1E7}\u{1F1EC}" },
+  { code: "el", name: "Ελληνικά",   flag: "\u{1F1EC}\u{1F1F7}" },
+  { code: "es", name: "Español",    flag: "\u{1F1EA}\u{1F1F8}" },
+  { code: "it", name: "Italiano",   flag: "\u{1F1EE}\u{1F1F9}" },
 ]
-
-function FlagImg({ cc }: { cc: string }) {
-  return (
-    <img
-      src={"https://flagcdn.com/w20/" + cc + ".png"}
-      srcSet={"https://flagcdn.com/w40/" + cc + ".png 2x"}
-      width={20}
-      height={14}
-      alt={cc}
-      className="rounded-[2px] object-cover"
-      style={{ display: "block", flexShrink: 0 }}
-    />
-  )
-}
 
 function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   const locale   = useLocale()
@@ -88,7 +74,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
                   fontWeight: active ? 600 : 500
                 }}
               >
-                {flag ? <FlagImg cc={flag} /> : <Globe size={16} strokeWidth={1.6} />}
+                <span className="text-[16px] leading-none">{flag ?? <Globe size={16} strokeWidth={1.6} />}</span>
                 <span className="text-[11px] uppercase tracking-[0.06em]">{code}</span>
               </button>
             )
@@ -108,7 +94,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
         onMouseEnter={(e) => e.currentTarget.style.color = "#fff"}
         onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.8)"}
       >
-        <Globe size={16} strokeWidth={1.8} />
+        {current.flag ? <span className="text-[16px] leading-none">{current.flag}</span> : <Globe size={16} strokeWidth={1.8} />}
         {current.code.toUpperCase()}
         <ChevronDown
           size={14}
@@ -139,8 +125,8 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
                     if (!active) e.currentTarget.style.backgroundColor = "transparent"
                   }}
                 >
-                  <span className="w-5 flex-none flex items-center justify-center">
-                    {flag ? <FlagImg cc={flag} /> : <Globe size={16} strokeWidth={1.6} />}
+                  <span className="w-5 flex-none flex items-center justify-center text-[16px] leading-none">
+                    {flag ?? <Globe size={16} strokeWidth={1.6} />}
                   </span>
                   <span className={"text-[13px] " + (active ? "font-semibold" : "font-normal")}>
                     {name}

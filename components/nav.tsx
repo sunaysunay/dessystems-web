@@ -60,6 +60,7 @@ const LOCALES = [
 function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   const locale   = useLocale()
   const pathname = usePathname()
+  const router   = useRouter()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -75,7 +76,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   function switchLocale(code: string) {
     document.cookie = "NEXT_LOCALE=" + code + "; path=/; max-age=" + (60 * 60 * 24 * 365)
     setOpen(false)
-    window.location.href = "/" + code + pathname
+    router.replace(pathname, { locale: code })
   }
 
   function resetToGeo() {

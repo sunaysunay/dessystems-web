@@ -9,17 +9,52 @@ import { useRouter, usePathname } from "@/src/i18n/routing"
 import { useRef } from "react"
 import { Globe } from "lucide-react"
 
+function Flag({ cc }: { cc: string }) {
+  const flags: Record<string, { colors: string[]; layout: "vert" | "horiz" | "custom" }> = {
+    nl: { colors: ["#AE1C28","#FFF","#21468B"], layout: "horiz" },
+    de: { colors: ["#000","#D00","#FFCE00"], layout: "horiz" },
+    fr: { colors: ["#002395","#FFF","#ED2939"], layout: "vert" },
+    tr: { colors: ["#E30A17"], layout: "custom" },
+    ro: { colors: ["#002B7F","#FCD116","#CE1126"], layout: "vert" },
+    bg: { colors: ["#FFF","#00966E","#D62612"], layout: "horiz" },
+    gr: { colors: ["#004C98","#FFF"], layout: "custom" },
+    es: { colors: ["#AA151B","#F1BF00"], layout: "custom" },
+    it: { colors: ["#008C45","#F4F5F0","#CD212A"], layout: "vert" },
+  }
+  const f = flags[cc]
+  if (!f) return null
+  const w = 20, h = 14
+  if (f.layout === "horiz") {
+    const s = h / 3
+    return <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{display:"block",flexShrink:0,borderRadius:2}}><rect width={w} height={s} fill={f.colors[0]}/><rect y={s} width={w} height={s} fill={f.colors[1]}/><rect y={s*2} width={w} height={s} fill={f.colors[2]}/></svg>
+  }
+  if (f.layout === "vert") {
+    const s = w / 3
+    return <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{display:"block",flexShrink:0,borderRadius:2}}><rect width={s} height={h} fill={f.colors[0]}/><rect x={s} width={s} height={h} fill={f.colors[1]}/><rect x={s*2} width={s} height={h} fill={f.colors[2]}/></svg>
+  }
+  if (cc === "tr") {
+    return <svg width={w} height={h} viewBox="0 0 20 14" style={{display:"block",flexShrink:0,borderRadius:2}}><rect width="20" height="14" fill="#E30A17"/><circle cx="8" cy="7" r="3.5" fill="#FFF"/><circle cx="9.2" cy="7" r="2.8" fill="#E30A17"/><polygon points="11.5,7 12.8,5.2 11.2,6.4 13,6.4 11.2,7.6" fill="#FFF" transform="rotate(18,12,7)"/></svg>
+  }
+  if (cc === "gr") {
+    return <svg width={w} height={h} viewBox="0 0 20 14" style={{display:"block",flexShrink:0,borderRadius:2}}><rect width="20" height="14" fill="#004C98"/>{[0,1,2,3].map(i=><rect key={i} y={i*3.11+1.56} width="20" height="1.56" fill="#FFF"/>)}<rect width="7.78" height="7.78" fill="#004C98"/><rect x="3.11" width="1.56" height="7.78" fill="#FFF"/><rect y="3.11" width="7.78" height="1.56" fill="#FFF"/></svg>
+  }
+  if (cc === "es") {
+    return <svg width={w} height={h} viewBox="0 0 20 14" style={{display:"block",flexShrink:0,borderRadius:2}}><rect width="20" height="14" fill="#F1BF00"/><rect width="20" height="3.5" fill="#AA151B"/><rect y="10.5" width="20" height="3.5" fill="#AA151B"/></svg>
+  }
+  return null
+}
+
 const LOCALES = [
-  { code: "en", name: "English",    flag: null },
-  { code: "nl", name: "Nederlands", flag: "\u{1F1F3}\u{1F1F1}" },
-  { code: "de", name: "Deutsch",    flag: "\u{1F1E9}\u{1F1EA}" },
-  { code: "fr", name: "Français",   flag: "\u{1F1EB}\u{1F1F7}" },
-  { code: "tr", name: "Türkçe",     flag: "\u{1F1F9}\u{1F1F7}" },
-  { code: "ro", name: "Română",     flag: "\u{1F1F7}\u{1F1F4}" },
-  { code: "bg", name: "Български",  flag: "\u{1F1E7}\u{1F1EC}" },
-  { code: "el", name: "Ελληνικά",   flag: "\u{1F1EC}\u{1F1F7}" },
-  { code: "es", name: "Español",    flag: "\u{1F1EA}\u{1F1F8}" },
-  { code: "it", name: "Italiano",   flag: "\u{1F1EE}\u{1F1F9}" },
+  { code: "en", name: "English",    flag: null  as string | null },
+  { code: "nl", name: "Nederlands", flag: "nl" },
+  { code: "de", name: "Deutsch",    flag: "de" },
+  { code: "fr", name: "Français",   flag: "fr" },
+  { code: "tr", name: "Türkçe",     flag: "tr" },
+  { code: "ro", name: "Română",     flag: "ro" },
+  { code: "bg", name: "Български",  flag: "bg" },
+  { code: "el", name: "Ελληνικά",   flag: "gr" },
+  { code: "es", name: "Español",    flag: "es" },
+  { code: "it", name: "Italiano",   flag: "it" },
 ]
 
 function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
@@ -74,7 +109,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
                   fontWeight: active ? 600 : 500
                 }}
               >
-                <span className="text-[16px] leading-none">{flag ?? <Globe size={16} strokeWidth={1.6} />}</span>
+                {flag ? <Flag cc={flag} /> : <Globe size={16} strokeWidth={1.6} />}
                 <span className="text-[11px] uppercase tracking-[0.06em]">{code}</span>
               </button>
             )
@@ -94,7 +129,7 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
         onMouseEnter={(e) => e.currentTarget.style.color = "#fff"}
         onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.8)"}
       >
-        {current.flag ? <span className="text-[16px] leading-none">{current.flag}</span> : <Globe size={16} strokeWidth={1.8} />}
+        {current.flag ? <Flag cc={current.flag} /> : <Globe size={16} strokeWidth={1.8} />}
         {current.code.toUpperCase()}
         <ChevronDown
           size={14}
@@ -125,8 +160,8 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
                     if (!active) e.currentTarget.style.backgroundColor = "transparent"
                   }}
                 >
-                  <span className="w-5 flex-none flex items-center justify-center text-[16px] leading-none">
-                    {flag ?? <Globe size={16} strokeWidth={1.6} />}
+                  <span className="w-5 flex-none flex items-center justify-center">
+                    {flag ? <Flag cc={flag} /> : <Globe size={16} strokeWidth={1.6} />}
                   </span>
                   <span className={"text-[13px] " + (active ? "font-semibold" : "font-normal")}>
                     {name}

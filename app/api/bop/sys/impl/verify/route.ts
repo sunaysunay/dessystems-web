@@ -104,6 +104,19 @@ async function verifyHelpDoc(ref: string, supabase: ReturnType<typeof getServerC
   return { ok: (data?.length ?? 0) > 0, evidence: { target_id: screenId, count: data?.length ?? 0 } };
 }
 
+async function verifySourceFile(ref: string): Promise<{ ok: boolean; evidence: Record<string, unknown> }> {
+  const fs = await import('fs').then(m => m.promises);
+  const bases = ['/root/dessystems-web-dev', '/opt/dessystems-console-dev', '/root/desshop-web'];
+  const rel = ref.startsWith('/') ? ref : `/${ref}`;
+  for (const base of bases) {
+    try {
+      const stat = await fs.stat(base + rel);
+      return { ok: true, evidence: { path: rel, base, size: stat.size } };
+    } catch { /* next base */ }
+  }
+  return { ok: false, evidence: { path: rel, error: 'file not found in any project' } };
+}
+
 async function verifyOne(d: Deliverable, supabase: ReturnType<typeof getServerClient>): Promise<VerifyResult> {
   if (d.verify_mode === 'manual') {
     return { id: d.id, is_verified: d.is_verified, verify_evidence: null, verify_error: null };
@@ -119,6 +132,7 @@ async function verifyOne(d: Deliverable, supabase: ReturnType<typeof getServerCl
       case 'PERMISSION':     result = await verifyPermission(d.ref, supabase); break;
       case 'I18N_KEY':       result = await verifyI18nKey(d.ref); break;
       case 'HELP_DOC':       result = await verifyHelpDoc(d.ref, supabase); break;
+      case 'SOURCE_FILE':    result = await verifySourceFile(d.ref); break;
       default:               result = { ok: false, evidence: { note: `auto-verify not implemented for kind=${d.kind}` } };
     }
     return { id: d.id, is_verified: result.ok, verify_evidence: result.evidence, verify_error: null };

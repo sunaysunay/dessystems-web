@@ -71,7 +71,7 @@ const KC: Record<string, string> = {
 const PROGRAM_STATUSES = ['draft', 'active', 'test', 'paused', 'done', 'cancelled'];
 const PHASE_STATUSES = ['not_started', 'in_progress', 'done', 'blocked'];
 const TASK_TYPES = ['screen', 'api', 'schema', 'integration', 'compliance', 'infra', 'docs', 'general'];
-const DELIVERABLE_KINDS = ['SCREEN','MENU_NODE','DB_TABLE','RLS_POLICY','API_ROUTE','PERMISSION','I18N_KEY','HELP_DOC','EMAIL_TEMPLATE','TELEGRAM_ALERT','TEST','MIGRATION','SMOKE_CHECK','CUSTOM'];
+const DELIVERABLE_KINDS = ['SCREEN','MENU_NODE','DB_TABLE','RLS_POLICY','API_ROUTE','PERMISSION','I18N_KEY','HELP_DOC','SOURCE_FILE','EMAIL_TEMPLATE','TELEGRAM_ALERT','TEST','MIGRATION','SMOKE_CHECK','CUSTOM'];
 
 function Bar({ pct, h = 'h-2' }: { pct: number; h?: string }) {
   const c = pct === 100 ? 'bg-emerald-500' : pct > 50 ? 'bg-blue-500' : pct > 0 ? 'bg-amber-400' : 'bg-slate-200';

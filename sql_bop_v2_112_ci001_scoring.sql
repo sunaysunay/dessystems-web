@@ -116,7 +116,7 @@ ON CONFLICT (object_id) DO NOTHING;
 --  bop_dependencies
 -- ═══════════════════════════════════════════════════════
 
-INSERT INTO bop_dependencies (source_id, target_id, dep_type)
+INSERT INTO bop_dependencies (from_id, to_id, dep_type)
 VALUES
   ('ci_benchmark',       'ci_daily_product',    'reads'),
   ('ci_benchmark',       'ci_daily_sales',      'reads'),
@@ -201,4 +201,4 @@ END $$;
 -- DROP TABLE IF EXISTS ci_score_def;
 -- DROP TABLE IF EXISTS ci_benchmark;
 -- DELETE FROM bop_objects WHERE object_id IN ('ci_benchmark','ci_score_def','ci_score_component','ci_score_result');
--- DELETE FROM bop_dependencies WHERE source_id IN ('ci_benchmark','ci_score_result','ci_score_component');
+-- DELETE FROM bop_dependencies WHERE from_id IN ('ci_benchmark','ci_score_result','ci_score_component');

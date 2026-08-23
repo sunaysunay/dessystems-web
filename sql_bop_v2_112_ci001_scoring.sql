@@ -124,7 +124,7 @@ VALUES
   ('ci_score_result',    'ci_benchmark',         'reads'),
   ('ci_score_result',    'ci_score_def',         'reads'),
   ('ci_score_result',    'ci_score_component',   'reads'),
-  ('ci_score_component', 'ci_score_def',         'child')
+  ('ci_score_component', 'ci_score_def',         'reads')
 ON CONFLICT DO NOTHING;
 
 -- ═══════════════════════════════════════════════════════

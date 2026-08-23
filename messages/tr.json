@@ -90,7 +90,8 @@
     "shopFinanceGrp": "Finance",
     "shopFulfilment": "Fulfilment",
     "shopOrdersMgmt": "Orders",
-    "shopProcurement": "Procurement"
+    "shopProcurement": "Procurement",
+    "shopAnalyticsGrp": "Ticaret Zekâsı"
   },
   "nav": {
     "dashboard": "Gösterge Paneli",
@@ -294,7 +295,17 @@
     "shopShipments": "Shipments",
     "shopSupplierCatalog": "Supplier Catalog",
     "shopSuppliers": "Suppliers",
-    "shopGuide": "Operations Guide"
+    "shopGuide": "Operations Guide",
+    "shopAnalyticsOverview": "Analitik Özeti",
+    "shopAnalyticsFunnel": "Huni",
+    "shopAnalyticsSales": "Satış & Marj",
+    "shopAnalyticsProducts": "Ürün Performansı",
+    "shopAnalyticsCustomers": "Müşteriler",
+    "shopAnalyticsTraffic": "Trafik & Pazarlama",
+    "shopAnalyticsCheckout": "Sepet & Ödeme",
+    "shopAnalyticsInventory": "Stok Sağlığı",
+    "shopAnalyticsDiscovery": "Arama & Keşif",
+    "shopAnalyticsAttention": "Dikkat Merkezi"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -443,7 +454,17 @@
     "SY050": "Özellik Bayrakları",
     "SY051": "Uygulama Kokpiti",
     "SY053": "Görev Detayı",
-    "MP005": "Düzen Yöneticisi"
+    "MP005": "Düzen Yöneticisi",
+    "SH100": "Analitik Özeti",
+    "SH101": "Huni",
+    "SH102": "Satış & Marj",
+    "SH103": "Ürün Performansı",
+    "SH104": "Müşteriler",
+    "SH105": "Trafik & Pazarlama",
+    "SH106": "Sepet & Ödeme",
+    "SH107": "Stok Sağlığı",
+    "SH108": "Arama & Keşif",
+    "SH109": "Dikkat Merkezi"
   },
   "support": {
     "title": "Destek",

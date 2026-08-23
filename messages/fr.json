@@ -90,7 +90,8 @@
     "shopFinanceGrp": "Finance",
     "shopFulfilment": "Fulfilment",
     "shopOrdersMgmt": "Orders",
-    "shopProcurement": "Procurement"
+    "shopProcurement": "Procurement",
+    "shopAnalyticsGrp": "Commerce Intelligence"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -294,7 +295,17 @@
     "shopShipments": "Shipments",
     "shopSupplierCatalog": "Supplier Catalog",
     "shopSuppliers": "Suppliers",
-    "shopGuide": "Operations Guide"
+    "shopGuide": "Operations Guide",
+    "shopAnalyticsOverview": "Aperçu analytique",
+    "shopAnalyticsFunnel": "Entonnoir",
+    "shopAnalyticsSales": "Ventes & Marge",
+    "shopAnalyticsProducts": "Performance produits",
+    "shopAnalyticsCustomers": "Clients",
+    "shopAnalyticsTraffic": "Trafic & Marketing",
+    "shopAnalyticsCheckout": "Panier & Paiement",
+    "shopAnalyticsInventory": "Santé des stocks",
+    "shopAnalyticsDiscovery": "Recherche & Découverte",
+    "shopAnalyticsAttention": "Centre d'attention"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -443,7 +454,17 @@
     "SY050": "Feature Flags",
     "SY051": "Cockpit Implémentation",
     "SY053": "Détail Tâche",
-    "MP005": "Gestionnaire de mise en page"
+    "MP005": "Gestionnaire de mise en page",
+    "SH100": "Aperçu analytique",
+    "SH101": "Entonnoir",
+    "SH102": "Ventes & Marge",
+    "SH103": "Performance produits",
+    "SH104": "Clients",
+    "SH105": "Trafic & Marketing",
+    "SH106": "Panier & Paiement",
+    "SH107": "Santé des stocks",
+    "SH108": "Recherche & Découverte",
+    "SH109": "Centre d'attention"
   },
   "support": {
     "title": "Support",

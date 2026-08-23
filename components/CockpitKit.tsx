@@ -20,6 +20,97 @@ export function Kpi({ label, value, delta, prev }: { label: string; value: numbe
   );
 }
 
+// ── CI001 extensions (CI-T16) ──────────────────────────────────────────────
+
+export function PlaneBadge({ plane }: { plane: 'A' | 'B' }) {
+  const style = plane === 'A'
+    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+    : 'bg-sky-50 text-sky-700 border-sky-200';
+  const title = plane === 'A'
+    ? 'Plane A — server-side truth, always complete'
+    : 'Plane B — consent-gated behavioural data';
+  return (
+    <span title={title} className={`inline-flex items-center rounded border px-1 text-[9px] font-bold leading-4 ${style}`}>
+      {plane}
+    </span>
+  );
+}
+
+export function ConsentCoverageBadge({ ratePct }: { ratePct: number | null }) {
+  if (ratePct == null) return null;
+  const c = ratePct >= 70 ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+    : ratePct >= 40 ? 'bg-amber-50 text-amber-700 border-amber-200'
+    : 'bg-red-50 text-red-600 border-red-200';
+  return (
+    <span title="Share of sessions with analytics consent — Plane B figures cover only these"
+      className={`inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-[10px] font-semibold ${c}`}>
+      consent {ratePct.toFixed(0)}%
+    </span>
+  );
+}
+
+export interface KpiComparisonBase {
+  /** Previous-period value, formatted the same way as `value`. */
+  prev: number | string;
+  /** What the base is, e.g. "vs prev 30 d". */
+  label: string;
+  /** Percent change vs the base; null when the base is zero. */
+  changePct: number | null;
+}
+
+/**
+ * CI001 KPI card (plan §7.1). The comparison base is MANDATORY — a number
+ * without a base is a decoration, and omitting `base` is a type error that
+ * fails `des-build`/lint.
+ */
+export function KpiCard({ label, value, plane, base, n, footnote, suppressed }: {
+  label: string;
+  value: number | string;
+  plane: 'A' | 'B';
+  base: KpiComparisonBase;
+  /** Sample size, e.g. order count behind the number. */
+  n?: number;
+  /** Extra context line, e.g. "p75 of last 12 months". */
+  footnote?: string;
+  /** Render as suppressed (insufficient data) instead of showing the value. */
+  suppressed?: string;
+}) {
+  const fmt = (v: number | string) => typeof v === 'number' ? v.toLocaleString('nl-NL') : v;
+  const d = base.changePct;
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-4">
+      <div className="flex items-center justify-between">
+        <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{label}</div>
+        <PlaneBadge plane={plane} />
+      </div>
+      {suppressed ? (
+        <div className="mt-1 text-[13px] font-semibold text-slate-400">{suppressed}</div>
+      ) : (
+        <>
+          <div className="mt-1 flex items-baseline gap-2">
+            <span className="text-[24px] font-bold text-slate-800">{fmt(value)}</span>
+            {d !== null && (
+              <span className={`text-[11px] font-bold ${d > 0 ? 'text-emerald-600' : d < 0 ? 'text-red-500' : 'text-slate-400'}`}>
+                {d > 0 ? '▲' : d < 0 ? '▼' : '•'} {Math.abs(d)}%
+              </span>
+            )}
+          </div>
+          <div className="mt-1 border-t border-slate-100 pt-1 text-[10px] text-slate-400">
+            {base.label} ({fmt(base.prev)})
+          </div>
+        </>
+      )}
+      {(footnote || n != null) && (
+        <div className="text-[10px] text-slate-300">
+          {[footnote, n != null ? `n=${n.toLocaleString('nl-NL')}` : null].filter(Boolean).join(' · ')}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── end CI001 extensions ───────────────────────────────────────────────────
+
 export function Spark({ data, height = 40, color = '#6366f1', targetLine }: { data: number[]; height?: number; color?: string; targetLine?: number }) {
   if (!data.length) return null;
   const w = 220, max = Math.max(...data, targetLine ?? 0, 1);

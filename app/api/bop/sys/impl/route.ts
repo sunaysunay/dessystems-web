@@ -16,12 +16,19 @@ export async function GET(req: NextRequest) {
       .select('*')
       .order('code');
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    // Enrich with scope from sy_programs
+    // Enrich with scope + dates from sy_programs (SY051-UX2)
     const ids = (data ?? []).map((p: Record<string, unknown>) => p.program_id);
     if (ids.length) {
-      const { data: raw } = await supabase.from('sy_programs').select('id, scope').in('id', ids);
-      const scopeMap = Object.fromEntries((raw ?? []).map((r: Record<string, unknown>) => [r.id, r.scope]));
-      for (const p of (data ?? [])) (p as Record<string, unknown>).scope = scopeMap[(p as Record<string, unknown>).program_id as string] ?? null;
+      const { data: raw } = await supabase.from('sy_programs')
+        .select('id, scope, created_at, updated_at, completed_at').in('id', ids);
+      const map = Object.fromEntries((raw ?? []).map((r: Record<string, unknown>) => [r.id, r]));
+      for (const p of (data ?? [])) {
+        const r = map[(p as Record<string, unknown>).program_id as string] as Record<string, unknown> | undefined;
+        (p as Record<string, unknown>).scope = r?.scope ?? null;
+        (p as Record<string, unknown>).created_at = r?.created_at ?? null;
+        (p as Record<string, unknown>).updated_at = r?.updated_at ?? null;
+        (p as Record<string, unknown>).completed_at = r?.completed_at ?? null;
+      }
     }
     return NextResponse.json({ programs: data ?? [] });
   }
@@ -190,7 +197,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const { error } = await supabase.from('sy_programs').update({ status, status_note: status_note || null, updated_at: new Date().toISOString() }).eq('id', program_id);
+    // SY051-UX2: entering 'done' stamps completed_at; leaving it clears it.
+    const statusUpdate: Record<string, unknown> = { status, status_note: status_note || null, updated_at: new Date().toISOString() };
+    statusUpdate.completed_at = status === 'done' ? new Date().toISOString() : null;
+    const { error } = await supabase.from('sy_programs').update(statusUpdate).eq('id', program_id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
     // Log event — find any task in this program to attach the event

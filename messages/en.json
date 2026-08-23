@@ -223,7 +223,17 @@
     "cbtTradeLog": "Trade Log",
     "cbtTradingDash": "Trading Dashboard",
     "cbtDealerFeed": "Dealer Feed",
-    "shopGuide": "Operations Guide"
+    "shopGuide": "Operations Guide",
+    "shopAnalyticsOverview": "Analytics Overview",
+    "shopAnalyticsFunnel": "Funnel",
+    "shopAnalyticsSales": "Sales & Margin",
+    "shopAnalyticsProducts": "Product Performance",
+    "shopAnalyticsCustomers": "Customers",
+    "shopAnalyticsTraffic": "Traffic & Marketing",
+    "shopAnalyticsCheckout": "Cart & Checkout",
+    "shopAnalyticsInventory": "Inventory Health",
+    "shopAnalyticsDiscovery": "Search & Discovery",
+    "shopAnalyticsAttention": "Attention Center"
   },
   "sal": {
     "orders": "Orders",
@@ -437,7 +447,8 @@
     "shopAfterSalesGrp": "After-Sales",
     "shopProcurement": "Procurement",
     "shopComplianceGrp": "Compliance",
-    "markets": "Markets"
+    "markets": "Markets",
+    "shopAnalyticsGrp": "Commerce Intelligence"
   },
   "screens": {
     "IN006": "Model Catalog",
@@ -586,7 +597,17 @@
     "SY050": "Feature Flags",
     "SY051": "Implementation Cockpit",
     "SY053": "Task Detail",
-    "MP005": "Layout Manager"
+    "MP005": "Layout Manager",
+    "SH100": "Analytics Overview",
+    "SH101": "Funnel",
+    "SH102": "Sales & Margin",
+    "SH103": "Product Performance",
+    "SH104": "Customers",
+    "SH105": "Traffic & Marketing",
+    "SH106": "Cart & Checkout",
+    "SH107": "Inventory Health",
+    "SH108": "Search & Discovery",
+    "SH109": "Attention Center"
   },
   "support": {
     "title": "Support",

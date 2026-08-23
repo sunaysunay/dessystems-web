@@ -305,6 +305,16 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/sal/warranties': { id: 'SA023', title: 'Warranties', mod: 'SAL' },
   '/console/shp/control-tower': { id: 'SH071', title: 'Control Tower', mod: 'SHP' },
   '/console/shp/guide': { id: 'SH090', title: 'Shop Guide', mod: 'SHP' },
+  '/console/shp/analytics/overview': { id: 'SH100', title: 'Analytics Overview', mod: 'SHP' },
+  '/console/shp/analytics/funnel': { id: 'SH101', title: 'Analytics Funnel', mod: 'SHP' },
+  '/console/shp/analytics/sales': { id: 'SH102', title: 'Analytics Sales', mod: 'SHP' },
+  '/console/shp/analytics/products': { id: 'SH103', title: 'Analytics Products', mod: 'SHP' },
+  '/console/shp/analytics/customers': { id: 'SH104', title: 'Analytics Customers', mod: 'SHP' },
+  '/console/shp/analytics/traffic': { id: 'SH105', title: 'Analytics Traffic', mod: 'SHP' },
+  '/console/shp/analytics/checkout': { id: 'SH106', title: 'Analytics Checkout', mod: 'SHP' },
+  '/console/shp/analytics/inventory': { id: 'SH107', title: 'Analytics Inventory', mod: 'SHP' },
+  '/console/shp/analytics/discovery': { id: 'SH108', title: 'Analytics Discovery', mod: 'SHP' },
+  '/console/shp/analytics/attention': { id: 'SH109', title: 'Analytics Attention', mod: 'SHP' },
 };
 
 export function getScreenMeta(pathname: string): ScreenMeta | null {

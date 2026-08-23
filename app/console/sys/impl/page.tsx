@@ -10,6 +10,7 @@ interface Program {
   total_deliverables: number; verified_deliverables: number; pct: number;
   status_note: string | null;
   scope: string | null;
+  created_at: string | null; updated_at: string | null; completed_at: string | null;
 }
 interface Phase {
   phase_id: string; program_id: string; seq: number; title: Record<string, string>;
@@ -218,6 +219,15 @@ export default function SY051Page() {
   const [tab, setTab] = useState<'dashboard' | 'tree'>('tree');
   const [programs, setPrograms] = useState<Program[]>([]);
   const [selProgramId, setSelProgramId] = useState<string>('');
+  // SY051-UX2: main-screen table state
+  const [showDone, setShowDone] = useState(false);
+  const [sortKey, setSortKey] = useState<string>('updated_at');
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
+  const [fltStatus, setFltStatus] = useState<Set<string>>(new Set());
+  const [fltOwner, setFltOwner] = useState('');
+  const [fltSearch, setFltSearch] = useState('');
+  const [fltFrom, setFltFrom] = useState('');
+  const [fltTo, setFltTo] = useState('');
   const [phases, setPhases] = useState<Phase[]>([]);
   const [tasksByPhase, setTasksByPhase] = useState<Record<string, Task[]>>({});
   const [delivsByTask, setDelivsByTask] = useState<Record<string, Deliverable[]>>({});
@@ -231,6 +241,7 @@ export default function SY051Page() {
   const [docsMaxSize] = useState(10 * 1024 * 1024);
   const [uploading, setUploading] = useState(false);
   const [previewDoc, setPreviewDoc] = useState<{ path: string; name: string; mimetype: string } | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const [drawer, setDrawer] = useState<'program' | 'phase' | 'task' | 'deliverable' | null>(null);
   const [drawerCtx, setDrawerCtx] = useState<{ phaseId?: string; taskId?: string }>({});
@@ -307,7 +318,7 @@ export default function SY051Page() {
   }, []);
 
   const loadDocs = useCallback(async (programId: string) => {
-    const res = await fetch(`/api/bop/sys/impl/docs?program_id=${programId}`);
+    const res = await fetch(`/api/bop/sys/impl/docs?program_id=${programId}&_t=${Date.now()}`, { cache: 'no-store' });
     const data = await res.json();
     setDocs(data.files ?? []);
     setDocsTotalSize(data.totalSize ?? 0);
@@ -340,14 +351,26 @@ export default function SY051Page() {
     window.open(`/api/bop/sys/impl/docs/download?path=${encodeURIComponent(path)}&name=${encodeURIComponent(name)}`, '_blank');
   };
 
-  useEffect(() => { loadPrograms(); }, [loadPrograms]);
+  useEffect(() => { loadPrograms(); }, [loadPrograms, refreshKey]);
   useEffect(() => {
     if (selProgramId) {
       loadFullTree(selProgramId); loadDocs(selProgramId);
       const p = programs.find(pr => pr.program_id === selProgramId);
       setScopeVal(p?.scope ?? '');
     }
-  }, [selProgramId, loadFullTree, loadDocs]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selProgramId, loadFullTree, loadDocs, refreshKey]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // SY051-UX2: deep link ?program=<id> survives refresh; selection updates the URL.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search).get('program');
+    if (q) setSelProgramId(q);
+  }, []);
+  const selectProgram = (id: string) => {
+    setSelProgramId(id);
+    const url = new URL(window.location.href);
+    if (id) url.searchParams.set('program', id); else url.searchParams.delete('program');
+    window.history.replaceState(null, '', url.toString());
+  };
 
   const togglePhase = (id: string) => {
     setExpandedPhases(prev => { const n = new Set(prev); n.has(id) ? n.delete(id) : n.add(id); return n; });
@@ -464,16 +487,18 @@ export default function SY051Page() {
       <div className="flex items-center justify-between">
         <ScreenHeader title="Implementation Cockpit" description="Track implementation programs, phases, tasks and deliverables — SY051" />
         <div className="flex items-center gap-2">
-          <button onClick={async () => { await loadPrograms(); if (selProgramId) { await loadFullTree(selProgramId); loadDocs(selProgramId); } showToast('Refreshed'); }}
+          <button onClick={() => { setRefreshKey(k => k + 1); showToast('Refreshing...'); }}
             className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 shadow-sm hover:bg-slate-50">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
             Refresh
           </button>
-          <button onClick={() => window.history.back()}
-            className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 shadow-sm hover:bg-slate-50">
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-            Back
-          </button>
+          {selProgramId && (
+            <button onClick={() => selectProgram('')}
+              className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600 shadow-sm hover:bg-slate-50">
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              Back
+            </button>
+          )}
         </div>
       </div>
 
@@ -484,10 +509,16 @@ export default function SY051Page() {
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold uppercase text-slate-400">Program</span>
           <select className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 focus:border-blue-400 focus:outline-none min-w-[220px]"
-            value={selProgramId} onChange={e => setSelProgramId(e.target.value)}>
+            value={selProgramId} onChange={e => selectProgram(e.target.value)}>
             <option value="">— Select program —</option>
-            {programs.map(p => <option key={p.program_id} value={p.program_id}>{p.code} — {t(p.title)}</option>)}
+            {programs
+              .filter(p => showDone || p.status !== 'done' || p.program_id === selProgramId)
+              .map(p => <option key={p.program_id} value={p.program_id}>{p.code} — {t(p.title)}</option>)}
           </select>
+          <label className="flex cursor-pointer items-center gap-1.5 text-xs text-slate-500">
+            <input type="checkbox" checked={showDone} onChange={e => setShowDone(e.target.checked)} />
+            Show done
+          </label>
         </div>
         <div className="flex gap-1 rounded-lg bg-slate-100 p-0.5">
           {(['tree', 'dashboard'] as const).map(tb => (
@@ -512,7 +543,7 @@ export default function SY051Page() {
                 if (!confirm(`Delete program "${selProgram?.code}" and ALL its phases, tasks, deliverables and documents? This cannot be undone.`)) return;
                 const r = await api({ action: 'delete_program', program_id: selProgramId });
                 if (r.error) { showToast(r.error); return; }
-                showToast('Program deleted'); setSelProgramId(''); loadPrograms();
+                showToast('Program deleted'); selectProgram(''); loadPrograms();
               }} className="rounded-lg border border-red-200 bg-red-50 px-3 py-1 text-xs font-medium text-red-600 hover:bg-red-100">Delete Program</button>
             </>
           )}
@@ -772,31 +803,106 @@ export default function SY051Page() {
 
       {loading && <div className="p-8 text-center text-sm text-slate-400">Loading...</div>}
 
-      {/* No program selected — show program cards */}
-      {!loading && !selProgramId && (
-        <div className="rounded-xl border border-slate-200 bg-white p-12 text-center">
-          <div className="text-slate-400 text-sm">Select a program above to view the implementation tree, or create a new one.</div>
-          {programs.length > 0 && (
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {programs.map(p => (
-                <button key={p.program_id} onClick={() => setSelProgramId(p.program_id)}
-                  className="rounded-xl border border-slate-200 p-4 text-left hover:border-blue-300 hover:bg-blue-50/50 transition-colors">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-slate-400">{p.code}</span>
-                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${SC[p.status] ?? SC.draft}`}>{p.status}</span>
-                  </div>
-                  <div className="text-sm font-medium text-slate-800 mt-1">{t(p.title)}</div>
-                  <div className="mt-2 flex items-center gap-2">
-                    <Bar pct={p.pct} />
-                    <span className="text-xs font-bold text-slate-500">{p.pct}%</span>
-                  </div>
-                  <div className="mt-1 text-[10px] text-slate-400">{p.total_phases} phases · {p.total_tasks} tasks · {p.total_deliverables} deliverables</div>
-                </button>
-              ))}
+      {/* ═══ MAIN SCREEN (SY051-UX2): All Implementations table ═══ */}
+      {!loading && !selProgramId && (() => {
+        const owners = [...new Set(programs.map(p => p.owner).filter(Boolean))] as string[];
+        const statuses = ['draft', 'active', 'test', 'paused', 'done', 'cancelled'].filter(s => programs.some(p => p.status === s));
+        const q = fltSearch.trim().toLowerCase();
+        const rows = programs
+          .filter(p => showDone || p.status !== 'done')
+          .filter(p => fltStatus.size === 0 || fltStatus.has(p.status))
+          .filter(p => !fltOwner || p.owner === fltOwner)
+          .filter(p => !q || p.code.toLowerCase().includes(q) || t(p.title).toLowerCase().includes(q))
+          .filter(p => !fltFrom || (p.updated_at ?? '') >= fltFrom)
+          .filter(p => !fltTo || (p.updated_at ?? '').slice(0, 10) <= fltTo)
+          .sort((a, b) => {
+            const av = (a as any)[sortKey] ?? '';
+            const bv = (b as any)[sortKey] ?? '';
+            const cmp = typeof av === 'number' && typeof bv === 'number' ? av - bv : String(av).localeCompare(String(bv));
+            return sortDir === 'asc' ? cmp : -cmp;
+          });
+        const fmtD = (iso: string | null) => iso ? new Date(iso).toLocaleDateString('nl-NL') : '—';
+        const th = (key: string, label: string) => (
+          <th key={key} onClick={() => { if (sortKey === key) setSortDir(d => d === 'asc' ? 'desc' : 'asc'); else { setSortKey(key); setSortDir('desc'); } }}
+            className="cursor-pointer select-none px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-slate-400 hover:text-slate-600">
+            {label}{sortKey === key ? (sortDir === 'desc' ? ' ↓' : ' ↑') : ''}
+          </th>
+        );
+        return (
+          <div className="rounded-xl border border-slate-200 bg-white">
+            <div className="flex flex-wrap items-center gap-3 border-b border-slate-100 px-4 py-3">
+              <span className="text-xs font-bold uppercase tracking-wide text-slate-400">All Implementations</span>
+              <input value={fltSearch} onChange={e => setFltSearch(e.target.value)} placeholder="Search code or title…"
+                className="rounded-lg border border-slate-200 px-2.5 py-1 text-xs focus:border-blue-400 focus:outline-none" />
+              <div className="flex items-center gap-1">
+                {statuses.map(s => (
+                  <button key={s} onClick={() => setFltStatus(prev => { const n = new Set(prev); n.has(s) ? n.delete(s) : n.add(s); return n; })}
+                    className={`rounded-full px-2 py-0.5 text-[10px] font-semibold transition-all ${fltStatus.has(s) ? 'ring-2 ring-blue-400 ' : ''}${SC[s] ?? SC.draft}`}>
+                    {s}
+                  </button>
+                ))}
+              </div>
+              <select value={fltOwner} onChange={e => setFltOwner(e.target.value)}
+                className="rounded-lg border border-slate-200 px-2 py-1 text-xs text-slate-600 focus:outline-none">
+                <option value="">All owners</option>
+                {owners.map(o => <option key={o} value={o}>{o}</option>)}
+              </select>
+              <div className="flex items-center gap-1 text-[10px] text-slate-400">
+                upd
+                <input type="date" value={fltFrom} onChange={e => setFltFrom(e.target.value)} className="rounded border border-slate-200 px-1 py-0.5 text-[10px]" />
+                –
+                <input type="date" value={fltTo} onChange={e => setFltTo(e.target.value)} className="rounded border border-slate-200 px-1 py-0.5 text-[10px]" />
+              </div>
+              <label className="ml-auto flex cursor-pointer items-center gap-1.5 text-xs text-slate-500">
+                <input type="checkbox" checked={showDone} onChange={e => setShowDone(e.target.checked)} />
+                Show done
+              </label>
             </div>
-          )}
-        </div>
-      )}
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-slate-100">
+                  {th('code', 'Code')}
+                  <th className="px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-slate-400">Title</th>
+                  {th('status', 'Status')}
+                  {th('owner', 'Owner')}
+                  {th('pct', 'Progress')}
+                  {th('target_date', 'Target')}
+                  {th('created_at', 'Created')}
+                  {th('updated_at', 'Updated')}
+                  {th('completed_at', 'Completed')}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map(p => (
+                  <tr key={p.program_id} onClick={() => selectProgram(p.program_id)}
+                    className="cursor-pointer border-b border-slate-50 hover:bg-blue-50/50 transition-colors">
+                    <td className="px-3 py-2 text-xs font-mono font-bold text-slate-500">{p.code}</td>
+                    <td className="px-3 py-2 text-xs font-medium text-slate-800">{t(p.title)}</td>
+                    <td className="px-3 py-2"><span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${SC[p.status] ?? SC.draft}`}>{p.status}</span></td>
+                    <td className="px-3 py-2 text-xs text-slate-500">{p.owner ?? '—'}</td>
+                    <td className="px-3 py-2">
+                      <div className="flex items-center gap-2">
+                        <Bar pct={p.pct} />
+                        <span className="text-[10px] font-bold text-slate-500">{p.pct}%</span>
+                        <span className="text-[10px] text-slate-400">{p.verified_tasks}/{p.total_tasks}</span>
+                      </div>
+                    </td>
+                    <td className="px-3 py-2 text-[11px] text-slate-500">{p.target_date ?? '—'}</td>
+                    <td className="px-3 py-2 text-[11px] text-slate-500">{fmtD(p.created_at)}</td>
+                    <td className="px-3 py-2 text-[11px] text-slate-500">{fmtD(p.updated_at)}</td>
+                    <td className="px-3 py-2 text-[11px] text-slate-500">{fmtD(p.completed_at)}</td>
+                  </tr>
+                ))}
+                {rows.length === 0 && (
+                  <tr><td colSpan={9} className="px-3 py-8 text-center text-sm text-slate-400">
+                    No implementations match the current filters.
+                  </td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        );
+      })()}
 
       {/* ═══ DASHBOARD TAB ═══ */}
       {tab === 'dashboard' && selProgramId && (

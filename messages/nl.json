@@ -223,7 +223,17 @@
     "cbtTradeLog": "Handelslog",
     "cbtTradingDash": "Handelsdashboard",
     "cbtDealerFeed": "Dealer Feed",
-    "shopGuide": "Bedieningsgids"
+    "shopGuide": "Bedieningsgids",
+    "shopAnalyticsOverview": "Analytics Overzicht",
+    "shopAnalyticsFunnel": "Funnel",
+    "shopAnalyticsSales": "Omzet & Marge",
+    "shopAnalyticsProducts": "Productprestaties",
+    "shopAnalyticsCustomers": "Klanten",
+    "shopAnalyticsTraffic": "Verkeer & Marketing",
+    "shopAnalyticsCheckout": "Winkelwagen & Checkout",
+    "shopAnalyticsInventory": "Voorraadgezondheid",
+    "shopAnalyticsDiscovery": "Zoeken & Ontdekking",
+    "shopAnalyticsAttention": "Attentiecentrum"
   },
   "sal": {
     "orders": "Bestellingen",
@@ -437,7 +447,8 @@
     "shopAfterSalesGrp": "Nazorg",
     "shopProcurement": "Inkoop",
     "shopComplianceGrp": "Compliance",
-    "markets": "Markten"
+    "markets": "Markten",
+    "shopAnalyticsGrp": "Commerce Intelligence"
   },
   "screens": {
     "IN006": "Modellencatalogus",
@@ -586,7 +597,17 @@
     "SY050": "Functievlaggen",
     "SY051": "Implementatie Cockpit",
     "SY053": "Taakdetail",
-    "MP005": "Layoutbeheer"
+    "MP005": "Layoutbeheer",
+    "SH100": "Analytics Overzicht",
+    "SH101": "Funnel",
+    "SH102": "Omzet & Marge",
+    "SH103": "Productprestaties",
+    "SH104": "Klanten",
+    "SH105": "Verkeer & Marketing",
+    "SH106": "Winkelwagen & Checkout",
+    "SH107": "Voorraadgezondheid",
+    "SH108": "Zoeken & Ontdekking",
+    "SH109": "Attentiecentrum"
   },
   "support": {
     "title": "Support",

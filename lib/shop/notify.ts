@@ -1,4 +1,4 @@
-async function sendTelegram(text: string) {
+export async function sendTelegram(text: string) {
   const token = process.env.BOP_TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
   const chat  = process.env.BOP_TELEGRAM_CHAT_ID   || process.env.TELEGRAM_CHAT_ID;
   if (!token || !chat) return;
@@ -106,6 +106,16 @@ export async function notifySupplierFeedStale(supplierName: string, lastSyncHour
     `⏱️ Last sync: ${lastSyncHoursAgo}h ago (threshold: 24h)`,
     `📋 Action: Check feed URL and supplier connectivity`,
     `🔗 https://bop-dev.dessystems.io/console/shp/procurement/suppliers`,
+  ].join('\n');
+  await sendTelegram(tg);
+}
+
+export async function notifyCiDataHealthRed(checks: Array<{ name: string; message: string; actual: string }>) {
+  const tg = [
+    `🔴 <b>CI Data Health Alert</b> — ${checks.length} check${checks.length > 1 ? 's' : ''} red`,
+    ...checks.map(c => `• ${c.name}: ${c.message} (${c.actual})`),
+    `📋 Action: Figures under reconciliation — do not use for decisions`,
+    `🔗 https://bop-dev.dessystems.io/console/shp/analytics/overview`,
   ].join('\n');
   await sendTelegram(tg);
 }

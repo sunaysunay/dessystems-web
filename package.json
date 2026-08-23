@@ -6,7 +6,9 @@
     "dev": "TURBOPACK=0 next dev -H 127.0.0.1 -p 13004",
     "build": "des-build next build",
     "start": "next start -H 127.0.0.1 -p 13009",
-    "lint": "eslint"
+    "lint": "eslint",
+    "ci:backfill": "node scripts/ci-backfill.mjs",
+    "ci:verify": "for t in lib/ci/__tests__/*.test.ts; do npx tsx \"$t\" || exit 1; done"
   },
   "dependencies": {
     "@dagrejs/dagre": "^3.1.1",

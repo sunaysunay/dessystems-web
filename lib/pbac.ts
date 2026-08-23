@@ -2,7 +2,7 @@
 // Layered on top of lib/rbac.ts which handles generic capabilities.
 import type { Role } from './scope-context';
 
-/** Module permission scopes for the Markets module. */
+/** Module permission scopes. */
 export const MODULES = [
   'markets',
   'markets.corridor',
@@ -12,6 +12,19 @@ export const MODULES = [
   'markets.opportunity',
   'markets.trade',
   'markets.dealer',
+  // CI001 Commerce Intelligence (DESSHOP-CI) — one scope per analytics screen.
+  'analytics',
+  'analytics.overview',
+  'analytics.funnel',
+  'analytics.sales',
+  'analytics.product',
+  'analytics.customer',
+  'analytics.traffic',
+  'analytics.checkout',
+  'analytics.inventory',
+  'analytics.discovery',
+  'analytics.attention',
+  'analytics.dsr',
 ] as const;
 
 export type Module = (typeof MODULES)[number];
@@ -36,6 +49,20 @@ export const MODULE_PERMISSIONS: Record<Module, Record<Role, readonly Action[]>>
   'markets.opportunity':  { super_admin: ALL_ACTIONS, platform_admin: ['view', 'create', 'edit', 'delete'],            tenant_manager: ['view', 'create', 'edit'],    viewer: VIEW_ONLY },
   'markets.trade':        { super_admin: ALL_ACTIONS, platform_admin: ['view', 'create', 'edit', 'delete', 'publish', 'approve'], tenant_manager: WRITE_ACTIONS, viewer: VIEW_ONLY },
   'markets.dealer':       { super_admin: ALL_ACTIONS, platform_admin: ['view', 'create', 'edit', 'delete'],            tenant_manager: ['view', 'create', 'edit'],    viewer: VIEW_ONLY },
+  // CI001 analytics: read-only dashboards; attention items can be actioned
+  // (edit) by managers; DSR export/erase is admin-only.
+  'analytics':            { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.overview':   { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.funnel':     { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.sales':      { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.product':    { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.customer':   { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.traffic':    { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.checkout':   { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.inventory':  { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.discovery':  { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.attention':  { super_admin: ALL_ACTIONS, platform_admin: ['view', 'edit'], tenant_manager: ['view', 'edit'], viewer: VIEW_ONLY },
+  'analytics.dsr':        { super_admin: ALL_ACTIONS, platform_admin: ['view', 'approve'], tenant_manager: [], viewer: [] },
 };
 
 /**

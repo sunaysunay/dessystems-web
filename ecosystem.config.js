@@ -70,5 +70,19 @@ module.exports = {
       },
       time: true,
     },
+    {
+      // CI001 (DESSHOP-CI) job scheduler — sessionise / aggregate /
+      // settle-returns / data-health / ad-spend, spec §9 cadences.
+      // Reads .env.local itself; needs CI_JOB_SECRET + CI_CONSOLE_URL there.
+      name: 'ci-jobs-cron',
+      script: 'scripts/ci-jobs-cron.mjs',
+      cwd: '/opt/dessystems-console-dev',
+      autorestart: true,
+      max_memory_restart: '64M',
+      env: {
+        NODE_ENV: 'development',
+      },
+      time: true,
+    },
   ],
 };

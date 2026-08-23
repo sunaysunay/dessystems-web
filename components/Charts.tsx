@@ -86,3 +86,93 @@ export function Sparkline({ values, color = '#4f46e5', height = 32, width = 80 }
     </svg>
   );
 }
+
+// ─── Waterfall (CI001, CI-T18) ───────────────────────────────────────────────
+// Steps carry signed cents; the final step is the resulting total. Rendered as
+// floating bars so each step visually starts where the previous ended.
+export interface WaterfallStep { label: string; cents: number; isTotal?: boolean }
+
+export function WaterfallChart({ steps, height = 180, format }: {
+  steps: WaterfallStep[];
+  height?: number;
+  format?: (cents: number) => string;
+}) {
+  if (!steps.length) return null;
+  const fmt = format ?? ((c: number) => `€${(c / 100).toLocaleString('nl-NL')}`);
+  let running = 0;
+  const bars = steps.map(s => {
+    const start = s.isTotal ? 0 : running;
+    const end = s.isTotal ? s.cents : running + s.cents;
+    if (!s.isTotal) running = end;
+    return { ...s, lo: Math.min(start, end), hi: Math.max(start, end) };
+  });
+  const max = Math.max(...bars.map(b => b.hi), 1);
+  const colW = 100 / steps.length;
+  return (
+    <div>
+      <div className="flex items-end gap-1" style={{ height }}>
+        {bars.map((b, i) => (
+          <div key={i} className="relative flex-1" style={{ height: '100%' }}>
+            <div
+              className={`absolute w-full rounded ${b.isTotal ? 'bg-emerald-500' : b.cents >= 0 ? 'bg-indigo-400' : 'bg-red-300'}`}
+              style={{
+                bottom: `${(b.lo / max) * 100}%`,
+                height: `${Math.max(((b.hi - b.lo) / max) * 100, 1)}%`,
+              }}
+              title={`${b.label}: ${fmt(b.cents)}`}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="mt-1 flex gap-1">
+        {bars.map((b, i) => (
+          <div key={i} className="flex-1 truncate text-center text-[9px] text-slate-500" title={b.label}>
+            {b.label}
+          </div>
+        ))}
+      </div>
+      <div className="flex gap-1">
+        {bars.map((b, i) => (
+          <div key={i} className={`flex-1 truncate text-center text-[9px] font-semibold ${b.cents < 0 && !b.isTotal ? 'text-red-500' : 'text-slate-700'}`}>
+            {fmt(b.cents)}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Heatmap (CI001, CI-T22) ─────────────────────────────────────────────────
+// Generic intensity grid: rows × cols with a 0..max colour scale. Used for
+// cohort retention (rows = cohorts, cols = M1..M12) and activity grids.
+export function HeatmapChart({ rows, maxValue, format }: {
+  rows: { label: string; cells: (number | null)[] }[];
+  maxValue?: number;
+  format?: (v: number) => string;
+}) {
+  if (!rows.length) return null;
+  const max = maxValue ?? Math.max(...rows.flatMap(r => r.cells.map(c => c ?? 0)), 1);
+  const fmt = format ?? ((v: number) => v.toLocaleString('nl-NL'));
+  const shade = (v: number | null) => {
+    if (v == null) return 'transparent';
+    const t = Math.min(v / max, 1);
+    return `rgba(79, 70, 229, ${0.08 + t * 0.82})`;
+  };
+  return (
+    <div className="space-y-0.5">
+      {rows.map(r => (
+        <div key={r.label} className="flex items-center gap-1">
+          <span className="w-24 shrink-0 truncate text-[10px] text-slate-500" title={r.label}>{r.label}</span>
+          {r.cells.map((c, i) => (
+            <div key={i}
+              className="h-5 flex-1 rounded-sm text-center text-[9px] leading-5"
+              style={{ background: shade(c), color: c != null && c / max > 0.55 ? '#fff' : '#475569' }}
+              title={c == null ? '—' : fmt(c)}>
+              {c == null ? '' : fmt(c)}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}

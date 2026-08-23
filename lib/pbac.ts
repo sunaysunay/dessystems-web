@@ -62,6 +62,7 @@ export const MODULE_PERMISSIONS: Record<Module, Record<Role, readonly Action[]>>
   'analytics.checkout':   { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
   'analytics.inventory':  { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
   'analytics.discovery':  { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
+  'analytics.scoring':    { super_admin: ALL_ACTIONS, platform_admin: VIEW_ONLY, tenant_manager: VIEW_ONLY, viewer: VIEW_ONLY },
   'analytics.attention':  { super_admin: ALL_ACTIONS, platform_admin: ['view', 'edit'], tenant_manager: ['view', 'edit'], viewer: VIEW_ONLY },
   'analytics.dsr':        { super_admin: ALL_ACTIONS, platform_admin: ['view', 'approve'], tenant_manager: [], viewer: [] },
 };

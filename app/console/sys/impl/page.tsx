@@ -809,7 +809,7 @@ export default function SY051Page() {
         const statuses = ['draft', 'active', 'test', 'paused', 'done', 'cancelled'].filter(s => programs.some(p => p.status === s));
         const q = fltSearch.trim().toLowerCase();
         const rows = programs
-          .filter(p => showDone || p.status !== 'done')
+          .filter(p => showDone || fltStatus.has('done') || p.status !== 'done')
           .filter(p => fltStatus.size === 0 || fltStatus.has(p.status))
           .filter(p => !fltOwner || p.owner === fltOwner)
           .filter(p => !q || p.code.toLowerCase().includes(q) || t(p.title).toLowerCase().includes(q))

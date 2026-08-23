@@ -305,7 +305,8 @@
     "shopAnalyticsCheckout": "Sepet & Ödeme",
     "shopAnalyticsInventory": "Stok Sağlığı",
     "shopAnalyticsDiscovery": "Arama & Keşif",
-    "shopAnalyticsAttention": "Dikkat Merkezi"
+    "shopAnalyticsAttention": "Dikkat Merkezi",
+    "shopAnalyticsScoring": "Puanlama"
   },
   "screens": {
     "IN006": "Model Kataloğu",

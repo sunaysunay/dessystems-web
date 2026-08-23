@@ -24,6 +24,7 @@ export const MODULES = [
   'analytics.inventory',
   'analytics.discovery',
   'analytics.attention',
+  'analytics.scoring',
   'analytics.dsr',
 ] as const;
 

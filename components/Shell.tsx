@@ -232,6 +232,7 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
           { label: tn('shopAnalyticsInventory'), href: '/console/shp/analytics/inventory' },
           { label: tn('shopAnalyticsDiscovery'), href: '/console/shp/analytics/discovery' },
           { label: tn('shopAnalyticsAttention'), href: '/console/shp/analytics/attention' },
+          { label: tn('shopAnalyticsScoring'),   href: '/console/shp/analytics/scoring' },
         ]},
       ]},
     { label: tn('shopSettings'),     href: '/console/shp/settings' },

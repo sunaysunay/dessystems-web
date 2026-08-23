@@ -315,6 +315,7 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/shp/analytics/inventory': { id: 'SH107', title: 'Analytics Inventory', mod: 'SHP' },
   '/console/shp/analytics/discovery': { id: 'SH108', title: 'Analytics Discovery', mod: 'SHP' },
   '/console/shp/analytics/attention': { id: 'SH109', title: 'Analytics Attention', mod: 'SHP' },
+  '/console/shp/analytics/scoring': { id: 'SH110', title: 'Analytics Scoring', mod: 'SHP' },
 };
 
 export function getScreenMeta(pathname: string): ScreenMeta | null {

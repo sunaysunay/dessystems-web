@@ -233,7 +233,8 @@
     "shopAnalyticsCheckout": "Cart & Checkout",
     "shopAnalyticsInventory": "Inventory Health",
     "shopAnalyticsDiscovery": "Search & Discovery",
-    "shopAnalyticsAttention": "Attention Center"
+    "shopAnalyticsAttention": "Attention Center",
+    "shopAnalyticsScoring": "Scoring"
   },
   "sal": {
     "orders": "Orders",

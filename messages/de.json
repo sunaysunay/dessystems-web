@@ -305,7 +305,8 @@
     "shopAnalyticsCheckout": "Warenkorb & Checkout",
     "shopAnalyticsInventory": "Bestandsgesundheit",
     "shopAnalyticsDiscovery": "Suche & Entdeckung",
-    "shopAnalyticsAttention": "Aufmerksamkeitszentrum"
+    "shopAnalyticsAttention": "Aufmerksamkeitszentrum",
+    "shopAnalyticsScoring": "Bewertung"
   },
   "screens": {
     "IN006": "Modellkatalog",

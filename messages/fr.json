@@ -305,7 +305,8 @@
     "shopAnalyticsCheckout": "Panier & Paiement",
     "shopAnalyticsInventory": "Santé des stocks",
     "shopAnalyticsDiscovery": "Recherche & Découverte",
-    "shopAnalyticsAttention": "Centre d'attention"
+    "shopAnalyticsAttention": "Centre d'attention",
+    "shopAnalyticsScoring": "Scores"
   },
   "screens": {
     "IN006": "Catalogue de modèles",

@@ -233,7 +233,8 @@
     "shopAnalyticsCheckout": "Winkelwagen & Checkout",
     "shopAnalyticsInventory": "Voorraadgezondheid",
     "shopAnalyticsDiscovery": "Zoeken & Ontdekking",
-    "shopAnalyticsAttention": "Attentiecentrum"
+    "shopAnalyticsAttention": "Attentiecentrum",
+    "shopAnalyticsScoring": "Scores"
   },
   "sal": {
     "orders": "Bestellingen",

@@ -1,7 +1,7 @@
 'use client';
 // Shared cockpit primitives: KPI tile with delta, SVG sparkline, h-bar rows,
 // status dot, range picker. Keep dependency-free (pure SVG).
-import React from 'react';
+import React, { useState } from 'react';
 
 export function Kpi({ label, value, delta, prev }: { label: string; value: number | string; delta?: number | null; prev?: number }) {
   return (
@@ -162,14 +162,67 @@ export function RangePicker({ value, onChange }: { value: number; onChange: (n: 
   );
 }
 
-export function Section({ title, children, right }: { title: string; children: React.ReactNode; right?: React.ReactNode }) {
+export function Section({ title, children, right, defaultOpen = true }: { title: string; children: React.ReactNode; right?: React.ReactNode; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-[11px] font-bold uppercase tracking-wide text-slate-400">{title}</h3>
+    <div className="rounded-xl border border-slate-200 bg-white p-4 mt-4">
+      <div className="flex items-center justify-between cursor-pointer" onClick={() => setOpen(!open)}>
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] text-slate-400">{open ? '▾' : '▸'}</span>
+          <h3 className="text-[11px] font-bold uppercase tracking-wide text-slate-400">{title}</h3>
+        </div>
         {right}
       </div>
-      {children}
+      {open && <div className="mt-3">{children}</div>}
+    </div>
+  );
+}
+
+interface DataGridColumn<T> {
+  header: string;
+  value: (row: T) => React.ReactNode;
+  sortable?: boolean;
+}
+
+export function DataGrid<T>({ rows, rowKey, columns }: { rows: T[]; rowKey: (row: T) => string; columns: DataGridColumn<T>[] }) {
+  const [sortCol, setSortCol] = useState<number | null>(null);
+  const [sortAsc, setSortAsc] = useState(true);
+
+  const sorted = sortCol !== null
+    ? [...rows].sort((a, b) => {
+        const av = columns[sortCol].value(a);
+        const bv = columns[sortCol].value(b);
+        const sa = typeof av === 'string' || typeof av === 'number' ? String(av) : '';
+        const sb = typeof bv === 'string' || typeof bv === 'number' ? String(bv) : '';
+        const cmp = sa.localeCompare(sb, undefined, { numeric: true });
+        return sortAsc ? cmp : -cmp;
+      })
+    : rows;
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full">
+        <thead>
+          <tr className="border-b border-slate-100">
+            {columns.map((col, i) => (
+              <th key={i}
+                onClick={() => { if (col.sortable) { if (sortCol === i) setSortAsc(!sortAsc); else { setSortCol(i); setSortAsc(true); } } }}
+                className={`px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wide text-slate-400 ${col.sortable ? 'cursor-pointer hover:text-slate-600' : ''}`}>
+                {col.header}{sortCol === i ? (sortAsc ? ' ↑' : ' ↓') : ''}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map(row => (
+            <tr key={rowKey(row)} className="border-b border-slate-50 hover:bg-slate-50/50">
+              {columns.map((col, i) => (
+                <td key={i} className="px-3 py-2 text-[12px] text-slate-700">{col.value(row)}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

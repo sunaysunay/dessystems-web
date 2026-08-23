@@ -106,10 +106,10 @@ CREATE POLICY ci_score_result_tenant_isolation ON ci_score_result
 
 INSERT INTO bop_objects (object_id, type, module, name, status, description)
 VALUES
-  ('ci_benchmark',      'table', 'CI', 'ci_benchmark',      'active', 'Percentile distributions per scope/metric/date (L2, §6.1)'),
-  ('ci_score_def',      'table', 'CI', 'ci_score_def',      'active', 'Score definitions, versioned (L3, §6)'),
-  ('ci_score_component','table', 'CI', 'ci_score_component', 'active', 'Component weights per score definition (L3)'),
-  ('ci_score_result',   'table', 'CI', 'ci_score_result',   'active', 'Computed scores per entity per day (L2, §6)')
+  ('table:ci_benchmark',      'table', 'SHP', 'ci_benchmark',      'active', 'Percentile distributions per scope/metric/date (L2, §6.1)'),
+  ('table:ci_score_def',      'table', 'SHP', 'ci_score_def',      'active', 'Score definitions, versioned (L3, §6)'),
+  ('table:ci_score_component','table', 'SHP', 'ci_score_component', 'active', 'Component weights per score definition (L3)'),
+  ('table:ci_score_result',   'table', 'SHP', 'ci_score_result',   'active', 'Computed scores per entity per day (L2, §6)')
 ON CONFLICT (object_id) DO NOTHING;
 
 -- ═══════════════════════════════════════════════════════
@@ -118,13 +118,13 @@ ON CONFLICT (object_id) DO NOTHING;
 
 INSERT INTO bop_dependencies (from_id, to_id, dep_type)
 VALUES
-  ('ci_benchmark',       'ci_daily_product',    'reads'),
-  ('ci_benchmark',       'ci_daily_sales',      'reads'),
-  ('ci_benchmark',       'ci_daily_traffic',    'reads'),
-  ('ci_score_result',    'ci_benchmark',         'reads'),
-  ('ci_score_result',    'ci_score_def',         'reads'),
-  ('ci_score_result',    'ci_score_component',   'reads'),
-  ('ci_score_component', 'ci_score_def',         'reads')
+  ('table:ci_benchmark',       'table:ci_daily_product',    'reads'),
+  ('table:ci_benchmark',       'table:ci_daily_sales',      'reads'),
+  ('table:ci_benchmark',       'table:ci_daily_traffic',    'reads'),
+  ('table:ci_score_result',    'table:ci_benchmark',         'reads'),
+  ('table:ci_score_result',    'table:ci_score_def',         'reads'),
+  ('table:ci_score_result',    'table:ci_score_component',   'reads'),
+  ('table:ci_score_component', 'table:ci_score_def',         'reads')
 ON CONFLICT DO NOTHING;
 
 -- ═══════════════════════════════════════════════════════
@@ -200,5 +200,5 @@ END $$;
 -- DROP TABLE IF EXISTS ci_score_component;
 -- DROP TABLE IF EXISTS ci_score_def;
 -- DROP TABLE IF EXISTS ci_benchmark;
--- DELETE FROM bop_objects WHERE object_id IN ('ci_benchmark','ci_score_def','ci_score_component','ci_score_result');
--- DELETE FROM bop_dependencies WHERE from_id IN ('ci_benchmark','ci_score_result','ci_score_component');
+-- DELETE FROM bop_objects WHERE object_id IN ('table:ci_benchmark','table:ci_score_def','table:ci_score_component','table:ci_score_result');
+-- DELETE FROM bop_dependencies WHERE from_id IN ('table:ci_benchmark','table:ci_score_result','table:ci_score_component');

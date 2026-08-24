@@ -1,5 +1,5 @@
 'use client';
-// SH100 — CI001 Analytics Overview: 8 KPI cards, health score, consent badge.
+// SH100 — CI001 Overview: 8 KPI cards, health score, consent badge.
 import { useState } from 'react';
 import { ScreenHeader } from '@/components/ScreenBadge';
 import { Section, RangePicker, Spark, KpiCard, ConsentCoverageBadge, Dot } from '@/components/CockpitKit';
@@ -15,12 +15,12 @@ export default function SH100Page() {
     base: { prev: fmt(c.prev), label: baseLabel, changePct: c.change_pct }, n: c.n,
   });
 
-  if (forbidden) return <div className="p-6"><ScreenHeader title="Analytics Overview" /><ForbiddenNote /></div>;
+  if (forbidden) return <div className="p-6"><ScreenHeader title="Overview" /><ForbiddenNote /></div>;
 
   return (
     <div className="p-6">
       <div className="flex items-center justify-between">
-        <ScreenHeader title="Analytics Overview" description="DESShop commerce intelligence — Plane A money, Plane B behaviour" />
+        <ScreenHeader title="Overview" description="DESShop commerce intelligence — Plane A money, Plane B behaviour" />
         <div className="flex items-center gap-2">
           {d && <ConsentCoverageBadge ratePct={d.consent_rate_pct} />}
           <RangePicker value={range} onChange={setRange} />

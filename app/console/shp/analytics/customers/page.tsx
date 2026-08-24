@@ -33,7 +33,7 @@ export default function SH104Page() {
   return (
     <div className="p-6">
       <div className="flex items-center justify-between">
-        <ScreenHeader title="Customer Analytics" description="New vs repeat buyers from order truth (Plane A)" />
+        <ScreenHeader title="Customers" description="New vs repeat buyers from order truth (Plane A)" />
         <RangePicker value={range} onChange={setRange} />
       </div>
       <DegradedBanner degraded={d?.degraded} reason={d?.degraded_reason} />

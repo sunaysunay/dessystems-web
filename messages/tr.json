@@ -91,7 +91,8 @@
     "shopFulfilment": "Fulfilment",
     "shopOrdersMgmt": "Orders",
     "shopProcurement": "Procurement",
-    "shopAnalyticsGrp": "Ticaret Zekâsı"
+    "shopAnalyticsGrp": "Ticaret Zekâsı",
+    "workshop": "Atölye"
   },
   "nav": {
     "dashboard": "Gösterge Paneli",
@@ -306,7 +307,19 @@
     "shopAnalyticsInventory": "Stok Sağlığı",
     "shopAnalyticsDiscovery": "Arama & Keşif",
     "shopAnalyticsAttention": "Dikkat Merkezi",
-    "shopAnalyticsScoring": "Puanlama"
+    "shopAnalyticsScoring": "Puanlama",
+    "wrkDashboard": "Atölye Paneli",
+    "wrkOrders": "İş Emirleri",
+    "wrkPlanning": "Planlama Tahtası",
+    "wrkEfficiency": "Verimlilik KPI",
+    "wrkInspections": "Kontrol Listesi",
+    "wrkApkReminders": "Muayene Hatırlatma",
+    "wrkApprovals": "Müşteri Onayı",
+    "wrkCustomerStatus": "Müşteri Durum",
+    "wrkBriefing": "Günlük Brifing",
+    "wrkRecommendations": "Tamir Önerileri",
+    "wrkRates": "İşçilik Tarifeleri",
+    "wrkPackages": "Servis Paketleri"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -465,7 +478,20 @@
     "SH106": "Sepet & Ödeme",
     "SH107": "Stok Sağlığı",
     "SH108": "Arama & Keşif",
-    "SH109": "Dikkat Merkezi"
+    "SH109": "Dikkat Merkezi",
+    "SH090": "Shop Operations Guide",
+    "WK001": "Atölye Paneli",
+    "WK002": "İş Emirleri",
+    "WK003": "Planlama Tahtası",
+    "WK004": "Verimlilik KPI",
+    "WK005": "Kontrol Listesi",
+    "WK006": "Muayene Hatırlatma",
+    "WK007": "Müşteri Onayı",
+    "WK008": "Müşteri Durum",
+    "WK009": "Günlük Brifing",
+    "WK010": "Tamir Önerileri",
+    "WK011": "İşçilik Tarifeleri",
+    "WK012": "Servis Paketleri"
   },
   "support": {
     "title": "Destek",

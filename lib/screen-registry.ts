@@ -316,6 +316,18 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/shp/analytics/discovery': { id: 'SH108', title: 'Discovery', mod: 'SHP' },
   '/console/shp/analytics/attention': { id: 'SH109', title: 'Attention', mod: 'SHP' },
   '/console/shp/analytics/scoring': { id: 'SH110', title: 'Scoring', mod: 'SHP' },
+  '/console/wrk/dashboard': { id: 'WK001', title: 'Workshop Dashboard', mod: 'WRK' },
+  '/console/wrk/orders': { id: 'WK002', title: 'Work Orders', mod: 'WRK' },
+  '/console/wrk/planning': { id: 'WK003', title: 'Planning Board', mod: 'WRK' },
+  '/console/wrk/efficiency': { id: 'WK004', title: 'Efficiency KPI', mod: 'WRK' },
+  '/console/wrk/inspections': { id: 'WK005', title: 'Inspection Checklist', mod: 'WRK' },
+  '/console/wrk/apk-reminders': { id: 'WK006', title: 'APK Reminders', mod: 'WRK' },
+  '/console/wrk/approvals': { id: 'WK007', title: 'Customer Approvals', mod: 'WRK' },
+  '/console/wrk/status': { id: 'WK008', title: 'Customer Status', mod: 'WRK' },
+  '/console/wrk/briefing': { id: 'WK009', title: 'Daily Briefing', mod: 'WRK' },
+  '/console/wrk/recommendations': { id: 'WK010', title: 'Repair Recommendations', mod: 'WRK' },
+  '/console/wrk/rates': { id: 'WK011', title: 'Labour Rates', mod: 'WRK' },
+  '/console/wrk/packages': { id: 'WK012', title: 'Service Packages', mod: 'WRK' },
 };
 
 export function getScreenMeta(pathname: string): ScreenMeta | null {

@@ -91,7 +91,8 @@
     "shopFulfilment": "Fulfilment",
     "shopOrdersMgmt": "Orders",
     "shopProcurement": "Procurement",
-    "shopAnalyticsGrp": "Commerce Intelligence"
+    "shopAnalyticsGrp": "Commerce Intelligence",
+    "workshop": "Atelier"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -306,7 +307,19 @@
     "shopAnalyticsInventory": "Santé des stocks",
     "shopAnalyticsDiscovery": "Recherche & Découverte",
     "shopAnalyticsAttention": "Centre d'attention",
-    "shopAnalyticsScoring": "Scores"
+    "shopAnalyticsScoring": "Scores",
+    "wrkDashboard": "Tableau de bord atelier",
+    "wrkOrders": "Ordres de travail",
+    "wrkPlanning": "Planning",
+    "wrkEfficiency": "KPI Efficacité",
+    "wrkInspections": "Liste de contrôle",
+    "wrkApkReminders": "Rappels CT",
+    "wrkApprovals": "Approbation client",
+    "wrkCustomerStatus": "Statut client",
+    "wrkBriefing": "Briefing quotidien",
+    "wrkRecommendations": "Recommandations",
+    "wrkRates": "Tarifs horaires",
+    "wrkPackages": "Forfaits"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -465,7 +478,20 @@
     "SH106": "Panier & Paiement",
     "SH107": "Santé des stocks",
     "SH108": "Recherche & Découverte",
-    "SH109": "Centre d'attention"
+    "SH109": "Centre d'attention",
+    "SH090": "Shop Operations Guide",
+    "WK001": "Tableau de bord atelier",
+    "WK002": "Ordres de travail",
+    "WK003": "Planning",
+    "WK004": "KPI Efficacité",
+    "WK005": "Liste de contrôle",
+    "WK006": "Rappels CT",
+    "WK007": "Approbation client",
+    "WK008": "Statut client",
+    "WK009": "Briefing quotidien",
+    "WK010": "Recommandations",
+    "WK011": "Tarifs horaires",
+    "WK012": "Forfaits"
   },
   "support": {
     "title": "Support",

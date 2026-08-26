@@ -91,7 +91,8 @@
     "shopFulfilment": "Fulfilment",
     "shopOrdersMgmt": "Orders",
     "shopProcurement": "Procurement",
-    "shopAnalyticsGrp": "Commerce Intelligence"
+    "shopAnalyticsGrp": "Commerce Intelligence",
+    "workshop": "Werkstatt"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -306,7 +307,19 @@
     "shopAnalyticsInventory": "Bestandsgesundheit",
     "shopAnalyticsDiscovery": "Suche & Entdeckung",
     "shopAnalyticsAttention": "Aufmerksamkeitszentrum",
-    "shopAnalyticsScoring": "Bewertung"
+    "shopAnalyticsScoring": "Bewertung",
+    "wrkDashboard": "Werkstatt Dashboard",
+    "wrkOrders": "Werkaufträge",
+    "wrkPlanning": "Plantafel",
+    "wrkEfficiency": "Effizienz KPI",
+    "wrkInspections": "Prüfliste",
+    "wrkApkReminders": "TÜV Erinnerungen",
+    "wrkApprovals": "Kundenfreigabe",
+    "wrkCustomerStatus": "Kundenstatus",
+    "wrkBriefing": "Tagesbriefing",
+    "wrkRecommendations": "Reparaturempfehlungen",
+    "wrkRates": "Stundensätze",
+    "wrkPackages": "Servicepakete"
   },
   "screens": {
     "IN006": "Modellkatalog",
@@ -465,7 +478,20 @@
     "SH106": "Warenkorb & Checkout",
     "SH107": "Bestandsgesundheit",
     "SH108": "Suche & Entdeckung",
-    "SH109": "Aufmerksamkeitszentrum"
+    "SH109": "Aufmerksamkeitszentrum",
+    "SH090": "Shop Operations Guide",
+    "WK001": "Werkstatt Dashboard",
+    "WK002": "Werkaufträge",
+    "WK003": "Plantafel",
+    "WK004": "Effizienz KPI",
+    "WK005": "Prüfliste",
+    "WK006": "TÜV Erinnerungen",
+    "WK007": "Kundenfreigabe",
+    "WK008": "Kundenstatus",
+    "WK009": "Tagesbriefing",
+    "WK010": "Reparaturempfehlungen",
+    "WK011": "Stundensätze",
+    "WK012": "Servicepakete"
   },
   "support": {
     "title": "Support",

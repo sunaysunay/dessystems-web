@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
+import { getTenantId } from '@/lib/tenant';
 
 export const dynamic = 'force-dynamic';
+
+const TENANT_ID = getTenantId('console');
 
 // GET /api/bop/sal/appointments?status=&inspection_type=&date_from=&date_to=&q=
 export async function GET(req: NextRequest) {
@@ -16,7 +19,7 @@ export async function GET(req: NextRequest) {
   let query = sb
     .from('bop_appointments')
     .select('id, ref, tenant_id, date, time_slot, inspection_type, vehicle_url, vin, name, email, phone, message, status, locale, source, internal_notes, confirmed_at, completed_at, created_at')
-    .eq('tenant_id', 300)
+    .eq('tenant_id', TENANT_ID)
     .order('date', { ascending: false })
     .order('time_slot', { ascending: true })
     .limit(500);
@@ -53,7 +56,7 @@ export async function PATCH(req: NextRequest) {
     .from('bop_appointments')
     .update(patch)
     .in('id', ids)
-    .eq('tenant_id', 300)
+    .eq('tenant_id', TENANT_ID)
     .select('id, status');
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ updated: data ?? [] });
@@ -74,7 +77,7 @@ export async function DELETE(req: NextRequest) {
     .from('bop_appointments')
     .select('id, status')
     .in('id', ids)
-    .eq('tenant_id', 300);
+    .eq('tenant_id', TENANT_ID);
   const nonNoShow = (check ?? []).filter(a => a.status !== 'no_show');
   if (nonNoShow.length > 0) {
     return NextResponse.json({ error: 'Only appointments with status "no_show" can be deleted' }, { status: 400 });
@@ -89,7 +92,7 @@ export async function DELETE(req: NextRequest) {
     .from('bop_appointments')
     .delete()
     .in('id', ids)
-    .eq('tenant_id', 300);
+    .eq('tenant_id', TENANT_ID);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ deleted: ids.length });
 }

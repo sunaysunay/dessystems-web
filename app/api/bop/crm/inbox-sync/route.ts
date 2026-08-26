@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
+import { getTenantId } from '@/lib/tenant';
 import { ImapFlow } from 'imapflow';
 import { simpleParser } from 'mailparser';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
-const TENANT_ID = 300;
+const TENANT_ID = getTenantId('console');
 const OUR_DOMAINS = ['dessystems.io', 'dessystems.com', 'dessystems.nl', 'dessystems.de'];
 
 const IMAP_CONFIG = {

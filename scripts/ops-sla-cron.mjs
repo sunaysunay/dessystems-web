@@ -3,6 +3,22 @@
 // Scans op_tasks for SLA breaches and escalates accordingly:
 //   L0 → L1 at SLA - 2h  (warning)
 //   L1 → L2 at SLA       (breach)
+
+// Self-load .env.local so cron runs correctly under PM2
+import { readFileSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dir = dirname(fileURLToPath(import.meta.url));
+try {
+  const raw = readFileSync(resolve(__dir, '../.env.local'), 'utf8');
+  for (const line of raw.split('\n')) {
+    const i = line.indexOf('=');
+    if (i < 1) continue;
+    const k = line.slice(0, i).trim();
+    const v = line.slice(i + 1).trim();
+    if (k && !process.env[k]) process.env[k] = v;
+  }
+} catch { /* .env.local not found — rely on injected env */ }
 //   L2 → L3 at SLA + 4h  (critical)
 // Each escalation writes an op_task_events row + sends Telegram.
 

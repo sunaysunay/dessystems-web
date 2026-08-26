@@ -19,12 +19,11 @@ module.exports = {
     },
     // Dev process: cd /opt/dessystems-console-dev && PORT=4401 pm2 start 'npm run dev' --name dessystems-console-dev
     {
+      // Reads SUPABASE_SERVICE_ROLE_KEY + NEXT_PUBLIC_SUPABASE_URL from .env.local
       name: 'die-worker-dev',
       script: 'scripts/die-worker.mjs',
       cwd: '/opt/dessystems-console-dev',
       env: {
-        NEXT_PUBLIC_SUPABASE_URL: 'https://ttydqyiezarpdysqacaa.supabase.co',
-        SUPABASE_SERVICE_ROLE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0eWRxeWllemFycGR5c3FhY2FhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTkzMzMyNCwiZXhwIjoyMDg3NTA5MzI0fQ.8GDRoL2HYXvbcW-0MD9cXUmWEJKLutTj4RJQcvXAVdI',
         NODE_ENV: 'development',
       },
       autorestart: true,
@@ -34,12 +33,11 @@ module.exports = {
       time: true,
     },
     {
+      // Reads SUPABASE_SERVICE_ROLE_KEY + NEXT_PUBLIC_SUPABASE_URL from .env.local
       name: 'ops-sla-cron',
       script: 'scripts/ops-sla-cron.mjs',
       cwd: '/opt/dessystems-console-dev',
       env: {
-        NEXT_PUBLIC_SUPABASE_URL: 'https://ttydqyiezarpdysqacaa.supabase.co',
-        SUPABASE_SERVICE_ROLE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0eWRxeWllemFycGR5c3FhY2FhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTkzMzMyNCwiZXhwIjoyMDg3NTA5MzI0fQ.8GDRoL2HYXvbcW-0MD9cXUmWEJKLutTj4RJQcvXAVdI',
         NODE_ENV: 'development',
       },
       autorestart: true,

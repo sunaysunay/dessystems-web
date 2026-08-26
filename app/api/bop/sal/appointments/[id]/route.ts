@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
+import { getTenantId } from '@/lib/tenant';
 import { renderBopEmail } from '@/lib/bop-email';
 import { sendBopMail, smtpConfigured } from '@/lib/bop-mailer';
 
 export const dynamic = 'force-dynamic';
 
-const TENANT_ID = 300;
+const TENANT_ID = getTenantId('console');
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

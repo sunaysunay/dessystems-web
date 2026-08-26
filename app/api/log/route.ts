@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
+import { getTenantId } from '@/lib/tenant'
 
-const TENANT_ID = 500  // dessystems.io
+const TENANT_ID = getTenantId('website')
 
 let geoip: any = null
 try { geoip = require("geoip-lite") } catch {}

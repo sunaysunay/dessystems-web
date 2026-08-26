@@ -14,6 +14,7 @@ const MODULES = [
   { key: '6_finance',     label: 'Finance',        icon: 'F', desc: 'Invoices, credit notes, VAT/OSS, margin' },
   { key: '7_aftersales',  label: 'After-Sales',    icon: 'A', desc: 'Returns, refunds, inspections, claims' },
   { key: '8_compliance',  label: 'Compliance',     icon: 'C', desc: 'GDPR, GPSR registrations, eco fees' },
+  { key: '9_analytics',   label: 'Analytics (CI)', icon: 'I', desc: 'Commerce Intelligence dashboards, jobs, metrics' },
 ];
 
 type GuideStep = {
@@ -78,9 +79,9 @@ export default function ShopGuidePage() {
         </div>
       </div>
 
-      <div className="flex gap-5 items-start">
+      <div className="flex gap-4 items-start overflow-hidden">
         {/* Module list — left, sticky */}
-        <div className="w-[260px] flex-shrink-0 sticky top-4 space-y-1">
+        <div className="flex-shrink-0 sticky top-4 space-y-0.5 overflow-y-auto" style={{ width: 220, maxHeight: 'calc(100vh - 140px)' }}>
           {MODULES.map(m => {
             const d = data[m.key];
             const isSelected = selected === m.key;
@@ -88,14 +89,14 @@ export default function ShopGuidePage() {
               <button
                 key={m.key}
                 onClick={() => setSelected(m.key)}
-                className={`w-full text-left rounded-lg border px-3 py-2 transition-all ${
+                className={`w-full text-left rounded-lg border px-2.5 py-1.5 transition-all ${
                   isSelected
                     ? 'border-indigo-300 dark:border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 shadow-sm'
                     : 'border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/40'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
-                  <div className={`w-7 h-7 rounded flex items-center justify-center text-[11px] font-bold flex-shrink-0 ${
+                  <div className={`w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold flex-shrink-0 ${
                     isSelected ? 'bg-indigo-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
                   }`}>
                     {m.icon}

@@ -515,10 +515,6 @@ export default function SY051Page() {
               .filter(p => showDone || p.status !== 'done' || p.program_id === selProgramId)
               .map(p => <option key={p.program_id} value={p.program_id}>{p.code} — {t(p.title)}</option>)}
           </select>
-          <label className="flex cursor-pointer items-center gap-1.5 text-xs text-slate-500">
-            <input type="checkbox" checked={showDone} onChange={e => setShowDone(e.target.checked)} />
-            Show done
-          </label>
         </div>
         <div className="flex gap-1 rounded-lg bg-slate-100 p-0.5">
           {(['tree', 'dashboard'] as const).map(tb => (

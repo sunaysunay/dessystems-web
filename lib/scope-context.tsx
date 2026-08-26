@@ -28,6 +28,16 @@ type ScopeState = {
 
 const ScopeContext = createContext<ScopeState | null>(null);
 
+// PROD/DEV badge: explicit NEXT_PUBLIC_BOP_ENV wins; otherwise detect from hostname.
+// bop.dessystems.io (and any non-dev host except localhost) = PROD; bop-dev/localhost = DEV.
+function detectEnv(): 'PROD' | 'DEV' {
+  const explicit = process.env.NEXT_PUBLIC_BOP_ENV;
+  if (explicit === 'PROD' || explicit === 'DEV') return explicit;
+  if (typeof window === 'undefined') return 'PROD';
+  const h = window.location.hostname;
+  return h.startsWith('bop-dev.') || h === 'localhost' || h === '127.0.0.1' ? 'DEV' : 'PROD';
+}
+
 // Tenant selection persistence, in priority order:
 //   1. `?tenant=ID` in the current URL (bookmarkable/shareable — the ask: "tenant id
 //      should be in the url of console bop v2 management")
@@ -117,8 +127,11 @@ export function ScopeProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [env, setEnv] = useState<'PROD' | 'DEV'>('PROD');
+  useEffect(() => { setEnv(detectEnv()); }, []);
+
   return (
-    <ScopeContext.Provider value={{ unit, setUnit, units, env: (process.env.NEXT_PUBLIC_BOP_ENV as 'PROD' | 'DEV') ?? 'DEV', role, user }}>
+    <ScopeContext.Provider value={{ unit, setUnit, units, env, role, user }}>
       {children}
     </ScopeContext.Provider>
   );

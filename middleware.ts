@@ -1,6 +1,8 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 import { routing } from './src/i18n/routing';
+import { SEG_TO_MODULE, ROLE_MODULES } from './lib/role-modules';
+import type { Role } from './lib/role-modules';
 
 // Country → locale (same pattern as descaravan middleware)
 const countryToLocale: Record<string, string> = {
@@ -17,8 +19,61 @@ const countryToLocale: Record<string, string> = {
 
 const intlMiddleware = createMiddleware(routing);
 
+const VALID_ROLES = new Set<string>(Object.keys(ROLE_MODULES));
+
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const host = request.headers.get('host') ?? '';
+  const isBopHost = host.startsWith('bop.') || host.startsWith('bop-dev.');
+
+  // ── Locale-prefixed console paths: strip the prefix ────────────────
+  // Console lives at /console/... (no locale). Old links like /nl/console/... → /console/...
+  const localeConsole = pathname.match(/^\/(en|nl|de|fr|tr|ro|bg|el|es|it)(\/console(?:\/.*)?)$/);
+  if (localeConsole) {
+    const url = request.nextUrl.clone();
+    url.pathname = localeConsole[2];
+    return NextResponse.redirect(url, { status: 308 });
+  }
+
+  // ── BOP domains are console-only: root + bare locale roots → /console ──
+  if (isBopHost && (pathname === '/' || /^\/(en|nl|de|fr|tr|ro|bg|el|es|it)\/?$/.test(pathname))) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/console';
+    return NextResponse.redirect(url, { status: 307 });
+  }
+
+  // ── Console RBAC gate ──────────────────────────────────────────────
+  // Extract the module segment from /console/{seg}/... paths
+  const consoleMatch = pathname.match(/^\/console\/([a-z]+)/);
+  if (consoleMatch) {
+    const seg = consoleMatch[1];
+    const moduleCode = SEG_TO_MODULE[seg];
+
+    if (moduleCode) {
+      const roleCookie = request.cookies.get('bop_role')?.value;
+      const role = roleCookie && VALID_ROLES.has(roleCookie)
+        ? (roleCookie as Role)
+        : null;
+
+      if (!role) {
+        const loginUrl = request.nextUrl.clone();
+        loginUrl.pathname = '/console';
+        loginUrl.searchParams.set('auth', 'required');
+        return NextResponse.redirect(loginUrl, { status: 307 });
+      }
+
+      if (!ROLE_MODULES[role]?.includes(moduleCode)) {
+        const deniedUrl = request.nextUrl.clone();
+        deniedUrl.pathname = '/console';
+        deniedUrl.searchParams.set('denied', moduleCode);
+        return NextResponse.redirect(deniedUrl, { status: 307 });
+      }
+    }
+  }
+
+  // ── Locale routing ─────────────────────────────────────────────────
+  // Console paths live at /console/... (no locale prefix) — skip intl
+  if (pathname === '/console' || pathname.startsWith('/console/')) return NextResponse.next();
 
   // Locale-prefixed paths: let next-intl serve them as usual
   if (pathname !== '/') return intlMiddleware(request);
@@ -57,5 +112,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/(en|nl|de|fr|tr|ro|bg|el|es|it)/:path*']
+  matcher: ['/', '/(en|nl|de|fr|tr|ro|bg|el|es|it)/:path*', '/console/:path*']
 };

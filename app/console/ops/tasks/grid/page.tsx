@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { ScreenHeader } from '@/components/ScreenBadge';
 import { useScope } from '@/lib/scope-context';
+import { QuickAddTaskModal } from '../quick-add';
 import {
   STATUS_COLOR, STATUS_LABEL, PRIORITY_LABEL, PRIORITY_COLOR,
   type OpTask,
@@ -50,6 +51,7 @@ export default function TaskGridPage() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState('');
+  const [showCreate, setShowCreate] = useState(false);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('created_at');
@@ -132,6 +134,8 @@ export default function TaskGridPage() {
       <div className="flex items-center justify-between">
         <ScreenHeader title="Task Grid" description="OP001 — Sortable grid with bulk actions" />
         <div className="flex gap-2">
+          <button onClick={() => setShowCreate(true)}
+            className="rounded-lg bg-slate-800 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-700 shadow-sm">+ Create Task</button>
           <button onClick={() => router.push('/console/ops/tasks')}
             className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 shadow-sm">Cockpit View</button>
           <button onClick={() => { void load(); showToast('Refreshed'); }}
@@ -212,6 +216,14 @@ export default function TaskGridPage() {
             <button disabled={page >= totalPages} onClick={() => setPage(p => p + 1)} className="rounded-lg border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-40">Next</button>
           </div>
         </div>
+      )}
+
+      {showCreate && (
+        <QuickAddTaskModal
+          onClose={() => setShowCreate(false)}
+          onCreated={() => void load()}
+          currentPath="/console/ops/tasks/grid"
+        />
       )}
     </div>
   );

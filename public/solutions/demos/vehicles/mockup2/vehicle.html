@@ -1,0 +1,99 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Demo · BMW X4 autopagina · Mockup 2 | DES Systems</title><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--navy:#0A2A5E;--navy2:#123A7A;--yel:#F5C400;--ink:#0E1320;--paper:#F6F5F0;--mist:#E9EDF3;--mut:#6C7787;--ok:#1F9D55}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Carlito,Calibri,sans-serif;color:var(--ink);background:var(--paper);width:1280px}
+.d{font-family:"DejaVu Sans Condensed","DejaVu Sans",sans-serif;font-weight:700;letter-spacing:-.02em}
+header{background:var(--navy);color:#fff}
+.bar{display:flex;align-items:center;padding:0 48px;height:64px;gap:32px}
+.logo{display:flex;align-items:center;gap:10px}.logo .m{width:34px;height:34px;background:var(--yel);border-radius:6px;display:grid;place-items:center;color:var(--navy);font-weight:800;font-size:18px;font-family:"DejaVu Sans Condensed"}
+.logo b{font-size:19px;letter-spacing:.06em;font-family:"DejaVu Sans Condensed"}.logo span{opacity:.7;font-size:12px;display:block;letter-spacing:.2em;text-transform:uppercase}
+nav{display:flex;gap:26px;font-size:15px;opacity:.9}nav i{font-style:normal;border-bottom:2px solid var(--yel);padding-bottom:2px}
+.bar .r{margin-left:auto;display:flex;gap:14px;align-items:center;font-size:13px}.tel{background:#fff;color:var(--navy);border-radius:6px;padding:8px 14px;font-weight:700}
+.hero{display:grid;grid-template-columns:1fr 440px;gap:0;padding:28px 48px 40px;background:linear-gradient(180deg,var(--navy) 0,var(--navy) 320px,var(--paper) 320px)}
+.stage{position:relative;border-radius:18px;overflow:hidden;background:#0d1f45;height:470px}
+.stage svg{position:absolute;inset:0;width:100%;height:100%}
+.stage .plate{position:absolute;left:24px;top:24px;background:var(--yel);color:var(--ink);border:2px solid #111;border-radius:6px;padding:4px 12px 4px 34px;font-family:"DejaVu Sans Mono",monospace;font-weight:700;font-size:22px;letter-spacing:.12em}
+.stage .plate::before{content:"NL";position:absolute;left:0;top:0;bottom:0;width:26px;background:#1a49b5;color:#fff;font-size:9px;display:grid;place-items:center;font-family:"DejaVu Sans";border-radius:3px 0 0 3px}
+.stage .cnt{position:absolute;right:24px;bottom:24px;display:flex;gap:6px}.stage .cnt span{background:rgba(255,255,255,.15);backdrop-filter:blur(6px);color:#fff;border-radius:6px;padding:7px 11px;font-size:12px}
+.stage .cnt .on{background:#fff;color:var(--navy);font-weight:700}
+.thumbs{display:flex;gap:8px;margin-top:10px}.thumbs div{flex:1;height:64px;border-radius:8px;background:linear-gradient(135deg,#c5cfdd,#94a3bb)}.thumbs div:last-child{display:grid;place-items:center;color:#fff;background:var(--navy2);font-size:13px;font-weight:700}
+.title{margin-top:22px;color:var(--ink)}.eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+h1{font-size:44px;line-height:1;margin:6px 0 8px;color:var(--navy)}.sub{font-size:17px;color:var(--mut)}
+.proof{display:flex;gap:0;margin:20px 0 0;border:1.5px solid var(--navy);border-radius:12px;overflow:hidden}
+.proof div{flex:1;padding:12px 14px;border-right:1.5px solid var(--navy);font-size:13px}.proof div:last-child{border:0}.proof b{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy)}.proof span{color:var(--ok);font-weight:700}
+.kaart{margin-left:28px;background:#fff;border-radius:6px 6px 18px 18px;box-shadow:0 30px 60px rgba(10,42,94,.35),0 2px 0 #ddd;position:relative;padding:0 0 22px;align-self:start}
+.kaart::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:repeating-linear-gradient(90deg,var(--navy) 0 12px,transparent 12px 16px);border-radius:6px 6px 0 0}
+.kaart .hd{padding:30px 26px 14px;border-bottom:1px dashed #cfd6e0}.kaart .lbl{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--mut)}
+.kaart .pr{font-size:54px;line-height:1;color:var(--navy);margin-top:4px}.kaart .pr small{font-size:14px;color:var(--mut);letter-spacing:0;font-family:Carlito;font-weight:400;margin-left:8px}
+.kaart .lease{margin-top:10px;display:flex;justify-content:space-between;font-size:14px}.kaart .lease b{color:var(--navy)}
+.kv{padding:14px 26px;display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;font-size:14px;border-bottom:1px dashed #cfd6e0}.kv div small{display:block;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.1em}.kv div b{font-size:16px}
+.acts{padding:18px 26px 0;display:grid;gap:8px}.acts a{display:block;text-align:center;border-radius:10px;padding:13px;font-weight:700;font-size:15px;text-decoration:none}
+.a1{background:var(--yel);color:var(--ink)}.a2{background:var(--navy);color:#fff}.a3{border:1.5px solid var(--navy);color:var(--navy)}
+.mini{padding:12px 26px 0;display:flex;gap:16px;font-size:12px;color:var(--navy);font-weight:700}.mini span{border-bottom:1px solid var(--navy)}
+.stamp{position:absolute;right:18px;top:118px;width:78px;height:78px;border:3px double var(--ok);border-radius:50%;color:var(--ok);display:grid;place-items:center;text-align:center;font-size:10px;line-height:1.2;font-weight:700;transform:rotate(-12deg);letter-spacing:.05em;opacity:.9}
+.body{padding:0 48px 48px;display:grid;grid-template-columns:1fr 440px;gap:28px}
+.sec{margin-top:30px}.sec h2{font-size:13px;letter-spacing:.25em;text-transform:uppercase;color:var(--mut);margin-bottom:12px;display:flex;align-items:center;gap:12px}.sec h2::after{content:"";flex:1;height:1px;background:#cfd6e0}
+.opt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.opt div{background:#fff;border-radius:8px;padding:10px 12px;font-size:13px;border-left:3px solid var(--yel)}
+.spec{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#cfd6e0;border-radius:10px;overflow:hidden}.spec div{background:#fff;padding:12px 14px}.spec small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}.spec b{font-size:16px}
+.ai{margin-top:30px;background:var(--navy);color:#fff;border-radius:18px;padding:22px 24px;position:relative;overflow:hidden}
+.ai::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:var(--yel);opacity:.12}
+.ai .t{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--yel)}.ai h3{font-size:22px;margin:4px 0 14px}
+.ai .b{background:rgba(255,255,255,.08);border-radius:12px;padding:11px 14px;font-size:14px;margin-top:8px;max-width:78%}.ai .u{background:var(--yel);color:var(--ink);margin-left:auto;font-weight:600}
+.ai input{width:100%;margin-top:14px;border:0;border-radius:10px;padding:13px 14px;font-size:14px;font-family:Carlito;color:var(--mut)}
+.side .box{background:#fff;border-radius:14px;padding:18px 20px;margin-top:30px}.side h4{font-size:15px;color:var(--navy)}.side p{font-size:13px;color:var(--mut);line-height:1.6;margin-top:6px}
+.rv{display:flex;gap:12px;align-items:center;margin-top:10px}.rv .n{font-size:34px;color:var(--navy)}.rv .s{color:var(--yel);font-size:14px;letter-spacing:2px}
+.q{font-size:13px;font-style:italic;border-left:3px solid var(--yel);padding-left:10px;margin-top:10px;color:var(--ink)}
+</style>
+<style>
+@media(max-width:900px){body{width:100%!important}.bar{padding:0 16px!important;gap:12px!important}nav,.bar .r span:not(.tel){display:none!important}
+.hero{grid-template-columns:1fr!important;padding:16px 16px 24px!important;background:var(--navy)!important}.stage{height:240px!important}
+.stage .cnt span:not(.on){display:none}.thumbs div{height:44px!important}.title,.sub{color:#fff!important}h1{font-size:32px!important;color:#fff!important}.eyebrow{color:rgba(255,255,255,.7)!important}
+.proof{flex-wrap:wrap;background:#fff;border-color:#fff!important}.proof div{flex:1 1 33%;border-color:#e6e9ef!important;font-size:12px!important;padding:8px 10px!important;color:var(--ink)}
+.kaart{margin:22px 0 0!important}.kaart .pr{font-size:44px!important}.stamp{top:100px!important}
+.body{grid-template-columns:1fr!important;padding:0 16px 32px!important}.spec{grid-template-columns:1fr 1fr!important}.opt{grid-template-columns:1fr!important}.ai .b{max-width:92%!important}
+.hero h1{font-size:34px!important}.stats{position:static!important;text-align:left!important;display:flex!important;gap:24px!important;margin-top:18px}.ask{flex-wrap:wrap;padding:12px!important}.ask b{margin-left:0!important}
+.wrap{grid-template-columns:1fr!important;padding:0 16px 32px!important;margin-top:-40px!important}.f{display:none}.grid{grid-template-columns:1fr!important}}
+@media(min-width:901px){body{width:auto!important;max-width:1280px;margin:0 auto}}
+</style></head><body>
+<style>
+.des-demo{position:sticky;top:0;z-index:999;background:#111827;color:#fff;font:13px/1.4 Carlito,Calibri,Inter,sans-serif;display:flex;align-items:center;gap:14px;padding:8px 20px}
+.des-demo b{background:#F5C400;color:#111;border-radius:4px;padding:2px 7px;font-size:11px;letter-spacing:.1em}
+.des-demo a{color:#fff;opacity:.85;text-decoration:underline}.des-demo .r{margin-left:auto;display:flex;gap:14px}
+@media(max-width:640px){.des-demo{font-size:11px;padding:8px 12px;gap:8px}.des-demo .hide{display:none}}
+</style>
+<div class="des-demo"><b>DEMO</b><span class="hide">DES Systems · Vehicle listing UI · Mockup 2 · Prijskaart</span><span class="r"><a href="/solutions/demos/vehicles/mockup1">Bekijk Mockup 1 →</a><a href="/solutions/demos/vehicles">Alle demo's</a><a href="/contact">Contact</a></span></div>
+<header><div class="bar"><a class="logo" href="./" style="text-decoration:none"><div class="m">C</div><div><b>CARISMA</b><span>Car Center · Ridderkerk</span></div></a>
+<nav><i>Occasions</i><span>Werkplaats</span><span>APK</span><span>Inruilen</span><span>Financiering</span><span>Over ons</span></nav>
+<div class="r"><span>NL · EN · TR · DE</span><span>♡ 3</span><span class="tel">☎ 0180-497271</span></div></div></header>
+<div class="hero">
+ <div>
+  <div class="stage"><svg viewBox="0 0 800 470"><defs><radialGradient id="g" cx="50%" cy="80%"><stop offset="0" stop-color="#3b5fa0"/><stop offset="1" stop-color="#0d1f45"/></radialGradient></defs><rect width="800" height="470" fill="url(#g)"/><ellipse cx="400" cy="380" rx="330" ry="20" fill="#000" opacity=".35"/><path d="M110 330 q40-110 150-120 h250 q100 0 170 70 l60 40 q20 12 0 32 h-630 q-30-12 0-32z" fill="#e8ecf2"/><path d="M270 215 h215 q45 0 90 55 h-350 z" fill="#1c2e55"/><circle cx="240" cy="352" r="44" fill="#111"/><circle cx="240" cy="352" r="20" fill="#9aa4b4"/><circle cx="620" cy="352" r="44" fill="#111"/><circle cx="620" cy="352" r="20" fill="#9aa4b4"/></svg>
+   <div class="plate">J-164-XX</div><div class="cnt"><span class="on">Exterieur 12</span><span>Interieur 11</span><span>Details 8</span><span>360°</span></div></div>
+  <div class="thumbs"><div></div><div></div><div></div><div></div><div></div><div>+26</div></div>
+  <div class="title"><div class="eyebrow">Occasion · SUV · Nederlands geleverd</div><h1 class="d">BMW X4 xDrive20i<br>M High Executive</h1><div class="sub">Panoramadak · Head-up display · Apple CarPlay · 20" M-velgen</div></div>
+  <div class="proof"><div><b>NAP</b><span>✓ Gecontroleerd</span></div><div><b>APK</b><span>✓ tot 21-01-2027</span></div><div><b>Historie</b><span>✓ Dealer onderhouden</span></div><div><b>Garantie</b><span>✓ 6 maanden</span></div><div><b>Sleutels</b><span>✓ 2 stuks</span></div><div><b>Afleverkosten</b><span>✓ Geen</span></div></div>
+ </div>
+ <div class="kaart">
+  <div class="stamp">NIEUWE APK<br>+ SERVICE<br>BIJ AFLEVERING</div>
+  <div class="hd"><div class="lbl">Prijskaart</div><div class="pr d">€ 39.000<small>marge</small></div><div class="lease"><span>Financial lease</span><b>v.a. € 641 p/m →</b></div></div>
+  <div class="kv"><div><small>Bouwjaar</small><b>01-2021</b></div><div><small>Km-stand</small><b>92.995</b></div><div><small>Brandstof</small><b>Benzine</b></div><div><small>Transmissie</small><b>Automaat</b></div><div><small>Vermogen</small><b>185 pk</b></div><div><small>Wegenbelasting</small><b>€ 307 / kw</b></div></div>
+  <div class="acts"><a class="a1">Proefrit inplannen</a><a class="a2">Mijn inruilwaarde in 1 minuut</a><a class="a3">WhatsApp met Ben</a></div>
+  <div class="mini"><span>Bel mij terug</span><span>Verzekering</span><span>Kentekenrapport</span><span>PDF</span></div>
+ </div>
+</div>
+<div class="body"><div>
+ <div class="sec"><h2>Techniek</h2><div class="spec"><div><small>Motor</small><b>2.0 turbo · 4 cil.</b></div><div><small>Koppel</small><b>290 Nm</b></div><div><small>0–100</small><b>8,3 s</b></div><div><small>Top</small><b>215 km/u</b></div><div><small>CO₂ · label</small><b>150 g · C</b></div><div><small>Euro</small><b>6</b></div><div><small>Trekgewicht</small><b>2.000 kg</b></div><div><small>Gewicht</small><b>1.720 kg</b></div></div></div>
+ <div class="sec"><h2>Uitrusting · 85 opties</h2><div class="opt"><div>Elektrisch panoramadak</div><div>Head-up display</div><div>Apple CarPlay · Android Auto</div><div>Adaptieve cruise control Stop&Go</div><div>Achteruitrijcamera · PDC v/a</div><div>Verwarmde lederen sportstoelen</div><div>Adaptieve LED-koplampen</div><div>Keyless · draadloos laden</div><div>Elektrische achterklep</div><div>Rijstrooksensor · botswaarschuwing</div><div>Digitaal instrumentarium</div><div>M-sportonderstel · 20" velgen</div></div></div>
+ <div class="ai"><div class="t">Vraag het Carisma · 24/7</div><h3 class="d">Alles over deze X4, in uw taal</h3>
+  <div class="b">Deze X4 staat in de showroom. Wilt u weten hoe hij is onderhouden, wat hij per maand kost, of een proefrit plannen?</div>
+  <div class="b u">Kan ik mijn Golf 2016 inruilen? Kenteken KL-123-B</div>
+  <div class="b">Uw Golf 1.0 TSI (2016, 118.000 km) heeft een indicatieve inruilwaarde van € 8.900–9.600. Met inruil wordt de X4 v.a. € 495 p/m. Zaterdag 11:00 proefrit?</div>
+  <input value="Typ uw vraag…"></div>
+</div>
+<div class="side">
+ <div class="box"><h4>Wat klanten schrijven</h4><div class="rv"><span class="n d">4,8</span><div><div class="s">★★★★★</div><div style="font-size:12px;color:var(--mut)">63 reviews · Google, Trustpilot</div></div></div><div class="q">"Ben dacht niet in problemen maar in oplossingen. Zo hoort het."</div><div class="q">"Loslatende bumper na aankoop — kosteloos gemaakt. Netjes."</div></div>
+ <div class="box"><h4>Showroom Ridderkerk</h4><p>Nijverheidstraat 5-7 · 12 min vanaf Rotterdam-Zuid<br>Ma–Do 08:00–17:30 · Vr tot 19:30 · Za 09:30–16:00<br><b style="color:var(--ok)">● Nu geopend</b> — loop binnen of plan een tijd.</p></div>
+ <div class="box"><h4>Ook op voorraad</h4><p>BMW X1 sDrive18i Automaat · € 11.450<br>BMW 3-serie 328i · € 11.900<br>Mercedes-Benz A-klasse · € 14.950</p></div>
+</div></div>
+</body></html>

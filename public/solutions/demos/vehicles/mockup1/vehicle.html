@@ -1,0 +1,83 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Demo · BMW X4 autopagina · Mockup 1 | DES Systems</title><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--b:#0B3D91;--b2:#1557C0;--ink:#111827;--mut:#6B7280;--line:#E5E7EB;--bg:#F7F8FA;--ok:#0F9D58}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,Segoe UI,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;width:1280px}
+.top{background:var(--b);color:#fff;font-size:12px;padding:6px 48px;display:flex;justify-content:space-between}
+nav{display:flex;align-items:center;padding:14px 48px;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:22px;color:var(--b);letter-spacing:-.5px}.logo span{color:var(--ink);font-weight:500}
+nav ul{display:flex;gap:20px;list-style:none;margin-left:36px;font-size:14px;font-weight:500;white-space:nowrap}
+nav .r{margin-left:auto;display:flex;gap:10px;align-items:center;font-size:13px}
+.pill{border:1px solid var(--line);border-radius:999px;padding:6px 12px}.btn{background:var(--b);color:#fff;border-radius:8px;padding:9px 16px;font-weight:600;font-size:13px}
+.crumb{padding:12px 48px;font-size:12px;color:var(--mut)}
+.wrap{display:grid;grid-template-columns:1fr 380px;gap:32px;padding:0 48px 40px}
+.gal{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:200px 200px;gap:8px;border-radius:14px;overflow:hidden}
+.ph{background:linear-gradient(135deg,#dfe6f2,#b8c6df);position:relative}.ph.main{grid-row:1/3}
+.ph svg{position:absolute;inset:0;width:100%;height:100%}
+.badge{position:absolute;left:14px;top:14px;background:#fff;border-radius:6px;padding:5px 9px;font-size:11px;font-weight:700;color:var(--b)}
+.cnt{position:absolute;right:14px;bottom:14px;background:rgba(0,0,0,.55);color:#fff;border-radius:6px;padding:5px 9px;font-size:11px}
+h1{font-size:28px;margin:20px 0 4px;letter-spacing:-.5px}.sub{color:var(--mut);font-size:14px}
+.trust{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.trust span{border:1px solid #CFE0FF;background:#EEF4FF;color:var(--b);border-radius:6px;font-size:12px;padding:6px 10px;font-weight:600}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0 22px}
+.sp{background:var(--bg);border-radius:10px;padding:12px}.sp b{display:block;font-size:15px}.sp small{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.tabs{display:flex;gap:22px;border-bottom:2px solid var(--line);font-size:14px;font-weight:600;color:var(--mut)}.tabs span{padding:10px 0}.tabs .on{color:var(--b);border-bottom:2px solid var(--b);margin-bottom:-2px}
+.opts{columns:3;font-size:13px;margin:16px 0;line-height:1.9}.opts div::before{content:"✓ ";color:var(--ok);font-weight:700}
+.ai{border:1px solid #CFE0FF;background:linear-gradient(180deg,#F5F8FF,#fff);border-radius:14px;padding:16px;margin-top:8px}
+.ai h3{font-size:14px;color:var(--b);display:flex;gap:8px;align-items:center}.ai .msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;margin-top:10px}
+.ai .me{background:var(--b);color:#fff;border:none;margin-left:120px}.ai input{width:100%;margin-top:10px;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:13px;color:var(--mut)}
+.side{position:sticky;top:20px}.card{border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 8px 30px rgba(11,61,145,.08)}
+.price{font-size:32px;font-weight:800;letter-spacing:-1px}.price small{font-size:13px;color:var(--mut);font-weight:500;margin-left:6px}
+.lease{color:var(--b);font-size:13px;font-weight:600;margin:4px 0 14px}
+.cta{display:block;text-align:center;border-radius:10px;padding:12px;font-weight:700;font-size:14px;margin-bottom:8px}
+.cta.p{background:var(--b);color:#fff}.cta.s{border:1.5px solid var(--b);color:var(--b)}.cta.w{background:#25D366;color:#fff}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;font-size:12px;color:var(--b)}.links span{border:1px solid var(--line);border-radius:8px;padding:8px;text-align:center}
+.dealer{margin-top:14px;font-size:12px;color:var(--mut);line-height:1.6}.dealer b{color:var(--ink)}
+.rev{margin-top:14px;font-size:12px}.rev .st{color:#F59E0B;letter-spacing:1px}.rev i{display:block;color:var(--mut);margin-top:4px}
+</style>
+<style>
+@media(max-width:900px){body{width:100%!important}.wrap{grid-template-columns:1fr!important;padding:0 16px 24px!important;gap:16px!important}
+.specs{grid-template-columns:1fr 1fr!important}.opts{columns:1!important}nav ul,.top span:last-child,.crumb,nav .pill{display:none!important}
+nav{padding:12px 16px!important}.top{padding:6px 16px!important;font-size:10px!important}.gal{grid-template-columns:1fr!important;grid-template-rows:210px!important}
+.gal .ph:not(.main){display:none!important}.side{position:static!important}h1{font-size:21px!important}.ai .me{margin-left:40px!important}
+.tabs{overflow-x:auto;white-space:nowrap;gap:16px!important;font-size:13px!important}.card{padding:16px!important}.price{font-size:26px!important}.trust span{font-size:11px!important}nav .r{gap:6px!important}
+.hero{padding:16px!important}.hero h1{font-size:20px!important}.search{flex-direction:column}.chips{flex-wrap:wrap}.grid{grid-template-columns:1fr!important}.f{display:none}}
+@media(min-width:901px){body{width:auto!important;max-width:1280px;margin:0 auto}}
+</style></head><body>
+<style>
+.des-demo{position:sticky;top:0;z-index:999;background:#111827;color:#fff;font:13px/1.4 Carlito,Calibri,Inter,sans-serif;display:flex;align-items:center;gap:14px;padding:8px 20px}
+.des-demo b{background:#F5C400;color:#111;border-radius:4px;padding:2px 7px;font-size:11px;letter-spacing:.1em}
+.des-demo a{color:#fff;opacity:.85;text-decoration:underline}.des-demo .r{margin-left:auto;display:flex;gap:14px}
+@media(max-width:640px){.des-demo{font-size:11px;padding:8px 12px;gap:8px}.des-demo .hide{display:none}}
+</style>
+<div class="des-demo"><b>DEMO</b><span class="hide">DES Systems · Vehicle listing UI · Mockup 1 · Clean</span><span class="r"><a href="/solutions/demos/vehicles/mockup2">Bekijk Mockup 2 →</a><a href="/solutions/demos/vehicles">Alle demo's</a><a href="/contact">Contact</a></span></div>
+<div class="top"><span>Nieuwe APK & servicebeurt bij aflevering · 6 maanden garantie · Geen afleverkosten</span><span>NL · EN · TR · DE · PL &nbsp; | &nbsp; ☎ 0180-497271</span></div>
+<nav><a class="logo" href="./" style="text-decoration:none">CARISMA <span>Car Center</span></div><ul><li>Occasions</li><li>Werkplaats</li><li>APK</li><li>Inruilen</li><li>Financiering</li><li>Over ons</li></ul><div class="r"><span class="pill">🔍 Slim zoeken…</span><span class="pill">♡ 3</span><span class="btn">Proefrit plannen</span></div></nav>
+<div class="crumb">Home › Occasions › BMW › X4 › <b style="color:var(--ink)">BMW X4 xDrive20i M High Executive (2021)</b></div>
+<div class="wrap"><div>
+ <div class="gal">
+  <div class="ph main"><svg viewBox="0 0 800 400"><path d="M120 280 q40-90 140-100 h230 q90 0 150 60 l60 40 q20 10 0 30 h-580 q-30-10 0-30z" fill="#3B4F7A"/><circle cx="240" cy="300" r="38" fill="#111"/><circle cx="240" cy="300" r="18" fill="#9aa"/><circle cx="600" cy="300" r="38" fill="#111"/><circle cx="600" cy="300" r="18" fill="#9aa"/><path d="M270 190 h200 q40 0 80 45 h-320 z" fill="#c9d6ee"/></svg><span class="badge">NAP ✓ · RDW ✓ · Dealer onderhouden</span><span class="cnt">1 / 31 · Alle foto's</span></div>
+  <div class="ph"></div><div class="ph"><span class="cnt">+27</span></div>
+ </div>
+ <h1>BMW X4 xDrive20i M High Executive Edition</h1>
+ <div class="sub">Pano · Head-Up · CarPlay · Nederlands geleverd · Ref. 6569334 · Kenteken J-164-XX</div>
+ <div class="trust"><span>✓ NAP gecontroleerd</span><span>✓ APK tot 21-01-2027</span><span>✓ Onderhoudshistorie</span><span>✓ 6 mnd garantie</span><span>✓ Reservesleutel</span><span>✓ Euro 6 · Label C</span></div>
+ <div class="specs">
+  <div class="sp"><small>Bouwjaar</small><b>01-2021</b></div><div class="sp"><small>Km-stand</small><b>92.995 km</b></div><div class="sp"><small>Brandstof</small><b>Benzine</b></div><div class="sp"><small>Transmissie</small><b>Automaat</b></div>
+  <div class="sp"><small>Vermogen</small><b>185 pk / 135 kW</b></div><div class="sp"><small>Wegenbelasting</small><b>€ 307 – 335 / kw</b></div><div class="sp"><small>Trekgewicht</small><b>2.000 kg</b></div><div class="sp"><small>Kleur / bekleding</small><b>Grijs · Leder</b></div>
+ </div>
+ <div class="tabs"><span class="on">Overzicht</span><span>Opties (85)</span><span>Techniek</span><span>Historie & RDW</span><span>Garantie</span><span>Reviews (4,8)</span></div>
+ <div class="opts"><div>Panoramadak elektrisch</div><div>Head-up display</div><div>Apple CarPlay / Android Auto</div><div>Adaptieve cruise control Stop&Go</div><div>Achteruitrijcamera + PDC v/a</div><div>Verwarmde sportstoelen leder</div><div>LED koplampen adaptief</div><div>Keyless start · draadloos laden</div><div>20" M velgen · M aerodynamica</div><div>Rijstrooksensor · botswaarschuwing</div><div>Elektrische achterklep</div><div>Volledig digitaal instrumentarium</div></div>
+ <div class="ai"><h3>✦ Vraag het over deze auto — 24/7, in uw taal</h3>
+  <div class="msg">Hallo! Ik ken alle details van deze BMW X4. Wat wilt u weten — opties, onderhoudshistorie, lease of een proefrit?</div>
+  <div class="msg me">Is de auto nog beschikbaar en kan ik mijn Golf 2016 inruilen?</div>
+  <div class="msg">Ja, de X4 staat in de showroom in Ridderkerk. Vul hieronder het kenteken van uw Golf in, dan geef ik direct een indicatieve inruilwaarde en plan ik een proefrit op een moment dat u past.</div>
+  <input value="Typ uw vraag… bijv. 'Wat kost dit per maand met €5.000 aanbetaling?'"></div>
+</div>
+<div class="side"><div class="card">
+ <div class="price">€ 39.000<small>marge · incl. BTW</small></div>
+ <div class="lease">Financial lease v.a. € 641 p/m · Bereken →</div>
+ <span class="cta p">Proefrit plannen</span><span class="cta s">Inruilwaarde direct berekenen</span><span class="cta w">WhatsApp met Carisma</span>
+ <div class="links"><span>📞 Bel mij terug</span><span>🛡 Verzekeren</span><span>📄 Kentekenrapport</span><span>⤴ Delen / PDF</span></div>
+ <div class="dealer"><b>Carisma Car Center</b><br>Nijverheidstraat 5-7, Ridderkerk<br>Ma–Do 08:00–17:30 · Vr tot 19:30 · Za 09:30–16:00<br><span style="color:var(--ok);font-weight:600">● Nu geopend</span> · 12 min van Rotterdam-Zuid</div>
+ <div class="rev"><span class="st">★★★★★</span> <b>4,8</b> · 63 reviews (Google, Trustpilot)<i>"Luisteren, meedenken, oplossen — zo hoort het."</i></div>
+</div></div></div>
+</body></html>

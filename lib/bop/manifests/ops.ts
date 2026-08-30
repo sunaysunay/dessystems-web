@@ -12,6 +12,7 @@ export const OPS_SCREEN_OBJECTS: BopObject[] = [
   { object_id:"screen:OP015",type:"screen",module:"OPS",name:"Entity Scorecard",route:"/console/ops/goals/scorecard",status:"active",description:"Per-entity radar chart, KPI grid, goal health donut, period comparison table" },
   { object_id:"screen:OP014",type:"screen",module:"OPS",name:"Task Timeline",route:"/console/ops/tasks/timeline",status:"active",description:"Gantt-style timeline with dependency arrows, priority stripes, today marker" },
   { object_id:"screen:OP016",type:"screen",module:"OPS",name:"Historical Ledger",route:"/console/ops/goals/ledger",status:"active",description:"Frozen period snapshots for historical goal comparison" },
+  { object_id:"screen:OP018",type:"screen",module:"OPS",name:"Fair Scout",route:"/console/ops/field-intel",status:"active",description:"Mobile-first trade fair capture tool — photo, classify, score, sync to Google Drive" },
 ];
 
 export const OPS_API_OBJECTS: BopObject[] = [

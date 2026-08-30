@@ -298,6 +298,7 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/ops/goals/dashboard': { id: 'OP016', title: 'Goals Dashboard', mod: 'OPS' },
   '/console/ops/goals/ledger': { id: 'OP017', title: 'Goals Ledger', mod: 'OPS' },
   '/console/ops/photo-enhance': { id: 'OP008', title: 'Photo Enhance', mod: 'OPS' },
+  '/console/ops/field-intel': { id: 'OP018', title: 'Fair Scout', mod: 'OPS' },
   '/console/sal/handovers': { id: 'SA019', title: 'Handovers', mod: 'SAL' },
   '/console/sal/quotes': { id: 'SA020', title: 'Quotes', mod: 'SAL' },
   '/console/sal/quote-submissions': { id: 'SA021', title: 'Quote Submissions', mod: 'SAL' },

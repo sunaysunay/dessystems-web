@@ -119,6 +119,7 @@
     "imageRenamer": "Afbeelding Hernoemer",
     "watermark": "Watermerk",
     "photoEnhance": "Foto Verbeteren",
+    "fieldIntel": "Fair Scout",
     "userList": "Gebruikerslijst",
     "userCockpit": "Gebruikerscockpit",
     "sessionsAdm": "Sessies",
@@ -382,7 +383,8 @@
     "flyer": "Flyer Maker",
     "imageRenamer": "Afbeelding Hernoemer",
     "watermark": "Watermerk",
-    "photoEnhance": "Foto Verbeteren"
+    "photoEnhance": "Foto Verbeteren",
+    "fieldIntel": "Fair Scout"
   },
   "pub": {
     "overview": "Publicatie Overzicht",
@@ -537,6 +539,7 @@
     "OP006": "Afbeelding Hernoemer",
     "OP007": "Watermerk",
     "OP008": "Foto Verbeteren",
+    "OP018": "Fair Scout",
     "OP009": "Takenraster",
     "OP010": "Kanban Bord",
     "OP011": "Kalenderweergave",
@@ -914,6 +917,26 @@
     "discuss": "Bespreek deze oplossing"
   },
   "SolutionsPage": {
+    "plat": {
+      "badge": "Vlaggenschip Product",
+      "title": "Eén platform. <em>Elk bedrijfsproces.</em>",
+      "lead": "DES Business Operating Platform past zich aan uw operatie aan met AI-gedreven intelligentie — van leadgeneratie tot facturatie, voorraadbeheer tot analytics. Geen rigide sjablonen. Uw processen, georkestreerd.",
+      "sub": "Gebouwd voor ondernemingen die weigeren hun tools te ontgroeien. BOP leert hoe uw teams werken en vormt zich rond uw workflows — niet andersom.",
+      "cta_explore": "Ontdek het Platform",
+      "cta_demo": "Demo aanvragen",
+      "f_ai": "AI-Native Intelligentie",
+      "f_ai_d": "Ingebouwde AI-agents die uw data begrijpen, beslissingen automatiseren en inzichten bieden voordat u erom vraagt.",
+      "f_auto": "Adaptieve Automatisering",
+      "f_auto_d": "Workflows die meegroeien met uw bedrijf — regelengines, triggers en orkestratie zonder code.",
+      "f_multi": "Meertalig & Multi-entiteit",
+      "f_multi_d": "Opereer in meerdere talen, valuta's en juridische entiteiten vanuit één uniforme console.",
+      "f_sec": "Enterprise-Grade Beveiliging",
+      "f_sec_d": "Rolgebaseerde toegang, audittrails, SOD-controles en tenant-isolatie in elke laag.",
+      "f_anal": "Realtime Analytics",
+      "f_anal_d": "Live dashboards, KPI-tracking en voorspellende modellen — van werkvloer tot directieniveau.",
+      "f_flow": "Modulaire Bedrijfsprocessen",
+      "f_flow_d": "Modulaire architectuur: activeer CRM, Sales, Finance, Ops — elke module sluit naadloos aan op uw realiteit."
+    },
     "eyebrow": "Onze oplossingen",
     "title1": "Enterprise-oplossingen.",
     "title2": "Echte zakelijke impact.",

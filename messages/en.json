@@ -119,6 +119,7 @@
     "imageRenamer": "Image Renamer",
     "watermark": "Watermark",
     "photoEnhance": "Photo Enhance",
+    "fieldIntel": "Fair Scout",
     "userList": "User List",
     "userCockpit": "User Cockpit",
     "sessionsAdm": "Sessions",
@@ -382,7 +383,8 @@
     "flyer": "Flyer Maker",
     "imageRenamer": "Image Renamer",
     "watermark": "Watermark",
-    "photoEnhance": "Photo Enhance"
+    "photoEnhance": "Photo Enhance",
+    "fieldIntel": "Fair Scout"
   },
   "pub": {
     "overview": "Publishing Overview",
@@ -537,6 +539,7 @@
     "OP006": "Image Renamer",
     "OP007": "Watermark",
     "OP008": "Photo Enhance",
+    "OP018": "Fair Scout",
     "OP009": "Task Grid",
     "OP010": "Kanban Board",
     "OP011": "Calendar View",
@@ -914,6 +917,26 @@
     "discuss": "Discuss this Solution"
   },
   "SolutionsPage": {
+    "plat": {
+      "badge": "Flagship Product",
+      "title": "One Platform. <em>Every Business Flow.</em>",
+      "lead": "DES Business Operating Platform adapts to your operations with AI-driven intelligence — from lead capture to invoicing, inventory to analytics. No rigid templates. Your processes, orchestrated.",
+      "sub": "Built for enterprises that refuse to outgrow their tools. BOP learns how your teams work and reshapes itself around your workflows — not the other way around.",
+      "cta_explore": "Explore the Platform",
+      "cta_demo": "Request a Demo",
+      "f_ai": "AI-Native Intelligence",
+      "f_ai_d": "Embedded AI agents that understand your data, automate decisions and surface insights before you ask.",
+      "f_auto": "Adaptive Automation",
+      "f_auto_d": "Workflows that evolve with your business — rule engines, triggers and orchestration without code.",
+      "f_multi": "Multilingual & Multi-entity",
+      "f_multi_d": "Operate across languages, currencies and legal entities from a single unified console.",
+      "f_sec": "Enterprise-Grade Security",
+      "f_sec_d": "Role-based access, audit trails, SOD controls and tenant isolation built into every layer.",
+      "f_anal": "Real-Time Analytics",
+      "f_anal_d": "Live dashboards, KPI tracking and predictive models — from shop floor metrics to executive summaries.",
+      "f_flow": "Composable Business Flows",
+      "f_flow_d": "Modular architecture lets you activate CRM, Sales, Finance, Ops — each module snaps into your reality."
+    },
     "eyebrow": "Our Solutions",
     "title1": "Enterprise Solutions.",
     "title2": "Real Business Impact.",

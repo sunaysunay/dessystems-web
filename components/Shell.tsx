@@ -249,6 +249,7 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     { label: tn('imageRenamer'),     href: '/console/ops/image-renamer' },
     { label: tn('watermark'),         href: '/console/ops/watermark' },
     { label: tn('photoEnhance'),     href: '/console/ops/photo-enhance' },
+    { label: tn('fieldIntel'),       href: '/console/ops/field-intel' },
   ]},
 
   { group: tg('system'), items: [

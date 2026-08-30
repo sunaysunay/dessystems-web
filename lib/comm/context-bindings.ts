@@ -16,7 +16,7 @@ import { getServerClient } from '@/lib/supabase-server';
 // caller's role/tenant assignment before invoking a loader — the loader's job
 // is to never return a row outside the tenantId it was given.
 
-export type ContextType = 'vehicle' | 'customer' | 'invoice' | 'listing' | 'sell_lead' | 'crm_lead' | 'order' | 'quotation' | 'handover';
+export type ContextType = 'vehicle' | 'customer' | 'invoice' | 'listing' | 'sell_lead' | 'crm_lead' | 'order' | 'quotation' | 'handover' | 'work_order';
 
 export interface ContextData {
   scope: Record<string, Record<string, string>>; // { Vehicle: {...}, Customer: {...}, ... }
@@ -364,6 +364,79 @@ async function loadHandoverContext(recordId: string, tenantId: number): Promise<
   };
 }
 
+// ── Work Order context — workshop work orders ─────────────────────────────────
+async function loadWorkOrderContext(recordId: string, tenantId: number): Promise<ContextData | null> {
+  const supabase = getServerClient();
+  const { data } = await supabase
+    .from('wrk_orders')
+    .select('*')
+    .eq('id', recordId)
+    .eq('tenant_id', tenantId)
+    .maybeSingle();
+  if (!data) return null;
+
+  let partnerName = '';
+  let partnerEmail = '';
+  let partnerPhone = '';
+  if (data.customer_id) {
+    const { data: partner } = await supabase
+      .from('mdm_business_partners')
+      .select('company_name, email, phone, preferred_locale')
+      .eq('id', data.customer_id)
+      .maybeSingle();
+    if (partner) {
+      partnerName = partner.company_name ?? '';
+      partnerEmail = partner.email ?? '';
+      partnerPhone = partner.phone ?? '';
+    }
+  }
+
+  let vehiclePlate = '';
+  let vehicleMakeModel = '';
+  if (data.vehicle_id) {
+    const { data: asset } = await supabase
+      .from('ast_assets')
+      .select('license_plate, brand, model')
+      .eq('id', data.vehicle_id)
+      .maybeSingle();
+    if (asset) {
+      vehiclePlate = asset.license_plate ?? '';
+      vehicleMakeModel = [asset.brand, asset.model].filter(Boolean).join(' ');
+    }
+  }
+
+  let techName = '';
+  if (data.technician_id) {
+    const { data: tech } = await supabase
+      .from('wrk_technicians')
+      .select('display_name')
+      .eq('id', data.technician_id)
+      .maybeSingle();
+    if (tech) techName = tech.display_name ?? '';
+  }
+
+  const { data: tenant } = await supabase.from('bop_tenants').select('name, domain').eq('tenant_id', tenantId).single();
+
+  return {
+    scope: {
+      WorkOrder: {
+        Id: data.id,
+        Number: data.wo_number ?? '',
+        Status: data.status ?? '',
+        Type: data.type ?? '',
+        EstimatedCompletion: data.estimated_completion ?? '',
+        Notes: data.notes ?? '',
+      },
+      Vehicle: { Plate: vehiclePlate, MakeModel: vehicleMakeModel },
+      Customer: { Name: partnerName, Email: partnerEmail, Phone: partnerPhone },
+      Technician: { Name: techName },
+      Tenant: { Name: tenant?.name ?? '', Domain: tenant?.domain ?? '' },
+    },
+    recipients: partnerEmail ? [{ to: partnerEmail, name: partnerName || partnerEmail }] : [],
+    links: [{ module: 'wrk', recordId: data.id, label: data.wo_number ?? data.id }],
+  };
+}
+
 // Category naming: `{contextType}.{name}` (e.g. 'vehicle.offer',
 // 'invoice.reminder') — consistent with bop_comm_automation.event_code's own
 // dot-notation, and matches what actually goes into bop_comm_template.category.
@@ -423,6 +496,12 @@ export const CONTEXT_BINDINGS: Record<ContextType, ContextBinding> = {
     loader: loadHandoverContext,
     categories: ['handover.invite', 'handover.signed', 'handover.reminder'],
     smartObjects: ['vehicle_card'],
+    primaryStyle: 'corporate',
+  },
+  work_order: {
+    loader: loadWorkOrderContext,
+    categories: ['work_order.created', 'work_order.status_changed', 'work_order.completed', 'inspection.report', 'approval.request'],
+    smartObjects: ['wo_number', 'vehicle_plate', 'vehicle_make_model', 'customer_name', 'technician_name', 'estimated_completion', 'total_amount', 'status_page_url', 'approval_url', 'inspection_report_url'],
     primaryStyle: 'corporate',
   },
 };

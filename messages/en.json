@@ -247,7 +247,8 @@
     "wrkBriefing": "Daily Briefing",
     "wrkRecommendations": "Repair Recommendations",
     "wrkRates": "Labour Rates",
-    "wrkPackages": "Service Packages"
+    "wrkPackages": "Service Packages",
+    "wrkDmsIntegration": "DMS Integration"
   },
   "sal": {
     "orders": "Orders",
@@ -427,7 +428,15 @@
     "accessAudit": "Access Audit",
     "suim": "User Information",
     "audit": "Audit Log",
-    "overview": "System Overview"
+    "overview": "System Overview",
+    "dbaOverview": "Database Overview",
+    "dbaSchema": "Schema Explorer",
+    "dbaTableData": "Table Data",
+    "dbaSqlRunner": "SQL Runner",
+    "dbaFunctions": "Functions & RPC",
+    "dbaActions": "Database Actions",
+    "dbaHistory": "Query History",
+    "dbaMigrations": "Migrations"
   },
   "groups": {
     "overview": "Overview",
@@ -464,9 +473,18 @@
     "shopComplianceGrp": "Compliance",
     "markets": "Markets",
     "shopAnalyticsGrp": "Commerce Intelligence",
-    "workshop": "Workshop"
+    "workshop": "Workshop",
+    "databaseConsole": "Database Console"
   },
   "screens": {
+    "DB001": "Database Overview",
+    "DB002": "Schema Explorer",
+    "DB003": "Table Data",
+    "DB004": "SQL Runner",
+    "DB005": "Functions & RPC",
+    "DB006": "Database Actions",
+    "DB007": "Query History",
+    "DB008": "Migrations",
     "IN006": "Model Catalog",
     "AI001": "AI Command Center",
     "AI002": "Tool Registry",
@@ -638,7 +656,8 @@
     "WK009": "Daily Briefing",
     "WK010": "Repair Recommendations",
     "WK011": "Labour Rates",
-    "WK012": "Service Packages"
+    "WK012": "Service Packages",
+    "WK013": "DMS Integration"
   },
   "support": {
     "title": "Support",

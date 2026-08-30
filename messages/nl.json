@@ -247,7 +247,16 @@
     "wrkBriefing": "Dagbriefing",
     "wrkRecommendations": "Reparatie Advies",
     "wrkRates": "Uurtarieven",
-    "wrkPackages": "Recepturen"
+    "wrkPackages": "Recepturen",
+    "wrkDmsIntegration": "DMS Koppeling",
+    "dbaOverview": "Database Overzicht",
+    "dbaSchema": "Schema Verkenner",
+    "dbaTableData": "Tabel Data",
+    "dbaSqlRunner": "SQL Runner",
+    "dbaFunctions": "Functies & RPC",
+    "dbaActions": "Database Acties",
+    "dbaHistory": "Query Geschiedenis",
+    "dbaMigrations": "Migraties"
   },
   "sal": {
     "orders": "Bestellingen",
@@ -464,7 +473,8 @@
     "shopComplianceGrp": "Compliance",
     "markets": "Markten",
     "shopAnalyticsGrp": "Commerce Intelligence",
-    "workshop": "Werkplaats"
+    "workshop": "Werkplaats",
+    "databaseConsole": "Database Console"
   },
   "screens": {
     "IN006": "Modellencatalogus",
@@ -638,7 +648,16 @@
     "WK009": "Dagbriefing",
     "WK010": "Reparatie Advies",
     "WK011": "Uurtarieven",
-    "WK012": "Recepturen"
+    "WK012": "Recepturen",
+    "WK013": "DMS Koppeling",
+    "DB001": "Database Overzicht",
+    "DB002": "Schema Verkenner",
+    "DB003": "Tabel Data",
+    "DB004": "SQL Runner",
+    "DB005": "Functies & RPC",
+    "DB006": "Database Acties",
+    "DB007": "Query Geschiedenis",
+    "DB008": "Migraties"
   },
   "support": {
     "title": "Support",

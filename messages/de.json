@@ -92,7 +92,8 @@
     "shopOrdersMgmt": "Orders",
     "shopProcurement": "Procurement",
     "shopAnalyticsGrp": "Commerce Intelligence",
-    "workshop": "Werkstatt"
+    "workshop": "Werkstatt",
+    "databaseConsole": "Datenbank-Konsole"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -320,7 +321,16 @@
     "wrkBriefing": "Tagesbriefing",
     "wrkRecommendations": "Reparaturempfehlungen",
     "wrkRates": "Stundensätze",
-    "wrkPackages": "Servicepakete"
+    "wrkPackages": "Servicepakete",
+    "wrkDmsIntegration": "DMS-Integration",
+    "dbaOverview": "Datenbank-Ubersicht",
+    "dbaSchema": "Schema Explorer",
+    "dbaTableData": "Tabellendaten",
+    "dbaSqlRunner": "SQL Runner",
+    "dbaFunctions": "Funktionen & RPC",
+    "dbaActions": "Datenbankaktionen",
+    "dbaHistory": "Abfrageverlauf",
+    "dbaMigrations": "Migrationen"
   },
   "screens": {
     "IN006": "Modellkatalog",
@@ -493,7 +503,16 @@
     "WK009": "Tagesbriefing",
     "WK010": "Reparaturempfehlungen",
     "WK011": "Stundensätze",
-    "WK012": "Servicepakete"
+    "WK012": "Servicepakete",
+    "WK013": "DMS-Integration",
+    "DB001": "Datenbank-Ubersicht",
+    "DB002": "Schema Explorer",
+    "DB003": "Tabellendaten",
+    "DB004": "SQL Runner",
+    "DB005": "Funktionen & RPC",
+    "DB006": "Datenbankaktionen",
+    "DB007": "Abfrageverlauf",
+    "DB008": "Migrationen"
   },
   "support": {
     "title": "Support",

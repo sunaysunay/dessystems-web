@@ -92,7 +92,8 @@
     "shopOrdersMgmt": "Orders",
     "shopProcurement": "Procurement",
     "shopAnalyticsGrp": "Commerce Intelligence",
-    "workshop": "Atelier"
+    "workshop": "Atelier",
+    "databaseConsole": "Console Base de Donnees"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -320,7 +321,16 @@
     "wrkBriefing": "Briefing quotidien",
     "wrkRecommendations": "Recommandations",
     "wrkRates": "Tarifs horaires",
-    "wrkPackages": "Forfaits"
+    "wrkPackages": "Forfaits",
+    "wrkDmsIntegration": "Integration DMS",
+    "dbaOverview": "Apercu Base de Donnees",
+    "dbaSchema": "Explorateur de Schema",
+    "dbaTableData": "Donnees de Table",
+    "dbaSqlRunner": "Executeur SQL",
+    "dbaFunctions": "Fonctions & RPC",
+    "dbaActions": "Actions Base de Donnees",
+    "dbaHistory": "Historique des Requetes",
+    "dbaMigrations": "Migrations"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -493,7 +503,16 @@
     "WK009": "Briefing quotidien",
     "WK010": "Recommandations",
     "WK011": "Tarifs horaires",
-    "WK012": "Forfaits"
+    "WK012": "Forfaits",
+    "WK013": "Integration DMS",
+    "DB001": "Apercu Base de Donnees",
+    "DB002": "Explorateur de Schema",
+    "DB003": "Donnees de Table",
+    "DB004": "Executeur SQL",
+    "DB005": "Fonctions & RPC",
+    "DB006": "Actions Base de Donnees",
+    "DB007": "Historique des Requetes",
+    "DB008": "Migrations"
   },
   "support": {
     "title": "Support",

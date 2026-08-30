@@ -35,6 +35,8 @@ interface Observation {
   website: string;
   status: string;
   photoCount: number;
+  synced?: boolean;
+  syncedAt?: string;
 }
 
 interface PhotoMeta {
@@ -448,6 +450,8 @@ export default function Page() {
   const [driveClientId, setDriveClientId] = useState('');
   const [driveToken, setDriveToken] = useState('');
   const [syncStatus, setSyncStatus] = useState('');
+  const [bopSyncStatus, setBopSyncStatus] = useState('');
+  const [bopSyncing, setBopSyncing] = useState(false);
   const [newSignal, setNewSignal] = useState('');
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -569,6 +573,10 @@ export default function Page() {
 
   // ── Edit observation ──
   function startEdit(obs: Observation) {
+    if (obs.synced) {
+      showToast('Synced — read-only');
+      return;
+    }
     setDraft({
       hall: obs.hall, stand: obs.stand, companyName: obs.companyName,
       title: obs.title, note: obs.note, categories: obs.categories,
@@ -586,6 +594,11 @@ export default function Page() {
 
   // ── Delete observation ──
   async function deleteObservation(id: string) {
+    const obs = observations.find(o => o.id === id);
+    if (obs?.synced) {
+      showToast('Synced — use "Clear synced" in Setup');
+      return;
+    }
     await dbDelete('observations', id);
     const photos = photosMeta.filter(p => p.observationId === id);
     for (const p of photos) {
@@ -734,6 +747,69 @@ export default function Page() {
     }
   }
 
+  // ── Sync to BOP ──
+  async function syncToBOP() {
+    const unsynced = observations.filter(o => !o.synced);
+    if (unsynced.length === 0) {
+      setBopSyncStatus('Nothing to sync — all observations already synced');
+      return;
+    }
+    setBopSyncing(true);
+    setBopSyncStatus(`Syncing ${unsynced.length} observations...`);
+    try {
+      const thumbnailsMap: Record<string, string[]> = {};
+      for (const obs of unsynced) {
+        const thumbs = photosMeta.filter(p => p.observationId === obs.id).map(p => p.thumbDataUrl);
+        if (thumbs.length > 0) thumbnailsMap[obs.id] = thumbs;
+      }
+      const res = await fetch('/api/bop/ops/fair-scout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'sync',
+          observations: unsynced,
+          thumbnails_map: thumbnailsMap,
+          synced_by: 'phone',
+        }),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || 'Sync failed');
+
+      const syncedAt = result.synced_at || new Date().toISOString();
+      const syncedIds = new Set(result.ids || unsynced.map((o: Observation) => o.id));
+      const updated = observations.map(o =>
+        syncedIds.has(o.id) ? { ...o, synced: true, syncedAt } : o
+      );
+      setObservations(updated);
+      for (const o of updated) {
+        if (syncedIds.has(o.id)) await dbPut('observations', o);
+      }
+      setBopSyncStatus(`Synced ${result.synced} observations to BOP`);
+      showToast(`Synced ${result.synced} to BOP`);
+      if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+    } catch (err: any) {
+      setBopSyncStatus(`Sync error: ${err?.message || 'unknown'}`);
+    } finally {
+      setBopSyncing(false);
+    }
+  }
+
+  async function deleteSyncedData() {
+    const synced = observations.filter(o => o.synced);
+    if (synced.length === 0) return;
+    for (const obs of synced) {
+      await dbDelete('observations', obs.id);
+      const photos = photosMeta.filter(p => p.observationId === obs.id);
+      for (const p of photos) {
+        await dbDelete('photos', p.id);
+        await dbDelete('blobs', p.id);
+      }
+    }
+    setObservations(prev => prev.filter(o => !o.synced));
+    setPhotosMeta(prev => prev.filter(p => !synced.some(s => s.id === p.observationId)));
+    showToast(`Cleared ${synced.length} synced observations`);
+  }
+
   // ── Filtered observations ──
   const filtered = observations.filter(o => {
     if (filter === 'high') return o.highValue;
@@ -753,6 +829,8 @@ export default function Page() {
     highValue: observations.filter(o => o.highValue).length,
     followUps: observations.filter(o => o.followUp).length,
     pending: pendingPhotos,
+    synced: observations.filter(o => o.synced).length,
+    unsynced: observations.filter(o => !o.synced).length,
   };
 
   if (!dbReady) {
@@ -1103,10 +1181,15 @@ export default function Page() {
                       </span>
                       {obs.highValue && <span className="text-[10px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded font-medium">HV</span>}
                       {obs.followUp && <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">FU</span>}
+                      {obs.synced && <span className="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-medium">synced</span>}
                     </div>
                   </div>
-                  <button onClick={e => { e.stopPropagation(); if (confirm('Delete this observation?')) deleteObservation(obs.id); }}
-                    className="self-start text-slate-300 hover:text-red-500 text-xs p-1">✕</button>
+                  {obs.synced ? (
+                    <span className="self-start text-emerald-400 text-xs p-1">🔒</span>
+                  ) : (
+                    <button onClick={e => { e.stopPropagation(); if (confirm('Delete this observation?')) deleteObservation(obs.id); }}
+                      className="self-start text-slate-300 hover:text-red-500 text-xs p-1">✕</button>
+                  )}
                 </button>
               );
             })}
@@ -1192,6 +1275,43 @@ export default function Page() {
             </div>
           </div>
 
+          {/* BOP Sync */}
+          <div className="bg-white rounded-xl border border-emerald-100 p-4">
+            <div className="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-2">Sync to BOP</div>
+            <div className="text-xs text-slate-500 mb-3">
+              Send observations to bop.dessystems.io so they appear on desktop. Photos stay on phone — only metadata and thumbnails are synced. Synced items become read-only.
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-center mb-3">
+              <div className="bg-slate-50 rounded-lg p-2">
+                <div className="text-lg font-bold text-slate-900">{stats.unsynced}</div>
+                <div className="text-[10px] text-slate-500">Pending</div>
+              </div>
+              <div className="bg-emerald-50 rounded-lg p-2">
+                <div className="text-lg font-bold text-emerald-700">{stats.synced}</div>
+                <div className="text-[10px] text-emerald-600">Synced</div>
+              </div>
+              <div className="bg-blue-50 rounded-lg p-2">
+                <div className="text-lg font-bold text-blue-700">{stats.total}</div>
+                <div className="text-[10px] text-blue-600">Total</div>
+              </div>
+            </div>
+            <button onClick={syncToBOP}
+              disabled={bopSyncing || stats.unsynced === 0}
+              className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-40 mb-2">
+              {bopSyncing ? 'Syncing...' : stats.unsynced === 0 ? 'All synced' : `Sync ${stats.unsynced} to BOP`}
+            </button>
+            {stats.synced > 0 && (
+              <button onClick={() => {
+                if (!confirm(`Clear ${stats.synced} synced observations from phone? They are safely stored in BOP.`)) return;
+                deleteSyncedData();
+              }}
+                className="w-full py-2 border border-slate-200 text-slate-600 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors">
+                Clear {stats.synced} synced from phone
+              </button>
+            )}
+            {bopSyncStatus && <div className="text-xs text-slate-500 mt-2">{bopSyncStatus}</div>}
+          </div>
+
           {/* Export */}
           <div className="bg-white rounded-xl border border-slate-100 p-4">
             <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Export</div>
@@ -1209,6 +1329,7 @@ export default function Page() {
               <div className="text-slate-500">Photos</div><div className="font-medium text-slate-900">{stats.photos}</div>
               <div className="text-slate-500">High value</div><div className="font-medium text-amber-600">{stats.highValue}</div>
               <div className="text-slate-500">Follow-ups</div><div className="font-medium text-slate-900">{stats.followUps}</div>
+              <div className="text-slate-500">Synced</div><div className="font-medium text-emerald-600">{stats.synced}</div>
             </div>
           </div>
 

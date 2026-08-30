@@ -28,6 +28,7 @@ export const MOD_COLORS: Record<string, string> = {
   WFL: 'bg-teal-100 text-teal-700',
   WRK: 'bg-sky-100 text-sky-700',
   SHP: 'bg-amber-100 text-amber-700',
+  DBA: 'bg-stone-100 text-stone-700',
 };
 
 export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
@@ -329,6 +330,15 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/wrk/recommendations': { id: 'WK010', title: 'Repair Recommendations', mod: 'WRK' },
   '/console/wrk/rates': { id: 'WK011', title: 'Labour Rates', mod: 'WRK' },
   '/console/wrk/packages': { id: 'WK012', title: 'Service Packages', mod: 'WRK' },
+  '/console/wrk/dms-integration': { id: 'WK013', title: 'DMS Integration', mod: 'WRK' },
+  '/console/dba': { id: 'DB001', title: 'Database Overview', mod: 'DBA' },
+  '/console/dba/schema': { id: 'DB002', title: 'Schema Explorer', mod: 'DBA' },
+  '/console/dba/data': { id: 'DB003', title: 'Table Data', mod: 'DBA' },
+  '/console/dba/sql': { id: 'DB004', title: 'SQL Runner', mod: 'DBA' },
+  '/console/dba/functions': { id: 'DB005', title: 'Functions & RPC', mod: 'DBA' },
+  '/console/dba/actions': { id: 'DB006', title: 'Database Actions', mod: 'DBA' },
+  '/console/dba/history': { id: 'DB007', title: 'Query History', mod: 'DBA' },
+  '/console/dba/migrations': { id: 'DB008', title: 'Migrations', mod: 'DBA' },
 };
 
 export function getScreenMeta(pathname: string): ScreenMeta | null {

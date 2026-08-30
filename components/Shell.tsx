@@ -97,6 +97,7 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     { label: tn('wrkRecommendations'),  href: '/console/wrk/recommendations' },
     { label: tn('wrkRates'),            href: '/console/wrk/rates' },
     { label: tn('wrkPackages'),         href: '/console/wrk/packages' },
+    { label: tn('wrkDmsIntegration'),  href: '/console/wrk/dms-integration' },
   ]},
 
   { group: tg('salesCrm'), items: [
@@ -315,6 +316,16 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
       { label: tn('mcp'),               href: '/console/sys/mcp' },
       { label: tn('gdrive'),            href: '/console/sys/drive' },
       { label: tn('handoff'),           href: '/console/sys/handoff' },
+    ]},
+    { label: tg("databaseConsole"), subitems: [
+      { label: tn("dbaOverview"),      href: "/console/dba" },
+      { label: tn("dbaSchema"),        href: "/console/dba/schema" },
+      { label: tn("dbaTableData"),     href: "/console/dba/data" },
+      { label: tn("dbaSqlRunner"),     href: "/console/dba/sql" },
+      { label: tn("dbaFunctions"),     href: "/console/dba/functions" },
+      { label: tn("dbaActions"),       href: "/console/dba/actions" },
+      { label: tn("dbaHistory"),       href: "/console/dba/history" },
+      { label: tn("dbaMigrations"),    href: "/console/dba/migrations" },
     ]},
   ]},
   ];

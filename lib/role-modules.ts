@@ -23,11 +23,12 @@ export const SEG_TO_MODULE: Record<string, string> = {
   wrk:  'WRK',
   pub:  'MKP',
   config: 'SYS',
+  dba:  'DBA',
 };
 
 export const ROLE_MODULES: Record<Role, string[]> = {
-  super_admin:    ['SYS','DEV','INT','FIN','SAL','MKP','CRM','ANL','AST','MDM','MKT','OPS','AIM','SHP','DAE','WRK'],
-  platform_admin: ['SYS','DEV','INT','FIN','SAL','MKP','CRM','ANL','AST','MDM','MKT','OPS','AIM','SHP','DAE','WRK'],
+  super_admin:    ['SYS','DEV','INT','FIN','SAL','MKP','CRM','ANL','AST','MDM','MKT','OPS','AIM','SHP','DAE','WRK','DBA'],
+  platform_admin: ['SYS','DEV','INT','FIN','SAL','MKP','CRM','ANL','AST','MDM','MKT','OPS','AIM','SHP','DAE','WRK','DBA'],
   tenant_manager: ['FIN','SAL','MKP','CRM','ANL','AST','MDM','MKT','OPS','AIM','SHP','WRK'],
   viewer:         ['ANL','AST','MKP','CRM','SAL'],
 };

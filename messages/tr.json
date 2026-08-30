@@ -92,7 +92,8 @@
     "shopOrdersMgmt": "Orders",
     "shopProcurement": "Procurement",
     "shopAnalyticsGrp": "Ticaret Zekâsı",
-    "workshop": "Atölye"
+    "workshop": "Atölye",
+    "databaseConsole": "Veritabani Konsolu"
   },
   "nav": {
     "dashboard": "Gösterge Paneli",
@@ -320,7 +321,16 @@
     "wrkBriefing": "Günlük Brifing",
     "wrkRecommendations": "Tamir Önerileri",
     "wrkRates": "İşçilik Tarifeleri",
-    "wrkPackages": "Servis Paketleri"
+    "wrkPackages": "Servis Paketleri",
+    "wrkDmsIntegration": "DMS Entegrasyonu",
+    "dbaOverview": "Veritabani Genel Bakis",
+    "dbaSchema": "Sema Gezgini",
+    "dbaTableData": "Tablo Verileri",
+    "dbaSqlRunner": "SQL Calistirici",
+    "dbaFunctions": "Fonksiyonlar & RPC",
+    "dbaActions": "Veritabani Islemleri",
+    "dbaHistory": "Sorgu Gecmisi",
+    "dbaMigrations": "Migrasyonlar"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -493,7 +503,16 @@
     "WK009": "Günlük Brifing",
     "WK010": "Tamir Önerileri",
     "WK011": "İşçilik Tarifeleri",
-    "WK012": "Servis Paketleri"
+    "WK012": "Servis Paketleri",
+    "WK013": "DMS Entegrasyonu",
+    "DB001": "Veritabani Genel Bakis",
+    "DB002": "Sema Gezgini",
+    "DB003": "Tablo Verileri",
+    "DB004": "SQL Calistirici",
+    "DB005": "Fonksiyonlar & RPC",
+    "DB006": "Veritabani Islemleri",
+    "DB007": "Sorgu Gecmisi",
+    "DB008": "Migrasyonlar"
   },
   "support": {
     "title": "Destek",

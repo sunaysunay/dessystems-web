@@ -75,6 +75,9 @@ export default function middleware(request: NextRequest) {
   // Console paths live at /console/... (no locale prefix) — skip intl
   if (pathname === '/console' || pathname.startsWith('/console/')) return NextResponse.next();
 
+  // Public approval pages — no locale prefix, no auth
+  if (pathname.startsWith('/approve/')) return NextResponse.next();
+
   // Locale-prefixed paths: let next-intl serve them as usual
   if (pathname !== '/') return intlMiddleware(request);
 

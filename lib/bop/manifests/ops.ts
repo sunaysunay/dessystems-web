@@ -32,6 +32,8 @@ export const OPS_API_OBJECTS: BopObject[] = [
   { object_id:"api:ops/goals:DELETE",type:"api",module:"OPS",name:"Soft-Delete Goal",route:"/api/bop/ops/goals",status:"active" },
   { object_id:"api:ops/tasks/analytics:GET",type:"api",module:"OPS",name:"GET Task Analytics",route:"/api/bop/ops/tasks/analytics",status:"active" },
   { object_id:"api:ops/telegram-webhook:POST",type:"api",module:"OPS",name:"Telegram Inline Action Webhook",route:"/api/bop/ops/telegram-webhook",status:"active" },
+  { object_id:"api:ops/fair-scout:GET",type:"api",module:"OPS",name:"GET Fair Scout observations",route:"/api/bop/ops/fair-scout",status:"active" },
+  { object_id:"api:ops/fair-scout:POST",type:"api",module:"OPS",name:"Fair Scout sync/bootstrap/delete",route:"/api/bop/ops/fair-scout",status:"active" },
 ];
 
 export const OPS_TABLE_OBJECTS: BopObject[] = [
@@ -97,4 +99,7 @@ export const OPS_DEPENDENCIES: BopDependency[] = [
   { from_id:"screen:OP012",to_id:"api:ops/goals:POST",dep_type:"calls" },
   { from_id:"screen:OP015",to_id:"api:ops/goals:GET",dep_type:"calls" },
   { from_id:"screen:OP015",to_id:"component:ScreenHeader",dep_type:"renders" },
+  { from_id:"screen:OP018",to_id:"api:ops/fair-scout:GET",dep_type:"calls" },
+  { from_id:"screen:OP018",to_id:"api:ops/fair-scout:POST",dep_type:"calls" },
+  { from_id:"screen:OP018",to_id:"component:ScreenHeader",dep_type:"renders" },
 ];

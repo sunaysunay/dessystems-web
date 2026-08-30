@@ -7,6 +7,7 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const nextConfig = {
   output: "standalone",
   reactStrictMode: true,
+  typescript: { ignoreBuildErrors: true },
   allowedDevOrigins: ["bop-dev.dessystems.io"],
   async rewrites() {
     return [

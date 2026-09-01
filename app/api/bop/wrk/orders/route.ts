@@ -67,12 +67,10 @@ export async function POST(req: NextRequest) {
     if (orderErr) return NextResponse.json({ error: orderErr.message }, { status: 500 });
 
     if (lines && Array.isArray(lines) && lines.length > 0) {
-      const lineRows = lines.map((l: Record<string, unknown>, i: number) => ({
-        ...l,
-        order_id: order.id,
-        tenant_id: TENANT_ID,
-        sort_order: i,
-      }));
+      const lineRows = lines.map((l: Record<string, unknown>, i: number) => {
+        const { total, ...rest } = l;
+        return { ...rest, order_id: order.id, tenant_id: TENANT_ID, sort_order: i };
+      });
       const { error: lineErr } = await supabase.from('wrk_order_lines').insert(lineRows);
       if (lineErr) return NextResponse.json({ error: lineErr.message, order }, { status: 500 });
     }

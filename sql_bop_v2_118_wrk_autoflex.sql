@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS wrk_autoflex_config (
 );
 
 ALTER TABLE wrk_autoflex_config ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "wrk_autoflex_config_tenant" ON wrk_autoflex_config;
 CREATE POLICY "wrk_autoflex_config_tenant" ON wrk_autoflex_config
   USING (tenant_id = current_setting('app.tenant_id', true)::int)
   WITH CHECK (tenant_id = current_setting('app.tenant_id', true)::int);
@@ -37,6 +38,7 @@ CREATE INDEX IF NOT EXISTS idx_wrk_autoflex_sync_logs_tenant
   ON wrk_autoflex_sync_logs (tenant_id, created_at DESC);
 
 ALTER TABLE wrk_autoflex_sync_logs ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "wrk_autoflex_sync_logs_tenant" ON wrk_autoflex_sync_logs;
 CREATE POLICY "wrk_autoflex_sync_logs_tenant" ON wrk_autoflex_sync_logs
   USING (tenant_id = current_setting('app.tenant_id', true)::int)
   WITH CHECK (tenant_id = current_setting('app.tenant_id', true)::int);
@@ -56,6 +58,7 @@ CREATE TABLE IF NOT EXISTS wrk_autoflex_field_maps (
 );
 
 ALTER TABLE wrk_autoflex_field_maps ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "wrk_autoflex_field_maps_tenant" ON wrk_autoflex_field_maps;
 CREATE POLICY "wrk_autoflex_field_maps_tenant" ON wrk_autoflex_field_maps
   USING (tenant_id = current_setting('app.tenant_id', true)::int)
   WITH CHECK (tenant_id = current_setting('app.tenant_id', true)::int);

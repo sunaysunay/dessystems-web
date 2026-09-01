@@ -1372,9 +1372,13 @@ export default function Page() {
           <span className="text-lg">📋</span>
           <span className="text-[10px] font-medium">Log</span>
         </button>
-        <button onClick={() => setView(v => v === 'tally' ? 'setup' : 'tally')} className={`flex flex-col items-center gap-0.5 ${view === 'tally' || view === 'setup' ? 'text-blue-600' : 'text-slate-400'}`}>
-          <span className="text-lg">{view === 'setup' ? '⚙️' : '📊'}</span>
-          <span className="text-[10px] font-medium">More</span>
+        <button onClick={() => setView('tally')} className={`flex flex-col items-center gap-0.5 ${view === 'tally' ? 'text-blue-600' : 'text-slate-400'}`}>
+          <span className="text-lg">📊</span>
+          <span className="text-[10px] font-medium">Tally</span>
+        </button>
+        <button onClick={() => setView('setup')} className={`flex flex-col items-center gap-0.5 ${view === 'setup' ? 'text-blue-600' : 'text-slate-400'}`}>
+          <span className="text-lg">⚙️</span>
+          <span className="text-[10px] font-medium">Setup</span>
         </button>
       </nav>
 

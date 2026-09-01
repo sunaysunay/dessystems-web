@@ -183,7 +183,7 @@ RETURNS TABLE(
   WHERE con.contype = 'f' AND n.nspname = p_schema AND c.relname = p_table
     AND sk.ord = tk.ord
   GROUP BY con.conname, con.conrelid, con.confrelid, con.confdeltype, con.confupdtype
-  ORDER BY direction, constraint_name;
+  ORDER BY 2, 1;
 $$;
 
 -- List functions/procedures

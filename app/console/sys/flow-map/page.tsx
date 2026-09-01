@@ -70,7 +70,8 @@ export default function FlowMapPage() {
   const { nodes, edges } = useMemo(() => {
     if (!data) return { nodes: [], edges: [] };
     const N: Node[] = [], E: Edge[] = [];
-    const flows = flow ? data.processes.filter((p: any) => p.slug === flow) : data.processes;
+    const allFlows = flow ? data.processes.filter((p: any) => p.slug === flow) : data.processes;
+    const flows = fModule ? allFlows.filter((p: any) => p.module === fModule) : allFlows;
     const flowSet = new Set(flows.map((f: any) => f.slug));
     const screenIds = new Set<string>();
 
@@ -280,7 +281,7 @@ export default function FlowMapPage() {
       <div className="mt-3 flex flex-wrap items-center gap-2">
         <BopSelect value={flow} onChange={v => { setFlow(v); setExpanded(new Set()); }}
           options={[{ value: '', label: 'System view — all flows' },
-            ...(data?.processes ?? []).map((p: any) => ({ value: p.slug, label: p.name }))]}
+            ...(data?.processes ?? []).map((p: any) => ({ value: p.slug, label: p.name, sublabel: p.module ?? '' }))]}
           className="min-w-[220px]" />
         <input value={fTc} onChange={e => setFTc(e.target.value)} placeholder="TC…"
           className="w-20 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 font-mono text-[11px] focus:outline-none focus:border-orange-400" />

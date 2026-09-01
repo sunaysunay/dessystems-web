@@ -10,9 +10,9 @@ export type NavSection  = { group: string; items: NavItem[] };
 type DbRow = { screen_id: string; route: string; title: string; nav_group: string; nav_subgroup: string | null; nav_order: number; nav_visible: boolean };
 type ApiTree = Record<string, Record<string, DbRow[]>>;
 
-const GROUP_ORDER = ["overview","operations","salesCrm","marketplace","sales","finance","intelligence","shop","masterData","tools","system"];
+const GROUP_ORDER = ["overview","operations","workshop","salesCrm","marketplace","sales","finance","intelligence","shop","masterData","tools","system"];
 const GROUP_LABELS: Record<string, string> = {
-  overview:"Overview", operations:"Operations", salesCrm:"Sales & CRM",
+  overview:"Overview", operations:"Operations", workshop:"Workshop", salesCrm:"Sales & CRM",
   marketplace:"Marketplace", sales:"Sales", finance:"Finance",
   intelligence:"Intelligence", shop:"Shop", masterData:"Master Data", tools:"Tools", system:"System",
 };
@@ -41,6 +41,7 @@ const SUBGROUP_LABELS: Record<string, string> = {
   "6_finance":     "Finance",
   "7_aftersales":  "After-Sales",
   "8_compliance":  "Compliance",
+  databaseConsole: "Database Console",
 };
 
 // Groups whose subgroups render as AdminSubMenu (subitems) not AnalyticsNav (subgroups)

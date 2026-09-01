@@ -4,9 +4,9 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 const GROUP_LABELS: Record<string, string> = {
-  overview: 'Overview', operations: 'Operations', salesCrm: 'Sales & CRM',
+  overview: 'Overview', operations: 'Operations', workshop: 'Workshop', salesCrm: 'Sales & CRM',
   marketplace: 'Marketplace', sales: 'Sales', finance: 'Finance',
-  intelligence: 'Intelligence', masterData: 'Master Data', tools: 'Tools', system: 'System',
+  intelligence: 'Intelligence', shop: 'Shop', masterData: 'Master Data', tools: 'Tools', system: 'System',
 };
 const SUBGROUP_LABELS: Record<string, string> = {
   development: 'Development', integration: 'Integration', users: 'Users',

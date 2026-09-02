@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, Fragment } from 'react';
 import { useRouter } from 'next/navigation';
 import { ScreenHeader } from '@/components/ScreenBadge';
 
@@ -32,6 +32,8 @@ export default function SchemaExplorerPage() {
   const [detailLoading, setDetailLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [tableFilter, setTableFilter] = useState('');
+  const pendingTable = useRef<string | null>(null);
+  const pendingTab = useRef<Tab | null>(null);
 
   // Read URL params on mount for deep-linking
   useEffect(() => {
@@ -40,8 +42,8 @@ export default function SchemaExplorerPage() {
     const t = params.get('table');
     const tab = params.get('tab') as Tab | null;
     if (s) setSelectedSchema(s);
-    if (t) setSelectedTable(t);
-    if (tab) setActiveTab(tab);
+    if (t) pendingTable.current = t;
+    if (tab) pendingTab.current = tab;
   }, []);
 
   useEffect(() => {
@@ -57,7 +59,18 @@ export default function SchemaExplorerPage() {
     setTableFilter('');
     fetch(`/api/bop/dba/schema?action=tables&schema=${selectedSchema}`)
       .then(r => r.json())
-      .then(d => setTables(d.tables ?? []))
+      .then(d => {
+        setTables(d.tables ?? []);
+        if (pendingTable.current) {
+          const match = (d.tables ?? []).find((t: TableInfo) => t.table_name === pendingTable.current);
+          if (match) {
+            setSelectedTable(match.table_name);
+            if (pendingTab.current) setActiveTab(pendingTab.current);
+          }
+          pendingTable.current = null;
+          pendingTab.current = null;
+        }
+      })
       .catch(() => {});
     fetch(`/api/bop/dba/schema?action=enums&schema=${selectedSchema}`)
       .then(r => r.json())
@@ -304,9 +317,8 @@ function IndexesTable({ indexes }: { indexes: IndexInfo[] }) {
       </tr></thead>
       <tbody>
         {indexes.map(i => (
-          <>
+          <Fragment key={i.index_name}>
             <tr
-              key={i.index_name}
               onClick={() => setExpanded(expanded === i.index_name ? null : i.index_name)}
               className="border-b hover:bg-gray-50 cursor-pointer"
             >
@@ -320,13 +332,13 @@ function IndexesTable({ indexes }: { indexes: IndexInfo[] }) {
               <td className="p-2 text-xs text-gray-500">{i.index_size}</td>
             </tr>
             {expanded === i.index_name && (
-              <tr key={i.index_name + '_detail'} className="border-b">
+              <tr className="border-b">
                 <td colSpan={4} className="p-0">
                   <pre className="px-4 py-3 text-xs font-mono bg-gray-900 text-gray-100 leading-relaxed whitespace-pre-wrap">{i.definition}</pre>
                 </td>
               </tr>
             )}
-          </>
+          </Fragment>
         ))}
       </tbody>
     </table>
@@ -349,9 +361,8 @@ function FKeysTable({ fkeys, onNavigate }: { fkeys: FkInfo[]; onNavigate: (table
         {fkeys.map(f => {
           const key = f.constraint_name + f.direction;
           return (
-            <>
+            <Fragment key={key}>
               <tr
-                key={key}
                 onClick={() => setExpanded(expanded === key ? null : key)}
                 className="border-b hover:bg-gray-50 cursor-pointer"
               >
@@ -375,7 +386,7 @@ function FKeysTable({ fkeys, onNavigate }: { fkeys: FkInfo[]; onNavigate: (table
                 <td className="p-2 text-xs text-gray-500">{f.on_delete}</td>
               </tr>
               {expanded === key && (
-                <tr key={key + '_detail'} className="border-b">
+                <tr className="border-b">
                   <td colSpan={5} className="px-4 py-3 bg-gray-50">
                     <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-xs">
                       <div><span className="text-gray-400">Constraint:</span> <span className="font-mono">{f.constraint_name}</span></div>
@@ -388,7 +399,7 @@ function FKeysTable({ fkeys, onNavigate }: { fkeys: FkInfo[]; onNavigate: (table
                   </td>
                 </tr>
               )}
-            </>
+            </Fragment>
           );
         })}
       </tbody>
@@ -409,9 +420,8 @@ function PoliciesTable({ policies }: { policies: PolicyInfo[] }) {
       </tr></thead>
       <tbody>
         {policies.map(p => (
-          <>
+          <Fragment key={p.policy_name}>
             <tr
-              key={p.policy_name}
               onClick={() => setExpanded(expanded === p.policy_name ? null : p.policy_name)}
               className="border-b hover:bg-gray-50 cursor-pointer"
             >
@@ -424,7 +434,7 @@ function PoliciesTable({ policies }: { policies: PolicyInfo[] }) {
               <td className="p-2 text-xs text-gray-600">{p.roles.join(', ')}</td>
             </tr>
             {expanded === p.policy_name && (
-              <tr key={p.policy_name + '_detail'} className="border-b">
+              <tr className="border-b">
                 <td colSpan={4} className="p-0">
                   <div className="space-y-2 px-4 py-3 bg-gray-50">
                     {p.qual && (
@@ -444,7 +454,7 @@ function PoliciesTable({ policies }: { policies: PolicyInfo[] }) {
                 </td>
               </tr>
             )}
-          </>
+          </Fragment>
         ))}
       </tbody>
     </table>
@@ -464,9 +474,8 @@ function TriggersTable({ triggers }: { triggers: TriggerInfo[] }) {
       </tr></thead>
       <tbody>
         {triggers.map(t => (
-          <>
+          <Fragment key={t.trigger_name}>
             <tr
-              key={t.trigger_name}
               onClick={() => setExpanded(expanded === t.trigger_name ? null : t.trigger_name)}
               className="border-b hover:bg-gray-50 cursor-pointer"
             >
@@ -479,13 +488,13 @@ function TriggersTable({ triggers }: { triggers: TriggerInfo[] }) {
               <td className="p-2 text-xs text-gray-500">{t.orientation}</td>
             </tr>
             {expanded === t.trigger_name && (
-              <tr key={t.trigger_name + '_detail'} className="border-b">
+              <tr className="border-b">
                 <td colSpan={4} className="p-0">
                   <pre className="px-4 py-3 text-xs font-mono bg-gray-900 text-gray-100 leading-relaxed whitespace-pre-wrap">{t.definition}</pre>
                 </td>
               </tr>
             )}
-          </>
+          </Fragment>
         ))}
       </tbody>
     </table>

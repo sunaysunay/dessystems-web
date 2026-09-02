@@ -1,4 +1,17 @@
 import { Pool, type PoolConfig } from 'pg';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+
+if (!process.env.DBA_PG_READ_PASSWORD) {
+  try {
+    const envPath = resolve(process.cwd(), '.env.local');
+    const lines = readFileSync(envPath, 'utf8').split('\n');
+    for (const line of lines) {
+      const m = line.match(/^\s*(DBA_\w+)\s*=\s*"?([^"]*)"?\s*$/);
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+    }
+  } catch {}
+}
 
 const SHARED: Partial<PoolConfig> = {
   max: 3,

@@ -1,19 +1,19 @@
 export const dynamic = 'force-dynamic';
 
 import { NextResponse } from 'next/server';
-import { getServerClient } from '@/lib/supabase-server';
+import { getReadPool } from '@/lib/db-console/pools';
 
 export async function GET() {
   try {
-    const supabase = getServerClient();
+    const pool = getReadPool();
 
     const [overviewRes, schemasRes] = await Promise.all([
-      supabase.rpc('database_overview', undefined, { schema: 'bop_meta' } as any),
-      supabase.rpc('list_schemas', undefined, { schema: 'bop_meta' } as any),
+      pool.query('SELECT * FROM bop_meta.database_overview()'),
+      pool.query('SELECT * FROM bop_meta.list_schemas()'),
     ]);
 
-    const overview = overviewRes.data?.[0] ?? null;
-    const schemas = schemasRes.data ?? [];
+    const overview = overviewRes.rows[0] ?? null;
+    const schemas = schemasRes.rows ?? [];
 
     return NextResponse.json({ overview, schemas });
   } catch (err: any) {

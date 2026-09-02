@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { ScreenHeader } from '@/components/ScreenBadge';
 
 interface SchemaInfo { schema_name: string; table_count: number; view_count: number; function_count: number; is_system: boolean }
@@ -14,6 +15,7 @@ interface EnumInfo { enum_name: string; enum_values: string[] }
 type Tab = 'columns' | 'indexes' | 'fkeys' | 'policies' | 'triggers';
 
 export default function SchemaExplorerPage() {
+  const router = useRouter();
   const [schemas, setSchemas] = useState<SchemaInfo[]>([]);
   const [selectedSchema, setSelectedSchema] = useState('public');
   const [showSystem, setShowSystem] = useState(false);
@@ -30,6 +32,17 @@ export default function SchemaExplorerPage() {
   const [detailLoading, setDetailLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [tableFilter, setTableFilter] = useState('');
+
+  // Read URL params on mount for deep-linking
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get('schema');
+    const t = params.get('table');
+    const tab = params.get('tab') as Tab | null;
+    if (s) setSelectedSchema(s);
+    if (t) setSelectedTable(t);
+    if (tab) setActiveTab(tab);
+  }, []);
 
   useEffect(() => {
     fetch('/api/bop/dba/schema?action=schemas')
@@ -67,6 +80,13 @@ export default function SchemaExplorerPage() {
       })
       .catch(() => setDetailLoading(false));
   }, [selectedTable, selectedSchema]);
+
+  function navigateToTable(tableName: string, tab?: Tab) {
+    setSelectedTable(tableName);
+    if (tab) setActiveTab(tab);
+    else setActiveTab('columns');
+    setTableFilter('');
+  }
 
   const visibleSchemas = showSystem ? schemas : schemas.filter(s => !s.is_system);
   const filteredTables = tableFilter
@@ -125,7 +145,7 @@ export default function SchemaExplorerPage() {
                 filteredTables.map(t => (
                   <button
                     key={t.table_name}
-                    onClick={() => { setSelectedTable(t.table_name); setActiveTab('columns'); }}
+                    onClick={() => navigateToTable(t.table_name)}
                     className={`w-full text-left px-3 py-2 text-sm border-b last:border-b-0 hover:bg-gray-50 flex items-center gap-2 ${
                       selectedTable === t.table_name ? 'bg-blue-50 border-l-2 border-l-blue-500' : ''
                     }`}
@@ -180,6 +200,12 @@ export default function SchemaExplorerPage() {
                     </div>
                   );
                 })()}
+                <button
+                  onClick={() => router.push(`/console/dba/data?schema=${selectedSchema}&table=${selectedTable}`)}
+                  className="ml-auto text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded hover:bg-blue-100 font-medium"
+                >
+                  Browse Data
+                </button>
               </div>
 
               <div className="flex gap-1 border-b">
@@ -203,9 +229,9 @@ export default function SchemaExplorerPage() {
                 <div className="p-4 text-sm text-gray-500">Loading...</div>
               ) : (
                 <div className="overflow-x-auto">
-                  {activeTab === 'columns' && <ColumnsTable columns={columns} />}
+                  {activeTab === 'columns' && <ColumnsTable columns={columns} onNavigate={navigateToTable} />}
                   {activeTab === 'indexes' && <IndexesTable indexes={indexes} />}
-                  {activeTab === 'fkeys' && <FKeysTable fkeys={fkeys} />}
+                  {activeTab === 'fkeys' && <FKeysTable fkeys={fkeys} onNavigate={navigateToTable} />}
                   {activeTab === 'policies' && <PoliciesTable policies={policies} />}
                   {activeTab === 'triggers' && <TriggersTable triggers={triggers} />}
                 </div>
@@ -218,7 +244,7 @@ export default function SchemaExplorerPage() {
   );
 }
 
-function ColumnsTable({ columns }: { columns: ColumnInfo[] }) {
+function ColumnsTable({ columns, onNavigate }: { columns: ColumnInfo[]; onNavigate: (table: string, tab?: Tab) => void }) {
   if (columns.length === 0) return <Empty label="No columns" />;
   return (
     <table className="w-full text-sm border-collapse">
@@ -243,7 +269,21 @@ function ColumnsTable({ columns }: { columns: ColumnInfo[] }) {
               {c.is_primary_key && <span className="text-xs font-medium text-amber-600 bg-amber-50 px-1 rounded">PK</span>}
               {c.is_unique && !c.is_primary_key && <span className="text-xs font-medium text-blue-600 bg-blue-50 px-1 rounded">UQ</span>}
             </td>
-            <td className="p-2 font-mono text-xs text-purple-600">{c.fk_target ?? ''}</td>
+            <td className="p-2 font-mono text-xs">
+              {c.fk_target ? (
+                <button
+                  onClick={() => {
+                    const target = c.fk_target!;
+                    const tbl = target.includes('.') ? target.split('.').pop()! : target;
+                    onNavigate(tbl, 'columns');
+                  }}
+                  className="text-purple-600 hover:text-purple-800 hover:underline cursor-pointer"
+                  title={`Jump to ${c.fk_target}`}
+                >
+                  {c.fk_target}
+                </button>
+              ) : null}
+            </td>
           </tr>
         ))}
       </tbody>
@@ -252,6 +292,7 @@ function ColumnsTable({ columns }: { columns: ColumnInfo[] }) {
 }
 
 function IndexesTable({ indexes }: { indexes: IndexInfo[] }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
   if (indexes.length === 0) return <Empty label="No indexes" />;
   return (
     <table className="w-full text-sm border-collapse">
@@ -263,22 +304,37 @@ function IndexesTable({ indexes }: { indexes: IndexInfo[] }) {
       </tr></thead>
       <tbody>
         {indexes.map(i => (
-          <tr key={i.index_name} className="border-b hover:bg-gray-50">
-            <td className="p-2 font-mono text-xs">
-              {i.is_primary && <span className="text-amber-600 mr-1">PK</span>}
-              {i.index_name}
-            </td>
-            <td className="p-2 font-mono text-xs text-gray-600">{i.columns.join(', ')}</td>
-            <td className="p-2 text-center text-xs">{i.is_unique ? 'yes' : ''}</td>
-            <td className="p-2 text-xs text-gray-500">{i.index_size}</td>
-          </tr>
+          <>
+            <tr
+              key={i.index_name}
+              onClick={() => setExpanded(expanded === i.index_name ? null : i.index_name)}
+              className="border-b hover:bg-gray-50 cursor-pointer"
+            >
+              <td className="p-2 font-mono text-xs">
+                <span className="mr-1 text-gray-300 text-[10px]">{expanded === i.index_name ? '▼' : '▶'}</span>
+                {i.is_primary && <span className="text-amber-600 mr-1">PK</span>}
+                {i.index_name}
+              </td>
+              <td className="p-2 font-mono text-xs text-gray-600">{i.columns.join(', ')}</td>
+              <td className="p-2 text-center text-xs">{i.is_unique ? 'yes' : ''}</td>
+              <td className="p-2 text-xs text-gray-500">{i.index_size}</td>
+            </tr>
+            {expanded === i.index_name && (
+              <tr key={i.index_name + '_detail'} className="border-b">
+                <td colSpan={4} className="p-0">
+                  <pre className="px-4 py-3 text-xs font-mono bg-gray-900 text-gray-100 leading-relaxed whitespace-pre-wrap">{i.definition}</pre>
+                </td>
+              </tr>
+            )}
+          </>
         ))}
       </tbody>
     </table>
   );
 }
 
-function FKeysTable({ fkeys }: { fkeys: FkInfo[] }) {
+function FKeysTable({ fkeys, onNavigate }: { fkeys: FkInfo[]; onNavigate: (table: string, tab?: Tab) => void }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
   if (fkeys.length === 0) return <Empty label="No foreign keys" />;
   return (
     <table className="w-full text-sm border-collapse">
@@ -290,25 +346,58 @@ function FKeysTable({ fkeys }: { fkeys: FkInfo[] }) {
         <th className="text-left p-2 font-medium">On Delete</th>
       </tr></thead>
       <tbody>
-        {fkeys.map(f => (
-          <tr key={f.constraint_name + f.direction} className="border-b hover:bg-gray-50">
-            <td className="p-2 font-mono text-xs">{f.constraint_name}</td>
-            <td className="p-2 text-center">
-              <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${f.direction === 'outbound' ? 'bg-blue-50 text-blue-600' : 'bg-green-50 text-green-600'}`}>
-                {f.direction === 'outbound' ? 'OUT' : 'IN'}
-              </span>
-            </td>
-            <td className="p-2 font-mono text-xs">{f.source_table} ({f.source_columns.join(', ')})</td>
-            <td className="p-2 font-mono text-xs">{f.target_table} ({f.target_columns.join(', ')})</td>
-            <td className="p-2 text-xs text-gray-500">{f.on_delete}</td>
-          </tr>
-        ))}
+        {fkeys.map(f => {
+          const key = f.constraint_name + f.direction;
+          return (
+            <>
+              <tr
+                key={key}
+                onClick={() => setExpanded(expanded === key ? null : key)}
+                className="border-b hover:bg-gray-50 cursor-pointer"
+              >
+                <td className="p-2 font-mono text-xs">
+                  <span className="mr-1 text-gray-300 text-[10px]">{expanded === key ? '▼' : '▶'}</span>
+                  {f.constraint_name}
+                </td>
+                <td className="p-2 text-center">
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${f.direction === 'outbound' ? 'bg-blue-50 text-blue-600' : 'bg-green-50 text-green-600'}`}>
+                    {f.direction === 'outbound' ? 'OUT' : 'IN'}
+                  </span>
+                </td>
+                <td className="p-2 font-mono text-xs">
+                  <button onClick={e => { e.stopPropagation(); onNavigate(f.source_table, 'columns'); }} className="text-purple-600 hover:underline">{f.source_table}</button>
+                  <span className="text-gray-400"> ({f.source_columns.join(', ')})</span>
+                </td>
+                <td className="p-2 font-mono text-xs">
+                  <button onClick={e => { e.stopPropagation(); onNavigate(f.target_table, 'columns'); }} className="text-purple-600 hover:underline">{f.target_table}</button>
+                  <span className="text-gray-400"> ({f.target_columns.join(', ')})</span>
+                </td>
+                <td className="p-2 text-xs text-gray-500">{f.on_delete}</td>
+              </tr>
+              {expanded === key && (
+                <tr key={key + '_detail'} className="border-b">
+                  <td colSpan={5} className="px-4 py-3 bg-gray-50">
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-xs">
+                      <div><span className="text-gray-400">Constraint:</span> <span className="font-mono">{f.constraint_name}</span></div>
+                      <div><span className="text-gray-400">Direction:</span> {f.direction}</div>
+                      <div><span className="text-gray-400">Source:</span> <span className="font-mono">{f.source_table} ({f.source_columns.join(', ')})</span></div>
+                      <div><span className="text-gray-400">Target:</span> <span className="font-mono">{f.target_table} ({f.target_columns.join(', ')})</span></div>
+                      <div><span className="text-gray-400">ON DELETE:</span> {f.on_delete}</div>
+                      <div><span className="text-gray-400">ON UPDATE:</span> {f.on_update}</div>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </>
+          );
+        })}
       </tbody>
     </table>
   );
 }
 
 function PoliciesTable({ policies }: { policies: PolicyInfo[] }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
   if (policies.length === 0) return <Empty label="No RLS policies" />;
   return (
     <table className="w-full text-sm border-collapse">
@@ -317,19 +406,45 @@ function PoliciesTable({ policies }: { policies: PolicyInfo[] }) {
         <th className="text-left p-2 font-medium">Command</th>
         <th className="text-left p-2 font-medium">Type</th>
         <th className="text-left p-2 font-medium">Roles</th>
-        <th className="text-left p-2 font-medium">USING</th>
-        <th className="text-left p-2 font-medium">WITH CHECK</th>
       </tr></thead>
       <tbody>
         {policies.map(p => (
-          <tr key={p.policy_name} className="border-b hover:bg-gray-50">
-            <td className="p-2 font-mono text-xs font-medium">{p.policy_name}</td>
-            <td className="p-2 text-xs">{p.command}</td>
-            <td className="p-2 text-xs">{p.permissive}</td>
-            <td className="p-2 text-xs text-gray-600">{p.roles.join(', ')}</td>
-            <td className="p-2 font-mono text-[11px] text-gray-600 max-w-[250px] truncate" title={p.qual ?? ''}>{p.qual ?? ''}</td>
-            <td className="p-2 font-mono text-[11px] text-gray-600 max-w-[250px] truncate" title={p.with_check ?? ''}>{p.with_check ?? ''}</td>
-          </tr>
+          <>
+            <tr
+              key={p.policy_name}
+              onClick={() => setExpanded(expanded === p.policy_name ? null : p.policy_name)}
+              className="border-b hover:bg-gray-50 cursor-pointer"
+            >
+              <td className="p-2 font-mono text-xs font-medium">
+                <span className="mr-1 text-gray-300 text-[10px]">{expanded === p.policy_name ? '▼' : '▶'}</span>
+                {p.policy_name}
+              </td>
+              <td className="p-2 text-xs">{p.command}</td>
+              <td className="p-2 text-xs">{p.permissive}</td>
+              <td className="p-2 text-xs text-gray-600">{p.roles.join(', ')}</td>
+            </tr>
+            {expanded === p.policy_name && (
+              <tr key={p.policy_name + '_detail'} className="border-b">
+                <td colSpan={4} className="p-0">
+                  <div className="space-y-2 px-4 py-3 bg-gray-50">
+                    {p.qual && (
+                      <div>
+                        <div className="text-[10px] text-gray-400 uppercase tracking-wide font-semibold mb-1">USING</div>
+                        <pre className="text-xs font-mono bg-gray-900 text-gray-100 rounded p-3 whitespace-pre-wrap leading-relaxed">{p.qual}</pre>
+                      </div>
+                    )}
+                    {p.with_check && (
+                      <div>
+                        <div className="text-[10px] text-gray-400 uppercase tracking-wide font-semibold mb-1">WITH CHECK</div>
+                        <pre className="text-xs font-mono bg-gray-900 text-gray-100 rounded p-3 whitespace-pre-wrap leading-relaxed">{p.with_check}</pre>
+                      </div>
+                    )}
+                    {!p.qual && !p.with_check && <div className="text-xs text-gray-400">No USING or WITH CHECK expressions</div>}
+                  </div>
+                </td>
+              </tr>
+            )}
+          </>
         ))}
       </tbody>
     </table>
@@ -337,6 +452,7 @@ function PoliciesTable({ policies }: { policies: PolicyInfo[] }) {
 }
 
 function TriggersTable({ triggers }: { triggers: TriggerInfo[] }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
   if (triggers.length === 0) return <Empty label="No triggers" />;
   return (
     <table className="w-full text-sm border-collapse">
@@ -348,12 +464,28 @@ function TriggersTable({ triggers }: { triggers: TriggerInfo[] }) {
       </tr></thead>
       <tbody>
         {triggers.map(t => (
-          <tr key={t.trigger_name} className="border-b hover:bg-gray-50">
-            <td className="p-2 font-mono text-xs font-medium">{t.trigger_name}</td>
-            <td className="p-2 text-xs">{t.timing}</td>
-            <td className="p-2 text-xs">{t.event}</td>
-            <td className="p-2 text-xs text-gray-500">{t.orientation}</td>
-          </tr>
+          <>
+            <tr
+              key={t.trigger_name}
+              onClick={() => setExpanded(expanded === t.trigger_name ? null : t.trigger_name)}
+              className="border-b hover:bg-gray-50 cursor-pointer"
+            >
+              <td className="p-2 font-mono text-xs font-medium">
+                <span className="mr-1 text-gray-300 text-[10px]">{expanded === t.trigger_name ? '▼' : '▶'}</span>
+                {t.trigger_name}
+              </td>
+              <td className="p-2 text-xs">{t.timing}</td>
+              <td className="p-2 text-xs">{t.event}</td>
+              <td className="p-2 text-xs text-gray-500">{t.orientation}</td>
+            </tr>
+            {expanded === t.trigger_name && (
+              <tr key={t.trigger_name + '_detail'} className="border-b">
+                <td colSpan={4} className="p-0">
+                  <pre className="px-4 py-3 text-xs font-mono bg-gray-900 text-gray-100 leading-relaxed whitespace-pre-wrap">{t.definition}</pre>
+                </td>
+              </tr>
+            )}
+          </>
         ))}
       </tbody>
     </table>

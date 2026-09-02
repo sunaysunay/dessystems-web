@@ -1,17 +1,58 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-// Minimal inline markdown: **bold** and `code`. Enough for Phase-1 help bodies.
-function fmt(s: string) {
+// Patterns for auto-linking in guide text
+const TABLE_RE = /^[a-z][a-z0-9_]{2,}$/;
+const API_ROUTE_RE = /^\/api\/bop\/.+$/;
+const CONSOLE_ROUTE_RE = /^\/console\/.+$/;
+
+function fmt(s: string, onClose?: () => void) {
   const parts: any[] = [];
   const re = /(\*\*[^*]+\*\*|`[^`]+`)/g;
   let last = 0, m: RegExpExecArray | null, i = 0;
   while ((m = re.exec(s))) {
     if (m.index > last) parts.push(s.slice(last, m.index));
     const tok = m[0];
-    if (tok.startsWith('**')) parts.push(<b key={i++}>{tok.slice(2, -2)}</b>);
-    else parts.push(<code key={i++} className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[11px] text-indigo-600">{tok.slice(1, -1)}</code>);
+    if (tok.startsWith('**')) {
+      parts.push(<b key={i++}>{tok.slice(2, -2)}</b>);
+    } else {
+      const inner = tok.slice(1, -1);
+      if (TABLE_RE.test(inner)) {
+        parts.push(
+          <Link
+            key={i++}
+            href={`/console/dba/schema?schema=public&table=${inner}`}
+            onClick={onClose}
+            className="rounded bg-indigo-50 px-1 py-0.5 font-mono text-[11px] text-indigo-600 hover:bg-indigo-100 hover:text-indigo-800 cursor-pointer border border-indigo-100"
+            title={`View ${inner} in Schema Explorer`}
+          >
+            {inner}
+          </Link>
+        );
+      } else if (API_ROUTE_RE.test(inner)) {
+        parts.push(
+          <code key={i++} className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[11px] text-indigo-600 border border-slate-200">
+            {inner}
+          </code>
+        );
+      } else if (CONSOLE_ROUTE_RE.test(inner)) {
+        parts.push(
+          <Link
+            key={i++}
+            href={inner}
+            onClick={onClose}
+            className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[11px] text-indigo-600 hover:bg-indigo-50 hover:text-indigo-800 cursor-pointer border border-slate-200"
+            title={`Go to ${inner}`}
+          >
+            {inner}
+          </Link>
+        );
+      } else {
+        parts.push(<code key={i++} className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[11px] text-indigo-600">{inner}</code>);
+      }
+    }
     last = m.index + tok.length;
   }
   if (last < s.length) parts.push(s.slice(last));
@@ -19,14 +60,14 @@ function fmt(s: string) {
 }
 
 
-function HelpGuideTab({ help }: { help: any }) {
+function HelpGuideTab({ help, onClose }: { help: any; onClose: () => void }) {
   if (!help?.has_docs) return <p className="text-sm text-slate-400">No help authored for this screen yet.</p>;
   return (
     <div className="space-y-5">
       {help.overview && (
         <div>
           <h3 className="mb-1 text-sm font-bold text-slate-800">{help.overview.title || 'Overview'}</h3>
-          <p className="text-sm leading-relaxed text-slate-600">{fmt(help.overview.body_md || '')}</p>
+          <p className="text-sm leading-relaxed text-slate-600">{fmt(help.overview.body_md || '', onClose)}</p>
         </div>
       )}
       {help.steps?.length > 0 && (
@@ -36,7 +77,7 @@ function HelpGuideTab({ help }: { help: any }) {
             {help.steps.map((s: any, i: number) => (
               <li key={i} className="flex gap-2 text-sm text-slate-600">
                 <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-50 text-[11px] font-bold text-blue-600">{i+1}</span>
-                <span><b className="text-slate-700">{s.title}</b> — {fmt(s.body_md || '')}</span>
+                <span><b className="text-slate-700">{s.title}</b> — {fmt(s.body_md || '', onClose)}</span>
               </li>
             ))}
           </ol>
@@ -49,7 +90,7 @@ function HelpGuideTab({ help }: { help: any }) {
             {help.faq.map((f: any, i: number) => (
               <div key={i}>
                 <p className="text-sm font-semibold text-slate-700">{f.title}</p>
-                <p className="text-sm text-slate-600">{fmt(f.body_md || '')}</p>
+                <p className="text-sm text-slate-600">{fmt(f.body_md || '', onClose)}</p>
               </div>
             ))}
           </div>
@@ -62,7 +103,7 @@ function HelpGuideTab({ help }: { help: any }) {
             {help.reference.map((f: any, i: number) => (
               <div key={i}>
                 <p className="text-sm font-semibold text-slate-700">{f.title}</p>
-                <p className="whitespace-pre-line text-sm text-slate-600">{fmt(f.body_md || '')}</p>
+                <p className="whitespace-pre-line text-sm text-slate-600">{fmt(f.body_md || '', onClose)}</p>
               </div>
             ))}
           </div>
@@ -75,7 +116,7 @@ function HelpGuideTab({ help }: { help: any }) {
             {help.process.map((f: any, i: number) => (
               <div key={i} className="rounded-lg border border-indigo-100 bg-indigo-50/50 p-3">
                 <p className="text-sm font-semibold text-indigo-700">{f.title}</p>
-                <p className="mt-1 whitespace-pre-line text-sm text-slate-600">{fmt(f.body_md || '')}</p>
+                <p className="mt-1 whitespace-pre-line text-sm text-slate-600">{fmt(f.body_md || '', onClose)}</p>
                 <Link href="/console/sys/processes" className="mt-1 inline-block text-[12px] font-semibold text-indigo-600 hover:underline">Full flow manual →</Link>
               </div>
             ))}
@@ -86,7 +127,7 @@ function HelpGuideTab({ help }: { help: any }) {
   );
 }
 
-function HelpTechTab({ tech }: { tech: any }) {
+function HelpTechTab({ tech, onClose }: { tech: any; onClose: () => void }) {
   return (
     <div className="space-y-4 text-sm">
       <div className="grid grid-cols-3 gap-x-3 gap-y-1">
@@ -114,7 +155,15 @@ function HelpTechTab({ tech }: { tech: any }) {
           <h3 className="mb-1 text-xs font-bold uppercase tracking-wide text-slate-400">Tables ({tech.tables_touched.length})</h3>
           <div className="flex flex-wrap gap-1">
             {tech.tables_touched.map((t: string) => (
-              <span key={t} className="rounded bg-indigo-50 px-1.5 py-0.5 font-mono text-[10px] text-indigo-700">{t}</span>
+              <Link
+                key={t}
+                href={`/console/dba/schema?schema=public&table=${t}`}
+                onClick={onClose}
+                className="rounded bg-indigo-50 px-1.5 py-0.5 font-mono text-[10px] text-indigo-700 hover:bg-indigo-100 hover:text-indigo-900 cursor-pointer border border-indigo-100 transition-colors"
+                title={`View ${t} in Schema Explorer`}
+              >
+                {t}
+              </Link>
             ))}
           </div>
         </div>
@@ -135,7 +184,15 @@ function HelpTechTab({ tech }: { tech: any }) {
                 {a.tables.length > 0 && (
                   <div className="mt-1 flex flex-wrap gap-1">
                     {a.tables.map((t: string, j: number) => (
-                      <span key={j} className="rounded bg-white px-1.5 py-0.5 font-mono text-[10px] text-slate-500">{t}</span>
+                      <Link
+                        key={j}
+                        href={`/console/dba/schema?schema=public&table=${t}`}
+                        onClick={onClose}
+                        className="rounded bg-white px-1.5 py-0.5 font-mono text-[10px] text-slate-600 hover:bg-indigo-50 hover:text-indigo-700 cursor-pointer border border-slate-200 transition-colors"
+                        title={`View ${t} in Schema Explorer`}
+                      >
+                        {t}
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -207,9 +264,9 @@ export function HelpPanel({ screenId, open, onClose }: { screenId: string; open:
         <div className="flex-1 overflow-y-auto px-5 py-4">
           {loading && <p className="text-sm text-slate-400">Loading…</p>}
 
-          {!loading && tab === 'help' && <HelpGuideTab help={help} />}
+          {!loading && tab === 'help' && <HelpGuideTab help={help} onClose={onClose} />}
 
-          {!loading && tab === 'tech' && tech && <HelpTechTab tech={tech} />}
+          {!loading && tab === 'tech' && tech && <HelpTechTab tech={tech} onClose={onClose} />}
         </div>
 
         {/* footer */}

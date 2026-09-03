@@ -416,6 +416,12 @@ export const API_OBJECTS: BopObject[] = [
   { object_id:"api:dba/migrations:GET",type:"api",module:"DBA",name:"GET Migrations",route:"/api/bop/dba/migrations",status:"active" },
   { object_id:"api:dba/migrations:POST",type:"api",module:"DBA",name:"Apply Migration",route:"/api/bop/dba/migrations",status:"active" },
   { object_id:"api:dba/health:GET",type:"api",module:"DBA",name:"GET Database Health",route:"/api/bop/dba/health",status:"active" },
+  { object_id:"api:dba/health:run_audit",type:"api",module:"DBA",name:"Run Health Audit",route:"/api/bop/dba/health?action=run_audit",status:"active" },
+  { object_id:"api:dba/health:run_vacuum",type:"api",module:"DBA",name:"Run Vacuum Now",route:"/api/bop/dba/health?action=run_vacuum",status:"active" },
+  { object_id:"api:dba/health:cron_history",type:"api",module:"DBA",name:"GET Cron Job History",route:"/api/bop/dba/health?action=cron_history",status:"active" },
+  { object_id:"api:dba/health:trend",type:"api",module:"DBA",name:"GET Audit History Trend",route:"/api/bop/dba/health?action=trend",status:"active" },
+  { object_id:"api:dba/schema:table_health",type:"api",module:"DBA",name:"GET Per-Table Health",route:"/api/bop/dba/schema?action=table_health",status:"active" },
+  { object_id:"api:dba/schema:tables_health",type:"api",module:"DBA",name:"GET Bulk Table Health",route:"/api/bop/dba/schema?action=tables_health",status:"active" },
 ];
 
 export const TABLE_OBJECTS: BopObject[] = [
@@ -480,6 +486,7 @@ export const TABLE_OBJECTS: BopObject[] = [
   { object_id:"table:wrk_autoflex_config",type:"table",module:"WRK",name:"wrk_autoflex_config",status:"active",description:"Autoflex DMS connection configuration per tenant" },
   { object_id:"table:wrk_autoflex_sync_logs",type:"table",module:"WRK",name:"wrk_autoflex_sync_logs",status:"active",description:"Autoflex sync operation history and results" },
   { object_id:"table:wrk_autoflex_field_maps",type:"table",module:"WRK",name:"wrk_autoflex_field_maps",status:"active",description:"Configurable field mappings between Autoflex and BOP entities" },
+  { object_id:"table:bop_db_health_log",type:"table",module:"DBA",name:"bop_db_health_log",status:"active",description:"Database health audit snapshot log with finding counts and summaries" },
 ];
 
 export const COMPONENT_OBJECTS: BopObject[] = [

@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getReadPool } from '@/lib/db-console/pools';
+import { getReadPool, getWritePool } from '@/lib/db-console/pools';
 
 /* ------------------------------------------------------------------ */
 /*  Finding type returned by the /findings action                     */
@@ -433,6 +433,40 @@ export async function GET(req: NextRequest) {
       case 'extensions': {
         const extensions = await getExtensions();
         return NextResponse.json({ extensions });
+      }
+      case 'trend': {
+        const readPool = getReadPool();
+        const { rows } = await readPool.query(`
+          SELECT id, captured_at, run_type, total_tables, urgent_count, monitor_count, in_range_count,
+                 summary, duration_ms, finding_count
+          FROM bop_db_health_log
+          ORDER BY captured_at DESC
+          LIMIT 30
+        `);
+        return NextResponse.json({ snapshots: rows });
+      }
+      case 'run_audit': {
+        const writePool = getWritePool();
+        const { rows } = await writePool.query(
+          `SELECT bop_capture_health_snapshot($1) AS result`,
+          ['manual']
+        );
+        const result = rows[0]?.result;
+        return NextResponse.json({ snapshot: result ?? null });
+      }
+      case 'run_vacuum': {
+        const writePool = getWritePool();
+        const { rows } = await writePool.query(
+          `SELECT bop_trigger_vacuum_now() AS result`
+        );
+        return NextResponse.json({ result: rows[0]?.result ?? 'Vacuum scheduled' });
+      }
+      case 'cron_history': {
+        const readPool = getReadPool();
+        const { rows } = await readPool.query(
+          `SELECT * FROM bop_get_cron_history()`
+        );
+        return NextResponse.json({ jobs: rows });
       }
       default:
         return NextResponse.json(

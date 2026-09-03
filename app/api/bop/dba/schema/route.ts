@@ -109,6 +109,138 @@ export async function GET(req: NextRequest) {
           triggers: trg.rows,
         });
       }
+      case 'table_health': {
+        if (!table) return NextResponse.json({ error: 'table param required' }, { status: 400 });
+        const { rows } = await pool.query(`
+          SELECT
+            s.schemaname,
+            s.relname AS table_name,
+            s.n_live_tup AS live_tuples,
+            s.n_dead_tup AS dead_tuples,
+            CASE WHEN s.n_live_tup + s.n_dead_tup > 0
+              THEN round((s.n_dead_tup::numeric / (s.n_live_tup + s.n_dead_tup)) * 100, 1)
+              ELSE 0
+            END AS dead_pct,
+            s.last_vacuum,
+            s.last_autovacuum,
+            s.last_analyze,
+            s.last_autoanalyze,
+            s.vacuum_count,
+            s.autovacuum_count,
+            s.analyze_count,
+            s.autoanalyze_count,
+            s.n_tup_ins AS inserts,
+            s.n_tup_upd AS updates,
+            s.n_tup_del AS deletes,
+            s.n_tup_hot_upd AS hot_updates,
+            s.seq_scan,
+            s.seq_tup_read,
+            s.idx_scan,
+            s.idx_tup_fetch,
+            pg_total_relation_size(c.oid) AS total_bytes,
+            pg_table_size(c.oid) AS table_bytes,
+            pg_indexes_size(c.oid) AS index_bytes,
+            pg_total_relation_size(c.oid) - pg_table_size(c.oid) - pg_indexes_size(c.oid) AS toast_bytes,
+            age(c.relfrozenxid) AS xid_age,
+            c.relpages,
+            c.reltuples::bigint AS pg_estimate
+          FROM pg_stat_user_tables s
+          JOIN pg_class c ON c.relname = s.relname
+          JOIN pg_namespace n ON n.oid = c.relnamespace AND n.nspname = s.schemaname
+          WHERE s.schemaname = $1 AND s.relname = $2
+        `, [schema, table]);
+
+        if (rows.length === 0) {
+          return NextResponse.json({ health: null });
+        }
+
+        const h = rows[0];
+        const deadPct = parseFloat(h.dead_pct);
+        const xidAge = parseInt(h.xid_age, 10);
+        const seqScan = parseInt(h.seq_scan, 10);
+        const idxScan = parseInt(h.idx_scan, 10);
+        const totalScans = seqScan + idxScan;
+
+        const assessments: { key: string; label: string; value: string; status: 'in_range' | 'monitor' | 'urgent'; detail: string }[] = [];
+
+        assessments.push({
+          key: 'dead_tuples',
+          label: 'Dead Tuple Ratio',
+          value: `${deadPct}%`,
+          status: deadPct < 5 ? 'in_range' : deadPct < 15 ? 'monitor' : 'urgent',
+          detail: `${Number(h.dead_tuples).toLocaleString()} dead / ${(Number(h.live_tuples) + Number(h.dead_tuples)).toLocaleString()} total`,
+        });
+
+        assessments.push({
+          key: 'xid_age',
+          label: 'Transaction ID Age',
+          value: Number(xidAge).toLocaleString(),
+          status: xidAge < 100_000_000 ? 'in_range' : xidAge < 500_000_000 ? 'monitor' : 'urgent',
+          detail: xidAge > 500_000_000 ? 'Approaching XID wraparound — VACUUM urgently' : xidAge > 100_000_000 ? 'Consider manual VACUUM FREEZE' : 'Within safe range',
+        });
+
+        const seqPct = totalScans > 0 ? Math.round((seqScan / totalScans) * 100) : 0;
+        assessments.push({
+          key: 'scan_ratio',
+          label: 'Sequential Scan Ratio',
+          value: `${seqPct}% seq`,
+          status: seqPct < 50 || totalScans < 100 ? 'in_range' : seqPct < 80 ? 'monitor' : 'urgent',
+          detail: `${seqScan.toLocaleString()} seq / ${idxScan.toLocaleString()} idx scans`,
+        });
+
+        const lastVac = h.last_autovacuum || h.last_vacuum;
+        const daysSinceVacuum = lastVac ? Math.round((Date.now() - new Date(lastVac).getTime()) / 86400000) : null;
+        assessments.push({
+          key: 'vacuum_age',
+          label: 'Last Vacuum',
+          value: daysSinceVacuum !== null ? `${daysSinceVacuum}d ago` : 'Never',
+          status: daysSinceVacuum === null ? 'monitor' : daysSinceVacuum < 7 ? 'in_range' : daysSinceVacuum < 30 ? 'monitor' : 'urgent',
+          detail: lastVac ? new Date(lastVac).toISOString().slice(0, 16).replace('T', ' ') : 'No vacuum recorded',
+        });
+
+        return NextResponse.json({
+          health: {
+            ...h,
+            assessments,
+          },
+        });
+      }
+      case 'tables_health': {
+        const { rows } = await pool.query(`
+          SELECT
+            s.relname AS table_name,
+            s.n_dead_tup AS dead_tuples,
+            CASE WHEN s.n_live_tup + s.n_dead_tup > 0
+              THEN round((s.n_dead_tup::numeric / (s.n_live_tup + s.n_dead_tup)) * 100, 1)
+              ELSE 0
+            END AS dead_pct,
+            age(c.relfrozenxid) AS xid_age,
+            s.last_autovacuum,
+            s.last_vacuum
+          FROM pg_stat_user_tables s
+          JOIN pg_class c ON c.relname = s.relname
+          JOIN pg_namespace n ON n.oid = c.relnamespace AND n.nspname = s.schemaname
+          WHERE s.schemaname = $1
+          ORDER BY s.relname
+        `, [schema]);
+
+        const summary = rows.map((r: any) => {
+          const deadPct = parseFloat(r.dead_pct);
+          const xidAge = parseInt(r.xid_age, 10);
+          const lastVac = r.last_autovacuum || r.last_vacuum;
+          const daysSinceVacuum = lastVac ? Math.round((Date.now() - new Date(lastVac).getTime()) / 86400000) : null;
+
+          let worst: 'in_range' | 'monitor' | 'urgent' = 'in_range';
+          if (deadPct >= 15 || xidAge >= 500_000_000 || (daysSinceVacuum !== null && daysSinceVacuum >= 30) || daysSinceVacuum === null) {
+            if (deadPct >= 15 || xidAge >= 500_000_000) worst = 'urgent';
+            else if (worst !== 'urgent') worst = 'monitor';
+          } else if (deadPct >= 5 || xidAge >= 100_000_000 || (daysSinceVacuum !== null && daysSinceVacuum >= 7)) {
+            worst = 'monitor';
+          }
+          return { table_name: r.table_name, status: worst, dead_pct: deadPct };
+        });
+        return NextResponse.json({ health: summary });
+      }
       default:
         return NextResponse.json({ error: `Unknown action: ${action}` }, { status: 400 });
     }

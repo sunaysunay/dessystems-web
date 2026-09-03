@@ -12,7 +12,20 @@ interface PolicyInfo { policy_name: string; command: string; permissive: string;
 interface TriggerInfo { trigger_name: string; event: string; timing: string; orientation: string; definition: string }
 interface EnumInfo { enum_name: string; enum_values: string[] }
 
-type Tab = 'columns' | 'indexes' | 'fkeys' | 'policies' | 'triggers' | 'screens' | 'relations';
+type Tab = 'columns' | 'indexes' | 'fkeys' | 'policies' | 'triggers' | 'screens' | 'relations' | 'health';
+
+interface TableHealth {
+  live_tuples: number; dead_tuples: number; dead_pct: number;
+  last_vacuum: string | null; last_autovacuum: string | null;
+  last_analyze: string | null; last_autoanalyze: string | null;
+  vacuum_count: number; autovacuum_count: number;
+  analyze_count: number; autoanalyze_count: number;
+  inserts: number; updates: number; deletes: number; hot_updates: number;
+  seq_scan: number; seq_tup_read: number; idx_scan: number; idx_tup_fetch: number;
+  total_bytes: number; table_bytes: number; index_bytes: number; toast_bytes: number;
+  xid_age: number; relpages: number; pg_estimate: number;
+  assessments: { key: string; label: string; value: string; status: 'in_range' | 'monitor' | 'urgent'; detail: string }[];
+}
 
 interface FkEdge { constraint_name: string; source_table: string; target_table: string; source_columns: string[]; target_columns: string[] }
 interface TableDoc { table_name: string; description: string; tags: string[]; module: string | null }
@@ -52,6 +65,9 @@ export default function SchemaExplorerPage() {
   const [tableDocs, setTableDocs] = useState<Map<string, TableDoc>>(new Map());
   const [colIndex, setColIndex] = useState<Map<string, string[]>>(new Map());
   const [tableScreens, setTableScreens] = useState<Record<string, ScreenRef[]>>({});
+  const [tableHealthMap, setTableHealthMap] = useState<Map<string, 'in_range' | 'monitor' | 'urgent'>>(new Map());
+  const [tableHealth, setTableHealth] = useState<TableHealth | null>(null);
+  const [healthLoading, setHealthLoading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [detailLoading, setDetailLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -124,11 +140,20 @@ export default function SchemaExplorerPage() {
       .then(r => r.json())
       .then(d => setTableScreens(d.table_screens ?? {}))
       .catch(() => {});
+    fetch(`/api/bop/dba/schema?action=tables_health&schema=${selectedSchema}`)
+      .then(r => r.json())
+      .then(d => {
+        const m = new Map<string, 'in_range' | 'monitor' | 'urgent'>();
+        for (const h of (d.health ?? [])) m.set(h.table_name, h.status);
+        setTableHealthMap(m);
+      })
+      .catch(() => {});
   }, [selectedSchema]);
 
   useEffect(() => {
     if (!selectedTable) return;
     setDetailLoading(true);
+    setTableHealth(null);
     fetch(`/api/bop/dba/schema?action=table_detail&schema=${selectedSchema}&table=${selectedTable}`)
       .then(r => r.json())
       .then(d => {
@@ -140,6 +165,11 @@ export default function SchemaExplorerPage() {
         setDetailLoading(false);
       })
       .catch(() => setDetailLoading(false));
+    setHealthLoading(true);
+    fetch(`/api/bop/dba/schema?action=table_health&schema=${selectedSchema}&table=${selectedTable}`)
+      .then(r => r.json())
+      .then(d => { setTableHealth(d.health ?? null); setHealthLoading(false); })
+      .catch(() => setHealthLoading(false));
   }, [selectedTable, selectedSchema]);
 
   function navigateToTable(tableName: string, tab?: Tab) {
@@ -154,6 +184,8 @@ export default function SchemaExplorerPage() {
     ? tables.filter(t => matchesSmartFilter(t.table_name, tableFilter, colIndex))
     : tables;
 
+  const healthIssues = tableHealth?.assessments?.filter(a => a.status !== 'in_range').length ?? 0;
+
   const TABS: { key: Tab; label: string; count: number }[] = [
     { key: 'columns', label: 'Columns', count: columns.length },
     { key: 'indexes', label: 'Indexes', count: indexes.length },
@@ -162,6 +194,7 @@ export default function SchemaExplorerPage() {
     { key: 'triggers', label: 'Triggers', count: triggers.length },
     { key: 'screens', label: 'Screens', count: selectedTable ? (tableScreens[selectedTable] ?? []).length : 0 },
     { key: 'relations', label: 'Relations', count: -1 },
+    { key: 'health', label: 'Health', count: -1 },
   ];
 
   return (
@@ -226,6 +259,12 @@ export default function SchemaExplorerPage() {
                       <span className="text-[9px] font-medium px-1 rounded bg-blue-50 text-blue-600">{tableDocs.get(t.table_name)!.module}</span>
                     )}
                     {t.has_rls && <span className="text-[10px] text-green-600" title="RLS enabled">RLS</span>}
+                    {tableHealthMap.get(t.table_name) === 'urgent' && (
+                      <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" title="Urgent — needs maintenance" />
+                    )}
+                    {tableHealthMap.get(t.table_name) === 'monitor' && (
+                      <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" title="Monitor — check health tab" />
+                    )}
                   </button>
                 ))
               )}
@@ -302,6 +341,14 @@ export default function SchemaExplorerPage() {
                     {tab.count > 0 && <span className="ml-1 text-xs text-gray-400">({tab.count})</span>}
                     {tab.key === 'screens' && <span className="ml-1 text-[10px] text-emerald-400">TC</span>}
                     {tab.key === 'relations' && <span className="ml-1 text-[10px] text-indigo-400">graph</span>}
+                    {tab.key === 'health' && healthIssues > 0 && (
+                      <span className={`ml-1 inline-block w-2 h-2 rounded-full ${
+                        tableHealth?.assessments?.some(a => a.status === 'urgent') ? 'bg-red-500' : 'bg-amber-500'
+                      }`} />
+                    )}
+                    {tab.key === 'health' && tableHealth && healthIssues === 0 && (
+                      <span className="ml-1 inline-block w-2 h-2 rounded-full bg-green-500" />
+                    )}
                   </button>
                 ))}
               </div>
@@ -331,6 +378,11 @@ export default function SchemaExplorerPage() {
                       onNavigate={navigateToTable}
                       tableScreens={tableScreens}
                     />
+                  )}
+                  {activeTab === 'health' && (
+                    healthLoading ? <div className="p-4 text-sm text-gray-500">Loading health data...</div> :
+                    !tableHealth ? <div className="p-6 text-center text-gray-400 text-sm">No health data available (views and system tables are excluded)</div> :
+                    <HealthTab health={tableHealth} />
                   )}
                 </div>
               )}
@@ -975,6 +1027,122 @@ function RelationsGraph({
         <span className="flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-full bg-gray-500" /> Related table</span>
         <span className="flex items-center gap-1.5"><span className="inline-block w-4 border-t-2 border-gray-300" /> FK relationship</span>
         <span className="flex items-center gap-1.5"><span className="inline-block w-2.5 h-2.5 rounded bg-emerald-600 text-[8px] text-white flex items-center justify-center font-bold">n</span> Has TC screens</span>
+      </div>
+    </div>
+  );
+}
+
+const STATUS_CFG: Record<string, { bg: string; text: string; dot: string; label: string }> = {
+  in_range: { bg: 'bg-green-50', text: 'text-green-700', dot: 'bg-green-500', label: 'In Range' },
+  monitor:  { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-500', label: 'Monitor' },
+  urgent:   { bg: 'bg-red-50',   text: 'text-red-700',   dot: 'bg-red-500',   label: 'Urgent' },
+};
+
+function fmtBytes(b: number): string {
+  if (b < 1024) return `${b} B`;
+  if (b < 1048576) return `${(b / 1024).toFixed(1)} KB`;
+  if (b < 1073741824) return `${(b / 1048576).toFixed(1)} MB`;
+  return `${(b / 1073741824).toFixed(2)} GB`;
+}
+
+function fmtTs(ts: string | null): string {
+  if (!ts) return '—';
+  return new Date(ts).toISOString().slice(0, 16).replace('T', ' ');
+}
+
+function HealthTab({ health }: { health: TableHealth }) {
+  return (
+    <div className="space-y-6 py-2">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {health.assessments.map(a => {
+          const cfg = STATUS_CFG[a.status] ?? STATUS_CFG.in_range;
+          return (
+            <div key={a.key} className={`rounded-lg border p-3 ${cfg.bg}`}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className={`w-2 h-2 rounded-full ${cfg.dot}`} />
+                <span className={`text-xs font-semibold ${cfg.text}`}>{cfg.label}</span>
+              </div>
+              <div className={`text-lg font-bold ${cfg.text}`}>{a.value}</div>
+              <div className="text-xs text-gray-600 mt-0.5">{a.label}</div>
+              <div className="text-[11px] text-gray-500 mt-1">{a.detail}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="border rounded-lg overflow-hidden">
+          <div className="bg-gray-50 px-3 py-2 border-b text-xs font-semibold text-gray-500 uppercase tracking-wide">Storage Breakdown</div>
+          <div className="p-3 space-y-2">
+            {[
+              { label: 'Total Size', value: fmtBytes(Number(health.total_bytes)) },
+              { label: 'Table Data', value: fmtBytes(Number(health.table_bytes)) },
+              { label: 'Indexes', value: fmtBytes(Number(health.index_bytes)) },
+              { label: 'TOAST', value: fmtBytes(Number(health.toast_bytes)) },
+              { label: 'Pages', value: Number(health.relpages).toLocaleString() },
+            ].map(r => (
+              <div key={r.label} className="flex justify-between text-sm">
+                <span className="text-gray-500">{r.label}</span>
+                <span className="font-mono font-medium">{r.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="border rounded-lg overflow-hidden">
+          <div className="bg-gray-50 px-3 py-2 border-b text-xs font-semibold text-gray-500 uppercase tracking-wide">Tuple Activity</div>
+          <div className="p-3 space-y-2">
+            {[
+              { label: 'Live Tuples', value: Number(health.live_tuples).toLocaleString() },
+              { label: 'Dead Tuples', value: Number(health.dead_tuples).toLocaleString() },
+              { label: 'Inserts', value: Number(health.inserts).toLocaleString() },
+              { label: 'Updates', value: Number(health.updates).toLocaleString() },
+              { label: 'HOT Updates', value: Number(health.hot_updates).toLocaleString() },
+              { label: 'Deletes', value: Number(health.deletes).toLocaleString() },
+            ].map(r => (
+              <div key={r.label} className="flex justify-between text-sm">
+                <span className="text-gray-500">{r.label}</span>
+                <span className="font-mono font-medium">{r.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="border rounded-lg overflow-hidden">
+          <div className="bg-gray-50 px-3 py-2 border-b text-xs font-semibold text-gray-500 uppercase tracking-wide">Scan Statistics</div>
+          <div className="p-3 space-y-2">
+            {[
+              { label: 'Sequential Scans', value: Number(health.seq_scan).toLocaleString() },
+              { label: 'Seq Tuples Read', value: Number(health.seq_tup_read).toLocaleString() },
+              { label: 'Index Scans', value: Number(health.idx_scan).toLocaleString() },
+              { label: 'Index Tuples Fetched', value: Number(health.idx_tup_fetch).toLocaleString() },
+            ].map(r => (
+              <div key={r.label} className="flex justify-between text-sm">
+                <span className="text-gray-500">{r.label}</span>
+                <span className="font-mono font-medium">{r.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="border rounded-lg overflow-hidden">
+          <div className="bg-gray-50 px-3 py-2 border-b text-xs font-semibold text-gray-500 uppercase tracking-wide">Maintenance History</div>
+          <div className="p-3 space-y-2">
+            {[
+              { label: 'Last Manual Vacuum', value: fmtTs(health.last_vacuum) },
+              { label: 'Last Auto Vacuum', value: fmtTs(health.last_autovacuum) },
+              { label: 'Last Manual Analyze', value: fmtTs(health.last_analyze) },
+              { label: 'Last Auto Analyze', value: fmtTs(health.last_autoanalyze) },
+              { label: 'Vacuum Count', value: `${health.vacuum_count} manual / ${health.autovacuum_count} auto` },
+              { label: 'Analyze Count', value: `${health.analyze_count} manual / ${health.autoanalyze_count} auto` },
+            ].map(r => (
+              <div key={r.label} className="flex justify-between text-sm">
+                <span className="text-gray-500">{r.label}</span>
+                <span className="font-mono font-medium text-right">{r.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

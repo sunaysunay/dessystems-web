@@ -20,6 +20,8 @@ const TABS = [
   { key: 'tables',      label: 'Tables' },
   { key: 'connections', label: 'Connections' },
   { key: 'extensions',  label: 'Extensions' },
+  { key: 'trend',       label: 'Audit History' },
+  { key: 'jobs',        label: 'Background Jobs' },
 ] as const;
 
 type TabKey = (typeof TABS)[number]['key'];
@@ -41,10 +43,17 @@ export default function DB009Page() {
   const [connections, setConnections] = useState<any[]>([]);
   const [extensions, setExtensions]   = useState<any[]>([]);
   const [activeTab, setActiveTab]     = useState<TabKey>('tables');
+  const [snapshots, setSnapshots]     = useState<any[]>([]);
+  const [cronJobs, setCronJobs]       = useState<any[]>([]);
+  const [auditing, setAuditing]       = useState(false);
+  const [vacuuming, setVacuuming]     = useState(false);
   const [loading, setLoading]         = useState(true);
   const [error, setError]             = useState<string | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
-  const [fetched, setFetched] = useState<Record<string, boolean>>({ tables: false, connections: false, extensions: false });
+  const [fetched, setFetched] = useState<Record<string, boolean>>({ tables: false, connections: false, extensions: false, trend: false });
+  const [sevFilter, setSevFilter]     = useState<string | null>(null);
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+  const [toast, setToast]             = useState<string | null>(null);
 
   function fetchAction(action: string) {
     return fetch(`/api/bop/dba/health?action=${action}`)
@@ -67,7 +76,7 @@ export default function DB009Page() {
         setOverview(ov.overview ?? ov);
         setFindings(fi.findings ?? []);
         setTables(tb.tables ?? []);
-        setFetched({ tables: true, connections: false, extensions: false });
+        setFetched({ tables: true, connections: false, extensions: false, trend: false, jobs: false });
         setLastRefresh(new Date());
       })
       .catch(e => setError(e.message))
@@ -77,11 +86,14 @@ export default function DB009Page() {
   function loadTab(tab: TabKey) {
     if (fetched[tab]) return;
     setLoading(true);
-    fetchAction(tab)
+    const action = tab === 'jobs' ? 'cron_history' : tab;
+    fetchAction(action)
       .then(d => {
         if (tab === 'tables')      setTables(d.tables ?? []);
         if (tab === 'connections') setConnections(d.connections ?? []);
         if (tab === 'extensions')  setExtensions(d.extensions ?? []);
+        if (tab === 'trend')       setSnapshots(d.snapshots ?? []);
+        if (tab === 'jobs')        setCronJobs(d.jobs ?? []);
         setFetched(prev => ({ ...prev, [tab]: true }));
       })
       .catch(e => setError(e.message))
@@ -89,8 +101,43 @@ export default function DB009Page() {
   }
 
   function refreshAll() {
-    setFetched({ tables: false, connections: false, extensions: false });
+    setFetched({ tables: false, connections: false, extensions: false, trend: false, jobs: false });
     loadInitial();
+  }
+
+  function showToast(msg: string) {
+    setToast(msg);
+    setTimeout(() => setToast(null), 4000);
+  }
+
+  function runAudit() {
+    setAuditing(true);
+    setError(null);
+    fetchAction('run_audit')
+      .then(d => {
+        if (d.snapshot) {
+          setSnapshots(prev => [d.snapshot, ...prev]);
+          setFetched(prev => ({ ...prev, trend: false }));
+          const s = d.snapshot;
+          showToast(`Audit complete — ${s.urgent_count ?? 0} urgent, ${s.monitor_count ?? 0} monitor, ${s.in_range_count ?? 0} healthy`);
+        } else {
+          showToast('Audit completed');
+        }
+        refreshAll();
+      })
+      .catch(e => setError(e.message))
+      .finally(() => setAuditing(false));
+  }
+
+  function runVacuum() {
+    setVacuuming(true);
+    setError(null);
+    fetchAction('run_vacuum')
+      .then(d => {
+        showToast(d.result ?? 'Vacuum scheduled — runs within 1 minute');
+      })
+      .catch(e => setError(e.message))
+      .finally(() => setVacuuming(false));
   }
 
   useEffect(() => { loadInitial(); }, []);
@@ -117,13 +164,29 @@ export default function DB009Page() {
         <div className="text-xs text-gray-400">
           {lastRefresh ? `Last refresh: ${formatTime(lastRefresh)}` : ''}
         </div>
-        <button
-          onClick={refreshAll}
-          disabled={loading}
-          className="px-3 py-1.5 text-sm rounded border border-gray-300 bg-white hover:bg-gray-50 disabled:opacity-50"
-        >
-          {loading ? 'Refreshing...' : 'Refresh'}
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={runVacuum}
+            disabled={vacuuming || loading}
+            className="px-3 py-1.5 text-sm rounded border border-orange-300 bg-orange-50 text-orange-700 hover:bg-orange-100 disabled:opacity-50 font-medium"
+          >
+            {vacuuming ? 'Scheduling...' : 'Run Vacuum'}
+          </button>
+          <button
+            onClick={runAudit}
+            disabled={auditing || loading}
+            className="px-3 py-1.5 text-sm rounded border border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 disabled:opacity-50 font-medium"
+          >
+            {auditing ? 'Running Audit...' : 'Run Audit Now'}
+          </button>
+          <button
+            onClick={refreshAll}
+            disabled={loading}
+            className="px-3 py-1.5 text-sm rounded border border-gray-300 bg-white hover:bg-gray-50 disabled:opacity-50"
+          >
+            {loading ? 'Refreshing...' : 'Refresh'}
+          </button>
+        </div>
       </div>
 
       {error && (
@@ -190,19 +253,28 @@ export default function DB009Page() {
       {/* Findings panel */}
       <div className="rounded-lg border border-gray-200 bg-white">
         <div className="p-4 border-b border-gray-100">
-          <h2 className="text-sm font-semibold text-gray-700 mb-2">Findings</h2>
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-sm font-semibold text-gray-700">Findings</h2>
+            {sevFilter && (
+              <button onClick={() => { setSevFilter(null); setExpandedIdx(null); }} className="text-xs text-blue-600 hover:underline">
+                Clear filter
+              </button>
+            )}
+          </div>
           {Object.keys(sevCounts).length > 0 && (
             <div className="flex flex-wrap gap-2">
               {['critical', 'high', 'medium', 'low', 'info'].map(sev => {
                 const count = sevCounts[sev];
                 if (!count) return null;
+                const active = sevFilter === sev;
                 return (
-                  <span
+                  <button
                     key={sev}
-                    className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs font-medium ${SEV_COLORS[sev] ?? ''}`}
+                    onClick={() => { setSevFilter(active ? null : sev); setExpandedIdx(null); }}
+                    className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs font-medium transition-all ${SEV_COLORS[sev] ?? ''} ${active ? 'ring-2 ring-offset-1 ring-blue-400 scale-105' : 'opacity-80 hover:opacity-100'}`}
                   >
                     {sev}: {count}
-                  </span>
+                  </button>
                 );
               })}
             </div>
@@ -213,27 +285,56 @@ export default function DB009Page() {
             <div className="p-4 rounded border border-green-200 bg-green-50 text-green-700 text-sm text-center">
               All checks passed &mdash; no issues detected
             </div>
-          ) : (
-            <div className="space-y-2">
-              {findings.map((f, i) => (
-                <div key={`${f.check_id}-${i}`} className="flex flex-wrap items-start gap-2 p-2 rounded border border-gray-100 hover:bg-gray-50 text-sm">
-                  <span className={`shrink-0 inline-block px-2 py-0.5 rounded-full border text-xs font-medium ${SEV_COLORS[f.severity] ?? SEV_COLORS.info}`}>
-                    {f.severity}
-                  </span>
-                  <span className="font-mono text-xs text-gray-500 shrink-0">{f.check_id}</span>
-                  {f.object_name && <span className="font-medium text-gray-800">{f.object_name}</span>}
-                  <span className="text-gray-600 flex-1">{f.detail}</span>
-                  {(f.actual_value != null || f.threshold != null) && (
-                    <span className="text-xs text-gray-400 shrink-0">
-                      {f.actual_value != null && <>actual: <span className="font-mono">{f.actual_value}</span></>}
-                      {f.actual_value != null && f.threshold != null && ' / '}
-                      {f.threshold != null && <>threshold: <span className="font-mono">{f.threshold}</span></>}
-                    </span>
-                  )}
+          ) : (() => {
+            const filtered = sevFilter ? findings.filter(f => f.severity === sevFilter) : findings;
+            return (
+              <div className="space-y-1">
+                <div className="text-xs text-gray-400 mb-2">
+                  {sevFilter ? `Showing ${filtered.length} ${sevFilter} findings` : `${findings.length} findings`}
+                  {' — click a row to expand details'}
                 </div>
-              ))}
-            </div>
-          )}
+                {filtered.map((f, i) => {
+                  const globalIdx = findings.indexOf(f);
+                  const isExpanded = expandedIdx === globalIdx;
+                  return (
+                    <div key={`${f.check_id}-${globalIdx}`}>
+                      <button
+                        onClick={() => setExpandedIdx(isExpanded ? null : globalIdx)}
+                        className={`w-full flex flex-wrap items-start gap-2 p-2 rounded border text-sm text-left transition-colors ${isExpanded ? 'border-blue-200 bg-blue-50/50' : 'border-gray-100 hover:bg-gray-50'}`}
+                      >
+                        <span className="shrink-0 text-gray-400 text-xs mt-0.5">{isExpanded ? '▼' : '▶'}</span>
+                        <span className={`shrink-0 inline-block px-2 py-0.5 rounded-full border text-xs font-medium ${SEV_COLORS[f.severity] ?? SEV_COLORS.info}`}>
+                          {f.severity}
+                        </span>
+                        <span className="font-mono text-xs text-gray-500 shrink-0">{f.check_id}</span>
+                        {f.object_name && <span className="font-medium text-gray-800">{f.object_name}</span>}
+                        <span className="text-gray-600 flex-1">{f.detail}</span>
+                      </button>
+                      {isExpanded && (
+                        <div className="ml-6 mt-1 mb-2 p-3 rounded bg-gray-50 border border-gray-100 text-xs space-y-1.5">
+                          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                            <div><span className="text-gray-400">Check:</span> <span className="font-mono text-gray-700">{f.check_id}</span></div>
+                            <div><span className="text-gray-400">Category:</span> <span className="text-gray-700">{f.category}</span></div>
+                            <div><span className="text-gray-400">Object:</span> <span className="font-mono text-gray-700">{f.object_name}</span></div>
+                            <div><span className="text-gray-400">Severity:</span> <span className={`font-medium ${f.severity === 'critical' ? 'text-red-700' : f.severity === 'high' ? 'text-orange-700' : 'text-gray-700'}`}>{f.severity}</span></div>
+                            {f.actual_value != null && (
+                              <div><span className="text-gray-400">Actual:</span> <span className="font-mono text-gray-700">{f.actual_value}</span></div>
+                            )}
+                            {f.threshold != null && (
+                              <div><span className="text-gray-400">Threshold:</span> <span className="font-mono text-gray-700">{f.threshold}</span></div>
+                            )}
+                          </div>
+                          <div className="pt-1 border-t border-gray-200">
+                            <span className="text-gray-400">Detail:</span> <span className="text-gray-700">{f.detail}</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
       </div>
 
@@ -293,7 +394,9 @@ export default function DB009Page() {
                         <td className="py-1.5 pr-3 text-right">{Number(t.seq_scan).toLocaleString()}</td>
                         <td className="py-1.5 pr-3 text-right">{Number(t.idx_scan).toLocaleString()}</td>
                         <td className="py-1.5 pr-3 text-xs text-gray-400">
-                          {t.last_autovacuum ? new Date(t.last_autovacuum).toLocaleDateString() : '-'}
+                          {t.last_autovacuum
+                            ? new Date(t.last_autovacuum).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' })
+                            : '-'}
                         </td>
                       </tr>
                     );
@@ -364,8 +467,158 @@ export default function DB009Page() {
               </table>
             </div>
           )}
+
+          {activeTab === 'trend' && (
+            <div className="space-y-4">
+              {snapshots.length > 0 && (
+                <div className="flex items-end gap-1 h-32 border-b border-gray-200 pb-2">
+                  {snapshots.slice().reverse().map((s, i) => {
+                    const total = s.total_tables || 1;
+                    const urgentH = Math.round((s.urgent_count / total) * 100);
+                    const monitorH = Math.round((s.monitor_count / total) * 100);
+                    const healthyH = 100 - urgentH - monitorH;
+                    return (
+                      <div key={s.id} className="flex-1 flex flex-col items-center gap-0.5 group" title={`${new Date(s.captured_at).toLocaleDateString()} — ${s.summary}`}>
+                        <div className="w-full flex flex-col" style={{ height: '100px' }}>
+                          <div className="bg-green-400 rounded-t-sm" style={{ height: `${healthyH}%` }} />
+                          <div className="bg-amber-400" style={{ height: `${monitorH}%` }} />
+                          <div className="bg-red-400 rounded-b-sm" style={{ height: `${urgentH}%` }} />
+                        </div>
+                        <div className="text-[8px] text-gray-400 group-hover:text-gray-600 truncate w-full text-center">
+                          {new Date(s.captured_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              <div className="flex gap-4 text-xs text-gray-500">
+                <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded bg-green-400" /> Healthy</span>
+                <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded bg-amber-400" /> Monitor</span>
+                <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded bg-red-400" /> Urgent</span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-200 text-left text-xs uppercase tracking-wider text-gray-400">
+                      <th className="py-2 pr-3">Date</th>
+                      <th className="py-2 pr-3">Type</th>
+                      <th className="py-2 pr-3 text-right">Tables</th>
+                      <th className="py-2 pr-3 text-right">Urgent</th>
+                      <th className="py-2 pr-3 text-right">Monitor</th>
+                      <th className="py-2 pr-3 text-right">Healthy</th>
+                      <th className="py-2 pr-3 text-right">Findings</th>
+                      <th className="py-2 pr-3 text-right">Duration</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {snapshots.map(s => (
+                      <tr key={s.id} className="border-b border-gray-50 hover:bg-gray-50">
+                        <td className="py-1.5 pr-3 text-xs">{new Date(s.captured_at).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}</td>
+                        <td className="py-1.5 pr-3">
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${s.run_type === 'manual' ? 'bg-blue-50 text-blue-600' : s.run_type === 'startup' ? 'bg-purple-50 text-purple-600' : 'bg-gray-100 text-gray-600'}`}>
+                            {s.run_type}
+                          </span>
+                        </td>
+                        <td className="py-1.5 pr-3 text-right">{s.total_tables}</td>
+                        <td className="py-1.5 pr-3 text-right font-medium text-red-600">{s.urgent_count}</td>
+                        <td className="py-1.5 pr-3 text-right text-amber-600">{s.monitor_count}</td>
+                        <td className="py-1.5 pr-3 text-right text-green-600">{s.in_range_count}</td>
+                        <td className="py-1.5 pr-3 text-right">{s.finding_count}</td>
+                        <td className="py-1.5 pr-3 text-right text-xs text-gray-400">{s.duration_ms}ms</td>
+                      </tr>
+                    ))}
+                    {snapshots.length === 0 && !loading && (
+                      <tr><td colSpan={8} className="py-4 text-center text-gray-400">No audit history — click "Run Audit Now" to capture the first snapshot</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'jobs' && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="text-xs text-gray-400">Last 20 pg_cron job runs for BOP jobs</div>
+                <button
+                  onClick={() => { setFetched(prev => ({ ...prev, jobs: false })); loadTab('jobs'); }}
+                  className="text-xs text-blue-600 hover:underline"
+                >
+                  Reload
+                </button>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-200 text-left text-xs uppercase tracking-wider text-gray-400">
+                      <th className="py-2 pr-3">Job</th>
+                      <th className="py-2 pr-3">Status</th>
+                      <th className="py-2 pr-3">Started</th>
+                      <th className="py-2 pr-3">Duration</th>
+                      <th className="py-2 pr-3">Message</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cronJobs.map((j, i) => {
+                      const start = j.start_time ? new Date(j.start_time) : null;
+                      const end = j.end_time ? new Date(j.end_time) : null;
+                      const durationMs = start && end ? end.getTime() - start.getTime() : null;
+                      const isSuccess = j.status === 'succeeded';
+                      const isFailed = j.status === 'failed';
+                      return (
+                        <tr key={`${j.jobid}-${i}`} className="border-b border-gray-50 hover:bg-gray-50">
+                          <td className="py-1.5 pr-3">
+                            <div className="font-medium text-gray-800">{j.jobname}</div>
+                            <div className="text-[10px] text-gray-400 font-mono truncate max-w-[300px]" title={j.command}>{j.command}</div>
+                          </td>
+                          <td className="py-1.5 pr-3">
+                            <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
+                              isSuccess ? 'bg-green-50 text-green-600' :
+                              isFailed ? 'bg-red-50 text-red-600' :
+                              'bg-gray-100 text-gray-600'
+                            }`}>
+                              {j.status}
+                            </span>
+                          </td>
+                          <td className="py-1.5 pr-3 text-xs text-gray-500">
+                            {start ? start.toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' }) : '-'}
+                          </td>
+                          <td className="py-1.5 pr-3 text-xs text-gray-500">
+                            {durationMs !== null ? (durationMs < 1000 ? `${durationMs}ms` : `${(durationMs / 1000).toFixed(1)}s`) : '-'}
+                          </td>
+                          <td className="py-1.5 pr-3 text-xs">
+                            <span className={isFailed ? 'text-red-600' : 'text-gray-400'}>{j.return_message || '-'}</span>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                    {cronJobs.length === 0 && !loading && (
+                      <tr><td colSpan={5} className="py-4 text-center text-gray-400">No background job history found</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Toast notification */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50 animate-[slideUp_0.3s_ease-out] bg-gray-900 text-white px-4 py-3 rounded-lg shadow-lg text-sm flex items-center gap-3">
+          <span className="inline-block w-2 h-2 rounded-full bg-green-400" />
+          {toast}
+          <button onClick={() => setToast(null)} className="text-gray-400 hover:text-white ml-2">&times;</button>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }

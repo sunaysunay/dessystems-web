@@ -326,6 +326,7 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
       { label: tn("dbaActions"),       href: "/console/dba/actions" },
       { label: tn("dbaHistory"),       href: "/console/dba/history" },
       { label: tn("dbaMigrations"),    href: "/console/dba/migrations" },
+      { label: tn("dbaHealth"),        href: "/console/dba/health" },
     ]},
   ]},
   ];

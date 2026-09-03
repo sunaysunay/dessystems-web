@@ -436,7 +436,8 @@
     "dbaFunctions": "Functions & RPC",
     "dbaActions": "Database Actions",
     "dbaHistory": "Query History",
-    "dbaMigrations": "Migrations"
+    "dbaMigrations": "Migrations",
+    "dbaHealth": "Database Health"
   },
   "groups": {
     "overview": "Overview",
@@ -485,6 +486,7 @@
     "DB006": "Database Actions",
     "DB007": "Query History",
     "DB008": "Migrations",
+    "DB009": "Database Health",
     "IN006": "Model Catalog",
     "AI001": "AI Command Center",
     "AI002": "Tool Registry",

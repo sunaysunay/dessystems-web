@@ -256,7 +256,8 @@
     "dbaFunctions": "Functies & RPC",
     "dbaActions": "Database Acties",
     "dbaHistory": "Query Geschiedenis",
-    "dbaMigrations": "Migraties"
+    "dbaMigrations": "Migraties",
+    "dbaHealth": "Database Gezondheid"
   },
   "sal": {
     "orders": "Bestellingen",
@@ -657,7 +658,8 @@
     "DB005": "Functies & RPC",
     "DB006": "Database Acties",
     "DB007": "Query Geschiedenis",
-    "DB008": "Migraties"
+    "DB008": "Migraties",
+    "DB009": "Database Gezondheid"
   },
   "support": {
     "title": "Support",

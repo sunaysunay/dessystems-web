@@ -330,7 +330,8 @@
     "dbaFunctions": "Fonksiyonlar & RPC",
     "dbaActions": "Veritabani Islemleri",
     "dbaHistory": "Sorgu Gecmisi",
-    "dbaMigrations": "Migrasyonlar"
+    "dbaMigrations": "Migrasyonlar",
+    "dbaHealth": "Veritabani Sagligi"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -512,7 +513,8 @@
     "DB005": "Fonksiyonlar & RPC",
     "DB006": "Veritabani Islemleri",
     "DB007": "Sorgu Gecmisi",
-    "DB008": "Migrasyonlar"
+    "DB008": "Migrasyonlar",
+    "DB009": "Veritabani Sagligi"
   },
   "support": {
     "title": "Destek",

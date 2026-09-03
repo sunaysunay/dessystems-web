@@ -330,7 +330,8 @@
     "dbaFunctions": "Fonctions & RPC",
     "dbaActions": "Actions Base de Donnees",
     "dbaHistory": "Historique des Requetes",
-    "dbaMigrations": "Migrations"
+    "dbaMigrations": "Migrations",
+    "dbaHealth": "Sante Base de Donnees"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -512,7 +513,8 @@
     "DB005": "Fonctions & RPC",
     "DB006": "Actions Base de Donnees",
     "DB007": "Historique des Requetes",
-    "DB008": "Migrations"
+    "DB008": "Migrations",
+    "DB009": "Sante Base de Donnees"
   },
   "support": {
     "title": "Support",

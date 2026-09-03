@@ -339,6 +339,7 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/dba/actions': { id: 'DB006', title: 'Database Actions', mod: 'DBA' },
   '/console/dba/history': { id: 'DB007', title: 'Query History', mod: 'DBA' },
   '/console/dba/migrations': { id: 'DB008', title: 'Migrations', mod: 'DBA' },
+  '/console/dba/health': { id: 'DB009', title: 'Database Health', mod: 'DBA' },
 };
 
 export function getScreenMeta(pathname: string): ScreenMeta | null {

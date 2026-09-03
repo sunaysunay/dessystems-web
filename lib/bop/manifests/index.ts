@@ -138,6 +138,7 @@ export const SCREEN_OBJECTS: BopObject[] = [
   { object_id:"screen:DB006",type:"screen",module:"DBA",name:"Database Actions",route:"/console/dba/actions",status:"active" },
   { object_id:"screen:DB007",type:"screen",module:"DBA",name:"Query History",route:"/console/dba/history",status:"active" },
   { object_id:"screen:DB008",type:"screen",module:"DBA",name:"Migrations",route:"/console/dba/migrations",status:"active" },
+  { object_id:"screen:DB009",type:"screen",module:"DBA",name:"Database Health",route:"/console/dba/health",status:"active" },
 ];
 
 export const API_OBJECTS: BopObject[] = [
@@ -409,9 +410,10 @@ export const API_OBJECTS: BopObject[] = [
   { object_id:"api:dba/sql:POST",type:"api",module:"DBA",name:"Execute SQL",route:"/api/bop/dba/sql",status:"active" },
   { object_id:"api:dba/functions:GET",type:"api",module:"DBA",name:"GET Functions",route:"/api/bop/dba/functions",status:"active" },
   { object_id:"api:dba/actions:POST",type:"api",module:"DBA",name:"Database Action",route:"/api/bop/dba/actions",status:"active" },
-  { object_id:"api:dba/history:GET",type:"api",module:"DBA",name:"GET Query History",route:"/api/bop/dba/history",status:"active" },
+  { object_id:"api:dba/sql:GET",type:"api",module:"DBA",name:"GET Query History / Stats / Classify",route:"/api/bop/dba/sql",status:"active" },
   { object_id:"api:dba/migrations:GET",type:"api",module:"DBA",name:"GET Migrations",route:"/api/bop/dba/migrations",status:"active" },
   { object_id:"api:dba/migrations:POST",type:"api",module:"DBA",name:"Apply Migration",route:"/api/bop/dba/migrations",status:"active" },
+  { object_id:"api:dba/health:GET",type:"api",module:"DBA",name:"GET Database Health",route:"/api/bop/dba/health",status:"active" },
 ];
 
 export const TABLE_OBJECTS: BopObject[] = [

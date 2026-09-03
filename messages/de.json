@@ -330,7 +330,8 @@
     "dbaFunctions": "Funktionen & RPC",
     "dbaActions": "Datenbankaktionen",
     "dbaHistory": "Abfrageverlauf",
-    "dbaMigrations": "Migrationen"
+    "dbaMigrations": "Migrationen",
+    "dbaHealth": "Datenbank-Gesundheit"
   },
   "screens": {
     "IN006": "Modellkatalog",
@@ -512,7 +513,8 @@
     "DB005": "Funktionen & RPC",
     "DB006": "Datenbankaktionen",
     "DB007": "Abfrageverlauf",
-    "DB008": "Migrationen"
+    "DB008": "Migrationen",
+    "DB009": "Datenbank-Gesundheit"
   },
   "support": {
     "title": "Support",

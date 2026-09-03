@@ -12,7 +12,27 @@ interface PolicyInfo { policy_name: string; command: string; permissive: string;
 interface TriggerInfo { trigger_name: string; event: string; timing: string; orientation: string; definition: string }
 interface EnumInfo { enum_name: string; enum_values: string[] }
 
-type Tab = 'columns' | 'indexes' | 'fkeys' | 'policies' | 'triggers';
+type Tab = 'columns' | 'indexes' | 'fkeys' | 'policies' | 'triggers' | 'screens' | 'relations';
+
+interface FkEdge { constraint_name: string; source_table: string; target_table: string; source_columns: string[]; target_columns: string[] }
+interface TableDoc { table_name: string; description: string; tags: string[]; module: string | null }
+interface ColIndex { table_name: string; columns: string[] }
+interface ScreenRef { screen_id: string; title: string; module: string; route: string }
+
+function matchesSmartFilter(tableName: string, filter: string, colIndex: Map<string, string[]>): boolean {
+  const tokens = filter.toLowerCase().split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return true;
+  const name = tableName.toLowerCase();
+  return tokens.every(tok => {
+    if (tok.startsWith('@')) {
+      const colTok = tok.slice(1);
+      if (!colTok) return true;
+      const cols = colIndex.get(tableName) ?? [];
+      return cols.some(c => c.toLowerCase().includes(colTok));
+    }
+    return name.includes(tok);
+  });
+}
 
 export default function SchemaExplorerPage() {
   const router = useRouter();
@@ -28,6 +48,10 @@ export default function SchemaExplorerPage() {
   const [policies, setPolicies] = useState<PolicyInfo[]>([]);
   const [triggers, setTriggers] = useState<TriggerInfo[]>([]);
   const [enums, setEnums] = useState<EnumInfo[]>([]);
+  const [allFkeys, setAllFkeys] = useState<FkEdge[]>([]);
+  const [tableDocs, setTableDocs] = useState<Map<string, TableDoc>>(new Map());
+  const [colIndex, setColIndex] = useState<Map<string, string[]>>(new Map());
+  const [tableScreens, setTableScreens] = useState<Record<string, ScreenRef[]>>({});
   const [loading, setLoading] = useState(true);
   const [detailLoading, setDetailLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -76,6 +100,30 @@ export default function SchemaExplorerPage() {
       .then(r => r.json())
       .then(d => setEnums(d.enums ?? []))
       .catch(() => {});
+    fetch(`/api/bop/dba/schema?action=all_fkeys&schema=${selectedSchema}`)
+      .then(r => r.json())
+      .then(d => setAllFkeys(d.foreign_keys ?? []))
+      .catch(() => {});
+    fetch(`/api/bop/dba/docs?action=list&schema=${selectedSchema}`)
+      .then(r => r.json())
+      .then(d => {
+        const m = new Map<string, TableDoc>();
+        for (const doc of (d.docs ?? [])) m.set(doc.table_name, doc);
+        setTableDocs(m);
+      })
+      .catch(() => {});
+    fetch(`/api/bop/dba/docs?action=columns_index&schema=${selectedSchema}`)
+      .then(r => r.json())
+      .then(d => {
+        const m = new Map<string, string[]>();
+        for (const t of (d.tables ?? [])) m.set(t.table_name, t.columns);
+        setColIndex(m);
+      })
+      .catch(() => {});
+    fetch(`/api/bop/dba/schema?action=table_screens`)
+      .then(r => r.json())
+      .then(d => setTableScreens(d.table_screens ?? {}))
+      .catch(() => {});
   }, [selectedSchema]);
 
   useEffect(() => {
@@ -103,7 +151,7 @@ export default function SchemaExplorerPage() {
 
   const visibleSchemas = showSystem ? schemas : schemas.filter(s => !s.is_system);
   const filteredTables = tableFilter
-    ? tables.filter(t => t.table_name.toLowerCase().includes(tableFilter.toLowerCase()))
+    ? tables.filter(t => matchesSmartFilter(t.table_name, tableFilter, colIndex))
     : tables;
 
   const TABS: { key: Tab; label: string; count: number }[] = [
@@ -112,6 +160,8 @@ export default function SchemaExplorerPage() {
     { key: 'fkeys', label: 'Foreign Keys', count: fkeys.length },
     { key: 'policies', label: 'RLS Policies', count: policies.length },
     { key: 'triggers', label: 'Triggers', count: triggers.length },
+    { key: 'screens', label: 'Screens', count: selectedTable ? (tableScreens[selectedTable] ?? []).length : 0 },
+    { key: 'relations', label: 'Relations', count: -1 },
   ];
 
   return (
@@ -142,10 +192,11 @@ export default function SchemaExplorerPage() {
 
           <input
             type="text"
-            placeholder="Filter tables..."
+            placeholder="Filter: wrk order  or  @tenant_id"
             value={tableFilter}
             onChange={e => setTableFilter(e.target.value)}
             className="w-full border rounded px-2 py-1.5 text-sm"
+            title="Space-separated tokens (AND). Prefix @ to search column names."
           />
 
           <div className="border rounded-lg overflow-hidden">
@@ -171,6 +222,9 @@ export default function SchemaExplorerPage() {
                       {t.table_type === 'table' ? 'T' : t.table_type === 'view' ? 'V' : 'M'}
                     </span>
                     <span className="truncate flex-1 font-mono">{t.table_name}</span>
+                    {tableDocs.get(t.table_name)?.module && (
+                      <span className="text-[9px] font-medium px-1 rounded bg-blue-50 text-blue-600">{tableDocs.get(t.table_name)!.module}</span>
+                    )}
                     {t.has_rls && <span className="text-[10px] text-green-600" title="RLS enabled">RLS</span>}
                   </button>
                 ))
@@ -220,6 +274,18 @@ export default function SchemaExplorerPage() {
                   Browse Data
                 </button>
               </div>
+              {tableDocs.get(selectedTable) && (
+                <div className="flex items-start gap-2 text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-2">
+                  <span className="flex-1">{tableDocs.get(selectedTable)!.description}</span>
+                  {(tableDocs.get(selectedTable)!.tags ?? []).length > 0 && (
+                    <div className="flex gap-1 shrink-0">
+                      {tableDocs.get(selectedTable)!.tags.map(tag => (
+                        <span key={tag} className="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-200 text-gray-600">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
 
               <div className="flex gap-1 border-b">
                 {TABS.map(tab => (
@@ -234,6 +300,8 @@ export default function SchemaExplorerPage() {
                   >
                     {tab.label}
                     {tab.count > 0 && <span className="ml-1 text-xs text-gray-400">({tab.count})</span>}
+                    {tab.key === 'screens' && <span className="ml-1 text-[10px] text-emerald-400">TC</span>}
+                    {tab.key === 'relations' && <span className="ml-1 text-[10px] text-indigo-400">graph</span>}
                   </button>
                 ))}
               </div>
@@ -247,6 +315,23 @@ export default function SchemaExplorerPage() {
                   {activeTab === 'fkeys' && <FKeysTable fkeys={fkeys} onNavigate={navigateToTable} />}
                   {activeTab === 'policies' && <PoliciesTable policies={policies} />}
                   {activeTab === 'triggers' && <TriggersTable triggers={triggers} />}
+                  {activeTab === 'screens' && selectedTable && (
+                    <ScreensTab
+                      focusTable={selectedTable}
+                      allFkeys={allFkeys}
+                      tableScreens={tableScreens}
+                      onNavigate={navigateToTable}
+                    />
+                  )}
+                  {activeTab === 'relations' && selectedTable && (
+                    <RelationsGraph
+                      focusTable={selectedTable}
+                      allFkeys={allFkeys}
+                      tables={tables}
+                      onNavigate={navigateToTable}
+                      tableScreens={tableScreens}
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -498,6 +583,400 @@ function TriggersTable({ triggers }: { triggers: TriggerInfo[] }) {
         ))}
       </tbody>
     </table>
+  );
+}
+
+function ScreensTab({
+  focusTable, allFkeys, tableScreens, onNavigate,
+}: {
+  focusTable: string;
+  allFkeys: FkEdge[];
+  tableScreens: Record<string, ScreenRef[]>;
+  onNavigate: (table: string, tab?: Tab) => void;
+}) {
+  const directScreens = tableScreens[focusTable] ?? [];
+
+  const relatedTables = new Set<string>();
+  for (const fk of allFkeys) {
+    if (fk.source_table === focusTable) relatedTables.add(fk.target_table);
+    if (fk.target_table === focusTable) relatedTables.add(fk.source_table);
+  }
+
+  const hop2: { table: string; screens: ScreenRef[] }[] = [];
+  for (const tbl of relatedTables) {
+    const screens = tableScreens[tbl] ?? [];
+    if (screens.length > 0) hop2.push({ table: tbl, screens });
+  }
+
+  if (directScreens.length === 0 && hop2.length === 0) {
+    return (
+      <div className="p-8 text-center space-y-2">
+        <div className="text-gray-400 text-sm">No screens reference this table or its FK neighbors</div>
+        <div className="text-xs text-gray-300">Screen mappings come from bop_screen_meta.db_tables</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6 py-2">
+      {directScreens.length > 0 && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">1-hop — Direct</span>
+            <span className="text-[10px] text-gray-400">Screens that directly use <span className="font-mono">{focusTable}</span></span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+            {directScreens.map(s => (
+              <a key={s.screen_id} href={s.route} target="_blank"
+                className="flex items-center gap-2 px-3 py-2.5 rounded-lg border bg-white hover:bg-emerald-50 hover:border-emerald-200 transition-colors group">
+                <span className="text-sm font-mono font-bold text-emerald-700 group-hover:text-emerald-800">{s.screen_id}</span>
+                <span className="text-sm text-gray-700 truncate flex-1">{s.title}</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 shrink-0">{s.module}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {hop2.length > 0 && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">2-hop — Related via FK</span>
+            <span className="text-[10px] text-gray-400">Screens using FK-linked tables</span>
+          </div>
+          {hop2.map(({ table, screens }) => (
+            <div key={table} className="border rounded-lg overflow-hidden">
+              <div className="bg-gray-50 px-3 py-1.5 flex items-center gap-2 border-b">
+                <button onClick={() => onNavigate(table, 'screens')} className="font-mono text-xs font-medium text-purple-600 hover:underline">{table}</button>
+                <span className="text-[10px] text-gray-400">({screens.length} screen{screens.length !== 1 ? 's' : ''})</span>
+              </div>
+              <div className="flex flex-wrap gap-2 p-2">
+                {screens.map(s => (
+                  <a key={s.screen_id} href={s.route} target="_blank"
+                    className="flex items-center gap-1.5 px-2 py-1.5 rounded border bg-white hover:bg-indigo-50 hover:border-indigo-200 transition-colors group text-xs">
+                    <span className="font-mono font-bold text-indigo-700 group-hover:text-indigo-800">{s.screen_id}</span>
+                    <span className="text-gray-600">{s.title}</span>
+                    <span className="text-[9px] px-1 rounded bg-gray-100 text-gray-400">{s.module}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RelationsGraph({
+  focusTable, allFkeys, tables, onNavigate, tableScreens,
+}: {
+  focusTable: string;
+  allFkeys: FkEdge[];
+  tables: TableInfo[];
+  onNavigate: (table: string, tab?: Tab) => void;
+  tableScreens: Record<string, ScreenRef[]>;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [depth, setDepth] = useState(1);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const nodesRef = useRef<{ id: string; x: number; y: number; vx: number; vy: number; depth: number }[]>([]);
+  const animRef = useRef<number>(0);
+  const dragRef = useRef<{ id: string } | null>(null);
+  const prevFocus = useRef<string>('');
+
+  const graph = (() => {
+    const connected = new Set<string>();
+    connected.add(focusTable);
+    for (let d = 0; d < depth; d++) {
+      const current = Array.from(connected);
+      for (const tbl of current) {
+        for (const fk of allFkeys) {
+          if (fk.source_table === tbl) connected.add(fk.target_table);
+          if (fk.target_table === tbl) connected.add(fk.source_table);
+        }
+      }
+    }
+    const edges = allFkeys.filter(fk => connected.has(fk.source_table) && connected.has(fk.target_table));
+    const nodeDepths = new Map<string, number>();
+    nodeDepths.set(focusTable, 0);
+    for (let d = 0; d < depth; d++) {
+      for (const fk of allFkeys) {
+        if (nodeDepths.has(fk.source_table) && nodeDepths.get(fk.source_table)! <= d && !nodeDepths.has(fk.target_table))
+          nodeDepths.set(fk.target_table, d + 1);
+        if (nodeDepths.has(fk.target_table) && nodeDepths.get(fk.target_table)! <= d && !nodeDepths.has(fk.source_table))
+          nodeDepths.set(fk.source_table, d + 1);
+      }
+    }
+    return { nodeIds: Array.from(connected), edges, nodeDepths };
+  })();
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const W = canvas.clientWidth;
+    const H = canvas.clientHeight;
+    canvas.width = W * 2;
+    canvas.height = H * 2;
+    ctx.scale(2, 2);
+
+    if (prevFocus.current !== focusTable) {
+      nodesRef.current = [];
+      prevFocus.current = focusTable;
+    }
+
+    const nodeCount = graph.nodeIds.length;
+    const spreadRadius = Math.min(W, H) * 0.35 + nodeCount * 4;
+    const nodes = graph.nodeIds.map((id, i) => {
+      const existing = nodesRef.current.find(n => n.id === id);
+      if (existing) return { ...existing, depth: graph.nodeDepths.get(id) ?? 1 };
+      if (id === focusTable) return { id, x: W / 2, y: H / 2, vx: 0, vy: 0, depth: 0 };
+      const angle = (i / nodeCount) * Math.PI * 2;
+      const d = graph.nodeDepths.get(id) ?? 1;
+      const radius = spreadRadius * 0.4 + d * spreadRadius * 0.3;
+      return { id, x: W / 2 + Math.cos(angle) * radius, y: H / 2 + Math.sin(angle) * radius, vx: 0, vy: 0, depth: d };
+    });
+    nodesRef.current = nodes;
+    const nodeMap = new Map(nodes.map(n => [n.id, n]));
+
+    let hoveredId = hovered;
+
+    const repulsion = Math.max(5000, 2000 + nodeCount * 300);
+    const idealDist = Math.max(120, 80 + nodeCount * 3);
+    const centerPull = nodeCount > 15 ? 0.005 : 0.01;
+
+    function simulate() {
+      for (const n of nodes) {
+        if (dragRef.current?.id === n.id) continue;
+        let fx = 0, fy = 0;
+        for (const m of nodes) {
+          if (m.id === n.id) continue;
+          const dx = n.x - m.x, dy = n.y - m.y;
+          const dist = Math.max(Math.sqrt(dx * dx + dy * dy), 10);
+          const force = repulsion / (dist * dist);
+          fx += (dx / dist) * force;
+          fy += (dy / dist) * force;
+        }
+        for (const e of graph.edges) {
+          let other: string | null = null;
+          if (e.source_table === n.id) other = e.target_table;
+          else if (e.target_table === n.id) other = e.source_table;
+          if (!other) continue;
+          const m = nodeMap.get(other);
+          if (!m) continue;
+          const dx = m.x - n.x, dy = m.y - n.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          fx += dx * 0.004 * (dist - idealDist);
+          fy += dy * 0.004 * (dist - idealDist);
+        }
+        fx += (W / 2 - n.x) * centerPull;
+        fy += (H / 2 - n.y) * centerPull;
+        n.vx = (n.vx + fx * 0.3) * 0.85;
+        n.vy = (n.vy + fy * 0.3) * 0.85;
+        n.x = Math.max(70, Math.min(W - 70, n.x + n.vx));
+        n.y = Math.max(25, Math.min(H - 25, n.y + n.vy));
+      }
+    }
+
+    function draw() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, W, H);
+
+      for (const e of graph.edges) {
+        const src = nodeMap.get(e.source_table), tgt = nodeMap.get(e.target_table);
+        if (!src || !tgt) continue;
+        const hi = hoveredId === e.source_table || hoveredId === e.target_table;
+        ctx.beginPath();
+        ctx.moveTo(src.x, src.y);
+        ctx.lineTo(tgt.x, tgt.y);
+        ctx.strokeStyle = hi ? '#6366f1' : '#cbd5e1';
+        ctx.lineWidth = hi ? 2 : 1;
+        ctx.stroke();
+        const angle = Math.atan2(tgt.y - src.y, tgt.x - src.x);
+        const mx = (src.x + tgt.x) / 2, my = (src.y + tgt.y) / 2;
+        ctx.beginPath();
+        ctx.moveTo(mx + Math.cos(angle) * 8, my + Math.sin(angle) * 8);
+        ctx.lineTo(mx + Math.cos(angle + 2.5) * 6, my + Math.sin(angle + 2.5) * 6);
+        ctx.lineTo(mx + Math.cos(angle - 2.5) * 6, my + Math.sin(angle - 2.5) * 6);
+        ctx.closePath();
+        ctx.fillStyle = hi ? '#6366f1' : '#94a3b8';
+        ctx.fill();
+        if (hi) {
+          ctx.font = '9px monospace';
+          ctx.fillStyle = '#6366f1';
+          ctx.textAlign = 'center';
+          ctx.fillText(`${e.source_columns.join(',')} → ${e.target_columns.join(',')}`, mx, my - 8);
+        }
+      }
+
+      for (const n of nodes) {
+        const isFocus = n.id === focusTable;
+        const isHov = n.id === hoveredId;
+        const linked = hoveredId && graph.edges.some(e =>
+          (e.source_table === hoveredId && e.target_table === n.id) ||
+          (e.target_table === hoveredId && e.source_table === n.id));
+        const r = isFocus ? 8 : 6;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = isFocus ? '#3b82f6' : isHov ? '#6366f1' : linked ? '#818cf8' : '#64748b';
+        ctx.fill();
+        if (isFocus || isHov) { ctx.strokeStyle = isFocus ? '#1e40af' : '#4f46e5'; ctx.lineWidth = 2; ctx.stroke(); }
+        ctx.font = `${isFocus || isHov ? 'bold ' : ''}11px system-ui, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = isFocus ? '#1e40af' : isHov ? '#4f46e5' : '#334155';
+        ctx.fillText(n.id, n.x, n.y + r + 13);
+
+        const screens = tableScreens[n.id];
+        if (screens && screens.length > 0) {
+          const badge = screens.length.toString();
+          ctx.font = 'bold 8px system-ui, sans-serif';
+          const bw = ctx.measureText(badge).width + 6;
+          ctx.fillStyle = '#059669';
+          ctx.beginPath();
+          ctx.roundRect(n.x + r - 2, n.y - r - 4, bw, 12, 3);
+          ctx.fill();
+          ctx.fillStyle = '#fff';
+          ctx.textAlign = 'center';
+          ctx.fillText(badge, n.x + r - 2 + bw / 2, n.y - r + 5);
+        }
+      }
+    }
+
+    let frame = 0;
+    function tick() {
+      simulate();
+      draw();
+      frame++;
+      const maxFrames = nodeCount > 15 ? 350 : 200;
+      if (frame < maxFrames) animRef.current = requestAnimationFrame(tick);
+    }
+    tick();
+
+    function getNode(e: MouseEvent) {
+      const rect = canvas!.getBoundingClientRect();
+      const x = e.clientX - rect.left, y = e.clientY - rect.top;
+      for (const n of nodesRef.current) {
+        if ((n.x - x) ** 2 + (n.y - y) ** 2 < 200) return n;
+      }
+      return null;
+    }
+
+    function onMove(e: MouseEvent) {
+      if (dragRef.current) {
+        const rect = canvas!.getBoundingClientRect();
+        const node = nodesRef.current.find(n => n.id === dragRef.current!.id);
+        if (node) { node.x = e.clientX - rect.left; node.y = e.clientY - rect.top; node.vx = 0; node.vy = 0; }
+        frame = 0; tick();
+        return;
+      }
+      const node = getNode(e);
+      hoveredId = node?.id ?? null;
+      canvas!.style.cursor = node ? 'pointer' : 'default';
+      draw();
+    }
+
+    let downPos = { x: 0, y: 0 };
+    function onDown(e: MouseEvent) {
+      downPos = { x: e.clientX, y: e.clientY };
+      const node = getNode(e);
+      if (node) dragRef.current = { id: node.id };
+    }
+
+    function onUp(e: MouseEvent) {
+      const dx = e.clientX - downPos.x, dy = e.clientY - downPos.y;
+      if (dx * dx + dy * dy < 25) {
+        const node = getNode(e);
+        setSelectedNode(node ? node.id : null);
+      }
+      dragRef.current = null;
+    }
+
+    function onDbl(e: MouseEvent) {
+      const node = getNode(e);
+      if (node && node.id !== focusTable) onNavigate(node.id, 'relations');
+    }
+
+    function onLeave() { hoveredId = null; dragRef.current = null; draw(); }
+
+    canvas.addEventListener('mousemove', onMove);
+    canvas.addEventListener('mousedown', onDown);
+    canvas.addEventListener('mouseup', onUp);
+    canvas.addEventListener('dblclick', onDbl);
+    canvas.addEventListener('mouseleave', onLeave);
+
+    return () => {
+      cancelAnimationFrame(animRef.current);
+      canvas.removeEventListener('mousemove', onMove);
+      canvas.removeEventListener('mousedown', onDown);
+      canvas.removeEventListener('mouseup', onUp);
+      canvas.removeEventListener('dblclick', onDbl);
+      canvas.removeEventListener('mouseleave', onLeave);
+    };
+  }, [focusTable, allFkeys, depth]);
+
+  if (graph.nodeIds.length <= 1 && graph.edges.length === 0) {
+    return <div className="p-6 text-center text-gray-400 text-sm">No foreign key relationships found for this table</div>;
+  }
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 text-sm">
+          <span className="text-gray-500">Depth:</span>
+          {[1, 2, 3].map(d => (
+            <button key={d} onClick={() => { nodesRef.current = []; setDepth(d); }}
+              className={`px-2.5 py-1 rounded text-xs font-medium ${depth === d ? 'bg-indigo-100 text-indigo-700 border border-indigo-200' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+              {d} hop{d > 1 ? 's' : ''}
+            </button>
+          ))}
+        </div>
+        <span className="text-xs text-gray-400">{graph.nodeIds.length} tables, {graph.edges.length} relationships</span>
+        <span className="text-[10px] text-gray-400 ml-auto">Click: show TCs. Double-click: navigate. Drag to rearrange.</span>
+      </div>
+      <div className="border rounded-lg overflow-hidden bg-white" style={{ height: `${Math.min(700, Math.max(450, 300 + graph.nodeIds.length * 12))}px` }}>
+        <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
+      </div>
+      {selectedNode && (tableScreens[selectedNode] ?? []).length > 0 && (
+        <div className="border rounded-lg bg-white p-3 space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Transaction Codes</span>
+            <span className="font-mono text-sm font-medium text-indigo-700">{selectedNode}</span>
+            <button onClick={() => setSelectedNode(null)} className="ml-auto text-gray-400 hover:text-gray-600 text-xs">Close</button>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {(tableScreens[selectedNode] ?? []).map(s => (
+              <a
+                key={s.screen_id}
+                href={s.route}
+                target="_blank"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border bg-gray-50 hover:bg-indigo-50 hover:border-indigo-200 transition-colors group"
+              >
+                <span className="text-xs font-mono font-bold text-emerald-700 group-hover:text-indigo-700">{s.screen_id}</span>
+                <span className="text-xs text-gray-600">{s.title}</span>
+                <span className="text-[9px] px-1 rounded bg-gray-200 text-gray-500">{s.module}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+      {selectedNode && (tableScreens[selectedNode] ?? []).length === 0 && (
+        <div className="border rounded-lg bg-gray-50 p-3 flex items-center gap-2">
+          <span className="font-mono text-sm font-medium text-gray-600">{selectedNode}</span>
+          <span className="text-xs text-gray-400">No transaction codes mapped to this table</span>
+          <button onClick={() => setSelectedNode(null)} className="ml-auto text-gray-400 hover:text-gray-600 text-xs">Close</button>
+        </div>
+      )}
+      <div className="flex gap-4 text-xs text-gray-500">
+        <span className="flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-full bg-blue-500" /> Focus table</span>
+        <span className="flex items-center gap-1.5"><span className="inline-block w-3 h-3 rounded-full bg-gray-500" /> Related table</span>
+        <span className="flex items-center gap-1.5"><span className="inline-block w-4 border-t-2 border-gray-300" /> FK relationship</span>
+        <span className="flex items-center gap-1.5"><span className="inline-block w-2.5 h-2.5 rounded bg-emerald-600 text-[8px] text-white flex items-center justify-center font-bold">n</span> Has TC screens</span>
+      </div>
+    </div>
   );
 }
 

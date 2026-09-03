@@ -54,6 +54,44 @@ export async function GET(req: NextRequest) {
         const { rows } = await pool.query('SELECT * FROM bop_meta.list_extensions()');
         return NextResponse.json({ extensions: rows });
       }
+      case 'table_screens': {
+        const { rows } = await pool.query(`
+          SELECT sm.screen_id, s.title, s.module, s.route,
+                 jsonb_array_elements_text(sm.db_tables) AS table_name
+          FROM bop_screen_meta sm
+          JOIN bop_screens s ON s.screen_id = sm.screen_id
+          WHERE sm.db_tables IS NOT NULL
+            AND jsonb_typeof(sm.db_tables) = 'array'
+          ORDER BY sm.screen_id
+        `);
+        const map: Record<string, { screen_id: string; title: string; module: string; route: string }[]> = {};
+        for (const r of rows) {
+          if (!map[r.table_name]) map[r.table_name] = [];
+          map[r.table_name].push({ screen_id: r.screen_id, title: r.title, module: r.module, route: r.route });
+        }
+        return NextResponse.json({ table_screens: map });
+      }
+      case 'all_fkeys': {
+        const { rows } = await pool.query(`
+          SELECT
+            conname AS constraint_name,
+            src.relname AS source_table,
+            tgt.relname AS target_table,
+            array_agg(sa.attname ORDER BY x.ord) AS source_columns,
+            array_agg(ta.attname ORDER BY x.ord) AS target_columns
+          FROM pg_constraint c
+          JOIN pg_class src ON src.oid = c.conrelid
+          JOIN pg_class tgt ON tgt.oid = c.confrelid
+          JOIN pg_namespace ns ON ns.oid = src.relnamespace
+          CROSS JOIN LATERAL unnest(c.conkey, c.confkey) WITH ORDINALITY AS x(src_att, tgt_att, ord)
+          JOIN pg_attribute sa ON sa.attrelid = c.conrelid AND sa.attnum = x.src_att
+          JOIN pg_attribute ta ON ta.attrelid = c.confrelid AND ta.attnum = x.tgt_att
+          WHERE c.contype = 'f' AND ns.nspname = $1
+          GROUP BY c.conname, src.relname, tgt.relname
+          ORDER BY src.relname, tgt.relname
+        `, [schema]);
+        return NextResponse.json({ foreign_keys: rows });
+      }
       case 'table_detail': {
         if (!table) return NextResponse.json({ error: 'table param required' }, { status: 400 });
         const [cols, idx, fks, pol, trg] = await Promise.all([

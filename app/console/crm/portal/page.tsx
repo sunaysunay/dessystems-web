@@ -84,6 +84,7 @@ export default function CR030Page() {
 
   const [expanded, setExpanded] = useState('');
   const [saving, setSaving] = useState(false);
+  const [eventSort, setEventSort] = useState<'newest' | 'oldest' | 'type' | 'client'>('newest');
 
   async function loadAll() {
     setLoading(true);
@@ -234,6 +235,22 @@ export default function CR030Page() {
     showToast('Document archived');
     void loadAll();
   }
+
+  async function deleteEvent(ev: Ev) {
+    if (!confirm(`Delete this activity entry (${ev.type.replace(/_/g, ' ')})? This removes it from the audit log permanently.`)) return;
+    const res = await fetch(`/api/bop/crm/portal/events?id=${ev.id}`, { method: 'DELETE' });
+    const d = await res.json();
+    if (d.error) { showToast(`Error: ${d.error}`); return; }
+    showToast('Activity entry deleted');
+    void loadAll();
+  }
+
+  const sortedEvents = [...events].sort((a, b) => {
+    if (eventSort === 'oldest') return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+    if (eventSort === 'type') return a.type.localeCompare(b.type) || new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    if (eventSort === 'client') return (a.portal_clients?.name ?? '').localeCompare(b.portal_clients?.name ?? '') || new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
 
   function startNewVersion(o: Offer) {
     const current = (o.portal_offer_versions ?? []).find((v: any) => v.version_no === o.current_version);
@@ -492,9 +509,19 @@ export default function CR030Page() {
           {/* ── Activity tab ── */}
           {tab === 'activity' && (
             <div className="rounded-xl border bg-white shadow-sm">
+              <div className="flex items-center justify-between border-b border-slate-100 px-5 py-2.5">
+                <span className="text-xs text-slate-400">{events.length} entries</span>
+                <select value={eventSort} onChange={e => setEventSort(e.target.value as any)}
+                  className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs text-slate-600">
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                  <option value="type">By event type</option>
+                  <option value="client">By client</option>
+                </select>
+              </div>
               {events.length === 0 && <div className="p-8 text-center text-sm text-slate-400">No portal activity yet.</div>}
-              {events.map(ev => (
-                <div key={ev.id} className="flex items-center gap-3 border-b border-slate-50 px-5 py-3 last:border-0">
+              {sortedEvents.map(ev => (
+                <div key={ev.id} className="group flex items-center gap-3 border-b border-slate-50 px-5 py-3 last:border-0">
                   <span className="text-lg">{EVENT_ICON[ev.type] ?? '•'}</span>
                   <div className="min-w-0 flex-1">
                     <span className="text-sm text-slate-700">
@@ -504,6 +531,10 @@ export default function CR030Page() {
                     </span>
                   </div>
                   <span className="flex-none text-xs text-slate-400">{fmtDateTime(ev.created_at)}{ev.ip ? ` · ${ev.ip}` : ''}</span>
+                  <button onClick={() => deleteEvent(ev)} title="Delete entry"
+                    className="flex-none rounded-lg border border-slate-200 px-2 py-1 text-xs text-slate-400 opacity-0 transition-opacity hover:bg-red-50 hover:text-red-500 group-hover:opacity-100">
+                    🗑
+                  </button>
                 </div>
               ))}
             </div>

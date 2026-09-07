@@ -209,7 +209,7 @@ export default function CR030Page() {
     setSaving(false);
     if (d.error) { showToast(`Error: ${d.error}`); return; }
     setVersionFor(null); setVersionNote(''); setItems([emptyItem()]);
-    showToast(`Version ${d.version_no} sent`);
+    showToast(d.status === 'draft' ? 'Draft updated' : `Version ${d.version_no} sent`);
     void loadAll();
   }
 
@@ -400,7 +400,9 @@ export default function CR030Page() {
                           {o.status === 'draft' && <button onClick={() => offerAction(o, 'send')} className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-700">Send to client</button>}
                           {!['approved', 'declined', 'withdrawn'].includes(o.status) && (
                             <>
-                              <button onClick={() => startNewVersion(o)} className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700">New version</button>
+                              <button onClick={() => startNewVersion(o)} className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700">
+                                {o.status === 'draft' ? 'Edit items' : 'New version'}
+                              </button>
                               <button onClick={() => offerAction(o, 'withdraw')} className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50">Withdraw</button>
                             </>
                           )}
@@ -586,7 +588,11 @@ export default function CR030Page() {
         <div className="fixed inset-0 z-40 flex justify-end bg-black/30" onClick={() => { setOfferDrawer(false); setVersionFor(null); }}>
           <div className="h-full w-full max-w-2xl overflow-y-auto bg-white p-6 shadow-xl" onClick={e => e.stopPropagation()}>
             <h3 className="mb-4 text-base font-bold text-slate-800">
-              {versionFor ? `New version — ${versionFor.title} (v${versionFor.current_version + 1})` : 'New offer'}
+              {versionFor
+                ? versionFor.status === 'draft'
+                  ? `Edit draft — ${versionFor.title}`
+                  : `New version — ${versionFor.title} (v${versionFor.current_version + 1})`
+                : 'New offer'}
             </h3>
             <div className="space-y-4">
               {!versionFor && (
@@ -642,7 +648,9 @@ export default function CR030Page() {
 
               <button onClick={versionFor ? createVersion : createOffer} disabled={saving}
                 className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50">
-                {saving ? 'Saving…' : versionFor ? 'Create & send new version' : offerForm.send ? 'Create & send offer' : 'Save draft'}
+                {saving ? 'Saving…'
+                  : versionFor ? (versionFor.status === 'draft' ? 'Save draft items' : 'Create & send new version')
+                  : offerForm.send ? 'Create & send offer' : 'Save draft'}
               </button>
             </div>
           </div>

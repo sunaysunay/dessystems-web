@@ -71,7 +71,10 @@ export async function POST(req: NextRequest) {
 
   const vatRate = Number(body.vat_rate ?? 21);
   const { line_items, subtotal, vat_amount, total } = computeTotals(body.line_items ?? [], vatRate);
-  if (line_items.length === 0) return NextResponse.json({ error: 'at least one line item required' }, { status: 400 });
+  // A draft may start empty — items can be added before sending. Sending requires items.
+  if (body.send && line_items.length === 0) {
+    return NextResponse.json({ error: 'at least one line item required to send' }, { status: 400 });
+  }
 
   const { data: offer, error: offerErr } = await supabase
     .from('portal_offers')
@@ -125,6 +128,15 @@ export async function PATCH(req: NextRequest) {
     if (!['draft', 'changes_requested'].includes(offer.status)) {
       return NextResponse.json({ error: `cannot send from status ${offer.status}` }, { status: 409 });
     }
+    const { data: cur } = await supabase
+      .from('portal_offer_versions')
+      .select('line_items')
+      .eq('offer_id', id)
+      .eq('version_no', offer.current_version)
+      .single();
+    if (!Array.isArray(cur?.line_items) || cur.line_items.length === 0) {
+      return NextResponse.json({ error: 'add line items before sending (use Edit items)' }, { status: 400 });
+    }
     const { error } = await supabase.from('portal_offers').update({ status: 'sent', updated_at: now }).eq('id', id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ ok: true, status: 'sent' });
@@ -144,6 +156,18 @@ export async function PATCH(req: NextRequest) {
     const vatRate = Number(body.vat_rate ?? 21);
     const { line_items, subtotal, vat_amount, total } = computeTotals(body.line_items ?? [], vatRate);
     if (line_items.length === 0) return NextResponse.json({ error: 'at least one line item required' }, { status: 400 });
+
+    // On a draft, edits replace the current version in place and it stays a draft
+    if (offer.status === 'draft') {
+      const { error: updErr } = await supabase
+        .from('portal_offer_versions')
+        .update({ line_items, subtotal, vat_rate: vatRate, vat_amount, total, change_note: body.change_note || null })
+        .eq('offer_id', id)
+        .eq('version_no', offer.current_version);
+      if (updErr) return NextResponse.json({ error: updErr.message }, { status: 500 });
+      await supabase.from('portal_offers').update({ updated_at: now }).eq('id', id);
+      return NextResponse.json({ ok: true, version_no: offer.current_version, status: 'draft' });
+    }
 
     const versionNo = offer.current_version + 1;
     const { error: verErr } = await supabase.from('portal_offer_versions').insert({

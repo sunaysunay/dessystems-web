@@ -173,8 +173,18 @@ export default function CR030Page() {
     void loadAll();
   }
 
+  // Rows without a description are dropped server-side — surface that instead of failing later
+  function validateItems(forSend: boolean): boolean {
+    const valid = items.filter(i => String(i.description || '').trim());
+    const halfFilled = items.some(i => !String(i.description || '').trim() && ((Number(i.quantity) || 0) > 1 || (Number(i.unit_price) || 0) > 0));
+    if (halfFilled) { showToast('Each line item needs a description — rows without one are not saved'); return false; }
+    if (forSend && valid.length === 0) { showToast('Add at least one line item (with description) before sending'); return false; }
+    return true;
+  }
+
   async function createOffer() {
     if (!offerForm.client_id || !offerForm.title.trim()) { showToast('Client and title are required'); return; }
+    if (!validateItems(!!offerForm.send)) return;
     setSaving(true);
     const res = await fetch('/api/bop/crm/portal/offers', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -198,13 +208,19 @@ export default function CR030Page() {
       body: JSON.stringify({ id: o.id, action }),
     });
     const d = await res.json();
-    if (d.error) { showToast(`Error: ${d.error}`); return; }
+    if (d.error) {
+      showToast(`Error: ${d.error}`);
+      // Sending an itemless draft → take the user straight to the item editor
+      if (action === 'send' && String(d.error).includes('line items')) startNewVersion(o);
+      return;
+    }
     showToast(`${o.offer_no ?? o.title} → ${d.status}`);
     void loadAll();
   }
 
   async function createVersion() {
     if (!versionFor) return;
+    if (!validateItems(versionFor.status !== 'draft')) return;
     setSaving(true);
     const res = await fetch('/api/bop/crm/portal/offers', {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' },
@@ -725,7 +741,9 @@ export default function CR030Page() {
                 <div className="space-y-2">
                   {items.map((it, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <input className={`${inputCls} flex-1`} placeholder="Description" value={it.description} onChange={e => updateItem(i, 'description', e.target.value)} />
+                      <input
+                        className={`${inputCls} flex-1 ${!String(it.description || '').trim() && ((Number(it.quantity) || 0) > 1 || (Number(it.unit_price) || 0) > 0) ? 'border-red-300 bg-red-50' : ''}`}
+                        placeholder="Description *" value={it.description} onChange={e => updateItem(i, 'description', e.target.value)} />
                       <input className={`${inputCls} w-16 text-right`} type="number" min={1} value={it.quantity} onChange={e => updateItem(i, 'quantity', Number(e.target.value))} />
                       <input className={`${inputCls} w-28 text-right`} type="number" step="0.01" placeholder="0.00" value={it.unit_price} onChange={e => updateItem(i, 'unit_price', Number(e.target.value))} />
                       <label className="flex items-center gap-1 text-[10px] text-slate-400"><input type="checkbox" checked={!!it.optional} onChange={e => updateItem(i, 'optional', e.target.checked)} />opt</label>

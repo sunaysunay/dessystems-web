@@ -10,6 +10,7 @@ export function toPortalLocale(raw: string | null | undefined): PortalLocale {
 
 export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
   en: {
+    attachments: 'Attachments',
     dossierLabel: 'Dossier code',
     dossierHint: 'The short code from your e-mail link, e.g. “carisma”.',
     portalTitle: 'Client Portal',
@@ -72,6 +73,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
     questions: 'Questions? Call or e-mail us — half an hour on the phone often saves a week of e-mailing.',
   },
   nl: {
+    attachments: 'Bijlagen',
     dossierLabel: 'Dossiercode',
     dossierHint: 'De korte code uit uw e-maillink, bijv. “carisma”.',
     portalTitle: 'Klantportaal',
@@ -134,6 +136,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
     questions: 'Vragen? Bel of mail gerust — een half uur aan de telefoon scheelt vaak een week mailen.',
   },
   de: {
+    attachments: 'Anhänge',
     dossierLabel: 'Dossiercode',
     dossierHint: 'Der kurze Code aus Ihrem E-Mail-Link, z. B. „carisma“.',
     portalTitle: 'Kundenportal',
@@ -196,6 +199,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
     questions: 'Fragen? Rufen Sie uns an oder schreiben Sie uns.',
   },
   fr: {
+    attachments: 'Pièces jointes',
     dossierLabel: 'Code de dossier',
     dossierHint: 'Le code court de votre lien e-mail, p. ex. « carisma ».',
     portalTitle: 'Portail client',
@@ -258,6 +262,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
     questions: 'Des questions ? Appelez-nous ou écrivez-nous.',
   },
   tr: {
+    attachments: 'Ekler',
     dossierLabel: 'Dosya kodu',
     dossierHint: 'E-posta bağlantınızdaki kısa kod, örn. “carisma”.',
     portalTitle: 'Müşteri Portalı',

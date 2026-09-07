@@ -30,6 +30,7 @@ export default function PortalOfferPage() {
   const id = params?.id as string;
 
   const [offer, setOffer] = useState<Offer | null>(null);
+  const [files, setFiles] = useState<{ name: string; size: number }[]>([]);
   const [versions, setVersions] = useState<Version[]>([]);
   const [responses, setResponses] = useState<Resp[]>([]);
   const [locale, setLocale] = useState('en');
@@ -53,6 +54,10 @@ export default function PortalOfferPage() {
       })
       .then(d => {
         setOffer(d.offer); setVersions(d.versions ?? []); setResponses(d.responses ?? []); setLocale(d.locale || 'en');
+        fetch(`/api/portal/offers/${id}/files`)
+          .then(r => r.json())
+          .then(f => { if (f.ok) setFiles(f.files ?? []); })
+          .catch(() => {});
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -166,10 +171,23 @@ export default function PortalOfferPage() {
                 <div className="flex justify-between border-t border-gray-200 pt-2 font-semibold text-gray-900"><span>{t('total')}</span><span>{fmtMoney(current.total)}</span></div>
               </div>
             </div>
-            {current.file_url && (
-              <a href={current.file_url} target="_blank" rel="noreferrer" className="mt-4 inline-block rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-50">
-                {t('download')} (PDF)
-              </a>
+            {(current.file_url || files.length > 0) && (
+              <div className="mt-5">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">{t('attachments')}</p>
+                <div className="flex flex-wrap gap-2">
+                  {files.map(f => (
+                    <a key={f.name} href={`/api/portal/offers/${offer.id}/files?name=${encodeURIComponent(f.name)}`} target="_blank" rel="noreferrer"
+                       className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-50">
+                      📎 {f.name} <span className="text-gray-400">({(f.size / 1048576).toFixed(1)} MB)</span>
+                    </a>
+                  ))}
+                  {current.file_url && (
+                    <a href={current.file_url} target="_blank" rel="noreferrer" className="inline-block rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-50">
+                      {t('download')} (PDF)
+                    </a>
+                  )}
+                </div>
+              </div>
             )}
           </div>
         )}

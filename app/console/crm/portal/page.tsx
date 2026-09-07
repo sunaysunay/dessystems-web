@@ -86,6 +86,8 @@ export default function CR030Page() {
   const [expanded, setExpanded] = useState('');
   const [saving, setSaving] = useState(false);
   const [eventSort, setEventSort] = useState<'newest' | 'oldest' | 'type' | 'client'>('newest');
+  const [attachments, setAttachments] = useState<{ files: { name: string; size: number }[]; used_bytes: number; max_bytes: number } | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   async function loadAll() {
     setLoading(true);
@@ -261,6 +263,32 @@ export default function CR030Page() {
     setVersionFor(o);
   }
 
+  async function loadAttachments(offerId: string) {
+    setAttachments(null);
+    const d = await fetch(`/api/bop/crm/portal/attachments?offer_id=${offerId}`).then(r => r.json());
+    if (!d.error) setAttachments(d);
+  }
+
+  async function uploadAttachment(o: Offer, file: File) {
+    setUploading(true);
+    const fd = new FormData();
+    fd.append('offer_id', o.id);
+    fd.append('file', file);
+    const d = await fetch('/api/bop/crm/portal/attachments', { method: 'POST', body: fd }).then(r => r.json());
+    setUploading(false);
+    if (d.error) { showToast(`Error: ${d.error}`); return; }
+    showToast(`Uploaded ${d.name}`);
+    void loadAttachments(o.id);
+  }
+
+  async function deleteAttachment(o: Offer, name: string) {
+    if (!confirm(`Remove attachment "${name}"? The client can no longer download it.`)) return;
+    const d = await fetch(`/api/bop/crm/portal/attachments?offer_id=${o.id}&name=${encodeURIComponent(name)}`, { method: 'DELETE' }).then(r => r.json());
+    if (d.error) { showToast(`Error: ${d.error}`); return; }
+    showToast('Attachment removed');
+    void loadAttachments(o.id);
+  }
+
   async function deleteOffer(o: Offer) {
     const label = `${o.offer_no ?? ''} "${o.title}"`.trim();
     const extra = o.status === 'approved' ? '\n\n⚠️ This offer was APPROVED — deleting removes the signed record.' : '';
@@ -406,7 +434,7 @@ export default function CR030Page() {
                 const open = expanded === o.id;
                 return (
                   <div key={o.id} className="rounded-xl border bg-white shadow-sm">
-                    <button onClick={() => setExpanded(open ? '' : o.id)} className="flex w-full items-center gap-3 px-5 py-4 text-left">
+                    <button onClick={() => { setExpanded(open ? '' : o.id); if (!open) void loadAttachments(o.id); }} className="flex w-full items-center gap-3 px-5 py-4 text-left">
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
                           <span className="font-mono text-xs text-slate-400">{o.offer_no}</span>
@@ -462,6 +490,34 @@ export default function CR030Page() {
                             </table>
                           </div>
                         )}
+
+                        {/* Attachments (private Supabase storage, 20 MB per offer; large files stay on Drive via the file URL field) */}
+                        <div className="mb-4">
+                          <div className="mb-2 flex items-center justify-between">
+                            <h4 className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                              Attachments{attachments ? ` — ${(attachments.used_bytes / 1048576).toFixed(1)} / ${(attachments.max_bytes / 1048576).toFixed(0)} MB` : ''}
+                            </h4>
+                            <label className={`cursor-pointer rounded-lg border border-slate-200 px-3 py-1 text-xs font-medium text-slate-600 hover:bg-slate-50 ${uploading ? 'opacity-50 pointer-events-none' : ''}`}>
+                              {uploading ? 'Uploading…' : '⬆ Upload file'}
+                              <input type="file" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) void uploadAttachment(o, f); e.target.value = ''; }} />
+                            </label>
+                          </div>
+                          {attachments && attachments.files.length > 0 ? (
+                            <div className="space-y-1">
+                              {attachments.files.map(f => (
+                                <div key={f.name} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-1.5 text-xs">
+                                  <span className="truncate text-slate-700">📎 {f.name}</span>
+                                  <span className="ml-3 flex flex-none items-center gap-2 text-slate-400">
+                                    {(f.size / 1048576).toFixed(2)} MB
+                                    <button onClick={() => deleteAttachment(o, f.name)} className="text-slate-300 hover:text-red-500" title="Remove attachment">✕</button>
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-xs text-slate-400">{attachments ? 'No files attached — the client sees these as secure downloads on the offer page.' : 'Loading…'}</p>
+                          )}
+                        </div>
 
                         {/* Responses */}
                         {(o.portal_offer_responses ?? []).length > 0 && (

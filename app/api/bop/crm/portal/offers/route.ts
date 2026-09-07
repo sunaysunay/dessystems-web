@@ -142,6 +142,29 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ ok: true, status: 'sent' });
   }
 
+  // Record a decision received outside the portal (phone, e-mail, on paper)
+  if (action === 'mark_approved' || action === 'mark_declined') {
+    if (offer.status === 'draft') return NextResponse.json({ error: 'send the offer first' }, { status: 409 });
+    if (['approved', 'declined', 'withdrawn'].includes(offer.status)) {
+      return NextResponse.json({ error: `offer already ${offer.status}` }, { status: 409 });
+    }
+    const decision = action === 'mark_approved' ? 'approved' : 'declined';
+    const { error: respErr } = await supabase.from('portal_offer_responses').insert({
+      offer_id: id,
+      version_no: offer.current_version,
+      action: decision,
+      comment: body.comment || `Recorded manually by DES (outside the portal)`,
+      signer_name: body.signer_name || null,
+    });
+    if (respErr) return NextResponse.json({ error: respErr.message }, { status: 500 });
+    const { error } = await supabase
+      .from('portal_offers')
+      .update({ status: decision, decided_at: now, updated_at: now })
+      .eq('id', id);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true, status: decision });
+  }
+
   if (action === 'withdraw') {
     const { error } = await supabase.from('portal_offers').update({ status: 'withdrawn', updated_at: now }).eq('id', id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
@@ -155,13 +178,17 @@ export async function PATCH(req: NextRequest) {
     }
     const vatRate = Number(body.vat_rate ?? 21);
     const { line_items, subtotal, vat_amount, total } = computeTotals(body.line_items ?? [], vatRate);
-    if (line_items.length === 0) return NextResponse.json({ error: 'at least one line item required' }, { status: 400 });
+    // Items are only mandatory when this creates a version the client will see;
+    // a draft may be saved incomplete (items without a description are dropped).
+    if (line_items.length === 0 && offer.status !== 'draft') {
+      return NextResponse.json({ error: 'at least one line item required' }, { status: 400 });
+    }
 
     // On a draft, edits replace the current version in place and it stays a draft
     if (offer.status === 'draft') {
       const { error: updErr } = await supabase
         .from('portal_offer_versions')
-        .update({ line_items, subtotal, vat_rate: vatRate, vat_amount, total, change_note: body.change_note || null })
+        .update({ line_items, subtotal, vat_rate: vatRate, vat_amount, total, change_note: body.change_note || null, file_url: body.file_url || null })
         .eq('offer_id', id)
         .eq('version_no', offer.current_version);
       if (updErr) return NextResponse.json({ error: updErr.message }, { status: 500 });

@@ -73,11 +73,12 @@ export default function CR030Page() {
   const [newCode, setNewCode] = useState<{ client: string; code: string; url: string } | null>(null);
 
   const [offerDrawer, setOfferDrawer] = useState(false);
-  const [offerForm, setOfferForm] = useState<any>({ client_id: '', title: '', summary: '', valid_until: '', vat_rate: 21, send: true });
+  const [offerForm, setOfferForm] = useState<any>({ client_id: '', title: '', summary: '', valid_until: '', vat_rate: 21, send: true, file_url: '' });
   const [items, setItems] = useState<LineItem[]>([emptyItem()]);
 
   const [versionFor, setVersionFor] = useState<Offer | null>(null);
   const [versionNote, setVersionNote] = useState('');
+  const [versionFile, setVersionFile] = useState('');
 
   const [docDrawer, setDocDrawer] = useState(false);
   const [docForm, setDocForm] = useState<any>({ client_id: '', title: '', note: '', category: 'proposal', file_url: '', is_primary: false });
@@ -181,7 +182,7 @@ export default function CR030Page() {
     setSaving(false);
     if (d.error) { showToast(`Error: ${d.error}`); return; }
     setOfferDrawer(false);
-    setOfferForm({ client_id: '', title: '', summary: '', valid_until: '', vat_rate: 21, send: true });
+    setOfferForm({ client_id: '', title: '', summary: '', valid_until: '', vat_rate: 21, send: true, file_url: '' });
     setItems([emptyItem()]);
     showToast(offerForm.send ? 'Offer created and sent' : 'Offer saved as draft');
     void loadAll();
@@ -203,7 +204,7 @@ export default function CR030Page() {
     setSaving(true);
     const res = await fetch('/api/bop/crm/portal/offers', {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: versionFor.id, action: 'new_version', line_items: items, change_note: versionNote || null, vat_rate: offerForm.vat_rate ?? 21 }),
+      body: JSON.stringify({ id: versionFor.id, action: 'new_version', line_items: items, change_note: versionNote || null, vat_rate: offerForm.vat_rate ?? 21, file_url: versionFile || null }),
     });
     const d = await res.json();
     setSaving(false);
@@ -256,7 +257,22 @@ export default function CR030Page() {
     const current = (o.portal_offer_versions ?? []).find((v: any) => v.version_no === o.current_version);
     setItems(current?.line_items?.length ? current.line_items.map((li: any) => ({ ...li })) : [emptyItem()]);
     setVersionNote('');
+    setVersionFile(current?.file_url ?? '');
     setVersionFor(o);
+  }
+
+  async function markDecision(o: Offer, decision: 'mark_approved' | 'mark_declined') {
+    const verb = decision === 'mark_approved' ? 'approved' : 'declined';
+    const signer = prompt(`Record that the customer ${verb} this offer outside the portal.\n\nCustomer name (who gave the decision):`);
+    if (signer === null) return;
+    const res = await fetch('/api/bop/crm/portal/offers', {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: o.id, action: decision, signer_name: signer.trim() || null }),
+    });
+    const d = await res.json();
+    if (d.error) { showToast(`Error: ${d.error}`); return; }
+    showToast(`Offer marked ${verb}`);
+    void loadAll();
   }
 
   function updateItem(idx: number, k: keyof LineItem, v: any) {
@@ -403,6 +419,12 @@ export default function CR030Page() {
                               <button onClick={() => startNewVersion(o)} className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700">
                                 {o.status === 'draft' ? 'Edit items' : 'New version'}
                               </button>
+                              {o.status !== 'draft' && (
+                                <>
+                                  <button onClick={() => markDecision(o, 'mark_approved')} className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-700 hover:bg-emerald-100" title="Record an approval received outside the portal">✓ Mark approved</button>
+                                  <button onClick={() => markDecision(o, 'mark_declined')} className="rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-100" title="Record a decline received outside the portal">✕ Mark declined</button>
+                                </>
+                              )}
                               <button onClick={() => offerAction(o, 'withdraw')} className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50">Withdraw</button>
                             </>
                           )}
@@ -612,11 +634,18 @@ export default function CR030Page() {
                     <div><label className={labelCls}>VAT %</label>
                       <input className={inputCls} type="number" value={offerForm.vat_rate} onChange={e => setOfferForm((p: any) => ({ ...p, vat_rate: Number(e.target.value) }))} /></div>
                   </div>
+                  <div><label className={labelCls}>Offer PDF (file URL, optional)</label>
+                    <input className={inputCls} value={offerForm.file_url} onChange={e => setOfferForm((p: any) => ({ ...p, file_url: e.target.value }))} placeholder="https://… (Drive export, hosted PDF)" />
+                    <p className="mt-1 text-[10px] text-slate-400">Shown to the client as a “Download (PDF)” button under the line items.</p></div>
                 </>
               )}
               {versionFor && (
-                <div><label className={labelCls}>What changed in this version *</label>
-                  <input className={inputCls} value={versionNote} onChange={e => setVersionNote(e.target.value)} placeholder="Adjusted scope of phase 2 per your feedback" /></div>
+                <>
+                  <div><label className={labelCls}>What changed in this version {versionFor.status !== 'draft' && '*'}</label>
+                    <input className={inputCls} value={versionNote} onChange={e => setVersionNote(e.target.value)} placeholder="Adjusted scope of phase 2 per your feedback" /></div>
+                  <div><label className={labelCls}>Offer PDF (file URL, optional)</label>
+                    <input className={inputCls} value={versionFile} onChange={e => setVersionFile(e.target.value)} placeholder="https://… (Drive export, hosted PDF)" /></div>
+                </>
               )}
 
               {/* Line items editor */}

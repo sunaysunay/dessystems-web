@@ -147,12 +147,27 @@ function StatCard({ label, value }: { label: string; value: string }) {
   );
 }
 
-function formatUptime(uptime: string): string {
-  const match = uptime.match(/(\d+)\s*days?\s+(\d+):(\d+)/);
+// The health API may return uptime as an interval string, a number of seconds,
+// or an object like {days, hours, minutes} depending on the pg driver — normalize first.
+function formatUptime(uptime: unknown): string {
+  if (uptime == null) return '—';
+  if (typeof uptime === 'number') {
+    const days = Math.floor(uptime / 86400);
+    const hours = Math.floor((uptime % 86400) / 3600);
+    return days > 0 ? `${days}d ${hours}h` : `${hours}h ${Math.floor((uptime % 3600) / 60)}m`;
+  }
+  if (typeof uptime === 'object') {
+    const u = uptime as { days?: number; hours?: number; minutes?: number };
+    if (u.days != null || u.hours != null || u.minutes != null) {
+      return u.days ? `${u.days}d ${u.hours ?? 0}h` : `${u.hours ?? 0}h ${u.minutes ?? 0}m`;
+    }
+  }
+  const s = String(uptime);
+  const match = s.match(/(\d+)\s*days?\s+(\d+):(\d+)/);
   if (match) return `${match[1]}d ${match[2]}h`;
-  const hoursMatch = uptime.match(/(\d+):(\d+)/);
+  const hoursMatch = s.match(/(\d+):(\d+)/);
   if (hoursMatch) return `${hoursMatch[1]}h ${hoursMatch[2]}m`;
-  return uptime;
+  return s;
 }
 
 function extractPgVersion(full: string): string {

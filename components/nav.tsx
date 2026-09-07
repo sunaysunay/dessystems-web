@@ -192,6 +192,67 @@ function LangSwitcher({ mobile = false }: { mobile?: boolean }) {
   )
 }
 
+// Laboratory + DES Group (+ future ecosystem links) grouped in one dropdown
+function HubMenu({ label }: { label: string }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
+  }, [open])
+
+  const items = [
+    { href: "/deslab", label: "Laboratory", external: false },
+    { href: "https://deshold.com", label: "DES Group", external: true },
+  ]
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className="flex items-center gap-1.5 text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
+        style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}
+        onMouseEnter={(e) => e.currentTarget.style.color = "#fff"}
+        onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.80)"}
+      >
+        {label}
+        <ChevronDown size={14} strokeWidth={2} className={"transition-transform " + (open ? "rotate-180" : "")} />
+      </button>
+
+      {open && (
+        <div className="absolute top-full right-0 z-[300] mt-2">
+          <div className="min-w-[180px] overflow-hidden rounded-xl border shadow-xl"
+            style={{ background: "rgba(14,22,38,0.95)", backdropFilter: "blur(12px)", borderColor: "rgba(255,255,255,0.15)" }}>
+            {items.map(it => it.external ? (
+              <a key={it.href} href={it.href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}
+                className="flex w-full items-center justify-between gap-3 px-4 py-[10px] text-left text-[13px] transition-colors"
+                style={{ color: "rgba(255,255,255,0.8)" }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.05)"}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}>
+                {it.label}<span style={{ color: "rgba(255,255,255,0.4)" }}>↗</span>
+              </a>
+            ) : (
+              <Link key={it.href} href={it.href} onClick={() => setOpen(false)}
+                className="flex w-full items-center gap-3 px-4 py-[10px] text-left text-[13px] transition-colors"
+                style={{ color: "rgba(255,255,255,0.8)" }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.05)"}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}>
+                {it.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function Nav() {
   const t = useTranslations("Nav")
   const [open, setOpen]       = useState(false)
@@ -247,16 +308,13 @@ export default function Nav() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <Link href="/deslab"
+          {/* /portal lives outside the [locale] tree — plain <a>, not the i18n Link */}
+          <a href="/portal/login"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
-            style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>
-            Laboratory
-          </Link>
-          <a href="https://deshold.com" target="_blank" rel="noopener noreferrer"
-            className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors whitespace-nowrap"
-            style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>
-            DES Group
+            style={{ border: "1px solid rgba(255,255,255,0.30)", color: "#fff" }}>
+            {t("portal")}
           </a>
+          <HubMenu label={t("more")} />
           <LangSwitcher />
           <Link href="/contact"
             className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors text-white"
@@ -279,14 +337,19 @@ export default function Nav() {
               {l.label}
             </Link>
           ))}
-          <div className="flex items-center justify-between mt-3 gap-2">
+          <div className="flex flex-wrap items-center mt-3 gap-2">
+            <a href="/portal/login" onClick={() => setOpen(false)}
+              className="text-sm font-medium px-4 py-2 rounded-md"
+              style={{ border: "1px solid rgba(255,255,255,0.30)", color: "#fff" }}>
+              {t("portal")}
+            </a>
             <Link href="/deslab" onClick={() => setOpen(false)}
               className="text-sm font-medium px-4 py-2 rounded-md"
               style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>
               Laboratory
             </Link>
             <a href="https://deshold.com" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}
-              className="text-[13px] font-medium px-5 py-2 rounded-md transition-colors w-fit"
+              className="text-sm font-medium px-4 py-2 rounded-md"
               style={{ border: "1px solid rgba(255,255,255,0.16)", color: "rgba(255,255,255,0.80)" }}>
               DES Group
             </a>

@@ -331,7 +331,8 @@
     "dbaActions": "Veritabani Islemleri",
     "dbaHistory": "Sorgu Gecmisi",
     "dbaMigrations": "Migrasyonlar",
-    "dbaHealth": "Veritabani Sagligi"
+    "dbaHealth": "Veritabani Sagligi",
+    "clientPortal": "Müşteri Portalı"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -514,7 +515,8 @@
     "DB006": "Veritabani Islemleri",
     "DB007": "Sorgu Gecmisi",
     "DB008": "Migrasyonlar",
-    "DB009": "Veritabani Sagligi"
+    "DB009": "Veritabani Sagligi",
+    "CR030": "Müşteri Portalı"
   },
   "support": {
     "title": "Destek",
@@ -616,7 +618,9 @@
     "careers": "Kariyer",
     "cta": "İletişim",
     "language": "Dil",
-    "autoDetect": "Otomatik algıla"
+    "autoDetect": "Otomatik algıla",
+    "portal": "Müşteri Portalı",
+    "more": "Daha fazla"
   },
   "Hero": {
     "erp_title": "ERP & SAP Lojistik Danışmanlığı",
@@ -756,7 +760,8 @@
     "get_in_touch": "İletişime Geçin",
     "rights": "Tüm hakları saklıdır.",
     "powered_by": "Sağlayan",
-    "made_with": "Avrupa'da <heart></heart> ile üretildi"
+    "made_with": "Avrupa'da <heart></heart> ile üretildi",
+    "l_portal": "Müşteri portalı"
   },
   "Contact": {
     "eyebrow": "İletişim",

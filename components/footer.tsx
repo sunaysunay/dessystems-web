@@ -114,6 +114,8 @@ export default function Footer() {
             <Link href="/privacy" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{t("l_privacy")}</Link>
             <Link href="/terms" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{t("l_terms")}</Link>
             <Link href="/cookies" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{t("l_cookies")}</Link>
+            {/* /portal lives outside the [locale] tree — plain <a>, not the i18n Link */}
+            <a href="/portal/login" className="text-[12px] transition-colors" style={{ color: "var(--text3)" }}>{t("l_portal")}</a>
           </div>
           <ThemeToggle />
           <div className="text-[12px] flex items-center gap-1.5" style={{ color: "var(--text3)" }}>

@@ -6,7 +6,9 @@
     "about": "About Us",
     "insights": "Insights",
     "careers": "Careers",
-    "cta": "Contact Us"
+    "cta": "Contact Us",
+    "portal": "Клиентски портал",
+    "more": "Още"
   },
   "Hero": {
     "erp_title": "ERP & SAP Logistic Consulting",
@@ -146,7 +148,8 @@
     "get_in_touch": "Свържете се с нас",
     "rights": "Всички права запазени.",
     "powered_by": "Задвижвано от",
-    "made_with": "Създадено с <heart></heart> в Европа"
+    "made_with": "Създадено с <heart></heart> в Европа",
+    "l_portal": "Клиентски портал"
   },
   "Contact": {
     "eyebrow": "Contact",
@@ -444,9 +447,13 @@
     "cbtOpportunities": "Opportunities",
     "cbtTradeLog": "Trade Log",
     "cbtTradingDash": "Trading Dashboard",
-    "cbtDealerFeed": "Dealer Feed"
+    "cbtDealerFeed": "Dealer Feed",
+    "clientPortal": "Клиентски портал"
   },
   "groups": {
     "markets": "Markets"
+  },
+  "screens": {
+    "CR030": "Клиентски портал"
   }
 }

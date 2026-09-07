@@ -248,7 +248,8 @@
     "wrkRecommendations": "Repair Recommendations",
     "wrkRates": "Labour Rates",
     "wrkPackages": "Service Packages",
-    "wrkDmsIntegration": "DMS Integration"
+    "wrkDmsIntegration": "DMS Integration",
+    "clientPortal": "Client Portal"
   },
   "sal": {
     "orders": "Orders",
@@ -659,7 +660,8 @@
     "WK010": "Repair Recommendations",
     "WK011": "Labour Rates",
     "WK012": "Service Packages",
-    "WK013": "DMS Integration"
+    "WK013": "DMS Integration",
+    "CR030": "Client Portal"
   },
   "support": {
     "title": "Support",
@@ -753,7 +755,9 @@
     "careers": "Careers",
     "cta": "Contact Us",
     "language": "Language",
-    "autoDetect": "Auto-detect"
+    "autoDetect": "Auto-detect",
+    "portal": "Client Portal",
+    "more": "More"
   },
   "Hero": {
     "erp_title": "ERP & SAP Logistic Consulting",
@@ -893,7 +897,8 @@
     "get_in_touch": "Get in Touch",
     "rights": "All rights reserved.",
     "powered_by": "Powered by",
-    "made_with": "Made with <heart></heart> in Europe"
+    "made_with": "Made with <heart></heart> in Europe",
+    "l_portal": "Client portal"
   },
   "Contact": {
     "eyebrow": "Contact",

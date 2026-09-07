@@ -6,7 +6,9 @@
     "about": "About Us",
     "insights": "Insights",
     "careers": "Careers",
-    "cta": "Contact Us"
+    "cta": "Contact Us",
+    "portal": "Πύλη πελατών",
+    "more": "Περισσότερα"
   },
   "Hero": {
     "erp_title": "ERP & SAP Logistic Consulting",
@@ -146,7 +148,8 @@
     "get_in_touch": "Επικοινωνήστε",
     "rights": "Με επιφύλαξη παντός δικαιώματος.",
     "powered_by": "Με την υποστήριξη",
-    "made_with": "Φτιαγμένο με <heart></heart> στην Ευρώπη"
+    "made_with": "Φτιαγμένο με <heart></heart> στην Ευρώπη",
+    "l_portal": "Πύλη πελατών"
   },
   "Contact": {
     "eyebrow": "Contact",
@@ -444,9 +447,13 @@
     "cbtOpportunities": "Opportunities",
     "cbtTradeLog": "Trade Log",
     "cbtTradingDash": "Trading Dashboard",
-    "cbtDealerFeed": "Dealer Feed"
+    "cbtDealerFeed": "Dealer Feed",
+    "clientPortal": "Πύλη πελατών"
   },
   "groups": {
     "markets": "Markets"
+  },
+  "screens": {
+    "CR030": "Πύλη πελατών"
   }
 }

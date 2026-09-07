@@ -6,7 +6,9 @@
     "about": "About Us",
     "insights": "Insights",
     "careers": "Careers",
-    "cta": "Contact Us"
+    "cta": "Contact Us",
+    "portal": "Portal de clientes",
+    "more": "Más"
   },
   "Hero": {
     "erp_title": "ERP & SAP Logistic Consulting",
@@ -146,7 +148,8 @@
     "get_in_touch": "Contáctanos",
     "rights": "Todos los derechos reservados.",
     "powered_by": "Desarrollado con",
-    "made_with": "Hecho con <heart></heart> en Europa"
+    "made_with": "Hecho con <heart></heart> en Europa",
+    "l_portal": "Portal de clientes"
   },
   "Contact": {
     "eyebrow": "Contact",
@@ -444,9 +447,13 @@
     "cbtOpportunities": "Opportunities",
     "cbtTradeLog": "Trade Log",
     "cbtTradingDash": "Trading Dashboard",
-    "cbtDealerFeed": "Dealer Feed"
+    "cbtDealerFeed": "Dealer Feed",
+    "clientPortal": "Portal de clientes"
   },
   "groups": {
     "markets": "Markets"
+  },
+  "screens": {
+    "CR030": "Portal de clientes"
   }
 }

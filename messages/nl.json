@@ -257,7 +257,8 @@
     "dbaActions": "Database Acties",
     "dbaHistory": "Query Geschiedenis",
     "dbaMigrations": "Migraties",
-    "dbaHealth": "Database Gezondheid"
+    "dbaHealth": "Database Gezondheid",
+    "clientPortal": "Klantportaal"
   },
   "sal": {
     "orders": "Bestellingen",
@@ -659,7 +660,8 @@
     "DB006": "Database Acties",
     "DB007": "Query Geschiedenis",
     "DB008": "Migraties",
-    "DB009": "Database Gezondheid"
+    "DB009": "Database Gezondheid",
+    "CR030": "Klantportaal"
   },
   "support": {
     "title": "Support",
@@ -753,7 +755,9 @@
     "careers": "Carrières",
     "cta": "Neem contact met ons op",
     "language": "Taal",
-    "autoDetect": "Automatisch detecteren"
+    "autoDetect": "Automatisch detecteren",
+    "portal": "Klantportaal",
+    "more": "Meer"
   },
   "Hero": {
     "erp_title": "ERP en SAP logistiek advies",
@@ -893,7 +897,8 @@
     "get_in_touch": "Neem contact op",
     "rights": "Alle rechten voorbehouden.",
     "powered_by": "Mogelijk gemaakt door",
-    "made_with": "Gemaakt met <heart></heart> in Europa"
+    "made_with": "Gemaakt met <heart></heart> in Europa",
+    "l_portal": "Klantportaal"
   },
   "Contact": {
     "eyebrow": "Contact",

@@ -107,6 +107,7 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     { label: tn('rentals'),           href: '/console/sal/rentals' },
     { label: tn('activities'),        href: '/console/crm/activities' },
     { label: tn('pipelineKanban'),   href: '/console/crm/kanban' },
+    { label: tn('clientPortal'),      href: '/console/crm/portal' },
   ]},
 
   { group: tg('marketplace'), items: [

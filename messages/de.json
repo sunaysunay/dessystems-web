@@ -331,7 +331,8 @@
     "dbaActions": "Datenbankaktionen",
     "dbaHistory": "Abfrageverlauf",
     "dbaMigrations": "Migrationen",
-    "dbaHealth": "Datenbank-Gesundheit"
+    "dbaHealth": "Datenbank-Gesundheit",
+    "clientPortal": "Kundenportal"
   },
   "screens": {
     "IN006": "Modellkatalog",
@@ -514,7 +515,8 @@
     "DB006": "Datenbankaktionen",
     "DB007": "Abfrageverlauf",
     "DB008": "Migrationen",
-    "DB009": "Datenbank-Gesundheit"
+    "DB009": "Datenbank-Gesundheit",
+    "CR030": "Kundenportal"
   },
   "support": {
     "title": "Support",
@@ -616,7 +618,9 @@
     "careers": "Karriere",
     "cta": "Kontakt",
     "language": "Sprache",
-    "autoDetect": "Automatisch erkennen"
+    "autoDetect": "Automatisch erkennen",
+    "portal": "Kundenportal",
+    "more": "Mehr"
   },
   "Hero": {
     "erp_title": "ERP- & SAP-Logistikberatung",
@@ -756,7 +760,8 @@
     "get_in_touch": "Kontakt aufnehmen",
     "rights": "Alle Rechte vorbehalten.",
     "powered_by": "Bereitgestellt von",
-    "made_with": "Gemacht mit <heart></heart> in Europa"
+    "made_with": "Gemacht mit <heart></heart> in Europa",
+    "l_portal": "Kundenportal"
   },
   "Contact": {
     "eyebrow": "Kontakt",

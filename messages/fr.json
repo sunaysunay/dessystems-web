@@ -331,7 +331,8 @@
     "dbaActions": "Actions Base de Donnees",
     "dbaHistory": "Historique des Requetes",
     "dbaMigrations": "Migrations",
-    "dbaHealth": "Sante Base de Donnees"
+    "dbaHealth": "Sante Base de Donnees",
+    "clientPortal": "Portail client"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -514,7 +515,8 @@
     "DB006": "Actions Base de Donnees",
     "DB007": "Historique des Requetes",
     "DB008": "Migrations",
-    "DB009": "Sante Base de Donnees"
+    "DB009": "Sante Base de Donnees",
+    "CR030": "Portail client"
   },
   "support": {
     "title": "Support",
@@ -616,7 +618,9 @@
     "careers": "Carrières",
     "cta": "Contact",
     "language": "Langue",
-    "autoDetect": "Détection automatique"
+    "autoDetect": "Détection automatique",
+    "portal": "Portail client",
+    "more": "Plus"
   },
   "Hero": {
     "erp_title": "Conseil ERP & logistique SAP",
@@ -756,7 +760,8 @@
     "get_in_touch": "Nous contacter",
     "rights": "Tous droits réservés.",
     "powered_by": "Propulsé par",
-    "made_with": "Fait avec <heart></heart> en Europe"
+    "made_with": "Fait avec <heart></heart> en Europe",
+    "l_portal": "Portail client"
   },
   "Contact": {
     "eyebrow": "Contact",

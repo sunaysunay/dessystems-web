@@ -6,7 +6,9 @@
     "about": "About Us",
     "insights": "Insights",
     "careers": "Careers",
-    "cta": "Contact Us"
+    "cta": "Contact Us",
+    "portal": "Portal clienți",
+    "more": "Mai mult"
   },
   "Hero": {
     "erp_title": "ERP & SAP Logistic Consulting",
@@ -146,7 +148,8 @@
     "get_in_touch": "Contactează-ne",
     "rights": "Toate drepturile rezervate.",
     "powered_by": "Susținut de",
-    "made_with": "Creat cu <heart></heart> în Europa"
+    "made_with": "Creat cu <heart></heart> în Europa",
+    "l_portal": "Portal clienți"
   },
   "Contact": {
     "eyebrow": "Contact",
@@ -444,9 +447,13 @@
     "cbtOpportunities": "Opportunities",
     "cbtTradeLog": "Trade Log",
     "cbtTradingDash": "Trading Dashboard",
-    "cbtDealerFeed": "Dealer Feed"
+    "cbtDealerFeed": "Dealer Feed",
+    "clientPortal": "Portal clienți"
   },
   "groups": {
     "markets": "Markets"
+  },
+  "screens": {
+    "CR030": "Portal clienți"
   }
 }

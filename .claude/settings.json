@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "ask": [
+      "Bash(psql *)",
+      "Bash(bash /root/scripts/des-sql.sh --commit*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r \".tool_input.command // \\\"\\\"\" | grep -qiE \"bop_console_ddl|DBA_PG_DDL_PASSWORD|des-sql\\.sh.*--commit|(^|[^A-Za-z0-9_-])psql([^A-Za-z0-9_-]|$)\" && printf \"%s\" \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"PreToolUse\\\",\\\"permissionDecision\\\":\\\"ask\\\",\\\"permissionDecisionReason\\\":\\\"Database/DDL SQL execution — user rule: requires explicit confirmation\\\"}}\" || true",
+            "statusMessage": "Checking for DDL/SQL execution…"
+          }
+        ]
+      }
+    ]
+  }
+}

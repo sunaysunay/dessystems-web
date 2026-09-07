@@ -5,6 +5,18 @@ This file is loaded by every AI agent (Claude, Cursor, Copilot, Gemini, etc.) be
 
 ---
 
+## ⛔ Database execution policy — MANDATORY for all AI agents
+
+**Never execute schema-changing or committing SQL without the user's explicit confirmation in the current conversation.** This applies to every path to the database:
+
+- `psql` in any form (including with `DBA_PG_DDL_PASSWORD` / role `bop_console_ddl`)
+- `bash /root/scripts/des-sql.sh --commit` (DML commit mode)
+- any other client executing CREATE / ALTER / DROP / GRANT / INSERT / UPDATE / DELETE
+
+Allowed without asking: read-only queries via `des-sql.sh "select …"` (dry-run default) and Supabase REST reads. When a migration is needed: **write the .sql file, show it, and ask the user to confirm before executing.** A Claude Code PreToolUse hook in `.claude/settings.json` enforces a confirmation prompt for these commands — do not attempt to bypass it.
+
+---
+
 ## Environment
 
 | Instance | Port | Directory | Purpose |

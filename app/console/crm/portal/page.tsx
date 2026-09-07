@@ -127,7 +127,7 @@ export default function CR030Page() {
     });
     const d = await res.json();
     if (d.error) { showToast(`Error: ${d.error}`); return; }
-    setNewCode({ client: c.name, code: d.code, url: `${location.origin}/portal/login?c=${c.slug}` });
+    setNewCode({ client: c.name, code: d.code, url: `${location.origin}/portal/login?c=${c.slug}&tenant=500` });
   }
 
   async function setClientStatus(c: Client, status: string) {
@@ -298,7 +298,7 @@ export default function CR030Page() {
                         <div className="text-xs text-slate-400">{c.contact_name}{c.email ? ` · ${c.email}` : ''}</div>
                       </td>
                       <td className="px-4 py-3">
-                        <button onClick={() => { navigator.clipboard?.writeText(`${location.origin}/portal/login?c=${c.slug}`); showToast('Login link copied'); }}
+                        <button onClick={() => { navigator.clipboard?.writeText(`${location.origin}/portal/login?c=${c.slug}&tenant=500`); showToast('Login link copied'); }}
                           className="font-mono text-xs text-blue-600 hover:underline">/portal/login?c={c.slug}</button>
                       </td>
                       <td className="px-4 py-3 text-xs uppercase text-slate-500">{c.locale}</td>

@@ -58,7 +58,8 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ client: data, code, login_url: `/portal/login?c=${data.slug}` });
+  // Client links always carry the DES Systems tenant (500), never the console's current tenant scope
+  return NextResponse.json({ client: data, code, login_url: `/portal/login?c=${data.slug}&tenant=500` });
 }
 
 // PATCH { id, action?: 'regenerate_code', ...fields }

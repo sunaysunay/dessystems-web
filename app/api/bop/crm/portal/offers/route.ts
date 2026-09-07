@@ -111,6 +111,18 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ offer });
 }
 
+// DELETE ?id= → permanently remove an offer with its versions and responses (FK cascade)
+export async function DELETE(req: NextRequest) {
+  const supabase = getServerClient();
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id') ?? '';
+  if (!id) return NextResponse.json({ error: 'id required' }, { status: 400 });
+
+  const { error } = await supabase.from('portal_offers').delete().eq('id', id);
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json({ ok: true });
+}
+
 // PATCH { id, action: 'send' | 'withdraw' | 'update' | 'new_version', ... }
 export async function PATCH(req: NextRequest) {
   const supabase = getServerClient();

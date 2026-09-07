@@ -261,6 +261,18 @@ export default function CR030Page() {
     setVersionFor(o);
   }
 
+  async function deleteOffer(o: Offer) {
+    const label = `${o.offer_no ?? ''} "${o.title}"`.trim();
+    const extra = o.status === 'approved' ? '\n\n⚠️ This offer was APPROVED — deleting removes the signed record.' : '';
+    if (!confirm(`Permanently delete offer ${label}?\nAll versions and client responses are removed. This cannot be undone.${extra}`)) return;
+    const res = await fetch(`/api/bop/crm/portal/offers?id=${o.id}`, { method: 'DELETE' });
+    const d = await res.json();
+    if (d.error) { showToast(`Error: ${d.error}`); return; }
+    showToast('Offer deleted');
+    setExpanded('');
+    void loadAll();
+  }
+
   async function markDecision(o: Offer, decision: 'mark_approved' | 'mark_declined') {
     const verb = decision === 'mark_approved' ? 'approved' : 'declined';
     const signer = prompt(`Record that the customer ${verb} this offer outside the portal.\n\nCustomer name (who gave the decision):`);
@@ -428,6 +440,7 @@ export default function CR030Page() {
                               <button onClick={() => offerAction(o, 'withdraw')} className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50">Withdraw</button>
                             </>
                           )}
+                          <button onClick={() => deleteOffer(o)} className="ml-auto rounded-lg border border-red-200 px-3 py-1.5 text-xs font-medium text-red-500 hover:bg-red-50" title="Permanently delete this offer with all versions and responses">🗑 Delete</button>
                         </div>
 
                         {/* Current version items */}

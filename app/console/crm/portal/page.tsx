@@ -342,6 +342,8 @@ export default function CR030Page() {
   /* ── Render ──────────────────────────────────────────────────────────── */
 
   const inputCls = 'w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent';
+  // Line-item row inputs must NOT carry w-full — it overrides the narrow qty/price widths and crushes the description field
+  const rowInputCls = 'rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent';
   const labelCls = 'block text-xs font-semibold text-slate-500 mb-1';
 
   return (
@@ -742,10 +744,10 @@ export default function CR030Page() {
                   {items.map((it, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <input
-                        className={`${inputCls} flex-1 ${!String(it.description || '').trim() && ((Number(it.quantity) || 0) > 1 || (Number(it.unit_price) || 0) > 0) ? 'border-red-300 bg-red-50' : ''}`}
+                        className={`${rowInputCls} min-w-0 flex-1 ${!String(it.description || '').trim() && ((Number(it.quantity) || 0) > 1 || (Number(it.unit_price) || 0) > 0) ? 'border-red-300 bg-red-50' : ''}`}
                         placeholder="Description *" value={it.description} onChange={e => updateItem(i, 'description', e.target.value)} />
-                      <input className={`${inputCls} w-16 text-right`} type="number" min={1} value={it.quantity} onChange={e => updateItem(i, 'quantity', Number(e.target.value))} />
-                      <input className={`${inputCls} w-28 text-right`} type="number" step="0.01" placeholder="0.00" value={it.unit_price} onChange={e => updateItem(i, 'unit_price', Number(e.target.value))} />
+                      <input className={`${rowInputCls} w-16 flex-none text-right`} type="number" min={1} title="Quantity" value={it.quantity} onChange={e => updateItem(i, 'quantity', Number(e.target.value))} />
+                      <input className={`${rowInputCls} w-28 flex-none text-right`} type="number" step="0.01" placeholder="0.00" title="Unit price €" value={it.unit_price} onChange={e => updateItem(i, 'unit_price', Number(e.target.value))} />
                       <label className="flex items-center gap-1 text-[10px] text-slate-400"><input type="checkbox" checked={!!it.optional} onChange={e => updateItem(i, 'optional', e.target.checked)} />opt</label>
                       <button onClick={() => setItems(prev => prev.filter((_, j) => j !== i))} className="text-slate-300 hover:text-red-500">✕</button>
                     </div>

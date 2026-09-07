@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
+import { notifyOfferByEmail } from '@/lib/portal/mail';
 
 type LineItemIn = { description?: string; quantity?: number; unit_price?: number; optional?: boolean };
 
@@ -108,6 +109,9 @@ export async function POST(req: NextRequest) {
     await supabase.from('portal_offers').delete().eq('id', offer.id);
     return NextResponse.json({ error: verErr.message }, { status: 500 });
   }
+  if (body.send) {
+    await notifyOfferByEmail({ clientId: clientId, offerId: offer.id, offerTitle: offer.title, kind: 'offer_sent' });
+  }
   return NextResponse.json({ offer });
 }
 
@@ -151,6 +155,7 @@ export async function PATCH(req: NextRequest) {
     }
     const { error } = await supabase.from('portal_offers').update({ status: 'sent', updated_at: now }).eq('id', id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    await notifyOfferByEmail({ clientId: offer.client_id, offerId: offer.id, offerTitle: offer.title, kind: 'offer_sent' });
     return NextResponse.json({ ok: true, status: 'sent' });
   }
 
@@ -228,6 +233,7 @@ export async function PATCH(req: NextRequest) {
       .update({ current_version: versionNo, status: 'sent', decided_at: null, updated_at: now })
       .eq('id', id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    await notifyOfferByEmail({ clientId: offer.client_id, offerId: offer.id, offerTitle: offer.title, kind: 'offer_updated' });
     return NextResponse.json({ ok: true, version_no: versionNo, status: 'sent' });
   }
 

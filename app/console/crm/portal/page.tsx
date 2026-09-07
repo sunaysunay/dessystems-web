@@ -68,6 +68,7 @@ export default function CR030Page() {
 
   // Drawers
   const [clientDrawer, setClientDrawer] = useState(false);
+  const [editClientId, setEditClientId] = useState('');
   const [clientForm, setClientForm] = useState<any>({ name: '', contact_name: '', email: '', locale: 'nl', expires_at: '' });
   const [newCode, setNewCode] = useState<{ client: string; code: string; url: string } | null>(null);
 
@@ -116,6 +117,35 @@ export default function CR030Page() {
     setClientDrawer(false);
     setClientForm({ name: '', contact_name: '', email: '', locale: 'nl', expires_at: '' });
     setNewCode({ client: d.client.name, code: d.code, url: `${location.origin}${d.login_url}` });
+    void loadAll();
+  }
+
+  function startEditClient(c: Client) {
+    setEditClientId(c.id);
+    setClientForm({
+      name: c.name,
+      contact_name: c.contact_name ?? '',
+      email: c.email ?? '',
+      locale: c.locale,
+      status: c.status,
+      expires_at: c.expires_at ? c.expires_at.slice(0, 10) : '',
+    });
+    setClientDrawer(true);
+  }
+
+  async function saveClientEdit() {
+    if (!clientForm.name.trim()) return;
+    setSaving(true);
+    const res = await fetch('/api/bop/crm/portal/clients', {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: editClientId, ...clientForm, expires_at: clientForm.expires_at || null }),
+    });
+    const d = await res.json();
+    setSaving(false);
+    if (d.error) { showToast(`Error: ${d.error}`); return; }
+    setClientDrawer(false); setEditClientId('');
+    setClientForm({ name: '', contact_name: '', email: '', locale: 'nl', expires_at: '' });
+    showToast('Client updated');
     void loadAll();
   }
 
@@ -263,7 +293,7 @@ export default function CR030Page() {
           {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
         <div className="ml-auto flex gap-2">
-          {tab === 'clients' && <button onClick={() => setClientDrawer(true)} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ New Client</button>}
+          {tab === 'clients' && <button onClick={() => { setEditClientId(''); setClientForm({ name: '', contact_name: '', email: '', locale: 'nl', expires_at: '' }); setClientDrawer(true); }} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ New Client</button>}
           {tab === 'offers' && <button onClick={() => { setItems([emptyItem()]); setOfferForm((p: any) => ({ ...p, client_id: clientFilter || p.client_id })); setOfferDrawer(true); }} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ New Offer</button>}
           {tab === 'documents' && <button onClick={() => { setDocForm((p: any) => ({ ...p, client_id: clientFilter || p.client_id })); setDocDrawer(true); }} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ Add Document</button>}
         </div>
@@ -291,7 +321,7 @@ export default function CR030Page() {
                 </thead>
                 <tbody>
                   {clients.length === 0 && <tr><td colSpan={8} className="px-4 py-8 text-center text-slate-400">No portal clients yet — create the first one.</td></tr>}
-                  {clients.map(c => (
+                  {clients.filter(c => !clientFilter || c.id === clientFilter).map(c => (
                     <tr key={c.id} className="border-b border-slate-50 hover:bg-slate-50/50">
                       <td className="px-4 py-3">
                         <div className="font-medium text-slate-800">{c.name}</div>
@@ -308,6 +338,7 @@ export default function CR030Page() {
                       <td className="px-4 py-3 text-xs text-slate-500">{fmtDate(c.expires_at)}</td>
                       <td className="px-4 py-3 text-right">
                         <div className="flex justify-end gap-1">
+                          <button onClick={() => startEditClient(c)} className="rounded-lg border border-slate-200 px-2 py-1 text-xs hover:bg-slate-50" title="Edit client details">✏️ Edit</button>
                           <button onClick={() => regenerateCode(c)} className="rounded-lg border border-slate-200 px-2 py-1 text-xs hover:bg-slate-50" title="Generate new access code">🔑 New code</button>
                           {c.status === 'active'
                             ? <button onClick={() => setClientStatus(c, 'suspended')} className="rounded-lg border border-slate-200 px-2 py-1 text-xs hover:bg-slate-50">Suspend</button>
@@ -482,9 +513,9 @@ export default function CR030Page() {
 
       {/* ── Client drawer ── */}
       {clientDrawer && (
-        <div className="fixed inset-0 z-40 flex justify-end bg-black/30" onClick={() => setClientDrawer(false)}>
+        <div className="fixed inset-0 z-40 flex justify-end bg-black/30" onClick={() => { setClientDrawer(false); setEditClientId(''); }}>
           <div className="h-full w-full max-w-md overflow-y-auto bg-white p-6 shadow-xl" onClick={e => e.stopPropagation()}>
-            <h3 className="mb-4 text-base font-bold text-slate-800">New portal client</h3>
+            <h3 className="mb-4 text-base font-bold text-slate-800">{editClientId ? 'Edit portal client' : 'New portal client'}</h3>
             <div className="space-y-4">
               <div><label className={labelCls}>Company / client name *</label>
                 <input className={inputCls} value={clientForm.name} onChange={e => setClientForm((p: any) => ({ ...p, name: e.target.value }))} placeholder="Carisma Car Center" /></div>
@@ -500,9 +531,20 @@ export default function CR030Page() {
                 <div><label className={labelCls}>Access expires</label>
                   <input className={inputCls} type="date" value={clientForm.expires_at} onChange={e => setClientForm((p: any) => ({ ...p, expires_at: e.target.value }))} /></div>
               </div>
-              <button onClick={createClient} disabled={saving} className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50">
-                {saving ? 'Creating…' : 'Create client & generate access code'}
+              {editClientId && (
+                <div><label className={labelCls}>Status</label>
+                  <select className={inputCls} value={clientForm.status ?? 'active'} onChange={e => setClientForm((p: any) => ({ ...p, status: e.target.value }))}>
+                    <option value="active">active — client can log in</option>
+                    <option value="suspended">suspended — login disabled, data kept</option>
+                    <option value="closed">closed — dossier ended</option>
+                  </select></div>
+              )}
+              <button onClick={editClientId ? saveClientEdit : createClient} disabled={saving} className="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50">
+                {saving ? 'Saving…' : editClientId ? 'Save changes' : 'Create client & generate access code'}
               </button>
+              {editClientId && (
+                <p className="text-xs text-slate-400">The access code is not changed here — use <b>🔑 New code</b> in the client row to rotate it.</p>
+              )}
             </div>
           </div>
         </div>

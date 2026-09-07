@@ -187,6 +187,8 @@ export default function CR030Page() {
     setOfferForm({ client_id: '', title: '', summary: '', valid_until: '', vat_rate: 21, send: true, file_url: '' });
     setItems([emptyItem()]);
     showToast(offerForm.send ? 'Offer created and sent' : 'Offer saved as draft');
+    // Open the new offer right away so Attachments (file upload) is in view
+    if (d.offer?.id) { setExpanded(d.offer.id); void loadAttachments(d.offer.id); }
     void loadAll();
   }
 
@@ -705,7 +707,7 @@ export default function CR030Page() {
                   </div>
                   <div><label className={labelCls}>Offer PDF (file URL, optional)</label>
                     <input className={inputCls} value={offerForm.file_url} onChange={e => setOfferForm((p: any) => ({ ...p, file_url: e.target.value }))} placeholder="https://… (Drive export, hosted PDF)" />
-                    <p className="mt-1 text-[10px] text-slate-400">Shown to the client as a “Download (PDF)” button under the line items.</p></div>
+                    <p className="mt-1 text-[10px] text-slate-400">Shown to the client as a “Download (PDF)” button under the line items. To <b>upload files</b> (secure storage, max 20 MB per offer), save the offer first — the Attachments section opens with it in the list.</p></div>
                 </>
               )}
               {versionFor && (

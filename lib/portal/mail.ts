@@ -129,8 +129,11 @@ export async function notifyOfferByEmail(options: {
   kind: MailKind;
 }): Promise<void> {
   const supabase = getServerClient();
-  const log = (type: string, detail: string) =>
-    supabase.from('portal_events').insert({ client_id: options.clientId, type, ref_id: options.offerId, detail }).then(() => {});
+  const log = async (type: string, detail: string): Promise<void> => {
+    try {
+      await supabase.from('portal_events').insert({ client_id: options.clientId, type, ref_id: options.offerId, detail });
+    } catch { /* logging must never throw */ }
+  };
 
   try {
     if (!smtpConfigured()) { await log('email_skipped', 'SMTP not configured'); return; }
@@ -147,6 +150,6 @@ export async function notifyOfferByEmail(options: {
     await sendBopMail(client.email, t.subject, renderHtml(t, options.offerTitle, client.contact_name, loginUrl));
     await log('email_sent', `${options.kind} · ${options.offerTitle} → ${client.email}`);
   } catch (e) {
-    await log('email_failed', `${options.offerTitle} · ${e instanceof Error ? e.message : 'unknown error'}`).catch(() => {});
+    await log('email_failed', `${options.offerTitle} · ${e instanceof Error ? e.message : 'unknown error'}`);
   }
 }

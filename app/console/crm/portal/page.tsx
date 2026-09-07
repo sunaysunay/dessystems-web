@@ -290,7 +290,7 @@ export default function CR030Page() {
         <select value={clientFilter} onChange={e => setClientFilter(e.target.value)}
           className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs text-slate-600">
           <option value="">All clients</option>
-          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+          {clients.filter(c => c.status === 'active').map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
         <div className="ml-auto flex gap-2">
           {tab === 'clients' && <button onClick={() => { setEditClientId(''); setClientForm({ name: '', contact_name: '', email: '', locale: 'nl', expires_at: '' }); setClientDrawer(true); }} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ New Client</button>}

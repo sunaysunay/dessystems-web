@@ -79,6 +79,7 @@ export default function CR030Page() {
   const [versionFor, setVersionFor] = useState<Offer | null>(null);
   const [versionNote, setVersionNote] = useState('');
   const [versionFile, setVersionFile] = useState('');
+  const [discount, setDiscount] = useState<{ mode: 'percent' | 'amount'; value: string; description: string }>({ mode: 'percent', value: '', description: '' });
 
   const [docDrawer, setDocDrawer] = useState(false);
   const [docForm, setDocForm] = useState<any>({ client_id: '', title: '', note: '', category: 'proposal', file_url: '', is_primary: false });
@@ -188,7 +189,7 @@ export default function CR030Page() {
     setSaving(true);
     const res = await fetch('/api/bop/crm/portal/offers', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...offerForm, valid_until: offerForm.valid_until || null, line_items: items }),
+      body: JSON.stringify({ ...offerForm, valid_until: offerForm.valid_until || null, line_items: items, discount: discountPayload() }),
     });
     const d = await res.json();
     setSaving(false);
@@ -224,7 +225,7 @@ export default function CR030Page() {
     setSaving(true);
     const res = await fetch('/api/bop/crm/portal/offers', {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: versionFor.id, action: 'new_version', line_items: items, change_note: versionNote || null, vat_rate: offerForm.vat_rate ?? 21, file_url: versionFile || null }),
+      body: JSON.stringify({ id: versionFor.id, action: 'new_version', line_items: items, change_note: versionNote || null, vat_rate: offerForm.vat_rate ?? 21, file_url: versionFile || null, discount: discountPayload() }),
     });
     const d = await res.json();
     setSaving(false);
@@ -275,7 +276,15 @@ export default function CR030Page() {
 
   function startNewVersion(o: Offer) {
     const current = (o.portal_offer_versions ?? []).find((v: any) => v.version_no === o.current_version);
-    setItems(current?.line_items?.length ? current.line_items.map((li: any) => ({ ...li })) : [emptyItem()]);
+    const all: any[] = current?.line_items ?? [];
+    const normal = all.filter((li: any) => !li.discount);
+    const disc = all.find((li: any) => li.discount);
+    setItems(normal.length ? normal.map((li: any) => ({ ...li })) : [emptyItem()]);
+    setDiscount(disc
+      ? (disc.pct != null
+          ? { mode: 'percent', value: String(disc.pct), description: disc.description }
+          : { mode: 'amount', value: String(Math.abs(disc.unit_price)), description: disc.description })
+      : { mode: 'percent', value: '', description: '' });
     setVersionNote('');
     setVersionFile(current?.file_url ?? '');
     setVersionFor(o);
@@ -338,6 +347,15 @@ export default function CR030Page() {
   }
 
   const itemsSubtotal = items.reduce((s, i) => s + (Number(i.quantity) || 0) * (Number(i.unit_price) || 0), 0);
+  function discountPayload() {
+    const v = Number(discount.value) || 0;
+    return v > 0 ? { mode: discount.mode, value: v, description: discount.description || null } : null;
+  }
+  const discountPreview = (() => {
+    const v = Number(discount.value) || 0;
+    if (v <= 0) return 0;
+    return discount.mode === 'percent' ? itemsSubtotal * Math.min(v, 100) / 100 : Math.min(v, itemsSubtotal);
+  })();
 
   /* ── Render ──────────────────────────────────────────────────────────── */
 
@@ -387,7 +405,7 @@ export default function CR030Page() {
         </select>
         <div className="ml-auto flex gap-2">
           {tab === 'clients' && <button onClick={() => { setEditClientId(''); setClientForm({ name: '', contact_name: '', email: '', locale: 'nl', expires_at: '' }); setClientDrawer(true); }} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ New Client</button>}
-          {tab === 'offers' && <button onClick={() => { setItems([emptyItem()]); setOfferForm((p: any) => ({ ...p, client_id: clientFilter || p.client_id })); setOfferDrawer(true); }} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ New Offer</button>}
+          {tab === 'offers' && <button onClick={() => { setItems([emptyItem()]); setDiscount({ mode: 'percent', value: '', description: '' }); setOfferForm((p: any) => ({ ...p, client_id: clientFilter || p.client_id })); setOfferDrawer(true); }} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ New Offer</button>}
           {tab === 'documents' && <button onClick={() => { setDocForm((p: any) => ({ ...p, client_id: clientFilter || p.client_id })); setDocDrawer(true); }} className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">+ Add Document</button>}
         </div>
       </div>
@@ -498,10 +516,10 @@ export default function CR030Page() {
                               <thead><tr className="bg-slate-50 text-left text-slate-400"><th className="px-3 py-2">Description</th><th className="px-3 py-2 text-right">Qty</th><th className="px-3 py-2 text-right">Unit</th><th className="px-3 py-2 text-right">Total</th></tr></thead>
                               <tbody>
                                 {(current.line_items ?? []).map((li: any, i: number) => (
-                                  <tr key={i} className="border-t border-slate-50">
-                                    <td className="px-3 py-2 text-slate-700">{li.description}{li.optional && <span className="ml-1 text-[10px] text-slate-400">(optional)</span>}</td>
-                                    <td className="px-3 py-2 text-right">{li.quantity}</td>
-                                    <td className="px-3 py-2 text-right">{fmtEur(li.unit_price, o.currency)}</td>
+                                  <tr key={i} className={`border-t border-slate-50 ${li.discount ? 'text-emerald-600' : ''}`}>
+                                    <td className={`px-3 py-2 ${li.discount ? '' : 'text-slate-700'}`}>{li.discount && '🏷 '}{li.description}{li.optional && <span className="ml-1 text-[10px] text-slate-400">(optional)</span>}</td>
+                                    <td className="px-3 py-2 text-right">{li.discount ? '' : li.quantity}</td>
+                                    <td className="px-3 py-2 text-right">{li.discount ? '' : fmtEur(li.unit_price, o.currency)}</td>
                                     <td className="px-3 py-2 text-right font-medium">{fmtEur(li.total, o.currency)}</td>
                                   </tr>
                                 ))}
@@ -755,7 +773,28 @@ export default function CR030Page() {
                 </div>
                 <div className="mt-2 flex items-center justify-between">
                   <button onClick={() => setItems(prev => [...prev, emptyItem()])} className="text-xs font-medium text-blue-600 hover:underline">+ Add line</button>
-                  <span className="text-xs text-slate-500">Subtotal: <b>{fmtEur(itemsSubtotal)}</b></span>
+                  <span className="text-xs text-slate-500">
+                    Subtotal: <b>{fmtEur(itemsSubtotal)}</b>
+                    {discountPreview > 0 && <> · Discount: <b className="text-emerald-600">−{fmtEur(discountPreview)}</b> · Net: <b>{fmtEur(itemsSubtotal - discountPreview)}</b></>}
+                  </span>
+                </div>
+              </div>
+
+              {/* Discount — stored as a flagged negative line; VAT applies after discount */}
+              <div>
+                <label className={labelCls}>Discount (optional)</label>
+                <div className="flex items-center gap-2">
+                  <select className={`${rowInputCls} w-20 flex-none`} value={discount.mode}
+                    onChange={e => setDiscount(p => ({ ...p, mode: e.target.value as 'percent' | 'amount' }))}>
+                    <option value="percent">%</option>
+                    <option value="amount">€</option>
+                  </select>
+                  <input className={`${rowInputCls} w-24 flex-none text-right`} type="number" min={0} step="0.01"
+                    placeholder="0" value={discount.value}
+                    onChange={e => setDiscount(p => ({ ...p, value: e.target.value }))} />
+                  <input className={`${rowInputCls} min-w-0 flex-1`} placeholder="Description, e.g. Launch discount"
+                    value={discount.description}
+                    onChange={e => setDiscount(p => ({ ...p, description: e.target.value }))} />
                 </div>
               </div>
 

@@ -4,11 +4,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerClient } from '@/lib/supabase-server';
 import { notifyOfferByEmail } from '@/lib/portal/mail';
 
-type LineItemIn = { description?: string; quantity?: number; unit_price?: number; optional?: boolean };
+type LineItemIn = { description?: string; quantity?: number; unit_price?: number; optional?: boolean; discount?: boolean };
+type DiscountIn = { mode?: 'percent' | 'amount'; value?: number; description?: string };
 
-function computeTotals(items: LineItemIn[], vatRate: number) {
-  const line_items = (items ?? [])
-    .filter(i => String(i.description || '').trim())
+// Discount is stored as a flagged negative line inside line_items (no schema change);
+// VAT is computed on the net subtotal, i.e. after the discount.
+function computeTotals(items: LineItemIn[], vatRate: number, discount?: DiscountIn | null) {
+  const line_items: any[] = (items ?? [])
+    .filter(i => !i.discount && String(i.description || '').trim())
     .map(i => {
       const quantity = Number(i.quantity ?? 1) || 1;
       const unit_price = Number(i.unit_price ?? 0) || 0;
@@ -20,6 +23,24 @@ function computeTotals(items: LineItemIn[], vatRate: number) {
         optional: !!i.optional,
       };
     });
+  const base = Math.round(line_items.reduce((s, i) => s + i.total, 0) * 100) / 100;
+
+  const dValue = Number(discount?.value ?? 0) || 0;
+  if (dValue > 0 && line_items.length > 0) {
+    const amount = discount!.mode === 'percent'
+      ? Math.round(base * Math.min(dValue, 100)) / 100
+      : Math.min(dValue, base);
+    const rounded = Math.round(amount * 100) / 100;
+    if (rounded > 0) {
+      const label = String(discount?.description || '').trim()
+        || (discount!.mode === 'percent' ? `Discount (${Math.min(dValue, 100)}%)` : 'Discount');
+      line_items.push({
+        description: label, quantity: 1, unit_price: -rounded, total: -rounded, optional: false,
+        discount: true, ...(discount!.mode === 'percent' ? { pct: Math.min(dValue, 100) } : {}),
+      });
+    }
+  }
+
   const subtotal = Math.round(line_items.reduce((s, i) => s + i.total, 0) * 100) / 100;
   const vat_amount = Math.round(subtotal * (vatRate / 100) * 100) / 100;
   const total = Math.round((subtotal + vat_amount) * 100) / 100;
@@ -71,7 +92,7 @@ export async function POST(req: NextRequest) {
   if (!clientId || !title) return NextResponse.json({ error: 'client_id and title required' }, { status: 400 });
 
   const vatRate = Number(body.vat_rate ?? 21);
-  const { line_items, subtotal, vat_amount, total } = computeTotals(body.line_items ?? [], vatRate);
+  const { line_items, subtotal, vat_amount, total } = computeTotals(body.line_items ?? [], vatRate, body.discount ?? null);
   // A draft may start empty — items can be added before sending. Sending requires items.
   if (body.send && line_items.length === 0) {
     return NextResponse.json({ error: 'at least one line item required to send' }, { status: 400 });
@@ -194,7 +215,7 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: 'offer already decided' }, { status: 409 });
     }
     const vatRate = Number(body.vat_rate ?? 21);
-    const { line_items, subtotal, vat_amount, total } = computeTotals(body.line_items ?? [], vatRate);
+    const { line_items, subtotal, vat_amount, total } = computeTotals(body.line_items ?? [], vatRate, body.discount ?? null);
     // Items are only mandatory when this creates a version the client will see;
     // a draft may be saved incomplete (items without a description are dropped).
     if (line_items.length === 0 && offer.status !== 'draft') {

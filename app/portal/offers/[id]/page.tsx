@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { portalT } from '@/lib/portal/labels';
 
-type LineItem = { description: string; quantity: number; unit_price: number; total: number; optional?: boolean };
+type LineItem = { description: string; quantity: number; unit_price: number; total: number; optional?: boolean; discount?: boolean };
 type Version = {
   id: string; version_no: number; change_note: string | null; line_items: LineItem[];
   subtotal: number; vat_rate: number; vat_amount: number; total: number;
@@ -152,13 +152,13 @@ export default function PortalOfferPage() {
                 <tbody>
                   {(current.line_items ?? []).map((li, i) => (
                     <tr key={i} className="border-b border-gray-50">
-                      <td className="py-3 pr-4 text-gray-700">
-                        {li.description}
+                      <td className={`py-3 pr-4 ${li.discount ? 'font-medium text-emerald-700' : 'text-gray-700'}`}>
+                        {li.discount && '🏷 '}{li.description}
                         {li.optional && <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-semibold text-gray-500">{t('optionalItem')}</span>}
                       </td>
-                      <td className="py-3 pr-4 text-right text-gray-600">{li.quantity}</td>
-                      <td className="py-3 pr-4 text-right text-gray-600">{fmtMoney(li.unit_price)}</td>
-                      <td className="py-3 text-right font-medium text-gray-900">{fmtMoney(li.total)}</td>
+                      <td className="py-3 pr-4 text-right text-gray-600">{li.discount ? '' : li.quantity}</td>
+                      <td className="py-3 pr-4 text-right text-gray-600">{li.discount ? '' : fmtMoney(li.unit_price)}</td>
+                      <td className={`py-3 text-right font-medium ${li.discount ? 'text-emerald-700' : 'text-gray-900'}`}>{fmtMoney(li.total)}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -108,7 +108,7 @@ export default function CustomerStatusPage() {
         <div className="flex gap-2">
           <input
             type="text"
-            placeholder="Enter WO number (e.g. WO-2024-001)"
+            placeholder="Enter WO number (e.g. 326360001)"
             value={woNumber}
             onChange={e => setWoNumber(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleSearch()}

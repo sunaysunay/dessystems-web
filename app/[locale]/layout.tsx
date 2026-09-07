@@ -7,6 +7,7 @@ import Footer from '@/components/footer'
 import { CookieConsent } from '@/components/cookie-consent'
 import { ClickTracker } from '@/components/click-tracker'
 import { ThemeProvider } from "@/components/theme-provider"
+import { SiteThemeProvider } from "@/components/site-theme-provider"
 import Script from 'next/script'
 
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
@@ -26,6 +27,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <SiteThemeProvider />
         <NextIntlClientProvider messages={messages}>
           <Nav /><main>{children}</main><Footer /><CookieConsent /><ClickTracker />
         </NextIntlClientProvider>

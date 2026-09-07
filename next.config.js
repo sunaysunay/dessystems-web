@@ -10,7 +10,7 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   allowedDevOrigins: ["bop-dev.dessystems.io"],
   async rewrites() {
-    return [
+    const demoRewrites = [
       { source: "/solutions/demos/vehicles", destination: "/solutions/demos/vehicles/index.html" },
       { source: "/solutions/demos/vehicles/mockup1", destination: "/solutions/demos/vehicles/mockup1/index.html" },
       { source: "/solutions/demos/vehicles/mockup1/vehicle", destination: "/solutions/demos/vehicles/mockup1/vehicle.html" },
@@ -19,6 +19,11 @@ const nextConfig = {
       { source: "/solutions/demos/vehicles/mockup3", destination: "/solutions/demos/vehicles/mockup3/index.html" },
       { source: "/solutions/demos/vehicles/mockup4", destination: "/solutions/demos/vehicles/mockup4/index.html" },
     ];
+    const localeDemoRewrites = demoRewrites.map(r => ({
+      source: "/:locale" + r.source,
+      destination: r.destination,
+    }));
+    return [...demoRewrites, ...localeDemoRewrites];
   },
 };
 module.exports = withNextIntl(nextConfig);

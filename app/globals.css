@@ -5,6 +5,113 @@
 html, body { height: 100%; }
 body { font-family: ui-sans-serif, system-ui, 'Inter', sans-serif; }
 
+/* ── Site theme tokens (consumed by Nav, Footer, ThemeToggle, dx-styles) ── */
+:root {
+  --accent:  #0a0a0a;
+  --accent2: #22c55e;
+  --bg2:     #fafafa;
+  --bg3:     #f5f5f5;
+  --text3:   #666666;
+  --border:  #f0f0f0;
+  --border2: #e0e0e0;
+  --site-font: 'Inter', system-ui, sans-serif;
+  --site-radius: 12px;
+  --dx-navy:   #0a0a0a;
+  --dx-accent: #0a0a0a;
+  --dx-accent2:#22c55e;
+  --dx-slate:  #999999;
+  --dx-line:   #f0f0f0;
+  --dx-bg:     #ffffff;
+  --dx-bg-soft:#fafafa;
+}
+html.dark {
+  --accent:  #ffffff;
+  --accent2: #22c55e;
+  --bg2:     #0a0a0a;
+  --bg3:     #1a1a1a;
+  --text3:   #999999;
+  --border:  #1f1f1f;
+  --border2: #2a2a2a;
+  --dx-navy:   #ffffff;
+  --dx-accent: #ffffff;
+  --dx-accent2:#22c55e;
+  --dx-slate:  #888888;
+  --dx-line:   #1f1f1f;
+  --dx-bg:     #0a0a0a;
+  --dx-bg-soft:#111111;
+}
+
+/* ── Site theme presets (set by SiteThemeProvider via class) ──────────── */
+html.site-swiss-minimal {
+  --accent:  #e63322;
+  --accent2: #e63322;
+  --bg2:     #f8f8f8;
+  --bg3:     #f0f0f0;
+  --text3:   #555555;
+  --border:  #e5e5e5;
+  --border2: #d0d0d0;
+  --site-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --site-radius: 0px;
+  --dx-navy:   #1a1a1a;
+  --dx-accent: #e63322;
+  --dx-accent2:#e63322;
+  --dx-slate:  #555555;
+  --dx-line:   #e5e5e5;
+  --dx-bg:     #ffffff;
+  --dx-bg-soft:#f8f8f8;
+}
+html.site-swiss-minimal.dark {
+  --accent:  #ff4433;
+  --accent2: #ff4433;
+  --bg2:     #0a0a0a;
+  --bg3:     #1a1a1a;
+  --text3:   #999999;
+  --border:  #1f1f1f;
+  --border2: #2a2a2a;
+  --dx-navy:   #ffffff;
+  --dx-accent: #ff4433;
+  --dx-accent2:#ff4433;
+  --dx-slate:  #999999;
+  --dx-line:   #1f1f1f;
+  --dx-bg:     #0a0a0a;
+  --dx-bg-soft:#111111;
+}
+
+html.site-warm-editorial {
+  --accent:  #1e3a5f;
+  --accent2: #c87941;
+  --bg2:     #faf8f5;
+  --bg3:     #f0ede8;
+  --text3:   #6b5e50;
+  --border:  #e8e2d8;
+  --border2: #d4cdc0;
+  --site-font: Georgia, 'Times New Roman', serif;
+  --site-radius: 16px;
+  --dx-navy:   #1e3a5f;
+  --dx-accent: #1e3a5f;
+  --dx-accent2:#c87941;
+  --dx-slate:  #6b5e50;
+  --dx-line:   #e8e2d8;
+  --dx-bg:     #fdfcfa;
+  --dx-bg-soft:#faf8f5;
+}
+html.site-warm-editorial.dark {
+  --accent:  #5b9bd5;
+  --accent2: #d4956a;
+  --bg2:     #0f0d0a;
+  --bg3:     #1a1714;
+  --text3:   #a09080;
+  --border:  #2a2520;
+  --border2: #3a3530;
+  --dx-navy:   #5b9bd5;
+  --dx-accent: #5b9bd5;
+  --dx-accent2:#d4956a;
+  --dx-slate:  #a09080;
+  --dx-line:   #2a2520;
+  --dx-bg:     #0f0d0a;
+  --dx-bg-soft:#1a1714;
+}
+
 /* ── Tabular numerals for financial/table data ─────────────────────────── */
 td, th,
 .tabular-nums,

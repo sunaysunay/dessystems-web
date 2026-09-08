@@ -70,7 +70,7 @@ function LoginForm() {
               maxLength={40}
               value={slug}
               onChange={e => setSlug(e.target.value.toLowerCase())}
-              placeholder="carisma"
+              placeholder="client1"
               className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-3 text-center font-mono text-base lowercase tracking-wide text-gray-900 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             <p className="mt-1 text-xs text-gray-400">{t('dossierHint')}</p>

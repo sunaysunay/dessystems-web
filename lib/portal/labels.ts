@@ -12,7 +12,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
   en: {
     attachments: 'Attachments',
     dossierLabel: 'Dossier code',
-    dossierHint: 'The short code from your e-mail link, e.g. “carisma”.',
+    dossierHint: 'The short code from your e-mail link, e.g. “client1”.',
     portalTitle: 'Client Portal',
     welcome: 'Welcome',
     loginTitle: 'Enter your access code',
@@ -75,7 +75,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
   nl: {
     attachments: 'Bijlagen',
     dossierLabel: 'Dossiercode',
-    dossierHint: 'De korte code uit uw e-maillink, bijv. “carisma”.',
+    dossierHint: 'De korte code uit uw e-maillink, bijv. “client1”.',
     portalTitle: 'Klantportaal',
     welcome: 'Welkom',
     loginTitle: 'Voer uw toegangscode in',
@@ -138,7 +138,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
   de: {
     attachments: 'Anhänge',
     dossierLabel: 'Dossiercode',
-    dossierHint: 'Der kurze Code aus Ihrem E-Mail-Link, z. B. „carisma“.',
+    dossierHint: 'Der kurze Code aus Ihrem E-Mail-Link, z. B. „client1“.',
     portalTitle: 'Kundenportal',
     welcome: 'Willkommen',
     loginTitle: 'Geben Sie Ihren Zugangscode ein',
@@ -201,7 +201,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
   fr: {
     attachments: 'Pièces jointes',
     dossierLabel: 'Code de dossier',
-    dossierHint: 'Le code court de votre lien e-mail, p. ex. « carisma ».',
+    dossierHint: 'Le code court de votre lien e-mail, p. ex. « client1 ».',
     portalTitle: 'Portail client',
     welcome: 'Bienvenue',
     loginTitle: "Saisissez votre code d'accès",
@@ -264,7 +264,7 @@ export const PORTAL_LABELS: Record<PortalLocale, Record<string, string>> = {
   tr: {
     attachments: 'Ekler',
     dossierLabel: 'Dosya kodu',
-    dossierHint: 'E-posta bağlantınızdaki kısa kod, örn. “carisma”.',
+    dossierHint: 'E-posta bağlantınızdaki kısa kod, örn. “client1”.',
     portalTitle: 'Müşteri Portalı',
     welcome: 'Hoş geldiniz',
     loginTitle: 'Erişim kodunuzu girin',

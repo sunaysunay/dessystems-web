@@ -249,7 +249,8 @@
     "wrkRates": "Labour Rates",
     "wrkPackages": "Service Packages",
     "wrkDmsIntegration": "DMS Integration",
-    "clientPortal": "Client Portal"
+    "clientPortal": "Client Portal",
+    "bpmCalculator": "BPM Calculator"
   },
   "sal": {
     "orders": "Orders",
@@ -661,7 +662,8 @@
     "WK011": "Labour Rates",
     "WK012": "Service Packages",
     "WK013": "DMS Integration",
-    "CR030": "Client Portal"
+    "CR030": "Client Portal",
+    "MP006": "BPM Calculator"
   },
   "support": {
     "title": "Support",

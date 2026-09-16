@@ -332,7 +332,8 @@
     "dbaHistory": "Abfrageverlauf",
     "dbaMigrations": "Migrationen",
     "dbaHealth": "Datenbank-Gesundheit",
-    "clientPortal": "Kundenportal"
+    "clientPortal": "Kundenportal",
+    "bpmCalculator": "BPM-Rechner"
   },
   "screens": {
     "IN006": "Modellkatalog",
@@ -516,7 +517,8 @@
     "DB007": "Abfrageverlauf",
     "DB008": "Migrationen",
     "DB009": "Datenbank-Gesundheit",
-    "CR030": "Kundenportal"
+    "CR030": "Kundenportal",
+    "MP006": "BPM-Rechner"
   },
   "support": {
     "title": "Support",

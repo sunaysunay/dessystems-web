@@ -448,12 +448,14 @@
     "cbtTradeLog": "Trade Log",
     "cbtTradingDash": "Trading Dashboard",
     "cbtDealerFeed": "Dealer Feed",
-    "clientPortal": "Πύλη πελατών"
+    "clientPortal": "Πύλη πελατών",
+    "bpmCalculator": "Υπολογιστής BPM"
   },
   "groups": {
     "markets": "Markets"
   },
   "screens": {
-    "CR030": "Πύλη πελατών"
+    "CR030": "Πύλη πελατών",
+    "MP006": "Υπολογιστής BPM"
   }
 }

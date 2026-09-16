@@ -151,6 +151,7 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/mkp/listings/[id]': { id: 'MP003', title: 'Listing Detail', mod: 'MKP' },
   '/console/mkp/publish': { id: 'MP004', title: 'Channel Publisher', mod: 'MKP' },
   '/console/mkp/layout-manager': { id: 'MP005', title: 'Layout Manager', mod: 'MKP' },
+  '/console/mkp/bpm-calculator': { id: 'MP006', title: 'BPM Calculator', mod: 'MKP' },
   '/menu/operations': { id: 'OP000', title: 'Operations Menu', mod: 'OPS' },
   '/console/ops/tasks': { id: 'OP001', title: 'Operations Cockpit', mod: 'OPS' },
   '/console/ops/goals': { id: 'OP002', title: 'Strategy Cockpit', mod: 'OPS' },

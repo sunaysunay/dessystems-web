@@ -258,7 +258,8 @@
     "dbaHistory": "Query Geschiedenis",
     "dbaMigrations": "Migraties",
     "dbaHealth": "Database Gezondheid",
-    "clientPortal": "Klantportaal"
+    "clientPortal": "Klantportaal",
+    "bpmCalculator": "BPM Rekentool"
   },
   "sal": {
     "orders": "Bestellingen",
@@ -661,7 +662,8 @@
     "DB007": "Query Geschiedenis",
     "DB008": "Migraties",
     "DB009": "Database Gezondheid",
-    "CR030": "Klantportaal"
+    "CR030": "Klantportaal",
+    "MP006": "BPM Rekentool"
   },
   "support": {
     "title": "Support",

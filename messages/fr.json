@@ -332,7 +332,8 @@
     "dbaHistory": "Historique des Requetes",
     "dbaMigrations": "Migrations",
     "dbaHealth": "Sante Base de Donnees",
-    "clientPortal": "Portail client"
+    "clientPortal": "Portail client",
+    "bpmCalculator": "Calculateur BPM"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -516,7 +517,8 @@
     "DB007": "Historique des Requetes",
     "DB008": "Migrations",
     "DB009": "Sante Base de Donnees",
-    "CR030": "Portail client"
+    "CR030": "Portail client",
+    "MP006": "Calculateur BPM"
   },
   "support": {
     "title": "Support",

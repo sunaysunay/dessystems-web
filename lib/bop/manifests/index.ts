@@ -91,6 +91,7 @@ export const SCREEN_OBJECTS: BopObject[] = [
   { object_id:"api:mkp/listings-v2:GET",type:"api",module:"MKP",name:"GET Listings V2 (bop_listings)",route:"/api/bop/mkp/listings-v2",status:"active" },
   { object_id:"api:int/feed/marktplaats:GET",type:"api",module:"INT",name:"Marktplaats Admarkt XML Feed",route:"/api/bop/int/feed/marktplaats",status:"active" },
   { object_id:"screen:MP005",type:"screen",module:"MKP",name:"Layout Manager",route:"/console/mkp/layout-manager",status:"active" },
+  { object_id:"screen:MP006",type:"screen",module:"MKP",name:"BPM Calculator",route:"/console/mkp/bpm-calculator",status:"active" },
   { object_id:"screen:AU001",type:"screen",module:"AUC",name:"Auction Manager",route:"/console/mkp/auctions",status:"active" },
   { object_id:"screen:AU002",type:"screen",module:"AUC",name:"Auction Detail",route:"/console/mkp/auctions/[id]",status:"active" },
   { object_id:"screen:AU004",type:"screen",module:"AUC",name:"Bidding Console",route:"/console/mkp/auctions/[id]/bidding",status:"active" },

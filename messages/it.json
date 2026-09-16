@@ -448,12 +448,14 @@
     "cbtTradeLog": "Trade Log",
     "cbtTradingDash": "Trading Dashboard",
     "cbtDealerFeed": "Dealer Feed",
-    "clientPortal": "Portale clienti"
+    "clientPortal": "Portale clienti",
+    "bpmCalculator": "Calcolatore BPM"
   },
   "groups": {
     "markets": "Markets"
   },
   "screens": {
-    "CR030": "Portale clienti"
+    "CR030": "Portale clienti",
+    "MP006": "Calcolatore BPM"
   }
 }

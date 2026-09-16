@@ -332,7 +332,8 @@
     "dbaHistory": "Sorgu Gecmisi",
     "dbaMigrations": "Migrasyonlar",
     "dbaHealth": "Veritabani Sagligi",
-    "clientPortal": "Müşteri Portalı"
+    "clientPortal": "Müşteri Portalı",
+    "bpmCalculator": "BPM Hesaplayici"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -516,7 +517,8 @@
     "DB007": "Sorgu Gecmisi",
     "DB008": "Migrasyonlar",
     "DB009": "Veritabani Sagligi",
-    "CR030": "Müşteri Portalı"
+    "CR030": "Müşteri Portalı",
+    "MP006": "BPM Hesaplayici"
   },
   "support": {
     "title": "Destek",

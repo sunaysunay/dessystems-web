@@ -118,6 +118,7 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     { label: tn('channelAnalytics'), href: '/console/mkp/analytics',  v3: true },
     { label: tn('auctionManager'),   href: '/console/mkp/auctions' },
     { label: tn('layoutManager'),    href: '/console/mkp/layout-manager' },
+    { label: tn('bpmCalculator'),    href: '/console/mkp/bpm-calculator' },
   ]},
 
   { group: tg('sales'), items: [

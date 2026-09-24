@@ -93,7 +93,8 @@
     "shopProcurement": "Procurement",
     "shopAnalyticsGrp": "Commerce Intelligence",
     "workshop": "Atelier",
-    "databaseConsole": "Console Base de Donnees"
+    "databaseConsole": "Console Base de Donnees",
+    "marketing": "Marketing"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -333,7 +334,13 @@
     "dbaMigrations": "Migrations",
     "dbaHealth": "Sante Base de Donnees",
     "clientPortal": "Portail client",
-    "bpmCalculator": "Calculateur BPM"
+    "bpmCalculator": "Calculateur BPM",
+    "grwDashboard": "Tableau de bord Croissance",
+    "grwCampaigns": "Gestionnaire de campagnes",
+    "grwContent": "Studio de contenu",
+    "grwChannels": "Gestion des canaux",
+    "grwPlaybooks": "Playbooks",
+    "grwPerformance": "Performance"
   },
   "screens": {
     "IN006": "Catalogue de modèles",
@@ -518,7 +525,13 @@
     "DB008": "Migrations",
     "DB009": "Sante Base de Donnees",
     "CR030": "Portail client",
-    "MP006": "Calculateur BPM"
+    "MP006": "Calculateur BPM",
+    "GR000": "Tableau de bord Croissance",
+    "GR001": "Gestionnaire de campagnes",
+    "GR002": "Studio de contenu",
+    "GR003": "Gestion des canaux",
+    "GR004": "Playbooks",
+    "GR005": "Performance"
   },
   "support": {
     "title": "Support",

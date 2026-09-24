@@ -259,7 +259,13 @@
     "dbaMigrations": "Migraties",
     "dbaHealth": "Database Gezondheid",
     "clientPortal": "Klantportaal",
-    "bpmCalculator": "BPM Rekentool"
+    "bpmCalculator": "BPM Rekentool",
+    "grwDashboard": "Groei Dashboard",
+    "grwCampaigns": "Campagnebeheer",
+    "grwContent": "Content Studio",
+    "grwChannels": "Kanaalbeheer",
+    "grwPlaybooks": "Playbooks",
+    "grwPerformance": "Prestaties"
   },
   "sal": {
     "orders": "Bestellingen",
@@ -477,7 +483,8 @@
     "markets": "Markten",
     "shopAnalyticsGrp": "Commerce Intelligence",
     "workshop": "Werkplaats",
-    "databaseConsole": "Database Console"
+    "databaseConsole": "Database Console",
+    "marketing": "Marketing"
   },
   "screens": {
     "IN006": "Modellencatalogus",
@@ -663,7 +670,13 @@
     "DB008": "Migraties",
     "DB009": "Database Gezondheid",
     "CR030": "Klantportaal",
-    "MP006": "BPM Rekentool"
+    "MP006": "BPM Rekentool",
+    "GR000": "Groei Dashboard",
+    "GR001": "Campagnebeheer",
+    "GR002": "Content Studio",
+    "GR003": "Kanaalbeheer",
+    "GR004": "Playbooks",
+    "GR005": "Prestaties"
   },
   "support": {
     "title": "Support",

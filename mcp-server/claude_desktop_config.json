@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "des-growth-engine": {
+      "command": "node",
+      "args": ["/root/des-growth-mcp/src/server.mjs"],
+      "env": {
+        "SUPABASE_URL": "https://your-project.supabase.co",
+        "SUPABASE_SERVICE_ROLE_KEY": "eyJ...",
+        "BOP_API_BASE": "http://100.118.171.56:4400"
+      }
+    }
+  }
+}

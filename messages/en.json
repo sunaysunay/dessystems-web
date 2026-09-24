@@ -250,7 +250,13 @@
     "wrkPackages": "Service Packages",
     "wrkDmsIntegration": "DMS Integration",
     "clientPortal": "Client Portal",
-    "bpmCalculator": "BPM Calculator"
+    "bpmCalculator": "BPM Calculator",
+    "grwDashboard": "Growth Dashboard",
+    "grwCampaigns": "Campaign Manager",
+    "grwContent": "Content Studio",
+    "grwChannels": "Channel Manager",
+    "grwPlaybooks": "Playbooks",
+    "grwPerformance": "Performance"
   },
   "sal": {
     "orders": "Orders",
@@ -477,7 +483,8 @@
     "markets": "Markets",
     "shopAnalyticsGrp": "Commerce Intelligence",
     "workshop": "Workshop",
-    "databaseConsole": "Database Console"
+    "databaseConsole": "Database Console",
+    "marketing": "Marketing"
   },
   "screens": {
     "DB001": "Database Overview",
@@ -663,7 +670,13 @@
     "WK012": "Service Packages",
     "WK013": "DMS Integration",
     "CR030": "Client Portal",
-    "MP006": "BPM Calculator"
+    "MP006": "BPM Calculator",
+    "GR000": "Growth Dashboard",
+    "GR001": "Campaign Manager",
+    "GR002": "Content Studio",
+    "GR003": "Channel Manager",
+    "GR004": "Playbooks",
+    "GR005": "Performance"
   },
   "support": {
     "title": "Support",

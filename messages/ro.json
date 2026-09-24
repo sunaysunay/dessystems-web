@@ -449,13 +449,26 @@
     "cbtTradingDash": "Trading Dashboard",
     "cbtDealerFeed": "Dealer Feed",
     "clientPortal": "Portal clienți",
-    "bpmCalculator": "Calculator BPM"
+    "bpmCalculator": "Calculator BPM",
+    "grwDashboard": "Panou de Creștere",
+    "grwCampaigns": "Manager Campanii",
+    "grwContent": "Studio de Conținut",
+    "grwChannels": "Manager Canale",
+    "grwPlaybooks": "Playbooks",
+    "grwPerformance": "Performanță"
   },
   "groups": {
-    "markets": "Markets"
+    "markets": "Markets",
+    "marketing": "Marketing"
   },
   "screens": {
     "CR030": "Portal clienți",
-    "MP006": "Calculator BPM"
+    "MP006": "Calculator BPM",
+    "GR000": "Panou de Creștere",
+    "GR001": "Manager Campanii",
+    "GR002": "Studio de Conținut",
+    "GR003": "Manager Canale",
+    "GR004": "Playbooks",
+    "GR005": "Performanță"
   }
 }

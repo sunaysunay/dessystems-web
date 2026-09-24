@@ -164,6 +164,15 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
   ]},
 
 
+  { group: tg('marketing'), items: [
+    { label: tn('grwDashboard'),     href: '/console/grw/dashboard' },
+    { label: tn('grwCampaigns'),     href: '/console/grw/campaigns' },
+    { label: tn('grwContent'),       href: '/console/grw/content' },
+    { label: tn('grwChannels'),      href: '/console/grw/channels' },
+    { label: tn('grwPlaybooks'),     href: '/console/grw/playbooks' },
+    { label: tn('grwPerformance'),   href: '/console/grw/performance' },
+  ]},
+
   { group: tg('shop'), items: [
     { label: tn('shopDashboard'),    href: '/console/shp/dashboard' },
     { label: tn('shopMonitor'),      href: '/console/shp/monitor' },

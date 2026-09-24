@@ -449,13 +449,26 @@
     "cbtTradingDash": "Trading Dashboard",
     "cbtDealerFeed": "Dealer Feed",
     "clientPortal": "Клиентски портал",
-    "bpmCalculator": "BPM Калкулатор"
+    "bpmCalculator": "BPM Калкулатор",
+    "grwDashboard": "Табло за растеж",
+    "grwCampaigns": "Управление на кампании",
+    "grwContent": "Студио за съдържание",
+    "grwChannels": "Управление на канали",
+    "grwPlaybooks": "Playbooks",
+    "grwPerformance": "Производителност"
   },
   "groups": {
-    "markets": "Markets"
+    "markets": "Markets",
+    "marketing": "Маркетинг"
   },
   "screens": {
     "CR030": "Клиентски портал",
-    "MP006": "BPM Калкулатор"
+    "MP006": "BPM Калкулатор",
+    "GR000": "Табло за растеж",
+    "GR001": "Управление на кампании",
+    "GR002": "Студио за съдържание",
+    "GR003": "Управление на канали",
+    "GR004": "Playbooks",
+    "GR005": "Производителност"
   }
 }

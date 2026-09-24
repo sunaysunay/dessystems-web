@@ -449,13 +449,26 @@
     "cbtTradingDash": "Trading Dashboard",
     "cbtDealerFeed": "Dealer Feed",
     "clientPortal": "Πύλη πελατών",
-    "bpmCalculator": "Υπολογιστής BPM"
+    "bpmCalculator": "Υπολογιστής BPM",
+    "grwDashboard": "Πίνακας Ανάπτυξης",
+    "grwCampaigns": "Διαχείριση Καμπανιών",
+    "grwContent": "Στούντιο Περιεχομένου",
+    "grwChannels": "Διαχείριση Καναλιών",
+    "grwPlaybooks": "Playbooks",
+    "grwPerformance": "Επιδόσεις"
   },
   "groups": {
-    "markets": "Markets"
+    "markets": "Markets",
+    "marketing": "Μάρκετινγκ"
   },
   "screens": {
     "CR030": "Πύλη πελατών",
-    "MP006": "Υπολογιστής BPM"
+    "MP006": "Υπολογιστής BPM",
+    "GR000": "Πίνακας Ανάπτυξης",
+    "GR001": "Διαχείριση Καμπανιών",
+    "GR002": "Στούντιο Περιεχομένου",
+    "GR003": "Διαχείριση Καναλιών",
+    "GR004": "Playbooks",
+    "GR005": "Επιδόσεις"
   }
 }

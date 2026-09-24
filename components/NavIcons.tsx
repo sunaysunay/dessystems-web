@@ -90,7 +90,7 @@ const ROUTE_ICON: Record<string, string> = { '/console': 'grid' };
 const SEG_ICON: Record<string, string> = {
   anl: 'chart', ast: 'cube', inv: 'tag', crm: 'users', fin: 'cash', mdm: 'database',
   mkp: 'cart', sys: 'cog', dev: 'code', int: 'plug', ops: 'wrench', sal: 'receipt',
-  pub: 'megaphone', ai: 'sparkles', mkt: 'megaphone',
+  pub: 'megaphone', ai: 'sparkles', mkt: 'megaphone', grw: 'rocket',
 };
 
 export function navIcon(href: string) {

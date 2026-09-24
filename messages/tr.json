@@ -93,7 +93,8 @@
     "shopProcurement": "Procurement",
     "shopAnalyticsGrp": "Ticaret Zekâsı",
     "workshop": "Atölye",
-    "databaseConsole": "Veritabani Konsolu"
+    "databaseConsole": "Veritabani Konsolu",
+    "marketing": "Pazarlama"
   },
   "nav": {
     "dashboard": "Gösterge Paneli",
@@ -333,7 +334,13 @@
     "dbaMigrations": "Migrasyonlar",
     "dbaHealth": "Veritabani Sagligi",
     "clientPortal": "Müşteri Portalı",
-    "bpmCalculator": "BPM Hesaplayici"
+    "bpmCalculator": "BPM Hesaplayici",
+    "grwDashboard": "Büyüme Paneli",
+    "grwCampaigns": "Kampanya Yöneticisi",
+    "grwContent": "İçerik Stüdyosu",
+    "grwChannels": "Kanal Yönetimi",
+    "grwPlaybooks": "Playbook'lar",
+    "grwPerformance": "Performans"
   },
   "screens": {
     "IN006": "Model Kataloğu",
@@ -518,7 +525,13 @@
     "DB008": "Migrasyonlar",
     "DB009": "Veritabani Sagligi",
     "CR030": "Müşteri Portalı",
-    "MP006": "BPM Hesaplayici"
+    "MP006": "BPM Hesaplayici",
+    "GR000": "Büyüme Paneli",
+    "GR001": "Kampanya Yöneticisi",
+    "GR002": "İçerik Stüdyosu",
+    "GR003": "Kanal Yönetimi",
+    "GR004": "Playbook'lar",
+    "GR005": "Performans"
   },
   "support": {
     "title": "Destek",

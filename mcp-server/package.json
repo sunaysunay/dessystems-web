@@ -1,0 +1,15 @@
+{
+  "name": "des-growth-mcp",
+  "version": "1.0.0",
+  "description": "DES Growth Engine MCP Server — AI agent runtime for marketing content generation, campaign automation, and channel publishing",
+  "type": "module",
+  "main": "src/server.mjs",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "dev": "node --watch src/server.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@supabase/supabase-js": "^2.49.0"
+  }
+}

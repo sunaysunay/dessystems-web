@@ -28,6 +28,7 @@ export const MOD_COLORS: Record<string, string> = {
   WFL: 'bg-teal-100 text-teal-700',
   WRK: 'bg-sky-100 text-sky-700',
   SHP: 'bg-amber-100 text-amber-700',
+  GRW: 'bg-lime-100 text-lime-700',
   DBA: 'bg-stone-100 text-stone-700',
 };
 
@@ -343,6 +344,13 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/dba/history': { id: 'DB007', title: 'Query History', mod: 'DBA' },
   '/console/dba/migrations': { id: 'DB008', title: 'Migrations', mod: 'DBA' },
   '/console/dba/health': { id: 'DB009', title: 'Database Health', mod: 'DBA' },
+
+  '/console/grw/dashboard': { id: 'GR000', title: 'Growth Dashboard', mod: 'GRW' },
+  '/console/grw/campaigns': { id: 'GR001', title: 'Campaign Manager', mod: 'GRW' },
+  '/console/grw/content': { id: 'GR002', title: 'Content Studio', mod: 'GRW' },
+  '/console/grw/channels': { id: 'GR003', title: 'Channel Manager', mod: 'GRW' },
+  '/console/grw/playbooks': { id: 'GR004', title: 'Playbooks', mod: 'GRW' },
+  '/console/grw/performance': { id: 'GR005', title: 'Performance', mod: 'GRW' },
 };
 
 export function getScreenMeta(pathname: string): ScreenMeta | null {

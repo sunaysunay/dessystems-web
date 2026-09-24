@@ -10,6 +10,7 @@ export const MODULE_NAMES: Record<string, string> = {
   DAE: 'Data Acquisition Engine',
   DEV: 'Development Lifecycle',
   FIN: 'Finance',
+  GRW: 'Growth Engine',
   INT: 'Integrations',
   INV: 'Inventory Catalog',
   LOG: 'Logistics',

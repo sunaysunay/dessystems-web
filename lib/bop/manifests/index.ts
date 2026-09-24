@@ -165,6 +165,21 @@ export const SCREEN_OBJECTS: BopObject[] = [
   { object_id:"screen:DB007",type:"screen",module:"DBA",name:"Query History",route:"/console/dba/history",status:"active" },
   { object_id:"screen:DB008",type:"screen",module:"DBA",name:"Migrations",route:"/console/dba/migrations",status:"active" },
   { object_id:"screen:DB009",type:"screen",module:"DBA",name:"Database Health",route:"/console/dba/health",status:"active" },
+
+  { object_id:"screen:GR000",type:"screen",module:"GRW",name:"Growth Dashboard",route:"/console/grw/dashboard",status:"active" },
+  { object_id:"screen:GR001",type:"screen",module:"GRW",name:"Campaign Manager",route:"/console/grw/campaigns",status:"active" },
+  { object_id:"screen:GR002",type:"screen",module:"GRW",name:"Content Studio",route:"/console/grw/content",status:"active" },
+  { object_id:"screen:GR003",type:"screen",module:"GRW",name:"Channel Manager",route:"/console/grw/channels",status:"active" },
+  { object_id:"screen:GR004",type:"screen",module:"GRW",name:"Playbooks",route:"/console/grw/playbooks",status:"active" },
+  { object_id:"screen:GR005",type:"screen",module:"GRW",name:"Performance",route:"/console/grw/performance",status:"active" },
+  { object_id:"api:grw/clients:GET",type:"api",module:"GRW",name:"GET Growth Clients",route:"/api/bop/grw/clients",status:"active" },
+  { object_id:"api:grw/clients:POST",type:"api",module:"GRW",name:"Upsert Growth Client",route:"/api/bop/grw/clients",status:"active" },
+  { object_id:"api:grw/clients:DELETE",type:"api",module:"GRW",name:"Delete Growth Client",route:"/api/bop/grw/clients",status:"active" },
+  { object_id:"api:grw/stats:GET",type:"api",module:"GRW",name:"GET Growth Stats",route:"/api/bop/grw/stats",status:"active" },
+  { object_id:"api:grw/playbooks:GET",type:"api",module:"GRW",name:"GET Playbooks",route:"/api/bop/grw/playbooks",status:"active" },
+  { object_id:"api:grw/playbooks:POST",type:"api",module:"GRW",name:"Create Playbook",route:"/api/bop/grw/playbooks",status:"active" },
+  { object_id:"api:grw/playbooks:PATCH",type:"api",module:"GRW",name:"Update Playbook",route:"/api/bop/grw/playbooks",status:"active" },
+  { object_id:"api:grw/playbooks:DELETE",type:"api",module:"GRW",name:"Delete Playbook",route:"/api/bop/grw/playbooks",status:"active" },
 ];
 
 export const API_OBJECTS: BopObject[] = [

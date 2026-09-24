@@ -150,6 +150,26 @@ bash /root/scripts/promote.sh --confirm
 
 ---
 
+## MCP Agent Runtime (Growth Engine)
+
+The GRW module has an MCP server running on **desworkstation** (mini PC, Tailscale `100.120.226.69`).
+
+| Component | Location |
+|-----------|----------|
+| MCP server source | `mcp-server/src/server.mjs` |
+| MCP server on mini PC | `/home/desserver/des-growth-mcp/` |
+| Bridge API | `/api/bop/grw/mcp` |
+| Claude Desktop config | `~/.config/Claude/claude_desktop_config.json` on mini PC |
+| Logs | `~/.config/Claude/logs/mcp-server-des-growth-engine.log` on mini PC |
+
+**SSH to mini PC:** `ssh desserver@100.120.226.69` (key auth, Tailscale SSH must be OFF)
+
+**To update:** `scp mcp-server/src/server.mjs desserver@100.120.226.69:~/des-growth-mcp/src/server.mjs` then restart Claude Desktop on mini PC.
+
+**SDK note:** MCP SDK v1.30+ requires `ListToolsRequestSchema` / `CallToolRequestSchema` from `@modelcontextprotocol/sdk/types.js` — string-based handlers (`'tools/list'`) will crash.
+
+---
+
 ## Build notes
 
 - Node heap must be capped: `NODE_OPTIONS="--max-old-space-size=2048"` (promote.sh handles this)

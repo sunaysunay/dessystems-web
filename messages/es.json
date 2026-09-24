@@ -449,13 +449,26 @@
     "cbtTradingDash": "Trading Dashboard",
     "cbtDealerFeed": "Dealer Feed",
     "clientPortal": "Portal de clientes",
-    "bpmCalculator": "Calculadora BPM"
+    "bpmCalculator": "Calculadora BPM",
+    "grwDashboard": "Panel de Crecimiento",
+    "grwCampaigns": "Gestor de Campañas",
+    "grwContent": "Estudio de Contenido",
+    "grwChannels": "Gestor de Canales",
+    "grwPlaybooks": "Playbooks",
+    "grwPerformance": "Rendimiento"
   },
   "groups": {
-    "markets": "Markets"
+    "markets": "Markets",
+    "marketing": "Marketing"
   },
   "screens": {
     "CR030": "Portal de clientes",
-    "MP006": "Calculadora BPM"
+    "MP006": "Calculadora BPM",
+    "GR000": "Panel de Crecimiento",
+    "GR001": "Gestor de Campañas",
+    "GR002": "Estudio de Contenido",
+    "GR003": "Gestor de Canales",
+    "GR004": "Playbooks",
+    "GR005": "Rendimiento"
   }
 }

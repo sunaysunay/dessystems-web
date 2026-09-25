@@ -51,7 +51,7 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/mkp/auctions/[id]': { id: 'AU002', title: 'Auction Detail', mod: 'AUC' },
   '/console/mkp/auctions/[id]/bidding': { id: 'AU004', title: 'Bidding Console', mod: 'AUC' },
   '/menu/bop': { id: 'BO000', title: 'BOP Menu', mod: 'BOP' },
-  '/console/bop/dashboard': { id: 'BO001', title: 'Dashboard', mod: 'BOP' },
+  '/console': { id: 'BO001', title: 'Dashboard', mod: 'BOP' },
   '/console/anl/overview': { id: 'BO002', title: 'Analytics', mod: 'BOP' },
   '/menu/analytics/live': { id: 'BO003', title: 'Live', mod: 'BOP' },
   '/menu/analytics/listings': { id: 'BO004', title: 'Listings', mod: 'BOP' },

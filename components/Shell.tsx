@@ -30,9 +30,17 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
   return [
   { group: tg('overview'), items: [
     { label: tn('dashboard'),       href: '/console' },
+    { label: tn('execDashboard'),   href: '/console/anl/exec-dashboard' },
     {
-      label: tn('analytics'), href: '/console/anl/overview',
+      label: tg('detailedReports'), href: '/console/anl/overview',
       subgroups: [
+        { subgroup: tg('insights'),   items: [
+          { label: tn('funnel'),        href: '/console/an/funnel' },
+          { label: tn('trafficAcq'),    href: '/console/an/traffic' },
+          { label: tn('sessionsIntel'), href: '/console/an/sessions-intel' },
+          { label: tn('listingPerf'),   href: '/console/an/listing-perf' },
+          { label: tn('qualityMonitor'),href: '/console/an/monitor' },
+        ]},
         { subgroup: tg('live'),       items: [{ label: tn('realtime'),          href: '/console/anl/realtime' }] },
         { subgroup: tg('listings'),   items: [
           { label: tn('performance'),   href: '/console/anl/performance' },
@@ -74,14 +82,16 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
   { group: tg('operations'), items: [
     { label: tn('inventory'),         href: '/console/ast/inventory' },
     { label: tn('catalog'),           href: '/console/ast/catalog' },
-    { label: tn('brands'),            href: '/console/ast/brands' },
-    { label: tn('categories'),        href: '/console/ast/categories' },
-    { label: tn('suppliers'),         href: '/console/ast/suppliers' },
-    { label: tn('structures'),        href: '/console/ast/structures' },
-    { label: tn('costManager'),      href: '/console/inventory/costs',        v3: true },
-    { label: tn('inspections'),       href: '/console/inventory/inspections',  v3: true },
-    { label: tn('transport'),         href: '/console/operations/transport',   v3: true },
-    { label: tn('workOrders'),       href: '/console/operations/work-orders', v3: true },
+    { label: tg('masterData'), subitems: [
+      { label: tn('businessPartners'), href: '/console/mdm/partners' },
+      { label: tn('suppliers'),        href: '/console/ast/suppliers' },
+      { label: tn('brands'),           href: '/console/ast/brands' },
+      { label: tn('modelCatalog'),     href: '/console/ast/models' },
+      { label: tn('categories'),       href: '/console/ast/categories' },
+      { label: tn('structures'),       href: '/console/ast/structures' },
+      { label: tn('vehicleTaxonomy'),  href: '/console/mdm/taxonomy' },
+      { label: tn('equipmentCatalog'), href: '/console/master-data/equipment',  v3: true },
+    ]},
   ]},
 
   { group: tg('workshop'), items: [
@@ -101,39 +111,58 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
   ]},
 
   { group: tg('salesCrm'), items: [
-    { label: tn('leads'),             href: '/console/crm/leads' },
-    { label: tn('appointments'),      href: '/console/sal/appointments' },
-    { label: tn('reviews'),           href: '/console/sal/reviews' },
-    { label: tn('rentals'),           href: '/console/sal/rentals' },
-    { label: tn('activities'),        href: '/console/crm/activities' },
-    { label: tn('pipelineKanban'),   href: '/console/crm/kanban' },
-    { label: tn('clientPortal'),      href: '/console/crm/portal' },
+    { label: tg('crm'), subitems: [
+      { label: tn('leads'),             href: '/console/crm/leads' },
+      { label: tn('deals'),             href: '/console/crm/deals' },
+      { label: tn('pipelineKanban'),   href: '/console/crm/kanban' },
+      { label: tn('crmCustomers'),      href: '/console/crm/customer' },
+      { label: tn('activities'),        href: '/console/crm/activities' },
+      { label: tn('appointments'),      href: '/console/sal/appointments' },
+      { label: tn('clientPortal'),      href: '/console/crm/portal' },
+    ]},
+    { label: tg('selling'), subitems: [
+      { label: tn('cases'),             href: '/console/sal/cases' },
+      { label: tn('sellLeads'),         href: '/console/sal/sell-leads' },
+      { label: tn('buyerInquiries'),    href: '/console/sal/inquiries' },
+      { label: tn('buyerInbox'),        href: '/console/sal/buyer-inbox' },
+      { label: tn('quotations'),        href: '/console/sal/quotations' },
+      { label: tn('quoteBuilder'),     href: '/console/sal/quotes' },
+      { label: tn('quotes'),            href: '/console/sal/quote-submissions' },
+      { label: tn('orders'),            href: '/console/sal/orders' },
+      { label: tn('payments'),          href: '/console/sal/payments' },
+      { label: tn('rentals'),           href: '/console/sal/rentals' },
+      { label: tn('salesDashboard'),   href: '/console/sal/dashboard' },
+    ]},
+    { label: tg('aftersale'), subitems: [
+      { label: tn('handovers'),         href: '/console/sal/handovers' },
+      { label: tn('warranties'),        href: '/console/sal/warranties' },
+      { label: tn('surveys'),           href: '/console/sal/surveys' },
+      { label: tn('reviews'),           href: '/console/sal/reviews' },
+    ]},
   ]},
 
-  { group: tg('marketplace'), items: [
-    { label: tn('listingManager'),   href: '/console/mkp/listings' },
-    { label: tn('publishListing'),   href: '/console/mkp/publish' },
-    { label: tn('publishQueue'),     href: '/console/pub/queue' },
-    { label: tn('publications'),      href: '/console/pub/overview' },
-    { label: tn('channelAnalytics'), href: '/console/mkp/analytics',  v3: true },
-    { label: tn('auctionManager'),   href: '/console/mkp/auctions' },
-    { label: tn('layoutManager'),    href: '/console/mkp/layout-manager' },
-    { label: tn('bpmCalculator'),    href: '/console/mkp/bpm-calculator' },
-  ]},
-
-  { group: tg('sales'), items: [
-    { label: tn('quotations'),        href: '/console/sal/quotations' },
-    { label: tn('sellLeads'),         href: '/console/sal/sell-leads' },
-    { label: tn('buyerInquiries'),    href: '/console/sal/inquiries' },
-    { label: tn('buyerInbox'),        href: '/console/sal/buyer-inbox' },
-    { label: tn('quoteBuilder'),     href: '/console/sal/quotes' },
-    { label: tn('quotes'),            href: '/console/sal/quote-submissions' },
-    { label: tn('orders'),            href: '/console/sal/orders' },
-    { label: tn('payments'),          href: '/console/sal/payments' },
-    { label: tn('salesDashboard'),   href: '/console/sal/dashboard' },
-    { label: tn('ordersBop'),      href: '/console/sales/orders',           v3: true },
-    { label: tn('contracts'),         href: '/console/sales/contracts',        v3: true },
-    { label: tn('partnerPortal'),    href: '/console/sal/portal',           v3: true },
+  { group: tg('marketingChannels'), items: [
+    { label: tg('publishing'), subitems: [
+      { label: tn('listingManager'),   href: '/console/mkp/listings' },
+      { label: tn('publishListing'),   href: '/console/mkp/publish' },
+      { label: tn('publishQueue'),     href: '/console/pub/queue' },
+      { label: tn('publications'),      href: '/console/pub/overview' },
+      { label: tn('channelAnalytics'), href: '/console/mkp/analytics' },
+      { label: tn('auctionManager'),   href: '/console/mkp/auctions' },
+      { label: tn('layoutManager'),    href: '/console/mkp/layout-manager' },
+      { label: tn('bpmCalculator'),    href: '/console/mkp/bpm-calculator' },
+    ]},
+    { label: tg('growth'), subitems: [
+      { label: tn('grwDashboard'),     href: '/console/grw/dashboard' },
+      { label: tn('grwCampaigns'),     href: '/console/grw/campaigns' },
+      { label: tn('grwContent'),       href: '/console/grw/content' },
+      { label: tn('grwChannels'),      href: '/console/grw/channels' },
+      { label: tn('grwPlaybooks'),     href: '/console/grw/playbooks' },
+      { label: tn('grwPerformance'),   href: '/console/grw/performance' },
+      { label: tn('aiCampaigns'),      href: '/console/mkt/campaigns' },
+      { label: tn('studio'),           href: '/console/mkt/studio' },
+      { label: tn('presetBg'),         href: '/console/mkt/studio/preset-backgrounds' },
+    ]},
   ]},
 
   { group: tg('finance'), items: [
@@ -145,86 +174,67 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     { label: tn('bonScanner'),       href: '/console/fin/scanner' },
     { label: tn('btwAssistent'),     href: '/console/fin/assistant' },
     { label: tn('winstVerlies'),   href: '/console/fin/pnl' },
-    { label: tn('arAging'),          href: '/console/finance/bop/aging',      v3: true },
-    { label: tn('expensesBop'),    href: '/console/finance/bop/expenses',   v3: true },
   ]},
 
   { group: tg('intelligence'), items: [
-    { label: tn('execDashboard'),    href: '/console/anl/exec-dashboard' },
-    { label: tn('marginCalculator'), href: '/console/sal/margin' },
     { label: tn('aiOverview'),       href: '/console/mkt/overview' },
     { label: tn('marketEval'),       href: '/console/mkt/market' },
     { label: tn('competitors'),       href: '/console/mkt/competitors' },
     { label: tn('brandTracker'),     href: '/console/mkt/brands' },
-    { label: tn('leadStats'),        href: '/console/crm/lead-stats' },
     { label: tn('listingIntel'),     href: '/console/mkt/listings' },
-    { label: tn('aiCampaigns'),      href: '/console/mkt/campaigns' },
-    { label: tn('studio'),           href: '/console/mkt/studio' },
-    { label: tn('presetBg'),         href: '/console/mkt/studio/preset-backgrounds' },
-  ]},
-
-
-  { group: tg('marketing'), items: [
-    { label: tn('grwDashboard'),     href: '/console/grw/dashboard' },
-    { label: tn('grwCampaigns'),     href: '/console/grw/campaigns' },
-    { label: tn('grwContent'),       href: '/console/grw/content' },
-    { label: tn('grwChannels'),      href: '/console/grw/channels' },
-    { label: tn('grwPlaybooks'),     href: '/console/grw/playbooks' },
-    { label: tn('grwPerformance'),   href: '/console/grw/performance' },
+    { label: tn('leadStats'),        href: '/console/crm/lead-stats' },
+    { label: tn('marginCalculator'), href: '/console/sal/margin' },
   ]},
 
   { group: tg('shop'), items: [
     { label: tn('shopDashboard'),    href: '/console/shp/dashboard' },
+    { label: tn('shopControlTower'), href: '/console/shp/control-tower' },
     { label: tn('shopMonitor'),      href: '/console/shp/monitor' },
-    { label: tn('shopGuide'),        href: '/console/shp/guide' },
-    { label: tn('shopProducts'), href: '/console/shp/products',
+    { label: tg('shopModules'), href: '/console/shp',
       subgroups: [
         { subgroup: tg('shopCatalog'), items: [
           { label: tn('shopProducts'),     href: '/console/shp/products' },
           { label: tn('shopBrands'),       href: '/console/shp/brands' },
-          { label: tn('shopInventory'),    href: '/console/shp/inventory' },
           { label: tn('shopDocuments'),    href: '/console/shp/documents' },
-          { label: tn('shopCollections'),  href: '/console/shp/collections' },
-          { label: tn('shopImport'),       href: '/console/shp/import' },
-        ]},
-        { subgroup: tg('shopOrdersMgmt'), items: [
-          { label: tn('shopOrders'),       href: '/console/shp/orders' },
-          { label: tn('shopCustomers'),    href: '/console/shp/customers' },
-          { label: tn('shopTracking'),     href: '/console/shp/tracking' },
-        ]},
-        { subgroup: tg('shopFulfilment'), items: [
-          { label: tn('shopFulfilOrders'), href: '/console/shp/fulfil/orders' },
-          { label: tn('shopAllocations'),  href: '/console/shp/fulfil/allocations' },
-          { label: tn('shopPickLists'),    href: '/console/shp/fulfil/pick' },
-          { label: tn('shopPackStation'),  href: '/console/shp/fulfil/pack' },
-          { label: tn('shopShipments'),    href: '/console/shp/fulfil/shipments' },
-          { label: tn('shopBackorders'),   href: '/console/shp/fulfil/backorders' },
         ]},
         { subgroup: tg('shopProcurement'), items: [
+          { label: tn('shopProcureCockpit'),  href: '/console/shp/procure/cockpit' },
           { label: tn('shopSuppliers'),       href: '/console/shp/procure/suppliers' },
           { label: tn('shopSupplierCatalog'), href: '/console/shp/procure/catalog' },
           { label: tn('shopPurchaseOrders'),  href: '/console/shp/procure/po' },
-          { label: tn('shopGoodsReceipt'),    href: '/console/shp/procure/receive' },
-          { label: tn('shopCycleCount'),      href: '/console/shp/procure/count' },
-          { label: tn('shopDropship'),        href: '/console/shp/procure/dropship' },
+          { label: tn('shopGoodsReceipt'),    href: '/console/shp/procure/goods-in' },
+        ]},
+        { subgroup: tg('shopWarehouse'), items: [
+          { label: tn('shopInventory'),    href: '/console/shp/inventory' },
+          { label: tn('shopCycleCount'),   href: '/console/shp/procure/cycle-count' },
+        ]},
+        { subgroup: tg('shopOrdersMgmt'), items: [
+          { label: tn('shopOrders'),       href: '/console/shp/orders' },
+          { label: tn('shopFulfilOrders'), href: '/console/shp/fulfil/orders' },
+          { label: tn('shopCustomers'),    href: '/console/shp/customers' },
+        ]},
+        { subgroup: tg('shopShipping'), items: [
+          { label: tn('shopPicking'),      href: '/console/shp/fulfil/picking' },
+          { label: tn('shopPacking'),      href: '/console/shp/fulfil/packing' },
+          { label: tn('shopShipping'),     href: '/console/shp/fulfil/shipping' },
+          { label: tn('shopDropshipDispatch'), href: '/console/shp/fulfil/dropship' },
         ]},
         { subgroup: tg('shopFinanceGrp'), items: [
           { label: tn('shopVat'),          href: '/console/shp/finance/vat' },
           { label: tn('shopSettlements'),  href: '/console/shp/finance/settlements' },
           { label: tn('shopInvoices'),     href: '/console/shp/finance/invoices' },
           { label: tn('shopCreditNotes'),  href: '/console/shp/finance/credit-notes' },
-          { label: tn('shopPayments'),     href: '/console/shp/finance/payments' },
           { label: tn('shopMargin'),       href: '/console/shp/finance/margin' },
         ]},
         { subgroup: tg('shopAfterSalesGrp'), items: [
           { label: tn('shopReturns'),        href: '/console/shp/aftersales/returns' },
+          { label: tn('shopReturnInspections'), href: '/console/shp/aftersales/inspections' },
+          { label: tn('shopRefunds'),        href: '/console/shp/aftersales/refunds' },
           { label: tn('shopClaims'),         href: '/console/shp/aftersales/claims' },
-          { label: tn('shopCarrierDamage'),  href: '/console/shp/aftersales/damage' },
-          { label: tn('shopReplacements'),   href: '/console/shp/aftersales/replacements' },
         ]},
         { subgroup: tg('shopComplianceGrp'), items: [
           { label: tn('shopCompliance'),  href: '/console/shp/compliance/registrations' },
-          { label: tn('shopHazards'),     href: '/console/shp/compliance/hazards' },
+          { label: tn('shopComplianceFees'), href: '/console/shp/compliance/fees' },
           { label: tn('shopGdpr'),        href: '/console/shp/compliance/gdpr' },
         ]},
         { subgroup: tg('shopAnalyticsGrp'), items: [
@@ -243,12 +253,6 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
       ]},
     { label: tn('shopSettings'),     href: '/console/shp/settings' },
     { label: tn('shopGuide'),        href: '/console/shp/guide' },
-  ]},
-
-  { group: tg('masterData'), items: [
-    { label: tn('businessPartners'), href: '/console/mdm/partners' },
-    { label: tn('vehicleTaxonomy'),  href: '/console/mdm/taxonomy' },
-    { label: tn('equipmentCatalog'), href: '/console/master-data/equipment',  v3: true },
   ]},
 
   { group: tg('tools'), items: [
@@ -270,26 +274,50 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
       { label: tn('userCockpit'),      href: '/console/sys/user-cockpit' },
       { label: tn('sessionsAdm'),          href: '/console/sys/sessions' },
       { label: tn('accessAudit'),      href: '/console/sys/access-audit' },
-      { label: tn('accessRequests'),    href: '/console/sys/access-request', v3: true },
-      { label: tn('sodConflicts'),      href: '/console/sys/sod',            v3: true },
-      { label: tn('recertification'),    href: '/console/sys/recertification',v3: true },
-      { label: tn('bulkUsers'),         href: '/console/sys/bulk-users',     v3: true },
+      { label: tn('bulkUsers'),         href: '/console/sys/bulk-users' },
+      { label: tn('dealerApplications'), href: '/console/sys/dealer-applications' },
     ]},
     { label: tg('accessRoles'), subitems: [
       { label: tn('roleCatalog'),      href: '/console/sys/roles' },
       { label: tn('securityCockpit'),  href: '/console/sys/suim' },
       { label: tn('rbac'),              href: '/console/sys/rbac' },
       { label: tn('auditLog'),         href: '/console/sys/audit' },
+      { label: tn('accessRequests'),    href: '/console/sys/access-request' },
+      { label: tn('sodConflicts'),      href: '/console/sys/sod' },
+      { label: tn('recertification'),    href: '/console/sys/recertification' },
+      { label: tn('securityEvents'),    href: '/console/sys/security' },
     ]},
     { label: tg('configuration'), subitems: [
       { label: tn('systemSettings'),   href: '/console/sys/settings' },
       { label: tn('tenants'),           href: '/console/sys/tenants' },
-      { label: tn('screenExplorer'),   href: '/console/sys/screen-explorer' },
+      { label: tn('featureMatrix'),     href: '/console/sys/sy050' },
+      { label: tn('themeConfig'),       href: '/console/sys/theme-config' },
       { label: tn('moduleManager'),   href: '/console/sys/modules' },
       { label: tn('menuConfig'),      href: '/console/sys/menu-config' },
+      { label: tn('screenExplorer'),   href: '/console/sys/screen-explorer' },
       { label: tn('counters'),        href: '/console/sys/counters' },
-      { label: 'Content Engine',      href: '/console/config/content-engine' },
-      { label: 'Tab Templates',       href: '/console/config/content-engine/templates' },
+      { label: tn('contentEngine'),   href: '/console/config/content-engine' },
+      { label: tn('tabTemplates'),    href: '/console/config/content-engine/templates' },
+    ]},
+    { label: tg('communication'), subitems: [
+      { label: tn('commTemplates'),   href: '/console/sys/comm/templates' },
+      { label: tn('commStyles'),      href: '/console/sys/comm/styles' },
+      { label: tn('commAutomation'),  href: '/console/sys/comm/automation' },
+      { label: tn('commLog'),         href: '/console/sys/comm/log' },
+      { label: tn('supportCenter'),   href: '/console/sys/support' },
+    ]},
+    { label: tg('aiPlatform'), subitems: [
+      { label: tn('aiModels'),        href: '/console/ai/models' },
+      { label: tn('aiPrompts'),       href: '/console/ai/prompts' },
+      { label: tn('aiAudit'),         href: '/console/ai/audit' },
+    ]},
+    { label: tg('docs'), subitems: [
+      { label: tn('docsBrowser'),     href: '/console/sys/docs' },
+      { label: tn('processLibrary'),  href: '/console/sys/processes' },
+      { label: tn('flowMap'),         href: '/console/sys/flow-map' },
+      { label: tn('tfeFlow'),         href: '/console/sys/tfe-flow' },
+      { label: tn('objectExplorer'),  href: '/console/sys/object-explorer' },
+      { label: tn('handoff'),         href: '/console/sys/handoff' },
     ]},
     { label: tg("development"), subitems: [
       { label: tn("devDashboard"),    href: "/console/dev" },
@@ -299,6 +327,9 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
       { label: tn("releases"),        href: "/console/dev/releases" },
       { label: tn("deployments"),     href: "/console/dev/deployments" },
       { label: tn("definitionAudit"), href: "/console/dev/definition-audit" },
+      { label: tn("authSmtpAudit"),   href: "/console/dev/auth-smtp-audit" },
+      { label: tn("qualityInspector"),href: "/console/sys/quality" },
+      { label: tn("dataExplorer"),    href: "/console/sys/data-explorer" },
       { label: tn("implCockpit"),     href: "/console/sys/impl" },
     ]},
     { label: tg("dataAcquisition"), subitems: [
@@ -320,13 +351,13 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     ]},
     { label: tg("infrastructure"), subitems: [
       { label: tn('adminDashboard'),   href: '/console/sys/dashboard' },
+      { label: tn('systemsOverview'),  href: '/console/sys/overview' },
       { label: tn('systemHealth'),     href: '/console/sys/health' },
       { label: tn('dbJobs'),           href: '/console/sys/jobs' },
       { label: tn('lockMonitor'),      href: '/console/sys/locks' },
       { label: tn('imapMonitor'),      href: '/console/sys/imap' },
       { label: tn('mcp'),               href: '/console/sys/mcp' },
       { label: tn('gdrive'),            href: '/console/sys/drive' },
-      { label: tn('handoff'),           href: '/console/sys/handoff' },
     ]},
     { label: tg("databaseConsole"), subitems: [
       { label: tn("dbaOverview"),      href: "/console/dba" },
@@ -982,7 +1013,7 @@ function useTCSearchHotkeys(
 function TCSearch() {
   const tn = useTranslations('nav');
   const tg = useTranslations('groups');
-  const dbNav = useNav(); const NAV = dbNav.length > 0 ? dbNav : makeNav(tn, tg);
+  const dbNav = useNav(tg); const NAV = dbNav.length > 0 ? dbNav : makeNav(tn, tg);
   const router = useRouter();
   const [query, setQuery]         = useState('');
   const [open, setOpen]           = useState(false);
@@ -1197,7 +1228,7 @@ function TCSearch() {
 export default function Shell({ children }: { children: React.ReactNode }) {
   const tn = useTranslations('nav');
   const tg = useTranslations('groups');
-  const dbNav = useNav(); const NAV = dbNav.length > 0 ? dbNav : makeNav(tn, tg);
+  const dbNav = useNav(tg); const NAV = dbNav.length > 0 ? dbNav : makeNav(tn, tg);
   const { env, user, role, unit } = useScope();
   const [quickOpen, setQuickOpen]   = useState(false);
   const [aiOpen, setAiOpen]         = useState(false);

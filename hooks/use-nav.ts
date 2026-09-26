@@ -39,7 +39,7 @@ const SUBGROUP_PARENT: Record<string, { href: string; labelKey: string }> = {
 };
 
 // Groups whose subgroups render as accordion sub-menus (AdminSubMenu)
-const SUBMENU_GROUPS = new Set(["system", "sales", "marketing", "operations"]);
+const SUBMENU_GROUPS = new Set(["system", "sales", "marketing", "operations", "tools"]);
 
 function lbl(route: string, title: string): string {
   return SCREEN_REGISTRY[route]?.title ?? title;

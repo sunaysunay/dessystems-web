@@ -266,6 +266,17 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     { label: tn('watermark'),         href: '/console/ops/watermark' },
     { label: tn('photoEnhance'),     href: '/console/ops/photo-enhance' },
     { label: tn('fieldIntel'),       href: '/console/ops/field-intel' },
+    { label: tg("databaseConsole"), subitems: [
+      { label: tn("dbaOverview"),      href: "/console/dba" },
+      { label: tn("dbaSchema"),        href: "/console/dba/schema" },
+      { label: tn("dbaTableData"),     href: "/console/dba/data" },
+      { label: tn("dbaSqlRunner"),     href: "/console/dba/sql" },
+      { label: tn("dbaFunctions"),     href: "/console/dba/functions" },
+      { label: tn("dbaActions"),       href: "/console/dba/actions" },
+      { label: tn("dbaHistory"),       href: "/console/dba/history" },
+      { label: tn("dbaMigrations"),    href: "/console/dba/migrations" },
+      { label: tn("dbaHealth"),        href: "/console/dba/health" },
+    ]},
   ]},
 
   { group: tg('system'), items: [
@@ -358,17 +369,6 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
       { label: tn('imapMonitor'),      href: '/console/sys/imap' },
       { label: tn('mcp'),               href: '/console/sys/mcp' },
       { label: tn('gdrive'),            href: '/console/sys/drive' },
-    ]},
-    { label: tg("databaseConsole"), subitems: [
-      { label: tn("dbaOverview"),      href: "/console/dba" },
-      { label: tn("dbaSchema"),        href: "/console/dba/schema" },
-      { label: tn("dbaTableData"),     href: "/console/dba/data" },
-      { label: tn("dbaSqlRunner"),     href: "/console/dba/sql" },
-      { label: tn("dbaFunctions"),     href: "/console/dba/functions" },
-      { label: tn("dbaActions"),       href: "/console/dba/actions" },
-      { label: tn("dbaHistory"),       href: "/console/dba/history" },
-      { label: tn("dbaMigrations"),    href: "/console/dba/migrations" },
-      { label: tn("dbaHealth"),        href: "/console/dba/health" },
     ]},
   ]},
   ];

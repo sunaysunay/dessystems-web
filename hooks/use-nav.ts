@@ -11,12 +11,13 @@ type DbRow = { screen_id: string; route: string; title: string; nav_group: strin
 type ApiTree = Record<string, Record<string, DbRow[]>>;
 type Tg = (key: string) => string;
 
-const GROUP_ORDER = ["overview","operations","workshop","sales","marketing","finance","intelligence","shop","tools","system"];
+const GROUP_ORDER = ["overview","operations","workshop","sales","marketing","finance","intelligence","ai","shop","tools","system"];
 
 // nav_group value → messages/*.json "groups" key
 const GROUP_KEY: Record<string, string> = {
   sales: "salesCrm",
   marketing: "marketingChannels",
+  ai: "aiPlatform",
 };
 
 // nav_subgroup value → "groups" key

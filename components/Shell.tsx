@@ -186,6 +186,12 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
     { label: tn('marginCalculator'), href: '/console/sal/margin' },
   ]},
 
+  { group: tg('aiPlatform'), items: [
+    { label: tn('aiModels'),        href: '/console/ai/models' },
+    { label: tn('aiPrompts'),       href: '/console/ai/prompts' },
+    { label: tn('aiAudit'),         href: '/console/ai/audit' },
+  ]},
+
   { group: tg('shop'), items: [
     { label: tn('shopDashboard'),    href: '/console/shp/dashboard' },
     { label: tn('shopControlTower'), href: '/console/shp/control-tower' },
@@ -316,11 +322,6 @@ function makeNav(tn: (k: string) => string, tg: (k: string) => string): NavSecti
       { label: tn('commAutomation'),  href: '/console/sys/comm/automation' },
       { label: tn('commLog'),         href: '/console/sys/comm/log' },
       { label: tn('supportCenter'),   href: '/console/sys/support' },
-    ]},
-    { label: tg('aiPlatform'), subitems: [
-      { label: tn('aiModels'),        href: '/console/ai/models' },
-      { label: tn('aiPrompts'),       href: '/console/ai/prompts' },
-      { label: tn('aiAudit'),         href: '/console/ai/audit' },
     ]},
     { label: tg('docs'), subitems: [
       { label: tn('docsBrowser'),     href: '/console/sys/docs' },

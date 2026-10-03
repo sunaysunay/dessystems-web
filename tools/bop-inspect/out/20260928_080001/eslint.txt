@@ -1,0 +1,9 @@
+
+Oops! Something went wrong! :(
+
+ESLint: 9.39.4
+
+Error: ENOENT: no such file or directory, stat '/opt/dessystems-console-dev/eslint.inspect.config.mjs'
+    at async Object.stat (node:internal/fs/promises:1038:18)
+    at async loadConfigFile (/opt/dessystems-console-dev/node_modules/eslint/lib/config/config-loader.js:206:17)
+    at async ConfigLoader.calculateConfigArray (/opt/dessystems-console-dev/node_modules/eslint/lib/config/config-loader.js:589:23)

@@ -76,7 +76,7 @@ function buildSections(tree: ApiTree, tg: Tg): NavSection[] {
   });
 }
 
-const NAV_CACHE_KEY = "bop_nav_cache_v3";
+const NAV_CACHE_KEY = "bop_nav_cache_v6";
 
 export function useNav(tg: Tg): NavSection[] {
   // Initialise from the last-known DB nav cached in localStorage so the first

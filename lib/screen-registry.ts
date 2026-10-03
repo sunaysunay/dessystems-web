@@ -22,6 +22,7 @@ export const MOD_COLORS: Record<string, string> = {
   PUB: 'bg-blue-100 text-blue-700',
   SAL: 'bg-green-100 text-green-700',
   SYS: 'bg-slate-100 text-slate-700',
+  SUP: 'bg-indigo-100 text-indigo-700',
   DEV: 'bg-violet-100 text-violet-700',
   INT: 'bg-cyan-100 text-cyan-700',
   DAE: 'bg-teal-100 text-teal-700',
@@ -344,6 +345,11 @@ export const SCREEN_REGISTRY: Record<string, ScreenMeta> = {
   '/console/dba/history': { id: 'DB007', title: 'Query History', mod: 'DBA' },
   '/console/dba/migrations': { id: 'DB008', title: 'Migrations', mod: 'DBA' },
   '/console/dba/health': { id: 'DB009', title: 'Database Health', mod: 'DBA' },
+
+  '/console/sup': { id: 'SUP000', title: 'Support Overview', mod: 'SUP' },
+  '/console/sup/queue': { id: 'SUP001', title: 'Support Queue', mod: 'SUP' },
+  '/console/sup/tenants': { id: 'SUP002', title: 'Support Tenants', mod: 'SUP' },
+  '/console/sup/api-docs': { id: 'SUP003', title: 'API Reference', mod: 'SUP' },
 
   '/console/grw/dashboard': { id: 'GR000', title: 'Growth Dashboard', mod: 'GRW' },
   '/console/grw/campaigns': { id: 'GR001', title: 'Campaign Manager', mod: 'GRW' },

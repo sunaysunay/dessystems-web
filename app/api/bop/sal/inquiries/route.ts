@@ -1,22 +1,28 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getServerClient } from '@/lib/supabase-server';
+import { NextRequest, NextResponse } from "next/server";
+import { getServerClient } from "@/lib/supabase-server";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   const sb = getServerClient();
   const { searchParams } = new URL(req.url);
-  const status = searchParams.get('status') ?? '';
+  const status = searchParams.get("status") ?? "";
 
   let q = sb
-    .from('dm_inquiries')
-    .select('id, listing_id, question_codes, intent_tags, free_text, contact_name, contact_email, status, locale, created_at')
-    .order('created_at', { ascending: false })
+    .from("dm_inquiries")
+    .select("id, listing_id, question_codes, intent_tags, free_text, contact_name, contact_email, status, locale, created_at")
+    .order("created_at", { ascending: false })
     .limit(500);
 
-  if (status) q = q.eq('status', status);
+  if (status) q = q.eq("status", status);
 
   const { data, error } = await q;
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ inquiries: data ?? [] });
+
+  const inquiries = (data ?? []).map((r: { id: string }) => ({
+    ...r,
+    ref_code: `DM-INQ-${r.id.slice(0, 8).toUpperCase()}`,
+  }));
+
+  return NextResponse.json({ inquiries });
 }

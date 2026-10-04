@@ -1,38 +1,38 @@
-'use client';
+"use client";
 // SA018 — Buyer Inquiry Detail: questions, contact, status machine, CRM lead promotion.
-import { useState, useEffect, useCallback, use } from 'react';
-import { useRouter } from 'next/navigation';
-import { ScreenHeader } from '@/components/ScreenBadge';
-import { useScope } from '@/lib/scope-context';
+import { useState, useEffect, useCallback, use } from "react";
+import { useRouter } from "next/navigation";
+import { ScreenHeader } from "@/components/ScreenBadge";
+import { useScope } from "@/lib/scope-context";
 
 const INTENT_COLOR: Record<string, string> = {
-  general:    'bg-slate-100 text-slate-600',
-  b2b:        'bg-indigo-100 text-indigo-700',
-  inspection: 'bg-amber-100 text-amber-700',
-  logistics:  'bg-teal-100 text-teal-700',
-  technical:  'bg-orange-100 text-orange-700',
+  general:    "bg-slate-100 text-slate-600",
+  b2b:        "bg-indigo-100 text-indigo-700",
+  inspection: "bg-amber-100 text-amber-700",
+  logistics:  "bg-teal-100 text-teal-700",
+  technical:  "bg-orange-100 text-orange-700",
 };
 const INTENT_EMOJI: Record<string, string> = {
-  general: '💬', b2b: '💼', inspection: '👀', logistics: '🚚', technical: '🔧',
+  general: "\u{1F4AC}", b2b: "\u{1F4BC}", inspection: "\u{1F440}", logistics: "\u{1F69A}", technical: "\u{1F527}",
 };
 const STATUS_TRANSITIONS: Record<string, string[]> = {
-  new:       ['seen', 'closed'],
-  seen:      ['replied', 'closed'],
-  replied:   ['closed'],
+  new:       ["seen", "closed"],
+  seen:      ["replied", "closed"],
+  replied:   ["closed"],
   closed:    [],
   converted: [],
 };
 const STATUS_COLOR: Record<string, string> = {
-  new:       'bg-blue-100 text-blue-700',
-  seen:      'bg-amber-100 text-amber-700',
-  replied:   'bg-violet-100 text-violet-700',
-  closed:    'bg-slate-100 text-slate-500',
-  converted: 'bg-teal-100 text-teal-700',
+  new:       "bg-blue-100 text-blue-700",
+  seen:      "bg-amber-100 text-amber-700",
+  replied:   "bg-violet-100 text-violet-700",
+  closed:    "bg-slate-100 text-slate-500",
+  converted: "bg-teal-100 text-teal-700",
 };
 
-const CARD_CLS = 'rounded-xl border border-slate-200 bg-white p-5';
-const LBL_CLS = 'text-[10px] uppercase tracking-wider text-slate-400 font-semibold';
-const VAL_CLS = 'mt-0.5 text-[13px] text-slate-800';
+const CARD_CLS = "rounded-xl border border-slate-200 bg-white p-5";
+const LBL_CLS = "text-[10px] uppercase tracking-wider text-slate-400 font-semibold";
+const VAL_CLS = "mt-0.5 text-[13px] text-slate-800";
 function RowItem({ label, value }: { label: string; value: unknown }) {
   if (!value) return null;
   return (
@@ -52,7 +52,7 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
   const [inq, setInq] = useState<any>(null);
   const [busy, setBusy] = useState(false);
   const [promoting, setPromoting] = useState(false);
-  const [msg, setMsg] = useState('');
+  const [msg, setMsg] = useState("");
   const [copied, setCopied] = useState(false);
 
   const load = useCallback(async () => {
@@ -64,31 +64,31 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
   useEffect(() => { void load(); }, [load]);
 
   async function setStatus(newStatus: string) {
-    setBusy(true); setMsg('');
+    setBusy(true); setMsg("");
     const res = await fetch(`/api/bop/sal/inquiries/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus }),
     });
     const j = await res.json();
-    if (!res.ok) setMsg(j.error ?? 'Failed');
-    else { await load(); setMsg('Status updated.'); }
+    if (!res.ok) setMsg(j.error ?? "Failed");
+    else { await load(); setMsg("Status updated."); }
     setBusy(false);
   }
 
   async function promote() {
-    setPromoting(true); setMsg('');
+    setPromoting(true); setMsg("");
     const res = await fetch(`/api/bop/sal/inquiries/${id}/promote`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ tenant_id: unit.id }),
     });
     const j = await res.json();
     if (!res.ok) {
-      setMsg(j.error ?? 'Promotion failed');
+      setMsg(j.error ?? "Promotion failed");
     } else {
       await load();
-      setMsg(j.already_existed ? 'Already linked to a CRM lead.' : 'CRM lead created successfully.');
+      setMsg(j.already_existed ? "Already linked to a CRM lead." : "CRM lead created successfully.");
     }
     setPromoting(false);
   }
@@ -103,24 +103,23 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
 
   if (!inq) return <div className="p-6 text-slate-400 text-sm">Loading...</div>;
 
-
-
+  const refCode = `DM-INQ-${inq.id.slice(0, 8).toUpperCase()}`;
   const transitions = STATUS_TRANSITIONS[inq.status] ?? [];
-  const isConverted = inq.status === 'converted';
-  const canPromote = !isConverted && !inq.crm_lead_id && (inq.status === 'seen' || inq.status === 'replied');
+  const isConverted = inq.status === "converted";
+  const canPromote = !isConverted && !inq.crm_lead_id && (inq.status === "seen" || inq.status === "replied");
 
   return (
     <div className="p-6">
       <ScreenHeader
-        title={`Inquiry — ${inq.listing_id}`}
+        title={`${refCode} — ${inq.listing_id}`}
         description={`${inq.contact_name} · ${inq.status}`}
       />
-      <button onClick={() => router.push('/console/sal/inquiries')} className="mt-2 text-[12px] text-slate-400 hover:text-slate-600">
+      <button onClick={() => router.push("/console/sal/inquiries")} className="mt-2 text-[12px] text-slate-400 hover:text-slate-600">
         back to list
       </button>
 
       {msg && (
-        <div className={`mt-3 rounded-lg px-4 py-2 text-[12px] ${msg.toLowerCase().includes('fail') || msg.toLowerCase().includes('error') ? 'bg-red-50 text-red-600' : 'bg-emerald-50 text-emerald-600'}`}>
+        <div className={`mt-3 rounded-lg px-4 py-2 text-[12px] ${msg.toLowerCase().includes("fail") || msg.toLowerCase().includes("error") ? "bg-red-50 text-red-600" : "bg-emerald-50 text-emerald-600"}`}>
           {msg}
         </div>
       )}
@@ -143,7 +142,7 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
             <h3 className="mb-3 text-[13px] font-bold text-slate-700">Questions asked</h3>
             <div className="mb-3 flex flex-wrap gap-1.5">
               {(inq.intent_tags ?? []).map((tag: string) => (
-                <span key={tag} className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${INTENT_COLOR[tag] ?? ''}`}>
+                <span key={tag} className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${INTENT_COLOR[tag] ?? ""}`}>
                   {INTENT_EMOJI[tag]} {tag}
                 </span>
               ))}
@@ -151,7 +150,7 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
             <div className="flex flex-wrap gap-2">
               {(inq.question_codes ?? []).map((code: string) => (
                 <span key={code} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[12px] text-slate-700">
-                  {code.replace(/_/g, ' ')}
+                  {code.replace(/_/g, " ")}
                 </span>
               ))}
             </div>
@@ -165,11 +164,13 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
 
           <div className={CARD_CLS}>
             <h3 className="mb-3 text-[13px] font-bold text-slate-700">Listing</h3>
-            <RowItem label='Listing ref / ID' value={inq.listing_id} />
-            <RowItem label='Locale' value={inq.locale} />
-            <RowItem label='Source' value={inq.source} />
-            <RowItem label='Received' value={new Date(inq.created_at).toLocaleString('nl-NL')} />
-            <RowItem label='Consent at' value={inq.consent_at ? new Date(inq.consent_at).toLocaleString('nl-NL') : null} />
+            <RowItem label="Reference" value={refCode} />
+            <RowItem label="Listing ref / ID" value={inq.listing_id} />
+            <RowItem label="Locale" value={inq.locale} />
+            <RowItem label="Source" value={inq.acquisition_source} />
+            <RowItem label="Channel" value={inq.traffic_channel} />
+            <RowItem label="Received" value={new Date(inq.created_at).toLocaleString("nl-NL")} />
+            <RowItem label="Consent at" value={inq.consent_at ? new Date(inq.consent_at).toLocaleString("nl-NL") : null} />
           </div>
         </div>
 
@@ -189,11 +190,11 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
                     onClick={copyEmail}
                     className="rounded px-2 py-0.5 text-[10px] font-semibold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors"
                   >
-                    {copied ? 'Copied' : 'Copy'}
+                    {copied ? "Copied" : "Copy"}
                   </button>
                 </div>
                 <a
-                  href={`mailto:${inq.contact_email}?subject=${encodeURIComponent('Re: Your inquiry about listing ' + inq.listing_id)}`}
+                  href={`mailto:${inq.contact_email}?subject=${encodeURIComponent("Re: Your inquiry about listing " + inq.listing_id)}`}
                   className="mt-1 block text-[11px] text-orange-500 hover:underline"
                 >
                   Reply by email
@@ -210,7 +211,7 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
 
           <div className={CARD_CLS}>
             <h3 className="mb-3 text-[13px] font-bold text-slate-700">Status</h3>
-            <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${STATUS_COLOR[inq.status] ?? ''}`}>
+            <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${STATUS_COLOR[inq.status] ?? ""}`}>
               {inq.status}
             </span>
 
@@ -238,7 +239,7 @@ export default function InquiryDetailPage({ params }: { params: Promise<{ id: st
                   disabled={promoting}
                   className="flex w-full items-center justify-center gap-2 rounded-lg bg-orange-500 px-3 py-2.5 text-[12px] font-semibold text-white transition-colors hover:bg-orange-600 disabled:opacity-50"
                 >
-                  {promoting ? 'Creating...' : 'Create CRM Lead'}
+                  {promoting ? "Creating..." : "Create CRM Lead"}
                 </button>
                 <p className="mt-1.5 text-[10px] text-slate-400 leading-snug">
                   Creates a lead in the CRM pipeline and locks this inquiry from further status changes.

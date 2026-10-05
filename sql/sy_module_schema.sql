@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS sy_programs (
   title           jsonb NOT NULL DEFAULT '{}',
   owner           text,
   status          text NOT NULL DEFAULT 'draft'
-                    CHECK (status IN ('draft','active','paused','done','cancelled')),
+                    CHECK (status IN ('draft','active','test','paused','done','cancelled')),
   spec_doc_path   text,
   total_fte_days  numeric(6,1),
   started_at      timestamptz,
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS sy_deliverables (
                     CHECK (kind IN (
                       'SCREEN','MENU_NODE','DB_TABLE','RLS_POLICY',
                       'API_ROUTE','PERMISSION','I18N_KEY','HELP_DOC',
-                      'EMAIL_TEMPLATE','TELEGRAM_ALERT','TEST',
+                      'SOURCE_FILE','EMAIL_TEMPLATE','TELEGRAM_ALERT','TEST',
                       'MIGRATION','SMOKE_CHECK','CUSTOM'
                     )),
   ref             text NOT NULL,

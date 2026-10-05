@@ -1569,12 +1569,11 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     <div className={`flex h-screen flex-col overflow-hidden bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 ${density === 'compact' ? 'bop-compact' : density === 'condensed' ? 'bop-compact bop-condensed' : ''}`}>
       <header className="flex h-16 flex-shrink-0 items-center justify-between border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5">
         <div className="flex items-center gap-3">
-          <Link href={`/console?tenant=${unit.id}`} className="flex items-center gap-1 hover:opacity-80 transition-opacity font-medium" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace" }}>
-            <span className="text-[#3B82F6] dark:text-[#3B82F6] text-base">&gt;_</span>
-            <span className="text-[#0B1A2E] dark:text-[#F4F2EE] text-base">des</span>
-            <span className="text-[#3B82F6] dark:text-[#3B82F6] text-base">.</span>
-            <span className="text-[#0B1A2E] dark:text-[#F4F2EE] text-base">systems</span>
-            {env !== "PROD" && <span className="ml-1.5 rounded px-1 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-des-orange text-white" style={{ fontFamily: "inherit" }}>DEV</span>}
+          <Link href={`/console?tenant=${unit.id}`} className="flex items-center gap-0.5 hover:opacity-80 transition-opacity" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif", fontStyle: "italic", fontWeight: 900, fontStretch: "112%", letterSpacing: "-0.03em", fontSize: "20px" }}>
+            <span style={{ color: "#3B82F6" }}>DES</span>
+            <span className="relative inline-block" style={{ color: "var(--text1, #0B1A2E)" }}><span className="dark:text-[#F4F2EE]">S</span><span className="absolute" style={{ left: "8%", right: "8%", top: "46%", height: "4px", background: "var(--bg, #fff)", transform: "skewX(-18deg)" }} /></span>
+            <span style={{ color: "var(--text1, #0B1A2E)" }} className="dark:text-[#F4F2EE]">YSTEMS</span>
+            {env !== "PROD" && <span className="ml-1.5 rounded px-1 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-des-orange text-white" style={{ fontFamily: "inherit", fontStyle: "normal", fontWeight: 700, fontStretch: "100%", letterSpacing: "0.05em" }}>DEV</span>}
           </Link>
           <TenantDropdown />
           {unit && <NotificationBell tenantId={unit.id} />}

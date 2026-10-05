@@ -1,12 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { Inter, IBM_Plex_Mono, Archivo } from "next/font/google";
 import { ScopeProvider } from "@/lib/scope-context";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 const ibmPlexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], display: "swap", variable: "--font-ibm-plex-mono" });
+const archivo = Archivo({ subsets: ["latin"], weight: ["900"], style: ["italic"], display: "swap", variable: "--font-archivo" });
 
 export const metadata: Metadata = {
   title: "DES Systems — BOP Console",
@@ -18,7 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.className} ${ibmPlexMono.variable}`}>
+    <html lang={locale} className={`${inter.className} ${ibmPlexMono.variable} ${archivo.variable}`}>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2563eb" />

@@ -52,13 +52,12 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-2">
-            <div className="flex items-baseline gap-1 mb-0.5" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontWeight: 500 }}>
-              <span className="text-[18px]" style={{ color: "#3B82F6" }}>&gt;_</span>
-              <span className="text-[18px]" style={{ color: "var(--text1, #0B1A2E)" }}>des</span>
-              <span className="text-[18px]" style={{ color: "#3B82F6" }}>.</span>
-              <span className="text-[18px]" style={{ color: "var(--text1, #0B1A2E)" }}>systems</span>
+            <div className="flex items-baseline mb-0.5" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif", fontStyle: "italic", fontWeight: 900, fontStretch: "112%", letterSpacing: "-0.03em", fontSize: "22px", lineHeight: 1 }}>
+              <span style={{ color: "#2563EB" }}>DES</span>
+              <span className="relative inline-block" style={{ color: "var(--text1, #0B1A2E)" }}>S<span className="absolute" style={{ left: "8%", right: "8%", top: "46%", height: "4px", background: "var(--bg2, #F4F2EE)", transform: "skewX(-18deg)" }} /></span>
+              <span style={{ color: "var(--text1, #0B1A2E)" }}>YSTEMS</span>
             </div>
-            <div className="text-[9px] tracking-[0.3em] uppercase mb-4" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontWeight: 400, color: "var(--text3, #9AA6B6)" }}>Business Operating Platform</div>
+            <div className="text-[9px] tracking-[0.3em] uppercase mb-4" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif", fontWeight: 400, fontStyle: "normal", color: "var(--text3, #9AA6B6)" }}>Business Operating Platform</div>
             <p className="text-[13px] leading-relaxed mb-5 max-w-xs" style={{ color: "var(--text3)" }}>
               {t("tagline")}
             </p>

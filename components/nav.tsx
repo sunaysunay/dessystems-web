@@ -286,13 +286,12 @@ export default function Nav() {
       <div className="flex items-center justify-between px-[4%] h-16">
         {/* Logo */}
         <Link href="/" className="flex flex-col leading-none">
-          <div className="flex items-baseline gap-1" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontWeight: 500 }}>
-            <span className="text-[17px]" style={{ color: "#3B82F6" }}>&gt;_</span>
-            <span className="text-[17px]" style={{ color: "#F4F2EE" }}>des</span>
-            <span className="text-[17px]" style={{ color: "#3B82F6" }}>.</span>
-            <span className="text-[17px]" style={{ color: "#F4F2EE" }}>systems</span>
+          <div className="flex items-baseline" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif", fontStyle: "italic", fontWeight: 900, fontStretch: "112%", letterSpacing: "-0.03em", fontSize: "22px", lineHeight: 1 }}>
+            <span style={{ color: "#3B82F6" }}>DES</span>
+            <span className="relative inline-block" style={{ color: "#F4F2EE" }}>S<span className="absolute" style={{ left: "8%", right: "8%", top: "46%", height: "4px", background: "#0B1A2E", transform: "skewX(-18deg)" }} /></span>
+            <span style={{ color: "#F4F2EE" }}>YSTEMS</span>
           </div>
-          <div className="text-[9px] tracking-[0.3em] uppercase mt-[1px]" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontWeight: 400, color: "rgba(255,255,255,0.35)" }}>
+          <div className="text-[9px] tracking-[0.3em] uppercase mt-[2px]" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif", fontWeight: 400, fontStyle: "normal", color: "rgba(255,255,255,0.35)" }}>
             Business Operating Platform
           </div>
         </Link>

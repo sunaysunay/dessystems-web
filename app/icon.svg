@@ -1,7 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <rect width="512" height="512" rx="102" fill="#0B1A2E"/>
-  <style>text{font-family:'Arial Black',Arial,Helvetica,sans-serif;font-weight:900;font-style:italic}</style>
-  <text x="52" y="410" font-size="380" fill="#3B82F6" letter-spacing="-15">D</text>
-  <text x="250" y="410" font-size="380" fill="#F4F2EE" letter-spacing="-15">S</text>
-  <rect x="240" y="230" width="230" height="28" rx="2" fill="#0B1A2E" transform="rotate(-18, 355, 244)"/>
+  <g transform="translate(40, 80)">
+    <!-- D letter - blue -->
+    <path d="M30 60 L30 300 L120 300 C200 300 240 250 240 180 C240 110 200 60 120 60 Z M90 120 L120 120 C165 120 180 145 180 180 C180 215 165 240 120 240 L90 240 Z" fill="#3B82F6"/>
+    <!-- S letter - white -->
+    <path d="M310 75 C270 75 240 100 240 135 C240 180 275 195 310 205 C340 213 350 222 350 240 C350 258 335 270 310 270 C285 270 268 258 260 240 L205 260 C218 300 255 325 310 325 C358 325 395 298 395 255 C395 210 360 195 320 183 C295 175 285 165 285 150 C285 135 298 125 310 125 C330 125 342 135 348 150 L398 130 C385 95 355 75 310 75 Z" fill="#F4F2EE"/>
+    <!-- Oblique slash through S -->
+    <rect x="228" y="185" width="180" height="22" rx="2" fill="#0B1A2E" transform="rotate(-18, 318, 196)"/>
+  </g>
 </svg>

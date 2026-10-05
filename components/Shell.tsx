@@ -1569,9 +1569,12 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     <div className={`flex h-screen flex-col overflow-hidden bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 ${density === 'compact' ? 'bop-compact' : density === 'condensed' ? 'bop-compact bop-condensed' : ''}`}>
       <header className="flex h-16 flex-shrink-0 items-center justify-between border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5">
         <div className="flex items-center gap-3">
-          <Link href={`/console?tenant=${unit.id}`} className="flex items-center gap-1.5 text-lg font-bold tracking-wide text-slate-900 hover:opacity-80 transition-opacity">
-            <span className={`rounded px-1.5 py-0.5 text-sm text-white ${env === "PROD" ? "bg-red-600" : "bg-des-orange"}`}>DES</span>
-            <span className="text-xs font-semibold text-slate-400">BOP</span>
+          <Link href={`/console?tenant=${unit.id}`} className="flex items-center gap-1 hover:opacity-80 transition-opacity font-medium" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace" }}>
+            <span className="text-[#3B82F6] dark:text-[#3B82F6] text-base">&gt;_</span>
+            <span className="text-[#0B1A2E] dark:text-[#F4F2EE] text-base">des</span>
+            <span className="text-[#3B82F6] dark:text-[#3B82F6] text-base">.</span>
+            <span className="text-[#0B1A2E] dark:text-[#F4F2EE] text-base">systems</span>
+            {env !== "PROD" && <span className="ml-1.5 rounded px-1 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-des-orange text-white" style={{ fontFamily: "inherit" }}>DEV</span>}
           </Link>
           <TenantDropdown />
           {unit && <NotificationBell tenantId={unit.id} />}

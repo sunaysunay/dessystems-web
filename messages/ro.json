@@ -266,6 +266,21 @@
       "b4": "Procesare IDoc",
       "b5": "Conectori pentru sisteme externe",
       "b6": "Sincronizarea datelor"
+    },
+    "saas": {
+      "title": "Platforme SaaS personalizate",
+      "subtitle": "Design de produs · Arhitectură cloud · Implementare",
+      "desc": "Proiectăm, dezvoltăm și operăm sisteme SaaS multi-tenant personalizate — de la primul concept de produs până la lansarea în producție — pe aceeași arhitectură pe care rulează propria noastră Business Operating Platform.",
+      "b1": "Product discovery și design UX",
+      "b2": "Arhitectură cloud multi-tenant",
+      "b3": "Dezvoltare full-stack",
+      "b4": "CI/CD, găzduire și implementare",
+      "b5": "Securitate, GDPR și controlul accesului",
+      "b6": "Operare gestionată și suport SLA",
+      "demo_label": "Demo live",
+      "demo_title": "Platformă pentru dealeri auto",
+      "demo_desc": "Machete interactive ale unei platforme pentru dealeri auto, construită pe stack-ul nostru SaaS: listă de stoc, pagini de detaliu ale vehiculelor și un asistent de vânzări AI.",
+      "demo_cta": "Deschideți demo-ul"
     }
   },
   "DesLab": {

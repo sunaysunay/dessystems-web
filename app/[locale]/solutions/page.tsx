@@ -15,7 +15,11 @@ const solutions = [
   { id: "mes",         modules: ["SAP ME", "SAP MII", "Siemens Opcenter", "IDoc", "BAPI", "REST APIs"] },
   { id: "automation",  modules: ["SAP BTP", "Integration Suite", "Python", "Power Automate", "APIs", "Webhooks"] },
   { id: "integration", modules: ["SAP PI/PO", "Integration Suite", "EDI", "REST", "SOAP", "BTP"] },
+  { id: "saas",        modules: ["Next.js", "React", "Node.js", "PostgreSQL", "Supabase", "Docker", "REST / GraphQL", "CI/CD"] },
 ]
+
+// Static demo pages live outside the [locale] tree (public/), so they are linked with a plain <a>.
+const DEMO_URL = "/solutions/demos/vehicles"
 
 const platformFeatures = ["ai", "auto", "multi", "sec", "anal", "flow"]
 
@@ -72,7 +76,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
 
             <div className="sx-articles">
               {solutions.map((s, i) => (
-                <article className="sx-card" key={s.id} id={s.id}>
+                <article className={s.id === "saas" ? "sx-card sx-card-feature" : "sx-card"} key={s.id} id={s.id}>
                   <div className="sx-card-top">
                     <div className="sx-card-meta">
                       <span className="sx-card-code">{code(i)}</span>
@@ -94,6 +98,24 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
                       </div>
                     </div>
                   </div>
+                  {s.id === "saas" && (
+                    <div className="sx-demo-wrap">
+                      <div className="sx-demo">
+                        <div className="sx-demo-chrome">
+                          <span /><span /><span />
+                          <div className="sx-demo-url">dessystems.io{DEMO_URL}</div>
+                        </div>
+                        <div className="sx-demo-body">
+                          <div className="sx-demo-copy">
+                            <div className="sx-label">{t("saas.demo_label")}</div>
+                            <div className="sx-demo-title">{t("saas.demo_title")}</div>
+                            <p>{t("saas.demo_desc")}</p>
+                          </div>
+                          <a href={DEMO_URL} target="_blank" rel="noopener" className="sx-btn sx-btn-primary">{t("saas.demo_cta")} <ArrowRight /></a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   <div className="sx-card-bar">
                     <Link href={`/contact?topic=${s.id}`} className="sx-link">{t("discuss")} <ArrowRight /></Link>
                   </div>

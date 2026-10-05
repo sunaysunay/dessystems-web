@@ -949,6 +949,21 @@
       "b4": "IDoc-Verarbeitung",
       "b5": "Externe Systemkonnektoren",
       "b6": "Datensynchronisation"
+    },
+    "saas": {
+      "title": "Individuelle SaaS-Plattformen",
+      "subtitle": "Produktdesign · Cloud-Architektur · Deployment",
+      "desc": "Wir konzipieren, entwickeln und betreiben maßgeschneiderte mandantenfähige SaaS-Systeme — vom ersten Produktkonzept bis zum produktiven Rollout — auf derselben Architektur, auf der unsere eigene Business Operating Platform läuft.",
+      "b1": "Product Discovery & UX-Design",
+      "b2": "Mandantenfähige Cloud-Architektur",
+      "b3": "Full-Stack-Entwicklung",
+      "b4": "CI/CD, Hosting & Deployment",
+      "b5": "Sicherheit, DSGVO & Zugriffskontrolle",
+      "b6": "Managed Operations & SLA-Support",
+      "demo_label": "Live-Demo",
+      "demo_title": "Plattform für Autohäuser",
+      "demo_desc": "Interaktive Mockups einer Autohaus-Plattform auf Basis unseres SaaS-Stacks: Bestandsübersicht, Fahrzeugdetailseiten und ein KI-Verkaufsassistent.",
+      "demo_cta": "Live-Demo öffnen"
     }
   },
   "DesLab": {

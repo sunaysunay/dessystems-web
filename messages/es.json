@@ -266,6 +266,21 @@
       "b4": "Procesamiento de IDoc",
       "b5": "Conectores con sistemas externos",
       "b6": "Sincronización de datos"
+    },
+    "saas": {
+      "title": "Plataformas SaaS a medida",
+      "subtitle": "Diseño de producto · Arquitectura cloud · Despliegue",
+      "desc": "Diseñamos, desarrollamos y operamos sistemas SaaS multi-tenant a medida — desde el primer concepto de producto hasta la puesta en producción — sobre la misma arquitectura que impulsa nuestra propia Business Operating Platform.",
+      "b1": "Descubrimiento de producto y diseño UX",
+      "b2": "Arquitectura cloud multi-tenant",
+      "b3": "Desarrollo full-stack",
+      "b4": "CI/CD, hosting y despliegue",
+      "b5": "Seguridad, RGPD y control de accesos",
+      "b6": "Operación gestionada y soporte SLA",
+      "demo_label": "Demo en vivo",
+      "demo_title": "Plataforma para concesionarios",
+      "demo_desc": "Maquetas interactivas de una plataforma para concesionarios construida sobre nuestro stack SaaS: listado de stock, fichas de vehículo y un asistente de ventas con IA.",
+      "demo_cta": "Abrir demo"
     }
   },
   "DesLab": {

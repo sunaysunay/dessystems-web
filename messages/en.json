@@ -1086,6 +1086,21 @@
       "b4": "IDoc Processing",
       "b5": "External System Connectors",
       "b6": "Data Synchronisation"
+    },
+    "saas": {
+      "title": "Custom SaaS Platforms",
+      "subtitle": "Product Design · Cloud Architecture · Deployment",
+      "desc": "We design, build and operate bespoke multi-tenant SaaS systems — from first product concept to production rollout — on the same architecture that powers our own Business Operating Platform.",
+      "b1": "Product discovery & UX design",
+      "b2": "Multi-tenant cloud architecture",
+      "b3": "Full-stack development",
+      "b4": "CI/CD, hosting & deployment",
+      "b5": "Security, GDPR & access control",
+      "b6": "Managed operations & SLA support",
+      "demo_label": "Live demo",
+      "demo_title": "Vehicle dealership platform",
+      "demo_desc": "Interactive mockups of a car-dealer platform built on our SaaS stack: inventory overview, vehicle detail pages and an AI sales assistant.",
+      "demo_cta": "Open live demo"
     }
   },
   "DesLab": {

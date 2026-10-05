@@ -949,6 +949,21 @@
       "b4": "IDoc İşleme",
       "b5": "Harici Sistem Bağlayıcıları",
       "b6": "Veri Senkronizasyonu"
+    },
+    "saas": {
+      "title": "Özel SaaS Platformları",
+      "subtitle": "Ürün Tasarımı · Bulut Mimarisi · Dağıtım",
+      "desc": "Kendi Business Operating Platform'umuzu çalıştıran mimari üzerinde, ilk ürün konseptinden canlı ortama geçişe kadar özel çok kiracılı SaaS sistemleri tasarlıyor, geliştiriyor ve işletiyoruz.",
+      "b1": "Ürün keşfi & UX tasarımı",
+      "b2": "Çok kiracılı bulut mimarisi",
+      "b3": "Full-stack geliştirme",
+      "b4": "CI/CD, barındırma & dağıtım",
+      "b5": "Güvenlik, KVKK/GDPR & erişim kontrolü",
+      "b6": "Yönetilen operasyon & SLA desteği",
+      "demo_label": "Canlı demo",
+      "demo_title": "Otomotiv bayi platformu",
+      "demo_desc": "SaaS altyapımız üzerine kurulu bir otomobil bayi platformunun etkileşimli taslakları: stok listesi, araç detay sayfaları ve yapay zekâ satış asistanı.",
+      "demo_cta": "Canlı demoyu aç"
     }
   },
   "DesLab": {

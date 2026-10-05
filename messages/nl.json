@@ -1086,6 +1086,21 @@
       "b4": "IDoc-verwerking",
       "b5": "Externe systeemconnectoren",
       "b6": "Datasynchronisatie"
+    },
+    "saas": {
+      "title": "Maatwerk SaaS-platformen",
+      "subtitle": "Productontwerp · Cloudarchitectuur · Deployment",
+      "desc": "Wij ontwerpen, bouwen en beheren maatwerk multi-tenant SaaS-systemen — van eerste productconcept tot productie-uitrol — op dezelfde architectuur waarop ons eigen Business Operating Platform draait.",
+      "b1": "Productdiscovery & UX-ontwerp",
+      "b2": "Multi-tenant cloudarchitectuur",
+      "b3": "Full-stack ontwikkeling",
+      "b4": "CI/CD, hosting & deployment",
+      "b5": "Beveiliging, AVG & toegangsbeheer",
+      "b6": "Beheer & SLA-ondersteuning",
+      "demo_label": "Live demo",
+      "demo_title": "Platform voor autodealers",
+      "demo_desc": "Interactieve mockups van een autodealerplatform gebouwd op onze SaaS-stack: voorraadoverzicht, voertuigdetailpagina's en een AI-verkoopassistent.",
+      "demo_cta": "Open live demo"
     }
   },
   "DesLab": {

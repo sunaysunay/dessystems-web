@@ -10,7 +10,7 @@ Connect to the DES Systems production VPS via SSH to run server commands like `p
 ## Prerequisites
 
 The environment must have:
-- `SSH_PRIVATE_KEY` set as an environment secret (base64-encoded private key)
+- `SSH_PRIVATE_KEY` set as an environment variable (base64-encoded private key)
 - `VPS_HOST` set as an environment variable (default: the server IP)
 - The VPS hostname added to the environment's allowed network domains
 - `openssh-client` installed (add to environment setup script: `apt-get install -y openssh-client`)
@@ -32,6 +32,30 @@ Host des-vps
 SSHEOF
 chmod 600 ~/.ssh/config
 ```
+
+## Usage
+
+When the user says `/connect-vps` or asks to connect to the VPS:
+
+1. Check that `SSH_PRIVATE_KEY` and `VPS_HOST` environment variables are set
+2. If not set, tell the user to add them in the cloud environment settings (title bar → Edit environment → Environment variables)
+3. If set, run the connection setup commands above
+4. Test the connection with `ssh des-vps 'hostname && uptime'`
+5. Then ask the user which VPS project they want to work on using the AskUserQuestion tool:
+
+### Project selection
+
+Use AskUserQuestion with these options:
+
+- **dessystems-web-dev** — DES Systems dev (bop-dev.dessystems.io), directory: `/opt/dessystems-console-dev`
+- **dessystems-web** — DES Systems production (bop.dessystems.io), directory: `/opt/dessystems-console`
+- **desmobil-web** — DES Mobil, directory: `/opt/desmobil-web`
+- **desshop-web** — DES Shop, directory: `/opt/desshop-web`
+
+After the user selects a project, set it as the working context and confirm:
+- Show the project name and directory
+- Run `ssh des-vps "ls -la <project-directory>"` to verify it exists
+- Tell the user the VPS is connected and ready for commands
 
 ## Common commands
 
@@ -59,15 +83,6 @@ ssh des-vps 'pm2 logs dessystems-console --lines 50'
 ```bash
 ssh des-vps 'cd /opt/dessystems-console-dev && node /root/scripts/bop-screen-validate.js --all'
 ```
-
-## Usage
-
-When the user says `/connect-vps` or asks to connect to the VPS:
-
-1. Check that `SSH_PRIVATE_KEY` and `VPS_HOST` environment variables are set
-2. If not set, tell the user to add them in the cloud environment settings (title bar → Edit environment → API credentials / Environment variables)
-3. If set, run the connection setup commands above
-4. Then run whatever command the user needs (default: test connection with `ssh des-vps 'hostname && uptime'`)
 
 ## Notes
 

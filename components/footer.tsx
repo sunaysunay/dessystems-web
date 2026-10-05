@@ -62,8 +62,9 @@ export default function Footer() {
               {t("tagline")}
             </p>
             <div className="flex gap-2.5">
-              {[["in","LinkedIn"],["𝕏","X"],["gh","GitHub"],["yt","YouTube"]].map(([l,title]) => (
-                <a key={l} href="#" title={title}
+              {[["in","LinkedIn","https://www.linkedin.com/company/dessystems"]].map(([l,title,href]) => (
+                <a key={l} href={href} title={title}
+                  {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="w-8 h-8 rounded-md flex items-center justify-center text-[13px] transition-colors"
                   style={{ border: "1px solid var(--border2)", color: "var(--text3)" }}>
                   {l}
@@ -93,7 +94,6 @@ export default function Footer() {
             <div className="space-y-2 mb-4">
               {[
                 ["✉","info@dessystems.io"],
-                ["📞","+31 6 82545600"],
                 ["📍","Europe / Worldwide"],
               ].map(([ico,val]) => (
                 <p key={val} className="text-[13px] flex items-center gap-2" style={{ color: "var(--text3)" }}>

@@ -104,7 +104,6 @@ export default function ContactPage() {
           <div className="grid grid-3" style={{ marginTop: 24 }}>
             {[
               { ico: "✉", label: t("info_email"), val: "info@dessystems.io" },
-              { ico: "☎", label: t("info_phone"), val: "+31 6 82545600" },
               { ico: "⏱", label: t("info_resp"),  val: t("info_resp_val") },
             ].map(i => (
               <div key={i.label} className="card center" style={{ padding: 18 }}>

@@ -1,98 +1,57 @@
 import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
 import { Link } from "@/src/i18n/routing"
 import { getTranslations } from "next-intl/server"
-import { ArrowRight, Check, Settings, Factory, Bot, Webhook, Sparkles, Zap, Globe, Shield, BarChart3, Workflow } from "lucide-react"
-import { dxCss } from "@/components/dx-styles"
+import { ArrowRight } from "lucide-react"
+import SolutionsIndex from "./solutions-index"
 
 export const metadata: Metadata = {
   title: "Solutions — DES Systems",
   description: "Enterprise ERP consulting, MES integration, automation and custom platform solutions.",
 }
 
+const geist = Geist({ subsets: ["latin", "latin-ext"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-geist" })
+const geistMono = Geist_Mono({ subsets: ["latin", "latin-ext"], weight: ["400", "500"], display: "swap", variable: "--font-geist-mono" })
+
 const solutions = [
-  { id: "erp",         Icon: Settings, modules: ["SAP MM", "SAP PP", "SAP QM", "SAP WM/EWM", "SAP PM", "SAP SD", "SAP TM"] },
-  { id: "mes",         Icon: Factory,  modules: ["SAP ME", "SAP MII", "Siemens Opcenter", "IDoc", "BAPI", "REST APIs"] },
-  { id: "automation",  Icon: Bot,      modules: ["SAP BTP", "Integration Suite", "Python", "Power Automate", "APIs", "Webhooks"] },
-  { id: "integration", Icon: Webhook,  modules: ["SAP PI/PO", "Integration Suite", "EDI", "REST", "SOAP", "BTP"] },
+  { id: "erp",         modules: ["SAP MM", "SAP PP", "SAP QM", "SAP WM/EWM", "SAP PM", "SAP SD", "SAP TM"] },
+  { id: "mes",         modules: ["SAP ME", "SAP MII", "Siemens Opcenter", "IDoc", "BAPI", "REST APIs"] },
+  { id: "automation",  modules: ["SAP BTP", "Integration Suite", "Python", "Power Automate", "APIs", "Webhooks"] },
+  { id: "integration", modules: ["SAP PI/PO", "Integration Suite", "EDI", "REST", "SOAP", "BTP"] },
 ]
 
-const platformFeatures = [
-  { id: "ai",    Icon: Sparkles },
-  { id: "auto",  Icon: Zap },
-  { id: "multi", Icon: Globe },
-  { id: "sec",   Icon: Shield },
-  { id: "anal",  Icon: BarChart3 },
-  { id: "flow",  Icon: Workflow },
-]
+const platformFeatures = ["ai", "auto", "multi", "sec", "anal", "flow"]
+
+const code = (i: number) => String(i + 1).padStart(2, "0")
 
 export default async function SolutionsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "SolutionsPage" })
 
   return (
-    <div className="dx" style={{ paddingTop: 72 }}>
-      <style dangerouslySetInnerHTML={{ __html: dxCss + platformCss }} />
+    <div className={`sx ${geist.variable} ${geistMono.variable}`}>
+      <style dangerouslySetInnerHTML={{ __html: sxCss }} />
 
       {/* ── BOP Platform Hero ── */}
-      <section className="plat-hero">
-        <div className="wrap">
-          <div className="plat-grid">
-            <div>
-              <span className="plat-badge">{t("plat.badge")}</span>
-              <h1 className="plat-h1">{t.rich("plat.title", { em: (c) => <em>{c}</em> })}</h1>
-              <p className="plat-lead">{t("plat.lead")}</p>
-              <p className="plat-sub">{t("plat.sub")}</p>
-              <div className="plat-btns">
-                <Link href="/platform" className="btn btn-primary">{t("plat.cta_explore")} <ArrowRight /></Link>
-                <Link href="/contact?topic=platform" className="btn btn-ghost">{t("plat.cta_demo")}</Link>
-              </div>
-            </div>
-            <div className="plat-features">
-              {platformFeatures.map((f) => (
-                <div key={f.id} className="plat-feat">
-                  <div className="plat-ic"><f.Icon /></div>
-                  <div>
-                    <b>{t(`plat.f_${f.id}`)}</b>
-                    <span>{t(`plat.f_${f.id}_d`)}</span>
-                  </div>
-                </div>
-              ))}
+      <section className="sx-hero">
+        <div className="sx-wrap sx-hero-grid">
+          <div className="sx-hero-copy">
+            <div className="sx-eyebrow">{t("plat.badge")}</div>
+            <h1 className="sx-h1">{t.rich("plat.title", { em: (c) => <em>{c}</em> })}</h1>
+            <p className="sx-lead">{t("plat.lead")}</p>
+            <p className="sx-sub">{t("plat.sub")}</p>
+            <div className="sx-btns">
+              <Link href="/platform" className="sx-btn sx-btn-primary">{t("plat.cta_explore")} <ArrowRight /></Link>
+              <Link href="/contact?topic=platform" className="sx-btn sx-btn-ghost">{t("plat.cta_demo")}</Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ── Consulting Solutions ── */}
-      <section className="section">
-        <div className="wrap">
-          <div className="center" style={{ marginBottom: 46 }}>
-            <span className="eyebrow">{t("eyebrow")}</span>
-            <h2 style={{ marginTop: 10 }}>{t("title1")} {t("title2")}</h2>
-            <p className="lead">{t("subtitle")}</p>
-          </div>
-
-          <div style={{ display: "grid", gap: 24 }}>
-            {solutions.map((s) => (
-              <div className="split" key={s.id} id={s.id}>
+          <div className="sx-stack">
+            {platformFeatures.map((id, i) => (
+              <div key={id} className="sx-layer">
+                <div className="sx-layer-code">{code(i)}</div>
                 <div>
-                  <div className="ic"><s.Icon /></div>
-                  <span className="eyebrow">{t(`${s.id}.subtitle`)}</span>
-                  <h3 style={{ fontSize: 22, margin: "6px 0 12px" }}>{t(`${s.id}.title`)}</h3>
-                  <p className="lead" style={{ fontSize: 15 }}>{t(`${s.id}.desc`)}</p>
-                  <ul className="checks">
-                    {Array.from({ length: 6 }, (_, bi) => (
-                      <li key={bi}><Check />{t(`${s.id}.b${bi + 1}`)}</li>
-                    ))}
-                  </ul>
-                  <Link href={`/contact?topic=${s.id}`} className="btn btn-primary">
-                    {t("discuss")} <ArrowRight />
-                  </Link>
-                </div>
-                <div className="panelcard">
-                  <h3>{t("tech_label")}</h3>
-                  <div className="modules" style={{ marginTop: 16 }}>
-                    {s.modules.map((m) => <span className="chip" key={m}>{m}</span>)}
-                  </div>
+                  <div className="sx-layer-name">{t(`plat.f_${id}`)}</div>
+                  <div className="sx-layer-desc">{t(`plat.f_${id}_d`)}</div>
                 </div>
               </div>
             ))}
@@ -100,44 +59,172 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      <section className="section soft">
-        <div className="wrap">
-          <div className="cta">
-            <span className="eyebrow" style={{ color: "#fff", opacity: 0.75 }}>{t("bop_eyebrow")}</span>
-            <h2 style={{ marginTop: 10 }}>Business Operating Platform</h2>
-            <p>{t("bop_desc")}</p>
-            <div className="row">
-              <Link href="/platform" className="btn btn-primary">{t("bop_cta")} <ArrowRight /></Link>
+      {/* ── Consulting Solutions ── */}
+      <section className="sx-solutions">
+        <div className="sx-wrap">
+          <div className="sx-head">
+            <div>
+              <div className="sx-eyebrow">{t("eyebrow")}</div>
+              <h2 className="sx-h2">{t("title1")} {t("title2")}</h2>
+            </div>
+            <p className="sx-head-p">{t("subtitle")}</p>
+          </div>
+
+          <div className="sx-sol-grid">
+            <SolutionsIndex items={solutions.map((s, i) => ({ id: s.id, code: code(i), name: t(`${s.id}.title`) }))} />
+
+            <div className="sx-articles">
+              {solutions.map((s, i) => (
+                <article className="sx-card" key={s.id} id={s.id}>
+                  <div className="sx-card-top">
+                    <div className="sx-card-meta">
+                      <span className="sx-card-code">{code(i)}</span>
+                      <span>{t(`${s.id}.subtitle`)}</span>
+                    </div>
+                    <h3 className="sx-h3">{t(`${s.id}.title`)}</h3>
+                    <p className="sx-card-desc">{t(`${s.id}.desc`)}</p>
+                  </div>
+                  <div className="sx-card-body">
+                    <ul className="sx-scope">
+                      {Array.from({ length: 6 }, (_, bi) => (
+                        <li key={bi}><span className="sx-sq" />{t(`${s.id}.b${bi + 1}`)}</li>
+                      ))}
+                    </ul>
+                    <div className="sx-tech">
+                      <div className="sx-label">{t("tech_label")}</div>
+                      <div className="sx-chips">
+                        {s.modules.map((m) => <span className="sx-chip" key={m}>{m}</span>)}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="sx-card-bar">
+                    <Link href={`/contact?topic=${s.id}`} className="sx-link">{t("discuss")} <ArrowRight /></Link>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── BOP band ── */}
+      <section className="sx-band">
+        <div className="sx-wrap sx-band-inner">
+          <div className="sx-band-copy">
+            <div className="sx-eyebrow sx-eyebrow-dark">{t("bop_eyebrow")}</div>
+            <h2 className="sx-h2">Business Operating Platform</h2>
+            <p>{t("bop_desc")}</p>
+          </div>
+          <Link href="/platform" className="sx-btn sx-btn-white">{t("bop_cta")} <ArrowRight /></Link>
         </div>
       </section>
     </div>
   )
 }
 
-const platformCss = `
-.plat-hero{background:linear-gradient(135deg,#0b1f3a 0%,#13294b 40%,#1a3a6a 100%);color:#fff;padding:80px 0 88px;position:relative;overflow:hidden}
-.plat-hero::before{content:"";position:absolute;right:-120px;top:-120px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(29,108,240,.18),transparent 70%)}
-.plat-hero::after{content:"";position:absolute;left:-80px;bottom:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(15,157,140,.12),transparent 70%)}
-.plat-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
-.plat-badge{display:inline-block;background:linear-gradient(135deg,rgba(29,108,240,.2),rgba(15,157,140,.2));border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:6px 16px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:20px}
-.plat-h1{font-size:clamp(32px,4.2vw,52px);line-height:1.08;font-weight:800;letter-spacing:-.03em;margin:0 0 20px}
-.plat-h1 em{font-style:normal;background:linear-gradient(135deg,#4d9fff,#0fd99e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.plat-lead{font-size:18px;line-height:1.6;color:rgba(255,255,255,.82);max-width:520px;margin:0 0 14px}
-.plat-sub{font-size:14px;line-height:1.6;color:rgba(255,255,255,.55);max-width:480px;margin:0 0 28px}
-.plat-btns{display:flex;gap:12px;flex-wrap:wrap}
-.plat-btns .btn-primary{background:linear-gradient(135deg,#1d6cf0,#0f9d8c);border:none;box-shadow:0 8px 24px rgba(29,108,240,.35)}
-.plat-btns .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(29,108,240,.45)}
-.plat-btns .btn-ghost{color:#fff;border-color:rgba(255,255,255,.25)}
-.plat-btns .btn-ghost:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06)}
-.plat-features{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.plat-feat{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 16px;transition:.2s}
-.plat-feat:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
-.plat-ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,rgba(29,108,240,.2),rgba(15,157,140,.15))}
-.plat-ic svg{width:20px;height:20px;color:#4d9fff}
-.plat-feat b{display:block;font-size:14px;font-weight:700;color:#fff;margin-bottom:3px}
-.plat-feat span{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.45}
-@media(max-width:920px){.plat-grid{grid-template-columns:1fr;gap:40px}.plat-hero{padding:56px 0 64px}}
-@media(max-width:600px){.plat-features{grid-template-columns:1fr}.plat-h1{font-size:28px}}
+const sxCss = `
+.sx{
+  --s-bg:#F5F6F8;--s-surface:#fff;--s-ink:#0B1220;--s-body:#3B4454;--s-muted:#5B6474;--s-faint:#8A93A3;
+  --s-line:#E3E6EC;--s-line2:#C9CED8;--s-chip:#F1F3F7;--s-bar:#FAFBFC;--s-accent:#2563EB;--s-accent-h:#1D4ED8;
+  --s-row:#F7F8FA;--s-deep:#0B1220;--s-deep-line:#222C3F;
+  --s-sans:var(--font-geist),'Geist',system-ui,sans-serif;--s-mono:var(--font-geist-mono),'Geist Mono',ui-monospace,monospace;
+  background:var(--s-bg);color:var(--s-ink);font-family:var(--s-sans);-webkit-font-smoothing:antialiased;padding-top:64px
+}
+html.dark .sx{
+  --s-bg:#0B1220;--s-surface:#111A2B;--s-ink:#F1F4F9;--s-body:#B4BCCB;--s-muted:#97A1B3;--s-faint:#6B7485;
+  --s-line:#222C3F;--s-line2:#3A4459;--s-chip:#18223A;--s-bar:#0E1626;--s-accent:#4F8BFF;--s-accent-h:#7FA6FF;
+  --s-row:#0E1626;--s-deep:#060A14;--s-deep-line:#1A2335
+}
+.sx *{box-sizing:border-box}
+.sx-wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.sx-eyebrow{font-family:var(--s-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--s-accent);margin-bottom:24px}
+.sx-eyebrow-dark{color:#7FA6FF;margin-bottom:20px}
+.sx-btns{display:flex;gap:12px;flex-wrap:wrap}
+.sx-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font-size:15px;font-weight:500;line-height:1.2;transition:background .2s,border-color .2s,color .2s}
+.sx-btn svg{width:16px;height:16px}
+.sx-btn-primary{background:var(--s-accent);color:#fff}
+.sx-btn-primary:hover{background:var(--s-accent-h);color:#fff}
+.sx-btn-ghost{border:1px solid var(--s-line2);color:var(--s-ink)}
+.sx-btn-ghost:hover{border-color:var(--s-ink)}
+.sx-btn-white{background:#fff;color:#0B1220;flex:none}
+.sx-btn-white:hover{background:#E8EDF7;color:#0B1220}
+
+/* hero */
+.sx-hero{border-bottom:1px solid var(--s-line)}
+.sx-hero-grid{padding-top:88px;padding-bottom:72px;display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start}
+.sx-hero-copy{flex:1 1 440px;min-width:0}
+.sx-h1{font-size:clamp(40px,5.2vw,68px);line-height:1.02;letter-spacing:-.035em;font-weight:600;margin:0 0 28px;text-wrap:balance}
+.sx-h1 em{font-style:normal;color:var(--s-accent)}
+.sx-lead{font-size:19px;line-height:1.55;color:var(--s-body);margin:0 0 16px;max-width:560px;text-wrap:pretty}
+.sx-sub{font-size:15px;line-height:1.6;color:var(--s-muted);margin:0 0 40px;max-width:520px;text-wrap:pretty}
+.sx-stack{flex:1 1 480px;min-width:0;background:var(--s-surface);border:1px solid var(--s-line);padding:20px;display:flex;flex-direction:column;gap:6px}
+.sx-layer{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start;padding:16px;border:1px solid var(--s-line);background:var(--s-row);transition:background .2s,border-color .2s}
+.sx-layer:hover{background:#0B1220;border-color:#0B1220}
+.sx-layer-code{font-family:var(--s-mono);font-size:11px;color:var(--s-faint);padding-top:3px}
+.sx-layer-name{font-size:15px;font-weight:600;margin-bottom:4px}
+.sx-layer-desc{font-size:13.5px;line-height:1.5;color:var(--s-muted)}
+.sx-layer:hover .sx-layer-code{color:#8FB0FF}
+.sx-layer:hover .sx-layer-name{color:#fff}
+.sx-layer:hover .sx-layer-desc{color:#B4BCCB}
+
+/* solutions */
+.sx-solutions .sx-wrap{padding-top:112px;padding-bottom:104px}
+.sx-head{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
+.sx-h2{font-size:clamp(32px,3.6vw,48px);line-height:1.05;letter-spacing:-.03em;font-weight:600;margin:0;max-width:680px;text-wrap:balance}
+.sx-head-p{font-size:16px;line-height:1.6;color:var(--s-muted);margin:0;max-width:400px}
+.sx-sol-grid{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.sx-index{flex:1 1 240px;position:sticky;top:96px;display:flex;flex-direction:column;border-top:1px solid var(--s-ink)}
+.sx-index a{display:grid;grid-template-columns:36px minmax(0,1fr) 16px;align-items:center;padding:20px 0;border-bottom:1px solid var(--s-line);color:var(--s-muted)}
+.sx-index a:hover{color:var(--s-ink)}
+.sx-index .ix-code{font-family:var(--s-mono);font-size:12px;color:var(--s-faint)}
+.sx-index .ix-name{font-size:18px;font-weight:500;letter-spacing:-.01em}
+.sx-index .ix-dot{width:8px;height:8px;background:transparent}
+.sx-index a.on{color:var(--s-ink)}
+.sx-index a.on .ix-code{color:var(--s-accent)}
+.sx-index a.on .ix-name{font-weight:600}
+.sx-index a.on .ix-dot{background:var(--s-accent)}
+.sx-articles{flex:3 1 560px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.sx-card{background:var(--s-surface);border:1px solid var(--s-line);scroll-margin-top:88px}
+.sx-card-top{padding:40px 40px 32px;border-bottom:1px solid var(--s-line)}
+.sx-card-meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--s-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--s-faint);margin-bottom:24px}
+.sx-card-code{color:var(--s-accent)}
+.sx-h3{font-size:clamp(26px,2.6vw,34px);line-height:1.12;letter-spacing:-.025em;font-weight:600;margin:0 0 16px;text-wrap:balance}
+.sx-card-desc{font-size:16px;line-height:1.6;color:var(--s-body);margin:0;max-width:660px;text-wrap:pretty}
+.sx-card-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.sx-scope{list-style:none;margin:0;padding:24px 40px 32px;border-right:1px solid var(--s-line)}
+.sx-scope li{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px dashed var(--s-line);font-size:15px}
+.sx-scope li:last-child{border-bottom:0}
+.sx-sq{width:6px;height:6px;background:var(--s-accent);flex:none;transform:translateY(-2px)}
+.sx-tech{padding:32px 40px}
+.sx-label{font-family:var(--s-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--s-faint);margin-bottom:16px}
+.sx-chips{display:flex;flex-wrap:wrap;gap:6px}
+.sx-chip{font-family:var(--s-mono);font-size:12px;padding:6px 10px;background:var(--s-chip);border:1px solid var(--s-line);color:var(--s-ink)}
+.sx-card-bar{display:flex;justify-content:flex-end;padding:20px 40px;background:var(--s-bar);border-top:1px solid var(--s-line)}
+.sx-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--s-accent)}
+.sx-link:hover{color:var(--s-accent-h)}
+.sx-link svg{width:15px;height:15px;transition:transform .2s}
+.sx-link:hover svg{transform:translateX(3px)}
+
+/* band */
+.sx-band{background:var(--s-deep);color:#fff;border-top:1px solid var(--s-deep-line)}
+.sx-band-inner{padding-top:104px;padding-bottom:104px;display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between;align-items:flex-end}
+.sx-band-copy{max-width:680px}
+.sx-band .sx-h2{margin-bottom:20px}
+.sx-band p{font-size:17px;line-height:1.6;color:#B4BCCB;margin:0;text-wrap:pretty}
+
+@media(max-width:900px){
+  .sx-index{display:none}
+  .sx-hero-grid{padding-top:56px;padding-bottom:56px;gap:40px}
+  .sx-solutions .sx-wrap{padding-top:72px;padding-bottom:72px}
+  .sx-band-inner{padding-top:72px;padding-bottom:72px}
+}
+@media(max-width:600px){
+  .sx-wrap{padding:0 16px}
+  .sx-stack{padding:12px}
+  .sx-card-top{padding:28px 20px 24px}
+  .sx-scope{padding:16px 20px 20px;border-right:0;border-bottom:1px solid var(--s-line)}
+  .sx-tech{padding:24px 20px}
+  .sx-card-bar{padding:16px 20px}
+  .sx-lead{font-size:17px}
+}
 `

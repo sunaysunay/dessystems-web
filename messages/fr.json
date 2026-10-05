@@ -963,7 +963,8 @@
       "demo_label": "Démo en ligne",
       "demo_title": "Plateforme pour concessionnaires automobiles",
       "demo_desc": "Maquettes interactives d'une plateforme de concession automobile construite sur notre stack SaaS : catalogue de stock, fiches véhicules et assistant commercial IA.",
-      "demo_cta": "Ouvrir la démo"
+      "demo_cta": "Ouvrir la démo",
+      "nav": "SaaS sur mesure"
     }
   },
   "DesLab": {

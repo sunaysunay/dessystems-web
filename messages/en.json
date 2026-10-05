@@ -1100,7 +1100,8 @@
       "demo_label": "Live demo",
       "demo_title": "Vehicle dealership platform",
       "demo_desc": "Interactive mockups of a car-dealer platform built on our SaaS stack: inventory overview, vehicle detail pages and an AI sales assistant.",
-      "demo_cta": "Open live demo"
+      "demo_cta": "Open live demo",
+      "nav": "Custom SaaS"
     }
   },
   "DesLab": {

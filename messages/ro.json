@@ -280,7 +280,8 @@
       "demo_label": "Demo live",
       "demo_title": "Platformă pentru dealeri auto",
       "demo_desc": "Machete interactive ale unei platforme pentru dealeri auto, construită pe stack-ul nostru SaaS: listă de stoc, pagini de detaliu ale vehiculelor și un asistent de vânzări AI.",
-      "demo_cta": "Deschideți demo-ul"
+      "demo_cta": "Deschideți demo-ul",
+      "nav": "SaaS personalizat"
     }
   },
   "DesLab": {

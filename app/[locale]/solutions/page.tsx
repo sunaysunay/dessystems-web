@@ -72,7 +72,7 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
           </div>
 
           <div className="sx-sol-grid">
-            <SolutionsIndex items={solutions.map((s, i) => ({ id: s.id, code: code(i), name: t(`${s.id}.title`) }))} />
+            <SolutionsIndex items={solutions.map((s, i) => ({ id: s.id, code: code(i), name: t(s.id === "saas" ? "saas.nav" : `${s.id}.title`) }))} />
 
             <div className="sx-articles">
               {solutions.map((s, i) => (

@@ -1100,7 +1100,8 @@
       "demo_label": "Live demo",
       "demo_title": "Platform voor autodealers",
       "demo_desc": "Interactieve mockups van een autodealerplatform gebouwd op onze SaaS-stack: voorraadoverzicht, voertuigdetailpagina's en een AI-verkoopassistent.",
-      "demo_cta": "Open live demo"
+      "demo_cta": "Open live demo",
+      "nav": "Maatwerk SaaS"
     }
   },
   "DesLab": {

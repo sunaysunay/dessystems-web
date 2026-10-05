@@ -280,7 +280,8 @@
       "demo_label": "Demo en vivo",
       "demo_title": "Plataforma para concesionarios",
       "demo_desc": "Maquetas interactivas de una plataforma para concesionarios construida sobre nuestro stack SaaS: listado de stock, fichas de vehículo y un asistente de ventas con IA.",
-      "demo_cta": "Abrir demo"
+      "demo_cta": "Abrir demo",
+      "nav": "SaaS a medida"
     }
   },
   "DesLab": {

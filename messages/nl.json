@@ -1743,5 +1743,84 @@
     "contact_grad": "digitaals",
     "contact_p": "Sunay staat open voor advies, partnerschappen en samenwerking rond SAP, digitale productie en DES. Of u nu een fabriek moderniseert of een idee opschaalt — neem contact op.",
     "footer": "Sunay S. · Oprichter, DES — Digital Enterprise Solutions · Nederland"
+  },
+  "ServicesPage": {
+    "kicker": "Diensten",
+    "h1_1": "Kernexpertise, van begin tot eind.",
+    "h1_2": "Eén partner voor de volledige enterprise-stack.",
+    "lead": "Van SAP S/4HANA-programma's tot MES-connectiviteit op de werkvloer en workflowautomatisering: DES Systems levert de diensten die productie-, logistiek- en retailactiviteiten draaiende houden — meetbaar beter.",
+    "cta_start": "Start een gesprek",
+    "stat1": "Jaar SAP-expertise",
+    "stat2": "SAP-modules end-to-end gedekt",
+    "stat3": "Landen bediend in Europa",
+    "stat4": "Levering op afstand & op locatie",
+    "svc_eyebrow": "Wat we doen",
+    "svc_title": "Diensten gevormd door de operationele praktijk",
+    "svc_lead": "Elke opdracht is gebaseerd op praktijkervaring op de fabrieksvloer, in het magazijn en in de winkel — geen slideware.",
+    "erp": {
+      "title": "ERP- & SAP-logistiekadvies",
+      "desc": "Implementatie, migratie, support en optimalisatie van S/4HANA door consultants met meer dan twintig jaar ervaring in het vak.",
+      "b1": "MM · PP · QM · WM · SD · TM-modules",
+      "b2": "Greenfield-, brownfield- & selectieve migraties",
+      "b3": "Procesontwerp, uitrol & hypercare-support"
+    },
+    "mes": {
+      "title": "MES-integratie",
+      "desc": "Realtime productie-inzicht van werkvloer tot directie, met koppeling van machines, operators en uw ERP-kern.",
+      "b1": "Connectiviteit van werkvloer naar ERP",
+      "b2": "Productiemonitoring & traceerbaarheid",
+      "b3": "OEE-, kwaliteits- & stilstandanalyses"
+    },
+    "automation": {
+      "title": "Workflowautomatisering",
+      "desc": "Digitale processen die handmatige overdrachten wegnemen, foutpercentages verlagen en doorlooptijden verkorten over afdelingen heen.",
+      "b1": "Procesontdekking & -mapping",
+      "b2": "Goedkeurings-, order- & documentstromen",
+      "b3": "RPA & low-code-orkestratie"
+    },
+    "integration": {
+      "title": "Integratie & API's",
+      "desc": "Betrouwbare data-uitwisseling tussen uw ERP, partners en platforms — gebouwd voor uptime en controleerbaarheid.",
+      "b1": "REST API-ontwerp & -ontwikkeling",
+      "b2": "EDI- & IDoc-ontwikkeling",
+      "b3": "Middleware & event-driven architectuur"
+    },
+    "bop": {
+      "title": "Business Operating Platform",
+      "desc": "Ons eigen multi-tenant platform voor kernprocessen — voorraad, orders, fulfilment en rapportage op één plek.",
+      "b1": "Multi-entiteit & multi-tenant by design",
+      "b2": "Modulair: activeer alleen wat u nodig hebt",
+      "b3": "Native integraties met SAP & commerce"
+    },
+    "ecommerce": {
+      "title": "E-commerce & digitale marketing",
+      "desc": "Headless commerce-engineering en performance marketing, dagelijks bewezen bij de eigen retailmerken van DES Group.",
+      "b1": "Headless commerce & storefront-ontwikkeling",
+      "b2": "SEO, betaalde media & CRM-automatisering",
+      "b3": "Productdata & marketplace-feeds"
+    },
+    "proc_eyebrow": "Hoe we werken",
+    "proc_title": "Een leveringsmodel gebouwd op zekerheid",
+    "proc_lead": "Duidelijke fasen, meetbare resultaten en senior mensen aan tafel vanaf dag één.",
+    "phase": "Fase",
+    "p1": {
+      "title": "Ontdekken",
+      "desc": "Analyse van processen, systemen en data. Samen bepalen we de doelsituatie en de business case."
+    },
+    "p2": {
+      "title": "Ontwerpen",
+      "desc": "Oplossingsarchitectuur, procesblauwdrukken en een implementatieroadmap met vaste mijlpalen."
+    },
+    "p3": {
+      "title": "Leveren",
+      "desc": "Agile implementatie met transparante sprints, grondig testen en gestructureerd verandermanagement."
+    },
+    "p4": {
+      "title": "Doorzetten",
+      "desc": "Hypercare, managed support en continue optimalisatie — we blijven verantwoordelijk na go-live."
+    },
+    "cta_title": "Klaar om uw operatie te moderniseren?",
+    "cta_desc": "Vertel ons waar het knelt — wij laten zien hoe het beter kan, met cijfers erbij.",
+    "cta_btn": "Neem contact op"
   }
 }

@@ -1743,5 +1743,84 @@
     "contact_grad": "digital",
     "contact_p": "Sunay is open to consulting, partnerships and collaboration around SAP, digital manufacturing and DES. Whether you're modernising a factory or scaling an idea — reach out.",
     "footer": "Sunay S. · Founder, DES — Digital Enterprise Solutions · Netherlands"
+  },
+  "ServicesPage": {
+    "kicker": "Services",
+    "h1_1": "Core expertise, end to end.",
+    "h1_2": "One partner across the full enterprise stack.",
+    "lead": "From SAP S/4HANA programmes to shop-floor MES connectivity and workflow automation, DES Systems delivers the services that keep manufacturing, logistics and retail operations running — measurably better.",
+    "cta_start": "Start a conversation",
+    "stat1": "Years of SAP expertise",
+    "stat2": "SAP modules covered end-to-end",
+    "stat3": "Countries served across Europe",
+    "stat4": "Remote & on-site delivery",
+    "svc_eyebrow": "What we do",
+    "svc_title": "Services shaped by operational reality",
+    "svc_lead": "Every engagement is grounded in hands-on experience from the plant floor, the warehouse and the storefront — not slideware.",
+    "erp": {
+      "title": "ERP & SAP Logistics Consulting",
+      "desc": "S/4HANA implementation, migration, support and optimisation delivered by consultants with more than two decades in the field.",
+      "b1": "MM · PP · QM · WM · SD · TM modules",
+      "b2": "Greenfield, brownfield & selective migrations",
+      "b3": "Process design, rollout & hypercare support"
+    },
+    "mes": {
+      "title": "MES Integration",
+      "desc": "Real-time production visibility from shop floor to top floor, connecting machines, operators and your ERP core.",
+      "b1": "Shop-floor to ERP connectivity",
+      "b2": "Production monitoring & traceability",
+      "b3": "OEE, quality & downtime analytics"
+    },
+    "automation": {
+      "title": "Workflow Automation",
+      "desc": "Digital operations that remove manual handovers, reduce error rates and shorten cycle times across departments.",
+      "b1": "Process discovery & mapping",
+      "b2": "Approval, order & document flows",
+      "b3": "RPA & low-code orchestration"
+    },
+    "integration": {
+      "title": "Integration & APIs",
+      "desc": "Reliable data exchange between your ERP, partners and platforms — built for uptime and auditability.",
+      "b1": "REST API design & development",
+      "b2": "EDI & IDoc development",
+      "b3": "Middleware & event-driven architecture"
+    },
+    "bop": {
+      "title": "Business Operating Platform",
+      "desc": "Our proprietary multi-tenant platform for core operations — inventory, orders, fulfilment and reporting in one place.",
+      "b1": "Multi-entity & multi-tenant by design",
+      "b2": "Modular: activate only what you need",
+      "b3": "Native integrations to SAP & commerce"
+    },
+    "ecommerce": {
+      "title": "E-Commerce & Digital Marketing",
+      "desc": "Headless commerce engineering and performance marketing, proven daily across the DES Group's own retail brands.",
+      "b1": "Headless commerce & storefront builds",
+      "b2": "SEO, paid media & CRM automation",
+      "b3": "Product data & marketplace feeds"
+    },
+    "proc_eyebrow": "How we work",
+    "proc_title": "A delivery model built for certainty",
+    "proc_lead": "Clear phases, measurable outcomes, and senior people in the room from day one.",
+    "phase": "Phase",
+    "p1": {
+      "title": "Discover",
+      "desc": "Assessment of processes, systems and data. We define the target state and the business case together."
+    },
+    "p2": {
+      "title": "Design",
+      "desc": "Solution architecture, process blueprints and an implementation roadmap with fixed milestones."
+    },
+    "p3": {
+      "title": "Deliver",
+      "desc": "Agile implementation with transparent sprints, rigorous testing and structured change management."
+    },
+    "p4": {
+      "title": "Drive",
+      "desc": "Hypercare, managed support and continuous optimisation — we stay accountable after go-live."
+    },
+    "cta_title": "Ready to modernise your operations?",
+    "cta_desc": "Tell us where it hurts — we'll show you what better looks like, with numbers attached.",
+    "cta_btn": "Get in touch"
   }
 }

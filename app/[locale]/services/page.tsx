@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { Link } from "@/src/i18n/routing"
-import { ArrowRight, Settings, Factory, Workflow, Webhook, LayoutGrid, ShoppingBag } from "lucide-react"
-import { dxCss } from "@/components/dx-styles"
+import { getTranslations } from "next-intl/server"
+import { ArrowRight } from "lucide-react"
+import { sxClass, sxCss } from "@/components/sx-styles"
 
 export const metadata: Metadata = {
   title: "Services — DES Systems | ERP, SAP, MES & Automation",
@@ -9,96 +10,67 @@ export const metadata: Metadata = {
 }
 
 const services = [
-  {
-    id: "erp", label: "S4", Icon: Settings,
-    title: "ERP & SAP Logistics Consulting",
-    desc: "S/4HANA implementation, migration, support and optimisation delivered by consultants with more than two decades in the field.",
-    bullets: ["MM · PP · QM · WM · SD · TM modules", "Greenfield, brownfield & selective migrations", "Process design, rollout & hypercare support"],
-  },
-  {
-    id: "mes", label: "MES", Icon: Factory,
-    title: "MES Integration",
-    desc: "Real-time production visibility from shop floor to top floor, connecting machines, operators and your ERP core.",
-    bullets: ["Shop-floor to ERP connectivity", "Production monitoring & traceability", "OEE, quality & downtime analytics"],
-  },
-  {
-    id: "automation", label: "WF", Icon: Workflow,
-    title: "Workflow Automation",
-    desc: "Digital operations that remove manual handovers, reduce error rates and shorten cycle times across departments.",
-    bullets: ["Process discovery & mapping", "Approval, order & document flows", "RPA & low-code orchestration"],
-  },
-  {
-    id: "integration", label: "API", Icon: Webhook,
-    title: "Integration & APIs",
-    desc: "Reliable data exchange between your ERP, partners and platforms — built for uptime and auditability.",
-    bullets: ["REST API design & development", "EDI & IDoc development", "Middleware & event-driven architecture"],
-  },
-  {
-    id: "bop", label: "BOP", Icon: LayoutGrid,
-    title: "Business Operating Platform",
-    desc: "Our proprietary multi-tenant platform for core operations — inventory, orders, fulfilment and reporting in one place.",
-    bullets: ["Multi-entity & multi-tenant by design", "Modular: activate only what you need", "Native integrations to SAP & commerce"],
-  },
-  {
-    id: "ecommerce", label: "EC", Icon: ShoppingBag,
-    title: "E-Commerce & Digital Marketing",
-    desc: "Headless commerce engineering and performance marketing, proven daily across the DES Group's own retail brands.",
-    bullets: ["Headless commerce & storefront builds", "SEO, paid media & CRM automation", "Product data & marketplace feeds"],
-  },
+  { id: "erp",         label: "S4" },
+  { id: "mes",         label: "MES" },
+  { id: "automation",  label: "WF" },
+  { id: "integration", label: "API" },
+  { id: "bop",         label: "BOP" },
+  { id: "ecommerce",   label: "EC" },
 ]
 
-const phases = [
-  { step: "01", title: "Discover", desc: "Assessment of processes, systems and data. We define the target state and the business case together." },
-  { step: "02", title: "Design", desc: "Solution architecture, process blueprints and an implementation roadmap with fixed milestones." },
-  { step: "03", title: "Deliver", desc: "Agile implementation with transparent sprints, rigorous testing and structured change management." },
-  { step: "04", title: "Drive", desc: "Hypercare, managed support and continuous optimisation — we stay accountable after go-live." },
-]
+const stats = ["23+", "6", "12+", "100%"]
 
-export default function ServicesPage() {
+const phases = ["01", "02", "03", "04"]
+
+export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "ServicesPage" })
+
   return (
-    <div className="dx" style={{ paddingTop: 72 }}>
-      <style dangerouslySetInnerHTML={{ __html: dxCss + pageCss }} />
+    <div className={sxClass}>
+      <style dangerouslySetInnerHTML={{ __html: sxCss }} />
 
       {/* Hero */}
-      <section className="pg-hero">
-        <div className="wrap">
-          <span className="pg-kicker">Services</span>
-          <h1 className="pg-h1">Core expertise, end to end.<br />One partner across the full enterprise stack.</h1>
-          <p className="pg-lead">From SAP S/4HANA programmes to shop-floor MES connectivity and workflow automation, DES Systems delivers the services that keep manufacturing, logistics and retail operations running — measurably better.</p>
-          <div className="pg-actions">
-            <Link href="/contact" className="btn btn-primary">Start a conversation <ArrowRight /></Link>
+      <section className="sx-hero">
+        <div className="sx-wrap sx-hero-grid">
+          <div className="sx-hero-copy">
+            <div className="sx-eyebrow">{t("kicker")}</div>
+            <h1 className="sx-h1 sx-h1-wide">{t("h1_1")}<br /><span className="sx-h1-2">{t("h1_2")}</span></h1>
+            <p className="sx-lead sx-lead-wide">{t("lead")}</p>
+            <div className="sx-btns">
+              <Link href="/contact" className="sx-btn sx-btn-primary">{t("cta_start")} <ArrowRight /></Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Stats band */}
-      <div className="band">
-        <div className="wrap">
-          <div className="grid-4">
-            <div className="s"><b>23+</b><span>Years of SAP expertise</span></div>
-            <div className="s"><b>6</b><span>SAP modules covered end-to-end</span></div>
-            <div className="s"><b>12+</b><span>Countries served across Europe</span></div>
-            <div className="s"><b>100%</b><span>Remote &amp; on-site delivery</span></div>
-          </div>
+      {/* Stats strip */}
+      <section className="sx-stats">
+        <div className="sx-wrap">
+          {stats.map((v, i) => (
+            <div className="sx-stat" key={i}><b>{v}</b><span>{t(`stat${i + 1}`)}</span></div>
+          ))}
         </div>
-      </div>
+      </section>
 
       {/* Services grid */}
-      <section className="section" id="services">
-        <div className="wrap">
-          <div className="pg-sec-head">
-            <span className="eyebrow">What we do</span>
-            <h2>Services shaped by operational reality</h2>
-            <p className="lead">Every engagement is grounded in hands-on experience from the plant floor, the warehouse and the storefront — not slideware.</p>
+      <section id="services">
+        <div className="sx-wrap sx-section">
+          <div className="sx-head">
+            <div>
+              <div className="sx-eyebrow">{t("svc_eyebrow")}</div>
+              <h2 className="sx-h2">{t("svc_title")}</h2>
+            </div>
+            <p className="sx-head-p">{t("svc_lead")}</p>
           </div>
-          <div className="grid grid-3">
-            {services.map(s => (
-              <div className="card" key={s.id}>
-                <div className="pg-svc-label">{s.label}</div>
-                <h3 style={{ margin: "14px 0 8px" }}>{s.title}</h3>
-                <p>{s.desc}</p>
-                <ul className="pg-bullets">
-                  {s.bullets.map(b => <li key={b}>{b}</li>)}
+          <div className="sx-cells">
+            {services.map((s, i) => (
+              <div className="sx-cell" key={s.id} id={s.id}>
+                <div className="sx-cell-code">{String(i + 1).padStart(2, "0")} — {s.label}</div>
+                <h3 className="sx-cell-title">{t(`${s.id}.title`)}</h3>
+                <p className="sx-cell-desc">{t(`${s.id}.desc`)}</p>
+                <ul className="sx-scope">
+                  {[1, 2, 3].map((b) => <li key={b}><span className="sx-sq" />{t(`${s.id}.b${b}`)}</li>)}
                 </ul>
               </div>
             ))}
@@ -107,19 +79,17 @@ export default function ServicesPage() {
       </section>
 
       {/* Process */}
-      <section className="section soft">
-        <div className="wrap">
-          <div className="pg-sec-head">
-            <span className="eyebrow">How we work</span>
-            <h2>A delivery model built for certainty</h2>
-            <p className="lead">Clear phases, measurable outcomes, and senior people in the room from day one.</p>
-          </div>
-          <div className="grid grid-4">
-            {phases.map(p => (
-              <div className="pg-step" key={p.step}>
-                <span className="pg-step-label">Phase {p.step}</span>
-                <h3 style={{ margin: "10px 0 8px" }}>{p.title}</h3>
-                <p style={{ fontSize: 14, color: "var(--slate)" }}>{p.desc}</p>
+      <section className="sx-process">
+        <div className="sx-wrap sx-section">
+          <div className="sx-eyebrow">{t("proc_eyebrow")}</div>
+          <h2 className="sx-h2">{t("proc_title")}</h2>
+          <p className="sx-process-lead">{t("proc_lead")}</p>
+          <div className="sx-steps">
+            {phases.map((step, i) => (
+              <div className="sx-step" key={step}>
+                <div className="sx-step-code">{t("phase")} {step}</div>
+                <div className="sx-step-title">{t(`p${i + 1}.title`)}</div>
+                <p>{t(`p${i + 1}.desc`)}</p>
               </div>
             ))}
           </div>
@@ -127,33 +97,15 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="section">
-        <div className="wrap">
-          <div className="cta">
-            <h2>Ready to modernise your operations?</h2>
-            <p>Tell us where it hurts — we&apos;ll show you what better looks like, with numbers attached.</p>
-            <div className="row">
-              <Link href="/contact" className="btn btn-primary">Get in touch <ArrowRight /></Link>
-            </div>
+      <section className="sx-cta">
+        <div className="sx-wrap">
+          <div className="sx-cta-copy">
+            <h2>{t("cta_title")}</h2>
+            <p>{t("cta_desc")}</p>
           </div>
+          <Link href="/contact" className="sx-btn sx-btn-primary sx-btn-lg">{t("cta_btn")} <ArrowRight /></Link>
         </div>
       </section>
     </div>
   )
 }
-
-const pageCss = `
-.pg-hero{background:linear-gradient(135deg,#0b1f3a 0%,#12294d 60%,#0f3d7a 100%);color:#fff;padding:96px 0 80px}
-.pg-kicker{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8fb4ff;margin-bottom:16px}
-.pg-h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.1;font-weight:800;max-width:820px;color:#fff;letter-spacing:-.03em;margin-top:0}
-.pg-lead{margin-top:20px;max-width:640px;color:#c3cfe2;font-size:1.05rem}
-.pg-actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
-.pg-sec-head{max-width:720px;margin-bottom:48px}
-.pg-sec-head h2{margin-top:10px}
-.pg-svc-label{width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,#1d6cf0,#0f9d8c);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
-.pg-bullets{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px;padding:0}
-.pg-bullets li{font-size:13.5px;color:var(--slate);padding-left:16px;position:relative}
-.pg-bullets li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:2px;background:var(--accent)}
-.pg-step{padding:26px 22px;border-left:3px solid var(--accent);background:#fff;border-radius:0 var(--radius) var(--radius) 0;box-shadow:var(--shadow)}
-.pg-step-label{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--accent);text-transform:uppercase}
-`

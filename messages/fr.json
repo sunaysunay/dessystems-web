@@ -1606,5 +1606,84 @@
     "contact_grad": "digital",
     "contact_p": "Sunay est ouvert au conseil, aux partenariats et aux collaborations autour de SAP, de l'industrie digitale et de DES. Que vous modernisiez une usine ou développiez une idée — contactez-le.",
     "footer": "Sunay S. · Fondateur, DES — Digital Enterprise Solutions · Pays-Bas"
+  },
+  "ServicesPage": {
+    "kicker": "Services",
+    "h1_1": "Une expertise clé, de bout en bout.",
+    "h1_2": "Un seul partenaire pour toute la pile d'entreprise.",
+    "lead": "Des programmes SAP S/4HANA à la connectivité MES en atelier et à l'automatisation des workflows, DES Systems fournit les services qui font tourner les opérations de production, de logistique et de distribution — de manière mesurablement meilleure.",
+    "cta_start": "Démarrer une conversation",
+    "stat1": "Années d'expertise SAP",
+    "stat2": "Modules SAP couverts de bout en bout",
+    "stat3": "Pays servis en Europe",
+    "stat4": "Intervention à distance & sur site",
+    "svc_eyebrow": "Ce que nous faisons",
+    "svc_title": "Des services façonnés par la réalité opérationnelle",
+    "svc_lead": "Chaque mission s'appuie sur une expérience concrète de l'atelier, de l'entrepôt et du magasin — pas sur des présentations.",
+    "erp": {
+      "title": "Conseil ERP & logistique SAP",
+      "desc": "Implémentation, migration, support et optimisation S/4HANA par des consultants forts de plus de vingt ans d'expérience.",
+      "b1": "Modules MM · PP · QM · WM · SD · TM",
+      "b2": "Migrations greenfield, brownfield & sélectives",
+      "b3": "Conception des processus, déploiement & support hypercare"
+    },
+    "mes": {
+      "title": "Intégration MES",
+      "desc": "Visibilité de la production en temps réel, de l'atelier à la direction, en connectant machines, opérateurs et votre cœur ERP.",
+      "b1": "Connectivité atelier–ERP",
+      "b2": "Suivi de production & traçabilité",
+      "b3": "Analyses TRS, qualité & arrêts"
+    },
+    "automation": {
+      "title": "Automatisation des workflows",
+      "desc": "Des opérations numériques qui suppriment les transferts manuels, réduisent les taux d'erreur et raccourcissent les délais entre services.",
+      "b1": "Découverte & cartographie des processus",
+      "b2": "Flux d'approbation, de commandes & de documents",
+      "b3": "RPA & orchestration low-code"
+    },
+    "integration": {
+      "title": "Intégration & API",
+      "desc": "Des échanges de données fiables entre votre ERP, vos partenaires et vos plateformes — conçus pour la disponibilité et l'auditabilité.",
+      "b1": "Conception & développement d'API REST",
+      "b2": "Développement EDI & IDoc",
+      "b3": "Middleware & architecture événementielle"
+    },
+    "bop": {
+      "title": "Business Operating Platform",
+      "desc": "Notre plateforme multi-tenant propriétaire pour les opérations clés — stocks, commandes, exécution et reporting en un seul endroit.",
+      "b1": "Multi-entité & multi-tenant par conception",
+      "b2": "Modulaire : activez uniquement ce dont vous avez besoin",
+      "b3": "Intégrations natives avec SAP & le commerce"
+    },
+    "ecommerce": {
+      "title": "E-commerce & marketing digital",
+      "desc": "Ingénierie headless commerce et marketing de performance, éprouvés chaque jour sur les propres enseignes de DES Group.",
+      "b1": "Headless commerce & création de vitrines",
+      "b2": "SEO, médias payants & automatisation CRM",
+      "b3": "Données produits & flux marketplaces"
+    },
+    "proc_eyebrow": "Notre méthode",
+    "proc_title": "Un modèle de delivery conçu pour la certitude",
+    "proc_lead": "Des phases claires, des résultats mesurables et des profils seniors dès le premier jour.",
+    "phase": "Phase",
+    "p1": {
+      "title": "Découvrir",
+      "desc": "Évaluation des processus, des systèmes et des données. Nous définissons ensemble la cible et le business case."
+    },
+    "p2": {
+      "title": "Concevoir",
+      "desc": "Architecture de la solution, plans de processus et feuille de route avec des jalons fixes."
+    },
+    "p3": {
+      "title": "Livrer",
+      "desc": "Mise en œuvre agile avec des sprints transparents, des tests rigoureux et une conduite du changement structurée."
+    },
+    "p4": {
+      "title": "Piloter",
+      "desc": "Hypercare, support managé et optimisation continue — nous restons responsables après la mise en production."
+    },
+    "cta_title": "Prêt à moderniser vos opérations ?",
+    "cta_desc": "Dites-nous où ça coince — nous vous montrerons à quoi ressemble le mieux, chiffres à l'appui.",
+    "cta_btn": "Nous contacter"
   }
 }

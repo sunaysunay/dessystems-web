@@ -194,58 +194,78 @@
     "discuss": "Discuss this Solution"
   },
   "SolutionsPage": {
-    "eyebrow": "Our Solutions",
-    "title1": "Enterprise Solutions.",
-    "title2": "Real Business Impact.",
-    "subtitle": "End-to-end enterprise solutions across ERP, MES, automation and integration — built to drive measurable results.",
-    "discuss": "Discuss this Solution",
-    "tech_label": "Technologies & Modules",
-    "bop_eyebrow": "Our own product",
-    "bop_desc": "DES Platform connects leads, customers, websites, analytics and operations in one ecosystem — powering all DES Group businesses.",
-    "bop_cta": "Explore DES Platform",
+    "plat": {
+      "badge": "Produs principal",
+      "title": "O singură platformă. <em>Fiecare flux de business.</em>",
+      "lead": "DES Business Operating Platform se adaptează operațiunilor dumneavoastră cu inteligență bazată pe AI — de la atragerea lead-urilor la facturare, de la stocuri la analize. Fără șabloane rigide. Procesele dumneavoastră, orchestrate.",
+      "sub": "Construită pentru companiile care refuză să-și depășească instrumentele. BOP învață cum lucrează echipele dumneavoastră și se modelează după fluxurile dumneavoastră de lucru — nu invers.",
+      "cta_explore": "Explorați platforma",
+      "cta_demo": "Solicitați un demo",
+      "f_ai": "Inteligență AI-native",
+      "f_ai_d": "Agenți AI integrați care vă înțeleg datele, automatizează decizii și oferă informații înainte să le cereți.",
+      "f_auto": "Automatizare adaptivă",
+      "f_auto_d": "Fluxuri de lucru care evoluează odată cu afacerea dumneavoastră — motoare de reguli, declanșatoare și orchestrare fără cod.",
+      "f_multi": "Multilingv și multi-entitate",
+      "f_multi_d": "Operați în mai multe limbi, monede și entități juridice dintr-o singură consolă unificată.",
+      "f_sec": "Securitate de nivel enterprise",
+      "f_sec_d": "Acces bazat pe roluri, jurnale de audit, controale SOD și izolarea tenanților în fiecare nivel.",
+      "f_anal": "Analize în timp real",
+      "f_anal_d": "Dashboard-uri live, urmărirea KPI și modele predictive — de la indicatorii din producție la rapoartele pentru management.",
+      "f_flow": "Fluxuri de business modulare",
+      "f_flow_d": "Arhitectura modulară vă permite să activați CRM, vânzări, financiar, operațiuni — fiecare modul se potrivește realității dumneavoastră."
+    },
+    "eyebrow": "Soluțiile noastre",
+    "title1": "Soluții enterprise.",
+    "title2": "Impact real în business.",
+    "subtitle": "Soluții enterprise complete pentru ERP, MES, automatizare și integrare — create pentru rezultate măsurabile.",
+    "discuss": "Discutați această soluție",
+    "tech_label": "Tehnologii și module",
+    "bop_eyebrow": "Produsul nostru propriu",
+    "bop_desc": "DES Platform conectează lead-uri, clienți, site-uri web, analize și operațiuni într-un singur ecosistem — stând la baza tuturor afacerilor DES Group.",
+    "bop_cta": "Explorați DES Platform",
     "erp": {
-      "title": "ERP Consulting",
-      "subtitle": "SAP S/4HANA · Implementation · Optimisation",
-      "desc": "We help businesses implement, optimise and support their ERP systems. From greenfield S/4HANA implementations to brownfield conversions and ongoing support.",
-      "b1": "Process Analysis & Design",
-      "b2": "ERP Implementation",
-      "b3": "System Optimisation",
-      "b4": "Data Migration",
-      "b5": "Training & Support",
-      "b6": "Change Management"
+      "title": "Consultanță ERP",
+      "subtitle": "SAP S/4HANA · Implementare · Optimizare",
+      "desc": "Ajutăm companiile să își implementeze, optimizeze și susțină sistemele ERP. De la implementări greenfield S/4HANA la conversii brownfield și suport continuu.",
+      "b1": "Analiza și proiectarea proceselor",
+      "b2": "Implementare ERP",
+      "b3": "Optimizarea sistemului",
+      "b4": "Migrarea datelor",
+      "b5": "Instruire și suport",
+      "b6": "Managementul schimbării"
     },
     "mes": {
-      "title": "MES Integration",
-      "subtitle": "Shop Floor · ERP Connectivity · Real-time Data",
-      "desc": "Seamless integration between Manufacturing Execution Systems and ERP for real-time production visibility, from shop floor to top floor.",
-      "b1": "MES–ERP Interface Design",
-      "b2": "Production Order Management",
-      "b3": "Real-time Data Synchronisation",
-      "b4": "IDoc & API Development",
-      "b5": "Monitoring & Alerting",
-      "b6": "Performance Optimisation"
+      "title": "Integrare MES",
+      "subtitle": "Producție · Conectivitate ERP · Date în timp real",
+      "desc": "Integrare fără întreruperi între sistemele de execuție a producției și ERP pentru vizibilitate în timp real asupra producției, din hală până la management.",
+      "b1": "Proiectarea interfețelor MES–ERP",
+      "b2": "Gestionarea comenzilor de producție",
+      "b3": "Sincronizarea datelor în timp real",
+      "b4": "Dezvoltare IDoc și API",
+      "b5": "Monitorizare și alertare",
+      "b6": "Optimizarea performanței"
     },
     "automation": {
-      "title": "Automation",
-      "subtitle": "Workflow Design · Process Automation · Digital Operations",
-      "desc": "Eliminate manual bottlenecks, reduce costs and improve productivity through intelligent process automation across your enterprise systems.",
-      "b1": "Workflow Analysis & Design",
+      "title": "Automatizare",
+      "subtitle": "Proiectarea fluxurilor · Automatizarea proceselor · Operațiuni digitale",
+      "desc": "Eliminați blocajele manuale, reduceți costurile și creșteți productivitatea prin automatizarea inteligentă a proceselor din sistemele dumneavoastră enterprise.",
+      "b1": "Analiza și proiectarea fluxurilor de lucru",
       "b2": "SAP Intelligent Automation",
-      "b3": "RPA Integration",
-      "b4": "KPI Dashboards",
-      "b5": "Monitoring Systems",
-      "b6": "Custom Automation Scripts"
+      "b3": "Integrare RPA",
+      "b4": "Dashboard-uri KPI",
+      "b5": "Sisteme de monitorizare",
+      "b6": "Scripturi de automatizare personalizate"
     },
     "integration": {
-      "title": "Integration",
-      "subtitle": "API Development · EDI · System Connectivity",
-      "desc": "Connect your enterprise systems, data sources and business partners. From SAP middleware to custom API development and EDI solutions.",
-      "b1": "API Design & Development",
-      "b2": "EDI B2B Integration",
+      "title": "Integrare",
+      "subtitle": "Dezvoltare API · EDI · Conectivitatea sistemelor",
+      "desc": "Conectați-vă sistemele enterprise, sursele de date și partenerii de afaceri. De la middleware SAP la dezvoltarea de API-uri personalizate și soluții EDI.",
+      "b1": "Proiectare și dezvoltare API",
+      "b2": "Integrare EDI B2B",
       "b3": "SAP PI/PO → Integration Suite",
-      "b4": "IDoc Processing",
-      "b5": "External System Connectors",
-      "b6": "Data Synchronisation"
+      "b4": "Procesare IDoc",
+      "b5": "Conectori pentru sisteme externe",
+      "b6": "Sincronizarea datelor"
     }
   },
   "DesLab": {
@@ -471,5 +491,84 @@
     "GR003": "Manager Canale",
     "GR004": "Playbooks",
     "GR005": "Performanță"
+  },
+  "ServicesPage": {
+    "kicker": "Servicii",
+    "h1_1": "Expertiză esențială, de la cap la coadă.",
+    "h1_2": "Un singur partener pentru întregul stack enterprise.",
+    "lead": "De la programe SAP S/4HANA la conectivitate MES în producție și automatizarea fluxurilor de lucru, DES Systems oferă serviciile care mențin funcționale operațiunile de producție, logistică și retail — măsurabil mai bine.",
+    "cta_start": "Începeți o discuție",
+    "stat1": "Ani de expertiză SAP",
+    "stat2": "Module SAP acoperite integral",
+    "stat3": "Țări deservite în Europa",
+    "stat4": "Livrare la distanță și la fața locului",
+    "svc_eyebrow": "Ce facem",
+    "svc_title": "Servicii modelate de realitatea operațională",
+    "svc_lead": "Fiecare proiect se bazează pe experiență practică din hala de producție, depozit și magazin — nu pe prezentări.",
+    "erp": {
+      "title": "Consultanță ERP și logistică SAP",
+      "desc": "Implementare, migrare, suport și optimizare S/4HANA, realizate de consultanți cu peste două decenii de experiență în domeniu.",
+      "b1": "Module MM · PP · QM · WM · SD · TM",
+      "b2": "Migrări greenfield, brownfield și selective",
+      "b3": "Proiectarea proceselor, implementare și suport hypercare"
+    },
+    "mes": {
+      "title": "Integrare MES",
+      "desc": "Vizibilitate a producției în timp real, din hală până la management, conectând utilaje, operatori și nucleul ERP.",
+      "b1": "Conectivitate între producție și ERP",
+      "b2": "Monitorizarea și trasabilitatea producției",
+      "b3": "Analize OEE, calitate și opriri"
+    },
+    "automation": {
+      "title": "Automatizarea fluxurilor de lucru",
+      "desc": "Operațiuni digitale care elimină predările manuale, reduc ratele de eroare și scurtează timpii de ciclu între departamente.",
+      "b1": "Analiza și maparea proceselor",
+      "b2": "Fluxuri de aprobare, comenzi și documente",
+      "b3": "RPA și orchestrare low-code"
+    },
+    "integration": {
+      "title": "Integrare și API-uri",
+      "desc": "Schimb de date fiabil între ERP-ul dumneavoastră, parteneri și platforme — construit pentru disponibilitate și auditabilitate.",
+      "b1": "Proiectare și dezvoltare API REST",
+      "b2": "Dezvoltare EDI și IDoc",
+      "b3": "Middleware și arhitectură bazată pe evenimente"
+    },
+    "bop": {
+      "title": "Business Operating Platform",
+      "desc": "Platforma noastră proprie multi-tenant pentru operațiunile de bază — stocuri, comenzi, livrare și raportare într-un singur loc.",
+      "b1": "Multi-entitate și multi-tenant prin design",
+      "b2": "Modulară: activați doar ce aveți nevoie",
+      "b3": "Integrări native cu SAP și comerț"
+    },
+    "ecommerce": {
+      "title": "E-commerce și marketing digital",
+      "desc": "Inginerie headless commerce și marketing de performanță, dovedite zilnic în brandurile de retail proprii ale DES Group.",
+      "b1": "Headless commerce și dezvoltare de magazine online",
+      "b2": "SEO, media plătită și automatizare CRM",
+      "b3": "Date de produs și feed-uri pentru marketplace-uri"
+    },
+    "proc_eyebrow": "Cum lucrăm",
+    "proc_title": "Un model de livrare construit pentru certitudine",
+    "proc_lead": "Etape clare, rezultate măsurabile și specialiști seniori implicați din prima zi.",
+    "phase": "Etapa",
+    "p1": {
+      "title": "Descoperire",
+      "desc": "Evaluarea proceselor, sistemelor și datelor. Definim împreună starea țintă și business case-ul."
+    },
+    "p2": {
+      "title": "Proiectare",
+      "desc": "Arhitectura soluției, modele de proces și o foaie de parcurs pentru implementare cu repere fixe."
+    },
+    "p3": {
+      "title": "Livrare",
+      "desc": "Implementare agilă cu sprinturi transparente, testare riguroasă și management al schimbării structurat."
+    },
+    "p4": {
+      "title": "Dezvoltare",
+      "desc": "Hypercare, suport gestionat și optimizare continuă — rămânem responsabili și după go-live."
+    },
+    "cta_title": "Pregătiți să vă modernizați operațiunile?",
+    "cta_desc": "Spuneți-ne unde vă doare — vă arătăm cum arată mai bine, cu cifre concrete.",
+    "cta_btn": "Contactați-ne"
   }
 }

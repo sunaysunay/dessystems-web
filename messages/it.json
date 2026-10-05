@@ -194,58 +194,78 @@
     "discuss": "Discuss this Solution"
   },
   "SolutionsPage": {
-    "eyebrow": "Our Solutions",
-    "title1": "Enterprise Solutions.",
-    "title2": "Real Business Impact.",
-    "subtitle": "End-to-end enterprise solutions across ERP, MES, automation and integration — built to drive measurable results.",
-    "discuss": "Discuss this Solution",
-    "tech_label": "Technologies & Modules",
-    "bop_eyebrow": "Our own product",
-    "bop_desc": "DES Platform connects leads, customers, websites, analytics and operations in one ecosystem — powering all DES Group businesses.",
-    "bop_cta": "Explore DES Platform",
+    "plat": {
+      "badge": "Prodotto di punta",
+      "title": "Una piattaforma. <em>Ogni flusso aziendale.</em>",
+      "lead": "DES Business Operating Platform si adatta alle vostre operazioni con un'intelligenza guidata dall'AI — dall'acquisizione dei lead alla fatturazione, dal magazzino all'analisi. Nessun modello rigido. I vostri processi, orchestrati.",
+      "sub": "Pensata per le aziende che non vogliono superare i propri strumenti. BOP impara come lavorano i vostri team e si modella sui vostri flussi di lavoro — non il contrario.",
+      "cta_explore": "Esplora la piattaforma",
+      "cta_demo": "Richiedi una demo",
+      "f_ai": "Intelligenza AI-native",
+      "f_ai_d": "Agenti AI integrati che comprendono i vostri dati, automatizzano le decisioni e offrono insight prima ancora che li chiediate.",
+      "f_auto": "Automazione adattiva",
+      "f_auto_d": "Flussi di lavoro che evolvono con la vostra azienda — motori di regole, trigger e orchestrazione senza codice.",
+      "f_multi": "Multilingua e multi-entità",
+      "f_multi_d": "Operate in più lingue, valute ed entità legali da un'unica console unificata.",
+      "f_sec": "Sicurezza di livello enterprise",
+      "f_sec_d": "Accesso basato sui ruoli, audit trail, controlli SOD e isolamento dei tenant in ogni livello.",
+      "f_anal": "Analisi in tempo reale",
+      "f_anal_d": "Dashboard live, monitoraggio dei KPI e modelli predittivi — dalle metriche di reparto ai report per il management.",
+      "f_flow": "Flussi aziendali componibili",
+      "f_flow_d": "L'architettura modulare vi consente di attivare CRM, vendite, finanza e operations — ogni modulo si integra nella vostra realtà."
+    },
+    "eyebrow": "Le nostre soluzioni",
+    "title1": "Soluzioni enterprise.",
+    "title2": "Impatto reale sul business.",
+    "subtitle": "Soluzioni enterprise end-to-end per ERP, MES, automazione e integrazione — pensate per generare risultati misurabili.",
+    "discuss": "Parliamo di questa soluzione",
+    "tech_label": "Tecnologie e moduli",
+    "bop_eyebrow": "Il nostro prodotto",
+    "bop_desc": "DES Platform collega lead, clienti, siti web, analytics e operations in un unico ecosistema — alla base di tutte le aziende di DES Group.",
+    "bop_cta": "Esplora DES Platform",
     "erp": {
-      "title": "ERP Consulting",
-      "subtitle": "SAP S/4HANA · Implementation · Optimisation",
-      "desc": "We help businesses implement, optimise and support their ERP systems. From greenfield S/4HANA implementations to brownfield conversions and ongoing support.",
-      "b1": "Process Analysis & Design",
-      "b2": "ERP Implementation",
-      "b3": "System Optimisation",
-      "b4": "Data Migration",
-      "b5": "Training & Support",
-      "b6": "Change Management"
+      "title": "Consulenza ERP",
+      "subtitle": "SAP S/4HANA · Implementazione · Ottimizzazione",
+      "desc": "Aiutiamo le aziende a implementare, ottimizzare e supportare i loro sistemi ERP. Dalle implementazioni greenfield di S/4HANA alle conversioni brownfield e al supporto continuativo.",
+      "b1": "Analisi e progettazione dei processi",
+      "b2": "Implementazione ERP",
+      "b3": "Ottimizzazione del sistema",
+      "b4": "Migrazione dei dati",
+      "b5": "Formazione e supporto",
+      "b6": "Gestione del cambiamento"
     },
     "mes": {
-      "title": "MES Integration",
-      "subtitle": "Shop Floor · ERP Connectivity · Real-time Data",
-      "desc": "Seamless integration between Manufacturing Execution Systems and ERP for real-time production visibility, from shop floor to top floor.",
-      "b1": "MES–ERP Interface Design",
-      "b2": "Production Order Management",
-      "b3": "Real-time Data Synchronisation",
-      "b4": "IDoc & API Development",
-      "b5": "Monitoring & Alerting",
-      "b6": "Performance Optimisation"
+      "title": "Integrazione MES",
+      "subtitle": "Reparto produttivo · Connettività ERP · Dati in tempo reale",
+      "desc": "Integrazione perfetta tra Manufacturing Execution System ed ERP per una visibilità della produzione in tempo reale, dal reparto alla direzione.",
+      "b1": "Progettazione di interfacce MES–ERP",
+      "b2": "Gestione degli ordini di produzione",
+      "b3": "Sincronizzazione dei dati in tempo reale",
+      "b4": "Sviluppo di IDoc e API",
+      "b5": "Monitoraggio e alerting",
+      "b6": "Ottimizzazione delle prestazioni"
     },
     "automation": {
-      "title": "Automation",
-      "subtitle": "Workflow Design · Process Automation · Digital Operations",
-      "desc": "Eliminate manual bottlenecks, reduce costs and improve productivity through intelligent process automation across your enterprise systems.",
-      "b1": "Workflow Analysis & Design",
+      "title": "Automazione",
+      "subtitle": "Progettazione workflow · Automazione dei processi · Operazioni digitali",
+      "desc": "Eliminate i colli di bottiglia manuali, riducete i costi e aumentate la produttività grazie all'automazione intelligente dei processi nei vostri sistemi aziendali.",
+      "b1": "Analisi e progettazione dei workflow",
       "b2": "SAP Intelligent Automation",
-      "b3": "RPA Integration",
-      "b4": "KPI Dashboards",
-      "b5": "Monitoring Systems",
-      "b6": "Custom Automation Scripts"
+      "b3": "Integrazione RPA",
+      "b4": "Dashboard KPI",
+      "b5": "Sistemi di monitoraggio",
+      "b6": "Script di automazione personalizzati"
     },
     "integration": {
-      "title": "Integration",
-      "subtitle": "API Development · EDI · System Connectivity",
-      "desc": "Connect your enterprise systems, data sources and business partners. From SAP middleware to custom API development and EDI solutions.",
-      "b1": "API Design & Development",
-      "b2": "EDI B2B Integration",
+      "title": "Integrazione",
+      "subtitle": "Sviluppo API · EDI · Connettività dei sistemi",
+      "desc": "Collegate i vostri sistemi aziendali, le fonti dati e i partner commerciali. Dal middleware SAP allo sviluppo di API personalizzate e soluzioni EDI.",
+      "b1": "Progettazione e sviluppo di API",
+      "b2": "Integrazione EDI B2B",
       "b3": "SAP PI/PO → Integration Suite",
-      "b4": "IDoc Processing",
-      "b5": "External System Connectors",
-      "b6": "Data Synchronisation"
+      "b4": "Elaborazione IDoc",
+      "b5": "Connettori per sistemi esterni",
+      "b6": "Sincronizzazione dei dati"
     }
   },
   "DesLab": {
@@ -471,5 +491,84 @@
     "GR003": "Gestione Canali",
     "GR004": "Playbooks",
     "GR005": "Prestazioni"
+  },
+  "ServicesPage": {
+    "kicker": "Servizi",
+    "h1_1": "Competenze chiave, dall'inizio alla fine.",
+    "h1_2": "Un unico partner per l'intero stack aziendale.",
+    "lead": "Dai programmi SAP S/4HANA alla connettività MES in reparto fino all'automazione dei flussi di lavoro, DES Systems offre i servizi che mantengono operative produzione, logistica e retail — in modo misurabilmente migliore.",
+    "cta_start": "Avvia una conversazione",
+    "stat1": "Anni di esperienza SAP",
+    "stat2": "Moduli SAP coperti end-to-end",
+    "stat3": "Paesi serviti in Europa",
+    "stat4": "Operatività da remoto e in sede",
+    "svc_eyebrow": "Cosa facciamo",
+    "svc_title": "Servizi plasmati dalla realtà operativa",
+    "svc_lead": "Ogni progetto si basa su esperienza pratica in reparto, in magazzino e in negozio — non su slide.",
+    "erp": {
+      "title": "Consulenza ERP e logistica SAP",
+      "desc": "Implementazione, migrazione, supporto e ottimizzazione di S/4HANA a cura di consulenti con oltre vent'anni di esperienza sul campo.",
+      "b1": "Moduli MM · PP · QM · WM · SD · TM",
+      "b2": "Migrazioni greenfield, brownfield e selettive",
+      "b3": "Progettazione dei processi, rollout e supporto hypercare"
+    },
+    "mes": {
+      "title": "Integrazione MES",
+      "desc": "Visibilità della produzione in tempo reale, dal reparto alla direzione, collegando macchine, operatori e il vostro core ERP.",
+      "b1": "Connettività tra reparto ed ERP",
+      "b2": "Monitoraggio e tracciabilità della produzione",
+      "b3": "Analisi di OEE, qualità e fermi"
+    },
+    "automation": {
+      "title": "Automazione dei flussi di lavoro",
+      "desc": "Operazioni digitali che eliminano i passaggi manuali, riducono gli errori e accorciano i tempi di ciclo tra i reparti.",
+      "b1": "Analisi e mappatura dei processi",
+      "b2": "Flussi di approvazione, ordini e documenti",
+      "b3": "RPA e orchestrazione low-code"
+    },
+    "integration": {
+      "title": "Integrazione e API",
+      "desc": "Scambio di dati affidabile tra il vostro ERP, i partner e le piattaforme — progettato per disponibilità e verificabilità.",
+      "b1": "Progettazione e sviluppo di API REST",
+      "b2": "Sviluppo EDI e IDoc",
+      "b3": "Middleware e architettura event-driven"
+    },
+    "bop": {
+      "title": "Business Operating Platform",
+      "desc": "La nostra piattaforma multi-tenant proprietaria per le operazioni chiave — magazzino, ordini, evasione e reporting in un unico posto.",
+      "b1": "Multi-entità e multi-tenant by design",
+      "b2": "Modulare: attivate solo ciò che vi serve",
+      "b3": "Integrazioni native con SAP e commerce"
+    },
+    "ecommerce": {
+      "title": "E-commerce e marketing digitale",
+      "desc": "Ingegneria headless commerce e performance marketing, messi alla prova ogni giorno sui marchi retail di DES Group.",
+      "b1": "Headless commerce e sviluppo di storefront",
+      "b2": "SEO, media a pagamento e automazione CRM",
+      "b3": "Dati prodotto e feed per marketplace"
+    },
+    "proc_eyebrow": "Come lavoriamo",
+    "proc_title": "Un modello di delivery costruito per dare certezze",
+    "proc_lead": "Fasi chiare, risultati misurabili e professionisti senior al tavolo fin dal primo giorno.",
+    "phase": "Fase",
+    "p1": {
+      "title": "Scoprire",
+      "desc": "Analisi di processi, sistemi e dati. Definiamo insieme lo stato obiettivo e il business case."
+    },
+    "p2": {
+      "title": "Progettare",
+      "desc": "Architettura della soluzione, blueprint dei processi e roadmap di implementazione con milestone fisse."
+    },
+    "p3": {
+      "title": "Realizzare",
+      "desc": "Implementazione agile con sprint trasparenti, test rigorosi e gestione del cambiamento strutturata."
+    },
+    "p4": {
+      "title": "Guidare",
+      "desc": "Hypercare, supporto gestito e ottimizzazione continua — restiamo responsabili anche dopo il go-live."
+    },
+    "cta_title": "Pronti a modernizzare le vostre operazioni?",
+    "cta_desc": "Diteci dove fa male — vi mostreremo com'è il meglio, numeri alla mano.",
+    "cta_btn": "Contattaci"
   }
 }

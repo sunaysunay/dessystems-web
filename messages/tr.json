@@ -1606,5 +1606,84 @@
     "contact_grad": "dijital bir şey inşa edelim",
     "contact_p": "Sunay; SAP, dijital üretim ve DES etrafında danışmanlığa, ortaklıklara ve işbirliğine açıktır. İster bir fabrikayı modernleştiriyor ister bir fikri ölçeklendiriyor olun — iletişime geçin.",
     "footer": "Sunay S. · Kurucu, DES — Digital Enterprise Solutions · Hollanda"
+  },
+  "ServicesPage": {
+    "kicker": "Hizmetler",
+    "h1_1": "Uçtan uca temel uzmanlık.",
+    "h1_2": "Tüm kurumsal yapı için tek bir iş ortağı.",
+    "lead": "SAP S/4HANA programlarından üretim sahasında MES bağlantısına ve iş akışı otomasyonuna kadar DES Systems, üretim, lojistik ve perakende operasyonlarını ölçülebilir şekilde daha iyi işleten hizmetleri sunar.",
+    "cta_start": "Görüşme başlatın",
+    "stat1": "Yıllık SAP uzmanlığı",
+    "stat2": "Uçtan uca kapsanan SAP modülü",
+    "stat3": "Avrupa'da hizmet verilen ülke",
+    "stat4": "Uzaktan & yerinde hizmet",
+    "svc_eyebrow": "Ne yapıyoruz",
+    "svc_title": "Operasyonel gerçeklikle şekillenen hizmetler",
+    "svc_lead": "Her proje sunum slaytlarına değil; üretim sahası, depo ve mağazadan edinilmiş uygulamalı deneyime dayanır.",
+    "erp": {
+      "title": "ERP & SAP Lojistik Danışmanlığı",
+      "desc": "Alanda yirmi yılı aşkın deneyime sahip danışmanlarla S/4HANA uygulaması, geçişi, desteği ve optimizasyonu.",
+      "b1": "MM · PP · QM · WM · SD · TM modülleri",
+      "b2": "Greenfield, brownfield & seçici geçişler",
+      "b3": "Süreç tasarımı, yaygınlaştırma & hypercare desteği"
+    },
+    "mes": {
+      "title": "MES Entegrasyonu",
+      "desc": "Makineleri, operatörleri ve ERP çekirdeğinizi birbirine bağlayarak üretim sahasından yönetime gerçek zamanlı üretim görünürlüğü.",
+      "b1": "Üretim sahasından ERP'ye bağlantı",
+      "b2": "Üretim izleme & izlenebilirlik",
+      "b3": "OEE, kalite & duruş analitiği"
+    },
+    "automation": {
+      "title": "İş Akışı Otomasyonu",
+      "desc": "Manuel devirleri ortadan kaldıran, hata oranlarını düşüren ve departmanlar arası döngü sürelerini kısaltan dijital operasyonlar.",
+      "b1": "Süreç keşfi & haritalama",
+      "b2": "Onay, sipariş & doküman akışları",
+      "b3": "RPA & low-code orkestrasyon"
+    },
+    "integration": {
+      "title": "Entegrasyon & API'ler",
+      "desc": "ERP'niz, iş ortaklarınız ve platformlarınız arasında güvenilir veri alışverişi — kesintisiz çalışma ve denetlenebilirlik için tasarlandı.",
+      "b1": "REST API tasarımı & geliştirme",
+      "b2": "EDI & IDoc geliştirme",
+      "b3": "Middleware & olay güdümlü mimari"
+    },
+    "bop": {
+      "title": "Business Operating Platform",
+      "desc": "Temel operasyonlar için kendi çok kiracılı platformumuz — stok, siparişler, sipariş karşılama ve raporlama tek bir yerde.",
+      "b1": "Tasarımı gereği çok şirketli & çok kiracılı",
+      "b2": "Modüler: yalnızca ihtiyacınız olanı etkinleştirin",
+      "b3": "SAP & e-ticaret ile yerel entegrasyonlar"
+    },
+    "ecommerce": {
+      "title": "E-Ticaret & Dijital Pazarlama",
+      "desc": "DES Group'un kendi perakende markalarında her gün kanıtlanan headless commerce mühendisliği ve performans pazarlaması.",
+      "b1": "Headless commerce & vitrin geliştirme",
+      "b2": "SEO, ücretli medya & CRM otomasyonu",
+      "b3": "Ürün verisi & pazaryeri beslemeleri"
+    },
+    "proc_eyebrow": "Nasıl çalışıyoruz",
+    "proc_title": "Kesinlik için kurgulanmış bir teslimat modeli",
+    "proc_lead": "Net aşamalar, ölçülebilir sonuçlar ve ilk günden itibaren masada kıdemli uzmanlar.",
+    "phase": "Aşama",
+    "p1": {
+      "title": "Keşfet",
+      "desc": "Süreçlerin, sistemlerin ve verilerin değerlendirilmesi. Hedef durumu ve iş gerekçesini birlikte belirleriz."
+    },
+    "p2": {
+      "title": "Tasarla",
+      "desc": "Çözüm mimarisi, süreç planları ve sabit kilometre taşlarına sahip bir uygulama yol haritası."
+    },
+    "p3": {
+      "title": "Teslim Et",
+      "desc": "Şeffaf sprintler, titiz testler ve yapılandırılmış değişim yönetimiyle çevik uygulama."
+    },
+    "p4": {
+      "title": "Sürdür",
+      "desc": "Hypercare, yönetilen destek ve sürekli optimizasyon — canlıya geçişten sonra da sorumluluğu üstleniriz."
+    },
+    "cta_title": "Operasyonlarınızı modernleştirmeye hazır mısınız?",
+    "cta_desc": "Sorunun nerede olduğunu anlatın — daha iyisinin nasıl göründüğünü rakamlarla gösterelim.",
+    "cta_btn": "İletişime geçin"
   }
 }

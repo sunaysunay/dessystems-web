@@ -1606,5 +1606,84 @@
     "contact_grad": "Digitales",
     "contact_p": "Sunay ist offen für Beratung, Partnerschaften und Zusammenarbeit rund um SAP, digitale Fertigung und DES. Ob Sie eine Fabrik modernisieren oder eine Idee skalieren — melden Sie sich.",
     "footer": "Sunay S. · Gründer, DES — Digital Enterprise Solutions · Niederlande"
+  },
+  "ServicesPage": {
+    "kicker": "Leistungen",
+    "h1_1": "Kernkompetenz, durchgängig.",
+    "h1_2": "Ein Partner für den gesamten Enterprise-Stack.",
+    "lead": "Von SAP-S/4HANA-Programmen über MES-Anbindung in der Fertigung bis zur Workflow-Automatisierung: DES Systems liefert die Leistungen, die Produktion, Logistik und Handel am Laufen halten — messbar besser.",
+    "cta_start": "Gespräch starten",
+    "stat1": "Jahre SAP-Erfahrung",
+    "stat2": "SAP-Module durchgängig abgedeckt",
+    "stat3": "Länder in Europa betreut",
+    "stat4": "Remote- & Vor-Ort-Einsatz",
+    "svc_eyebrow": "Was wir tun",
+    "svc_title": "Leistungen, geprägt von der operativen Realität",
+    "svc_lead": "Jedes Projekt basiert auf praktischer Erfahrung aus Werkhalle, Lager und Ladengeschäft — nicht auf Folienschlachten.",
+    "erp": {
+      "title": "ERP- & SAP-Logistikberatung",
+      "desc": "S/4HANA-Implementierung, -Migration, -Support und -Optimierung durch Berater mit mehr als zwei Jahrzehnten Praxiserfahrung.",
+      "b1": "Module MM · PP · QM · WM · SD · TM",
+      "b2": "Greenfield-, Brownfield- & selektive Migrationen",
+      "b3": "Prozessdesign, Rollout & Hypercare-Support"
+    },
+    "mes": {
+      "title": "MES-Integration",
+      "desc": "Echtzeit-Transparenz in der Produktion vom Shopfloor bis zum Topfloor — mit Anbindung von Maschinen, Mitarbeitern und Ihrem ERP-Kern.",
+      "b1": "Shopfloor-zu-ERP-Konnektivität",
+      "b2": "Produktionsüberwachung & Rückverfolgbarkeit",
+      "b3": "OEE-, Qualitäts- & Stillstandsanalysen"
+    },
+    "automation": {
+      "title": "Workflow-Automatisierung",
+      "desc": "Digitale Abläufe, die manuelle Übergaben beseitigen, Fehlerquoten senken und Durchlaufzeiten abteilungsübergreifend verkürzen.",
+      "b1": "Prozessanalyse & -mapping",
+      "b2": "Freigabe-, Auftrags- & Dokumentenflüsse",
+      "b3": "RPA & Low-Code-Orchestrierung"
+    },
+    "integration": {
+      "title": "Integration & APIs",
+      "desc": "Zuverlässiger Datenaustausch zwischen Ihrem ERP, Partnern und Plattformen — ausgelegt auf Verfügbarkeit und Revisionssicherheit.",
+      "b1": "REST-API-Design & -Entwicklung",
+      "b2": "EDI- & IDoc-Entwicklung",
+      "b3": "Middleware & ereignisgesteuerte Architektur"
+    },
+    "bop": {
+      "title": "Business Operating Platform",
+      "desc": "Unsere eigene mandantenfähige Plattform für Kernprozesse — Bestand, Aufträge, Fulfillment und Reporting an einem Ort.",
+      "b1": "Multi-Entity & mandantenfähig by Design",
+      "b2": "Modular: nur aktivieren, was Sie brauchen",
+      "b3": "Native Integrationen zu SAP & Commerce"
+    },
+    "ecommerce": {
+      "title": "E-Commerce & digitales Marketing",
+      "desc": "Headless-Commerce-Engineering und Performance-Marketing, täglich bewährt bei den eigenen Handelsmarken der DES Group.",
+      "b1": "Headless Commerce & Storefront-Entwicklung",
+      "b2": "SEO, Paid Media & CRM-Automatisierung",
+      "b3": "Produktdaten & Marktplatz-Feeds"
+    },
+    "proc_eyebrow": "So arbeiten wir",
+    "proc_title": "Ein Liefermodell, das Sicherheit schafft",
+    "proc_lead": "Klare Phasen, messbare Ergebnisse und erfahrene Experten vom ersten Tag an.",
+    "phase": "Phase",
+    "p1": {
+      "title": "Analysieren",
+      "desc": "Bewertung von Prozessen, Systemen und Daten. Gemeinsam definieren wir Zielbild und Business Case."
+    },
+    "p2": {
+      "title": "Konzipieren",
+      "desc": "Lösungsarchitektur, Prozess-Blueprints und eine Umsetzungs-Roadmap mit festen Meilensteinen."
+    },
+    "p3": {
+      "title": "Umsetzen",
+      "desc": "Agile Umsetzung mit transparenten Sprints, gründlichen Tests und strukturiertem Change Management."
+    },
+    "p4": {
+      "title": "Weiterführen",
+      "desc": "Hypercare, Managed Support und kontinuierliche Optimierung — wir bleiben auch nach dem Go-live verantwortlich."
+    },
+    "cta_title": "Bereit, Ihre Abläufe zu modernisieren?",
+    "cta_desc": "Sagen Sie uns, wo es hakt — wir zeigen Ihnen, wie es besser geht, mit konkreten Zahlen.",
+    "cta_btn": "Kontakt aufnehmen"
   }
 }

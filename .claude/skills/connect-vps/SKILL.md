@@ -45,12 +45,12 @@ When the user says `/connect-vps` or asks to connect to the VPS:
 
 ### Project selection
 
-Use AskUserQuestion with these options:
+Discover all projects on the VPS dynamically by running:
+```bash
+ssh des-vps 'ls -d /opt/des*/ /opt/*-console*/ 2>/dev/null | sort -u'
+```
 
-- **dessystems-web-dev** — DES Systems dev (bop-dev.dessystems.io), directory: `/opt/dessystems-console-dev`
-- **dessystems-web** — DES Systems production (bop.dessystems.io), directory: `/opt/dessystems-console`
-- **desmobil-web** — DES Mobil, directory: `/opt/desmobil-web`
-- **desshop-web** — DES Shop, directory: `/opt/desshop-web`
+Then present the discovered directories to the user using AskUserQuestion, with each directory as an option (up to 4 options — use "Other" for the rest). Include the directory name and any recognizable label (e.g. if it contains a `package.json`, show the `name` field).
 
 After the user selects a project, set it as the working context and confirm:
 - Show the project name and directory

@@ -52,10 +52,13 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-2">
-            <div className="font-bold text-[18px] tracking-wide mb-0.5" style={{ fontFamily: "'Syne',sans-serif" }}>
-              DES <span style={{ color: "var(--accent2)" }}>TECH</span>
+            <div className="flex items-baseline gap-1 mb-0.5" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontWeight: 500 }}>
+              <span className="text-[18px]" style={{ color: "#3B82F6" }}>&gt;_</span>
+              <span className="text-[18px]" style={{ color: "var(--text1, #0B1A2E)" }}>des</span>
+              <span className="text-[18px]" style={{ color: "#3B82F6" }}>.</span>
+              <span className="text-[18px]" style={{ color: "var(--text1, #0B1A2E)" }}>systems</span>
             </div>
-            <div className="text-[10px] tracking-[0.1em] uppercase mb-4" style={{ color: "var(--text3)" }}>Enterprise Solutions</div>
+            <div className="text-[9px] tracking-[0.3em] uppercase mb-4" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontWeight: 400, color: "var(--text3, #9AA6B6)" }}>Business Operating Platform</div>
             <p className="text-[13px] leading-relaxed mb-5 max-w-xs" style={{ color: "var(--text3)" }}>
               {t("tagline")}
             </p>

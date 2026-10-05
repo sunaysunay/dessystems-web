@@ -286,13 +286,14 @@ export default function Nav() {
       <div className="flex items-center justify-between px-[4%] h-16">
         {/* Logo */}
         <Link href="/" className="flex flex-col leading-none">
-          <div className="flex items-baseline gap-2">
-            <div className="font-bold text-[17px] tracking-wide" style={{ fontFamily: "'Syne', sans-serif", color: "#fff" }}>
-              DES <span style={{ color: "var(--accent2)" }}>TECH</span>
-            </div>
+          <div className="flex items-baseline gap-1" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontWeight: 500 }}>
+            <span className="text-[17px]" style={{ color: "#3B82F6" }}>&gt;_</span>
+            <span className="text-[17px]" style={{ color: "#F4F2EE" }}>des</span>
+            <span className="text-[17px]" style={{ color: "#3B82F6" }}>.</span>
+            <span className="text-[17px]" style={{ color: "#F4F2EE" }}>systems</span>
           </div>
-          <div className="text-[10px] tracking-[0.1em] uppercase mt-[-2px]" style={{ color: "rgba(255,255,255,0.52)" }}>
-            Enterprise Solutions
+          <div className="text-[9px] tracking-[0.3em] uppercase mt-[1px]" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontWeight: 400, color: "rgba(255,255,255,0.35)" }}>
+            Business Operating Platform
           </div>
         </Link>
 

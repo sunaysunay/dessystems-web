@@ -84,7 +84,7 @@ export default function InquiriesPage() {
               >
                 <td className="px-3 py-2.5 whitespace-nowrap font-mono text-[11px] font-bold text-orange-600">{r.ref_code}</td>
                 <td className="px-3 py-2.5 whitespace-nowrap text-slate-500">
-                  {new Date(r.created_at).toLocaleString("nl-NL", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                  {new Date(r.created_at).toLocaleString("nl-NL", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                 </td>
                 <td className="px-3 py-2.5 font-mono text-slate-700 font-semibold">{r.listing_id}</td>
                 <td className="px-3 py-2.5">

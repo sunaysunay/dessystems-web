@@ -1,0 +1,65 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-vps
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Set up SSH
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -T 15 "$VPS_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy console (bop.dessystems.io) and public site (dessystems.io)
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -o ServerAliveInterval=30 "$VPS_USER@$VPS_HOST" 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          export NODE_OPTIONS="--max-old-space-size=2048"
+          stamp=$(date +%Y%m%d-%H%M%S)
+
+          # Sync a VPS checkout to origin/main, preserving anything made directly on the server.
+          sync_main() {
+            cd "$1"
+            git fetch origin main
+            if [ -n "$(git status --porcelain)" ]; then
+              git stash push -u -m "auto-deploy $stamp"
+              echo "Uncommitted VPS changes in $1 saved to: git stash list"
+            fi
+            if ! git merge-base --is-ancestor HEAD origin/main; then
+              git branch "vps-backup/$stamp" HEAD
+              echo "Local VPS commits in $1 saved to branch vps-backup/$stamp"
+            fi
+            git reset --hard origin/main
+          }
+
+          echo "=== Console: dev -> prod ==="
+          sync_main /opt/dessystems-console-dev
+          bash /root/scripts/promote.sh --confirm
+
+          echo "=== Public site: dessystemsCom ==="
+          before=$(sha1sum /root/dessystems-web/package-lock.json 2>/dev/null || true)
+          sync_main /root/dessystems-web
+          after=$(sha1sum package-lock.json 2>/dev/null || true)
+          if [ "$before" != "$after" ]; then npm ci --no-audit --no-fund; fi
+          npm run build
+          pm2 restart dessystemsCom
+
+          echo "=== Deployed $(git rev-parse --short HEAD) ==="
+          REMOTE

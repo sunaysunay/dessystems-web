@@ -20,15 +20,18 @@ jobs:
           VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
         run: |
           mkdir -p ~/.ssh
-          # Accept the key pasted as-is (Windows copies add \r) or as a single base64 line.
+          # Accept a full key, a key body without its BEGIN/END lines, or a base64-encoded key file.
+          body=$(printf '%s' "$VPS_SSH_KEY" | tr -d '\r\n ')
           if printf '%s' "$VPS_SSH_KEY" | grep -q 'BEGIN'; then
             printf '%s\n' "$VPS_SSH_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          elif [ "$(printf '%s' "$body" | base64 -d 2>/dev/null | head -c 14)" = "openssh-key-v1" ]; then
+            { echo "-----BEGIN OPENSSH PRIVATE KEY-----"; printf '%s' "$body" | fold -w 70; echo; echo "-----END OPENSSH PRIVATE KEY-----"; } > ~/.ssh/deploy_key
           else
-            printf '%s' "$VPS_SSH_KEY" | tr -d '\r\n ' | base64 -d > ~/.ssh/deploy_key
+            printf '%s' "$body" | base64 -d > ~/.ssh/deploy_key
           fi
           chmod 600 ~/.ssh/deploy_key
-          echo "Key file: $(wc -l < ~/.ssh/deploy_key) lines; first line: $(head -1 ~/.ssh/deploy_key | cut -c1-36)"
-          ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null && echo "Key parses OK"
+          ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null
+          echo "Deploy key loaded OK"
           ssh-keyscan -T 15 "$VPS_HOST" >> ~/.ssh/known_hosts
 
       - name: Deploy console (bop.dessystems.io) and public site (dessystems.io)

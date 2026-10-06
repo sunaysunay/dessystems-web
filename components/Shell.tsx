@@ -1569,11 +1569,16 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     <div className={`flex h-screen flex-col overflow-hidden bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 ${density === 'compact' ? 'bop-compact' : density === 'condensed' ? 'bop-compact bop-condensed' : ''}`}>
       <header className="flex h-16 flex-shrink-0 items-center justify-between border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5">
         <div className="flex items-center gap-3">
-          <Link href={`/console?tenant=${unit.id}`} className="flex items-center gap-0.5 hover:opacity-80 transition-opacity" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif", fontStyle: "italic", fontWeight: 900, fontStretch: "112%", letterSpacing: "-0.03em", fontSize: "20px" }}>
-            <span style={{ color: "#3B82F6" }}>DES</span>
-            <span className="relative inline-block" style={{ color: "var(--text1, #0B1A2E)" }}><span className="dark:text-[#F4F2EE]">S</span><span className="absolute" style={{ left: "8%", right: "8%", top: "46%", height: "4px", background: "var(--bg, #fff)", transform: "skewX(-18deg)" }} /></span>
-            <span style={{ color: "var(--text1, #0B1A2E)" }} className="dark:text-[#F4F2EE]">YSTEMS</span>
-            {env !== "PROD" && <span className="ml-1.5 rounded px-1 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-des-orange text-white" style={{ fontFamily: "inherit", fontStyle: "normal", fontWeight: 700, fontStretch: "100%", letterSpacing: "0.05em" }}>DEV</span>}
+          <Link href={`/console?tenant=${unit.id}`} aria-label="DES Systems" title="DES Systems" className="flex items-center hover:opacity-80 transition-opacity">
+            <svg viewBox="0 0 512 512" width="32" height="32" className="flex-shrink-0" aria-hidden="true">
+              <rect width="512" height="512" rx="102" fill="#0B1A2E" />
+              <g transform="translate(40, 80)">
+                <path d="M30 60 L30 300 L120 300 C200 300 240 250 240 180 C240 110 200 60 120 60 Z M90 120 L120 120 C165 120 180 145 180 180 C180 215 165 240 120 240 L90 240 Z" fill="#3B82F6" />
+                <path d="M310 75 C270 75 240 100 240 135 C240 180 275 195 310 205 C340 213 350 222 350 240 C350 258 335 270 310 270 C285 270 268 258 260 240 L205 260 C218 300 255 325 310 325 C358 325 395 298 395 255 C395 210 360 195 320 183 C295 175 285 165 285 150 C285 135 298 125 310 125 C330 125 342 135 348 150 L398 130 C385 95 355 75 310 75 Z" fill="#F4F2EE" />
+                <rect x="228" y="185" width="180" height="22" rx="2" fill="#0B1A2E" transform="rotate(-18, 318, 196)" />
+              </g>
+            </svg>
+            {env !== "PROD" && <span className="ml-1.5 rounded px-1 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-des-orange text-white">DEV</span>}
           </Link>
           <TenantDropdown />
           {unit && <NotificationBell tenantId={unit.id} />}

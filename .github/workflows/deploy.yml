@@ -44,13 +44,14 @@ jobs:
           export NODE_OPTIONS="--max-old-space-size=2048"
           stamp=$(date +%Y%m%d-%H%M%S)
 
-          # Sync a VPS checkout to origin/main, preserving anything made directly on the server.
+          # Sync a VPS checkout to origin/main. Untracked server-only files (e.g. start.sh) are left
+          # in place; edits to tracked files are stashed and local commits kept on a backup branch.
           sync_main() {
             cd "$1"
             git fetch origin main
-            if [ -n "$(git status --porcelain)" ]; then
-              git stash push -u -m "auto-deploy $stamp"
-              echo "Uncommitted VPS changes in $1 saved to: git stash list"
+            if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+              git stash push -m "auto-deploy $stamp"
+              echo "Uncommitted VPS edits in $1 saved to: git stash list"
             fi
             if ! git merge-base --is-ancestor HEAD origin/main; then
               git branch "vps-backup/$stamp" HEAD
@@ -70,6 +71,13 @@ jobs:
           if [ "$before" != "$after" ]; then npm ci --no-audit --no-fund; fi
           npm run build
           pm2 restart dessystemsCom
+          sleep 8
+          if ! curl -fsS -o /dev/null http://127.0.0.1:3003; then
+            echo "dessystemsCom is not responding on :3003 after restart"
+            pm2 logs dessystemsCom --lines 20 --nostream
+            exit 1
+          fi
+          echo "dessystemsCom is up"
 
           echo "=== Deployed $(git rev-parse --short HEAD) ==="
           REMOTE

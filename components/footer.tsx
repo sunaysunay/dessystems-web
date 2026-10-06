@@ -57,7 +57,6 @@ export default function Footer() {
               <span className="relative inline-block" style={{ color: "var(--text1, #0B1A2E)" }}>S<span className="absolute" style={{ left: "8%", right: "8%", top: "46%", height: "4px", background: "var(--bg2, #F4F2EE)", transform: "skewX(-18deg)" }} /></span>
               <span style={{ color: "var(--text1, #0B1A2E)" }}>YSTEMS</span>
             </div>
-            <div className="text-[8.5px] tracking-[0.08em] uppercase mb-4" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif", fontWeight: 500, fontStyle: "normal", color: "var(--text3, #9AA6B6)" }}>Business Operating Platform</div>
             <p className="text-[13px] leading-relaxed mb-5 max-w-xs" style={{ color: "var(--text3)" }}>
               {t("tagline")}
             </p>

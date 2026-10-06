@@ -291,9 +291,6 @@ export default function Nav() {
             <span className="relative inline-block" style={{ color: "#F4F2EE" }}>S<span className="absolute" style={{ left: "8%", right: "8%", top: "46%", height: "4px", background: "#0B1A2E", transform: "skewX(-18deg)" }} /></span>
             <span style={{ color: "#F4F2EE" }}>YSTEMS</span>
           </div>
-          <div className="text-[8.5px] tracking-[0.08em] uppercase mt-[2px]" style={{ fontFamily: "var(--font-archivo), Archivo, sans-serif", fontWeight: 500, fontStyle: "normal", color: "rgba(255,255,255,0.52)" }}>
-            Business Operating Platform
-          </div>
         </Link>
 
         {/* Desktop */}

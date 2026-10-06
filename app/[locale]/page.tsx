@@ -10,6 +10,7 @@ import {
 // Keyword banner + tech chips + client logos stay as-is (universal tech / brand
 // terms). Everything else is driven by the HomeContent i18n namespace.
 const flier = [
+  "BUSINESS OPERATING PLATFORM",
   "AI · ERP · MES · CRM · DevOps", "SAP S/4HANA", "ERP Consulting", "MES Integration",
   "Workflow Automation", "Autonomous AI Agents", "EDI / IDoc", "Enterprise Solutions",
   "AI Marketing Automation", "AI Lead Generation", "Predictive Lead Scoring",

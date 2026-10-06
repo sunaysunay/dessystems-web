@@ -19,7 +19,10 @@ const solutions = [
 ]
 
 // Static demo pages live outside the [locale] tree (public/), so they are linked with a plain <a>.
-const DEMO_URL = "/solutions/demos/vehicles"
+const demos = [
+  { id: "vehicles", url: "/solutions/demos/vehicles" },
+  { id: "garage",   url: "/solutions/demos/garage" },
+] as const
 
 const platformFeatures = ["ai", "auto", "multi", "sec", "anal", "flow"]
 
@@ -100,19 +103,23 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
                   </div>
                   {s.id === "saas" && (
                     <div className="sx-demo-wrap">
-                      <div className="sx-demo">
-                        <div className="sx-demo-chrome">
-                          <span /><span /><span />
-                          <div className="sx-demo-url">dessystems.io{DEMO_URL}</div>
-                        </div>
-                        <div className="sx-demo-body">
-                          <div className="sx-demo-copy">
-                            <div className="sx-label">{t("saas.demo_label")}</div>
-                            <div className="sx-demo-title">{t("saas.demo_title")}</div>
-                            <p>{t("saas.demo_desc")}</p>
+                      <div className="sx-demos-grid">
+                        {demos.map((d) => (
+                          <div className="sx-demo" key={d.id}>
+                            <div className="sx-demo-chrome">
+                              <span /><span /><span />
+                              <div className="sx-demo-url">dessystems.io{d.url}</div>
+                            </div>
+                            <div className="sx-demo-body">
+                              <div className="sx-demo-copy">
+                                <div className="sx-label">{t(`saas.${d.id}_label`)}</div>
+                                <div className="sx-demo-title">{t(`saas.${d.id}_title`)}</div>
+                                <p>{t(`saas.${d.id}_desc`)}</p>
+                              </div>
+                              <a href={d.url} target="_blank" rel="noopener" className="sx-btn sx-btn-primary">{t(`saas.${d.id}_cta`)} <ArrowRight /></a>
+                            </div>
                           </div>
-                          <a href={DEMO_URL} target="_blank" rel="noopener" className="sx-btn sx-btn-primary">{t("saas.demo_cta")} <ArrowRight /></a>
-                        </div>
+                        ))}
                       </div>
                     </div>
                   )}

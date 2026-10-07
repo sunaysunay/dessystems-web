@@ -953,7 +953,7 @@
     "saas": {
       "title": "Özel SaaS Platformları",
       "subtitle": "Ürün Tasarımı · Bulut Mimarisi · Dağıtım",
-      "desc": "Kendi Business Operating Platform'umuzu çalıştıran mimari üzerinde, ilk ürün konseptinden canlı ortama geçişe kadar özel çok kiracılı SaaS sistemleri tasarlıyor, geliştiriyor ve işletiyoruz.",
+      "desc": "Araç bayiliği platformlarından tamir garajı yönetimine ve araç fotoğraf stüdyosu çözümlerine kadar özel multi-tenant SaaS sistemleri tasarlıyor, geliştiriyor ve işletiyoruz — kendi İş Operasyon Platformumuzu destekleyen aynı mimari üzerinde.",
       "b1": "Ürün keşfi & UX tasarımı",
       "b2": "Çok kiracılı bulut mimarisi",
       "b3": "Full-stack geliştirme",
@@ -964,7 +964,11 @@
       "demo_title": "Otomotiv bayi platformu",
       "demo_desc": "SaaS altyapımız üzerine kurulu bir otomobil bayi platformunun etkileşimli taslakları: stok listesi, araç detay sayfaları ve yapay zekâ satış asistanı.",
       "demo_cta": "Canlı demoyu aç",
-      "nav": "Özel SaaS"
+      "nav": "Özel SaaS",
+      "spinsold_label": "Canlı demo",
+      "spinsold_title": "Araç fotoğraf stüdyosu platformu",
+      "spinsold_desc": "Yapay zeka işleme, hasar denetim raporları ve çok kanallı teslimat ile otomatik 360° araç stüdyosu — araç fotoğraf stüdyoları için eksiksiz bir SaaS platformu.",
+      "spinsold_cta": "Canlı demoyu aç"
     }
   },
   "DesLab": {

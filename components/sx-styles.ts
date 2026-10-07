@@ -115,8 +115,7 @@ html.dark .sx{
 .sx-demo-copy{flex:1 1 320px;min-width:0}
 .sx-demo-title{font-size:20px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
 .sx-demo-copy p{font-size:15px;line-height:1.55;color:var(--s-body);margin:0;max-width:520px}
-.sx-demos-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:860px){.sx-demos-grid{grid-template-columns:1fr}}
+.sx-demos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
 
 /* services: hairline grid of cells */
 .sx-cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--s-line);border:1px solid var(--s-line)}

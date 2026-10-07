@@ -1090,7 +1090,7 @@
     "saas": {
       "title": "Maatwerk SaaS-platformen",
       "subtitle": "Productontwerp · Cloudarchitectuur · Deployment",
-      "desc": "Wij ontwerpen, bouwen en beheren maatwerk multi-tenant SaaS-systemen — van eerste productconcept tot productie-uitrol — op dezelfde architectuur waarop ons eigen Business Operating Platform draait.",
+      "desc": "Wij ontwerpen, bouwen en beheren op maat gemaakte multi-tenant SaaS-systemen — van voertuighandelsplatformen en garagebeheer tot autofotografiestudio-oplossingen — op dezelfde architectuur die ons eigen Business Operating Platform aandrijft.",
       "b1": "Productdiscovery & UX-ontwerp",
       "b2": "Multi-tenant cloudarchitectuur",
       "b3": "Full-stack ontwikkeling",
@@ -1101,7 +1101,11 @@
       "demo_title": "Platform voor autodealers",
       "demo_desc": "Interactieve mockups van een autodealerplatform gebouwd op onze SaaS-stack: voorraadoverzicht, voertuigdetailpagina's en een AI-verkoopassistent.",
       "demo_cta": "Open live demo",
-      "nav": "Maatwerk SaaS"
+      "nav": "Maatwerk SaaS",
+      "spinsold_label": "Live demo",
+      "spinsold_title": "Autofotografie studio platform",
+      "spinsold_desc": "Geautomatiseerde 360° voertuigstudio met AI-verwerking, schade-inspectierapporten en multi-channel levering — een compleet SaaS-platform voor autofotografiestudio's.",
+      "spinsold_cta": "Open live demo"
     }
   },
   "DesLab": {

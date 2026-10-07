@@ -22,6 +22,7 @@ const solutions = [
 const demos = [
   { id: "vehicles", url: "/solutions/demos/vehicles" },
   { id: "garage",   url: "/solutions/demos/garage" },
+  { id: "spinsold", url: "/solutions/demos/spinsold" },
 ] as const
 
 const platformFeatures = ["ai", "auto", "multi", "sec", "anal", "flow"]

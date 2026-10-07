@@ -953,7 +953,7 @@
     "saas": {
       "title": "Plateformes SaaS sur mesure",
       "subtitle": "Conception produit · Architecture cloud · Déploiement",
-      "desc": "Nous concevons, développons et exploitons des systèmes SaaS multi-tenant sur mesure — du premier concept produit au déploiement en production — sur la même architecture que notre propre Business Operating Platform.",
+      "desc": "Nous concevons, développons et exploitons des systèmes SaaS multi-locataires sur mesure — des plateformes de concessionnaires et de gestion de garages aux solutions de studios photo automobile — sur la même architecture que notre propre Business Operating Platform.",
       "b1": "Discovery produit & design UX",
       "b2": "Architecture cloud multi-tenant",
       "b3": "Développement full-stack",
@@ -964,7 +964,11 @@
       "demo_title": "Plateforme pour concessionnaires automobiles",
       "demo_desc": "Maquettes interactives d'une plateforme de concession automobile construite sur notre stack SaaS : catalogue de stock, fiches véhicules et assistant commercial IA.",
       "demo_cta": "Ouvrir la démo",
-      "nav": "SaaS sur mesure"
+      "nav": "SaaS sur mesure",
+      "spinsold_label": "Démo live",
+      "spinsold_title": "Plateforme studio photo automobile",
+      "spinsold_desc": "Studio véhicule 360° automatisé avec traitement IA, rapports d'inspection des dommages et livraison multi-canal — une plateforme SaaS complète pour les studios photo automobile.",
+      "spinsold_cta": "Ouvrir la démo"
     }
   },
   "DesLab": {

@@ -953,7 +953,7 @@
     "saas": {
       "title": "Individuelle SaaS-Plattformen",
       "subtitle": "Produktdesign · Cloud-Architektur · Deployment",
-      "desc": "Wir konzipieren, entwickeln und betreiben maßgeschneiderte mandantenfähige SaaS-Systeme — vom ersten Produktkonzept bis zum produktiven Rollout — auf derselben Architektur, auf der unsere eigene Business Operating Platform läuft.",
+      "desc": "Wir entwerfen, entwickeln und betreiben maßgeschneiderte Multi-Tenant-SaaS-Systeme — von Fahrzeughändler-Plattformen und Werkstattverwaltung bis hin zu Autofotografie-Studio-Lösungen — auf der gleichen Architektur, die unsere eigene Business Operating Platform antreibt.",
       "b1": "Product Discovery & UX-Design",
       "b2": "Mandantenfähige Cloud-Architektur",
       "b3": "Full-Stack-Entwicklung",
@@ -964,7 +964,11 @@
       "demo_title": "Plattform für Autohäuser",
       "demo_desc": "Interaktive Mockups einer Autohaus-Plattform auf Basis unseres SaaS-Stacks: Bestandsübersicht, Fahrzeugdetailseiten und ein KI-Verkaufsassistent.",
       "demo_cta": "Live-Demo öffnen",
-      "nav": "Individuelle SaaS"
+      "nav": "Individuelle SaaS",
+      "spinsold_label": "Live-Demo",
+      "spinsold_title": "Autofotografie-Studio-Plattform",
+      "spinsold_desc": "Automatisiertes 360°-Fahrzeugstudio mit KI-Verarbeitung, Schadensinspektionsberichten und Multi-Channel-Lieferung — eine vollständige SaaS-Plattform für Autofotografie-Studios.",
+      "spinsold_cta": "Live-Demo öffnen"
     }
   },
   "DesLab": {

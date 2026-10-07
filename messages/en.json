@@ -1090,7 +1090,7 @@
     "saas": {
       "title": "Custom SaaS Platforms",
       "subtitle": "Product Design · Cloud Architecture · Deployment",
-      "desc": "We design, build and operate bespoke multi-tenant SaaS systems — from vehicle dealership platforms to repair garage management — on the same architecture that powers our own Business Operating Platform.",
+      "desc": "We design, build and operate bespoke multi-tenant SaaS systems — from vehicle dealership platforms and repair garage management to car photography studio solutions — on the same architecture that powers our own Business Operating Platform.",
       "b1": "Product discovery & UX design",
       "b2": "Multi-tenant cloud architecture",
       "b3": "Full-stack development",
@@ -1105,7 +1105,11 @@
       "garage_title": "Repair garage management",
       "garage_desc": "Workshop planning, job tracking, parts inventory and invoicing — a complete garage management platform built on the same multi-tenant SaaS architecture.",
       "garage_cta": "Open live demo",
-      "nav": "Custom SaaS"
+      "nav": "Custom SaaS",
+      "spinsold_label": "Live demo",
+      "spinsold_title": "Car photography studio platform",
+      "spinsold_desc": "Automated 360° vehicle studio with AI processing, damage inspection reports and multi-channel delivery — a full SaaS platform for car photography studios.",
+      "spinsold_cta": "Open live demo"
     }
   },
   "DesLab": {

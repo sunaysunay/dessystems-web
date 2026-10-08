@@ -170,6 +170,54 @@ The GRW module has an MCP server running on **desworkstation** (mini PC, Tailsca
 
 ---
 
+## Anti-hallucination policy — MANDATORY for all AI agents
+
+Agents (subagents, parallel workers, any automated coding process) **must verify before acting**. Never assume a file, table, route, or symbol exists — confirm it first.
+
+### Read before write
+- **Always `Read` a file before editing it.** Never edit a file you haven't read in this session.
+- **Always `Grep`/`Glob` before referencing.** If you mention a file path, table name, API route, component, or function — confirm it exists first.
+- **Never invent paths.** If you can't find a file, say so. Don't guess paths like `lib/something-that-sounds-right.ts`.
+
+### Database tables
+- **Never assume a table or column exists.** Verify with a read-only query: `des-sql.sh "select column_name from information_schema.columns where table_name='X' limit 5"`
+- **Never assume RPC functions exist.** Check with: `des-sql.sh "select routine_name from information_schema.routines where routine_name='X'"`
+- The `/des-content` skill documents known tables — use it as a starting reference, but still verify before writing SQL.
+
+### API routes
+- **Verify route files exist** with `Glob` before calling or referencing them.
+- **Check `export const dynamic`** is present in new route files.
+- **Check the actual request/response shape** by reading the route file — don't guess parameters.
+
+### Imports and dependencies
+- **Verify imports resolve** before using them. `Grep` for the export in the source file.
+- **Never assume a package is installed.** Check `package.json` first.
+- **Never assume a component prop interface.** Read the component file to confirm props.
+
+### When delegating to subagents
+- Give subagents **specific file paths** to read, not vague instructions like "find the email system."
+- Require subagents to **return file paths and line numbers** as evidence for every claim.
+- After a subagent returns, **spot-check at least one claim** by reading the referenced file.
+
+### Automatic verification (enforced by hooks)
+
+A PreToolUse hook blocks `git commit` with a confirmation prompt. Before confirming, the agent **must** have verified:
+
+1. Every new file path referenced in code actually exists (`Glob`)
+2. Every import resolves to a real export (`Grep` the source file)
+3. Every database table/column referenced is confirmed (`des-sql.sh` read-only query)
+4. Every API route referenced has a corresponding `route.ts` file (`Glob`)
+5. Translation keys are added to all 5 language files (`Grep`)
+6. Screen IDs follow the `XX000` format and don't collide with existing ones (`Grep` screen-registry.ts)
+
+The `/verify` skill runs these checks systematically. Agents should use it or perform equivalent checks before every commit. The hook ensures this cannot be skipped.
+
+Additional hooks enforced:
+- **Edit/Write to `/opt/dessystems-console/`** — DENIED. Agents cannot edit prod directly.
+- **Database DDL/DML** — requires explicit user confirmation.
+
+---
+
 ## Build notes
 
 - Node heap must be capped: `NODE_OPTIONS="--max-old-space-size=2048"` (promote.sh handles this)

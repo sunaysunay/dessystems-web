@@ -14,6 +14,31 @@
             "type": "command",
             "command": "jq -r \".tool_input.command // \\\"\\\"\" | grep -qiE \"bop_console_ddl|DBA_PG_DDL_PASSWORD|des-sql\\.sh.*--commit|(^|[^A-Za-z0-9_-])psql([^A-Za-z0-9_-]|$)\" && printf \"%s\" \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"PreToolUse\\\",\\\"permissionDecision\\\":\\\"ask\\\",\\\"permissionDecisionReason\\\":\\\"Database/DDL SQL execution — user rule: requires explicit confirmation\\\"}}\" || true",
             "statusMessage": "Checking for DDL/SQL execution…"
+          },
+          {
+            "type": "command",
+            "command": "jq -r \".tool_input.command // \\\"\\\"\" | grep -qiE \"^git commit|git commit \" && printf \"%s\" \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"PreToolUse\\\",\\\"permissionDecision\\\":\\\"ask\\\",\\\"permissionDecisionReason\\\":\\\"Pre-commit gate — verify all references exist (imports, routes, tables, translations). Run /verify or confirm you checked.\\\"}}\" || true",
+            "statusMessage": "Pre-commit verification gate…"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r \".tool_input.file_path // \\\"\\\"\" | grep -qiE \"^/opt/dessystems-console/\" && printf \"%s\" \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"PreToolUse\\\",\\\"permissionDecision\\\":\\\"deny\\\",\\\"permissionDecisionReason\\\":\\\"BLOCKED: Never edit prod directly. Edit dev at /opt/dessystems-console-dev, then promote.sh\\\"}}\" || true",
+            "statusMessage": "Checking edit target…"
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r \".tool_input.file_path // \\\"\\\"\" | grep -qiE \"^/opt/dessystems-console/\" && printf \"%s\" \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"PreToolUse\\\",\\\"permissionDecision\\\":\\\"deny\\\",\\\"permissionDecisionReason\\\":\\\"BLOCKED: Never edit prod directly. Edit dev at /opt/dessystems-console-dev, then promote.sh\\\"}}\" || true",
+            "statusMessage": "Checking write target…"
           }
         ]
       }

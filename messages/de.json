@@ -976,7 +976,11 @@
       "bodyshop_label": "Live-Demo",
       "bodyshop_title": "Karosserie-Werkstatt",
       "bodyshop_desc": "Karosserie- und Lackierbetrieb mit Online-Schadenaufnahme, Reparaturverfolgung und Kundenportal — eine vollständige SaaS-Plattform für Unfallreparaturbetriebe.",
-      "bodyshop_cta": "Live-Demo öffnen"
+      "bodyshop_cta": "Live-Demo öffnen",
+      "spinsold2_label": "Live demo",
+      "spinsold2_title": "SpinSold landing page",
+      "spinsold2_desc": "A modern product landing page for SpinSold — showcasing the car photography studio platform with features, pricing and call-to-action.",
+      "spinsold2_cta": "Open live demo"
     }
   },
   "DesLab": {

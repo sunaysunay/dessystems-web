@@ -25,6 +25,7 @@ const demos = [
   { id: "spinsold",  url: "/solutions/demos/spinsold" },
   { id: "detailing", url: "/solutions/demos/detailing" },
   { id: "bodyshop",  url: "/solutions/demos/bodyshop" },
+  { id: "spinsold2", url: "/solutions/demos/spinsold2" },
 ] as const
 
 const platformFeatures = ["ai", "auto", "multi", "sec", "anal", "flow"]

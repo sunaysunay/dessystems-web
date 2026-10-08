@@ -22,6 +22,7 @@ const nextConfig = {
       { source: "/solutions/demos/spinsold", destination: "/solutions/demos/spinsold/index.html" },
       { source: "/solutions/demos/detailing", destination: "/solutions/demos/detailing/index.html" },
       { source: "/solutions/demos/bodyshop", destination: "/solutions/demos/bodyshop/index.html" },
+      { source: "/solutions/demos/spinsold2", destination: "/solutions/demos/spinsold2/index.html" },
     ];
     const localeDemoRewrites = demoRewrites.map(r => ({
       source: "/:locale" + r.source,

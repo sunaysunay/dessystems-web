@@ -281,7 +281,11 @@
       "demo_title": "Plataforma para concesionarios",
       "demo_desc": "Maquetas interactivas de una plataforma para concesionarios construida sobre nuestro stack SaaS: listado de stock, fichas de vehículo y un asistente de ventas con IA.",
       "demo_cta": "Abrir demo",
-      "nav": "SaaS a medida"
+      "nav": "SaaS a medida",
+      "spinsold2_label": "Live demo",
+      "spinsold2_title": "SpinSold landing page",
+      "spinsold2_desc": "A modern product landing page for SpinSold — showcasing the car photography studio platform with features, pricing and call-to-action.",
+      "spinsold2_cta": "Open live demo"
     }
   },
   "DesLab": {

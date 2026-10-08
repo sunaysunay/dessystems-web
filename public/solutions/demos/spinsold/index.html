@@ -302,29 +302,62 @@ img{display:block;max-width:100%}
     <span class="ss-eyebrow">04</span><span class="ss-eyebrow" style="color:var(--steel-400)" data-i18n="s04_label">Interactive showcase</span><span class="ss-divider__line" style="background:var(--graphite-700)"></span>
   </div>
   <h2 class="ss-h2" style="margin-bottom:48px" data-i18n="s04_title">See every angle.</h2>
-  <div class="ss-viewer">
-    <div class="ss-viewer__stage" style="aspect-ratio:16/9;position:relative">
-      <img src="/solutions/demos/spinsold/img/viewer-360.webp" alt="360° vehicle photography setup with turntable and lighting rig" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center">
-      <div class="ss-viewer__top">
+  <div class="ss-viewer" id="spin-viewer">
+    <div class="ss-viewer__stage" style="aspect-ratio:16/9;position:relative;cursor:grab;overflow:hidden;user-select:none" id="spin-stage">
+      <img id="spin-img" src="/solutions/demos/spinsold/img/viewer-360.webp" alt="360° vehicle photography" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s,transform .4s ease">
+      <div class="ss-viewer__top" style="z-index:10;pointer-events:auto">
         <div class="ss-tabs--pill">
-          <button class="ss-tab" aria-selected="true" data-i18n="tab_exterior">Exterior</button>
-          <button class="ss-tab" aria-selected="false" data-i18n="tab_interior">Interior</button>
-          <button class="ss-tab" aria-selected="false" data-i18n="tab_inspection">Inspection</button>
+          <button class="ss-tab ss-view-tab" aria-selected="true" data-mode="exterior" data-i18n="tab_exterior">Exterior</button>
+          <button class="ss-tab ss-view-tab" aria-selected="false" data-mode="interior" data-i18n="tab_interior">Interior</button>
+          <button class="ss-tab ss-view-tab" aria-selected="false" data-mode="inspection" data-i18n="tab_inspection">Inspection</button>
         </div>
       </div>
-      <button class="ss-hotspot" style="left:28%;top:52%" aria-label="LED headlights"></button>
-      <button class="ss-hotspot" style="left:62%;top:38%" aria-label="Panoramic roof"></button>
-      <button class="ss-hotspot" style="left:78%;top:58%" aria-label="Alloy wheels"></button>
+      <div id="hotspots-layer" style="position:absolute;inset:0;z-index:5;pointer-events:none">
+        <button class="ss-hotspot" data-angle="4" data-info="LED headlights" style="left:28%;top:52%;pointer-events:auto" aria-label="LED headlights"></button>
+        <button class="ss-hotspot" data-angle="6" data-info="Panoramic roof" style="left:62%;top:38%;pointer-events:auto" aria-label="Panoramic roof"></button>
+        <button class="ss-hotspot" data-angle="2" data-info="Alloy wheels" style="left:78%;top:58%;pointer-events:auto" aria-label="Alloy wheels"></button>
+      </div>
+      <div id="spin-tooltip" style="display:none;position:absolute;z-index:20;background:rgba(14,16,19,.92);border:1px solid var(--cyan);border-radius:8px;padding:8px 14px;font:500 13px/1.4 var(--font-body);color:var(--cyan-300);pointer-events:none;white-space:nowrap;backdrop-filter:blur(8px)"></div>
+      <div id="spin-overlay" style="position:absolute;inset:0;background:rgba(14,16,19,.6);opacity:0;transition:opacity .2s;pointer-events:none;display:flex;align-items:center;justify-content:center">
+        <span style="font:600 16px/1 var(--font-body);color:var(--cyan)">Switching angle...</span>
+      </div>
     </div>
     <div class="ss-viewer__bar">
-      <span class="ss-ring" style="--size:36px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
+      <span class="ss-ring ss-ring--spin" style="--size:36px;--w:1.5px"><span class="ss-ring__arc"></span></span>
       <span class="ss-viewer__hint">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l7 7 7-7"/></svg>
         <span data-i18n="viewer_drag">Drag to spin</span>
       </span>
       <span style="flex:1"></span>
-      <span style="font-variant-numeric:tabular-nums">135° · 12 / 36</span>
+      <span id="spin-angle" style="font-variant-numeric:tabular-nums">135° · 4 / 8</span>
     </div>
+  </div>
+  <!-- Thumbnail strip -->
+  <div id="spin-thumbs" style="display:flex;gap:8px;margin-top:16px;overflow-x:auto;padding:4px 0">
+    <button class="spin-thumb" data-idx="0" style="flex-shrink:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:none;padding:0;cursor:pointer;transition:border-color .2s,opacity .2s;opacity:.5">
+      <img src="/solutions/demos/spinsold/img/angle-front.webp" alt="Front" style="width:120px;height:72px;object-fit:cover;display:block">
+    </button>
+    <button class="spin-thumb" data-idx="1" style="flex-shrink:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:none;padding:0;cursor:pointer;transition:border-color .2s,opacity .2s;opacity:.5">
+      <img src="/solutions/demos/spinsold/img/angle-front-right.webp" alt="Front Right" style="width:120px;height:72px;object-fit:cover;display:block">
+    </button>
+    <button class="spin-thumb" data-idx="2" style="flex-shrink:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:none;padding:0;cursor:pointer;transition:border-color .2s,opacity .2s;opacity:.5">
+      <img src="/solutions/demos/spinsold/img/angle-right.webp" alt="Right" style="width:120px;height:72px;object-fit:cover;display:block">
+    </button>
+    <button class="spin-thumb" data-idx="3" style="flex-shrink:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:none;padding:0;cursor:pointer;transition:border-color .2s,opacity .2s;opacity:.5">
+      <img src="/solutions/demos/spinsold/img/angle-rear-right.webp" alt="Rear Right" style="width:120px;height:72px;object-fit:cover;display:block">
+    </button>
+    <button class="spin-thumb active" data-idx="4" style="flex-shrink:0;border:2px solid var(--cyan);border-radius:8px;overflow:hidden;background:none;padding:0;cursor:pointer;transition:border-color .2s,opacity .2s;opacity:1">
+      <img src="/solutions/demos/spinsold/img/angle-rear.webp" alt="Rear" style="width:120px;height:72px;object-fit:cover;display:block">
+    </button>
+    <button class="spin-thumb" data-idx="5" style="flex-shrink:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:none;padding:0;cursor:pointer;transition:border-color .2s,opacity .2s;opacity:.5">
+      <img src="/solutions/demos/spinsold/img/angle-rear-left.webp" alt="Rear Left" style="width:120px;height:72px;object-fit:cover;display:block">
+    </button>
+    <button class="spin-thumb" data-idx="6" style="flex-shrink:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:none;padding:0;cursor:pointer;transition:border-color .2s,opacity .2s;opacity:.5">
+      <img src="/solutions/demos/spinsold/img/angle-left.webp" alt="Left" style="width:120px;height:72px;object-fit:cover;display:block">
+    </button>
+    <button class="spin-thumb" data-idx="7" style="flex-shrink:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:none;padding:0;cursor:pointer;transition:border-color .2s,opacity .2s;opacity:.5">
+      <img src="/solutions/demos/spinsold/img/angle-front-left.webp" alt="Front Left" style="width:120px;height:72px;object-fit:cover;display:block">
+    </button>
   </div>
   <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center">
     <img src="/solutions/demos/spinsold/img/angles-grid.webp" alt="8-angle vehicle photography output" style="width:100%;border-radius:var(--radius-md);border:1px solid var(--graphite-700)">
@@ -714,5 +747,172 @@ img{display:block;max-width:100%}
 })();
 </script>
 
+<script>
+(function(){
+  var ANGLES = [
+    {name:'Front',       deg:0,   file:'angle-front.webp'},
+    {name:'Front Right', deg:45,  file:'angle-front-right.webp'},
+    {name:'Right',       deg:90,  file:'angle-right.webp'},
+    {name:'Rear Right',  deg:135, file:'angle-rear-right.webp'},
+    {name:'Rear',        deg:180, file:'angle-rear.webp'},
+    {name:'Rear Left',   deg:225, file:'angle-rear-left.webp'},
+    {name:'Left',        deg:270, file:'angle-left.webp'},
+    {name:'Front Left',  deg:315, file:'angle-front-left.webp'}
+  ];
+  var BASE = '/solutions/demos/spinsold/img/';
+  var MAIN_IMG = BASE + 'viewer-360.webp';
+  var currentIdx = 4;
+  var stage = document.getElementById('spin-stage');
+  var img = document.getElementById('spin-img');
+  var angleLabel = document.getElementById('spin-angle');
+  var overlay = document.getElementById('spin-overlay');
+  var tooltip = document.getElementById('spin-tooltip');
+  var thumbs = document.querySelectorAll('.spin-thumb');
+
+  function updateAngle(idx, animate){
+    if(idx === currentIdx && !animate) return;
+    var a = ANGLES[idx];
+    currentIdx = idx;
+    angleLabel.textContent = a.deg + '° · ' + (idx+1) + ' / 8';
+    thumbs.forEach(function(t){
+      var i = parseInt(t.getAttribute('data-idx'));
+      t.style.borderColor = i === idx ? 'var(--cyan)' : 'transparent';
+      t.style.opacity = i === idx ? '1' : '.5';
+    });
+
+    if(animate){
+      img.style.opacity = '0.3';
+      img.style.transform = 'scale(1.02)';
+      overlay.style.opacity = '1';
+      setTimeout(function(){
+        img.style.opacity = '1';
+        img.style.transform = 'scale(1)';
+        overlay.style.opacity = '0';
+      }, 350);
+    }
+  }
+
+  thumbs.forEach(function(t){
+    t.addEventListener('click', function(){
+      var idx = parseInt(t.getAttribute('data-idx'));
+      updateAngle(idx, true);
+    });
+  });
+
+  document.querySelectorAll('.ss-hotspot').forEach(function(hs){
+    hs.addEventListener('click', function(e){
+      e.stopPropagation();
+      var idx = parseInt(hs.getAttribute('data-angle'));
+      var info = hs.getAttribute('data-info');
+      tooltip.textContent = info + ' — ' + ANGLES[idx].name + ' (' + ANGLES[idx].deg + '°)';
+      tooltip.style.display = 'block';
+      var r = hs.getBoundingClientRect();
+      var sr = stage.getBoundingClientRect();
+      tooltip.style.left = (r.left - sr.left + r.width/2 - tooltip.offsetWidth/2) + 'px';
+      tooltip.style.top = (r.top - sr.top - tooltip.offsetHeight - 10) + 'px';
+      updateAngle(idx, true);
+      setTimeout(function(){ tooltip.style.display = 'none'; }, 2500);
+    });
+    hs.addEventListener('mouseenter', function(){
+      var info = hs.getAttribute('data-info');
+      tooltip.textContent = info;
+      tooltip.style.display = 'block';
+      var r = hs.getBoundingClientRect();
+      var sr = stage.getBoundingClientRect();
+      tooltip.style.left = (r.left - sr.left + r.width/2 - tooltip.offsetWidth/2) + 'px';
+      tooltip.style.top = (r.top - sr.top - tooltip.offsetHeight - 10) + 'px';
+    });
+    hs.addEventListener('mouseleave', function(){
+      tooltip.style.display = 'none';
+    });
+  });
+
+  var dragging = false, startX = 0, dragIdx = 0;
+  stage.addEventListener('mousedown', function(e){
+    if(e.target.classList.contains('ss-hotspot') || e.target.classList.contains('ss-tab')) return;
+    dragging = true; startX = e.clientX; dragIdx = currentIdx;
+    stage.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', function(e){
+    if(!dragging) return;
+    var dx = e.clientX - startX;
+    var steps = Math.round(dx / 60);
+    var newIdx = ((dragIdx + steps) % 8 + 8) % 8;
+    if(newIdx !== currentIdx) updateAngle(newIdx, true);
+  });
+  document.addEventListener('mouseup', function(){
+    if(dragging){ dragging = false; stage.style.cursor = 'grab'; }
+  });
+
+  var touchStartX = 0;
+  stage.addEventListener('touchstart', function(e){
+    if(e.target.classList.contains('ss-hotspot')) return;
+    touchStartX = e.touches[0].clientX; dragIdx = currentIdx;
+  }, {passive:true});
+  stage.addEventListener('touchmove', function(e){
+    var dx = e.touches[0].clientX - touchStartX;
+    var steps = Math.round(dx / 50);
+    var newIdx = ((dragIdx + steps) % 8 + 8) % 8;
+    if(newIdx !== currentIdx) updateAngle(newIdx, true);
+  }, {passive:true});
+
+  document.querySelectorAll('.ss-view-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.ss-view-tab').forEach(function(t){ t.setAttribute('aria-selected','false'); });
+      tab.setAttribute('aria-selected','true');
+      var mode = tab.getAttribute('data-mode');
+      var hsLayer = document.getElementById('hotspots-layer');
+      if(mode === 'inspection'){
+        hsLayer.innerHTML = '';
+        var damages = [
+          {x:'35%',y:'62%',label:'Scratch',sev:'1'},
+          {x:'70%',y:'55%',label:'Dent',sev:'2'},
+          {x:'50%',y:'70%',label:'Stone chip',sev:'1'}
+        ];
+        damages.forEach(function(d){
+          var el = document.createElement('button');
+          el.className = 'ss-damage';
+          el.style.cssText = 'left:'+d.x+';top:'+d.y+';pointer-events:auto';
+          el.textContent = d.sev;
+          el.setAttribute('aria-label', d.label);
+          el.addEventListener('mouseenter', function(){
+            tooltip.textContent = d.label + ' (severity '+d.sev+')';
+            tooltip.style.display = 'block';
+            var r = el.getBoundingClientRect();
+            var sr = stage.getBoundingClientRect();
+            tooltip.style.left = (r.left - sr.left + r.width/2 - tooltip.offsetWidth/2) + 'px';
+            tooltip.style.top = (r.top - sr.top - tooltip.offsetHeight - 10) + 'px';
+          });
+          el.addEventListener('mouseleave', function(){ tooltip.style.display = 'none'; });
+          hsLayer.appendChild(el);
+        });
+      } else {
+        hsLayer.innerHTML = '<button class="ss-hotspot" data-angle="4" data-info="LED headlights" style="left:28%;top:52%;pointer-events:auto" aria-label="LED headlights"></button>'
+          + '<button class="ss-hotspot" data-angle="6" data-info="Panoramic roof" style="left:62%;top:38%;pointer-events:auto" aria-label="Panoramic roof"></button>'
+          + '<button class="ss-hotspot" data-angle="2" data-info="Alloy wheels" style="left:78%;top:58%;pointer-events:auto" aria-label="Alloy wheels"></button>';
+        hsLayer.querySelectorAll('.ss-hotspot').forEach(function(hs){
+          hs.addEventListener('click', function(e){
+            e.stopPropagation();
+            var idx = parseInt(hs.getAttribute('data-angle'));
+            updateAngle(idx, true);
+          });
+          hs.addEventListener('mouseenter', function(){
+            tooltip.textContent = hs.getAttribute('data-info');
+            tooltip.style.display = 'block';
+            var r = hs.getBoundingClientRect();
+            var sr = stage.getBoundingClientRect();
+            tooltip.style.left = (r.left - sr.left + r.width/2 - tooltip.offsetWidth/2) + 'px';
+            tooltip.style.top = (r.top - sr.top - tooltip.offsetHeight - 10) + 'px';
+          });
+          hs.addEventListener('mouseleave', function(){ tooltip.style.display = 'none'; });
+        });
+      }
+    });
+  });
+
+  updateAngle(4, false);
+})();
+</script>
 </body>
 </html>

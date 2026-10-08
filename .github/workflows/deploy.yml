@@ -39,13 +39,11 @@ jobs:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
         run: |
-          ssh -i ~/.ssh/deploy_key -o ServerAliveInterval=30 "$VPS_USER@$VPS_HOST" 'bash -s' <<'REMOTE'
+          ssh -i ~/.ssh/deploy_key -o ServerAliveInterval=30 -o ServerAliveCountMax=6 "$VPS_USER@$VPS_HOST" 'bash -s' <<'REMOTE'
           set -euo pipefail
-          export NODE_OPTIONS="--max-old-space-size=2048"
+          export NODE_OPTIONS="--max-old-space-size=1536"
           stamp=$(date +%Y%m%d-%H%M%S)
 
-          # Sync a VPS checkout to origin/main. Untracked server-only files (e.g. start.sh) are left
-          # in place; edits to tracked files are stashed and local commits kept on a backup branch.
           sync_main() {
             cd "$1"
             git fetch origin main
@@ -59,6 +57,10 @@ jobs:
             fi
             git reset --hard origin/main
           }
+
+          # Free memory before builds
+          sync 2>/dev/null || true
+          echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || true
 
           echo "=== Console: dev -> prod ==="
           sync_main /opt/dessystems-console-dev

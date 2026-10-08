@@ -21,12 +21,8 @@
 body{font-family:var(--font-body);-webkit-font-smoothing:antialiased;color:#F2F4F7;background:var(--graphite)}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-
-/* Container */
 .ss-container{max-width:1200px;margin:0 auto;padding:0 24px}
 @media(max-width:768px){.ss-container{padding:0 16px}}
-
-/* Typography */
 .ss-display{font:800 72px/76px var(--font-display);letter-spacing:-0.02em}
 .ss-h1{font:700 52px/58px var(--font-display);letter-spacing:-0.015em}
 .ss-h2{font:650 38px/44px var(--font-display)}
@@ -41,15 +37,11 @@ img{display:block;max-width:100%}
   .ss-h1{font-size:36px;line-height:42px}
   .ss-h2{font-size:28px;line-height:34px}
 }
-
-/* Ring motif */
 .ss-ring{display:inline-flex;align-items:center;justify-content:center;width:var(--size,40px);height:var(--size,40px);position:relative;flex-shrink:0}
 .ss-ring::before{content:'';position:absolute;inset:0;border-radius:50%;border:var(--w,1.5px) solid var(--steel-700);opacity:.4}
 .ss-ring__arc{position:absolute;inset:0;border-radius:50%;border:var(--w,1.5px) solid transparent;border-top-color:var(--cyan);transform:rotate(var(--r,-45deg))}
 .ss-ring--spin .ss-ring__arc{animation:ring-spin 28s linear infinite}
 @keyframes ring-spin{to{transform:rotate(315deg)}}
-
-/* Buttons */
 .ss-btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 24px;border-radius:999px;font:600 15px/1 var(--font-body);border:0;cursor:pointer;transition:all .2s}
 .ss-btn--primary{background:var(--cyan);color:var(--cyan-ink)}
 .ss-btn--primary:hover{background:var(--cyan-300)}
@@ -58,13 +50,9 @@ img{display:block;max-width:100%}
 .ss-btn--sm{height:36px;padding:0 16px;font-size:14px}
 .ss-btn--text{background:none;border:0;color:var(--cyan);padding:0;height:auto;font-size:15px;font-weight:600}
 .ss-btn--text:hover{color:var(--cyan-300)}
-
-/* Cards */
 .ss-card{display:flex;flex-direction:column;border:1px solid var(--steel-150);border-radius:var(--radius-md);background:var(--white)}
 .ss-card__title{font:600 20px/26px var(--font-display);color:var(--graphite)}
 .ss-card__body{font:400 15px/24px var(--font-body);color:var(--steel-600)}
-
-/* Status chips */
 .ss-chip{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:999px;font:600 12px/1 var(--font-body);letter-spacing:0.02em}
 .ss-chip[data-status="shooting"]{background:rgba(46,197,255,.12);color:var(--cyan-700)}
 .ss-chip[data-status="ai"]{background:rgba(242,184,75,.12);color:#8A5B00}
@@ -73,91 +61,53 @@ img{display:block;max-width:100%}
 .ss-chip[data-status="moderate"]{background:rgba(255,138,61,.12);color:#A8460A}
 .ss-chip[data-status="minor"]{background:rgba(242,184,75,.12);color:#8A5B00}
 .ss-chip[data-status="severe"]{background:rgba(255,100,100,.12);color:#B42323}
-
-/* Tags */
 .ss-tag{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:999px;font:500 14px/1 var(--font-body);border:1px solid var(--steel-150);background:var(--white);color:var(--graphite)}
-
-/* Segment switch */
 .ss-seg{display:flex;border-radius:999px;overflow:hidden;border:1px solid var(--steel-600)}
 .ss-seg__opt{border:0;background:none;color:var(--steel-400);font:600 13px/1 var(--font-body);padding:6px 14px;cursor:pointer;transition:.2s}
 .ss-seg__opt[aria-pressed="true"]{background:var(--cyan);color:var(--cyan-ink)}
-
-/* Job rows (dashboard) */
 .ss-jobrow{display:grid;grid-template-columns:1fr 1.4fr 1fr auto 60px;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--steel-150);font:400 14px/20px var(--font-body);color:var(--steel-500)}
 .ss-jobrow--head{font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--steel-400);border-bottom:1px solid var(--steel-200)}
 .ss-jobrow__time{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:var(--steel-500)}
 .ss-plate{font:700 13px/1 var(--font-body);letter-spacing:.04em;padding:4px 8px;border-radius:4px;background:var(--steel-100);color:var(--graphite)}
-
-/* Image placeholders */
 .ss-img{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:1px dashed var(--steel-200);background:var(--graphite-850);border-radius:var(--radius-md);min-height:200px;text-align:center;padding:32px}
 .ss-img__desc{font:400 14px/20px var(--font-body);color:var(--steel-400);max-width:32ch}
-
-/* Stats */
 .ss-stat{text-align:center}
 .ss-stat__value{font:700 52px/1 var(--font-display);letter-spacing:-0.03em;color:var(--graphite);font-variant-numeric:tabular-nums}
 .ss-stat__unit{font:500 20px/1 var(--font-body);color:var(--steel-400);margin-left:4px}
 .ss-stat__label{font:500 15px/1 var(--font-body);color:var(--steel-500);margin-top:12px}
-
-/* Placeholder token */
 .ss-ph{color:var(--cyan);font-style:italic}
-
-/* Divider with ring */
 .ss-divider{display:flex;align-items:center;gap:12px}
 .ss-divider__line{flex:1;height:1px;background:var(--steel-150)}
-
-/* Hotspot */
 .ss-hotspot{position:absolute;width:20px;height:20px;border-radius:50%;border:2px solid var(--cyan);background:rgba(46,197,255,.2);cursor:pointer;transform:translate(-50%,-50%)}
 .ss-hotspot::after{content:'';position:absolute;inset:4px;border-radius:50%;background:var(--cyan)}
-
-/* Damage markers */
 .ss-damage{position:absolute;width:28px;height:28px;border-radius:50%;border:2px solid var(--red);background:rgba(255,100,100,.2);cursor:pointer;transform:translate(-50%,-50%);font:700 13px/24px var(--font-body);text-align:center;color:var(--red)}
-
-/* Quote */
 .ss-quote__text{font:400 22px/34px var(--font-display);color:var(--graphite);font-style:italic}
 .ss-quote__avatar{width:40px;height:40px;border-radius:50%;background:var(--steel-200)}
-
-/* Logo slot */
 .ss-logo-slot{display:flex;align-items:center;justify-content:center;height:56px;border:1px dashed var(--steel-200);border-radius:var(--radius-sm);font:500 13px/1 var(--font-body);color:var(--steel-400)}
-
-/* Viewer */
 .ss-viewer{border:1px solid var(--graphite-700);border-radius:var(--radius-xl);overflow:hidden;background:var(--graphite-900)}
 .ss-viewer__stage{position:relative;background:var(--graphite-850)}
 .ss-viewer__top{position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center}
 .ss-viewer__bar{display:flex;align-items:center;gap:16px;padding:16px 20px;border-top:1px solid var(--graphite-700);font:500 14px/1 var(--font-body);color:var(--steel-400)}
 .ss-viewer__hint{display:flex;align-items:center;gap:6px}
-
-/* Tabs in viewer */
 .ss-tabs--pill{display:flex;gap:4px;padding:3px;background:rgba(14,16,19,.88);border-radius:999px;backdrop-filter:blur(8px)}
 .ss-tab{height:34px;padding:0 16px;border-radius:999px;border:0;background:none;font:500 15px/1 var(--font-body);cursor:pointer;color:var(--steel-400);transition:.2s}
 .ss-tab[aria-selected="true"]{background:var(--cyan);color:var(--cyan-ink)}
-
-/* Icon button */
 .ss-iconbtn{width:36px;height:36px;border-radius:50%;border:1px solid var(--graphite-700);background:var(--graphite-850);color:var(--steel-400);display:flex;align-items:center;justify-content:center;cursor:pointer}
-
-/* Forms */
 .ss-field{display:flex;flex-direction:column;gap:6px}
 .ss-field__label{font:600 13px/1 var(--font-body);color:var(--steel-300)}
 .ss-input,.ss-select{height:44px;padding:0 14px;border-radius:var(--radius-sm);border:1px solid var(--graphite-700);background:var(--graphite-850);color:#F2F4F7;font:400 15px/1 var(--font-body)}
 .ss-input::placeholder{color:var(--steel-500)}
 .ss-input:focus,.ss-select:focus{outline:2px solid var(--cyan);outline-offset:-1px}
-
-/* Wordmark */
 .ss-wordmark{display:flex;align-items:center;gap:6px;font:800 20px/1 var(--font-display);letter-spacing:-0.02em;color:#F2F4F7}
-
-/* Dark/Light sections */
 .ss-dark{background:var(--graphite);color:#F2F4F7}
 .ss-light{background:var(--paper);color:var(--graphite)}
 .ss-light .ss-lead{color:var(--steel-600)}
 .ss-light .ss-small{color:var(--steel-500)}
 .ss-light .ss-eyebrow{color:var(--cyan-700)}
 .ss-light .ss-viewer__bar{border-color:var(--steel-150)}
-
-/* Powered by DES banner */
 .des-banner{text-align:center;padding:24px;background:var(--graphite-900);border-top:1px solid var(--graphite-700);font:500 13px/1 var(--font-body);color:var(--steel-400)}
 .des-banner a{color:var(--cyan);font-weight:600}
 .des-banner a:hover{color:var(--cyan-300)}
-
-/* === RESPONSIVE === */
 @media(max-width:768px){
   .hero-grid{grid-template-columns:1fr!important;text-align:center}
   .hero-visual{display:none}
@@ -175,7 +125,7 @@ img{display:block;max-width:100%}
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
+<!-- HEADER -->
 <header class="ss-dark" style="position:sticky;top:0;z-index:100;border-bottom:1px solid var(--graphite-700);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(14,16,19,0.92)">
 <div class="ss-container" style="display:flex;align-items:center;height:64px;gap:20px">
 <a class="ss-wordmark" href="#">
@@ -183,31 +133,31 @@ img{display:block;max-width:100%}
   <span>SpinSold</span>
 </a>
 <nav class="nav-links" style="display:flex;gap:20px;font:500 14px/1 var(--font-body);flex:1;min-width:0">
-  <a href="#dealers" style="color:var(--steel-300)">Dealers</a>
-  <a href="#inspection" style="color:var(--steel-300)">Inspection</a>
-  <a href="#studio" style="color:var(--steel-300)">Studio rental</a>
-  <a href="#large" style="color:var(--steel-300)">Large goods</a>
-  <a href="#platform" style="color:var(--steel-300)">Platform</a>
-  <a href="#cta" style="color:var(--steel-300)">Pricing</a>
+  <a href="#dealers" style="color:var(--steel-300)" data-i18n="nav_dealers">Dealers</a>
+  <a href="#inspection" style="color:var(--steel-300)" data-i18n="nav_inspection">Inspection</a>
+  <a href="#studio" style="color:var(--steel-300)" data-i18n="nav_studio">Studio rental</a>
+  <a href="#large" style="color:var(--steel-300)" data-i18n="nav_large">Large goods</a>
+  <a href="#platform" style="color:var(--steel-300)" data-i18n="nav_platform">Platform</a>
+  <a href="#cta" style="color:var(--steel-300)" data-i18n="nav_pricing">Pricing</a>
 </nav>
 <div style="display:flex;align-items:center;gap:12px;margin-left:auto">
-  <div class="ss-seg"><button class="ss-seg__opt" aria-pressed="false">NL</button><button class="ss-seg__opt" aria-pressed="true">EN</button></div>
-  <a href="#" class="ss-btn ss-btn--ghost ss-btn--sm">Log in</a>
-  <a href="#cta" class="ss-btn ss-btn--primary ss-btn--sm">Book a shoot</a>
+  <div class="ss-seg"><button class="ss-seg__opt" data-lang="nl" aria-pressed="false">NL</button><button class="ss-seg__opt" data-lang="en" aria-pressed="true">EN</button></div>
+  <a href="#" class="ss-btn ss-btn--ghost ss-btn--sm" data-i18n="nav_login">Log in</a>
+  <a href="#cta" class="ss-btn ss-btn--primary ss-btn--sm" data-i18n="nav_book">Book a shoot</a>
 </div>
 </div>
 </header>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section class="ss-dark" style="padding:100px 0 0;overflow:hidden">
 <div class="ss-container hero-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 260px)">
   <div style="display:flex;flex-direction:column;gap:24px">
-    <span class="ss-eyebrow">Automated 360° vehicle studio</span>
-    <h1 class="ss-display">Spin it.<br>Sell it.</h1>
-    <p class="ss-lead" style="max-width:40ch">Listing-ready photos, 360° spins and signed condition reports, online within minutes of drop-off.</p>
+    <span class="ss-eyebrow" data-i18n="hero_eyebrow">Automated 360° vehicle studio</span>
+    <h1 class="ss-display" data-i18n="hero_title" data-i18n-html="1">Spin it.<br>Sell it.</h1>
+    <p class="ss-lead" style="max-width:40ch" data-i18n="hero_lead">Listing-ready photos, 360° spins and signed condition reports, online within minutes of drop-off.</p>
     <div style="display:flex;gap:14px;flex-wrap:wrap">
-      <a href="#cta" class="ss-btn ss-btn--primary">Book a shoot</a>
-      <a href="#how" class="ss-btn ss-btn--ghost">See how it works</a>
+      <a href="#cta" class="ss-btn ss-btn--primary" data-i18n="hero_cta1">Book a shoot</a>
+      <a href="#how" class="ss-btn ss-btn--ghost" data-i18n="hero_cta2">See how it works</a>
     </div>
   </div>
   <div class="hero-visual" style="position:relative;display:flex;align-items:center;justify-content:center">
@@ -219,140 +169,140 @@ img{display:block;max-width:100%}
   </div>
 </div>
 <div class="ss-container" style="display:flex;justify-content:center;gap:48px;font:500 15px/1 var(--font-body);color:var(--steel-400);padding:48px 0 64px;flex-wrap:wrap">
-  <span>360° exterior + interior</span>
+  <span data-i18n="hero_usp1">360° exterior + interior</span>
   <span style="color:var(--graphite-700)">·</span>
-  <span>Online within 24 hours</span>
+  <span data-i18n="hero_usp2">Online within 24 hours</span>
   <span style="color:var(--graphite-700)">·</span>
-  <span>Cars, vans and campers up to 4 tonnes</span>
+  <span data-i18n="hero_usp3">Cars, vans and campers up to 4 tonnes</span>
 </div>
 </section>
 
-<!-- ═══ TWO PROMISES ═══ -->
+<!-- TWO PROMISES -->
 <section class="ss-light" style="padding:128px 0 0">
 <div class="ss-container">
   <div class="ss-divider" style="margin-bottom:48px">
     <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
-    <span class="ss-eyebrow" style="color:var(--cyan-700)">01</span><span class="ss-eyebrow" style="color:var(--steel-500)">What we deliver</span><span class="ss-divider__line"></span>
+    <span class="ss-eyebrow" style="color:var(--cyan-700)">01</span><span class="ss-eyebrow" style="color:var(--steel-500)" data-i18n="s01_label">What we deliver</span><span class="ss-divider__line"></span>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
     <div class="ss-card" style="padding:48px;gap:20px">
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <h2 class="ss-h2" style="color:var(--graphite)">Photos that sell.</h2>
-      <p class="ss-body" style="color:var(--steel-600);max-width:38ch">Consistent studio photos, branded backgrounds, published to your website, Marktplaats, AutoScout24 and mobile.de.</p>
+      <h2 class="ss-h2" style="color:var(--graphite)" data-i18n="promise1_title">Photos that sell.</h2>
+      <p class="ss-body" style="color:var(--steel-600);max-width:38ch" data-i18n="promise1_desc">Consistent studio photos, branded backgrounds, published to your website, Marktplaats, AutoScout24 and mobile.de.</p>
     </div>
     <div class="ss-card" style="padding:48px;gap:20px">
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-      <h2 class="ss-h2" style="color:var(--graphite)">Photos that prove.</h2>
-      <p class="ss-body" style="color:var(--steel-600);max-width:38ch">Fixed-angle inspection under controlled light. AI marks every scratch; an inspector signs the report.</p>
+      <h2 class="ss-h2" style="color:var(--graphite)" data-i18n="promise2_title">Photos that prove.</h2>
+      <p class="ss-body" style="color:var(--steel-600);max-width:38ch" data-i18n="promise2_desc">Fixed-angle inspection under controlled light. AI marks every scratch; an inspector signs the report.</p>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══ HOW IT WORKS ═══ -->
+<!-- HOW IT WORKS -->
 <section id="how" class="ss-light" style="padding:128px 0">
 <div class="ss-container">
   <div class="ss-divider" style="margin-bottom:48px">
     <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
-    <span class="ss-eyebrow" style="color:var(--cyan-700)">02</span><span class="ss-eyebrow" style="color:var(--steel-500)">How it works</span><span class="ss-divider__line"></span>
+    <span class="ss-eyebrow" style="color:var(--cyan-700)">02</span><span class="ss-eyebrow" style="color:var(--steel-500)" data-i18n="s02_label">How it works</span><span class="ss-divider__line"></span>
   </div>
-  <h2 class="ss-h2" style="color:var(--graphite);margin-bottom:64px">Five steps. Minutes, not days.</h2>
+  <h2 class="ss-h2" style="color:var(--graphite);margin-bottom:64px" data-i18n="s02_title">Five steps. Minutes, not days.</h2>
   <div class="steps-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:24px;text-align:center">
     <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
       <div class="ss-ring" style="--size:48px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5" style="position:relative;z-index:1"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
       </div>
       <span class="ss-eyebrow" style="color:var(--cyan-700)">01</span>
-      <h4 class="ss-h4" style="color:var(--graphite)">Book</h4>
-      <p class="ss-small">Online, via API or phone.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="step1_title">Book</h4>
+      <p class="ss-small" data-i18n="step1_desc">Online, via API or phone.</p>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
       <div class="ss-ring" style="--size:48px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5" style="position:relative;z-index:1"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M10 17h5"/></svg>
       </div>
       <span class="ss-eyebrow" style="color:var(--cyan-700)">02</span>
-      <h4 class="ss-h4" style="color:var(--graphite)">Drive in</h4>
-      <p class="ss-small">Or we pick up.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="step2_title">Drive in</h4>
+      <p class="ss-small" data-i18n="step2_desc">Or we pick up.</p>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
       <div class="ss-ring" style="--size:48px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5" style="position:relative;z-index:1"><path d="M21 12a9 9 0 11-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg>
       </div>
       <span class="ss-eyebrow" style="color:var(--cyan-700)">03</span>
-      <h4 class="ss-h4" style="color:var(--graphite)">Spin &amp; shoot</h4>
-      <p class="ss-small">About 5 minutes per vehicle.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="step3_title">Spin &amp; shoot</h4>
+      <p class="ss-small" data-i18n="step3_desc">About 5 minutes per vehicle.</p>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
       <div class="ss-ring" style="--size:48px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5" style="position:relative;z-index:1"><path d="M12 2a4 4 0 014 4c0 2-2 3-2 6H10c0-3-2-4-2-6a4 4 0 014-4z"/><path d="M10 18h4M10 22h4M10 20h4"/></svg>
       </div>
       <span class="ss-eyebrow" style="color:var(--cyan-700)">04</span>
-      <h4 class="ss-h4" style="color:var(--graphite)">AI &amp; QC</h4>
-      <p class="ss-small">Background swap, plate masking, quality check.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="step4_title">AI &amp; QC</h4>
+      <p class="ss-small" data-i18n="step4_desc">Background swap, plate masking, quality check.</p>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
       <div class="ss-ring" style="--size:48px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5" style="position:relative;z-index:1"><path d="M5 12l5 5L20 7"/></svg>
       </div>
       <span class="ss-eyebrow" style="color:var(--cyan-700)">05</span>
-      <h4 class="ss-h4" style="color:var(--graphite)">Delivered</h4>
-      <p class="ss-small">To your website, portals and DMS.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="step5_title">Delivered</h4>
+      <p class="ss-small" data-i18n="step5_desc">To your website, portals and DMS.</p>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══ WHO IT'S FOR ═══ -->
+<!-- WHO IT'S FOR -->
 <section id="dealers" class="ss-light" style="padding:0 0 128px">
 <div class="ss-container">
   <div class="ss-divider" style="margin-bottom:48px">
     <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
-    <span class="ss-eyebrow" style="color:var(--cyan-700)">03</span><span class="ss-eyebrow" style="color:var(--steel-500)">Who it's for</span><span class="ss-divider__line"></span>
+    <span class="ss-eyebrow" style="color:var(--cyan-700)">03</span><span class="ss-eyebrow" style="color:var(--steel-500)" data-i18n="s03_label">Who it's for</span><span class="ss-divider__line"></span>
   </div>
-  <h2 class="ss-h2" style="color:var(--graphite);margin-bottom:64px">Built for every link<br>in the chain.</h2>
+  <h2 class="ss-h2" style="color:var(--graphite);margin-bottom:64px" data-i18n="s03_title" data-i18n-html="1">Built for every link<br>in the chain.</h2>
   <div class="segments-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
     <div class="ss-card" style="padding:32px;gap:16px">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <h3 class="ss-card__title">Car dealers</h3>
-      <p class="ss-card__body">Sell faster with the same look across every branch.</p>
+      <h3 class="ss-card__title" data-i18n="seg1_title">Car dealers</h3>
+      <p class="ss-card__body" data-i18n="seg1_desc">Sell faster with the same look across every branch.</p>
     </div>
     <div class="ss-card" style="padding:32px;gap:16px">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
-      <h3 class="ss-card__title">Lease companies</h3>
-      <p class="ss-card__body">Documented returns, fewer damage disputes.</p>
+      <h3 class="ss-card__title" data-i18n="seg2_title">Lease companies</h3>
+      <p class="ss-card__body" data-i18n="seg2_desc">Documented returns, fewer damage disputes.</p>
     </div>
     <div class="ss-card" style="padding:32px;gap:16px">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-      <h3 class="ss-card__title">Auctions &amp; remarketing</h3>
-      <p class="ss-card__body">Remote buyers bid with confidence.</p>
+      <h3 class="ss-card__title" data-i18n="seg3_title">Auctions &amp; remarketing</h3>
+      <p class="ss-card__body" data-i18n="seg3_desc">Remote buyers bid with confidence.</p>
     </div>
     <div class="ss-card" style="padding:32px;gap:16px">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <h3 class="ss-card__title">Insurers &amp; claims</h3>
-      <p class="ss-card__body">Proof before cover and after damage.</p>
+      <h3 class="ss-card__title" data-i18n="seg4_title">Insurers &amp; claims</h3>
+      <p class="ss-card__body" data-i18n="seg4_desc">Proof before cover and after damage.</p>
     </div>
     <div class="ss-card" style="padding:32px;gap:16px">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-      <h3 class="ss-card__title">Body shops</h3>
-      <p class="ss-card__body">Before/after proof for owner and insurer.</p>
+      <h3 class="ss-card__title" data-i18n="seg5_title">Body shops</h3>
+      <p class="ss-card__body" data-i18n="seg5_desc">Before/after proof for owner and insurer.</p>
     </div>
     <div class="ss-card" style="padding:32px;gap:16px">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8l4.58-3.06A1 1 0 0122 5.86v8.28a1 1 0 01-1.42.92L16 12"/></svg>
-      <h3 class="ss-card__title">Large goods</h3>
-      <p class="ss-card__body">Webshop-ready photos of items too heavy to lift.</p>
+      <h3 class="ss-card__title" data-i18n="seg6_title">Large goods</h3>
+      <p class="ss-card__body" data-i18n="seg6_desc">Webshop-ready photos of items too heavy to lift.</p>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══ INTERACTIVE SHOWCASE — 360° VIEWER ═══ -->
+<!-- INTERACTIVE SHOWCASE — 360 VIEWER -->
 <section id="inspection" class="ss-dark" style="padding:128px 0">
 <div class="ss-container">
   <div class="ss-divider" style="margin-bottom:48px">
     <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
-    <span class="ss-eyebrow">04</span><span class="ss-eyebrow" style="color:var(--steel-400)">Interactive showcase</span><span class="ss-divider__line" style="background:var(--graphite-700)"></span>
+    <span class="ss-eyebrow">04</span><span class="ss-eyebrow" style="color:var(--steel-400)" data-i18n="s04_label">Interactive showcase</span><span class="ss-divider__line" style="background:var(--graphite-700)"></span>
   </div>
-  <h2 class="ss-h2" style="margin-bottom:48px">See every angle.</h2>
+  <h2 class="ss-h2" style="margin-bottom:48px" data-i18n="s04_title">See every angle.</h2>
   <div class="ss-viewer">
     <div class="ss-viewer__stage" style="aspect-ratio:16/9;position:relative">
       <figure class="ss-img" style="position:absolute;inset:0;border:0;border-radius:0;min-height:0;aspect-ratio:auto;margin:0">
@@ -361,9 +311,9 @@ img{display:block;max-width:100%}
       </figure>
       <div class="ss-viewer__top">
         <div class="ss-tabs--pill">
-          <button class="ss-tab" aria-selected="true">Exterior</button>
-          <button class="ss-tab" aria-selected="false">Interior</button>
-          <button class="ss-tab" aria-selected="false">Inspection</button>
+          <button class="ss-tab" aria-selected="true" data-i18n="tab_exterior">Exterior</button>
+          <button class="ss-tab" aria-selected="false" data-i18n="tab_interior">Interior</button>
+          <button class="ss-tab" aria-selected="false" data-i18n="tab_inspection">Inspection</button>
         </div>
       </div>
       <button class="ss-hotspot" style="left:28%;top:52%" aria-label="LED headlights"></button>
@@ -374,7 +324,7 @@ img{display:block;max-width:100%}
       <span class="ss-ring" style="--size:36px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
       <span class="ss-viewer__hint">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l7 7 7-7"/></svg>
-        Drag to spin
+        <span data-i18n="viewer_drag">Drag to spin</span>
       </span>
       <span style="flex:1"></span>
       <span style="font-variant-numeric:tabular-nums">135° · 12 / 36</span>
@@ -383,26 +333,26 @@ img{display:block;max-width:100%}
 </div>
 </section>
 
-<!-- ═══ PLATFORM ═══ -->
+<!-- PLATFORM -->
 <section id="platform" class="ss-light" style="padding:128px 0">
 <div class="ss-container">
   <div class="ss-divider" style="margin-bottom:48px">
     <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
-    <span class="ss-eyebrow" style="color:var(--cyan-700)">05</span><span class="ss-eyebrow" style="color:var(--steel-500)">Platform</span><span class="ss-divider__line"></span>
+    <span class="ss-eyebrow" style="color:var(--cyan-700)">05</span><span class="ss-eyebrow" style="color:var(--steel-500)" data-i18n="s05_label">Platform</span><span class="ss-divider__line"></span>
   </div>
   <div class="platform-grid" style="display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center">
     <div style="display:flex;flex-direction:column;gap:24px">
-      <h2 class="ss-h2" style="color:var(--graphite)">One platform,<br>from booking<br>to invoice.</h2>
-      <p class="ss-body" style="color:var(--steel-600);max-width:38ch">Track every vehicle from the moment it's booked until the photos land on the dealer's website. API-first; connects to your existing DMS.</p>
+      <h2 class="ss-h2" style="color:var(--graphite)" data-i18n="plat_title" data-i18n-html="1">One platform,<br>from booking<br>to invoice.</h2>
+      <p class="ss-body" style="color:var(--steel-600);max-width:38ch" data-i18n="plat_desc">Track every vehicle from the moment it's booked until the photos land on the dealer's website. API-first; connects to your existing DMS.</p>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
-        <span class="ss-tag">Booking</span>
-        <span class="ss-tag">Intake</span>
-        <span class="ss-tag">Capture</span>
-        <span class="ss-tag">AI processing</span>
-        <span class="ss-tag">Reports</span>
-        <span class="ss-tag">Delivery</span>
-        <span class="ss-tag">Invoicing</span>
-        <span class="ss-tag">Portal</span>
+        <span class="ss-tag" data-i18n="tag_booking">Booking</span>
+        <span class="ss-tag" data-i18n="tag_intake">Intake</span>
+        <span class="ss-tag" data-i18n="tag_capture">Capture</span>
+        <span class="ss-tag" data-i18n="tag_ai">AI processing</span>
+        <span class="ss-tag" data-i18n="tag_reports">Reports</span>
+        <span class="ss-tag" data-i18n="tag_delivery">Delivery</span>
+        <span class="ss-tag" data-i18n="tag_invoicing">Invoicing</span>
+        <span class="ss-tag" data-i18n="tag_portal">Portal</span>
         <span class="ss-tag">API</span>
       </div>
     </div>
@@ -416,57 +366,57 @@ img{display:block;max-width:100%}
       </div>
       <div style="padding:20px">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-          <span style="font:700 18px/1 var(--font-display);letter-spacing:-0.02em;color:var(--graphite)">Today's jobs</span>
+          <span style="font:700 18px/1 var(--font-display);letter-spacing:-0.02em;color:var(--graphite)" data-i18n="dash_title">Today's jobs</span>
           <div style="display:flex;gap:8px">
-            <span class="ss-chip" data-status="shooting">2 Shooting</span>
+            <span class="ss-chip" data-status="shooting" data-i18n="dash_shooting">2 Shooting</span>
             <span class="ss-chip" data-status="ai">3 AI</span>
           </div>
         </div>
-        <div class="ss-jobrow ss-jobrow--head"><span>Plate</span><span>Customer</span><span>Service</span><span>Status</span><span style="text-align:right">Time</span></div>
-        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">Van den Berg Auto's</span><span style="color:var(--steel-500)">360° exterior</span><span><span class="ss-chip" data-status="shooting">Shooting</span></span><span class="ss-jobrow__time">14:20</span></div>
-        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">LeasePlan NL</span><span style="color:var(--steel-500)">Return inspection</span><span><span class="ss-chip" data-status="ai">AI</span></span><span class="ss-jobrow__time">13:45</span></div>
-        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">BCA Auctions</span><span style="color:var(--steel-500)">360° + inspection</span><span><span class="ss-chip" data-status="delivered">Delivered</span></span><span class="ss-jobrow__time">12:10</span></div>
-        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">Allianz Claims</span><span style="color:var(--steel-500)">Damage report</span><span><span class="ss-chip" data-status="qc">QC</span></span><span class="ss-jobrow__time">11:30</span></div>
+        <div class="ss-jobrow ss-jobrow--head"><span data-i18n="dash_plate">Plate</span><span data-i18n="dash_customer">Customer</span><span data-i18n="dash_service">Service</span><span>Status</span><span style="text-align:right" data-i18n="dash_time">Time</span></div>
+        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">Van den Berg Auto's</span><span style="color:var(--steel-500)" data-i18n="svc_360ext">360° exterior</span><span><span class="ss-chip" data-status="shooting" data-i18n="chip_shooting">Shooting</span></span><span class="ss-jobrow__time">14:20</span></div>
+        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">LeasePlan NL</span><span style="color:var(--steel-500)" data-i18n="svc_return">Return inspection</span><span><span class="ss-chip" data-status="ai">AI</span></span><span class="ss-jobrow__time">13:45</span></div>
+        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">BCA Auctions</span><span style="color:var(--steel-500)" data-i18n="svc_360insp">360° + inspection</span><span><span class="ss-chip" data-status="delivered" data-i18n="chip_delivered">Delivered</span></span><span class="ss-jobrow__time">12:10</span></div>
+        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">Allianz Claims</span><span style="color:var(--steel-500)" data-i18n="svc_damage">Damage report</span><span><span class="ss-chip" data-status="qc">QC</span></span><span class="ss-jobrow__time">11:30</span></div>
       </div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══ AI BAND ═══ -->
+<!-- AI BAND -->
 <section class="ss-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
 <div class="ss-container">
   <div class="ss-divider" style="margin-bottom:48px">
     <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
-    <span class="ss-eyebrow" style="color:var(--cyan-700)">06</span><span class="ss-eyebrow" style="color:var(--steel-500)">AI processing</span><span class="ss-divider__line"></span>
+    <span class="ss-eyebrow" style="color:var(--cyan-700)">06</span><span class="ss-eyebrow" style="color:var(--steel-500)" data-i18n="s06_label">AI processing</span><span class="ss-divider__line"></span>
   </div>
   <div class="ai-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
     <div style="display:flex;flex-direction:column;gap:14px;padding-top:20px;border-top:1px solid var(--steel-200)">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <h4 class="ss-h4" style="color:var(--graphite)">Background &amp; reflection</h4>
-      <p class="ss-small">Clean, branded backgrounds applied automatically.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="ai1_title">Background &amp; reflection</h4>
+      <p class="ss-small" data-i18n="ai1_desc">Clean, branded backgrounds applied automatically.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;padding-top:20px;border-top:1px solid var(--steel-200)">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-      <h4 class="ss-h4" style="color:var(--graphite)">Plate masking</h4>
-      <p class="ss-small">Licence plates detected and blurred for privacy.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="ai2_title">Plate masking</h4>
+      <p class="ss-small" data-i18n="ai2_desc">Licence plates detected and blurred for privacy.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;padding-top:20px;border-top:1px solid var(--steel-200)">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
-      <h4 class="ss-h4" style="color:var(--graphite)">Damage detection</h4>
-      <p class="ss-small">AI marks every scratch; a human inspector signs off.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="ai3_title">Damage detection</h4>
+      <p class="ss-small" data-i18n="ai3_desc">AI marks every scratch; a human inspector signs off.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;padding-top:20px;border-top:1px solid var(--steel-200)">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan-700)" stroke-width="1.5"><path d="M4 21V14a2 2 0 012-2h12a2 2 0 012 2v7"/><path d="M4 10V6a2 2 0 012-2h12a2 2 0 012 2v4"/><path d="M2 21h20"/><path d="M9 8h6"/></svg>
-      <h4 class="ss-h4" style="color:var(--graphite)">Listing text</h4>
-      <p class="ss-small">Generated in Dutch, English and German.</p>
+      <h4 class="ss-h4" style="color:var(--graphite)" data-i18n="ai4_title">Listing text</h4>
+      <p class="ss-small" data-i18n="ai4_desc">Generated in Dutch, English and German.</p>
     </div>
   </div>
-  <p class="ss-small" style="margin-top:32px">Originals are always kept; every AI edit is logged.</p>
+  <p class="ss-small" style="margin-top:32px" data-i18n="ai_note">Originals are always kept; every AI edit is logged.</p>
 </div>
 </section>
 
-<!-- ═══ STUDIO RENTAL ═══ -->
+<!-- STUDIO RENTAL -->
 <section id="studio" class="ss-light" style="padding:128px 0;border-top:1px solid var(--steel-150)">
 <div class="ss-container rental-grid" style="display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center">
   <figure class="ss-img" style="aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);background:var(--steel-100);border-color:var(--steel-200)">
@@ -476,32 +426,32 @@ img{display:block;max-width:100%}
   <div style="display:flex;flex-direction:column;gap:24px">
     <div class="ss-divider">
       <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
-      <span class="ss-eyebrow" style="color:var(--cyan-700)">07</span><span class="ss-eyebrow" style="color:var(--steel-500)">Studio rental</span><span class="ss-divider__line"></span>
+      <span class="ss-eyebrow" style="color:var(--cyan-700)">07</span><span class="ss-eyebrow" style="color:var(--steel-500)" data-i18n="s07_label">Studio rental</span><span class="ss-divider__line"></span>
     </div>
-    <h2 class="ss-h2" style="color:var(--graphite)">Rent the studio.</h2>
-    <p class="ss-body" style="color:var(--steel-600);max-width:36ch">7 m turntable, controlled light, evenings and weekends. With or without operator.</p>
+    <h2 class="ss-h2" style="color:var(--graphite)" data-i18n="rental_title">Rent the studio.</h2>
+    <p class="ss-body" style="color:var(--steel-600);max-width:36ch" data-i18n="rental_desc">7 m turntable, controlled light, evenings and weekends. With or without operator.</p>
     <div style="display:flex;align-items:baseline;gap:12px">
       <span style="font:700 34px/1 var(--font-display);letter-spacing:-0.03em;color:var(--graphite)">€<span class="ss-ph">[X]</span></span>
-      <span class="ss-small">per hour</span>
+      <span class="ss-small" data-i18n="rental_unit">per hour</span>
     </div>
     <div style="display:flex;gap:14px">
-      <a href="#" class="ss-btn ss-btn--primary">Check availability</a>
-      <a href="#" class="ss-btn ss-btn--ghost" style="border-color:var(--steel-200);color:var(--graphite)">See packages</a>
+      <a href="#" class="ss-btn ss-btn--primary" data-i18n="rental_cta1">Check availability</a>
+      <a href="#" class="ss-btn ss-btn--ghost" style="border-color:var(--steel-200);color:var(--graphite)" data-i18n="rental_cta2">See packages</a>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══ LARGE GOODS ═══ -->
+<!-- LARGE GOODS -->
 <section id="large" class="ss-light" style="padding:128px 0;border-top:1px solid var(--steel-150)">
 <div class="ss-container large-grid" style="display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center">
   <div style="display:flex;flex-direction:column;gap:24px">
     <div class="ss-divider">
       <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
-      <span class="ss-eyebrow" style="color:var(--cyan-700)">08</span><span class="ss-eyebrow" style="color:var(--steel-500)">Large goods</span><span class="ss-divider__line"></span>
+      <span class="ss-eyebrow" style="color:var(--cyan-700)">08</span><span class="ss-eyebrow" style="color:var(--steel-500)" data-i18n="s08_label">Large goods</span><span class="ss-divider__line"></span>
     </div>
-    <h2 class="ss-h2" style="color:var(--graphite)">Too heavy to lift.<br>Easy to spin.</h2>
-    <p class="ss-body" style="color:var(--steel-600);max-width:36ch">Furniture, machinery, e-bikes and motorbikes on the turntable. Webshop-ready photos without a studio build.</p>
+    <h2 class="ss-h2" style="color:var(--graphite)" data-i18n="large_title" data-i18n-html="1">Too heavy to lift.<br>Easy to spin.</h2>
+    <p class="ss-body" style="color:var(--steel-600);max-width:36ch" data-i18n="large_desc">Furniture, machinery, e-bikes and motorbikes on the turntable. Webshop-ready photos without a studio build.</p>
   </div>
   <figure class="ss-img" style="aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);background:var(--steel-100);border-color:var(--steel-200)">
     <span class="ss-eyebrow" style="color:var(--cyan-700)">Image</span>
@@ -510,52 +460,52 @@ img{display:block;max-width:100%}
 </div>
 </section>
 
-<!-- ═══ NUMBERS ═══ -->
+<!-- NUMBERS -->
 <section class="ss-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
 <div class="ss-container">
   <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center">
-    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span></div><div class="ss-stat__label">Vehicles photographed</div></div>
-    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span><span class="ss-stat__unit">min</span></div><div class="ss-stat__label">Average shoot time</div></div>
-    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span><span class="ss-stat__unit">h</span></div><div class="ss-stat__label">To online</div></div>
-    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span></div><div class="ss-stat__label">Partners</div></div>
+    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span></div><div class="ss-stat__label" data-i18n="stat1">Vehicles photographed</div></div>
+    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span><span class="ss-stat__unit">min</span></div><div class="ss-stat__label" data-i18n="stat2">Average shoot time</div></div>
+    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span><span class="ss-stat__unit">h</span></div><div class="ss-stat__label" data-i18n="stat3">To online</div></div>
+    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span></div><div class="ss-stat__label" data-i18n="stat4">Partners</div></div>
   </div>
 </div>
 </section>
 
-<!-- ═══ FINAL CTA ═══ -->
+<!-- FINAL CTA -->
 <section id="cta" class="ss-dark" style="padding:128px 0">
 <div class="ss-container" style="max-width:800px;margin:0 auto">
   <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;margin-bottom:64px">
     <span class="ss-ring ss-ring--spin" style="--size:64px;--w:1.5px"><span class="ss-ring__arc"></span></span>
-    <h2 class="ss-h1">Ready to spin?</h2>
-    <p class="ss-lead" style="max-width:44ch">Book a test shoot or talk to our team. We'll show you how SpinSold fits your workflow.</p>
+    <h2 class="ss-h1" data-i18n="cta_title">Ready to spin?</h2>
+    <p class="ss-lead" style="max-width:44ch" data-i18n="cta_lead">Book a test shoot or talk to our team. We'll show you how SpinSold fits your workflow.</p>
   </div>
   <div class="cta-form" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
     <div class="ss-field">
-      <label class="ss-field__label" for="f-name">Name</label>
-      <input class="ss-input" id="f-name" type="text" placeholder="Your name">
+      <label class="ss-field__label" for="f-name" data-i18n="form_name">Name</label>
+      <input class="ss-input" id="f-name" type="text" data-i18n-ph="form_name_ph" placeholder="Your name">
     </div>
     <div class="ss-field">
-      <label class="ss-field__label" for="f-company">Company</label>
-      <input class="ss-input" id="f-company" type="text" placeholder="Company name">
+      <label class="ss-field__label" for="f-company" data-i18n="form_company">Company</label>
+      <input class="ss-input" id="f-company" type="text" data-i18n-ph="form_company_ph" placeholder="Company name">
     </div>
     <div class="ss-field">
-      <label class="ss-field__label" for="f-segment">Segment</label>
+      <label class="ss-field__label" for="f-segment" data-i18n="form_segment">Segment</label>
       <select class="ss-select" id="f-segment">
-        <option value="" disabled selected>Select your segment</option>
-        <option>Car dealer</option>
-        <option>Lease company</option>
-        <option>Auction / remarketing</option>
-        <option>Insurer</option>
-        <option>Body shop</option>
-        <option>Large goods / e-commerce</option>
-        <option>Photographer / film crew</option>
+        <option value="" disabled selected data-i18n="form_seg_ph">Select your segment</option>
+        <option data-i18n="form_seg1">Car dealer</option>
+        <option data-i18n="form_seg2">Lease company</option>
+        <option data-i18n="form_seg3">Auction / remarketing</option>
+        <option data-i18n="form_seg4">Insurer</option>
+        <option data-i18n="form_seg5">Body shop</option>
+        <option data-i18n="form_seg6">Large goods / e-commerce</option>
+        <option data-i18n="form_seg7">Photographer / film crew</option>
       </select>
     </div>
     <div class="ss-field">
-      <label class="ss-field__label" for="f-vol">Vehicles per month</label>
+      <label class="ss-field__label" for="f-vol" data-i18n="form_vol">Vehicles per month</label>
       <select class="ss-select" id="f-vol">
-        <option value="" disabled selected>Estimated volume</option>
+        <option value="" disabled selected data-i18n="form_vol_ph">Estimated volume</option>
         <option>1 – 20</option>
         <option>21 – 50</option>
         <option>51 – 200</option>
@@ -563,22 +513,22 @@ img{display:block;max-width:100%}
       </select>
     </div>
     <div class="ss-field">
-      <label class="ss-field__label" for="f-email">Email</label>
+      <label class="ss-field__label" for="f-email">E-mail</label>
       <input class="ss-input" id="f-email" type="email" placeholder="you@company.nl">
     </div>
     <div class="ss-field">
-      <label class="ss-field__label" for="f-phone">Phone</label>
-      <input class="ss-input" id="f-phone" type="tel" placeholder="+31 6 ...">
+      <label class="ss-field__label" for="f-phone" data-i18n="form_phone">Phone</label>
+      <input class="ss-input" id="f-phone" type="tel" data-i18n-ph="form_phone_ph" placeholder="+31 6 ...">
     </div>
     <div style="grid-column:1/-1;display:flex;gap:14px;margin-top:8px">
-      <a href="#" class="ss-btn ss-btn--primary" style="flex:1;justify-content:center">Book a test shoot</a>
-      <a href="#" class="ss-btn ss-btn--ghost" style="flex:1;justify-content:center">Talk to sales</a>
+      <a href="#" class="ss-btn ss-btn--primary" style="flex:1;justify-content:center" data-i18n="cta_book">Book a test shoot</a>
+      <a href="#" class="ss-btn ss-btn--ghost" style="flex:1;justify-content:center" data-i18n="cta_sales">Talk to sales</a>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 <footer class="ss-dark" style="padding:64px 0 32px;border-top:1px solid var(--graphite-700)">
 <div class="ss-container">
   <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px">
@@ -587,44 +537,194 @@ img{display:block;max-width:100%}
         <span class="ss-ring" style="--size:17px;--w:2.5px;--r:-145deg"><span class="ss-ring__arc"></span></span>
         <span>SpinSold</span>
       </a>
-      <p class="ss-small" style="margin-top:12px;max-width:28ch">Spin it. Sell it.<br>Photos that sell. Photos that prove.</p>
+      <p class="ss-small" style="margin-top:12px;max-width:28ch" data-i18n="footer_tagline" data-i18n-html="1">Spin it. Sell it.<br>Photos that sell. Photos that prove.</p>
     </div>
     <div>
-      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px">Services</h4>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px" data-i18n="footer_services">Services</h4>
       <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#">360° Photos</a><a href="#">Inspection</a><a href="#">Studio rental</a><a href="#">Large goods</a>
+        <a href="#" data-i18n="footer_360">360° Photos</a><a href="#" data-i18n="footer_insp">Inspection</a><a href="#" data-i18n="footer_rental">Studio rental</a><a href="#" data-i18n="footer_lg">Large goods</a>
       </div>
     </div>
     <div>
-      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px">Platform</h4>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px" data-i18n="footer_platform">Platform</h4>
       <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#">Dashboard</a><a href="#">API docs</a><a href="#">Customer portal</a><a href="#">Integrations</a>
+        <a href="#">Dashboard</a><a href="#" data-i18n="footer_api">API docs</a><a href="#" data-i18n="footer_portal">Customer portal</a><a href="#" data-i18n="footer_integ">Integrations</a>
       </div>
     </div>
     <div>
-      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px">Company</h4>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px" data-i18n="footer_company">Company</h4>
       <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a>
+        <a href="#" data-i18n="footer_about">About</a><a href="#" data-i18n="footer_careers">Careers</a><a href="#" data-i18n="footer_contact">Contact</a>
       </div>
     </div>
     <div>
-      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px">Legal</h4>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px" data-i18n="footer_legal">Legal</h4>
       <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a>
+        <a href="#">Privacy</a><a href="#" data-i18n="footer_terms">Terms</a><a href="#">Cookies</a>
       </div>
     </div>
   </div>
   <div style="border-top:1px solid var(--graphite-700);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
-    <span class="ss-small">© 2026 SpinSold B.V. All rights reserved.</span>
+    <span class="ss-small" data-i18n="footer_copy">© 2026 SpinSold B.V. All rights reserved.</span>
     <span class="ss-small">KvK [placeholder] · BTW [placeholder]</span>
   </div>
 </div>
 </footer>
 
-<!-- ═══ POWERED BY DES ═══ -->
+<!-- POWERED BY DES -->
 <div class="des-banner">
-  Designed &amp; built by <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform
+  <span data-i18n="des_banner" data-i18n-html="1">Designed &amp; built by <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform</span>
 </div>
+
+<script>
+(function(){
+  var T = {
+    nl: {
+      nav_dealers:"Dealers", nav_inspection:"Inspectie", nav_studio:"Studiohuur",
+      nav_large:"Groot materieel", nav_platform:"Platform", nav_pricing:"Prijzen",
+      nav_login:"Inloggen", nav_book:"Boek een shoot",
+
+      hero_eyebrow:"Geautomatiseerde 360° voertuigstudio",
+      hero_title:"Draai het.<br>Verkoop het.",
+      hero_lead:"Publicatieklare foto's, 360°-spins en getekende conditierapporten, binnen enkele minuten na aflevering online.",
+      hero_cta1:"Boek een shoot", hero_cta2:"Bekijk hoe het werkt",
+      hero_usp1:"360° exterieur + interieur", hero_usp2:"Binnen 24 uur online",
+      hero_usp3:"Auto's, bestelwagens en campers tot 4 ton",
+
+      s01_label:"Wat wij leveren",
+      promise1_title:"Foto's die verkopen.",
+      promise1_desc:"Consistente studiofoto's, branded achtergronden, gepubliceerd op uw website, Marktplaats, AutoScout24 en mobile.de.",
+      promise2_title:"Foto's die bewijzen.",
+      promise2_desc:"Inspectie onder vaste hoek en gecontroleerd licht. AI markeert elke kras; een inspecteur tekent het rapport.",
+
+      s02_label:"Hoe het werkt", s02_title:"Vijf stappen. Minuten, geen dagen.",
+      step1_title:"Boeken", step1_desc:"Online, via API of telefonisch.",
+      step2_title:"Rijdt binnen", step2_desc:"Of wij halen op.",
+      step3_title:"Draai &amp; fotografeer", step3_desc:"Circa 5 minuten per voertuig.",
+      step4_title:"AI &amp; QC", step4_desc:"Achtergrondwissel, kentekenmasking, kwaliteitscontrole.",
+      step5_title:"Opgeleverd", step5_desc:"Naar uw website, portalen en DMS.",
+
+      s03_label:"Voor wie", s03_title:"Gebouwd voor elke schakel<br>in de keten.",
+      seg1_title:"Autobedrijven", seg1_desc:"Sneller verkopen met dezelfde uitstraling bij elke vestiging.",
+      seg2_title:"Leasemaatschappijen", seg2_desc:"Gedocumenteerde innames, minder schadegeschillen.",
+      seg3_title:"Veilingen &amp; remarketing", seg3_desc:"Kopers op afstand bieden met vertrouwen.",
+      seg4_title:"Verzekeraars &amp; claims", seg4_desc:"Bewijs vóór dekking en na schade.",
+      seg5_title:"Schadeherstelbedrijven", seg5_desc:"Voor/na bewijs voor eigenaar en verzekeraar.",
+      seg6_title:"Groot materieel", seg6_desc:"Webshopklare foto's van objecten te zwaar om op te tillen.",
+
+      s04_label:"Interactieve showcase", s04_title:"Bekijk elke hoek.",
+      tab_exterior:"Exterieur", tab_interior:"Interieur", tab_inspection:"Inspectie",
+      viewer_drag:"Sleep om te draaien",
+
+      s05_label:"Platform",
+      plat_title:"Eén platform,<br>van boeking<br>tot factuur.",
+      plat_desc:"Volg elk voertuig vanaf het moment van boeking tot de foto's op de website van de dealer staan. API-first; sluit aan op uw bestaande DMS.",
+      tag_booking:"Boeking", tag_intake:"Intake", tag_capture:"Opname",
+      tag_ai:"AI-verwerking", tag_reports:"Rapporten", tag_delivery:"Oplevering",
+      tag_invoicing:"Facturatie", tag_portal:"Portaal",
+      dash_title:"Opdrachten vandaag", dash_shooting:"2 Fotografie",
+      dash_plate:"Kenteken", dash_customer:"Klant", dash_service:"Dienst", dash_time:"Tijd",
+      svc_360ext:"360° exterieur", svc_return:"Inname-inspectie",
+      svc_360insp:"360° + inspectie", svc_damage:"Schaderapport",
+      chip_shooting:"Fotografie", chip_delivered:"Opgeleverd",
+
+      s06_label:"AI-verwerking",
+      ai1_title:"Achtergrond &amp; reflectie", ai1_desc:"Schone, branded achtergronden automatisch toegepast.",
+      ai2_title:"Kentekenmasking", ai2_desc:"Kentekens gedetecteerd en geblurd voor privacy.",
+      ai3_title:"Schadedetectie", ai3_desc:"AI markeert elke kras; een menselijke inspecteur tekent af.",
+      ai4_title:"Advertentietekst", ai4_desc:"Gegenereerd in het Nederlands, Engels en Duits.",
+      ai_note:"Originelen worden altijd bewaard; elke AI-bewerking wordt gelogd.",
+
+      s07_label:"Studiohuur", rental_title:"Huur de studio.",
+      rental_desc:"7 m draaitafel, gecontroleerd licht, 's avonds en in het weekend. Met of zonder operator.",
+      rental_unit:"per uur", rental_cta1:"Beschikbaarheid bekijken", rental_cta2:"Bekijk pakketten",
+
+      s08_label:"Groot materieel", large_title:"Te zwaar om op te tillen.<br>Gemakkelijk te draaien.",
+      large_desc:"Meubels, machines, e-bikes en motorfietsen op de draaitafel. Webshopklare foto's zonder studiebouw.",
+
+      stat1:"Voertuigen gefotografeerd", stat2:"Gemiddelde shoottijd",
+      stat3:"Tot online", stat4:"Partners",
+
+      cta_title:"Klaar om te draaien?",
+      cta_lead:"Boek een proefshoot of praat met ons team. Wij laten zien hoe SpinSold in uw workflow past.",
+      form_name:"Naam", form_name_ph:"Uw naam",
+      form_company:"Bedrijf", form_company_ph:"Bedrijfsnaam",
+      form_segment:"Segment", form_seg_ph:"Selecteer uw segment",
+      form_seg1:"Autobedrijf", form_seg2:"Leasemaatschappij",
+      form_seg3:"Veiling / remarketing", form_seg4:"Verzekeraar",
+      form_seg5:"Schadeherstelbedrijf", form_seg6:"Groot materieel / e-commerce",
+      form_seg7:"Fotograaf / filmploeg",
+      form_vol:"Voertuigen per maand", form_vol_ph:"Geschat volume",
+      form_phone:"Telefoon", form_phone_ph:"+31 6 ...",
+      cta_book:"Boek een proefshoot", cta_sales:"Praat met sales",
+
+      footer_tagline:"Draai het. Verkoop het.<br>Foto's die verkopen. Foto's die bewijzen.",
+      footer_services:"Diensten", footer_360:"360° Foto's", footer_insp:"Inspectie",
+      footer_rental:"Studiohuur", footer_lg:"Groot materieel",
+      footer_platform:"Platform", footer_api:"API-documentatie",
+      footer_portal:"Klantenportaal", footer_integ:"Integraties",
+      footer_company:"Bedrijf", footer_about:"Over ons",
+      footer_careers:"Vacatures", footer_contact:"Contact",
+      footer_legal:"Juridisch", footer_terms:"Voorwaarden",
+      footer_copy:"© 2026 SpinSold B.V. Alle rechten voorbehouden.",
+      des_banner:'Ontworpen &amp; gebouwd door <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform'
+    }
+  };
+
+  var lang = 'en';
+  var els = document.querySelectorAll('[data-i18n]');
+  var phEls = document.querySelectorAll('[data-i18n-ph]');
+  var originals = new Map();
+  var phOriginals = new Map();
+
+  els.forEach(function(el){
+    originals.set(el, el.getAttribute('data-i18n-html') ? el.innerHTML : el.textContent);
+  });
+  phEls.forEach(function(el){
+    phOriginals.set(el, el.placeholder);
+  });
+
+  function apply(l){
+    lang = l;
+    document.documentElement.lang = l;
+    document.title = l === 'nl'
+      ? 'SpinSold — Geautomatiseerde 360° Voertuigstudio'
+      : 'SpinSold — Automated 360° Vehicle Studio';
+
+    els.forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(l === 'en'){
+        if(el.getAttribute('data-i18n-html')) el.innerHTML = originals.get(el);
+        else el.textContent = originals.get(el);
+      } else if(T[l] && T[l][key]){
+        if(el.getAttribute('data-i18n-html')) el.innerHTML = T[l][key];
+        else el.textContent = T[l][key];
+      }
+    });
+    phEls.forEach(function(el){
+      var key = el.getAttribute('data-i18n-ph');
+      if(l === 'en') el.placeholder = phOriginals.get(el);
+      else if(T[l] && T[l][key]) el.placeholder = T[l][key];
+    });
+
+    document.querySelectorAll('.ss-seg__opt[data-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === l ? 'true' : 'false');
+    });
+  }
+
+  document.querySelectorAll('.ss-seg__opt[data-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      apply(btn.getAttribute('data-lang'));
+      try{ localStorage.setItem('ss-lang', lang); }catch(e){}
+    });
+  });
+
+  try{
+    var saved = localStorage.getItem('ss-lang');
+    if(saved && T[saved]) apply(saved);
+  }catch(e){}
+})();
+</script>
 
 </body>
 </html>

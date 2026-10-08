@@ -162,7 +162,7 @@ img{display:block;max-width:100%}
   </div>
   <div class="hero-visual" style="position:relative;display:flex;align-items:center;justify-content:center">
     <span class="ss-ring ss-ring--spin" style="--size:400px;--w:1px;position:absolute"><span class="ss-ring__arc"></span></span>
-    <img src="img/hero-studio.webp" alt="SUV on turntable in studio, 3/4 front view" style="width:460px;aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);z-index:1;object-fit:cover">
+    <img src="img/hero-bmw.webp" alt="BMW X5 on turntable in SpinSold studio" style="width:460px;aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);z-index:1;object-fit:cover">
   </div>
 </div>
 <div class="ss-container" style="display:flex;justify-content:center;gap:48px;font:500 15px/1 var(--font-body);color:var(--steel-400);padding:48px 0 64px;flex-wrap:wrap">
@@ -324,6 +324,13 @@ img{display:block;max-width:100%}
       <span style="font-variant-numeric:tabular-nums">135° · 12 / 36</span>
     </div>
   </div>
+  <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center">
+    <img src="img/angles-grid.webp" alt="8-angle vehicle photography output" style="width:100%;border-radius:var(--radius-md);border:1px solid var(--graphite-700)">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <h3 class="ss-h3" data-i18n="showcase_title">Consistent angles, every vehicle.</h3>
+      <p class="ss-lead" data-i18n="showcase_desc">Eight fixed angles captured automatically. Same framing across your entire fleet — ready for your website, portals and print.</p>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -351,27 +358,8 @@ img{display:block;max-width:100%}
       </div>
     </div>
     <!-- Dashboard mockup -->
-    <div style="border:1px solid var(--steel-150);border-radius:var(--radius-xl);background:var(--white);overflow:hidden">
-      <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--steel-150)">
-        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
-        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
-        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
-        <span style="flex:1;height:28px;border-radius:var(--radius-sm);background:var(--steel-100);margin:0 48px"></span>
-      </div>
-      <div style="padding:20px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-          <span style="font:700 18px/1 var(--font-display);letter-spacing:-0.02em;color:var(--graphite)" data-i18n="dash_title">Today's jobs</span>
-          <div style="display:flex;gap:8px">
-            <span class="ss-chip" data-status="shooting" data-i18n="dash_shooting">2 Shooting</span>
-            <span class="ss-chip" data-status="ai">3 AI</span>
-          </div>
-        </div>
-        <div class="ss-jobrow ss-jobrow--head"><span data-i18n="dash_plate">Plate</span><span data-i18n="dash_customer">Customer</span><span data-i18n="dash_service">Service</span><span>Status</span><span style="text-align:right" data-i18n="dash_time">Time</span></div>
-        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">Van den Berg Auto's</span><span style="color:var(--steel-500)" data-i18n="svc_360ext">360° exterior</span><span><span class="ss-chip" data-status="shooting" data-i18n="chip_shooting">Shooting</span></span><span class="ss-jobrow__time">14:20</span></div>
-        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">LeasePlan NL</span><span style="color:var(--steel-500)" data-i18n="svc_return">Return inspection</span><span><span class="ss-chip" data-status="ai">AI</span></span><span class="ss-jobrow__time">13:45</span></div>
-        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">BCA Auctions</span><span style="color:var(--steel-500)" data-i18n="svc_360insp">360° + inspection</span><span><span class="ss-chip" data-status="delivered" data-i18n="chip_delivered">Delivered</span></span><span class="ss-jobrow__time">12:10</span></div>
-        <div class="ss-jobrow"><span><span class="ss-plate">XX-000-X</span></span><span style="color:var(--graphite)">Allianz Claims</span><span style="color:var(--steel-500)" data-i18n="svc_damage">Damage report</span><span><span class="ss-chip" data-status="qc">QC</span></span><span class="ss-jobrow__time">11:30</span></div>
-      </div>
+    <div style="border-radius:var(--radius-xl);overflow:hidden;border:1px solid var(--steel-150)">
+      <img src="img/platform-screen.webp" alt="SpinSold platform dashboard" style="width:100%;display:block">
     </div>
   </div>
 </div>
@@ -444,7 +432,11 @@ img{display:block;max-width:100%}
     <h2 class="ss-h2" style="color:var(--graphite)" data-i18n="large_title" data-i18n-html="1">Too heavy to lift.<br>Easy to spin.</h2>
     <p class="ss-body" style="color:var(--steel-600);max-width:36ch" data-i18n="large_desc">Furniture, machinery, e-bikes and motorbikes on the turntable. Webshop-ready photos without a studio build.</p>
   </div>
-  <img src="img/large-goods.webp" alt="E-bike and motorcycle on turntable, product photography" style="aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);object-fit:cover;width:100%">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <img src="img/motorcycle.webp" alt="Motorcycle on studio turntable" style="width:100%;border-radius:var(--radius-md);object-fit:cover;aspect-ratio:16/10">
+    <img src="img/sprinter.webp" alt="Mercedes Sprinter 4x4 van on turntable" style="width:100%;border-radius:var(--radius-md);object-fit:cover;aspect-ratio:16/10">
+    <img src="img/caravan.webp" alt="Hobby caravan on studio turntable" style="grid-column:1/-1;width:100%;border-radius:var(--radius-md);object-fit:cover;aspect-ratio:21/9">
+  </div>
 </div>
 </section>
 
@@ -467,6 +459,10 @@ img{display:block;max-width:100%}
     <span class="ss-ring ss-ring--spin" style="--size:64px;--w:1.5px"><span class="ss-ring__arc"></span></span>
     <h2 class="ss-h1" data-i18n="cta_title">Ready to spin?</h2>
     <p class="ss-lead" style="max-width:44ch" data-i18n="cta_lead">Book a test shoot or talk to our team. We'll show you how SpinSold fits your workflow.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px">
+    <img src="img/app-phone.webp" alt="SpinSold mobile app showing 360° vehicle view" style="width:100%;border-radius:var(--radius-md)">
+    <img src="img/marketing-card.webp" alt="SpinSold professional 360° photography features" style="width:100%;border-radius:var(--radius-md)">
   </div>
   <div class="cta-form" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
     <div class="ss-field">
@@ -655,7 +651,9 @@ img{display:block;max-width:100%}
       footer_careers:"Vacatures", footer_contact:"Contact",
       footer_legal:"Juridisch", footer_terms:"Voorwaarden",
       footer_copy:"© 2026 SpinSold B.V. Alle rechten voorbehouden.",
-      des_banner:'Ontworpen &amp; gebouwd door <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform'
+      des_banner:'Ontworpen &amp; gebouwd door <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform',
+      showcase_title:"Consistente hoeken, elk voertuig.",
+      showcase_desc:"Acht vaste hoeken automatisch vastgelegd. Dezelfde kadrering voor uw hele wagenpark — klaar voor uw website, portalen en drukwerk."
     }
   };
 

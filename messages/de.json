@@ -968,7 +968,15 @@
       "spinsold_label": "Live-Demo",
       "spinsold_title": "Autofotografie-Studio-Plattform",
       "spinsold_desc": "Automatisiertes 360°-Fahrzeugstudio mit KI-Verarbeitung, Schadensinspektionsberichten und Multi-Channel-Lieferung — eine vollständige SaaS-Plattform für Autofotografie-Studios.",
-      "spinsold_cta": "Live-Demo öffnen"
+      "spinsold_cta": "Live-Demo öffnen",
+      "detailing_label": "Live-Demo",
+      "detailing_title": "Fahrzeugaufbereitung-Plattform",
+      "detailing_desc": "Professionelle Fahrzeugaufbereitung für Händler, Leasingunternehmen und Fuhrparks — mit einer maßgeschneiderten SaaS-Plattform für Buchungen, Statusverfolgung und Fotoberichte.",
+      "detailing_cta": "Live-Demo öffnen",
+      "bodyshop_label": "Live-Demo",
+      "bodyshop_title": "Karosserie-Werkstatt",
+      "bodyshop_desc": "Karosserie- und Lackierbetrieb mit Online-Schadenaufnahme, Reparaturverfolgung und Kundenportal — eine vollständige SaaS-Plattform für Unfallreparaturbetriebe.",
+      "bodyshop_cta": "Live-Demo öffnen"
     }
   },
   "DesLab": {

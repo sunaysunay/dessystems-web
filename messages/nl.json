@@ -1105,7 +1105,15 @@
       "spinsold_label": "Live demo",
       "spinsold_title": "Autofotografie studio platform",
       "spinsold_desc": "Geautomatiseerde 360° voertuigstudio met AI-verwerking, schade-inspectierapporten en multi-channel levering — een compleet SaaS-platform voor autofotografiestudio's.",
-      "spinsold_cta": "Open live demo"
+      "spinsold_cta": "Open live demo",
+      "detailing_label": "Live demo",
+      "detailing_title": "Autopoetsbedrijf platform",
+      "detailing_desc": "Professionele voertuigpreparatie voor dealers, leasemaatschappijen en wagenparken — met een maatwerk SaaS-portaal voor boekingen, statustracking en foto-rapporten.",
+      "detailing_cta": "Open live demo",
+      "bodyshop_label": "Live demo",
+      "bodyshop_title": "Autoschade herstelbedrijf",
+      "bodyshop_desc": "Autoschade herstel en spuiterij met online schade-intake, reparatietracking en klantenportaal — een compleet maatwerk SaaS-platform voor schadeherstelbedrijven.",
+      "bodyshop_cta": "Open live demo"
     }
   },
   "DesLab": {

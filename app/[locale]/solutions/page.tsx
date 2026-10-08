@@ -20,9 +20,11 @@ const solutions = [
 
 // Static demo pages live outside the [locale] tree (public/), so they are linked with a plain <a>.
 const demos = [
-  { id: "vehicles", url: "/solutions/demos/vehicles" },
-  { id: "garage",   url: "/solutions/demos/garage" },
-  { id: "spinsold", url: "/solutions/demos/spinsold" },
+  { id: "vehicles",  url: "/solutions/demos/vehicles" },
+  { id: "garage",    url: "/solutions/demos/garage" },
+  { id: "spinsold",  url: "/solutions/demos/spinsold" },
+  { id: "detailing", url: "/solutions/demos/detailing" },
+  { id: "bodyshop",  url: "/solutions/demos/bodyshop" },
 ] as const
 
 const platformFeatures = ["ai", "auto", "multi", "sec", "anal", "flow"]

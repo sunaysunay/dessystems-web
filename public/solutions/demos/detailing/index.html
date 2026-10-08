@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poetsstation Borchwerf — Professionele Voertuigpreparatie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0F1B2D;--navy-900:#152338;--navy-850:#1A2B42;--navy-800:#1F344E;--navy-700:#2A4060;
+  --steel-600:#4F5761;--steel-500:#646D77;--steel-400:#8C959E;--steel-300:#A7B0B8;--steel-200:#C9CED3;--steel-150:#DDE0E2;--steel-100:#ECEDEC;
+  --paper:#F6F6F4;--white:#FFFFFF;
+  --teal:#1ABFB0;--teal-300:#5DD9CD;--teal-600:#0FA89B;--teal-700:#0B7D73;--teal-800:#085E57;--teal-ink:#031615;
+  --green:#3DD68C;--amber:#F2B84B;--red:#FF6464;
+  --font-display:'Manrope',sans-serif;--font-body:'Inter',sans-serif;
+  --radius-sm:8px;--radius-md:12px;--radius-xl:20px;
+}
+body{font-family:var(--font-body);-webkit-font-smoothing:antialiased;color:#F2F4F7;background:var(--navy)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.pb-container{max-width:1200px;margin:0 auto;padding:0 24px}
+@media(max-width:768px){.pb-container{padding:0 16px}}
+.pb-display{font:800 64px/70px var(--font-display);letter-spacing:-0.02em}
+.pb-h1{font:700 48px/54px var(--font-display);letter-spacing:-0.015em}
+.pb-h2{font:650 36px/42px var(--font-display)}
+.pb-h3{font:600 22px/28px var(--font-display)}
+.pb-h4{font:600 17px/23px var(--font-display)}
+.pb-lead{font:400 18px/28px var(--font-body);color:var(--steel-300)}
+.pb-body{font:400 15px/24px var(--font-body)}
+.pb-small{font:400 14px/20px var(--font-body);color:var(--steel-400)}
+.pb-eyebrow{font:600 12px/16px var(--font-body);text-transform:uppercase;letter-spacing:0.08em;color:var(--teal)}
+@media(max-width:768px){
+  .pb-display{font-size:38px;line-height:42px}
+  .pb-h1{font-size:32px;line-height:38px}
+  .pb-h2{font-size:26px;line-height:32px}
+}
+.pb-btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 26px;border-radius:var(--radius-sm);font:600 15px/1 var(--font-body);border:0;cursor:pointer;transition:all .2s}
+.pb-btn--primary{background:var(--teal);color:var(--teal-ink)}
+.pb-btn--primary:hover{background:var(--teal-300)}
+.pb-btn--ghost{background:transparent;border:1px solid var(--steel-600);color:#F2F4F7}
+.pb-btn--ghost:hover{border-color:var(--steel-400)}
+.pb-btn--sm{height:38px;padding:0 18px;font-size:14px}
+.pb-btn--white{background:var(--white);color:var(--navy);border:0}
+.pb-btn--white:hover{background:var(--steel-100)}
+.pb-card{display:flex;flex-direction:column;border:1px solid var(--steel-150);border-radius:var(--radius-md);background:var(--white)}
+.pb-card__title{font:600 18px/24px var(--font-display);color:var(--navy)}
+.pb-card__body{font:400 14px/22px var(--font-body);color:var(--steel-600)}
+.pb-tag{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 14px;border-radius:999px;font:500 13px/1 var(--font-body);border:1px solid var(--steel-150);background:var(--white);color:var(--navy)}
+.pb-chip{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:999px;font:600 12px/1 var(--font-body)}
+.pb-chip--teal{background:rgba(26,191,176,.12);color:var(--teal-700)}
+.pb-chip--amber{background:rgba(242,184,75,.12);color:#8A5B00}
+.pb-chip--green{background:rgba(61,214,140,.12);color:#147A4A}
+.pb-divider{display:flex;align-items:center;gap:12px}
+.pb-divider__line{flex:1;height:1px;background:var(--steel-150)}
+.pb-img{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px dashed var(--steel-200);background:var(--navy-850);border-radius:var(--radius-md);min-height:200px;text-align:center;padding:32px}
+.pb-img__desc{font:400 13px/18px var(--font-body);color:var(--steel-400);max-width:32ch}
+.pb-img--light{background:var(--steel-100);border-color:var(--steel-200)}
+.pb-stat{text-align:center}
+.pb-stat__value{font:700 48px/1 var(--font-display);letter-spacing:-0.03em;color:var(--teal);font-variant-numeric:tabular-nums}
+.pb-stat__unit{font:500 18px/1 var(--font-body);color:var(--steel-400);margin-left:4px}
+.pb-stat__label{font:500 14px/1 var(--font-body);color:var(--steel-300);margin-top:10px}
+.pb-ph{color:var(--teal);font-style:italic}
+.pb-field{display:flex;flex-direction:column;gap:6px}
+.pb-field__label{font:600 13px/1 var(--font-body);color:var(--steel-300)}
+.pb-input,.pb-select,.pb-textarea{padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--navy-700);background:var(--navy-850);color:#F2F4F7;font:400 15px/1.5 var(--font-body)}
+.pb-input{height:44px}
+.pb-select{height:44px}
+.pb-textarea{min-height:100px;resize:vertical}
+.pb-input::placeholder,.pb-textarea::placeholder{color:var(--steel-500)}
+.pb-input:focus,.pb-select:focus,.pb-textarea:focus{outline:2px solid var(--teal);outline-offset:-1px}
+.pb-topbar{background:var(--navy);font:400 13px/1 var(--font-body);color:var(--steel-400);border-bottom:1px solid var(--navy-700)}
+.pb-dark{background:var(--navy);color:#F2F4F7}
+.pb-light{background:var(--paper);color:var(--navy)}
+.pb-light .pb-lead{color:var(--steel-600)}
+.pb-light .pb-small{color:var(--steel-500)}
+.pb-light .pb-eyebrow{color:var(--teal-700)}
+.pb-wordmark{display:flex;align-items:center;gap:8px;font:800 19px/1 var(--font-display);letter-spacing:-0.02em;color:#F2F4F7}
+.pb-wordmark svg{flex-shrink:0}
+.pb-logo-tile{display:flex;align-items:center;justify-content:center;height:56px;border:1px dashed var(--steel-200);border-radius:var(--radius-sm);font:500 12px/1 var(--font-body);color:var(--steel-400);background:var(--white)}
+.pb-step{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;position:relative}
+.pb-step__num{width:40px;height:40px;border-radius:50%;background:var(--teal);color:var(--teal-ink);font:700 16px/40px var(--font-display);text-align:center}
+.pb-accordion{border:1px solid var(--steel-150);border-radius:var(--radius-md);overflow:hidden;background:var(--white)}
+.pb-accordion summary{padding:16px 20px;font:600 15px/22px var(--font-body);color:var(--navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.pb-accordion summary::-webkit-details-marker{display:none}
+.pb-accordion summary::after{content:'+';font-size:20px;color:var(--steel-400);transition:.2s}
+.pb-accordion[open] summary::after{transform:rotate(45deg)}
+.pb-accordion .pb-acc-body{padding:0 20px 16px;font:400 14px/22px var(--font-body);color:var(--steel-600)}
+.pb-jobrow{display:grid;grid-template-columns:1fr 1.2fr 1.2fr auto 70px;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--steel-150);font:400 13px/18px var(--font-body);color:var(--steel-500)}
+.pb-jobrow--head{font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--steel-400);border-bottom:1px solid var(--steel-200)}
+.pb-plate{font:700 12px/1 var(--font-body);letter-spacing:.04em;padding:4px 8px;border-radius:4px;background:var(--steel-100);color:var(--navy)}
+.pb-pricing-card{display:flex;flex-direction:column;border:1px solid var(--steel-150);border-radius:var(--radius-md);background:var(--white);padding:32px;gap:16px}
+.pb-pricing-card--pop{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal)}
+.pb-pricing-card__name{font:700 20px/1 var(--font-display);color:var(--navy)}
+.pb-pricing-card__price{font:700 32px/1 var(--font-display);color:var(--navy)}
+.pb-pricing-card__price span{font:400 14px/1 var(--font-body);color:var(--steel-500)}
+.pb-pricing-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;font:400 14px/20px var(--font-body);color:var(--steel-600)}
+.pb-pricing-card li::before{content:'✓ ';color:var(--teal-700);font-weight:700}
+.pb-star{color:var(--amber)}
+.des-banner{text-align:center;padding:24px;background:var(--navy-900);border-top:1px solid var(--navy-700);font:500 13px/1 var(--font-body);color:var(--steel-400)}
+.des-banner a{color:var(--teal);font-weight:600}
+.des-banner a:hover{color:var(--teal-300)}
+@media(max-width:768px){
+  .hero-grid{grid-template-columns:1fr!important}
+  .hero-visual{display:none}
+  .sectors-grid,.services-grid{grid-template-columns:1fr!important}
+  .stats-grid{grid-template-columns:1fr 1fr!important}
+  .value-grid,.portal-grid,.facility-grid,.pricing-grid,.coating-grid,.warranty-grid{grid-template-columns:1fr!important}
+  .process-grid{grid-template-columns:repeat(2,1fr)!important}
+  .logo-grid{grid-template-columns:repeat(4,1fr)!important}
+  .cta-grid{grid-template-columns:1fr!important}
+  .footer-grid{grid-template-columns:1fr 1fr!important}
+  .nav-links{display:none!important}
+  .topbar-info{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="pb-topbar">
+<div class="pb-container" style="display:flex;align-items:center;justify-content:space-between;height:36px;gap:20px">
+  <div class="topbar-info" style="display:flex;gap:24px;align-items:center">
+    <span>0165 396 820</span>
+    <span>info@autopoetsstation.nl</span>
+    <span>Ma–Vr 08:00–17:00</span>
+  </div>
+  <a href="#" style="color:var(--teal);font-weight:600;font-size:13px">Zakelijk portaal — inloggen</a>
+</div>
+</div>
+
+<!-- HEADER -->
+<header class="pb-dark" style="position:sticky;top:0;z-index:100;border-bottom:1px solid var(--navy-700);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(15,27,45,0.92)">
+<div class="pb-container" style="display:flex;align-items:center;height:64px;gap:24px">
+<a class="pb-wordmark" href="#">
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="4" stroke="var(--teal)" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="14" fill="var(--teal)">PB</text></svg>
+  <span>Poetsstation<br style="display:none"> Borchwerf</span>
+</a>
+<nav class="nav-links" style="display:flex;gap:20px;font:500 14px/1 var(--font-body);flex:1;min-width:0;margin-left:16px">
+  <a href="#diensten" style="color:var(--steel-300)">Diensten</a>
+  <a href="#zakelijk" style="color:var(--steel-300)">Zakelijk</a>
+  <a href="#werkwijze" style="color:var(--steel-300)">Werkwijze</a>
+  <a href="#over" style="color:var(--steel-300)">Over ons</a>
+  <a href="#faq" style="color:var(--steel-300)">FAQ</a>
+  <a href="#contact" style="color:var(--steel-300)">Contact</a>
+</nav>
+<div style="display:flex;align-items:center;gap:10px;margin-left:auto">
+  <a href="#contact" class="pb-btn pb-btn--ghost pb-btn--sm">Afspraak maken</a>
+  <a href="#contact" class="pb-btn pb-btn--primary pb-btn--sm">Zakelijke offerte</a>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="pb-dark" style="padding:100px 0 0;overflow:hidden">
+<div class="pb-container hero-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 260px)">
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <span class="pb-eyebrow">Professionele voertuigpreparatie</span>
+    <h1 class="pb-display">Afleverklaar.<br>Elke keer.<br>Op schaal.</h1>
+    <p class="pb-lead" style="max-width:42ch">Professionele voertuigpreparatie, showroomonderhoud en lakbescherming voor autodealers, leasemaatschappijen en wagenparken in West-Brabant.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a href="#contact" class="pb-btn pb-btn--primary">Zakelijke offerte aanvragen</a>
+      <a href="#contact" class="pb-btn pb-btn--ghost">Afspraak maken (particulier)</a>
+    </div>
+  </div>
+  <div class="hero-visual" style="position:relative;display:flex;align-items:center;justify-content:center">
+    <figure class="pb-img" style="width:480px;aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);z-index:1">
+      <span class="pb-eyebrow">Eigen foto: werkplaats</span>
+      <span class="pb-img__desc">Professionele detailer met polijstmachine onder inspectielicht, glanzende lak in close-up</span>
+    </figure>
+  </div>
+</div>
+<div class="pb-container" style="display:flex;justify-content:center;gap:40px;font:500 14px/1 var(--font-body);color:var(--steel-400);padding:48px 0 64px;flex-wrap:wrap">
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Verzekerd voor voertuigen in onze zorg</span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Foto-rapport per voertuig</span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Doorlooptijd 24–48 uur</span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M10 17h5"/></svg> Haal- en brengservice</span>
+</div>
+</section>
+
+<!-- STATS BAR -->
+<section style="background:var(--navy-900);padding:64px 0;border-top:1px solid var(--navy-700);border-bottom:1px solid var(--navy-700)">
+<div class="pb-container">
+  <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center">
+    <div class="pb-stat"><div class="pb-stat__value"><span class="pb-ph">[XX]</span></div><div class="pb-stat__label">Jaar ervaring</div></div>
+    <div class="pb-stat"><div class="pb-stat__value"><span class="pb-ph">[X.XXX]</span><span class="pb-stat__unit">+</span></div><div class="pb-stat__label">Voertuigen per jaar</div></div>
+    <div class="pb-stat"><div class="pb-stat__value"><span class="pb-ph">[XX]</span></div><div class="pb-stat__label">Dealers en zakelijke klanten</div></div>
+    <div class="pb-stat"><div class="pb-stat__value">24–48<span class="pb-stat__unit">uur</span></div><div class="pb-stat__label">Doorlooptijd</div></div>
+  </div>
+</div>
+</section>
+
+<!-- CLIENT LOGO STRIP -->
+<section class="pb-light" style="padding:64px 0">
+<div class="pb-container" style="text-align:center">
+  <p class="pb-small" style="margin-bottom:32px">Vertrouwd door dealers en zakelijke klanten in de regio</p>
+  <div class="logo-grid" style="display:grid;grid-template-columns:repeat(8,1fr);gap:16px">
+    <div class="pb-logo-tile">Dealerlogo</div>
+    <div class="pb-logo-tile">Dealerlogo</div>
+    <div class="pb-logo-tile">Dealerlogo</div>
+    <div class="pb-logo-tile">Dealerlogo</div>
+    <div class="pb-logo-tile">Dealerlogo</div>
+    <div class="pb-logo-tile">Dealerlogo</div>
+    <div class="pb-logo-tile">Dealerlogo</div>
+    <div class="pb-logo-tile">Dealerlogo</div>
+  </div>
+</div>
+</section>
+
+<!-- SECTORS WE SERVE -->
+<section id="zakelijk" class="pb-light" style="padding:0 0 96px">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">01</span><span class="pb-eyebrow" style="color:var(--steel-500)">Sectoren</span><span class="pb-divider__line"></span>
+  </div>
+  <h2 class="pb-h2" style="color:var(--navy);margin-bottom:48px">Voor wie wij werken</h2>
+  <div class="sectors-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="pb-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <h3 class="pb-card__title">Autodealers</h3>
+      <p class="pb-card__body">Showroomonderhoud en afleverpreparatie op schaal.</p>
+    </div>
+    <div class="pb-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+      <h3 class="pb-card__title">Leasemaatschappijen</h3>
+      <p class="pb-card__body">Inname- en retourpreparatie met gestandaardiseerd rapport.</p>
+    </div>
+    <div class="pb-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8l4.58-3.06A1 1 0 0122 5.86v8.28a1 1 0 01-1.42.92L16 12"/></svg>
+      <h3 class="pb-card__title">Wagenparkbeheer</h3>
+      <p class="pb-card__body">Periodiek onderhoud van bedrijfsvoertuigen.</p>
+    </div>
+    <div class="pb-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M21 12a9 9 0 11-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg>
+      <h3 class="pb-card__title">Autoverhuur</h3>
+      <p class="pb-card__body">Snelle turnaround tussen verhuurperiodes.</p>
+    </div>
+    <div class="pb-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      <h3 class="pb-card__title">Occasionhandel en remarketing</h3>
+      <p class="pb-card__body">Verkoopklaar maken en fotografie.</p>
+    </div>
+    <div class="pb-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <h3 class="pb-card__title">Particulieren</h3>
+      <p class="pb-card__body">Complete poets- en coatingbehandelingen.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SERVICES GRID -->
+<section id="diensten" class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">02</span><span class="pb-eyebrow" style="color:var(--steel-500)">Diensten</span><span class="pb-divider__line"></span>
+  </div>
+  <h2 class="pb-h2" style="color:var(--navy);margin-bottom:48px">Ons volledige dienstenpakket</h2>
+  <div class="services-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M5 12l5 5L20 7"/></svg>
+      <h4 class="pb-card__title">Afleverpoetsbeurt</h4>
+      <p class="pb-card__body">Voertuig afleverklaar voor de showroom of klant.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <h4 class="pb-card__title">Showroomonderhoud</h4>
+      <p class="pb-card__body">Periodiek, op locatie mogelijk. Vaste planning.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      <h4 class="pb-card__title">Occasion- en remarketingpreparatie</h4>
+      <p class="pb-card__body">Verkoopklaar met fotografie uit eigen studio.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M12 2a4 4 0 014 4c0 2-2 3-2 6H10c0-3-2-4-2-6a4 4 0 014-4z"/><path d="M10 18h4M10 22h4M10 20h4"/></svg>
+      <h4 class="pb-card__title">Interieur stoomreiniging</h4>
+      <p class="pb-card__body">Stoom op ca. 175 °C. Verwijdert bacterien en geuren.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10"/><path d="M2 12h20"/></svg>
+      <h4 class="pb-card__title">Lakcorrectie en polijsten</h4>
+      <p class="pb-card__body">Meerstaps machinaal polijsten voor diepe glans.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <h4 class="pb-card__title">Ceramic coating</h4>
+      <p class="pb-card__body">2, 3 of 5 jaar garantie. Gecertificeerd applicateur.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      <h4 class="pb-card__title">Koplamprestauratie</h4>
+      <p class="pb-card__body">Vergeelde of matte koplampen helder en veilig.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m8 0h3a2 2 0 002-2v-3"/></svg>
+      <h4 class="pb-card__title">Geur- en ozonbehandeling</h4>
+      <p class="pb-card__body">Neutraliseert rookgeur en andere hardnekkige luchtjes.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      <h4 class="pb-card__title">Sticker- en belettering verwijderen</h4>
+      <p class="pb-card__body">Zonder schade aan de lak.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      <h4 class="pb-card__title">Kunststofreparatie</h4>
+      <p class="pb-card__body">Beschadigde bumpers en interieuronderdelen hersteld.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <h4 class="pb-card__title">Voertuigfotografie</h4>
+      <p class="pb-card__body">In eigen fotostudio, direct publicatieklaar.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M10 17h5"/></svg>
+      <h4 class="pb-card__title">Haal- en brengservice</h4>
+      <p class="pb-card__body">Ophalen en afleveren met handelaarskenteken.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- WHY CHOOSE US / B2B VALUE PROPOSITION -->
+<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">03</span><span class="pb-eyebrow" style="color:var(--steel-500)">Waarom wij</span><span class="pb-divider__line"></span>
+  </div>
+  <div class="value-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h2 class="pb-h2" style="color:var(--navy)">Zakelijke waardepropositie</h2>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;font:400 15px/24px var(--font-body);color:var(--steel-600)">
+        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Vaste doorlooptijden (SLA-afspraken)</li>
+        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Kwaliteitschecklist per voertuig</li>
+        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Voor/na foto-rapport bij elke behandeling</li>
+        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Vaste contactpersoon per account</li>
+        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Maandfacturatie met PO-nummers</li>
+        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Volumetarieven en raamovereenkomsten</li>
+        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Opzichtverzekering voor alle voertuigen</li>
+      </ul>
+    </div>
+    <figure class="pb-img pb-img--light" style="aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl)">
+      <span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span>
+      <span class="pb-img__desc" style="color:var(--steel-500)">Rij geprepareerde dealervoertuigen in de behandelruimte, gecontroleerd licht</span>
+    </figure>
+  </div>
+</div>
+</section>
+
+<!-- WERKWIJZE — B2B PROCESS -->
+<section id="werkwijze" class="pb-dark" style="padding:96px 0">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow">04</span><span class="pb-eyebrow" style="color:var(--steel-400)">Werkwijze</span><span class="pb-divider__line" style="background:var(--navy-700)"></span>
+  </div>
+  <h2 class="pb-h2" style="margin-bottom:64px">Zeven stappen. Van aanvraag tot factuur.</h2>
+  <div class="process-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:20px">
+    <div class="pb-step"><div class="pb-step__num">1</div><h4 class="pb-h4">Aanvraag</h4><p class="pb-small">Portaal, e-mail of lijst</p></div>
+    <div class="pb-step"><div class="pb-step__num">2</div><h4 class="pb-h4">Ophalen</h4><p class="pb-small">Of aanleveren op locatie</p></div>
+    <div class="pb-step"><div class="pb-step__num">3</div><h4 class="pb-h4">Intake</h4><p class="pb-small">Inspectie met foto's</p></div>
+    <div class="pb-step"><div class="pb-step__num">4</div><h4 class="pb-h4">Behandeling</h4><p class="pb-small">Volgens vaste werkinstructie</p></div>
+    <div class="pb-step"><div class="pb-step__num">5</div><h4 class="pb-h4">QC</h4><p class="pb-small">Tweede controleur</p></div>
+    <div class="pb-step"><div class="pb-step__num">6</div><h4 class="pb-h4">Gereed</h4><p class="pb-small">Foto-rapport en melding</p></div>
+    <div class="pb-step"><div class="pb-step__num">7</div><h4 class="pb-h4">Aflevering</h4><p class="pb-small">Retour en maandfactuur</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ZAKELIJK PORTAAL -->
+<section class="pb-light" style="padding:96px 0">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">05</span><span class="pb-eyebrow" style="color:var(--steel-500)">Zakelijk portaal</span><span class="pb-divider__line"></span>
+  </div>
+  <div class="portal-grid" style="display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h2 class="pb-h2" style="color:var(--navy)">Uw voertuigen realtime in beeld</h2>
+      <p class="pb-body" style="color:var(--steel-600)">Meld voertuigen aan op kenteken, volg de status van ontvangen tot gereed, download voor/na foto's en beheer facturen en rapportages. Meerdere vestigingen en gebruikers.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+        <span class="pb-tag">Kenteken aanmelden</span>
+        <span class="pb-tag">Status volgen</span>
+        <span class="pb-tag">Foto's downloaden</span>
+        <span class="pb-tag">Facturen</span>
+        <span class="pb-tag">Multi-vestiging</span>
+      </div>
+    </div>
+    <!-- Dashboard mockup -->
+    <div style="border:1px solid var(--steel-150);border-radius:var(--radius-xl);background:var(--white);overflow:hidden">
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--steel-150)">
+        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
+        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
+        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
+        <span style="flex:1;height:28px;border-radius:var(--radius-sm);background:var(--steel-100);margin:0 48px"></span>
+      </div>
+      <div style="padding:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <span style="font:700 16px/1 var(--font-display);color:var(--navy)">Voertuigen vandaag</span>
+          <div style="display:flex;gap:8px">
+            <span class="pb-chip pb-chip--teal">3 In behandeling</span>
+            <span class="pb-chip pb-chip--green">5 Gereed</span>
+          </div>
+        </div>
+        <div class="pb-jobrow pb-jobrow--head"><span>Kenteken</span><span>Model</span><span>Dienst</span><span>Status</span><span style="text-align:right">Datum</span></div>
+        <div class="pb-jobrow"><span><span class="pb-plate">XX-000-X</span></span><span style="color:var(--navy)">Audi A4 Avant</span><span>Afleverpoetsbeurt</span><span><span class="pb-chip pb-chip--green">Gereed</span></span><span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">14:20</span></div>
+        <div class="pb-jobrow"><span><span class="pb-plate">XX-000-X</span></span><span style="color:var(--navy)">VW Golf 8</span><span>Ceramic coating</span><span><span class="pb-chip pb-chip--amber">In behandeling</span></span><span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">13:00</span></div>
+        <div class="pb-jobrow"><span><span class="pb-plate">XX-000-X</span></span><span style="color:var(--navy)">Mercedes C-Klasse</span><span>Retourpreparatie</span><span><span class="pb-chip pb-chip--teal">Intake</span></span><span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">11:45</span></div>
+        <div class="pb-jobrow" style="border-bottom:0"><span><span class="pb-plate">XX-000-X</span></span><span style="color:var(--navy)">Toyota RAV4</span><span>Stoomreiniging</span><span><span class="pb-chip pb-chip--green">Gereed</span></span><span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">10:30</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRODUCTS & MATERIALS -->
+<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">06</span><span class="pb-eyebrow" style="color:var(--steel-500)">Producten en werkwijze</span><span class="pb-divider__line"></span>
+  </div>
+  <h2 class="pb-h2" style="color:var(--navy);margin-bottom:48px">Professionele producten. Verantwoorde werkwijze.</h2>
+  <div class="sectors-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <h4 class="pb-card__title">Merkproducten</h4>
+      <p class="pb-card__body">Professionele producten van toonaangevende merken voor elk type behandeling.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <h4 class="pb-card__title">pH-neutraal en afbreekbaar</h4>
+      <p class="pb-card__body">Biologisch afbreekbare reinigers die lakken en materialen respecteren.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <h4 class="pb-card__title">Stoomreiniging ca. 175 °C</h4>
+      <p class="pb-card__body">Verwijdert bacterien, allergenen en geuren uit textiel en leer.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <h4 class="pb-card__title">Gecertificeerd coatingapplicateur</h4>
+      <p class="pb-card__body">Erkende installateur voor professionele ceramic coatings.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <h4 class="pb-card__title">Getraind door Malco Automotive</h4>
+      <p class="pb-card__body">Ons team is opgeleid door Malco voor polijst- en hersteltechnieken.</p>
+    </div>
+    <div class="pb-card" style="padding:24px;gap:12px">
+      <h4 class="pb-card__title">Afvalwaterverwerking</h4>
+      <p class="pb-card__body">Slibvangput en olieafscheider conform milieuvoorschriften.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FACILITY & CAPACITY -->
+<section id="over" class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">07</span><span class="pb-eyebrow" style="color:var(--steel-500)">Faciliteiten</span><span class="pb-divider__line"></span>
+  </div>
+  <h2 class="pb-h2" style="color:var(--navy);margin-bottom:48px">Onze locatie op Borchwerf</h2>
+  <div class="facility-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px">
+    <figure class="pb-img pb-img--light" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md)"><span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span><span class="pb-img__desc" style="color:var(--steel-500)">Buitenaanzicht bedrijfspand</span></figure>
+    <figure class="pb-img pb-img--light" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md)"><span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span><span class="pb-img__desc" style="color:var(--steel-500)">Overdekte behandelruimte met voertuig</span></figure>
+    <figure class="pb-img pb-img--light" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md)"><span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span><span class="pb-img__desc" style="color:var(--steel-500)">Eigen fotostudio met voertuig</span></figure>
+    <figure class="pb-img pb-img--light" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md)"><span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span><span class="pb-img__desc" style="color:var(--steel-500)">Beveiligde stalling</span></figure>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font:500 14px/1 var(--font-body);color:var(--steel-600)">
+    <span class="pb-tag">Overdekte behandelruimtes</span>
+    <span class="pb-tag"><span class="pb-ph">[X]</span> voertuigen per dag</span>
+    <span class="pb-tag">Eigen fotostudio</span>
+    <span class="pb-tag">Beveiligde stalling</span>
+    <span class="pb-tag">Centrale ligging A17/A58</span>
+  </div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">08</span><span class="pb-eyebrow" style="color:var(--steel-500)">Tarieven</span><span class="pb-divider__line"></span>
+  </div>
+
+  <!-- Tab switcher -->
+  <div style="display:flex;gap:4px;margin-bottom:48px;padding:3px;background:var(--steel-100);border-radius:var(--radius-sm);width:fit-content">
+    <button class="pb-price-tab" data-tab="particulier" style="height:36px;padding:0 20px;border-radius:6px;border:0;font:600 14px/1 var(--font-body);cursor:pointer;background:var(--teal);color:var(--teal-ink)">Particulier</button>
+    <button class="pb-price-tab" data-tab="zakelijk" style="height:36px;padding:0 20px;border-radius:6px;border:0;font:600 14px/1 var(--font-body);cursor:pointer;background:none;color:var(--steel-500)">Zakelijk</button>
+  </div>
+
+  <!-- Particulier pricing -->
+  <div id="tab-particulier">
+    <h3 class="pb-h3" style="color:var(--navy);margin-bottom:32px">Poetspakketten</h3>
+    <div class="pricing-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px">
+      <div class="pb-pricing-card">
+        <div class="pb-pricing-card__name">Basis</div>
+        <div class="pb-pricing-card__price">€<span class="pb-ph">[XX]</span> <span>incl. btw</span></div>
+        <ul>
+          <li>Exterieur handwas</li>
+          <li>Velgen gereinigd</li>
+          <li>Ramen binnen en buiten</li>
+          <li>Stofzuigen</li>
+          <li>Kunststof reinigen</li>
+        </ul>
+        <a href="#contact" class="pb-btn pb-btn--ghost" style="border-color:var(--steel-200);color:var(--navy);width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
+      </div>
+      <div class="pb-pricing-card pb-pricing-card--pop">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span class="pb-pricing-card__name">Compleet</span><span class="pb-chip pb-chip--teal">Meest gekozen</span></div>
+        <div class="pb-pricing-card__price">€<span class="pb-ph">[XX]</span> <span>incl. btw</span></div>
+        <ul>
+          <li>Alles van Basis</li>
+          <li>Interieur stoomreiniging</li>
+          <li>Bekleding en hemel</li>
+          <li>Kofferbak</li>
+          <li>Wax beschermlaag</li>
+        </ul>
+        <a href="#contact" class="pb-btn pb-btn--primary" style="width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
+      </div>
+      <div class="pb-pricing-card">
+        <div class="pb-pricing-card__name">Premium</div>
+        <div class="pb-pricing-card__price">€<span class="pb-ph">[XX]</span> <span>incl. btw</span></div>
+        <ul>
+          <li>Alles van Compleet</li>
+          <li>Kleibehandeling</li>
+          <li>Meerstaps machinaal polijsten</li>
+          <li>Motorruimte</li>
+          <li>Lakverzegeling</li>
+        </ul>
+        <a href="#contact" class="pb-btn pb-btn--ghost" style="border-color:var(--steel-200);color:var(--navy);width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
+      </div>
+    </div>
+    <p class="pb-small" style="color:var(--steel-500);max-width:60ch">SUV/MPV toeslag van toepassing. Toeslag bij sterke vervuiling (bijv. hondenharen) altijd vooraf besproken. Haal- en brengservice €35.</p>
+
+    <h3 class="pb-h3" style="color:var(--navy);margin:48px 0 32px">Ceramic coating</h3>
+    <div class="coating-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <div class="pb-pricing-card">
+        <div class="pb-pricing-card__name">2 jaar garantie</div>
+        <div class="pb-pricing-card__price">€<span class="pb-ph">[XXX]</span> <span>incl. btw</span></div>
+        <ul>
+          <li>Wasbeurt en kleibehandeling</li>
+          <li>Eenstaps machinaal polijsten</li>
+          <li>Coating applicatie</li>
+          <li>Digitaal certificaat op kenteken</li>
+        </ul>
+        <a href="#contact" class="pb-btn pb-btn--ghost" style="border-color:var(--steel-200);color:var(--navy);width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
+      </div>
+      <div class="pb-pricing-card">
+        <div class="pb-pricing-card__name">3 jaar garantie</div>
+        <div class="pb-pricing-card__price">€<span class="pb-ph">[XXX]</span> <span>incl. btw</span></div>
+        <ul>
+          <li>Alles van 2 jaar</li>
+          <li>Meerstaps polijsten</li>
+          <li>Velgen gecoat</li>
+          <li>Jaarlijkse controlebeurt</li>
+        </ul>
+        <a href="#contact" class="pb-btn pb-btn--ghost" style="border-color:var(--steel-200);color:var(--navy);width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
+      </div>
+      <div class="pb-pricing-card pb-pricing-card--pop">
+        <div class="pb-pricing-card__name">5 jaar garantie</div>
+        <div class="pb-pricing-card__price">€<span class="pb-ph">[XXX]</span> <span>incl. btw</span></div>
+        <ul>
+          <li>Alles van 3 jaar</li>
+          <li>Glas gecoat</li>
+          <li>Interieur bescherming</li>
+          <li>Jaarlijkse controlebeurt inclusief</li>
+        </ul>
+        <a href="#contact" class="pb-btn pb-btn--primary" style="width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zakelijk pricing -->
+  <div id="tab-zakelijk" style="display:none">
+    <div style="text-align:center;padding:64px 24px;border:1px dashed var(--steel-200);border-radius:var(--radius-xl);background:var(--white)">
+      <h3 class="pb-h2" style="color:var(--navy);margin-bottom:16px">Volumetarieven en raamovereenkomsten op maat</h3>
+      <p class="pb-body" style="color:var(--steel-600);max-width:44ch;margin:0 auto 32px">Wij stellen een voorstel op dat past bij uw volume, frequentie en gewenste diensten. Inclusief SLA en vaste contactpersoon.</p>
+      <a href="#contact" class="pb-btn pb-btn--primary">Offerte aanvragen</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- WARRANTY / GARANTIE -->
+<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">09</span><span class="pb-eyebrow" style="color:var(--steel-500)">Garantie</span><span class="pb-divider__line"></span>
+  </div>
+  <div class="warranty-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="pb-card" style="padding:32px;gap:16px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      <h3 class="pb-card__title">Vakmanschapsgarantie</h3>
+      <p class="pb-card__body">Niet tevreden? Meld het binnen 48 uur en wij behandelen kosteloos opnieuw.</p>
+    </div>
+    <div class="pb-card" style="padding:32px;gap:16px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <h3 class="pb-card__title">Coatinggarantie</h3>
+      <p class="pb-card__body">2, 3 of 5 jaar garantie met digitaal certificaat op kenteken. Jaarlijkse controlebeurt.</p>
+    </div>
+    <div class="pb-card" style="padding:32px;gap:16px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <h3 class="pb-card__title">Schadebeleid</h3>
+      <p class="pb-card__body">Intake met foto's. Schade door ons wordt op onze kosten hersteld. Volledig verzekerd (opzichtverzekering).</p>
+    </div>
+  </div>
+  <p class="pb-small" style="margin-top:24px;text-align:center"><a href="#" style="color:var(--teal-700);font-weight:600">Bekijk garantievoorwaarden →</a></p>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="pb-container">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">10</span><span class="pb-eyebrow" style="color:var(--steel-500)">Klantervaring</span><span class="pb-divider__line"></span>
+  </div>
+  <div style="text-align:center;margin-bottom:48px">
+    <div style="font:700 48px/1 var(--font-display);color:var(--navy)"><span class="pb-ph">[4,X]</span> <span class="pb-star">★</span></div>
+    <p class="pb-small" style="margin-top:8px">op Google · <span class="pb-ph">[XX]</span> reviews</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="pb-card" style="padding:28px;gap:16px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic">"Elke week leveren wij voertuigen af via Poetsstation Borchwerf. Altijd hetzelfde hoge niveau, nooit een klacht van onze klanten."</p>
+      <div><span style="font:600 14px/1 var(--font-body);color:var(--navy)">[Naam]</span><br><span class="pb-small">Vestigingsmanager, [Dealer]</span></div>
+    </div>
+    <div class="pb-card" style="padding:28px;gap:16px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic">"Het portaal bespaart ons tijd: aanmelden, status volgen en foto-rapport downloaden. Overzichtelijk en snel."</p>
+      <div><span style="font:600 14px/1 var(--font-body);color:var(--navy)">[Naam]</span><br><span class="pb-small">Fleet Manager, [Leasemaatschappij]</span></div>
+    </div>
+    <div class="pb-card" style="padding:28px;gap:16px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic">"Mijn auto zag eruit alsof hij net uit de showroom kwam. De ceramic coating houdt hem nu al twee jaar schoon."</p>
+      <div><span style="font:600 14px/1 var(--font-body);color:var(--navy)">[Naam]</span><br><span class="pb-small">Particuliere klant</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="pb-container" style="max-width:800px">
+  <div class="pb-divider" style="margin-bottom:48px">
+    <span class="pb-eyebrow" style="color:var(--teal-700)">11</span><span class="pb-eyebrow" style="color:var(--steel-500)">Veelgestelde vragen</span><span class="pb-divider__line"></span>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <details class="pb-accordion"><summary>Hoe lang duurt een behandeling?</summary><div class="pb-acc-body">Een standaard afleverpoetsbeurt duurt 2 tot 3 uur. Een volledige Premium-behandeling met polijsten kan een volledige werkdag in beslag nemen. Bij aanmelding ontvangt u een indicatie van de doorlooptijd.</div></details>
+    <details class="pb-accordion"><summary>Werken jullie alleen op afspraak?</summary><div class="pb-acc-body">Ja, wij werken uitsluitend op afspraak. Zo garanderen wij voldoende tijd en aandacht per voertuig. Neem contact op via telefoon, e-mail of ons online formulier.</div></details>
+    <details class="pb-accordion"><summary>Wat moet ik uit de auto halen?</summary><div class="pb-acc-body">Verwijder alle persoonlijke bezittingen en waardevolle spullen. Laat de auto zo leeg mogelijk achter, zodat wij direct aan de slag kunnen.</div></details>
+    <details class="pb-accordion"><summary>Verdwijnen alle krassen door polijsten?</summary><div class="pb-acc-body">Oppervlakkige krassen en swirls worden vrijwel volledig verwijderd. Diepe krassen die door de blanke lak gaan, kunnen niet volledig worden weggepolijst, maar worden wel verminderd. Wij beoordelen dit vooraf en communiceren eerlijk over het verwachte resultaat.</div></details>
+    <details class="pb-accordion"><summary>Is stoomreinigen veilig voor elektronica en leer?</summary><div class="pb-acc-body">Ja. Wij gebruiken professionele stoomapparatuur met regelbare druk en temperatuur. Onze medewerkers zijn getraind om gevoelige materialen zoals leer, alcantara en elektronica veilig te behandelen.</div></details>
+    <details class="pb-accordion"><summary>Wat is het verschil tussen wax en ceramic coating?</summary><div class="pb-acc-body">Wax biedt tijdelijke bescherming (enkele weken tot maanden). Ceramic coating hecht chemisch aan de lak en biedt jarenlange bescherming tegen UV, vuil, vogelpoep en lichte krassen. De investering is hoger, maar het rendement op de lange termijn is groter.</div></details>
+    <details class="pb-accordion"><summary>Mag ik met een gecoate auto door de wasstraat?</summary><div class="pb-acc-body">Wij raden het af. Wasstraten gebruiken borstels die de coating op termijn kunnen aantasten. Een handwas of contactloze wasbeurt is de beste keuze voor een gecoat voertuig.</div></details>
+    <details class="pb-accordion"><summary>Hebben jullie zakelijke tarieven en raamovereenkomsten?</summary><div class="pb-acc-body">Ja, wij bieden volumetarieven en raamovereenkomsten op maat. Neem contact op voor een vrijblijvende offerte op basis van uw volume en gewenste diensten.</div></details>
+    <details class="pb-accordion"><summary>Zijn voertuigen verzekerd tijdens de behandeling?</summary><div class="pb-acc-body">Ja. Alle voertuigen in onze zorg zijn verzekerd via onze opzichtverzekering. Bij intake maken wij een foto-inspectie van het voertuig.</div></details>
+    <details class="pb-accordion"><summary>Hoe wordt er zakelijk gefactureerd?</summary><div class="pb-acc-body">Zakelijke klanten ontvangen een maandoverzicht met specificatie per voertuig. Facturatie verloopt per maand met een betalingstermijn van 14 dagen. PO-nummers worden ondersteund.</div></details>
+    <details class="pb-accordion"><summary>Kan ik mijn afspraak annuleren?</summary><div class="pb-acc-body">Ja, tot 24 uur voor de afspraak kosteloos annuleren of verzetten. Bij annulering binnen 24 uur kunnen wij een vergoeding in rekening brengen.</div></details>
+  </div>
+</div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contact" class="pb-dark" style="padding:96px 0">
+<div class="pb-container">
+  <div class="cta-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+    <div>
+      <!-- Tab switcher for form -->
+      <div style="display:flex;gap:4px;margin-bottom:32px;padding:3px;background:var(--navy-850);border-radius:var(--radius-sm);width:fit-content">
+        <button class="pb-form-tab" data-form="zakelijk-form" style="height:36px;padding:0 20px;border-radius:6px;border:0;font:600 14px/1 var(--font-body);cursor:pointer;background:var(--teal);color:var(--teal-ink)">Zakelijke offerte</button>
+        <button class="pb-form-tab" data-form="particulier-form" style="height:36px;padding:0 20px;border-radius:6px;border:0;font:600 14px/1 var(--font-body);cursor:pointer;background:none;color:var(--steel-400)">Afspraak particulier</button>
+      </div>
+
+      <!-- Zakelijk form -->
+      <div id="zakelijk-form" style="display:flex;flex-direction:column;gap:16px">
+        <div class="pb-field"><label class="pb-field__label" for="z-company">Bedrijfsnaam</label><input class="pb-input" id="z-company" type="text" placeholder="Uw bedrijfsnaam"></div>
+        <div class="pb-field"><label class="pb-field__label" for="z-contact">Contactpersoon</label><input class="pb-input" id="z-contact" type="text" placeholder="Naam contactpersoon"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="pb-field"><label class="pb-field__label" for="z-email">E-mail</label><input class="pb-input" id="z-email" type="email" placeholder="naam@bedrijf.nl"></div>
+          <div class="pb-field"><label class="pb-field__label" for="z-phone">Telefoon</label><input class="pb-input" id="z-phone" type="tel" placeholder="0165 ..."></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="pb-field"><label class="pb-field__label" for="z-sector">Sector</label>
+            <select class="pb-select" id="z-sector">
+              <option value="" disabled selected>Selecteer sector</option>
+              <option>Autodealer</option>
+              <option>Leasemaatschappij</option>
+              <option>Wagenparkbeheer</option>
+              <option>Autoverhuur</option>
+              <option>Occasionhandel / remarketing</option>
+              <option>Anders</option>
+            </select>
+          </div>
+          <div class="pb-field"><label class="pb-field__label" for="z-vol">Voertuigen per maand</label><input class="pb-input" id="z-vol" type="text" placeholder="Geschat aantal"></div>
+        </div>
+        <div class="pb-field"><label class="pb-field__label" for="z-notes">Opmerkingen</label><textarea class="pb-textarea" id="z-notes" placeholder="Gewenste diensten, bijzonderheden..."></textarea></div>
+        <label style="display:flex;gap:8px;align-items:flex-start;font:400 13px/18px var(--font-body);color:var(--steel-400);cursor:pointer"><input type="checkbox" style="margin-top:2px"> Ik ga akkoord met de verwerking van mijn gegevens conform het privacybeleid.</label>
+        <button class="pb-btn pb-btn--primary" style="width:100%;justify-content:center">Offerte aanvragen</button>
+      </div>
+
+      <!-- Particulier form -->
+      <div id="particulier-form" style="display:none;flex-direction:column;gap:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="pb-field"><label class="pb-field__label" for="p-plate">Kenteken</label><input class="pb-input" id="p-plate" type="text" placeholder="XX-000-X"></div>
+          <div class="pb-field"><label class="pb-field__label" for="p-package">Pakket</label>
+            <select class="pb-select" id="p-package">
+              <option value="" disabled selected>Kies pakket</option>
+              <option>Basis</option>
+              <option>Compleet</option>
+              <option>Premium</option>
+              <option>Ceramic coating 2 jaar</option>
+              <option>Ceramic coating 3 jaar</option>
+              <option>Ceramic coating 5 jaar</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="pb-field"><label class="pb-field__label" for="p-date">Gewenste datum</label><input class="pb-input" id="p-date" type="date"></div>
+          <div class="pb-field" style="justify-content:flex-end"><label style="display:flex;gap:8px;align-items:center;font:500 14px/1 var(--font-body);color:var(--steel-300);cursor:pointer;height:44px"><input type="checkbox"> Haal- en brengservice (€35)</label></div>
+        </div>
+        <div class="pb-field"><label class="pb-field__label" for="p-name">Naam</label><input class="pb-input" id="p-name" type="text" placeholder="Uw naam"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="pb-field"><label class="pb-field__label" for="p-email">E-mail</label><input class="pb-input" id="p-email" type="email" placeholder="uw@email.nl"></div>
+          <div class="pb-field"><label class="pb-field__label" for="p-phone">Telefoon</label><input class="pb-input" id="p-phone" type="tel" placeholder="06 ..."></div>
+        </div>
+        <label style="display:flex;gap:8px;align-items:flex-start;font:400 13px/18px var(--font-body);color:var(--steel-400);cursor:pointer"><input type="checkbox" style="margin-top:2px"> Ik ga akkoord met de verwerking van mijn gegevens conform het privacybeleid.</label>
+        <button class="pb-btn pb-btn--primary" style="width:100%;justify-content:center">Afspraak aanvragen</button>
+      </div>
+    </div>
+
+    <!-- Contact card -->
+    <div style="display:flex;flex-direction:column;gap:24px;padding:40px;border:1px solid var(--navy-700);border-radius:var(--radius-xl);background:var(--navy-900)">
+      <h3 class="pb-h3">Neem contact op</h3>
+      <div style="display:flex;flex-direction:column;gap:16px;font:400 15px/24px var(--font-body);color:var(--steel-300)">
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>0165 396 820</div>
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>WhatsApp: 06 41 82 45 93</div>
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@autopoetsstation.nl</div>
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hoge Bergen 23, 4704 RH Roosendaal</div>
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Ma–Vr 08:00–17:00</div>
+      </div>
+      <div style="border-top:1px solid var(--navy-700);padding-top:20px">
+        <p class="pb-small" style="color:var(--teal)">Reactie binnen 1 werkdag</p>
+      </div>
+      <!-- Map placeholder -->
+      <figure class="pb-img" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md);min-height:160px">
+        <span class="pb-eyebrow">Kaart</span>
+        <span class="pb-img__desc">Embedded Google Maps — Hoge Bergen 23, Roosendaal</span>
+      </figure>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="pb-dark" style="padding:64px 0 32px;border-top:1px solid var(--navy-700)">
+<div class="pb-container">
+  <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+    <div>
+      <a class="pb-wordmark" href="#" style="margin-bottom:16px;display:inline-flex">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="4" stroke="var(--teal)" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="14" fill="var(--teal)">PB</text></svg>
+        <span>Poetsstation Borchwerf</span>
+      </a>
+      <p class="pb-small" style="margin-top:14px;max-width:28ch">Professionele voertuigpreparatie voor dealers, leasemaatschappijen en wagenparken in West-Brabant.</p>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px">Diensten</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
+        <a href="#diensten">Afleverpreparatie</a><a href="#diensten">Ceramic coating</a><a href="#diensten">Interieur reiniging</a><a href="#diensten">Voertuigfotografie</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px">Zakelijk</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
+        <a href="#zakelijk">Sectoren</a><a href="#">Portaal</a><a href="#">SLA en tarieven</a><a href="#contact">Offerte</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px">Bedrijf</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
+        <a href="#over">Over ons</a><a href="#werkwijze">Werkwijze</a><a href="#">Vacatures</a><a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px">Juridisch</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
+        <a href="#">Privacyverklaring</a><a href="#">Algemene voorwaarden</a><a href="#">Cookieverklaring</a><a href="#">Garantievoorwaarden</a>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--navy-700);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <span class="pb-small">© 2026 Poetsstation Borchwerf · KvK [nummer] · BTW [nummer]</span>
+    <div style="display:flex;gap:12px">
+      <a href="#" style="color:var(--steel-400)" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      <a href="#" style="color:var(--steel-400)" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="#" style="color:var(--steel-400)" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+  </div>
+</div>
+</footer>
+
+<!-- POWERED BY DES -->
+<div class="des-banner">
+  Ontworpen &amp; gebouwd door <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform
+</div>
+
+<!-- WhatsApp floating button -->
+<a href="https://wa.me/31641824593" target="_blank" rel="noopener" style="position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:100" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+(function(){
+  // Pricing tab switcher
+  document.querySelectorAll('.pb-price-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var tab = btn.getAttribute('data-tab');
+      document.querySelectorAll('.pb-price-tab').forEach(function(b){ b.style.background='none'; b.style.color='var(--steel-500)'; });
+      btn.style.background='var(--teal)'; btn.style.color='var(--teal-ink)';
+      document.getElementById('tab-particulier').style.display = tab==='particulier' ? 'block' : 'none';
+      document.getElementById('tab-zakelijk').style.display = tab==='zakelijk' ? 'block' : 'none';
+    });
+  });
+
+  // Contact form tab switcher
+  document.querySelectorAll('.pb-form-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var form = btn.getAttribute('data-form');
+      document.querySelectorAll('.pb-form-tab').forEach(function(b){ b.style.background='none'; b.style.color='var(--steel-400)'; });
+      btn.style.background='var(--teal)'; btn.style.color='var(--teal-ink)';
+      document.getElementById('zakelijk-form').style.display = form==='zakelijk-form' ? 'flex' : 'none';
+      document.getElementById('particulier-form').style.display = form==='particulier-form' ? 'flex' : 'none';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

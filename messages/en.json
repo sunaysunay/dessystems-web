@@ -1109,7 +1109,15 @@
       "spinsold_label": "Live demo",
       "spinsold_title": "Car photography studio platform",
       "spinsold_desc": "Automated 360° vehicle studio with AI processing, damage inspection reports and multi-channel delivery — a full SaaS platform for car photography studios.",
-      "spinsold_cta": "Open live demo"
+      "spinsold_cta": "Open live demo",
+      "detailing_label": "Live demo",
+      "detailing_title": "Car detailing company platform",
+      "detailing_desc": "Professional vehicle preparation for dealers, lease companies and fleets — with a custom SaaS portal for booking, status tracking and photo reports.",
+      "detailing_cta": "Open live demo",
+      "bodyshop_label": "Live demo",
+      "bodyshop_title": "Vehicle body repair garage",
+      "bodyshop_desc": "Car body repair and paint shop with online damage intake, repair tracking and customer portal — a full custom SaaS platform for collision repair businesses.",
+      "bodyshop_cta": "Open live demo"
     }
   },
   "DesLab": {

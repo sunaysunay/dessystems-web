@@ -968,7 +968,15 @@
       "spinsold_label": "Canlı demo",
       "spinsold_title": "Araç fotoğraf stüdyosu platformu",
       "spinsold_desc": "Yapay zeka işleme, hasar denetim raporları ve çok kanallı teslimat ile otomatik 360° araç stüdyosu — araç fotoğraf stüdyoları için eksiksiz bir SaaS platformu.",
-      "spinsold_cta": "Canlı demoyu aç"
+      "spinsold_cta": "Canlı demoyu aç",
+      "detailing_label": "Canlı demo",
+      "detailing_title": "Araç bakım şirketi platformu",
+      "detailing_desc": "Bayiler, kiralama şirketleri ve filolar için profesyonel araç hazırlama — rezervasyon, durum takibi ve fotoğraf raporları için özel SaaS portalı ile birlikte.",
+      "detailing_cta": "Canlı demoyu aç",
+      "bodyshop_label": "Canlı demo",
+      "bodyshop_title": "Araç kaporta tamir atölyesi",
+      "bodyshop_desc": "Çevrimiçi hasar alımı, onarım takibi ve müşteri portalı ile araç kaporta tamir ve boya atölyesi — çarpışma onarım işletmeleri için eksiksiz özel SaaS platformu.",
+      "bodyshop_cta": "Canlı demoyu aç"
     }
   },
   "DesLab": {

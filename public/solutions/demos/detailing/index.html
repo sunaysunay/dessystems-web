@@ -3,833 +3,841 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Poetsstation Borchwerf — Professionele Voertuigpreparatie</title>
+<title>AutoDetail Pro — Professionele Voertuigverzorging</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+/* ═══ Industry / Blueprint — Design System Tokens ═══ */
+*,*::before,*::after{box-sizing:border-box}
 :root{
-  --navy:#0F1B2D;--navy-900:#152338;--navy-850:#1A2B42;--navy-800:#1F344E;--navy-700:#2A4060;
-  --steel-600:#4F5761;--steel-500:#646D77;--steel-400:#8C959E;--steel-300:#A7B0B8;--steel-200:#C9CED3;--steel-150:#DDE0E2;--steel-100:#ECEDEC;
-  --paper:#F6F6F4;--white:#FFFFFF;
-  --teal:#1ABFB0;--teal-300:#5DD9CD;--teal-600:#0FA89B;--teal-700:#0B7D73;--teal-800:#085E57;--teal-ink:#031615;
-  --green:#3DD68C;--amber:#F2B84B;--red:#FF6464;
-  --font-display:'Manrope',sans-serif;--font-body:'Inter',sans-serif;
-  --radius-sm:8px;--radius-md:12px;--radius-xl:20px;
+  --color-bg:#f2f2f3;
+  --color-surface:#e9e9ea;
+  --color-text:#1d1f20;
+  --color-accent:#5980a6;
+  --color-accent-2:#728fab;
+  --color-divider:color-mix(in srgb,#1d1f20 16%,transparent);
+  --color-neutral-100:#f5f5f8;--color-neutral-200:#e7e7ea;--color-neutral-300:#d4d4d7;
+  --color-neutral-400:#b7b7ba;--color-neutral-500:#98989b;--color-neutral-600:#7a7a7d;
+  --color-neutral-700:#5d5d60;--color-neutral-800:#424244;--color-neutral-900:#2b2b2d;
+  --color-accent-100:#eef6ff;--color-accent-200:#d6ebff;--color-accent-300:#b5d9fd;
+  --color-accent-400:#94bce3;--color-accent-500:#749dc4;--color-accent-600:#597ea3;
+  --color-accent-700:#416180;--color-accent-800:#2c455d;--color-accent-900:#1d2d3d;
+  --font-heading:"Barlow Condensed",system-ui,sans-serif;
+  --font-heading-weight:600;
+  --font-body:"Barlow",system-ui,sans-serif;
+  --radius-sm:2px;--radius-md:4px;--radius-lg:7px;
+  --shadow-sm:0 1px 2px color-mix(in srgb,#2b2b2d 14%,transparent);
+  --shadow-md:0 3px 10px color-mix(in srgb,#2b2b2d 16%,transparent);
+  --shadow-lg:0 12px 32px color-mix(in srgb,#2b2b2d 22%,transparent);
 }
-body{font-family:var(--font-body);-webkit-font-smoothing:antialiased;color:#F2F4F7;background:var(--navy)}
-a{color:inherit;text-decoration:none}
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:16px;line-height:1.5;text-wrap:pretty}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:var(--font-heading-weight);line-height:1.12;letter-spacing:-.015em;margin:0}
+a{color:var(--color-accent-700);text-underline-offset:3px}
+a:hover{color:var(--color-accent-900)}
 img{display:block;max-width:100%}
-.pb-container{max-width:1200px;margin:0 auto;padding:0 24px}
-@media(max-width:768px){.pb-container{padding:0 16px}}
-.pb-display{font:800 64px/70px var(--font-display);letter-spacing:-0.02em}
-.pb-h1{font:700 48px/54px var(--font-display);letter-spacing:-0.015em}
-.pb-h2{font:650 36px/42px var(--font-display)}
-.pb-h3{font:600 22px/28px var(--font-display)}
-.pb-h4{font:600 17px/23px var(--font-display)}
-.pb-lead{font:400 18px/28px var(--font-body);color:var(--steel-300)}
-.pb-body{font:400 15px/24px var(--font-body)}
-.pb-small{font:400 14px/20px var(--font-body);color:var(--steel-400)}
-.pb-eyebrow{font:600 12px/16px var(--font-body);text-transform:uppercase;letter-spacing:0.08em;color:var(--teal)}
+html{scroll-behavior:smooth}
+::selection{background:color-mix(in srgb,var(--color-accent) 30%,transparent)}
+:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+
+/* ═══ Blueprint Frame ═══ */
+.blueprint{position:relative;border:1px solid var(--color-divider);border-radius:0}
+.blueprint.duotone{overflow:visible}
+.blueprint>.corner{position:absolute;width:11px;height:11px;color:color-mix(in srgb,var(--color-text) 55%,transparent)}
+.blueprint>.corner::before,.blueprint>.corner::after{content:"";position:absolute;background:currentColor}
+.blueprint>.corner::before{left:5px;top:0;width:1px;height:100%}
+.blueprint>.corner::after{top:5px;left:0;width:100%;height:1px}
+.blueprint>.corner.tl{top:-6px;left:-6px}
+.blueprint>.corner.tr{top:-6px;right:-6px}
+.blueprint>.corner.bl{bottom:-6px;left:-6px}
+.blueprint>.corner.br{bottom:-6px;right:-6px}
+.duotone{position:relative;overflow:hidden}
+.duotone::after{content:"";position:absolute;inset:0;pointer-events:none;background:var(--color-accent);mix-blend-mode:color}
+
+/* ═══ Components ═══ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;text-decoration:none;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:14px;line-height:1.2;color:var(--color-text);background:transparent;border:1px solid var(--color-divider);padding:6.8px 12.24px;border-radius:0;white-space:nowrap}
+.btn svg{display:block}
+.btn-primary{background:var(--color-accent);color:var(--color-bg);border-color:var(--color-accent)}
+.btn-primary:hover{background:var(--color-accent-600)}
+.btn-secondary{border-color:var(--color-divider)}
+.btn-secondary:hover{background:color-mix(in srgb,var(--color-text) 7%,transparent)}
+.btn-icon{width:36px;height:36px;padding:0}
+.tag{display:inline-flex;align-items:center;font-size:11px;letter-spacing:.02em;padding:3px 10px;border-radius:0}
+.tag-accent{background:var(--color-accent-100);color:var(--color-accent-800)}
+.tag-outline{border:1px solid var(--color-accent);color:var(--color-accent)}
+.tag-neutral{background:var(--color-neutral-100);color:var(--color-neutral-800)}
+.seg{display:inline-flex;overflow:hidden;border:1px solid var(--color-divider);border-radius:0}
+.seg-opt{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;font-size:13px;cursor:pointer;background:none;border:0;font:inherit;color:inherit;white-space:nowrap}
+.seg-opt+.seg-opt{border-left:1px solid var(--color-divider)}
+.field>label{display:block;font-size:12px;margin-bottom:5px;color:color-mix(in srgb,var(--color-text) 70%,transparent)}
+.input{width:100%;min-height:36px;padding:6px 10px;font:inherit;font-size:14px;color:var(--color-text);caret-color:var(--color-accent);background:var(--color-surface);border:1px solid var(--color-divider);border-radius:0}
+.input:focus-visible{border-color:var(--color-accent);outline-offset:0}
+textarea.input{min-height:90px;resize:vertical}
+select.input{appearance:auto}
+.table{width:100%;border-collapse:collapse;font-size:14px}
+.table th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 60%,transparent);padding:6.8px;border-bottom:1px solid var(--color-divider)}
+.table td{padding:6.8px;border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%,transparent)}
+.table tbody tr:hover{background:color-mix(in srgb,var(--color-text) 4%,transparent)}
+.elev-lg{box-shadow:var(--shadow-lg)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ═══ Section label ═══ */
+.sec-label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)}
+.sec-divider{height:1px;background:var(--color-divider);margin:12px 0 24px}
+.sec-heading{font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 40px;max-width:22ch}
+
+/* ═══ Responsive ═══ */
 @media(max-width:768px){
-  .pb-display{font-size:38px;line-height:42px}
-  .pb-h1{font-size:32px;line-height:38px}
-  .pb-h2{font-size:26px;line-height:32px}
-}
-.pb-btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 26px;border-radius:var(--radius-sm);font:600 15px/1 var(--font-body);border:0;cursor:pointer;transition:all .2s}
-.pb-btn--primary{background:var(--teal);color:var(--teal-ink)}
-.pb-btn--primary:hover{background:var(--teal-300)}
-.pb-btn--ghost{background:transparent;border:1px solid var(--steel-600);color:#F2F4F7}
-.pb-btn--ghost:hover{border-color:var(--steel-400)}
-.pb-btn--sm{height:38px;padding:0 18px;font-size:14px}
-.pb-btn--white{background:var(--white);color:var(--navy);border:0}
-.pb-btn--white:hover{background:var(--steel-100)}
-.pb-card{display:flex;flex-direction:column;border:1px solid var(--steel-150);border-radius:var(--radius-md);background:var(--white)}
-.pb-card__title{font:600 18px/24px var(--font-display);color:var(--navy)}
-.pb-card__body{font:400 14px/22px var(--font-body);color:var(--steel-600)}
-.pb-tag{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 14px;border-radius:999px;font:500 13px/1 var(--font-body);border:1px solid var(--steel-150);background:var(--white);color:var(--navy)}
-.pb-chip{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:999px;font:600 12px/1 var(--font-body)}
-.pb-chip--teal{background:rgba(26,191,176,.12);color:var(--teal-700)}
-.pb-chip--amber{background:rgba(242,184,75,.12);color:#8A5B00}
-.pb-chip--green{background:rgba(61,214,140,.12);color:#147A4A}
-.pb-divider{display:flex;align-items:center;gap:12px}
-.pb-divider__line{flex:1;height:1px;background:var(--steel-150)}
-.pb-img{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px dashed var(--steel-200);background:var(--navy-850);border-radius:var(--radius-md);min-height:200px;text-align:center;padding:32px}
-.pb-img__desc{font:400 13px/18px var(--font-body);color:var(--steel-400);max-width:32ch}
-.pb-img--light{background:var(--steel-100);border-color:var(--steel-200)}
-.pb-stat{text-align:center}
-.pb-stat__value{font:700 48px/1 var(--font-display);letter-spacing:-0.03em;color:var(--teal);font-variant-numeric:tabular-nums}
-.pb-stat__unit{font:500 18px/1 var(--font-body);color:var(--steel-400);margin-left:4px}
-.pb-stat__label{font:500 14px/1 var(--font-body);color:var(--steel-300);margin-top:10px}
-.pb-ph{color:var(--teal);font-style:italic}
-.pb-field{display:flex;flex-direction:column;gap:6px}
-.pb-field__label{font:600 13px/1 var(--font-body);color:var(--steel-300)}
-.pb-input,.pb-select,.pb-textarea{padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--navy-700);background:var(--navy-850);color:#F2F4F7;font:400 15px/1.5 var(--font-body)}
-.pb-input{height:44px}
-.pb-select{height:44px}
-.pb-textarea{min-height:100px;resize:vertical}
-.pb-input::placeholder,.pb-textarea::placeholder{color:var(--steel-500)}
-.pb-input:focus,.pb-select:focus,.pb-textarea:focus{outline:2px solid var(--teal);outline-offset:-1px}
-.pb-topbar{background:var(--navy);font:400 13px/1 var(--font-body);color:var(--steel-400);border-bottom:1px solid var(--navy-700)}
-.pb-dark{background:var(--navy);color:#F2F4F7}
-.pb-light{background:var(--paper);color:var(--navy)}
-.pb-light .pb-lead{color:var(--steel-600)}
-.pb-light .pb-small{color:var(--steel-500)}
-.pb-light .pb-eyebrow{color:var(--teal-700)}
-.pb-wordmark{display:flex;align-items:center;gap:8px;font:800 19px/1 var(--font-display);letter-spacing:-0.02em;color:#F2F4F7}
-.pb-wordmark svg{flex-shrink:0}
-.pb-logo-tile{display:flex;align-items:center;justify-content:center;height:56px;border:1px dashed var(--steel-200);border-radius:var(--radius-sm);font:500 12px/1 var(--font-body);color:var(--steel-400);background:var(--white)}
-.pb-step{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;position:relative}
-.pb-step__num{width:40px;height:40px;border-radius:50%;background:var(--teal);color:var(--teal-ink);font:700 16px/40px var(--font-display);text-align:center}
-.pb-accordion{border:1px solid var(--steel-150);border-radius:var(--radius-md);overflow:hidden;background:var(--white)}
-.pb-accordion summary{padding:16px 20px;font:600 15px/22px var(--font-body);color:var(--navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
-.pb-accordion summary::-webkit-details-marker{display:none}
-.pb-accordion summary::after{content:'+';font-size:20px;color:var(--steel-400);transition:.2s}
-.pb-accordion[open] summary::after{transform:rotate(45deg)}
-.pb-accordion .pb-acc-body{padding:0 20px 16px;font:400 14px/22px var(--font-body);color:var(--steel-600)}
-.pb-jobrow{display:grid;grid-template-columns:1fr 1.2fr 1.2fr auto 70px;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--steel-150);font:400 13px/18px var(--font-body);color:var(--steel-500)}
-.pb-jobrow--head{font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--steel-400);border-bottom:1px solid var(--steel-200)}
-.pb-plate{font:700 12px/1 var(--font-body);letter-spacing:.04em;padding:4px 8px;border-radius:4px;background:var(--steel-100);color:var(--navy)}
-.pb-pricing-card{display:flex;flex-direction:column;border:1px solid var(--steel-150);border-radius:var(--radius-md);background:var(--white);padding:32px;gap:16px}
-.pb-pricing-card--pop{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal)}
-.pb-pricing-card__name{font:700 20px/1 var(--font-display);color:var(--navy)}
-.pb-pricing-card__price{font:700 32px/1 var(--font-display);color:var(--navy)}
-.pb-pricing-card__price span{font:400 14px/1 var(--font-body);color:var(--steel-500)}
-.pb-pricing-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;font:400 14px/20px var(--font-body);color:var(--steel-600)}
-.pb-pricing-card li::before{content:'✓ ';color:var(--teal-700);font-weight:700}
-.pb-star{color:var(--amber)}
-.des-banner{text-align:center;padding:24px;background:var(--navy-900);border-top:1px solid var(--navy-700);font:500 13px/1 var(--font-body);color:var(--steel-400)}
-.des-banner a{color:var(--teal);font-weight:600}
-.des-banner a:hover{color:var(--teal-300)}
-@media(max-width:768px){
+  .hide-mobile{display:none!important}
   .hero-grid{grid-template-columns:1fr!important}
-  .hero-visual{display:none}
-  .sectors-grid,.services-grid{grid-template-columns:1fr!important}
-  .stats-grid{grid-template-columns:1fr 1fr!important}
-  .value-grid,.portal-grid,.facility-grid,.pricing-grid,.coating-grid,.warranty-grid{grid-template-columns:1fr!important}
-  .process-grid{grid-template-columns:repeat(2,1fr)!important}
-  .logo-grid{grid-template-columns:repeat(4,1fr)!important}
-  .cta-grid{grid-template-columns:1fr!important}
-  .footer-grid{grid-template-columns:1fr 1fr!important}
-  .nav-links{display:none!important}
-  .topbar-info{display:none!important}
 }
 </style>
 </head>
 <body>
+<div id="app" style="min-height:100vh">
 
-<!-- TOP BAR -->
-<div class="pb-topbar">
-<div class="pb-container" style="display:flex;align-items:center;justify-content:space-between;height:36px;gap:20px">
-  <div class="topbar-info" style="display:flex;gap:24px;align-items:center">
-    <span>0165 396 820</span>
-    <span>info@autopoetsstation.nl</span>
-    <span>Ma–Vr 08:00–17:00</span>
+<!-- A. Topbar -->
+<div id="topbar" style="background:var(--color-accent-900);color:var(--color-accent-200);font-size:13px">
+  <div style="max-width:1200px;margin:0 auto;padding:8px clamp(20px,5vw,72px);display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between;align-items:center">
+    <div style="display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center">
+      <a href="tel:0101234567" style="display:flex;gap:6px;align-items:center;color:inherit;text-decoration:none">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span data-i18n="topbar_phone">010 123 4567</span>
+      </a>
+      <a href="mailto:info@autodetailpro.nl" style="display:flex;gap:6px;align-items:center;color:inherit;text-decoration:none">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        info@autodetailpro.nl
+      </a>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <span data-i18n="topbar_hours">Ma–vr 08:00–17:30</span>
+      <span style="margin-left:8px;display:inline-flex;gap:4px">
+        <button onclick="setLang('nl')" id="lang-nl" style="background:none;border:0;color:var(--color-bg);cursor:pointer;font:inherit;font-weight:700;font-size:13px;padding:2px 4px">NL</button>
+        <span style="opacity:.4">|</span>
+        <button onclick="setLang('en')" id="lang-en" style="background:none;border:0;color:var(--color-accent-300);cursor:pointer;font:inherit;font-size:13px;padding:2px 4px">EN</button>
+      </span>
+    </div>
   </div>
-  <a href="#" style="color:var(--teal);font-weight:600;font-size:13px">Zakelijk portaal — inloggen</a>
-</div>
 </div>
 
-<!-- HEADER -->
-<header class="pb-dark" style="position:sticky;top:0;z-index:100;border-bottom:1px solid var(--navy-700);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(15,27,45,0.92)">
-<div class="pb-container" style="display:flex;align-items:center;height:64px;gap:24px">
-<a class="pb-wordmark" href="#">
-  <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="4" stroke="var(--teal)" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="14" fill="var(--teal)">PB</text></svg>
-  <span>Poetsstation<br style="display:none"> Borchwerf</span>
-</a>
-<nav class="nav-links" style="display:flex;gap:20px;font:500 14px/1 var(--font-body);flex:1;min-width:0;margin-left:16px">
-  <a href="#diensten" style="color:var(--steel-300)">Diensten</a>
-  <a href="#zakelijk" style="color:var(--steel-300)">Zakelijk</a>
-  <a href="#werkwijze" style="color:var(--steel-300)">Werkwijze</a>
-  <a href="#over" style="color:var(--steel-300)">Over ons</a>
-  <a href="#faq" style="color:var(--steel-300)">FAQ</a>
-  <a href="#contact" style="color:var(--steel-300)">Contact</a>
-</nav>
-<div style="display:flex;align-items:center;gap:10px;margin-left:auto">
-  <a href="#contact" class="pb-btn pb-btn--ghost pb-btn--sm">Afspraak maken</a>
-  <a href="#contact" class="pb-btn pb-btn--primary pb-btn--sm">Zakelijke offerte</a>
-</div>
-</div>
+<!-- B. Header -->
+<header id="header" style="position:sticky;top:0;z-index:50;background:var(--color-bg);border-bottom:1px solid var(--color-divider)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,72px);display:flex;align-items:center;min-height:60px;gap:24px">
+    <div class="blueprint" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;background:var(--color-accent-900);color:var(--color-bg);font-family:var(--font-heading);font-weight:600;font-size:18px;letter-spacing:.04em">
+      <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+      AD
+    </div>
+    <span style="font-family:var(--font-heading);font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.02em;margin-right:auto" data-i18n="brand_name">AutoDetail Pro</span>
+    <nav style="display:flex;gap:20px;font-size:14px" class="hide-mobile">
+      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="nav_services">Diensten</a>
+      <a href="#over-ons" style="color:inherit;text-decoration:none" data-i18n="nav_about">Over ons</a>
+      <a href="#prijzen" style="color:inherit;text-decoration:none" data-i18n="nav_pricing">Tarieven</a>
+      <a href="#referenties" style="color:inherit;text-decoration:none" data-i18n="nav_reviews">Referenties</a>
+      <a href="#contact" style="color:inherit;text-decoration:none" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <a href="#afspraak" class="btn btn-primary" style="min-height:40px;padding-inline:16px" data-i18n="nav_cta">Afspraak maken</a>
+  </div>
 </header>
 
-<!-- HERO -->
-<section class="pb-dark" style="padding:100px 0 0;overflow:hidden">
-<div class="pb-container hero-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 260px)">
-  <div style="display:flex;flex-direction:column;gap:24px">
-    <span class="pb-eyebrow">Professionele voertuigpreparatie</span>
-    <h1 class="pb-display">Afleverklaar.<br>Elke keer.<br>Op schaal.</h1>
-    <p class="pb-lead" style="max-width:42ch">Professionele voertuigpreparatie, showroomonderhoud en lakbescherming voor autodealers, leasemaatschappijen en wagenparken in West-Brabant.</p>
-    <div style="display:flex;gap:14px;flex-wrap:wrap">
-      <a href="#contact" class="pb-btn pb-btn--primary">Zakelijke offerte aanvragen</a>
-      <a href="#contact" class="pb-btn pb-btn--ghost">Afspraak maken (particulier)</a>
+<!-- C. Hero -->
+<section style="background:var(--color-accent-900);color:var(--color-bg);position:relative;overflow:hidden">
+  <div class="duotone" style="position:absolute;inset:0;background:var(--color-neutral-500);display:grid;place-items:center;color:var(--color-neutral-300);font-size:13px;letter-spacing:.06em;text-transform:uppercase">
+    Hero achtergrond: polijstwerk in actie
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(29,45,61,.92),rgba(29,45,61,.7))"></div>
+  <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(80px,12vw,160px) clamp(20px,5vw,72px) clamp(64px,8vw,120px)">
+    <div style="max-width:720px">
+      <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-300);margin-bottom:16px" data-i18n="hero_kicker">Professionele voertuigverzorging</div>
+      <h1 style="font-size:clamp(36px,5vw,64px);text-transform:uppercase;letter-spacing:.02em;line-height:1.05;margin:0 0 24px;color:var(--color-bg)" data-i18n="hero_title">Uw voertuig verdient vakmanschap</h1>
+      <p style="font-size:18px;color:var(--color-accent-100);margin:0 0 32px;max-width:52ch" data-i18n="hero_sub">Detailing, ceramic coating en interieurverzorging voor particulieren, dealers en wagenparken. Met vaste kwaliteitscontrole en garantiecertificaat.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#afspraak" class="btn btn-primary" style="min-height:48px;padding-inline:24px;font-size:16px" data-i18n="hero_cta1">Afspraak maken</a>
+        <a href="#diensten" class="btn btn-secondary" style="min-height:48px;padding-inline:24px;font-size:16px;color:var(--color-bg);border-color:color-mix(in srgb,var(--color-bg) 35%,transparent)" data-i18n="hero_cta2">Bekijk diensten</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:48px;padding-top:32px;border-top:1px solid color-mix(in srgb,var(--color-bg) 20%,transparent)">
+      <div class="blueprint" style="padding:14px 16px;background:color-mix(in srgb,var(--color-bg) 8%,transparent);border-color:color-mix(in srgb,var(--color-bg) 20%,transparent);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--color-accent-100)">
+        <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none"><path d="M20 6 9 17l-5-5"/></svg>
+        <span data-i18n="badge_1">Gecertificeerd applicateur</span>
+      </div>
+      <div class="blueprint" style="padding:14px 16px;background:color-mix(in srgb,var(--color-bg) 8%,transparent);border-color:color-mix(in srgb,var(--color-bg) 20%,transparent);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--color-accent-100)">
+        <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span data-i18n="badge_2">ISO-werkinstructies</span>
+      </div>
+      <div class="blueprint" style="padding:14px 16px;background:color-mix(in srgb,var(--color-bg) 8%,transparent);border-color:color-mix(in srgb,var(--color-bg) 20%,transparent);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--color-accent-100)">
+        <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+        <span data-i18n="badge_3">Tot 5 jaar garantie</span>
+      </div>
     </div>
   </div>
-  <div class="hero-visual" style="position:relative;display:flex;align-items:center;justify-content:center">
-    <figure class="pb-img" style="width:480px;aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);z-index:1">
-      <span class="pb-eyebrow">Eigen foto: werkplaats</span>
-      <span class="pb-img__desc">Professionele detailer met polijstmachine onder inspectielicht, glanzende lak in close-up</span>
-    </figure>
-  </div>
-</div>
-<div class="pb-container" style="display:flex;justify-content:center;gap:40px;font:500 14px/1 var(--font-body);color:var(--steel-400);padding:48px 0 64px;flex-wrap:wrap">
-  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Verzekerd voor voertuigen in onze zorg</span>
-  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Foto-rapport per voertuig</span>
-  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Doorlooptijd 24–48 uur</span>
-  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M10 17h5"/></svg> Haal- en brengservice</span>
-</div>
 </section>
 
-<!-- STATS BAR -->
-<section style="background:var(--navy-900);padding:64px 0;border-top:1px solid var(--navy-700);border-bottom:1px solid var(--navy-700)">
-<div class="pb-container">
-  <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center">
-    <div class="pb-stat"><div class="pb-stat__value"><span class="pb-ph">[XX]</span></div><div class="pb-stat__label">Jaar ervaring</div></div>
-    <div class="pb-stat"><div class="pb-stat__value"><span class="pb-ph">[X.XXX]</span><span class="pb-stat__unit">+</span></div><div class="pb-stat__label">Voertuigen per jaar</div></div>
-    <div class="pb-stat"><div class="pb-stat__value"><span class="pb-ph">[XX]</span></div><div class="pb-stat__label">Dealers en zakelijke klanten</div></div>
-    <div class="pb-stat"><div class="pb-stat__value">24–48<span class="pb-stat__unit">uur</span></div><div class="pb-stat__label">Doorlooptijd</div></div>
+<!-- D. Stats -->
+<section style="background:var(--color-surface)">
+  <div id="stats-plate" style="max-width:1200px;margin:0 auto;padding:clamp(32px,4vw,56px) clamp(20px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px">
+    <div class="blueprint" style="padding:20px;text-align:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div style="font-family:var(--font-heading);font-weight:600;font-size:42px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1" id="c0">0</div>
+      <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px" data-i18n="stat_1">Jaar ervaring</div>
+    </div>
+    <div class="blueprint" style="padding:20px;text-align:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div style="font-family:var(--font-heading);font-weight:600;font-size:42px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1" id="c1">0</div>
+      <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px" data-i18n="stat_2">Voertuigen per jaar</div>
+    </div>
+    <div class="blueprint" style="padding:20px;text-align:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div style="font-family:var(--font-heading);font-weight:600;font-size:42px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1" id="c2">0</div>
+      <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px" data-i18n="stat_3">Dealerpartners</div>
+    </div>
+    <div class="blueprint" style="padding:20px;text-align:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div style="font-family:var(--font-heading);font-weight:600;font-size:42px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1" id="c3">0</div>
+      <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px" data-i18n="stat_4">Uur doorlooptijd gemiddeld</div>
+    </div>
   </div>
-</div>
 </section>
 
-<!-- CLIENT LOGO STRIP -->
-<section class="pb-light" style="padding:64px 0">
-<div class="pb-container" style="text-align:center">
-  <p class="pb-small" style="margin-bottom:32px">Vertrouwd door dealers en zakelijke klanten in de regio</p>
-  <div class="logo-grid" style="display:grid;grid-template-columns:repeat(8,1fr);gap:16px">
-    <div class="pb-logo-tile">Dealerlogo</div>
-    <div class="pb-logo-tile">Dealerlogo</div>
-    <div class="pb-logo-tile">Dealerlogo</div>
-    <div class="pb-logo-tile">Dealerlogo</div>
-    <div class="pb-logo-tile">Dealerlogo</div>
-    <div class="pb-logo-tile">Dealerlogo</div>
-    <div class="pb-logo-tile">Dealerlogo</div>
-    <div class="pb-logo-tile">Dealerlogo</div>
+<!-- E. Sectoren -->
+<section style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div class="sec-label" data-i18n="sec_sectors">01 · Sectoren</div>
+  <div class="sec-divider"></div>
+  <h2 class="sec-heading" data-i18n="sectors_title">Voor wie wij werken</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+    <a href="#afspraak" class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="sector_1_title">Autodealers</h3>
+      <p style="margin:0;color:var(--color-neutral-700);flex:1" data-i18n="sector_1_desc">Afleverpreparatie en showroomonderhoud met vaste SLA en foto-rapportage.</p>
+      <span style="color:var(--color-accent-700);font-weight:500;font-size:14px" data-i18n="sector_cta">Bekijk mogelijkheden →</span>
+    </a>
+    <a href="#afspraak" class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></svg>
+      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="sector_2_title">Leasemaatschappijen</h3>
+      <p style="margin:0;color:var(--color-neutral-700);flex:1" data-i18n="sector_2_desc">Retourpreparatie en remarketingklaar maken, met digitaal overdrachtsrapport.</p>
+      <span style="color:var(--color-accent-700);font-weight:500;font-size:14px" data-i18n="sector_cta">Bekijk mogelijkheden →</span>
+    </a>
+    <a href="#afspraak" class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="sector_3_title">Particulieren</h3>
+      <p style="margin:0;color:var(--color-neutral-700);flex:1" data-i18n="sector_3_desc">Complete poets- en coatingbehandelingen, op afspraak en met garantie.</p>
+      <span style="color:var(--color-accent-700);font-weight:500;font-size:14px" data-i18n="sector_cta_pricing">Bekijk pakketten →</span>
+    </a>
   </div>
-</div>
 </section>
 
-<!-- SECTORS WE SERVE -->
-<section id="zakelijk" class="pb-light" style="padding:0 0 96px">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">01</span><span class="pb-eyebrow" style="color:var(--steel-500)">Sectoren</span><span class="pb-divider__line"></span>
+<!-- F. Diensten -->
+<section id="diensten" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div class="sec-label" data-i18n="sec_services">02 · Diensten</div>
+  <div class="sec-divider"></div>
+  <h2 class="sec-heading" data-i18n="services_title">Twaalf diensten, één kwaliteitsstandaard</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1px;background:var(--color-divider);border:1px solid var(--color-divider)">
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M9.9 2.7a1 1 0 0 1 1.9 0l1.3 4a1 1 0 0 0 .6.6l4 1.3a1 1 0 0 1 0 1.9l-4 1.3a1 1 0 0 0-.6.6l-1.3 4a1 1 0 0 1-1.9 0l-1.3-4a1 1 0 0 0-.6-.6l-4-1.3a1 1 0 0 1 0-1.9l4-1.3a1 1 0 0 0 .6-.6z"/><path d="M20 3v4M22 5h-4"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_1_title">Afleverpoetsbeurt</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_1_desc">Nieuwe en gebruikte voertuigen showroomklaar volgens uw afleverstandaard.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><rect width="16" height="20" x="4" y="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_2_title">Showroomonderhoud</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_2_desc">Periodiek onderhoud van showroomvoertuigen, op locatie mogelijk.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_3_title">Occasionpreparatie</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_3_desc">Verkoopklaar maken van inruil- en retourvoertuigen, inclusief fotografie.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_4_title">Interieur stoomreiniging</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_4_desc">Reiniging met stoom van ±175 °C: verwijdert bacteriën en geuren zonder agressieve middelen.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_5_title">Lakcorrectie &amp; polijsten</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_5_desc">Machinaal verwijderen van swirls, krasjes en hologrammen in meerdere stappen.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_6_title">Ceramic coating</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_6_desc">Lakbescherming met 2, 3 of 5 jaar garantie en digitaal certificaat op kenteken.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_7_title">Koplamprestauratie</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_7_desc">Vergeelde en matte koplampen helder geschuurd, gepolijst en verzegeld.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_8_title">Geurbehandeling</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_8_desc">Neutraliseert rook-, dier- en vochtgeuren tot in het ventilatiesysteem.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
+    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+      <h3 style="font-size:19px;margin:0" data-i18n="svc_9_title">Voertuigfotografie</h3>
+      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_9_desc">Consistente occasionfoto's in de eigen fotostudio, klaar voor uw portalen.</p>
+      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
+    </div>
   </div>
-  <h2 class="pb-h2" style="color:var(--navy);margin-bottom:48px">Voor wie wij werken</h2>
-  <div class="sectors-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-    <div class="pb-card" style="padding:28px;gap:14px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <h3 class="pb-card__title">Autodealers</h3>
-      <p class="pb-card__body">Showroomonderhoud en afleverpreparatie op schaal.</p>
-    </div>
-    <div class="pb-card" style="padding:28px;gap:14px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
-      <h3 class="pb-card__title">Leasemaatschappijen</h3>
-      <p class="pb-card__body">Inname- en retourpreparatie met gestandaardiseerd rapport.</p>
-    </div>
-    <div class="pb-card" style="padding:28px;gap:14px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8l4.58-3.06A1 1 0 0122 5.86v8.28a1 1 0 01-1.42.92L16 12"/></svg>
-      <h3 class="pb-card__title">Wagenparkbeheer</h3>
-      <p class="pb-card__body">Periodiek onderhoud van bedrijfsvoertuigen.</p>
-    </div>
-    <div class="pb-card" style="padding:28px;gap:14px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M21 12a9 9 0 11-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg>
-      <h3 class="pb-card__title">Autoverhuur</h3>
-      <p class="pb-card__body">Snelle turnaround tussen verhuurperiodes.</p>
-    </div>
-    <div class="pb-card" style="padding:28px;gap:14px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-      <h3 class="pb-card__title">Occasionhandel en remarketing</h3>
-      <p class="pb-card__body">Verkoopklaar maken en fotografie.</p>
-    </div>
-    <div class="pb-card" style="padding:28px;gap:14px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <h3 class="pb-card__title">Particulieren</h3>
-      <p class="pb-card__body">Complete poets- en coatingbehandelingen.</p>
-    </div>
-  </div>
-</div>
 </section>
 
-<!-- SERVICES GRID -->
-<section id="diensten" class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">02</span><span class="pb-eyebrow" style="color:var(--steel-500)">Diensten</span><span class="pb-divider__line"></span>
-  </div>
-  <h2 class="pb-h2" style="color:var(--navy);margin-bottom:48px">Ons volledige dienstenpakket</h2>
-  <div class="services-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M5 12l5 5L20 7"/></svg>
-      <h4 class="pb-card__title">Afleverpoetsbeurt</h4>
-      <p class="pb-card__body">Voertuig afleverklaar voor de showroom of klant.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      <h4 class="pb-card__title">Showroomonderhoud</h4>
-      <p class="pb-card__body">Periodiek, op locatie mogelijk. Vaste planning.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-      <h4 class="pb-card__title">Occasion- en remarketingpreparatie</h4>
-      <p class="pb-card__body">Verkoopklaar met fotografie uit eigen studio.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M12 2a4 4 0 014 4c0 2-2 3-2 6H10c0-3-2-4-2-6a4 4 0 014-4z"/><path d="M10 18h4M10 22h4M10 20h4"/></svg>
-      <h4 class="pb-card__title">Interieur stoomreiniging</h4>
-      <p class="pb-card__body">Stoom op ca. 175 °C. Verwijdert bacterien en geuren.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10"/><path d="M2 12h20"/></svg>
-      <h4 class="pb-card__title">Lakcorrectie en polijsten</h4>
-      <p class="pb-card__body">Meerstaps machinaal polijsten voor diepe glans.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <h4 class="pb-card__title">Ceramic coating</h4>
-      <p class="pb-card__body">2, 3 of 5 jaar garantie. Gecertificeerd applicateur.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-      <h4 class="pb-card__title">Koplamprestauratie</h4>
-      <p class="pb-card__body">Vergeelde of matte koplampen helder en veilig.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m8 0h3a2 2 0 002-2v-3"/></svg>
-      <h4 class="pb-card__title">Geur- en ozonbehandeling</h4>
-      <p class="pb-card__body">Neutraliseert rookgeur en andere hardnekkige luchtjes.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      <h4 class="pb-card__title">Sticker- en belettering verwijderen</h4>
-      <p class="pb-card__body">Zonder schade aan de lak.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-      <h4 class="pb-card__title">Kunststofreparatie</h4>
-      <p class="pb-card__body">Beschadigde bumpers en interieuronderdelen hersteld.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <h4 class="pb-card__title">Voertuigfotografie</h4>
-      <p class="pb-card__body">In eigen fotostudio, direct publicatieklaar.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M10 17h5"/></svg>
-      <h4 class="pb-card__title">Haal- en brengservice</h4>
-      <p class="pb-card__body">Ophalen en afleveren met handelaarskenteken.</p>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- WHY CHOOSE US / B2B VALUE PROPOSITION -->
-<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">03</span><span class="pb-eyebrow" style="color:var(--steel-500)">Waarom wij</span><span class="pb-divider__line"></span>
-  </div>
-  <div class="value-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
-    <div style="display:flex;flex-direction:column;gap:24px">
-      <h2 class="pb-h2" style="color:var(--navy)">Zakelijke waardepropositie</h2>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;font:400 15px/24px var(--font-body);color:var(--steel-600)">
-        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Vaste doorlooptijden (SLA-afspraken)</li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Kwaliteitschecklist per voertuig</li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Voor/na foto-rapport bij elke behandeling</li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Vaste contactpersoon per account</li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Maandfacturatie met PO-nummers</li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Volumetarieven en raamovereenkomsten</li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>Opzichtverzekering voor alle voertuigen</li>
+<!-- G. Waarom -->
+<section id="over-ons" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px clamp(32px,5vw,96px);align-items:center">
+    <div>
+      <div class="sec-label" data-i18n="sec_why">03 · Waarom AutoDetail Pro</div>
+      <div class="sec-divider"></div>
+      <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 20px" data-i18n="why_title">Een partner die uw proces volgt</h2>
+      <p style="color:var(--color-neutral-700);margin:0 0 24px;max-width:52ch" data-i18n="why_sub">Wij werken met vaste afspraken, vaste controles en vaste contactpersonen. Zo weet u wat u krijgt, wanneer u het krijgt en wat het kost.</p>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:12px">
+        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_1">Vaste doorlooptijden, vastgelegd in een SLA</span></li>
+        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_2">Kwaliteitschecklist per voertuig</span></li>
+        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_3">Voor/na foto-rapport bij elke gereedmelding</span></li>
+        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_4">Vaste contactpersoon voor planning en vragen</span></li>
+        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_5">Maandfacturatie met PO-nummers</span></li>
+        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_6">Verzekerd voor voertuigen in onze zorg</span></li>
       </ul>
     </div>
-    <figure class="pb-img pb-img--light" style="aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl)">
-      <span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span>
-      <span class="pb-img__desc" style="color:var(--steel-500)">Rij geprepareerde dealervoertuigen in de behandelruimte, gecontroleerd licht</span>
+    <figure class="blueprint duotone" style="margin:0;aspect-ratio:4/3;background:var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-600);font-size:13px;letter-spacing:.06em;text-transform:uppercase">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <span data-i18n="ph_detailer">Foto: detailer met polijstmachine</span>
     </figure>
   </div>
-</div>
 </section>
 
-<!-- WERKWIJZE — B2B PROCESS -->
-<section id="werkwijze" class="pb-dark" style="padding:96px 0">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow">04</span><span class="pb-eyebrow" style="color:var(--steel-400)">Werkwijze</span><span class="pb-divider__line" style="background:var(--navy-700)"></span>
-  </div>
-  <h2 class="pb-h2" style="margin-bottom:64px">Zeven stappen. Van aanvraag tot factuur.</h2>
-  <div class="process-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:20px">
-    <div class="pb-step"><div class="pb-step__num">1</div><h4 class="pb-h4">Aanvraag</h4><p class="pb-small">Portaal, e-mail of lijst</p></div>
-    <div class="pb-step"><div class="pb-step__num">2</div><h4 class="pb-h4">Ophalen</h4><p class="pb-small">Of aanleveren op locatie</p></div>
-    <div class="pb-step"><div class="pb-step__num">3</div><h4 class="pb-h4">Intake</h4><p class="pb-small">Inspectie met foto's</p></div>
-    <div class="pb-step"><div class="pb-step__num">4</div><h4 class="pb-h4">Behandeling</h4><p class="pb-small">Volgens vaste werkinstructie</p></div>
-    <div class="pb-step"><div class="pb-step__num">5</div><h4 class="pb-h4">QC</h4><p class="pb-small">Tweede controleur</p></div>
-    <div class="pb-step"><div class="pb-step__num">6</div><h4 class="pb-h4">Gereed</h4><p class="pb-small">Foto-rapport en melding</p></div>
-    <div class="pb-step"><div class="pb-step__num">7</div><h4 class="pb-h4">Aflevering</h4><p class="pb-small">Retour en maandfactuur</p></div>
-  </div>
-</div>
+<!-- H. Werkwijze -->
+<section id="werkwijze" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div class="sec-label" data-i18n="sec_workflow">04 · Werkwijze</div>
+  <div class="sec-divider"></div>
+  <h2 class="sec-heading" data-i18n="workflow_title">Zeven stappen, van aanvraag tot factuur</h2>
+  <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px 16px">
+    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">01</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_1_title">Aanvraag</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_1_desc">Via portaal, e-mail of telefoon.</span></li>
+    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">02</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_2_title">Ophalen of aanleveren</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_2_desc">Op afspraak gebracht of door ons opgehaald.</span></li>
+    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">03</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_3_title">Intake-inspectie</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_3_desc">Staat vastgelegd met foto's.</span></li>
+    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">04</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_4_title">Behandeling</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_4_desc">Volgens vaste werkinstructie.</span></li>
+    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">05</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_5_title">Kwaliteitscontrole</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_5_desc">Checklist door tweede controleur.</span></li>
+    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">06</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_6_title">Foto-rapport</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_6_desc">Gereedmelding met voor/na-foto's.</span></li>
+    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">07</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_7_title">Aflevering en factuur</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_7_desc">Terugbezorgd; maandfactuur met PO.</span></li>
+  </ol>
 </section>
 
-<!-- ZAKELIJK PORTAAL -->
-<section class="pb-light" style="padding:96px 0">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">05</span><span class="pb-eyebrow" style="color:var(--steel-500)">Zakelijk portaal</span><span class="pb-divider__line"></span>
-  </div>
-  <div class="portal-grid" style="display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center">
-    <div style="display:flex;flex-direction:column;gap:24px">
-      <h2 class="pb-h2" style="color:var(--navy)">Uw voertuigen realtime in beeld</h2>
-      <p class="pb-body" style="color:var(--steel-600)">Meld voertuigen aan op kenteken, volg de status van ontvangen tot gereed, download voor/na foto's en beheer facturen en rapportages. Meerdere vestigingen en gebruikers.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
-        <span class="pb-tag">Kenteken aanmelden</span>
-        <span class="pb-tag">Status volgen</span>
-        <span class="pb-tag">Foto's downloaden</span>
-        <span class="pb-tag">Facturen</span>
-        <span class="pb-tag">Multi-vestiging</span>
-      </div>
-    </div>
-    <!-- Dashboard mockup -->
-    <div style="border:1px solid var(--steel-150);border-radius:var(--radius-xl);background:var(--white);overflow:hidden">
-      <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--steel-150)">
-        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
-        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
-        <span style="width:12px;height:12px;border-radius:50%;background:var(--steel-200)"></span>
-        <span style="flex:1;height:28px;border-radius:var(--radius-sm);background:var(--steel-100);margin:0 48px"></span>
-      </div>
-      <div style="padding:20px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <span style="font:700 16px/1 var(--font-display);color:var(--navy)">Voertuigen vandaag</span>
-          <div style="display:flex;gap:8px">
-            <span class="pb-chip pb-chip--teal">3 In behandeling</span>
-            <span class="pb-chip pb-chip--green">5 Gereed</span>
-          </div>
-        </div>
-        <div class="pb-jobrow pb-jobrow--head"><span>Kenteken</span><span>Model</span><span>Dienst</span><span>Status</span><span style="text-align:right">Datum</span></div>
-        <div class="pb-jobrow"><span><span class="pb-plate">XX-000-X</span></span><span style="color:var(--navy)">Audi A4 Avant</span><span>Afleverpoetsbeurt</span><span><span class="pb-chip pb-chip--green">Gereed</span></span><span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">14:20</span></div>
-        <div class="pb-jobrow"><span><span class="pb-plate">XX-000-X</span></span><span style="color:var(--navy)">VW Golf 8</span><span>Ceramic coating</span><span><span class="pb-chip pb-chip--amber">In behandeling</span></span><span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">13:00</span></div>
-        <div class="pb-jobrow"><span><span class="pb-plate">XX-000-X</span></span><span style="color:var(--navy)">Mercedes C-Klasse</span><span>Retourpreparatie</span><span><span class="pb-chip pb-chip--teal">Intake</span></span><span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">11:45</span></div>
-        <div class="pb-jobrow" style="border-bottom:0"><span><span class="pb-plate">XX-000-X</span></span><span style="color:var(--navy)">Toyota RAV4</span><span>Stoomreiniging</span><span><span class="pb-chip pb-chip--green">Gereed</span></span><span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:600">10:30</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- PRODUCTS & MATERIALS -->
-<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">06</span><span class="pb-eyebrow" style="color:var(--steel-500)">Producten en werkwijze</span><span class="pb-divider__line"></span>
-  </div>
-  <h2 class="pb-h2" style="color:var(--navy);margin-bottom:48px">Professionele producten. Verantwoorde werkwijze.</h2>
-  <div class="sectors-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <h4 class="pb-card__title">Merkproducten</h4>
-      <p class="pb-card__body">Professionele producten van toonaangevende merken voor elk type behandeling.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <h4 class="pb-card__title">pH-neutraal en afbreekbaar</h4>
-      <p class="pb-card__body">Biologisch afbreekbare reinigers die lakken en materialen respecteren.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <h4 class="pb-card__title">Stoomreiniging ca. 175 °C</h4>
-      <p class="pb-card__body">Verwijdert bacterien, allergenen en geuren uit textiel en leer.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <h4 class="pb-card__title">Gecertificeerd coatingapplicateur</h4>
-      <p class="pb-card__body">Erkende installateur voor professionele ceramic coatings.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <h4 class="pb-card__title">Getraind door Malco Automotive</h4>
-      <p class="pb-card__body">Ons team is opgeleid door Malco voor polijst- en hersteltechnieken.</p>
-    </div>
-    <div class="pb-card" style="padding:24px;gap:12px">
-      <h4 class="pb-card__title">Afvalwaterverwerking</h4>
-      <p class="pb-card__body">Slibvangput en olieafscheider conform milieuvoorschriften.</p>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- FACILITY & CAPACITY -->
-<section id="over" class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">07</span><span class="pb-eyebrow" style="color:var(--steel-500)">Faciliteiten</span><span class="pb-divider__line"></span>
-  </div>
-  <h2 class="pb-h2" style="color:var(--navy);margin-bottom:48px">Onze locatie op Borchwerf</h2>
-  <div class="facility-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px">
-    <figure class="pb-img pb-img--light" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md)"><span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span><span class="pb-img__desc" style="color:var(--steel-500)">Buitenaanzicht bedrijfspand</span></figure>
-    <figure class="pb-img pb-img--light" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md)"><span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span><span class="pb-img__desc" style="color:var(--steel-500)">Overdekte behandelruimte met voertuig</span></figure>
-    <figure class="pb-img pb-img--light" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md)"><span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span><span class="pb-img__desc" style="color:var(--steel-500)">Eigen fotostudio met voertuig</span></figure>
-    <figure class="pb-img pb-img--light" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md)"><span class="pb-eyebrow" style="color:var(--teal-700)">Eigen foto</span><span class="pb-img__desc" style="color:var(--steel-500)">Beveiligde stalling</span></figure>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font:500 14px/1 var(--font-body);color:var(--steel-600)">
-    <span class="pb-tag">Overdekte behandelruimtes</span>
-    <span class="pb-tag"><span class="pb-ph">[X]</span> voertuigen per dag</span>
-    <span class="pb-tag">Eigen fotostudio</span>
-    <span class="pb-tag">Beveiligde stalling</span>
-    <span class="pb-tag">Centrale ligging A17/A58</span>
-  </div>
-</div>
-</section>
-
-<!-- PRICING -->
-<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">08</span><span class="pb-eyebrow" style="color:var(--steel-500)">Tarieven</span><span class="pb-divider__line"></span>
-  </div>
-
-  <!-- Tab switcher -->
-  <div style="display:flex;gap:4px;margin-bottom:48px;padding:3px;background:var(--steel-100);border-radius:var(--radius-sm);width:fit-content">
-    <button class="pb-price-tab" data-tab="particulier" style="height:36px;padding:0 20px;border-radius:6px;border:0;font:600 14px/1 var(--font-body);cursor:pointer;background:var(--teal);color:var(--teal-ink)">Particulier</button>
-    <button class="pb-price-tab" data-tab="zakelijk" style="height:36px;padding:0 20px;border-radius:6px;border:0;font:600 14px/1 var(--font-body);cursor:pointer;background:none;color:var(--steel-500)">Zakelijk</button>
-  </div>
-
-  <!-- Particulier pricing -->
-  <div id="tab-particulier">
-    <h3 class="pb-h3" style="color:var(--navy);margin-bottom:32px">Poetspakketten</h3>
-    <div class="pricing-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px">
-      <div class="pb-pricing-card">
-        <div class="pb-pricing-card__name">Basis</div>
-        <div class="pb-pricing-card__price">€<span class="pb-ph">[XX]</span> <span>incl. btw</span></div>
-        <ul>
-          <li>Exterieur handwas</li>
-          <li>Velgen gereinigd</li>
-          <li>Ramen binnen en buiten</li>
-          <li>Stofzuigen</li>
-          <li>Kunststof reinigen</li>
-        </ul>
-        <a href="#contact" class="pb-btn pb-btn--ghost" style="border-color:var(--steel-200);color:var(--navy);width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
-      </div>
-      <div class="pb-pricing-card pb-pricing-card--pop">
-        <div style="display:flex;justify-content:space-between;align-items:center"><span class="pb-pricing-card__name">Compleet</span><span class="pb-chip pb-chip--teal">Meest gekozen</span></div>
-        <div class="pb-pricing-card__price">€<span class="pb-ph">[XX]</span> <span>incl. btw</span></div>
-        <ul>
-          <li>Alles van Basis</li>
-          <li>Interieur stoomreiniging</li>
-          <li>Bekleding en hemel</li>
-          <li>Kofferbak</li>
-          <li>Wax beschermlaag</li>
-        </ul>
-        <a href="#contact" class="pb-btn pb-btn--primary" style="width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
-      </div>
-      <div class="pb-pricing-card">
-        <div class="pb-pricing-card__name">Premium</div>
-        <div class="pb-pricing-card__price">€<span class="pb-ph">[XX]</span> <span>incl. btw</span></div>
-        <ul>
-          <li>Alles van Compleet</li>
-          <li>Kleibehandeling</li>
-          <li>Meerstaps machinaal polijsten</li>
-          <li>Motorruimte</li>
-          <li>Lakverzegeling</li>
-        </ul>
-        <a href="#contact" class="pb-btn pb-btn--ghost" style="border-color:var(--steel-200);color:var(--navy);width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
-      </div>
-    </div>
-    <p class="pb-small" style="color:var(--steel-500);max-width:60ch">SUV/MPV toeslag van toepassing. Toeslag bij sterke vervuiling (bijv. hondenharen) altijd vooraf besproken. Haal- en brengservice €35.</p>
-
-    <h3 class="pb-h3" style="color:var(--navy);margin:48px 0 32px">Ceramic coating</h3>
-    <div class="coating-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-      <div class="pb-pricing-card">
-        <div class="pb-pricing-card__name">2 jaar garantie</div>
-        <div class="pb-pricing-card__price">€<span class="pb-ph">[XXX]</span> <span>incl. btw</span></div>
-        <ul>
-          <li>Wasbeurt en kleibehandeling</li>
-          <li>Eenstaps machinaal polijsten</li>
-          <li>Coating applicatie</li>
-          <li>Digitaal certificaat op kenteken</li>
-        </ul>
-        <a href="#contact" class="pb-btn pb-btn--ghost" style="border-color:var(--steel-200);color:var(--navy);width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
-      </div>
-      <div class="pb-pricing-card">
-        <div class="pb-pricing-card__name">3 jaar garantie</div>
-        <div class="pb-pricing-card__price">€<span class="pb-ph">[XXX]</span> <span>incl. btw</span></div>
-        <ul>
-          <li>Alles van 2 jaar</li>
-          <li>Meerstaps polijsten</li>
-          <li>Velgen gecoat</li>
-          <li>Jaarlijkse controlebeurt</li>
-        </ul>
-        <a href="#contact" class="pb-btn pb-btn--ghost" style="border-color:var(--steel-200);color:var(--navy);width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
-      </div>
-      <div class="pb-pricing-card pb-pricing-card--pop">
-        <div class="pb-pricing-card__name">5 jaar garantie</div>
-        <div class="pb-pricing-card__price">€<span class="pb-ph">[XXX]</span> <span>incl. btw</span></div>
-        <ul>
-          <li>Alles van 3 jaar</li>
-          <li>Glas gecoat</li>
-          <li>Interieur bescherming</li>
-          <li>Jaarlijkse controlebeurt inclusief</li>
-        </ul>
-        <a href="#contact" class="pb-btn pb-btn--primary" style="width:100%;justify-content:center;margin-top:auto">Afspraak maken</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Zakelijk pricing -->
-  <div id="tab-zakelijk" style="display:none">
-    <div style="text-align:center;padding:64px 24px;border:1px dashed var(--steel-200);border-radius:var(--radius-xl);background:var(--white)">
-      <h3 class="pb-h2" style="color:var(--navy);margin-bottom:16px">Volumetarieven en raamovereenkomsten op maat</h3>
-      <p class="pb-body" style="color:var(--steel-600);max-width:44ch;margin:0 auto 32px">Wij stellen een voorstel op dat past bij uw volume, frequentie en gewenste diensten. Inclusief SLA en vaste contactpersoon.</p>
-      <a href="#contact" class="pb-btn pb-btn--primary">Offerte aanvragen</a>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- WARRANTY / GARANTIE -->
-<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">09</span><span class="pb-eyebrow" style="color:var(--steel-500)">Garantie</span><span class="pb-divider__line"></span>
-  </div>
-  <div class="warranty-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-    <div class="pb-card" style="padding:32px;gap:16px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-      <h3 class="pb-card__title">Vakmanschapsgarantie</h3>
-      <p class="pb-card__body">Niet tevreden? Meld het binnen 48 uur en wij behandelen kosteloos opnieuw.</p>
-    </div>
-    <div class="pb-card" style="padding:32px;gap:16px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <h3 class="pb-card__title">Coatinggarantie</h3>
-      <p class="pb-card__body">2, 3 of 5 jaar garantie met digitaal certificaat op kenteken. Jaarlijkse controlebeurt.</p>
-    </div>
-    <div class="pb-card" style="padding:32px;gap:16px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-700)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <h3 class="pb-card__title">Schadebeleid</h3>
-      <p class="pb-card__body">Intake met foto's. Schade door ons wordt op onze kosten hersteld. Volledig verzekerd (opzichtverzekering).</p>
-    </div>
-  </div>
-  <p class="pb-small" style="margin-top:24px;text-align:center"><a href="#" style="color:var(--teal-700);font-weight:600">Bekijk garantievoorwaarden →</a></p>
-</div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
-<div class="pb-container">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">10</span><span class="pb-eyebrow" style="color:var(--steel-500)">Klantervaring</span><span class="pb-divider__line"></span>
-  </div>
-  <div style="text-align:center;margin-bottom:48px">
-    <div style="font:700 48px/1 var(--font-display);color:var(--navy)"><span class="pb-ph">[4,X]</span> <span class="pb-star">★</span></div>
-    <p class="pb-small" style="margin-top:8px">op Google · <span class="pb-ph">[XX]</span> reviews</p>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-    <div class="pb-card" style="padding:28px;gap:16px">
-      <div style="color:var(--amber);font-size:16px">★★★★★</div>
-      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic">"Elke week leveren wij voertuigen af via Poetsstation Borchwerf. Altijd hetzelfde hoge niveau, nooit een klacht van onze klanten."</p>
-      <div><span style="font:600 14px/1 var(--font-body);color:var(--navy)">[Naam]</span><br><span class="pb-small">Vestigingsmanager, [Dealer]</span></div>
-    </div>
-    <div class="pb-card" style="padding:28px;gap:16px">
-      <div style="color:var(--amber);font-size:16px">★★★★★</div>
-      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic">"Het portaal bespaart ons tijd: aanmelden, status volgen en foto-rapport downloaden. Overzichtelijk en snel."</p>
-      <div><span style="font:600 14px/1 var(--font-body);color:var(--navy)">[Naam]</span><br><span class="pb-small">Fleet Manager, [Leasemaatschappij]</span></div>
-    </div>
-    <div class="pb-card" style="padding:28px;gap:16px">
-      <div style="color:var(--amber);font-size:16px">★★★★★</div>
-      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic">"Mijn auto zag eruit alsof hij net uit de showroom kwam. De ceramic coating houdt hem nu al twee jaar schoon."</p>
-      <div><span style="font:600 14px/1 var(--font-body);color:var(--navy)">[Naam]</span><br><span class="pb-small">Particuliere klant</span></div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="pb-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
-<div class="pb-container" style="max-width:800px">
-  <div class="pb-divider" style="margin-bottom:48px">
-    <span class="pb-eyebrow" style="color:var(--teal-700)">11</span><span class="pb-eyebrow" style="color:var(--steel-500)">Veelgestelde vragen</span><span class="pb-divider__line"></span>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:8px">
-    <details class="pb-accordion"><summary>Hoe lang duurt een behandeling?</summary><div class="pb-acc-body">Een standaard afleverpoetsbeurt duurt 2 tot 3 uur. Een volledige Premium-behandeling met polijsten kan een volledige werkdag in beslag nemen. Bij aanmelding ontvangt u een indicatie van de doorlooptijd.</div></details>
-    <details class="pb-accordion"><summary>Werken jullie alleen op afspraak?</summary><div class="pb-acc-body">Ja, wij werken uitsluitend op afspraak. Zo garanderen wij voldoende tijd en aandacht per voertuig. Neem contact op via telefoon, e-mail of ons online formulier.</div></details>
-    <details class="pb-accordion"><summary>Wat moet ik uit de auto halen?</summary><div class="pb-acc-body">Verwijder alle persoonlijke bezittingen en waardevolle spullen. Laat de auto zo leeg mogelijk achter, zodat wij direct aan de slag kunnen.</div></details>
-    <details class="pb-accordion"><summary>Verdwijnen alle krassen door polijsten?</summary><div class="pb-acc-body">Oppervlakkige krassen en swirls worden vrijwel volledig verwijderd. Diepe krassen die door de blanke lak gaan, kunnen niet volledig worden weggepolijst, maar worden wel verminderd. Wij beoordelen dit vooraf en communiceren eerlijk over het verwachte resultaat.</div></details>
-    <details class="pb-accordion"><summary>Is stoomreinigen veilig voor elektronica en leer?</summary><div class="pb-acc-body">Ja. Wij gebruiken professionele stoomapparatuur met regelbare druk en temperatuur. Onze medewerkers zijn getraind om gevoelige materialen zoals leer, alcantara en elektronica veilig te behandelen.</div></details>
-    <details class="pb-accordion"><summary>Wat is het verschil tussen wax en ceramic coating?</summary><div class="pb-acc-body">Wax biedt tijdelijke bescherming (enkele weken tot maanden). Ceramic coating hecht chemisch aan de lak en biedt jarenlange bescherming tegen UV, vuil, vogelpoep en lichte krassen. De investering is hoger, maar het rendement op de lange termijn is groter.</div></details>
-    <details class="pb-accordion"><summary>Mag ik met een gecoate auto door de wasstraat?</summary><div class="pb-acc-body">Wij raden het af. Wasstraten gebruiken borstels die de coating op termijn kunnen aantasten. Een handwas of contactloze wasbeurt is de beste keuze voor een gecoat voertuig.</div></details>
-    <details class="pb-accordion"><summary>Hebben jullie zakelijke tarieven en raamovereenkomsten?</summary><div class="pb-acc-body">Ja, wij bieden volumetarieven en raamovereenkomsten op maat. Neem contact op voor een vrijblijvende offerte op basis van uw volume en gewenste diensten.</div></details>
-    <details class="pb-accordion"><summary>Zijn voertuigen verzekerd tijdens de behandeling?</summary><div class="pb-acc-body">Ja. Alle voertuigen in onze zorg zijn verzekerd via onze opzichtverzekering. Bij intake maken wij een foto-inspectie van het voertuig.</div></details>
-    <details class="pb-accordion"><summary>Hoe wordt er zakelijk gefactureerd?</summary><div class="pb-acc-body">Zakelijke klanten ontvangen een maandoverzicht met specificatie per voertuig. Facturatie verloopt per maand met een betalingstermijn van 14 dagen. PO-nummers worden ondersteund.</div></details>
-    <details class="pb-accordion"><summary>Kan ik mijn afspraak annuleren?</summary><div class="pb-acc-body">Ja, tot 24 uur voor de afspraak kosteloos annuleren of verzetten. Bij annulering binnen 24 uur kunnen wij een vergoeding in rekening brengen.</div></details>
-  </div>
-</div>
-</section>
-
-<!-- CTA / CONTACT -->
-<section id="contact" class="pb-dark" style="padding:96px 0">
-<div class="pb-container">
-  <div class="cta-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+<!-- I. Portaal (dark section) -->
+<section id="portaal" style="margin-top:clamp(64px,8vw,112px);background:var(--color-accent-900);color:var(--color-bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px clamp(32px,5vw,80px);align-items:center">
     <div>
-      <!-- Tab switcher for form -->
-      <div style="display:flex;gap:4px;margin-bottom:32px;padding:3px;background:var(--navy-850);border-radius:var(--radius-sm);width:fit-content">
-        <button class="pb-form-tab" data-form="zakelijk-form" style="height:36px;padding:0 20px;border-radius:6px;border:0;font:600 14px/1 var(--font-body);cursor:pointer;background:var(--teal);color:var(--teal-ink)">Zakelijke offerte</button>
-        <button class="pb-form-tab" data-form="particulier-form" style="height:36px;padding:0 20px;border-radius:6px;border:0;font:600 14px/1 var(--font-body);cursor:pointer;background:none;color:var(--steel-400)">Afspraak particulier</button>
-      </div>
-
-      <!-- Zakelijk form -->
-      <div id="zakelijk-form" style="display:flex;flex-direction:column;gap:16px">
-        <div class="pb-field"><label class="pb-field__label" for="z-company">Bedrijfsnaam</label><input class="pb-input" id="z-company" type="text" placeholder="Uw bedrijfsnaam"></div>
-        <div class="pb-field"><label class="pb-field__label" for="z-contact">Contactpersoon</label><input class="pb-input" id="z-contact" type="text" placeholder="Naam contactpersoon"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="pb-field"><label class="pb-field__label" for="z-email">E-mail</label><input class="pb-input" id="z-email" type="email" placeholder="naam@bedrijf.nl"></div>
-          <div class="pb-field"><label class="pb-field__label" for="z-phone">Telefoon</label><input class="pb-input" id="z-phone" type="tel" placeholder="0165 ..."></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="pb-field"><label class="pb-field__label" for="z-sector">Sector</label>
-            <select class="pb-select" id="z-sector">
-              <option value="" disabled selected>Selecteer sector</option>
-              <option>Autodealer</option>
-              <option>Leasemaatschappij</option>
-              <option>Wagenparkbeheer</option>
-              <option>Autoverhuur</option>
-              <option>Occasionhandel / remarketing</option>
-              <option>Anders</option>
-            </select>
-          </div>
-          <div class="pb-field"><label class="pb-field__label" for="z-vol">Voertuigen per maand</label><input class="pb-input" id="z-vol" type="text" placeholder="Geschat aantal"></div>
-        </div>
-        <div class="pb-field"><label class="pb-field__label" for="z-notes">Opmerkingen</label><textarea class="pb-textarea" id="z-notes" placeholder="Gewenste diensten, bijzonderheden..."></textarea></div>
-        <label style="display:flex;gap:8px;align-items:flex-start;font:400 13px/18px var(--font-body);color:var(--steel-400);cursor:pointer"><input type="checkbox" style="margin-top:2px"> Ik ga akkoord met de verwerking van mijn gegevens conform het privacybeleid.</label>
-        <button class="pb-btn pb-btn--primary" style="width:100%;justify-content:center">Offerte aanvragen</button>
-      </div>
-
-      <!-- Particulier form -->
-      <div id="particulier-form" style="display:none;flex-direction:column;gap:16px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="pb-field"><label class="pb-field__label" for="p-plate">Kenteken</label><input class="pb-input" id="p-plate" type="text" placeholder="XX-000-X"></div>
-          <div class="pb-field"><label class="pb-field__label" for="p-package">Pakket</label>
-            <select class="pb-select" id="p-package">
-              <option value="" disabled selected>Kies pakket</option>
-              <option>Basis</option>
-              <option>Compleet</option>
-              <option>Premium</option>
-              <option>Ceramic coating 2 jaar</option>
-              <option>Ceramic coating 3 jaar</option>
-              <option>Ceramic coating 5 jaar</option>
-            </select>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="pb-field"><label class="pb-field__label" for="p-date">Gewenste datum</label><input class="pb-input" id="p-date" type="date"></div>
-          <div class="pb-field" style="justify-content:flex-end"><label style="display:flex;gap:8px;align-items:center;font:500 14px/1 var(--font-body);color:var(--steel-300);cursor:pointer;height:44px"><input type="checkbox"> Haal- en brengservice (€35)</label></div>
-        </div>
-        <div class="pb-field"><label class="pb-field__label" for="p-name">Naam</label><input class="pb-input" id="p-name" type="text" placeholder="Uw naam"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="pb-field"><label class="pb-field__label" for="p-email">E-mail</label><input class="pb-input" id="p-email" type="email" placeholder="uw@email.nl"></div>
-          <div class="pb-field"><label class="pb-field__label" for="p-phone">Telefoon</label><input class="pb-input" id="p-phone" type="tel" placeholder="06 ..."></div>
-        </div>
-        <label style="display:flex;gap:8px;align-items:flex-start;font:400 13px/18px var(--font-body);color:var(--steel-400);cursor:pointer"><input type="checkbox" style="margin-top:2px"> Ik ga akkoord met de verwerking van mijn gegevens conform het privacybeleid.</label>
-        <button class="pb-btn pb-btn--primary" style="width:100%;justify-content:center">Afspraak aanvragen</button>
-      </div>
+      <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-300)" data-i18n="sec_portal">05 · Zakelijk portaal</div>
+      <div style="height:1px;background:color-mix(in srgb,var(--color-bg) 25%,transparent);margin:12px 0 24px"></div>
+      <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 20px;color:var(--color-bg)" data-i18n="portal_title">Uw voertuigen realtime in beeld</h2>
+      <p style="color:var(--color-accent-100);margin:0 0 24px;max-width:50ch" data-i18n="portal_sub">Het portaal geeft uw vestigingen direct inzicht in status, foto's en facturatie. Geen telefoontjes, geen losse e-mails.</p>
+      <ul style="list-style:none;margin:0 0 28px;padding:0;display:grid;gap:12px;color:var(--color-accent-100)">
+        <li style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="portal_1">Voertuigen aanmelden op kenteken</span></li>
+        <li style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="portal_2">Status: ontvangen → in behandeling → gereed</span></li>
+        <li style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="portal_3">Voor/na foto's downloaden</span></li>
+        <li style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="portal_4">Facturen en rapportages per periode</span></li>
+      </ul>
+      <a href="#afspraak" class="btn btn-primary" style="min-height:44px;padding-inline:20px" data-i18n="portal_cta">Bekijk het portaal</a>
     </div>
-
-    <!-- Contact card -->
-    <div style="display:flex;flex-direction:column;gap:24px;padding:40px;border:1px solid var(--navy-700);border-radius:var(--radius-xl);background:var(--navy-900)">
-      <h3 class="pb-h3">Neem contact op</h3>
-      <div style="display:flex;flex-direction:column;gap:16px;font:400 15px/24px var(--font-body);color:var(--steel-300)">
-        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>0165 396 820</div>
-        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>WhatsApp: 06 41 82 45 93</div>
-        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@autopoetsstation.nl</div>
-        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hoge Bergen 23, 4704 RH Roosendaal</div>
-        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Ma–Vr 08:00–17:00</div>
+    <div class="blueprint" style="background:var(--color-bg);color:var(--color-text);border-color:color-mix(in srgb,var(--color-bg) 40%,transparent);box-shadow:var(--shadow-lg)">
+      <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--color-divider);font-size:13px">
+        <span style="font-family:var(--font-heading);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.02em" data-i18n="portal_table_title">Voertuigen · Vestiging Zuid</span>
+        <span class="tag tag-accent" data-i18n="portal_week">Deze week: 18</span>
       </div>
-      <div style="border-top:1px solid var(--navy-700);padding-top:20px">
-        <p class="pb-small" style="color:var(--teal)">Reactie binnen 1 werkdag</p>
+      <div style="overflow-x:auto">
+        <table class="table" style="font-size:13px;min-width:460px">
+          <thead><tr><th data-i18n="th_plate">Kenteken</th><th data-i18n="th_model">Model</th><th data-i18n="th_service">Dienst</th><th>Status</th><th data-i18n="th_date">Datum</th></tr></thead>
+          <tbody>
+            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">XR-392-K</td><td>Volvo XC60</td><td data-i18n="tbl_svc1">Afleverpoets</td><td><span class="tag tag-accent" data-i18n="status_done">Gereed</span></td><td>07-10</td></tr>
+            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">SK-118-P</td><td>Toyota Yaris</td><td data-i18n="tbl_svc2">Retourpreparatie</td><td><span class="tag tag-outline" data-i18n="status_wip">In behandeling</span></td><td>08-10</td></tr>
+            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">NL-640-T</td><td>Mercedes A</td><td data-i18n="tbl_svc3">Ceramic coating</td><td><span class="tag tag-outline" data-i18n="status_wip">In behandeling</span></td><td>08-10</td></tr>
+            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">RT-071-G</td><td>Kia Sportage</td><td data-i18n="tbl_svc4">Fotografie</td><td><span class="tag tag-neutral" data-i18n="status_recv">Ontvangen</span></td><td>08-10</td></tr>
+            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">HD-225-X</td><td>Ford Transit</td><td data-i18n="tbl_svc5">Stoomreiniging</td><td><span class="tag tag-neutral" data-i18n="status_recv">Ontvangen</span></td><td>09-10</td></tr>
+          </tbody>
+        </table>
       </div>
-      <!-- Map placeholder -->
-      <figure class="pb-img" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md);min-height:160px">
-        <span class="pb-eyebrow">Kaart</span>
-        <span class="pb-img__desc">Embedded Google Maps — Hoge Bergen 23, Roosendaal</span>
-      </figure>
     </div>
   </div>
-</div>
 </section>
 
-<!-- FOOTER -->
-<footer class="pb-dark" style="padding:64px 0 32px;border-top:1px solid var(--navy-700)">
-<div class="pb-container">
-  <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
-    <div>
-      <a class="pb-wordmark" href="#" style="margin-bottom:16px;display:inline-flex">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="4" stroke="var(--teal)" stroke-width="2"/><text x="14" y="19" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="14" fill="var(--teal)">PB</text></svg>
-        <span>Poetsstation Borchwerf</span>
-      </a>
-      <p class="pb-small" style="margin-top:14px;max-width:28ch">Professionele voertuigpreparatie voor dealers, leasemaatschappijen en wagenparken in West-Brabant.</p>
+<!-- J. Prijzen -->
+<section id="prijzen" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div class="sec-label" data-i18n="sec_pricing">06 · Tarieven</div>
+  <div class="sec-divider"></div>
+  <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:end;margin-bottom:40px">
+    <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="pricing_title">Transparante tarieven</h2>
+    <div class="seg" role="tablist">
+      <button type="button" role="tab" class="seg-opt" id="seg-part" onclick="setPricing('part')" style="background:var(--color-accent);color:var(--color-bg)" data-i18n="tab_private">Particulier</button>
+      <button type="button" role="tab" class="seg-opt" id="seg-zak" onclick="setPricing('zak')" data-i18n="tab_business">Zakelijk</button>
     </div>
-    <div>
-      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px">Diensten</h4>
-      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#diensten">Afleverpreparatie</a><a href="#diensten">Ceramic coating</a><a href="#diensten">Interieur reiniging</a><a href="#diensten">Voertuigfotografie</a>
+  </div>
+  <div id="pricing-part">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
+      <div class="blueprint" style="padding:28px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)">Pakket 01</div>
+        <h3 style="font-size:28px;text-transform:uppercase;margin:0" data-i18n="pkg_1">Basis</h3>
+        <div style="font-family:var(--font-heading);font-weight:600;font-size:36px;line-height:1" data-i18n="pkg_1_price">Vanaf € 89<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. btw</span></div>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;flex:1">
+          <li data-i18n="pkg_1_f1">Exterieur handwas</li><li data-i18n="pkg_1_f2">Velgen reinigen</li><li data-i18n="pkg_1_f3">Ramen binnen en buiten</li><li data-i18n="pkg_1_f4">Interieur stofzuigen</li><li data-i18n="pkg_1_f5">Kunststof reinigen</li>
+        </ul>
+        <a href="#afspraak" class="btn btn-secondary" style="min-height:42px" data-i18n="pkg_cta">Afspraak aanvragen</a>
+      </div>
+      <div class="blueprint" style="padding:28px;display:flex;flex-direction:column;gap:16px;border-color:var(--color-accent);background:var(--color-accent-100)"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)">Pakket 02</span><span class="tag tag-accent" style="background:var(--color-accent);color:var(--color-bg)" data-i18n="pkg_popular">Meest gekozen</span></div>
+        <h3 style="font-size:28px;text-transform:uppercase;margin:0" data-i18n="pkg_2">Compleet</h3>
+        <div style="font-family:var(--font-heading);font-weight:600;font-size:36px;line-height:1" data-i18n="pkg_2_price">Vanaf € 169<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. btw</span></div>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;flex:1">
+          <li data-i18n="pkg_2_f1">Alles uit Basis</li><li data-i18n="pkg_2_f2">Interieur stoomreiniging</li><li data-i18n="pkg_2_f3">Bekleding en hemel</li><li data-i18n="pkg_2_f4">Kofferbak</li><li data-i18n="pkg_2_f5">Wax-afwerking</li>
+        </ul>
+        <a href="#afspraak" class="btn btn-primary" style="min-height:42px" data-i18n="pkg_cta">Afspraak aanvragen</a>
+      </div>
+      <div class="blueprint" style="padding:28px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)">Pakket 03</div>
+        <h3 style="font-size:28px;text-transform:uppercase;margin:0" data-i18n="pkg_3">Premium</h3>
+        <div style="font-family:var(--font-heading);font-weight:600;font-size:36px;line-height:1" data-i18n="pkg_3_price">Vanaf € 289<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. btw</span></div>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;flex:1">
+          <li data-i18n="pkg_3_f1">Alles uit Compleet</li><li data-i18n="pkg_3_f2">Kleibehandeling</li><li data-i18n="pkg_3_f3">Meerstaps polijsten</li><li data-i18n="pkg_3_f4">Motorruimte</li><li data-i18n="pkg_3_f5">Lakverzegeling</li>
+        </ul>
+        <a href="#afspraak" class="btn btn-secondary" style="min-height:42px" data-i18n="pkg_cta">Afspraak aanvragen</a>
       </div>
     </div>
-    <div>
-      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px">Zakelijk</h4>
-      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#zakelijk">Sectoren</a><a href="#">Portaal</a><a href="#">SLA en tarieven</a><a href="#contact">Offerte</a>
+    <p style="font-size:13px;color:var(--color-neutral-700);margin:20px 0 0;max-width:80ch" data-i18n="pricing_note">Toeslag voor SUV/MPV. Toeslag bij sterke vervuiling wordt altijd vooraf besproken. Haal- en brengservice € 35.</p>
+    <h3 style="font-size:24px;text-transform:uppercase;letter-spacing:.02em;margin:48px 0 24px" data-i18n="coating_title">Ceramic coating</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
+      <div class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="font-family:var(--font-heading);font-weight:600;font-size:32px;line-height:1" data-i18n="coat_2y">2 jaar<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">garantie</span></div>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px;flex:1"><li data-i18n="coat_2y_1">Eenstaps polijsten</li><li data-i18n="coat_2y_2">Eén laag coating op lak</li><li data-i18n="coat_2y_3">Digitaal certificaat</li></ul>
+        <div style="font-size:14px;color:var(--color-neutral-700)" data-i18n="coat_2y_price">Vanaf € 399 incl. btw</div>
       </div>
-    </div>
-    <div>
-      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px">Bedrijf</h4>
-      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#over">Over ons</a><a href="#werkwijze">Werkwijze</a><a href="#">Vacatures</a><a href="#contact">Contact</a>
+      <div class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="font-family:var(--font-heading);font-weight:600;font-size:32px;line-height:1" data-i18n="coat_3y">3 jaar<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">garantie</span></div>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px;flex:1"><li data-i18n="coat_3y_1">Tweestaps polijsten</li><li data-i18n="coat_3y_2">Twee lagen coating</li><li data-i18n="coat_3y_3">Velgen en glas gecoat</li><li data-i18n="coat_3y_4">Jaarlijkse controle</li></ul>
+        <div style="font-size:14px;color:var(--color-neutral-700)" data-i18n="coat_3y_price">Vanaf € 699 incl. btw</div>
       </div>
-    </div>
-    <div>
-      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px">Juridisch</h4>
-      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#">Privacyverklaring</a><a href="#">Algemene voorwaarden</a><a href="#">Cookieverklaring</a><a href="#">Garantievoorwaarden</a>
+      <div class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="font-family:var(--font-heading);font-weight:600;font-size:32px;line-height:1" data-i18n="coat_5y">5 jaar<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">garantie</span></div>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px;flex:1"><li data-i18n="coat_5y_1">Meerstaps lakcorrectie</li><li data-i18n="coat_5y_2">Basis- en toplaag coating</li><li data-i18n="coat_5y_3">Velgen, glas, kunststof en interieur</li><li data-i18n="coat_5y_4">Jaarlijkse controle inbegrepen</li></ul>
+        <div style="font-size:14px;color:var(--color-neutral-700)" data-i18n="coat_5y_price">Vanaf € 999 incl. btw</div>
       </div>
     </div>
   </div>
-  <div style="border-top:1px solid var(--navy-700);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
-    <span class="pb-small">© 2026 Poetsstation Borchwerf · KvK [nummer] · BTW [nummer]</span>
-    <div style="display:flex;gap:12px">
-      <a href="#" style="color:var(--steel-400)" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-      <a href="#" style="color:var(--steel-400)" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-      <a href="#" style="color:var(--steel-400)" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+  <div id="pricing-zak" style="display:none">
+    <div class="blueprint" style="padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div>
+        <h3 style="font-size:28px;text-transform:uppercase;margin:0 0 12px" data-i18n="biz_title">Volumetarieven en raamovereenkomsten op maat</h3>
+        <p style="margin:0;color:var(--color-neutral-700);max-width:52ch" data-i18n="biz_desc">Zakelijke tarieven zijn afhankelijk van volume, dienstenmix en doorlooptijd. Wij stellen binnen één werkdag een voorstel op met SLA en maandfacturatie.</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:end">
+        <a href="#afspraak" class="btn btn-primary" style="min-height:44px;padding-inline:20px" data-i18n="biz_cta">Offerte aanvragen</a>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- K. Referenties -->
+<section id="referenties" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div class="sec-label" data-i18n="sec_refs">07 · Referenties</div>
+  <div class="sec-divider"></div>
+  <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:end;margin-bottom:40px">
+    <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="refs_title">Wat klanten zeggen</h2>
+    <div class="blueprint" style="display:inline-flex;align-items:center;gap:12px;padding:10px 16px;font-size:14px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" style="color:var(--color-accent-700)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <strong style="font-family:var(--font-heading);font-size:18px">4,8</strong>
+      <span style="color:var(--color-neutral-700)" data-i18n="google_reviews">op Google · 127 reviews</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
+    <figure class="blueprint" style="margin:0;padding:24px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <blockquote style="margin:0;font-family:var(--font-heading);font-size:22px;line-height:1.3;flex:1" data-i18n="review_1">"Onze afleverplanning is voorspelbaar geworden. Het foto-rapport scheelt discussie bij overdracht."</blockquote>
+      <figcaption style="font-size:14px;color:var(--color-neutral-700)"><strong style="color:var(--color-text)" data-i18n="review_1_name">R. Janssen</strong> · <span data-i18n="review_1_role">Aftersalesmanager, Autodealer Zuid</span></figcaption>
+    </figure>
+    <figure class="blueprint" style="margin:0;padding:24px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <blockquote style="margin:0;font-family:var(--font-heading);font-size:22px;line-height:1.3;flex:1" data-i18n="review_2">"Retourvoertuigen worden gedocumenteerd ingenomen en binnen 48 uur verkoopklaar aangeleverd."</blockquote>
+      <figcaption style="font-size:14px;color:var(--color-neutral-700)"><strong style="color:var(--color-text)" data-i18n="review_2_name">M. de Vries</strong> · <span data-i18n="review_2_role">Remarketing, LeasePlan</span></figcaption>
+    </figure>
+    <figure class="blueprint" style="margin:0;padding:24px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <blockquote style="margin:0;font-family:var(--font-heading);font-size:22px;line-height:1.3;flex:1" data-i18n="review_3">"De auto zag er na de coating beter uit dan bij aflevering. Duidelijke afspraak, duidelijke prijs."</blockquote>
+      <figcaption style="font-size:14px;color:var(--color-neutral-700)"><strong style="color:var(--color-text)" data-i18n="review_3_name">S. Bakker</strong> · <span data-i18n="review_3_role">Particuliere klant</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- L. Garantie -->
+<section id="garantie" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div class="sec-label" data-i18n="sec_warranty">08 · Garantie</div>
+  <div class="sec-divider"></div>
+  <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 40px" data-i18n="warranty_title">Vastgelegd, niet beloofd</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
+    <div class="blueprint" style="padding:24px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 10px" data-i18n="war_1_title">Vakmanschapsgarantie</h3>
+      <p style="margin:0;font-size:15px;color:var(--color-neutral-700)" data-i18n="war_1_desc">Niet tevreden? Meld het binnen 48 uur. Wij behandelen het voertuig kosteloos opnieuw.</p>
+    </div>
+    <div class="blueprint" style="padding:24px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 10px" data-i18n="war_2_title">Coatinggarantie</h3>
+      <p style="margin:0;font-size:15px;color:var(--color-neutral-700)" data-i18n="war_2_desc">2, 3 of 5 jaar, met digitaal garantiecertificaat op kenteken en jaarlijkse controle.</p>
+    </div>
+    <div class="blueprint" style="padding:24px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 10px" data-i18n="war_3_title">Schadebeleid</h3>
+      <p style="margin:0;font-size:15px;color:var(--color-neutral-700)" data-i18n="war_3_desc">Intake met foto's. Schade die door ons ontstaat, herstellen wij op onze kosten. Volledig verzekerd.</p>
+    </div>
+  </div>
+</section>
+
+<!-- M. FAQ -->
+<section id="faq" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div class="sec-label" data-i18n="sec_faq">09 · Kennisbank</div>
+  <div class="sec-divider"></div>
+  <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 24px" data-i18n="faq_title">Veelgestelde vragen</h2>
+  <div style="max-width:720px">
+    <div style="border-bottom:1px solid var(--color-divider)">
+      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q1">Hoe lang duurt een behandeling?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
+      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a1">Een Basis-behandeling duurt circa 2 uur, Compleet een dagdeel en Premium of ceramic coating één tot twee werkdagen.</p>
+    </div>
+    <div style="border-bottom:1px solid var(--color-divider)">
+      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q2">Verdwijnen alle krassen door polijsten?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
+      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a2">Krassen in de blanke lak verdwijnen vrijwel volledig. Krassen tot in de grondlaag kunnen wij verminderen maar niet verwijderen.</p>
+    </div>
+    <div style="border-bottom:1px solid var(--color-divider)">
+      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q3">Wat is het verschil tussen wax en ceramic coating?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
+      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a3">Wax beschermt enkele weken. Ceramic coating hecht chemisch aan de lak en beschermt 2 tot 5 jaar, met garantiecertificaat.</p>
+    </div>
+    <div style="border-bottom:1px solid var(--color-divider)">
+      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q4">Zijn voertuigen verzekerd tijdens behandeling?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
+      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a4">Ja. Voertuigen in onze zorg vallen onder onze opzichtverzekering, inclusief transport.</p>
+    </div>
+    <div style="border-bottom:1px solid var(--color-divider)">
+      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q5">Hebben jullie zakelijke tarieven?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
+      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a5">Ja. Op basis van volume en dienstenmix stellen wij een raamovereenkomst op met vaste tarieven en SLA.</p>
+    </div>
+  </div>
+</section>
+
+<!-- N. Afspraak / Contact -->
+<section id="afspraak" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
+  <div class="sec-label" data-i18n="sec_appointment">10 · Offerte of afspraak</div>
+  <div class="sec-divider"></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px clamp(32px,5vw,80px);align-items:start">
+    <div class="blueprint" style="padding:clamp(20px,3vw,32px)"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <form style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px" onsubmit="event.preventDefault()">
+        <div class="field"><label data-i18n="form_name">Naam</label><input class="input" style="min-height:44px"></div>
+        <div class="field"><label data-i18n="form_company">Bedrijfsnaam (optioneel)</label><input class="input" style="min-height:44px"></div>
+        <div class="field"><label data-i18n="form_email">E-mailadres</label><input class="input" type="email" style="min-height:44px"></div>
+        <div class="field"><label data-i18n="form_phone">Telefoonnummer</label><input class="input" type="tel" style="min-height:44px"></div>
+        <div class="field"><label data-i18n="form_plate">Kenteken</label><input class="input" placeholder="XX-123-X" style="min-height:44px;text-transform:uppercase;font-family:var(--font-heading);font-weight:600;letter-spacing:.06em"></div>
+        <div class="field"><label data-i18n="form_service">Gewenste dienst</label>
+          <select class="input" style="min-height:44px">
+            <option data-i18n="form_svc_1">Afleverpoetsbeurt</option>
+            <option data-i18n="form_svc_2">Compleet pakket</option>
+            <option data-i18n="form_svc_3">Premium pakket</option>
+            <option data-i18n="form_svc_4">Ceramic coating</option>
+            <option data-i18n="form_svc_5">Lakcorrectie</option>
+            <option data-i18n="form_svc_6">Zakelijke offerte</option>
+          </select>
+        </div>
+        <div class="field" style="grid-column:1/-1"><label data-i18n="form_message">Opmerkingen</label><textarea class="input"></textarea></div>
+        <label style="grid-column:1/-1;display:flex;gap:10px;align-items:start;font-size:13px;color:var(--color-neutral-700)"><input type="checkbox" style="accent-color:var(--color-accent);width:16px;height:16px;margin-top:2px"><span data-i18n="form_privacy">Ik ga akkoord met de verwerking van mijn gegevens (AVG).</span></label>
+        <button type="submit" class="btn btn-primary" style="min-height:46px;justify-self:start;padding-inline:22px" data-i18n="form_submit">Aanvraag versturen</button>
+      </form>
+    </div>
+    <aside style="display:grid;gap:24px">
+      <div class="blueprint" style="padding:24px;background:var(--color-accent-900);color:var(--color-bg);border-color:var(--color-accent-900)"><i class="corner tl" style="color:var(--color-accent-400)"></i><i class="corner tr" style="color:var(--color-accent-400)"></i><i class="corner bl" style="color:var(--color-accent-400)"></i><i class="corner br" style="color:var(--color-accent-400)"></i>
+        <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-300)" data-i18n="response_label">Reactie binnen 1 werkdag</div>
+        <p style="margin:10px 0 0;color:var(--color-accent-100)" data-i18n="response_desc">Aanvragen worden binnen één werkdag beantwoord met een voorstel inclusief doorlooptijd en tarief.</p>
+      </div>
+      <div class="blueprint" style="padding:24px;display:grid;gap:14px;font-size:15px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="contact_direct">Direct contact</h3>
+        <a href="tel:0101234567" style="display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-i18n="topbar_phone">010 123 4567</span>
+        </a>
+        <a href="mailto:info@autodetailpro.nl" style="display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          info@autodetailpro.nl
+        </a>
+        <div style="display:flex;gap:12px;align-items:start">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span data-i18n="topbar_hours">Ma–vr 08:00–17:30</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- O. Contact & kaart -->
+<section id="contact" style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,72px) clamp(64px,8vw,112px)">
+  <div class="sec-label" data-i18n="sec_contact">11 · Contact en route</div>
+  <div class="sec-divider"></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px">
+    <div class="blueprint" style="min-height:320px;display:grid;place-items:center;background:var(--color-neutral-200);color:var(--color-neutral-700);font-size:13px;letter-spacing:.06em;text-transform:uppercase"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <span data-i18n="map_ph">Kaart: Industrieweg 15, Rotterdam</span>
+    </div>
+    <div style="display:grid;gap:24px;align-content:start">
+      <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="visit_title">Bezoekadres</h2>
+      <address style="font-style:normal;display:grid;gap:4px;font-size:16px">
+        <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600" data-i18n="brand_name">AutoDetail Pro</strong>
+        <span data-i18n="address_street">Industrieweg 15</span>
+        <span data-i18n="address_city">3045 AE Rotterdam</span>
+      </address>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="tel:0101234567" class="btn btn-secondary" style="min-height:44px" data-i18n="cta_call">Bel 010 123 4567</a>
+        <a href="#afspraak" class="btn btn-primary" style="min-height:44px" data-i18n="nav_cta">Afspraak maken</a>
+      </div>
+      <dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 24px;font-size:15px">
+        <dt style="color:var(--color-neutral-700)" data-i18n="dt_email">E-mail</dt><dd style="margin:0"><a href="mailto:info@autodetailpro.nl">info@autodetailpro.nl</a></dd>
+        <dt style="color:var(--color-neutral-700)" data-i18n="dt_hours">Openingstijden</dt><dd style="margin:0" data-i18n="dd_hours">Ma–vr 08:00–17:30 · za op afspraak</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- P. Footer -->
+<footer style="background:var(--color-accent-900);color:var(--color-accent-200)">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,6vw,72px) clamp(20px,5vw,72px) 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px 32px;font-size:14px">
+    <div style="grid-column:span 1;display:grid;gap:14px;align-content:start;max-width:30ch">
+      <span style="font-family:var(--font-heading);font-weight:600;font-size:20px;text-transform:uppercase;letter-spacing:.02em;color:var(--color-bg)" data-i18n="brand_name">AutoDetail Pro</span>
+      <p style="margin:0" data-i18n="footer_desc">Professionele voertuigverzorging voor dealers, leasemaatschappijen en particulieren.</p>
+    </div>
+    <div style="display:grid;gap:10px;align-content:start">
+      <strong style="font-family:var(--font-heading);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_services">Diensten</strong>
+      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_1_title">Afleverpoetsbeurt</a>
+      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_4_title">Interieur stoomreiniging</a>
+      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_5_title">Lakcorrectie &amp; polijsten</a>
+      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_6_title">Ceramic coating</a>
+      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_9_title">Voertuigfotografie</a>
+    </div>
+    <div style="display:grid;gap:10px;align-content:start">
+      <strong style="font-family:var(--font-heading);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_company">Bedrijf</strong>
+      <a href="#over-ons" style="color:inherit;text-decoration:none" data-i18n="nav_about">Over ons</a>
+      <a href="#werkwijze" style="color:inherit;text-decoration:none" data-i18n="footer_workflow">Werkwijze</a>
+      <a href="#garantie" style="color:inherit;text-decoration:none" data-i18n="footer_warranty">Garantie</a>
+      <a href="#faq" style="color:inherit;text-decoration:none" data-i18n="footer_faq">Veelgestelde vragen</a>
+    </div>
+    <div style="display:grid;gap:10px;align-content:start">
+      <strong style="font-family:var(--font-heading);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_contact">Contact</strong>
+      <span data-i18n="address_street">Industrieweg 15</span>
+      <span data-i18n="address_city">3045 AE Rotterdam</span>
+      <a href="tel:0101234567" style="color:inherit;text-decoration:none" data-i18n="topbar_phone">010 123 4567</a>
+      <a href="mailto:info@autodetailpro.nl" style="color:inherit;text-decoration:none">info@autodetailpro.nl</a>
+      <span data-i18n="topbar_hours">Ma–vr 08:00–17:30</span>
+    </div>
+  </div>
+  <div style="border-top:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
+    <div style="max-width:1200px;margin:0 auto;padding:18px clamp(20px,5vw,72px);display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;align-items:center">
+      <span data-i18n="footer_copy">&copy; 2026 AutoDetail Pro</span>
+      <a href="#" style="color:inherit" data-i18n="footer_terms">Algemene voorwaarden</a>
+      <a href="#" style="color:inherit" data-i18n="footer_privacy">Privacyverklaring</a>
+      <span style="margin-left:auto;font-size:11px;color:var(--color-accent-400)">Powered by DES Systems</span>
+    </div>
+  </div>
 </footer>
 
-<!-- POWERED BY DES -->
-<div class="des-banner">
-  Ontworpen &amp; gebouwd door <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform
-</div>
-
-<!-- WhatsApp floating button -->
-<a href="https://wa.me/31641824593" target="_blank" rel="noopener" style="position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:100" aria-label="WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<!-- Q. Floating WhatsApp -->
+<a href="#afspraak" aria-label="WhatsApp" class="btn btn-primary elev-lg" style="position:fixed;right:20px;bottom:20px;width:52px;height:52px;padding:0;z-index:70;border-radius:0">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
 </a>
 
+</div>
+
 <script>
-(function(){
-  // Pricing tab switcher
-  document.querySelectorAll('.pb-price-tab').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var tab = btn.getAttribute('data-tab');
-      document.querySelectorAll('.pb-price-tab').forEach(function(b){ b.style.background='none'; b.style.color='var(--steel-500)'; });
-      btn.style.background='var(--teal)'; btn.style.color='var(--teal-ink)';
-      document.getElementById('tab-particulier').style.display = tab==='particulier' ? 'block' : 'none';
-      document.getElementById('tab-zakelijk').style.display = tab==='zakelijk' ? 'block' : 'none';
-    });
-  });
+var LANG = localStorage.getItem('adp-lang') || 'nl';
+var I18N = {
+  en: {
+    topbar_phone: '010 123 4567',
+    topbar_hours: 'Mon–Fri 08:00–17:30',
+    brand_name: 'AutoDetail Pro',
+    nav_services: 'Services', nav_about: 'About us', nav_pricing: 'Pricing',
+    nav_reviews: 'Reviews', nav_contact: 'Contact', nav_cta: 'Book now',
+    hero_kicker: 'Professional vehicle care',
+    hero_title: 'Your vehicle deserves craftsmanship',
+    hero_sub: 'Detailing, ceramic coating and interior care for private owners, dealers and fleets. With fixed quality control and warranty certificate.',
+    hero_cta1: 'Book appointment', hero_cta2: 'View services',
+    badge_1: 'Certified applicator', badge_2: 'ISO work instructions', badge_3: 'Up to 5 year warranty',
+    stat_1: 'Years experience', stat_2: 'Vehicles per year', stat_3: 'Dealer partners', stat_4: 'Hours avg turnaround',
+    sec_sectors: '01 · Sectors', sectors_title: 'Who we work for',
+    sector_1_title: 'Car dealers', sector_1_desc: 'Delivery preparation and showroom maintenance with fixed SLA and photo reporting.',
+    sector_2_title: 'Leasing companies', sector_2_desc: 'Return preparation and remarketing-ready vehicles with digital handover report.',
+    sector_3_title: 'Private owners', sector_3_desc: 'Complete detailing and coating treatments, by appointment with warranty.',
+    sector_cta: 'View options →', sector_cta_pricing: 'View packages →',
+    sec_services: '02 · Services', services_title: 'Twelve services, one quality standard',
+    svc_1_title: 'Delivery detailing', svc_1_desc: 'New and used vehicles showroom-ready to your delivery standard.',
+    svc_2_title: 'Showroom maintenance', svc_2_desc: 'Periodic maintenance of showroom vehicles, on-site possible.',
+    svc_3_title: 'Pre-owned preparation', svc_3_desc: 'Making trade-in and return vehicles sale-ready, including photography.',
+    svc_4_title: 'Interior steam cleaning', svc_4_desc: 'Cleaning with ±175°C steam: removes bacteria and odors without harsh chemicals.',
+    svc_5_title: 'Paint correction & polishing', svc_5_desc: 'Machine removal of swirls, scratches and holograms in multiple steps.',
+    svc_6_title: 'Ceramic coating', svc_6_desc: 'Paint protection with 2, 3 or 5 year warranty and digital certificate.',
+    svc_7_title: 'Headlight restoration', svc_7_desc: 'Yellowed and dull headlights sanded clear, polished and sealed.',
+    svc_8_title: 'Odor treatment', svc_8_desc: 'Neutralizes smoke, pet and moisture odors down to the ventilation system.',
+    svc_9_title: 'Vehicle photography', svc_9_desc: 'Consistent pre-owned photos in our studio, ready for your portals.',
+    svc_more: 'More info',
+    sec_why: '03 · Why AutoDetail Pro', why_title: 'A partner that follows your process',
+    why_sub: 'We work with fixed agreements, fixed inspections and fixed contacts. So you know what you get, when you get it and what it costs.',
+    why_1: 'Fixed turnaround times in an SLA', why_2: 'Quality checklist per vehicle',
+    why_3: 'Before/after photo report', why_4: 'Dedicated contact person',
+    why_5: 'Monthly invoicing with PO numbers', why_6: 'Insured vehicles in our care',
+    ph_detailer: 'Photo: detailer with polishing machine',
+    sec_workflow: '04 · Workflow', workflow_title: 'Seven steps, from request to invoice',
+    step_1_title: 'Request', step_1_desc: 'Via portal, email or phone.',
+    step_2_title: 'Pick-up or delivery', step_2_desc: 'By appointment or collected by us.',
+    step_3_title: 'Intake inspection', step_3_desc: 'Condition documented with photos.',
+    step_4_title: 'Treatment', step_4_desc: 'Per fixed work instruction.',
+    step_5_title: 'Quality control', step_5_desc: 'Checklist by second inspector.',
+    step_6_title: 'Photo report', step_6_desc: 'Completion with before/after photos.',
+    step_7_title: 'Delivery & invoice', step_7_desc: 'Returned; monthly invoice with PO.',
+    sec_portal: '05 · Business portal', portal_title: 'Your vehicles in real-time view',
+    portal_sub: 'The portal gives your locations direct insight into status, photos and invoicing. No phone calls, no loose emails.',
+    portal_1: 'Register vehicles by license plate', portal_2: 'Track status: received → in progress → done',
+    portal_3: 'Download before/after photos', portal_4: 'Invoices and reports per period',
+    portal_cta: 'View the portal',
+    portal_table_title: 'Vehicles · Location South', portal_week: 'This week: 18',
+    th_plate: 'Plate', th_model: 'Model', th_service: 'Service', th_date: 'Date',
+    tbl_svc1: 'Delivery detail', tbl_svc2: 'Return prep', tbl_svc3: 'Ceramic coating', tbl_svc4: 'Photography', tbl_svc5: 'Steam clean',
+    status_done: 'Done', status_wip: 'In progress', status_recv: 'Received',
+    sec_pricing: '06 · Pricing', pricing_title: 'Transparent pricing',
+    tab_private: 'Private', tab_business: 'Business',
+    pkg_1: 'Basic', pkg_1_price: 'From €89<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. VAT</span>',
+    pkg_1_f1: 'Exterior hand wash', pkg_1_f2: 'Wheel cleaning', pkg_1_f3: 'Windows inside & out', pkg_1_f4: 'Interior vacuuming', pkg_1_f5: 'Plastic cleaning',
+    pkg_2: 'Complete', pkg_2_price: 'From €169<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. VAT</span>',
+    pkg_2_f1: 'Everything in Basic', pkg_2_f2: 'Interior steam cleaning', pkg_2_f3: 'Upholstery & headliner', pkg_2_f4: 'Trunk', pkg_2_f5: 'Wax finish',
+    pkg_3: 'Premium', pkg_3_price: 'From €289<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. VAT</span>',
+    pkg_3_f1: 'Everything in Complete', pkg_3_f2: 'Clay bar treatment', pkg_3_f3: 'Multi-step polishing', pkg_3_f4: 'Engine bay', pkg_3_f5: 'Paint sealant',
+    pkg_popular: 'Most popular', pkg_cta: 'Book appointment',
+    pricing_note: 'Surcharge for SUV/MPV. Extra soiling surcharge always discussed beforehand. Pick-up & delivery €35.',
+    coating_title: 'Ceramic coating',
+    coat_2y: '2 year<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">warranty</span>',
+    coat_2y_1: 'Single-step polishing', coat_2y_2: 'One layer on paint', coat_2y_3: 'Digital certificate',
+    coat_2y_price: 'From €399 incl. VAT',
+    coat_3y: '3 year<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">warranty</span>',
+    coat_3y_1: 'Two-step polishing', coat_3y_2: 'Two layers coating', coat_3y_3: 'Wheels & glass coated', coat_3y_4: 'Annual inspection',
+    coat_3y_price: 'From €699 incl. VAT',
+    coat_5y: '5 year<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">warranty</span>',
+    coat_5y_1: 'Multi-step paint correction', coat_5y_2: 'Base & top layer coating', coat_5y_3: 'Wheels, glass, plastic & interior', coat_5y_4: 'Annual inspection included',
+    coat_5y_price: 'From €999 incl. VAT',
+    biz_title: 'Volume rates and framework agreements', biz_desc: 'Business rates depend on volume, service mix and turnaround. We provide a proposal within one business day with SLA and monthly invoicing.',
+    biz_cta: 'Request quote',
+    sec_refs: '07 · Reviews', refs_title: 'What clients say', google_reviews: 'on Google · 127 reviews',
+    review_1: '"Our delivery planning has become predictable. The photo report saves discussion at handover."',
+    review_1_name: 'R. Janssen', review_1_role: 'Aftersales Manager, Dealer South',
+    review_2: '"Return vehicles are documented on intake and delivered sale-ready within 48 hours."',
+    review_2_name: 'M. de Vries', review_2_role: 'Remarketing, LeasePlan',
+    review_3: '"The car looked better after coating than at delivery. Clear agreement, clear price."',
+    review_3_name: 'S. Bakker', review_3_role: 'Private client',
+    sec_warranty: '08 · Warranty', warranty_title: 'Documented, not just promised',
+    war_1_title: 'Craftsmanship guarantee', war_1_desc: 'Not satisfied? Report within 48 hours. We treat the vehicle again at no cost.',
+    war_2_title: 'Coating warranty', war_2_desc: '2, 3 or 5 years, with digital warranty certificate and annual inspection.',
+    war_3_title: 'Damage policy', war_3_desc: 'Intake with photos. Damage caused by us is repaired at our cost. Fully insured.',
+    sec_faq: '09 · Knowledge base', faq_title: 'Frequently asked questions',
+    faq_q1: 'How long does a treatment take?', faq_a1: 'A Basic treatment takes about 2 hours, Complete half a day, and Premium or ceramic coating one to two business days.',
+    faq_q2: 'Will polishing remove all scratches?', faq_a2: 'Scratches in the clear coat are almost fully removed. Scratches down to the primer can be reduced but not eliminated.',
+    faq_q3: 'What is the difference between wax and ceramic coating?', faq_a3: 'Wax protects for a few weeks. Ceramic coating bonds chemically and protects for 2 to 5 years, with warranty certificate.',
+    faq_q4: 'Are vehicles insured during treatment?', faq_a4: 'Yes. Vehicles in our care are covered by our custodian insurance, including transport.',
+    faq_q5: 'Do you have business rates?', faq_a5: 'Yes. Based on volume and service mix we set up a framework agreement with fixed rates and SLA.',
+    sec_appointment: '10 · Quote or appointment',
+    form_name: 'Name', form_company: 'Company (optional)', form_email: 'Email address',
+    form_phone: 'Phone number', form_plate: 'License plate', form_service: 'Desired service',
+    form_svc_1: 'Delivery detailing', form_svc_2: 'Complete package', form_svc_3: 'Premium package',
+    form_svc_4: 'Ceramic coating', form_svc_5: 'Paint correction', form_svc_6: 'Business quote',
+    form_message: 'Comments', form_privacy: 'I agree to data processing (GDPR).', form_submit: 'Send request',
+    response_label: 'Response within 1 business day', response_desc: 'Requests are answered within one business day with a proposal including turnaround and pricing.',
+    contact_direct: 'Direct contact',
+    sec_contact: '11 · Contact & directions', visit_title: 'Visit address',
+    address_street: 'Industrieweg 15', address_city: '3045 AE Rotterdam',
+    map_ph: 'Map: Industrieweg 15, Rotterdam',
+    cta_call: 'Call 010 123 4567',
+    dt_email: 'Email', dt_hours: 'Opening hours', dd_hours: 'Mon–Fri 08:00–17:30 · Sat by appointment',
+    footer_desc: 'Professional vehicle care for dealers, leasing companies and private owners.',
+    footer_services: 'Services', footer_company: 'Company', footer_contact: 'Contact',
+    footer_workflow: 'Workflow', footer_warranty: 'Warranty', footer_faq: 'FAQ',
+    footer_copy: '© 2026 AutoDetail Pro', footer_terms: 'Terms & conditions', footer_privacy: 'Privacy policy'
+  }
+};
 
-  // Contact form tab switcher
-  document.querySelectorAll('.pb-form-tab').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var form = btn.getAttribute('data-form');
-      document.querySelectorAll('.pb-form-tab').forEach(function(b){ b.style.background='none'; b.style.color='var(--steel-400)'; });
-      btn.style.background='var(--teal)'; btn.style.color='var(--teal-ink)';
-      document.getElementById('zakelijk-form').style.display = form==='zakelijk-form' ? 'flex' : 'none';
-      document.getElementById('particulier-form').style.display = form==='particulier-form' ? 'flex' : 'none';
+function setLang(lang) {
+  LANG = lang;
+  try { localStorage.setItem('adp-lang', lang); } catch(e) {}
+  document.getElementById('lang-nl').style.color = lang === 'nl' ? 'var(--color-bg)' : 'var(--color-accent-300)';
+  document.getElementById('lang-nl').style.fontWeight = lang === 'nl' ? '700' : '400';
+  document.getElementById('lang-en').style.color = lang === 'en' ? 'var(--color-bg)' : 'var(--color-accent-300)';
+  document.getElementById('lang-en').style.fontWeight = lang === 'en' ? '700' : '400';
+  document.documentElement.lang = lang;
+  if (lang === 'en' && I18N.en) {
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (I18N.en[key]) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = I18N.en[key];
+        else el.innerHTML = I18N.en[key];
+      }
     });
-  });
+  } else {
+    location.reload();
+  }
+}
+
+function setPricing(tab) {
+  var partEl = document.getElementById('pricing-part');
+  var zakEl = document.getElementById('pricing-zak');
+  var segPart = document.getElementById('seg-part');
+  var segZak = document.getElementById('seg-zak');
+  if (tab === 'zak') {
+    partEl.style.display = 'none'; zakEl.style.display = 'block';
+    segZak.style.background = 'var(--color-accent)'; segZak.style.color = 'var(--color-bg)';
+    segPart.style.background = 'transparent'; segPart.style.color = 'inherit';
+  } else {
+    partEl.style.display = 'block'; zakEl.style.display = 'none';
+    segPart.style.background = 'var(--color-accent)'; segPart.style.color = 'var(--color-bg)';
+    segZak.style.background = 'transparent'; segZak.style.color = 'inherit';
+  }
+}
+
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var chevron = btn.querySelector('svg');
+  var isOpen = answer.style.display !== 'none';
+  document.querySelectorAll('#faq p[data-i18n^="faq_a"]').forEach(function(p) { p.style.display = 'none'; });
+  document.querySelectorAll('#faq button svg').forEach(function(s) { s.style.transform = 'rotate(0deg)'; });
+  if (!isOpen) {
+    answer.style.display = 'block';
+    chevron.style.transform = 'rotate(180deg)';
+  }
+}
+
+// Animated counters
+(function() {
+  var targets = [12, 3200, 35, 48], animated = false;
+  function check() {
+    if (animated) return;
+    var el = document.getElementById('stats-plate');
+    if (el && el.getBoundingClientRect().top < window.innerHeight) {
+      animated = true;
+      window.removeEventListener('scroll', check);
+      var t0 = performance.now(), dur = 1400;
+      (function step(now) {
+        var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        document.getElementById('c0').textContent = Math.round(targets[0] * e);
+        document.getElementById('c1').textContent = Math.round(targets[1] * e).toLocaleString('nl-NL');
+        document.getElementById('c2').textContent = Math.round(targets[2] * e);
+        document.getElementById('c3').textContent = Math.round(targets[3] * e);
+        if (p < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  check();
+  setTimeout(check, 500);
 })();
-</script>
 
+// Init language
+try {
+  var saved = localStorage.getItem('adp-lang');
+  if (saved === 'en') setLang('en');
+} catch(e) {}
+</script>
 </body>
 </html>

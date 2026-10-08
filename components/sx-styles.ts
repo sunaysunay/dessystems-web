@@ -106,6 +106,7 @@ html.dark .sx{
 
 /* featured card + framed live demo */
 .sx-card-feature{border-top:2px solid var(--s-accent)}
+.sx-demos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
 .sx-demo-wrap{padding:0 40px 32px}
 .sx-demo{border:1px solid var(--s-line2);background:var(--s-bg)}
 .sx-demo-chrome{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--s-line);background:var(--s-surface)}

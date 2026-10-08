@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoService Pro — Garage Management Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0C0F12;--bg-900:#111518;--bg-850:#171B20;--bg-800:#1D2228;--bg-700:#282E36;
+  --steel-600:#4B535E;--steel-500:#616B76;--steel-400:#8A939D;--steel-300:#A5AEB7;--steel-200:#C5CCD3;--steel-150:#DDE1E4;--steel-100:#ECEEF0;
+  --paper:#F5F6F4;--white:#FFFFFF;
+  --em:#34D399;--em-300:#6EE7B7;--em-600:#10B981;--em-700:#059669;--em-800:#047857;--em-ink:#022C22;
+  --amber:#F59E0B;--red:#EF4444;--blue:#3B82F6;
+  --font-d:'Manrope',sans-serif;--font-b:'Inter',sans-serif;
+  --r-sm:8px;--r-md:12px;--r-xl:20px;
+}
+body{font-family:var(--font-b);-webkit-font-smoothing:antialiased;color:#F1F3F5;background:var(--bg)}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+.g-wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+@media(max-width:768px){.g-wrap{padding:0 16px}}
+.g-display{font:800 56px/62px var(--font-d);letter-spacing:-0.02em}
+.g-h1{font:700 42px/48px var(--font-d);letter-spacing:-0.015em}
+.g-h2{font:650 32px/38px var(--font-d)}
+.g-h3{font:600 20px/26px var(--font-d)}
+.g-h4{font:600 16px/22px var(--font-d)}
+.g-lead{font:400 17px/27px var(--font-b);color:var(--steel-300)}
+.g-body{font:400 15px/24px var(--font-b)}
+.g-small{font:400 13px/18px var(--font-b);color:var(--steel-400)}
+.g-eyebrow{font:600 12px/16px var(--font-b);text-transform:uppercase;letter-spacing:0.08em;color:var(--em)}
+@media(max-width:768px){.g-display{font-size:34px;line-height:38px}.g-h1{font-size:28px;line-height:34px}.g-h2{font-size:22px;line-height:28px}}
+.g-btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 26px;border-radius:var(--r-sm);font:600 15px/1 var(--font-b);border:0;cursor:pointer;transition:all .2s}
+.g-btn--pri{background:var(--em);color:var(--em-ink)}.g-btn--pri:hover{background:var(--em-300)}
+.g-btn--ghost{background:transparent;border:1px solid var(--steel-600);color:#F1F3F5}.g-btn--ghost:hover{border-color:var(--steel-400)}
+.g-btn--sm{height:38px;padding:0 18px;font-size:14px}
+.g-card{display:flex;flex-direction:column;border-radius:var(--r-md);border:1px solid var(--bg-700);background:var(--bg-900);padding:28px;gap:14px}
+.g-card__t{font:600 17px/22px var(--font-d);color:#F1F3F5}
+.g-card__b{font:400 14px/22px var(--font-b);color:var(--steel-300)}
+.g-card--light{border-color:var(--steel-150);background:var(--white)}
+.g-card--light .g-card__t{color:var(--bg)}
+.g-card--light .g-card__b{color:var(--steel-600)}
+.g-tag{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;font:500 12px/1 var(--font-b)}
+.g-tag--em{background:rgba(52,211,153,.12);color:var(--em-700)}
+.g-tag--amber{background:rgba(245,158,11,.12);color:#92400E}
+.g-tag--red{background:rgba(239,68,68,.12);color:#991B1B}
+.g-tag--blue{background:rgba(59,130,246,.12);color:#1E40AF}
+.g-seg{display:flex;border-radius:999px;overflow:hidden;border:1px solid var(--steel-600)}
+.g-seg__opt{border:0;background:none;color:var(--steel-400);font:600 13px/1 var(--font-b);padding:6px 14px;cursor:pointer;transition:.2s}
+.g-seg__opt[aria-pressed="true"]{background:var(--em);color:var(--em-ink)}
+.g-stat{text-align:center}
+.g-stat__v{font:700 44px/1 var(--font-d);letter-spacing:-0.03em;color:var(--em);font-variant-numeric:tabular-nums}
+.g-stat__u{font:500 16px/1 var(--font-b);color:var(--steel-400);margin-left:4px}
+.g-stat__l{font:500 13px/1 var(--font-b);color:var(--steel-300);margin-top:10px}
+.g-img{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed var(--steel-200);background:var(--bg-850);border-radius:var(--r-md);min-height:180px;text-align:center;padding:28px}
+.g-img__d{font:400 12px/16px var(--font-b);color:var(--steel-400);max-width:30ch}
+.g-divider{display:flex;align-items:center;gap:12px;margin-bottom:48px}
+.g-divider__line{flex:1;height:1px;background:var(--bg-700)}
+.g-step{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.g-step__n{width:38px;height:38px;border-radius:50%;background:var(--em);color:var(--em-ink);font:700 15px/38px var(--font-d);text-align:center}
+.g-light{background:var(--paper);color:var(--bg)}
+.g-light .g-lead{color:var(--steel-600)}
+.g-light .g-eyebrow{color:var(--em-700)}
+.g-light .g-divider__line{background:var(--steel-150)}
+.des-banner{text-align:center;padding:24px;background:var(--bg-900);border-top:1px solid var(--bg-700);font:500 13px/1 var(--font-b);color:var(--steel-400)}
+.des-banner a{color:var(--em);font-weight:600}.des-banner a:hover{color:var(--em-300)}
+.g-wordmark{display:flex;align-items:center;gap:8px;font:800 18px/1 var(--font-d);letter-spacing:-0.02em;color:#F1F3F5}
+.g-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.g-tbl th{text-align:left;padding:10px 14px;font-weight:600;color:var(--steel-300);border-bottom:1px solid var(--bg-700);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.g-tbl td{padding:10px 14px;border-bottom:1px solid var(--bg-700);color:var(--steel-200)}
+.g-tbl tr:last-child td{border-bottom:0}
+@media(max-width:768px){
+  .hero-grid{grid-template-columns:1fr!important}
+  .hero-visual{display:none}
+  .feat-grid,.mod-grid,.step-grid,.usp-grid,.test-grid{grid-template-columns:1fr!important}
+  .stats-grid{grid-template-columns:1fr 1fr!important}
+  .cta-grid,.dash-cols{grid-template-columns:1fr!important}
+  .footer-grid{grid-template-columns:1fr 1fr!important}
+  .nav-links{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header style="position:sticky;top:0;z-index:100;border-bottom:1px solid var(--bg-700);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(12,15,18,0.92)">
+<div class="g-wrap" style="display:flex;align-items:center;height:64px;gap:24px">
+<a class="g-wordmark" href="#">
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="4" fill="var(--em)"/><text x="14" y="19" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="12" fill="var(--em-ink)">ASP</text></svg>
+  <span>AutoService Pro</span>
+</a>
+<nav class="nav-links" style="display:flex;gap:20px;font:500 14px/1 var(--font-b);flex:1;margin-left:16px">
+  <a href="#modules" style="color:var(--steel-300)" data-i18n="nav_modules">Modules</a>
+  <a href="#dashboard" style="color:var(--steel-300)">Dashboard</a>
+  <a href="#workflow" style="color:var(--steel-300)" data-i18n="nav_workflow">Werkwijze</a>
+  <a href="#pricing" style="color:var(--steel-300)" data-i18n="nav_pricing">Pakketten</a>
+  <a href="#contact" style="color:var(--steel-300)">Contact</a>
+</nav>
+<div style="display:flex;align-items:center;gap:10px;margin-left:auto">
+  <div class="g-seg"><button class="g-seg__opt" data-lang="nl" aria-pressed="true">NL</button><button class="g-seg__opt" data-lang="en" aria-pressed="false">EN</button></div>
+  <a href="#contact" class="g-btn g-btn--pri g-btn--sm" data-i18n="nav_cta">Demo aanvragen</a>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section style="padding:100px 0 0;overflow:hidden">
+<div class="g-wrap hero-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 260px)">
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <span class="g-eyebrow" data-i18n="hero_eyebrow">Garage Management Platform</span>
+    <h1 class="g-display" data-i18n="hero_title" data-i18n-html="1">Uw werkplaats.<br>Volledig digitaal.</h1>
+    <p class="g-lead" style="max-width:42ch" data-i18n="hero_lead">Werkplaatsplanning, opdrachtbeheer, onderdelenbeheer en facturatie — alles in één platform. Gebouwd voor garages die willen groeien.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a href="#contact" class="g-btn g-btn--pri" data-i18n="hero_cta1">Demo aanvragen</a>
+      <a href="#modules" class="g-btn g-btn--ghost" data-i18n="hero_cta2">Bekijk modules</a>
+    </div>
+  </div>
+  <div class="hero-visual" style="display:flex;align-items:center;justify-content:center">
+    <figure class="g-img" style="width:480px;aspect-ratio:4/3;border-radius:var(--r-xl)">
+      <span class="g-eyebrow">Screenshot</span>
+      <span class="g-img__d">Dashboard met werkplaatsplanning, openstaande opdrachten en KPI's</span>
+    </figure>
+  </div>
+</div>
+<div class="g-wrap" style="display:flex;justify-content:center;gap:40px;font:500 14px/1 var(--font-b);color:var(--steel-400);padding:48px 0 64px;flex-wrap:wrap">
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="hero_usp1">Multi-tenant SaaS</span></span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="hero_usp2">GDPR-compliant</span></span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="hero_usp3">Realtime overzicht</span></span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span data-i18n="hero_usp4">Elk apparaat</span></span>
+</div>
+</section>
+
+<!-- STATS -->
+<section style="background:var(--bg-900);padding:64px 0;border-top:1px solid var(--bg-700);border-bottom:1px solid var(--bg-700)">
+<div class="g-wrap">
+  <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+    <div class="g-stat"><div class="g-stat__v">150<span class="g-stat__u">+</span></div><div class="g-stat__l" data-i18n="stat1">Garages aangesloten</div></div>
+    <div class="g-stat"><div class="g-stat__v">45k<span class="g-stat__u">+</span></div><div class="g-stat__l" data-i18n="stat2">Werkorders per jaar</div></div>
+    <div class="g-stat"><div class="g-stat__v">99.8<span class="g-stat__u">%</span></div><div class="g-stat__l" data-i18n="stat3">Uptime</div></div>
+    <div class="g-stat"><div class="g-stat__v">30<span class="g-stat__u">%</span></div><div class="g-stat__l" data-i18n="stat4">Snellere facturatie</div></div>
+  </div>
+</div>
+</section>
+
+<!-- MODULES -->
+<section id="modules" class="g-light" style="padding:96px 0">
+<div class="g-wrap">
+  <div class="g-divider">
+    <span class="g-eyebrow" style="color:var(--em-700)">01</span><span class="g-eyebrow" style="color:var(--steel-500)" data-i18n="s01_label">Modules</span><span class="g-divider__line"></span>
+  </div>
+  <h2 class="g-h2" style="color:var(--bg);margin-bottom:48px" data-i18n="s01_title">Alles wat uw garage nodig heeft</h2>
+  <div class="mod-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="g-card g-card--light" style="gap:16px">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <h3 class="g-card__t" style="color:var(--bg)" data-i18n="mod1_title">Werkplaatsplanning</h3>
+      <p class="g-card__b" style="color:var(--steel-600)" data-i18n="mod1_desc">Visuele planning per monteur en brug. Sleep-en-drop werkorders, automatische capaciteitsberekening en realtime status updates.</p>
+    </div>
+    <div class="g-card g-card--light" style="gap:16px">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <h3 class="g-card__t" style="color:var(--bg)" data-i18n="mod2_title">Werkorderbeheer</h3>
+      <p class="g-card__b" style="color:var(--steel-600)" data-i18n="mod2_desc">Van intake tot oplevering: checklists, foto's, tijdregistratie en klantcommunicatie. Alles gekoppeld aan het voertuig.</p>
+    </div>
+    <div class="g-card g-card--light" style="gap:16px">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <h3 class="g-card__t" style="color:var(--bg)" data-i18n="mod3_title">Onderdelenvoorraad</h3>
+      <p class="g-card__b" style="color:var(--steel-600)" data-i18n="mod3_desc">Voorraadbeheer met min/max-niveaus, automatische bestelvoorstellen, leveranciersbeheer en kostprijsberekening per onderdeel.</p>
+    </div>
+    <div class="g-card g-card--light" style="gap:16px">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      <h3 class="g-card__t" style="color:var(--bg)" data-i18n="mod4_title">Facturatie</h3>
+      <p class="g-card__b" style="color:var(--steel-600)" data-i18n="mod4_desc">Automatische factuurgeneratie vanuit werkorders. Uurtarieven, onderdeelprijzen en BTW berekening in één klik.</p>
+    </div>
+    <div class="g-card g-card--light" style="gap:16px">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <h3 class="g-card__t" style="color:var(--bg)" data-i18n="mod5_title">Klantportaal</h3>
+      <p class="g-card__b" style="color:var(--steel-600)" data-i18n="mod5_desc">Klanten volgen hun opdracht online: status updates, foto's van werkzaamheden en digitale facturen. Verhoogt vertrouwen en bespaart telefoontjes.</p>
+    </div>
+    <div class="g-card g-card--light" style="gap:16px">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <h3 class="g-card__t" style="color:var(--bg)" data-i18n="mod6_title">Rapportage &amp; Analytics</h3>
+      <p class="g-card__b" style="color:var(--steel-600)" data-i18n="mod6_desc">Omzet per monteur, gemiddelde doorlooptijd, bezettingsgraad en klanttevredenheid. Inzicht voor betere beslissingen.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- DASHBOARD MOCKUP -->
+<section id="dashboard" style="padding:96px 0">
+<div class="g-wrap">
+  <div class="g-divider">
+    <span class="g-eyebrow">02</span><span class="g-eyebrow" style="color:var(--steel-400)">Dashboard</span><span class="g-divider__line"></span>
+  </div>
+  <h2 class="g-h2" style="margin-bottom:48px" data-i18n="s02_title">Realtime werkplaatsoverzicht</h2>
+  <div style="border:1px solid var(--bg-700);border-radius:var(--r-xl);background:var(--bg-900);overflow:hidden">
+    <!-- Title bar -->
+    <div style="display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid var(--bg-700)">
+      <span style="width:12px;height:12px;border-radius:50%;background:var(--red)"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:var(--amber)"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:var(--em)"></span>
+      <span style="flex:1;text-align:center;font:500 12px/1 var(--font-b);color:var(--steel-400)">AutoService Pro — Dashboard</span>
+    </div>
+    <div style="padding:24px">
+      <!-- KPI row -->
+      <div class="dash-cols" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">
+        <div style="padding:16px;border:1px solid var(--bg-700);border-radius:var(--r-md);background:var(--bg-850)">
+          <div class="g-small" data-i18n="kpi1">Openstaande werkorders</div>
+          <div style="font:700 28px/1 var(--font-d);color:var(--em);margin-top:8px">12</div>
+        </div>
+        <div style="padding:16px;border:1px solid var(--bg-700);border-radius:var(--r-md);background:var(--bg-850)">
+          <div class="g-small" data-i18n="kpi2">In uitvoering</div>
+          <div style="font:700 28px/1 var(--font-d);color:var(--blue);margin-top:8px">5</div>
+        </div>
+        <div style="padding:16px;border:1px solid var(--bg-700);border-radius:var(--r-md);background:var(--bg-850)">
+          <div class="g-small" data-i18n="kpi3">Gereed voor oplevering</div>
+          <div style="font:700 28px/1 var(--font-d);color:var(--amber);margin-top:8px">3</div>
+        </div>
+        <div style="padding:16px;border:1px solid var(--bg-700);border-radius:var(--r-md);background:var(--bg-850)">
+          <div class="g-small" data-i18n="kpi4">Omzet deze maand</div>
+          <div style="font:700 28px/1 var(--font-d);color:#F1F3F5;margin-top:8px">€ 48.250</div>
+        </div>
+      </div>
+      <!-- Work orders table -->
+      <div style="border:1px solid var(--bg-700);border-radius:var(--r-md);overflow-x:auto">
+        <table class="g-tbl">
+          <thead>
+            <tr><th>WO #</th><th data-i18n="tbl_vehicle">Voertuig</th><th data-i18n="tbl_customer">Klant</th><th data-i18n="tbl_type">Type</th><th>Status</th><th data-i18n="tbl_mechanic">Monteur</th><th data-i18n="tbl_due">Deadline</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="color:var(--em)">WO-2024-0847</td><td>BMW 320d (2021)</td><td>Van Dijk Lease</td><td data-i18n="wo_type1">APK + onderhoud</td><td><span class="g-tag g-tag--blue" data-i18n="wo_status_progress">In uitvoering</span></td><td>Mark V.</td><td>15 okt</td></tr>
+            <tr><td style="color:var(--em)">WO-2024-0846</td><td>VW Transporter T6</td><td>Bakkerij Jansen</td><td data-i18n="wo_type2">Remmen + banden</td><td><span class="g-tag g-tag--blue" data-i18n="wo_status_progress">In uitvoering</span></td><td>Sander K.</td><td>15 okt</td></tr>
+            <tr><td style="color:var(--em)">WO-2024-0845</td><td>Audi A4 Avant</td><td>Jansen, P.</td><td data-i18n="wo_type3">Distributieriem</td><td><span class="g-tag g-tag--amber" data-i18n="wo_status_parts">Wacht op onderdelen</span></td><td>Mark V.</td><td>16 okt</td></tr>
+            <tr><td style="color:var(--em)">WO-2024-0844</td><td>Mercedes Vito</td><td>Schoonmaak Plus</td><td data-i18n="wo_type4">Aircoservice</td><td><span class="g-tag g-tag--em" data-i18n="wo_status_done">Gereed</span></td><td>Tom B.</td><td>14 okt</td></tr>
+            <tr><td style="color:var(--em)">WO-2024-0843</td><td>Renault Clio (2019)</td><td>De Wit, K.</td><td>APK</td><td><span class="g-tag g-tag--em" data-i18n="wo_status_done">Gereed</span></td><td>Sander K.</td><td>14 okt</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow" class="g-light" style="padding:96px 0">
+<div class="g-wrap">
+  <div class="g-divider">
+    <span class="g-eyebrow" style="color:var(--em-700)">03</span><span class="g-eyebrow" style="color:var(--steel-500)" data-i18n="s03_label">Werkwijze</span><span class="g-divider__line"></span>
+  </div>
+  <h2 class="g-h2" style="color:var(--bg);margin-bottom:64px" data-i18n="s03_title">Van intake tot factuur in vijf stappen</h2>
+  <div class="step-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px">
+    <div class="g-step"><div class="g-step__n">1</div><h4 class="g-h4" style="color:var(--bg)" data-i18n="step1_t">Intake</h4><p class="g-small" style="color:var(--steel-500)" data-i18n="step1_d">Klant meldt zich. Voertuiggegevens, klachtomschrijving en foto's vastleggen.</p></div>
+    <div class="g-step"><div class="g-step__n">2</div><h4 class="g-h4" style="color:var(--bg)" data-i18n="step2_t">Diagnose</h4><p class="g-small" style="color:var(--steel-500)" data-i18n="step2_d">Monteur stelt diagnose. Benodigde onderdelen en uren worden geschat.</p></div>
+    <div class="g-step"><div class="g-step__n">3</div><h4 class="g-h4" style="color:var(--bg)" data-i18n="step3_t">Planning</h4><p class="g-small" style="color:var(--steel-500)" data-i18n="step3_d">Werkorder ingepland op beschikbare brug en monteur. Klant ontvangt bevestiging.</p></div>
+    <div class="g-step"><div class="g-step__n">4</div><h4 class="g-h4" style="color:var(--bg)" data-i18n="step4_t">Uitvoering</h4><p class="g-small" style="color:var(--steel-500)" data-i18n="step4_d">Realtime statusupdates. Onderdelen worden afgeboekt van voorraad.</p></div>
+    <div class="g-step"><div class="g-step__n">5</div><h4 class="g-h4" style="color:var(--bg)" data-i18n="step5_t">Oplevering</h4><p class="g-small" style="color:var(--steel-500)" data-i18n="step5_d">Kwaliteitscheck, automatische factuur en digitale oplevering aan klant.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- USPs -->
+<section style="padding:96px 0">
+<div class="g-wrap">
+  <div class="g-divider">
+    <span class="g-eyebrow">04</span><span class="g-eyebrow" style="color:var(--steel-400)" data-i18n="s04_label">Voordelen</span><span class="g-divider__line"></span>
+  </div>
+  <h2 class="g-h2" style="margin-bottom:48px" data-i18n="s04_title">Waarom AutoService Pro?</h2>
+  <div class="usp-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="g-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><h3 class="g-card__t" data-i18n="usp1_t">Bespaar 10+ uur per week</h3><p class="g-card__b" data-i18n="usp1_d">Geen dubbele invoer meer. Werkorders stromen automatisch door naar planning, voorraad en factuur.</p></div>
+    <div class="g-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><h3 class="g-card__t" data-i18n="usp2_t">Werkt overal</h3><p class="g-card__b" data-i18n="usp2_d">Browser-based: gebruik het op desktop, tablet of telefoon. Altijd de laatste versie, geen installatie.</p></div>
+    <div class="g-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><h3 class="g-card__t" data-i18n="usp3_t">Klantportaal inbegrepen</h3><p class="g-card__b" data-i18n="usp3_d">Klanten volgen hun werkorder online. Minder telefoontjes, meer vertrouwen.</p></div>
+    <div class="g-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><h3 class="g-card__t" data-i18n="usp4_t">GDPR-proof</h3><p class="g-card__b" data-i18n="usp4_d">Alle data op Europese servers. Automatische verwijdering van persoonsgegevens conform AVG.</p></div>
+    <div class="g-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><h3 class="g-card__t" data-i18n="usp5_t">Inzicht in uw cijfers</h3><p class="g-card__b" data-i18n="usp5_d">Omzet per monteur, bezettingsgraad, gemiddelde doorlooptijd. Data-gedreven beslissingen.</p></div>
+    <div class="g-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--em)" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><h3 class="g-card__t" data-i18n="usp6_t">Automatische herinneringen</h3><p class="g-card__b" data-i18n="usp6_d">APK-herinneringen, servicenotificaties en onderhoudsschema's automatisch per e-mail of SMS.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="g-light" style="padding:96px 0">
+<div class="g-wrap">
+  <div class="g-divider">
+    <span class="g-eyebrow" style="color:var(--em-700)">05</span><span class="g-eyebrow" style="color:var(--steel-500)" data-i18n="s05_label">Pakketten</span><span class="g-divider__line"></span>
+  </div>
+  <h2 class="g-h2" style="color:var(--bg);margin-bottom:48px" data-i18n="s05_title">Schaalbaar met uw garage mee</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="mod-grid">
+    <!-- Starter -->
+    <div class="g-card g-card--light" style="gap:20px;padding:32px">
+      <span class="g-eyebrow" style="color:var(--em-700)">Starter</span>
+      <div><span style="font:800 36px/1 var(--font-d);color:var(--bg)">€ 149</span><span style="font:400 14px/1 var(--font-b);color:var(--steel-500)"> / <span data-i18n="price_mo">maand</span></span></div>
+      <p class="g-card__b" style="color:var(--steel-600)" data-i18n="pkg1_desc">Voor kleine garages tot 3 monteurs. Werkorders, planning en basisfacturatie.</p>
+      <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;font:400 14px/20px var(--font-b);color:var(--steel-600)">
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg1_f1">Tot 3 gebruikers</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg1_f2">Werkorder- en planningmodule</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg1_f3">Basisfacturatie</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg1_f4">E-mail support</span></li>
+      </ul>
+      <a href="#contact" class="g-btn g-btn--ghost" style="width:100%;justify-content:center;color:var(--bg);border-color:var(--steel-200)" data-i18n="pkg_cta">Meer informatie</a>
+    </div>
+    <!-- Professional -->
+    <div style="border:2px solid var(--em);border-radius:var(--r-md);background:var(--white);padding:32px;display:flex;flex-direction:column;gap:20px;position:relative">
+      <span style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--em);color:var(--em-ink);font:700 12px/28px var(--font-b);padding:0 16px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em" data-i18n="pkg_pop">Populair</span>
+      <span class="g-eyebrow" style="color:var(--em-700)">Professional</span>
+      <div><span style="font:800 36px/1 var(--font-d);color:var(--bg)">€ 299</span><span style="font:400 14px/1 var(--font-b);color:var(--steel-500)"> / <span data-i18n="price_mo">maand</span></span></div>
+      <p style="font:400 14px/22px var(--font-b);color:var(--steel-600)" data-i18n="pkg2_desc">Voor groeiende garages. Alle modules inclusief klantportaal en voorraad.</p>
+      <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;font:400 14px/20px var(--font-b);color:var(--steel-600)">
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg2_f1">Tot 10 gebruikers</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg2_f2">Alle modules</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg2_f3">Klantportaal</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg2_f4">Voorraadmodule</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg2_f5">Prioriteitssupport</span></li>
+      </ul>
+      <a href="#contact" class="g-btn g-btn--pri" style="width:100%;justify-content:center" data-i18n="pkg_cta">Meer informatie</a>
+    </div>
+    <!-- Enterprise -->
+    <div class="g-card g-card--light" style="gap:20px;padding:32px">
+      <span class="g-eyebrow" style="color:var(--em-700)">Enterprise</span>
+      <div><span style="font:800 36px/1 var(--font-d);color:var(--bg)" data-i18n="pkg3_price">Op maat</span></div>
+      <p class="g-card__b" style="color:var(--steel-600)" data-i18n="pkg3_desc">Voor multi-locatie garages en ketens. Onbeperkt gebruikers, API-koppelingen en custom integraties.</p>
+      <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;font:400 14px/20px var(--font-b);color:var(--steel-600)">
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg3_f1">Onbeperkt gebruikers</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg3_f2">Multi-locatie beheer</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg3_f3">API-koppelingen &amp; SSO</span></li>
+        <li style="display:flex;gap:8px;align-items:flex-start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/></svg><span data-i18n="pkg3_f4">Dedicated support</span></li>
+      </ul>
+      <a href="#contact" class="g-btn g-btn--ghost" style="width:100%;justify-content:center;color:var(--bg);border-color:var(--steel-200)" data-i18n="pkg_contact">Contact opnemen</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding:96px 0">
+<div class="g-wrap">
+  <div class="g-divider">
+    <span class="g-eyebrow">06</span><span class="g-eyebrow" style="color:var(--steel-400)" data-i18n="s06_label">Ervaringen</span><span class="g-divider__line"></span>
+  </div>
+  <div class="test-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="g-card" style="gap:14px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 14px/22px var(--font-b);color:var(--steel-300);font-style:italic" data-i18n="test1_q">"Sinds we AutoService Pro gebruiken is de administratie gehalveerd. Alles zit in één systeem."</p>
+      <div><span style="font:600 14px/1 var(--font-b);color:#F1F3F5">[Naam]</span><br><span class="g-small" data-i18n="test1_r">Eigenaar, Autogarage Utrecht</span></div>
+    </div>
+    <div class="g-card" style="gap:14px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 14px/22px var(--font-b);color:var(--steel-300);font-style:italic" data-i18n="test2_q">"Het klantportaal is een gamechanger. Klanten zien zelf de voortgang en bellen veel minder."</p>
+      <div><span style="font:600 14px/1 var(--font-b);color:#F1F3F5">[Naam]</span><br><span class="g-small" data-i18n="test2_r">Werkplaatschef, Rotterdam</span></div>
+    </div>
+    <div class="g-card" style="gap:14px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 14px/22px var(--font-b);color:var(--steel-300);font-style:italic" data-i18n="test3_q">"Eindelijk inzicht in omzet per monteur en doorlooptijden. Precies wat we nodig hadden."</p>
+      <div><span style="font:600 14px/1 var(--font-b);color:#F1F3F5">[Naam]</span><br><span class="g-small" data-i18n="test3_r">Directeur, Garageketen (6 vestigingen)</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contact" class="g-light" style="padding:96px 0">
+<div class="g-wrap">
+  <div class="cta-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+    <div>
+      <h2 class="g-h2" style="color:var(--bg);margin-bottom:8px" data-i18n="cta_title">Klaar om uw werkplaats te digitaliseren?</h2>
+      <p class="g-lead" style="color:var(--steel-600);margin-bottom:32px" data-i18n="cta_lead">Plan een vrijblijvende demo. Wij laten u zien hoe AutoService Pro werkt voor uw situatie.</p>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1 var(--font-b);color:var(--steel-600)" data-i18n="form_name">Naam</label><input style="height:44px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--steel-150);font:400 15px/1 var(--font-b);background:var(--white)" type="text" data-i18n-ph="form_name_ph" placeholder="Uw naam"></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1 var(--font-b);color:var(--steel-600)" data-i18n="form_company">Bedrijfsnaam</label><input style="height:44px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--steel-150);font:400 15px/1 var(--font-b);background:var(--white)" type="text" data-i18n-ph="form_company_ph" placeholder="Garagenaam"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1 var(--font-b);color:var(--steel-600)">E-mail</label><input style="height:44px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--steel-150);font:400 15px/1 var(--font-b);background:var(--white)" type="email" placeholder="uw@email.nl"></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1 var(--font-b);color:var(--steel-600)" data-i18n="form_phone">Telefoon</label><input style="height:44px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--steel-150);font:400 15px/1 var(--font-b);background:var(--white)" type="tel" placeholder="06 ..."></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1 var(--font-b);color:var(--steel-600)" data-i18n="form_garage_size">Aantal monteurs</label><select style="height:44px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--steel-150);font:400 15px/1 var(--font-b);background:var(--white);color:var(--bg)"><option value="" data-i18n="form_select">Selecteer...</option><option>1-3</option><option>4-10</option><option>10+</option></select></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1 var(--font-b);color:var(--steel-600)" data-i18n="form_message">Bericht</label><textarea style="min-height:90px;padding:10px 14px;border-radius:var(--r-sm);border:1px solid var(--steel-150);font:400 15px/1.5 var(--font-b);background:var(--white);resize:vertical" data-i18n-ph="form_message_ph" placeholder="Vertel ons over uw garage..."></textarea></div>
+        <button class="g-btn g-btn--pri" style="width:100%;justify-content:center;background:var(--em-700);color:var(--white)" data-i18n="form_submit">Demo aanvragen</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:28px;padding:40px;border:1px solid var(--steel-150);border-radius:var(--r-xl);background:var(--white)">
+      <h3 class="g-h3" style="color:var(--bg)" data-i18n="contact_title">Waarom een demo?</h3>
+      <div style="display:flex;flex-direction:column;gap:16px;font:400 15px/24px var(--font-b);color:var(--steel-600)">
+        <div style="display:flex;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="demo_reason1">30 minuten, speciaal voor uw situatie</span></div>
+        <div style="display:flex;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="demo_reason2">Geen verplichtingen, geen verkooppraatje</span></div>
+        <div style="display:flex;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="demo_reason3">Direct antwoord op al uw vragen</span></div>
+        <div style="display:flex;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2" style="flex-shrink:0;margin-top:2px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="demo_reason4">Proefperiode van 14 dagen na de demo</span></div>
+      </div>
+      <div style="border-top:1px solid var(--steel-150);padding-top:20px;display:flex;flex-direction:column;gap:12px;font:400 14px/20px var(--font-b);color:var(--steel-500)">
+        <div style="display:flex;gap:10px;align-items:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@dessystems.io</div>
+        <div style="display:flex;gap:10px;align-items:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--em-700)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg>dessystems.io</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:64px 0 32px;border-top:1px solid var(--bg-700)">
+<div class="g-wrap">
+  <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+    <div>
+      <a class="g-wordmark" href="#" style="margin-bottom:16px;display:inline-flex">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="4" fill="var(--em)"/><text x="14" y="19" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="12" fill="var(--em-ink)">ASP</text></svg>
+        <span>AutoService Pro</span>
+      </a>
+      <p class="g-small" style="margin-top:14px;max-width:28ch" data-i18n="footer_tag">Garage management platform. Werkplaatsplanning, opdrachtbeheer, onderdelen en facturatie in één systeem.</p>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-b);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px" data-i18n="footer_modules">Modules</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-b);color:var(--steel-300)">
+        <a href="#modules" data-i18n="footer_m1">Planning</a>
+        <a href="#modules" data-i18n="footer_m2">Werkorders</a>
+        <a href="#modules" data-i18n="footer_m3">Voorraad</a>
+        <a href="#modules" data-i18n="footer_m4">Facturatie</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-b);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px" data-i18n="footer_platform">Platform</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-b);color:var(--steel-300)">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#pricing" data-i18n="footer_pricing">Pakketten</a>
+        <a href="#" data-i18n="footer_security">Beveiliging</a>
+        <a href="#">API</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-b);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px" data-i18n="footer_legal">Juridisch</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-b);color:var(--steel-300)">
+        <a href="#">Privacy</a>
+        <a href="#" data-i18n="footer_terms">Algemene voorwaarden</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--bg-700);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <span class="g-small">© 2026 AutoService Pro — <span data-i18n="footer_by">een product van</span> DES Systems</span>
+  </div>
+</div>
+</footer>
+
+<!-- POWERED BY DES -->
+<div class="des-banner">
+  Ontworpen &amp; gebouwd door <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform
+</div>
+
+<script>
+(function(){
+  var T = {
+    en: {
+      nav_modules:"Modules", nav_workflow:"Workflow", nav_pricing:"Packages", nav_cta:"Request a demo",
+      hero_eyebrow:"Garage Management Platform",
+      hero_title:"Your workshop.<br>Fully digital.",
+      hero_lead:"Workshop planning, job management, parts inventory and invoicing — all in one platform. Built for garages that want to grow.",
+      hero_cta1:"Request a demo", hero_cta2:"View modules",
+      hero_usp1:"Multi-tenant SaaS", hero_usp2:"GDPR-compliant", hero_usp3:"Real-time overview", hero_usp4:"Any device",
+      stat1:"Garages connected", stat2:"Work orders per year", stat3:"Uptime", stat4:"Faster invoicing",
+      s01_label:"Modules", s01_title:"Everything your garage needs",
+      mod1_title:"Workshop Planning", mod1_desc:"Visual scheduling per mechanic and bay. Drag-and-drop work orders, automatic capacity calculation and real-time status updates.",
+      mod2_title:"Work Order Management", mod2_desc:"From intake to delivery: checklists, photos, time tracking and customer communication. Everything linked to the vehicle.",
+      mod3_title:"Parts Inventory", mod3_desc:"Stock management with min/max levels, automatic reorder suggestions, supplier management and cost price calculation per part.",
+      mod4_title:"Invoicing", mod4_desc:"Automatic invoice generation from work orders. Hourly rates, part prices and VAT calculation in one click.",
+      mod5_title:"Customer Portal", mod5_desc:"Customers follow their job online: status updates, photos of work in progress and digital invoices. Builds trust and saves phone calls.",
+      mod6_title:"Reporting & Analytics", mod6_desc:"Revenue per mechanic, average turnaround time, utilization rate and customer satisfaction. Insights for better decisions.",
+      s02_title:"Real-time workshop overview",
+      kpi1:"Open work orders", kpi2:"In progress", kpi3:"Ready for delivery", kpi4:"Revenue this month",
+      tbl_vehicle:"Vehicle", tbl_customer:"Customer", tbl_type:"Type", tbl_mechanic:"Mechanic", tbl_due:"Due",
+      wo_type1:"MOT + service", wo_type2:"Brakes + tires", wo_type3:"Timing belt", wo_type4:"A/C service",
+      wo_status_progress:"In progress", wo_status_parts:"Waiting for parts", wo_status_done:"Completed",
+      s03_label:"Workflow", s03_title:"From intake to invoice in five steps",
+      step1_t:"Intake", step1_d:"Customer reports in. Record vehicle data, complaint description and photos.",
+      step2_t:"Diagnosis", step2_d:"Mechanic diagnoses the issue. Required parts and hours are estimated.",
+      step3_t:"Scheduling", step3_d:"Work order scheduled on available bay and mechanic. Customer receives confirmation.",
+      step4_t:"Execution", step4_d:"Real-time status updates. Parts are automatically deducted from stock.",
+      step5_t:"Delivery", step5_d:"Quality check, automatic invoice and digital delivery to customer.",
+      s04_label:"Benefits", s04_title:"Why AutoService Pro?",
+      usp1_t:"Save 10+ hours per week", usp1_d:"No more double entry. Work orders flow automatically to planning, inventory and invoice.",
+      usp2_t:"Works everywhere", usp2_d:"Browser-based: use it on desktop, tablet or phone. Always the latest version, no installation.",
+      usp3_t:"Customer portal included", usp3_d:"Customers track their work order online. Fewer phone calls, more trust.",
+      usp4_t:"GDPR-proof", usp4_d:"All data on European servers. Automatic deletion of personal data in compliance with GDPR.",
+      usp5_t:"Insight into your numbers", usp5_d:"Revenue per mechanic, utilization rate, average turnaround time. Data-driven decisions.",
+      usp6_t:"Automatic reminders", usp6_d:"MOT reminders, service notifications and maintenance schedules automatically by email or SMS.",
+      s05_label:"Packages", s05_title:"Scales with your garage",
+      price_mo:"month",
+      pkg1_desc:"For small garages up to 3 mechanics. Work orders, planning and basic invoicing.",
+      pkg1_f1:"Up to 3 users", pkg1_f2:"Work order & planning module", pkg1_f3:"Basic invoicing", pkg1_f4:"Email support",
+      pkg_pop:"Popular",
+      pkg2_desc:"For growing garages. All modules including customer portal and inventory.",
+      pkg2_f1:"Up to 10 users", pkg2_f2:"All modules", pkg2_f3:"Customer portal", pkg2_f4:"Inventory module", pkg2_f5:"Priority support",
+      pkg3_price:"Custom", pkg3_desc:"For multi-location garages and chains. Unlimited users, API integrations and custom development.",
+      pkg3_f1:"Unlimited users", pkg3_f2:"Multi-location management", pkg3_f3:"API integrations & SSO", pkg3_f4:"Dedicated support",
+      pkg_cta:"More information", pkg_contact:"Contact us",
+      s06_label:"Reviews",
+      test1_q:'"Since using AutoService Pro, our admin work has been cut in half. Everything is in one system."',
+      test1_r:"Owner, Car Garage Utrecht",
+      test2_q:'"The customer portal is a game changer. Customers see their progress and call much less."',
+      test2_r:"Workshop Manager, Rotterdam",
+      test3_q:'"Finally insight into revenue per mechanic and turnaround times. Exactly what we needed."',
+      test3_r:"Director, Garage Chain (6 locations)",
+      cta_title:"Ready to digitize your workshop?",
+      cta_lead:"Schedule a no-obligation demo. We'll show you how AutoService Pro works for your situation.",
+      form_name:"Name", form_name_ph:"Your name",
+      form_company:"Company name", form_company_ph:"Garage name",
+      form_phone:"Phone", form_garage_size:"Number of mechanics", form_select:"Select...",
+      form_message:"Message", form_message_ph:"Tell us about your garage...",
+      form_submit:"Request a demo",
+      contact_title:"Why a demo?",
+      demo_reason1:"30 minutes, tailored to your situation",
+      demo_reason2:"No obligations, no sales pitch",
+      demo_reason3:"Immediate answers to all your questions",
+      demo_reason4:"14-day trial after the demo",
+      footer_tag:"Garage management platform. Workshop planning, job management, parts and invoicing in one system.",
+      footer_modules:"Modules", footer_m1:"Planning", footer_m2:"Work orders", footer_m3:"Inventory", footer_m4:"Invoicing",
+      footer_platform:"Platform", footer_pricing:"Packages", footer_security:"Security",
+      footer_legal:"Legal", footer_terms:"Terms and conditions", footer_by:"a product of"
+    }
+  };
+
+  var lang = 'nl';
+  var els = document.querySelectorAll('[data-i18n]');
+  var phEls = document.querySelectorAll('[data-i18n-ph]');
+  var originals = new Map();
+  var phOriginals = new Map();
+
+  els.forEach(function(el){
+    originals.set(el, el.getAttribute('data-i18n-html') ? el.innerHTML : el.textContent);
+  });
+  phEls.forEach(function(el){
+    phOriginals.set(el, el.placeholder);
+  });
+
+  function apply(l){
+    lang = l;
+    document.documentElement.lang = l;
+    document.title = l === 'en'
+      ? 'AutoService Pro — Garage Management Platform'
+      : 'AutoService Pro — Garage Management Platform';
+    els.forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(l === 'nl'){
+        if(el.getAttribute('data-i18n-html')) el.innerHTML = originals.get(el);
+        else el.textContent = originals.get(el);
+      } else if(T[l] && T[l][key]){
+        if(el.getAttribute('data-i18n-html')) el.innerHTML = T[l][key];
+        else el.textContent = T[l][key];
+      }
+    });
+    phEls.forEach(function(el){
+      var key = el.getAttribute('data-i18n-ph');
+      if(l === 'nl') el.placeholder = phOriginals.get(el);
+      else if(T[l] && T[l][key]) el.placeholder = T[l][key];
+    });
+    document.querySelectorAll('.g-seg__opt[data-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === l ? 'true' : 'false');
+    });
+  }
+
+  document.querySelectorAll('.g-seg__opt[data-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      apply(btn.getAttribute('data-lang'));
+      try{ localStorage.setItem('g-lang', lang); }catch(e){}
+    });
+  });
+
+  try{
+    var saved = localStorage.getItem('g-lang');
+    if(saved && T[saved]) apply(saved);
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>

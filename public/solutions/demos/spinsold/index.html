@@ -149,8 +149,10 @@ img{display:block;max-width:100%}
 </header>
 
 <!-- HERO -->
-<section class="ss-dark" style="padding:100px 0 0;overflow:hidden">
-<div class="ss-container hero-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 260px)">
+<section class="ss-dark" style="position:relative;padding:100px 0 0;overflow:hidden">
+<div style="position:absolute;inset:0;background:url('/solutions/demos/spinsold/img/hero-bg.webp') center/cover no-repeat;opacity:.35"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(to right,var(--graphite) 30%,transparent 70%)"></div>
+<div class="ss-container hero-grid" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 260px)">
   <div style="display:flex;flex-direction:column;gap:24px">
     <span class="ss-eyebrow" data-i18n="hero_eyebrow">Automated 360° vehicle studio</span>
     <h1 class="ss-display" data-i18n="hero_title" data-i18n-html="1">Spin it.<br>Sell it.</h1>
@@ -161,8 +163,8 @@ img{display:block;max-width:100%}
     </div>
   </div>
   <div class="hero-visual" style="position:relative;display:flex;align-items:center;justify-content:center">
-    <span class="ss-ring ss-ring--spin" style="--size:400px;--w:1px;position:absolute"><span class="ss-ring__arc"></span></span>
     <img src="/solutions/demos/spinsold/img/hero-bmw.webp" alt="BMW X5 on turntable in SpinSold studio" style="width:460px;aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);z-index:1;object-fit:cover">
+    <span class="ss-ring ss-ring--spin" style="--size:400px;--w:1px;position:absolute;z-index:2"><span class="ss-ring__arc"></span></span>
   </div>
 </div>
 <div class="ss-container" style="display:flex;justify-content:center;gap:48px;font:500 15px/1 var(--font-body);color:var(--steel-400);padding:48px 0 64px;flex-wrap:wrap">

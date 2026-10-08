@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AutoDetail Pro — Professionele Voertuigverzorging</title>
+<title>AutoDetail Pro — Professionele Voertuigpreparatie Rotterdam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* ═══ Industry / Blueprint — Design System Tokens ═══ */
 *,*::before,*::after{box-sizing:border-box}
@@ -23,6 +23,9 @@
   --color-accent-100:#eef6ff;--color-accent-200:#d6ebff;--color-accent-300:#b5d9fd;
   --color-accent-400:#94bce3;--color-accent-500:#749dc4;--color-accent-600:#597ea3;
   --color-accent-700:#416180;--color-accent-800:#2c455d;--color-accent-900:#1d2d3d;
+  --color-accent2-100:#f0f4f8;--color-accent2-200:#dce4ec;--color-accent2-300:#c2d0dc;
+  --color-accent2-400:#a6b8c8;--color-accent2-500:#8da2b5;--color-accent2-600:#728fab;
+  --color-accent2-700:#5a7189;--color-accent2-800:#435568;--color-accent2-900:#2e3a48;
   --font-heading:"Barlow Condensed",system-ui,sans-serif;
   --font-heading-weight:600;
   --font-body:"Barlow",system-ui,sans-serif;
@@ -30,6 +33,7 @@
   --shadow-sm:0 1px 2px color-mix(in srgb,#2b2b2d 14%,transparent);
   --shadow-md:0 3px 10px color-mix(in srgb,#2b2b2d 16%,transparent);
   --shadow-lg:0 12px 32px color-mix(in srgb,#2b2b2d 22%,transparent);
+  --max-w:1360px;
 }
 body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:16px;line-height:1.5;text-wrap:pretty}
 h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:var(--font-heading-weight);line-height:1.12;letter-spacing:-.015em;margin:0}
@@ -42,7 +46,6 @@ html{scroll-behavior:smooth}
 
 /* ═══ Blueprint Frame ═══ */
 .blueprint{position:relative;border:1px solid var(--color-divider);border-radius:0}
-.blueprint.duotone{overflow:visible}
 .blueprint>.corner{position:absolute;width:11px;height:11px;color:color-mix(in srgb,var(--color-text) 55%,transparent)}
 .blueprint>.corner::before,.blueprint>.corner::after{content:"";position:absolute;background:currentColor}
 .blueprint>.corner::before{left:5px;top:0;width:1px;height:100%}
@@ -79,288 +82,293 @@ select.input{appearance:auto}
 .table td{padding:6.8px;border-bottom:1px solid color-mix(in srgb,var(--color-text) 8%,transparent)}
 .table tbody tr:hover{background:color-mix(in srgb,var(--color-text) 4%,transparent)}
 .elev-lg{box-shadow:var(--shadow-lg)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* ═══ Section label ═══ */
-.sec-label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)}
-.sec-divider{height:1px;background:var(--color-divider);margin:12px 0 24px}
-.sec-heading{font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 40px;max-width:22ch}
+/* ═══ Kicker label ═══ */
+.kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)}
+
+/* ═══ Wrap ═══ */
+.wrap{max-width:var(--max-w);margin:0 auto;padding-left:clamp(20px,5vw,72px);padding-right:clamp(20px,5vw,72px)}
+
+/* ═══ Animations ═══ */
+@keyframes scan{0%{top:-2px}100%{top:100%}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
 /* ═══ Responsive ═══ */
 @media(max-width:768px){
   .hide-mobile{display:none!important}
   .hero-grid{grid-template-columns:1fr!important}
+  .two-col{grid-template-columns:1fr!important}
+  .three-col{grid-template-columns:1fr!important}
+  .reg-nav{overflow-x:auto}
+  .facility-grid{grid-template-columns:1fr!important}
+  .footer-grid{grid-template-columns:1fr 1fr!important}
+  .sticky-left{position:static!important}
+  .pricing-table-wrap{overflow-x:auto}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr!important}
 }
 </style>
 </head>
 <body>
 <div id="app" style="min-height:100vh">
 
-<!-- A. Topbar -->
-<div id="topbar" style="background:var(--color-accent-900);color:var(--color-accent-200);font-size:13px">
-  <div style="max-width:1200px;margin:0 auto;padding:8px clamp(20px,5vw,72px);display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between;align-items:center">
-    <div style="display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center">
-      <a href="tel:0101234567" style="display:flex;gap:6px;align-items:center;color:inherit;text-decoration:none">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span data-i18n="topbar_phone">010 123 4567</span>
-      </a>
-      <a href="mailto:info@autodetailpro.nl" style="display:flex;gap:6px;align-items:center;color:inherit;text-decoration:none">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        info@autodetailpro.nl
-      </a>
-    </div>
-    <div style="display:flex;gap:6px;align-items:center">
-      <span data-i18n="topbar_hours">Ma–vr 08:00–17:30</span>
-      <span style="margin-left:8px;display:inline-flex;gap:4px">
-        <button onclick="setLang('nl')" id="lang-nl" style="background:none;border:0;color:var(--color-bg);cursor:pointer;font:inherit;font-weight:700;font-size:13px;padding:2px 4px">NL</button>
-        <span style="opacity:.4">|</span>
-        <button onclick="setLang('en')" id="lang-en" style="background:none;border:0;color:var(--color-accent-300);cursor:pointer;font:inherit;font-size:13px;padding:2px 4px">EN</button>
-      </span>
-    </div>
-  </div>
-</div>
-
-<!-- B. Header -->
+<!-- ════════════════════════════════════════════════
+     1. HEADER — sticky, no separate topbar
+     ════════════════════════════════════════════════ -->
 <header id="header" style="position:sticky;top:0;z-index:50;background:var(--color-bg);border-bottom:1px solid var(--color-divider)">
-  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,72px);display:flex;align-items:center;min-height:60px;gap:24px">
-    <div class="blueprint" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;background:var(--color-accent-900);color:var(--color-bg);font-family:var(--font-heading);font-weight:600;font-size:18px;letter-spacing:.04em">
+  <div class="wrap" style="display:flex;align-items:center;min-height:60px;gap:20px">
+    <!-- Logo box -->
+    <div class="blueprint" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--color-accent-900);color:var(--color-bg);font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.04em;flex:none;border-color:var(--color-accent)">
       <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
-      AD
+      PB
     </div>
-    <span style="font-family:var(--font-heading);font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.02em;margin-right:auto" data-i18n="brand_name">AutoDetail Pro</span>
-    <nav style="display:flex;gap:20px;font-size:14px" class="hide-mobile">
+    <!-- Brand -->
+    <div style="margin-right:auto;line-height:1.2">
+      <span style="font-family:var(--font-heading);font-weight:600;font-size:17px;text-transform:uppercase;letter-spacing:.02em;display:block" data-i18n="brand_name">AutoDetail Pro</span>
+      <span style="font-size:11px;color:var(--color-neutral-600);letter-spacing:.04em" data-i18n="brand_sub">Voertuigpreparatie &middot; Rotterdam</span>
+    </div>
+    <!-- Nav -->
+    <nav style="display:flex;gap:18px;font-size:14px" class="hide-mobile">
       <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="nav_services">Diensten</a>
-      <a href="#over-ons" style="color:inherit;text-decoration:none" data-i18n="nav_about">Over ons</a>
-      <a href="#prijzen" style="color:inherit;text-decoration:none" data-i18n="nav_pricing">Tarieven</a>
-      <a href="#referenties" style="color:inherit;text-decoration:none" data-i18n="nav_reviews">Referenties</a>
+      <a href="#tarieven" style="color:inherit;text-decoration:none" data-i18n="nav_business">Zakelijk</a>
+      <a href="#werkwijze" style="color:inherit;text-decoration:none" data-i18n="nav_workflow">Werkwijze</a>
+      <a href="#tarieven" style="color:inherit;text-decoration:none" data-i18n="nav_pricing">Tarieven</a>
       <a href="#contact" style="color:inherit;text-decoration:none" data-i18n="nav_contact">Contact</a>
     </nav>
-    <a href="#afspraak" class="btn btn-primary" style="min-height:40px;padding-inline:16px" data-i18n="nav_cta">Afspraak maken</a>
+    <!-- Lang toggle -->
+    <span style="display:inline-flex;gap:3px;font-size:12px;letter-spacing:.04em" class="hide-mobile">
+      <button onclick="setLang('nl')" id="lang-nl" style="background:none;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;padding:2px 4px;color:var(--color-text)">NL</button>
+      <span style="opacity:.3">|</span>
+      <button onclick="setLang('en')" id="lang-en" style="background:none;border:0;cursor:pointer;font:inherit;font-size:12px;padding:2px 4px;color:var(--color-neutral-500)">EN</button>
+    </span>
+    <!-- Phone -->
+    <a href="tel:0101234567" class="btn btn-secondary hide-mobile" style="min-height:38px;padding-inline:12px;gap:6px;font-size:13px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span data-i18n="topbar_phone">010 123 4567</span>
+    </a>
+    <!-- CTA -->
+    <a href="#contact" class="btn btn-primary blueprint" style="min-height:38px;padding-inline:16px;position:relative" data-i18n="nav_cta">
+      <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
+      Offerte aanvragen
+    </a>
   </div>
 </header>
 
-<!-- C. Hero -->
-<section style="background:var(--color-accent-900);color:var(--color-bg);position:relative;overflow:hidden">
-  <div class="duotone" style="position:absolute;inset:0;background:var(--color-neutral-500);display:grid;place-items:center;color:var(--color-neutral-300);font-size:13px;letter-spacing:.06em;text-transform:uppercase">
-    Hero achtergrond: polijstwerk in actie
-  </div>
-  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(29,45,61,.92),rgba(29,45,61,.7))"></div>
-  <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(80px,12vw,160px) clamp(20px,5vw,72px) clamp(64px,8vw,120px)">
-    <div style="max-width:720px">
-      <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-300);margin-bottom:16px" data-i18n="hero_kicker">Professionele voertuigverzorging</div>
-      <h1 style="font-size:clamp(36px,5vw,64px);text-transform:uppercase;letter-spacing:.02em;line-height:1.05;margin:0 0 24px;color:var(--color-bg)" data-i18n="hero_title">Uw voertuig verdient vakmanschap</h1>
-      <p style="font-size:18px;color:var(--color-accent-100);margin:0 0 32px;max-width:52ch" data-i18n="hero_sub">Detailing, ceramic coating en interieurverzorging voor particulieren, dealers en wagenparken. Met vaste kwaliteitscontrole en garantiecertificaat.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:12px">
-        <a href="#afspraak" class="btn btn-primary" style="min-height:48px;padding-inline:24px;font-size:16px" data-i18n="hero_cta1">Afspraak maken</a>
-        <a href="#diensten" class="btn btn-secondary" style="min-height:48px;padding-inline:24px;font-size:16px;color:var(--color-bg);border-color:color-mix(in srgb,var(--color-bg) 35%,transparent)" data-i18n="hero_cta2">Bekijk diensten</a>
+<!-- ════════════════════════════════════════════════
+     2. HERO — Blad 01: Werkorder
+     ════════════════════════════════════════════════ -->
+<section id="hero" style="animation:rise .7s ease-out both">
+  <div class="wrap" style="padding-top:0;padding-bottom:0">
+    <div class="hero-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-divider);border:1px solid var(--color-divider)">
+      <!-- Left column -->
+      <div style="background:var(--color-bg);padding:clamp(32px,5vw,64px)">
+        <!-- Werkorder meta -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;margin-bottom:32px">
+          <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--color-neutral-600)">Werkorder</span>
+          <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)" data-i18n="hero_blad">Blad 01 van 09</span>
+          <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-500)">Rev. 2026-A</span>
+        </div>
+        <!-- h1 -->
+        <h1 style="font-size:clamp(52px,7.5vw,112px);text-transform:uppercase;letter-spacing:.01em;line-height:1.0;margin:0 0 28px">
+          <span style="display:block" data-i18n="hero_l1">Afleverklaar.</span>
+          <span style="display:block" data-i18n="hero_l2">Elke keer.</span>
+          <span style="display:block;color:var(--color-accent-700)" data-i18n="hero_l3">Op schaal.</span>
+        </h1>
+        <!-- Description -->
+        <p style="font-size:17px;color:var(--color-neutral-700);margin:0 0 32px;max-width:48ch" data-i18n="hero_desc">Professionele voertuigpreparatie voor dealers, leasemaatschappijen en wagenparken. Vaste doorlooptijden, foto-rapportage en volledige opzichtverzekering.</p>
+        <!-- CTAs -->
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:40px">
+          <a href="#contact" class="btn btn-primary" style="min-height:48px;padding-inline:24px;font-size:16px" data-i18n="hero_cta1">Zakelijke offerte aanvragen</a>
+          <a href="#contact" class="btn btn-secondary" style="min-height:48px;padding-inline:24px;font-size:16px" data-i18n="hero_cta2">Afspraak maken (particulier)</a>
+        </div>
+        <!-- Stats -->
+        <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;border-top:1px solid var(--color-divider);padding-top:24px">
+          <div>
+            <dt style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:4px" data-i18n="stat_turnaround">Doorlooptijd</dt>
+            <dd style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:22px;color:var(--color-accent-700)">48 uur</dd>
+          </div>
+          <div>
+            <dt style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:4px" data-i18n="stat_reporting">Rapportage</dt>
+            <dd style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:15px" data-i18n="stat_reporting_val">Foto per voertuig</dd>
+          </div>
+          <div>
+            <dt style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:4px" data-i18n="stat_insurance">Verzekering</dt>
+            <dd style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:15px" data-i18n="stat_insurance_val">Opzicht, volledig</dd>
+          </div>
+          <div>
+            <dt style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:4px" data-i18n="stat_logistics">Logistiek</dt>
+            <dd style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:15px" data-i18n="stat_logistics_val">Haal en breng</dd>
+          </div>
+        </dl>
       </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:48px;padding-top:32px;border-top:1px solid color-mix(in srgb,var(--color-bg) 20%,transparent)">
-      <div class="blueprint" style="padding:14px 16px;background:color-mix(in srgb,var(--color-bg) 8%,transparent);border-color:color-mix(in srgb,var(--color-bg) 20%,transparent);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--color-accent-100)">
-        <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none"><path d="M20 6 9 17l-5-5"/></svg>
-        <span data-i18n="badge_1">Gecertificeerd applicateur</span>
-      </div>
-      <div class="blueprint" style="padding:14px 16px;background:color-mix(in srgb,var(--color-bg) 8%,transparent);border-color:color-mix(in srgb,var(--color-bg) 20%,transparent);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--color-accent-100)">
-        <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-        <span data-i18n="badge_2">ISO-werkinstructies</span>
-      </div>
-      <div class="blueprint" style="padding:14px 16px;background:color-mix(in srgb,var(--color-bg) 8%,transparent);border-color:color-mix(in srgb,var(--color-bg) 20%,transparent);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--color-accent-100)">
-        <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
-        <span data-i18n="badge_3">Tot 5 jaar garantie</span>
+      <!-- Right column -->
+      <div style="background:var(--color-accent-900);min-height:520px;overflow:hidden;position:relative;display:flex;flex-direction:column;color:var(--color-bg)">
+        <!-- Placeholder image area -->
+        <div style="flex:1;position:relative;display:grid;place-items:center;color:var(--color-accent-400);font-size:12px;letter-spacing:.08em;text-transform:uppercase">
+          Foto: detailer aan het werk
+          <!-- Gradient overlay -->
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--color-accent-900) 100%);pointer-events:none"></div>
+          <!-- Scanning animation bar -->
+          <div style="position:absolute;left:0;right:0;height:2px;background:var(--color-accent-300);opacity:.18;animation:scan 6s linear infinite;top:-2px"></div>
+        </div>
+        <!-- Live status panel -->
+        <div id="live-panel" style="padding:20px clamp(16px,3vw,28px);border-top:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
+          <!-- Live indicator -->
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300)">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent-300);display:inline-block"></span>
+            <span data-i18n="live_label">Live &middot; vestiging Rotterdam</span>
+            <span style="margin-left:auto;font-feature-settings:'tnum' 1" id="live-clock">--:--:--</span>
+          </div>
+          <!-- Vehicle info -->
+          <div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:14px">
+            <span id="live-plate" style="font-family:var(--font-heading);font-weight:700;font-size:18px;padding:4px 12px;border:1px solid color-mix(in srgb,var(--color-bg) 30%,transparent);letter-spacing:.06em">XR-392-K</span>
+            <span id="live-model" style="font-size:14px;color:var(--color-accent-100)">Volvo XC60</span>
+            <span id="live-service" style="font-size:13px;color:var(--color-accent-300)">Afleverpoets</span>
+          </div>
+          <!-- Progress bar -->
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px">
+            <div><div style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300);margin-bottom:4px" data-i18n="step_intake">Intake</div><div style="height:3px;background:color-mix(in srgb,var(--color-bg) 15%,transparent)"><div id="prog-1" style="height:100%;background:var(--color-accent-300);width:100%"></div></div></div>
+            <div><div style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300);margin-bottom:4px" data-i18n="step_treatment">Behandeling</div><div style="height:3px;background:color-mix(in srgb,var(--color-bg) 15%,transparent)"><div id="prog-2" style="height:100%;background:var(--color-accent-300);width:100%"></div></div></div>
+            <div><div style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300);margin-bottom:4px" data-i18n="step_control">Controle</div><div style="height:3px;background:color-mix(in srgb,var(--color-bg) 15%,transparent)"><div id="prog-3" style="height:100%;background:var(--color-accent-300);width:60%"></div></div></div>
+            <div><div style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300);margin-bottom:4px" data-i18n="step_ready">Gereed</div><div style="height:3px;background:color-mix(in srgb,var(--color-bg) 15%,transparent)"><div id="prog-4" style="height:100%;background:var(--color-accent-300);width:0%"></div></div></div>
+          </div>
+          <div id="live-note" style="font-size:12px;color:var(--color-accent-200)" data-i18n="live_note">Kwaliteitscontrole loopt &mdash; verwacht gereed 14:30</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- D. Stats -->
-<section style="background:var(--color-surface)">
-  <div id="stats-plate" style="max-width:1200px;margin:0 auto;padding:clamp(32px,4vw,56px) clamp(20px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px">
-    <div class="blueprint" style="padding:20px;text-align:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <div style="font-family:var(--font-heading);font-weight:600;font-size:42px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1" id="c0">0</div>
-      <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px" data-i18n="stat_1">Jaar ervaring</div>
-    </div>
-    <div class="blueprint" style="padding:20px;text-align:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <div style="font-family:var(--font-heading);font-weight:600;font-size:42px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1" id="c1">0</div>
-      <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px" data-i18n="stat_2">Voertuigen per jaar</div>
-    </div>
-    <div class="blueprint" style="padding:20px;text-align:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <div style="font-family:var(--font-heading);font-weight:600;font-size:42px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1" id="c2">0</div>
-      <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px" data-i18n="stat_3">Dealerpartners</div>
-    </div>
-    <div class="blueprint" style="padding:20px;text-align:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <div style="font-family:var(--font-heading);font-weight:600;font-size:42px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1" id="c3">0</div>
-      <div style="font-size:14px;color:var(--color-neutral-700);margin-top:6px" data-i18n="stat_4">Uur doorlooptijd gemiddeld</div>
+<!-- ════════════════════════════════════════════════
+     3. REGISTER NAV
+     ════════════════════════════════════════════════ -->
+<div class="reg-nav" style="border-bottom:1px solid var(--color-divider);background:var(--color-bg)">
+  <div class="wrap" style="display:flex;align-items:stretch;gap:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;overflow-x:auto">
+    <a href="#sectoren" style="display:flex;align-items:center;gap:6px;padding:12px 16px;color:inherit;text-decoration:none;white-space:nowrap;border-right:1px solid var(--color-divider)"><span style="color:var(--color-accent-700)">02</span> Sectoren</a>
+    <a href="#diensten" style="display:flex;align-items:center;gap:6px;padding:12px 16px;color:inherit;text-decoration:none;white-space:nowrap;border-right:1px solid var(--color-divider)"><span style="color:var(--color-accent-700)">03</span> Diensten</a>
+    <a href="#werkwijze" style="display:flex;align-items:center;gap:6px;padding:12px 16px;color:inherit;text-decoration:none;white-space:nowrap;border-right:1px solid var(--color-divider)"><span style="color:var(--color-accent-700)">04</span> Werkwijze</a>
+    <a href="#faciliteit" style="display:flex;align-items:center;gap:6px;padding:12px 16px;color:inherit;text-decoration:none;white-space:nowrap;border-right:1px solid var(--color-divider)"><span style="color:var(--color-accent-700)">05</span> Faciliteit</a>
+    <a href="#portaal" style="display:flex;align-items:center;gap:6px;padding:12px 16px;color:inherit;text-decoration:none;white-space:nowrap;border-right:1px solid var(--color-divider)"><span style="color:var(--color-accent-700)">06</span> Portaal</a>
+    <a href="#tarieven" style="display:flex;align-items:center;gap:6px;padding:12px 16px;color:inherit;text-decoration:none;white-space:nowrap;border-right:1px solid var(--color-divider)"><span style="color:var(--color-accent-700)">07</span> Tarieven</a>
+    <a href="#referenties" style="display:flex;align-items:center;gap:6px;padding:12px 16px;color:inherit;text-decoration:none;white-space:nowrap;border-right:1px solid var(--color-divider)"><span style="color:var(--color-accent-700)">08</span> Referenties</a>
+    <a href="#contact" style="display:flex;align-items:center;gap:6px;padding:12px 16px;color:inherit;text-decoration:none;white-space:nowrap"><span style="color:var(--color-accent-700)">09</span> Contact</a>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     4. BLAD 02: SECTOREN
+     ════════════════════════════════════════════════ -->
+<section id="sectoren" style="padding:clamp(64px,8vw,112px) 0">
+  <div class="wrap">
+    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px)">
+      <!-- Left sticky -->
+      <div class="sticky-left" style="position:sticky;top:80px;align-self:start">
+        <div class="kicker" style="margin-bottom:12px" data-i18n="sec_sectors">Blad 02 &middot; Sectoren</div>
+        <div style="height:1px;background:var(--color-divider);margin-bottom:24px"></div>
+        <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 16px" data-i18n="sectors_title">Zes sectoren, een standaard</h2>
+        <p style="color:var(--color-neutral-700);margin:0 0 32px;max-width:42ch" data-i18n="sectors_desc">Van autodealers tot particulieren: dezelfde kwaliteitscontrole, dezelfde rapportage, dezelfde garantie.</p>
+        <!-- Blueprint photo placeholder -->
+        <div class="blueprint duotone" style="aspect-ratio:16/10;background:var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-600);font-size:12px;letter-spacing:.06em;text-transform:uppercase">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          Foto: voertuighal
+        </div>
+      </div>
+      <!-- Right — sector list -->
+      <div style="display:grid;gap:0">
+        <div class="sector-item" onmouseenter="setSector(0)" style="padding:20px 0;border-bottom:1px solid var(--color-divider);cursor:default">
+          <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:4px">
+            <span style="font-family:var(--font-heading);font-weight:600;font-size:28px;color:var(--color-accent-700);min-width:40px;font-feature-settings:'tnum' 1">01</span>
+            <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0;flex:1" data-i18n="sector_1_title">Autodealers</h3>
+            <span class="tag tag-accent" data-i18n="sector_1_sla">SLA 48u</span>
+          </div>
+          <p class="sector-desc" style="margin:6px 0 0 56px;font-size:14px;color:var(--color-neutral-700);max-height:0;overflow:hidden;transition:max-height .3s ease" data-i18n="sector_1_desc">Afleverpreparatie en showroomonderhoud met vaste SLA, foto-rapportage en maandfacturatie per vestiging.</p>
+        </div>
+        <div class="sector-item" onmouseenter="setSector(1)" style="padding:20px 0;border-bottom:1px solid var(--color-divider);cursor:default">
+          <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:4px">
+            <span style="font-family:var(--font-heading);font-weight:600;font-size:28px;color:var(--color-accent-700);min-width:40px;font-feature-settings:'tnum' 1">02</span>
+            <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0;flex:1" data-i18n="sector_2_title">Leasemaatschappijen</h3>
+            <span class="tag tag-accent" data-i18n="sector_2_sla">SLA 48u</span>
+          </div>
+          <p class="sector-desc" style="margin:6px 0 0 56px;font-size:14px;color:var(--color-neutral-700);max-height:0;overflow:hidden;transition:max-height .3s ease" data-i18n="sector_2_desc">Retourpreparatie en remarketingklaar maken, met digitaal overdrachtsrapport en staat-documentatie.</p>
+        </div>
+        <div class="sector-item" onmouseenter="setSector(2)" style="padding:20px 0;border-bottom:1px solid var(--color-divider);cursor:default">
+          <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:4px">
+            <span style="font-family:var(--font-heading);font-weight:600;font-size:28px;color:var(--color-accent-700);min-width:40px;font-feature-settings:'tnum' 1">03</span>
+            <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0;flex:1" data-i18n="sector_3_title">Wagenparkbeheer</h3>
+            <span class="tag tag-accent" data-i18n="sector_3_sla">SLA 72u</span>
+          </div>
+          <p class="sector-desc" style="margin:6px 0 0 56px;font-size:14px;color:var(--color-neutral-700);max-height:0;overflow:hidden;transition:max-height .3s ease" data-i18n="sector_3_desc">Periodiek onderhoud en preparatie van bedrijfsvoertuigen, op locatie of bij ons.</p>
+        </div>
+        <div class="sector-item" onmouseenter="setSector(3)" style="padding:20px 0;border-bottom:1px solid var(--color-divider);cursor:default">
+          <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:4px">
+            <span style="font-family:var(--font-heading);font-weight:600;font-size:28px;color:var(--color-accent-700);min-width:40px;font-feature-settings:'tnum' 1">04</span>
+            <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0;flex:1" data-i18n="sector_4_title">Autoverhuur</h3>
+            <span class="tag tag-accent" data-i18n="sector_4_sla">SLA 24u</span>
+          </div>
+          <p class="sector-desc" style="margin:6px 0 0 56px;font-size:14px;color:var(--color-neutral-700);max-height:0;overflow:hidden;transition:max-height .3s ease" data-i18n="sector_4_desc">Snelle retourreiniging tussen verhuringen, stoomreiniging en geurbehandeling inbegrepen.</p>
+        </div>
+        <div class="sector-item" onmouseenter="setSector(4)" style="padding:20px 0;border-bottom:1px solid var(--color-divider);cursor:default">
+          <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:4px">
+            <span style="font-family:var(--font-heading);font-weight:600;font-size:28px;color:var(--color-accent-700);min-width:40px;font-feature-settings:'tnum' 1">05</span>
+            <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0;flex:1" data-i18n="sector_5_title">Occasionhandel &amp; remarketing</h3>
+            <span class="tag tag-accent" data-i18n="sector_5_sla">SLA 48u</span>
+          </div>
+          <p class="sector-desc" style="margin:6px 0 0 56px;font-size:14px;color:var(--color-neutral-700);max-height:0;overflow:hidden;transition:max-height .3s ease" data-i18n="sector_5_desc">Verkoopklaar maken inclusief fotografie en online-ready presentatie voor remarketing.</p>
+        </div>
+        <div class="sector-item" onmouseenter="setSector(5)" style="padding:20px 0;border-bottom:1px solid var(--color-divider);cursor:default">
+          <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:4px">
+            <span style="font-family:var(--font-heading);font-weight:600;font-size:28px;color:var(--color-accent-700);min-width:40px;font-feature-settings:'tnum' 1">06</span>
+            <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0;flex:1" data-i18n="sector_6_title">Particulieren</h3>
+            <span class="tag tag-neutral" data-i18n="sector_6_sla">Op afspraak</span>
+          </div>
+          <p class="sector-desc" style="margin:6px 0 0 56px;font-size:14px;color:var(--color-neutral-700);max-height:0;overflow:hidden;transition:max-height .3s ease" data-i18n="sector_6_desc">Complete poets- en coatingbehandelingen op afspraak, met garantie en certificaat.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- E. Sectoren -->
-<section style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div class="sec-label" data-i18n="sec_sectors">01 · Sectoren</div>
-  <div class="sec-divider"></div>
-  <h2 class="sec-heading" data-i18n="sectors_title">Voor wie wij werken</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
-    <a href="#afspraak" class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none">
+<!-- ════════════════════════════════════════════════
+     5. BLAD 03: DIENSTEN
+     ════════════════════════════════════════════════ -->
+<section id="diensten" style="padding-bottom:clamp(64px,8vw,112px)">
+  <div class="wrap">
+    <div class="kicker" style="margin-bottom:12px" data-i18n="sec_services">Blad 03 &middot; Diensten</div>
+    <div style="height:1px;background:var(--color-divider);margin-bottom:24px"></div>
+    <div class="blueprint" style="overflow:hidden">
       <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
-      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="sector_1_title">Autodealers</h3>
-      <p style="margin:0;color:var(--color-neutral-700);flex:1" data-i18n="sector_1_desc">Afleverpreparatie en showroomonderhoud met vaste SLA en foto-rapportage.</p>
-      <span style="color:var(--color-accent-700);font-weight:500;font-size:14px" data-i18n="sector_cta">Bekijk mogelijkheden →</span>
-    </a>
-    <a href="#afspraak" class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none">
-      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></svg>
-      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="sector_2_title">Leasemaatschappijen</h3>
-      <p style="margin:0;color:var(--color-neutral-700);flex:1" data-i18n="sector_2_desc">Retourpreparatie en remarketingklaar maken, met digitaal overdrachtsrapport.</p>
-      <span style="color:var(--color-accent-700);font-weight:500;font-size:14px" data-i18n="sector_cta">Bekijk mogelijkheden →</span>
-    </a>
-    <a href="#afspraak" class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none">
-      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="sector_3_title">Particulieren</h3>
-      <p style="margin:0;color:var(--color-neutral-700);flex:1" data-i18n="sector_3_desc">Complete poets- en coatingbehandelingen, op afspraak en met garantie.</p>
-      <span style="color:var(--color-accent-700);font-weight:500;font-size:14px" data-i18n="sector_cta_pricing">Bekijk pakketten →</span>
-    </a>
-  </div>
-</section>
-
-<!-- F. Diensten -->
-<section id="diensten" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div class="sec-label" data-i18n="sec_services">02 · Diensten</div>
-  <div class="sec-divider"></div>
-  <h2 class="sec-heading" data-i18n="services_title">Twaalf diensten, één kwaliteitsstandaard</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1px;background:var(--color-divider);border:1px solid var(--color-divider)">
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M9.9 2.7a1 1 0 0 1 1.9 0l1.3 4a1 1 0 0 0 .6.6l4 1.3a1 1 0 0 1 0 1.9l-4 1.3a1 1 0 0 0-.6.6l-1.3 4a1 1 0 0 1-1.9 0l-1.3-4a1 1 0 0 0-.6-.6l-4-1.3a1 1 0 0 1 0-1.9l4-1.3a1 1 0 0 0 .6-.6z"/><path d="M20 3v4M22 5h-4"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_1_title">Afleverpoetsbeurt</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_1_desc">Nieuwe en gebruikte voertuigen showroomklaar volgens uw afleverstandaard.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><rect width="16" height="20" x="4" y="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_2_title">Showroomonderhoud</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_2_desc">Periodiek onderhoud van showroomvoertuigen, op locatie mogelijk.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_3_title">Occasionpreparatie</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_3_desc">Verkoopklaar maken van inruil- en retourvoertuigen, inclusief fotografie.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_4_title">Interieur stoomreiniging</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_4_desc">Reiniging met stoom van ±175 °C: verwijdert bacteriën en geuren zonder agressieve middelen.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_5_title">Lakcorrectie &amp; polijsten</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_5_desc">Machinaal verwijderen van swirls, krasjes en hologrammen in meerdere stappen.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_6_title">Ceramic coating</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_6_desc">Lakbescherming met 2, 3 of 5 jaar garantie en digitaal certificaat op kenteken.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_7_title">Koplamprestauratie</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_7_desc">Vergeelde en matte koplampen helder geschuurd, gepolijst en verzegeld.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_8_title">Geurbehandeling</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_8_desc">Neutraliseert rook-, dier- en vochtgeuren tot in het ventilatiesysteem.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-    <div style="background:var(--color-bg);padding:22px;display:flex;flex-direction:column;gap:10px">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-      <h3 style="font-size:19px;margin:0" data-i18n="svc_9_title">Voertuigfotografie</h3>
-      <p style="margin:0;font-size:14px;color:var(--color-neutral-700);flex:1" data-i18n="svc_9_desc">Consistente occasionfoto's in de eigen fotostudio, klaar voor uw portalen.</p>
-      <a href="#afspraak" style="font-size:14px;font-weight:500" data-i18n="svc_more">Meer informatie</a>
-    </div>
-  </div>
-</section>
-
-<!-- G. Waarom -->
-<section id="over-ons" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px clamp(32px,5vw,96px);align-items:center">
-    <div>
-      <div class="sec-label" data-i18n="sec_why">03 · Waarom AutoDetail Pro</div>
-      <div class="sec-divider"></div>
-      <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 20px" data-i18n="why_title">Een partner die uw proces volgt</h2>
-      <p style="color:var(--color-neutral-700);margin:0 0 24px;max-width:52ch" data-i18n="why_sub">Wij werken met vaste afspraken, vaste controles en vaste contactpersonen. Zo weet u wat u krijgt, wanneer u het krijgt en wat het kost.</p>
-      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:12px">
-        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_1">Vaste doorlooptijden, vastgelegd in een SLA</span></li>
-        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_2">Kwaliteitschecklist per voertuig</span></li>
-        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_3">Voor/na foto-rapport bij elke gereedmelding</span></li>
-        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_4">Vaste contactpersoon voor planning en vragen</span></li>
-        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_5">Maandfacturatie met PO-nummers</span></li>
-        <li style="display:flex;gap:12px;align-items:start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="why_6">Verzekerd voor voertuigen in onze zorg</span></li>
-      </ul>
-    </div>
-    <figure class="blueprint duotone" style="margin:0;aspect-ratio:4/3;background:var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-600);font-size:13px;letter-spacing:.06em;text-transform:uppercase">
-      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <span data-i18n="ph_detailer">Foto: detailer met polijstmachine</span>
-    </figure>
-  </div>
-</section>
-
-<!-- H. Werkwijze -->
-<section id="werkwijze" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div class="sec-label" data-i18n="sec_workflow">04 · Werkwijze</div>
-  <div class="sec-divider"></div>
-  <h2 class="sec-heading" data-i18n="workflow_title">Zeven stappen, van aanvraag tot factuur</h2>
-  <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px 16px">
-    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">01</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_1_title">Aanvraag</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_1_desc">Via portaal, e-mail of telefoon.</span></li>
-    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">02</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_2_title">Ophalen of aanleveren</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_2_desc">Op afspraak gebracht of door ons opgehaald.</span></li>
-    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">03</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_3_title">Intake-inspectie</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_3_desc">Staat vastgelegd met foto's.</span></li>
-    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">04</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_4_title">Behandeling</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_4_desc">Volgens vaste werkinstructie.</span></li>
-    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">05</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_5_title">Kwaliteitscontrole</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_5_desc">Checklist door tweede controleur.</span></li>
-    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">06</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_6_title">Foto-rapport</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_6_desc">Gereedmelding met voor/na-foto's.</span></li>
-    <li style="display:flex;flex-direction:column;gap:12px"><span style="font-family:var(--font-heading);font-weight:600;font-size:40px;line-height:1;color:var(--color-accent-700);font-feature-settings:'tnum' 1">07</span><span style="height:1px;background:var(--color-divider)"></span><strong style="font-family:var(--font-heading);font-size:19px;font-weight:600;line-height:1.2" data-i18n="step_7_title">Aflevering en factuur</strong><span style="font-size:14px;color:var(--color-neutral-700)" data-i18n="step_7_desc">Terugbezorgd; maandfactuur met PO.</span></li>
-  </ol>
-</section>
-
-<!-- I. Portaal (dark section) -->
-<section id="portaal" style="margin-top:clamp(64px,8vw,112px);background:var(--color-accent-900);color:var(--color-bg)">
-  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px clamp(32px,5vw,80px);align-items:center">
-    <div>
-      <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-300)" data-i18n="sec_portal">05 · Zakelijk portaal</div>
-      <div style="height:1px;background:color-mix(in srgb,var(--color-bg) 25%,transparent);margin:12px 0 24px"></div>
-      <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 20px;color:var(--color-bg)" data-i18n="portal_title">Uw voertuigen realtime in beeld</h2>
-      <p style="color:var(--color-accent-100);margin:0 0 24px;max-width:50ch" data-i18n="portal_sub">Het portaal geeft uw vestigingen direct inzicht in status, foto's en facturatie. Geen telefoontjes, geen losse e-mails.</p>
-      <ul style="list-style:none;margin:0 0 28px;padding:0;display:grid;gap:12px;color:var(--color-accent-100)">
-        <li style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="portal_1">Voertuigen aanmelden op kenteken</span></li>
-        <li style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="portal_2">Status: ontvangen → in behandeling → gereed</span></li>
-        <li style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="portal_3">Voor/na foto's downloaden</span></li>
-        <li style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-300);flex:none;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="portal_4">Facturen en rapportages per periode</span></li>
-      </ul>
-      <a href="#afspraak" class="btn btn-primary" style="min-height:44px;padding-inline:20px" data-i18n="portal_cta">Bekijk het portaal</a>
-    </div>
-    <div class="blueprint" style="background:var(--color-bg);color:var(--color-text);border-color:color-mix(in srgb,var(--color-bg) 40%,transparent);box-shadow:var(--shadow-lg)">
-      <i class="corner tl" style="color:var(--color-accent-300)"></i><i class="corner tr" style="color:var(--color-accent-300)"></i><i class="corner bl" style="color:var(--color-accent-300)"></i><i class="corner br" style="color:var(--color-accent-300)"></i>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--color-divider);font-size:13px">
-        <span style="font-family:var(--font-heading);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.02em" data-i18n="portal_table_title">Voertuigen · Vestiging Zuid</span>
-        <span class="tag tag-accent" data-i18n="portal_week">Deze week: 18</span>
+      <!-- Table header bar -->
+      <div style="display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--color-divider);background:var(--color-surface)">
+        <span style="font-family:var(--font-heading);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.02em" data-i18n="diensten_title">Dienstenregister &mdash; AutoDetail Pro</span>
+        <span style="font-size:12px;color:var(--color-neutral-600);letter-spacing:.06em">AD-DR-03</span>
+        <span class="tag tag-accent" data-i18n="diensten_count">12 posities</span>
       </div>
+      <!-- Table -->
       <div style="overflow-x:auto">
-        <table class="table" style="font-size:13px;min-width:460px">
-          <thead><tr><th data-i18n="th_plate">Kenteken</th><th data-i18n="th_model">Model</th><th data-i18n="th_service">Dienst</th><th>Status</th><th data-i18n="th_date">Datum</th></tr></thead>
+        <table class="table" style="min-width:700px">
+          <thead>
+            <tr>
+              <th style="padding-left:20px;width:50px">Nr.</th>
+              <th data-i18n="th_dienst">Dienst</th>
+              <th data-i18n="th_omschrijving">Omschrijving</th>
+              <th data-i18n="th_doorlooptijd">Doorlooptijd</th>
+              <th data-i18n="th_voor">Voor</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">XR-392-K</td><td>Volvo XC60</td><td data-i18n="tbl_svc1">Afleverpoets</td><td><span class="tag tag-accent" data-i18n="status_done">Gereed</span></td><td>07-10</td></tr>
-            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">SK-118-P</td><td>Toyota Yaris</td><td data-i18n="tbl_svc2">Retourpreparatie</td><td><span class="tag tag-outline" data-i18n="status_wip">In behandeling</span></td><td>08-10</td></tr>
-            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">NL-640-T</td><td>Mercedes A</td><td data-i18n="tbl_svc3">Ceramic coating</td><td><span class="tag tag-outline" data-i18n="status_wip">In behandeling</span></td><td>08-10</td></tr>
-            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">RT-071-G</td><td>Kia Sportage</td><td data-i18n="tbl_svc4">Fotografie</td><td><span class="tag tag-neutral" data-i18n="status_recv">Ontvangen</span></td><td>08-10</td></tr>
-            <tr><td style="font-family:var(--font-heading);font-weight:600;font-size:14px">HD-225-X</td><td>Ford Transit</td><td data-i18n="tbl_svc5">Stoomreiniging</td><td><span class="tag tag-neutral" data-i18n="status_recv">Ontvangen</span></td><td>09-10</td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">01</td><td style="font-weight:600" data-i18n="svc_1_title">Afleverpoetsbeurt</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_1_desc">Nieuwe en gebruikte voertuigen showroomklaar volgens uw afleverstandaard.</td><td>48u</td><td><span class="tag tag-accent">Zakelijk</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">02</td><td style="font-weight:600" data-i18n="svc_2_title">Showroomonderhoud</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_2_desc">Periodiek onderhoud van showroomvoertuigen, op locatie mogelijk.</td><td data-i18n="svc_2_time">Cyclisch</td><td><span class="tag tag-accent">Zakelijk</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">03</td><td style="font-weight:600" data-i18n="svc_3_title">Occasion- &amp; remarketingpreparatie</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_3_desc">Verkoopklaar maken van inruil- en retourvoertuigen, inclusief fotografie.</td><td>48u</td><td><span class="tag tag-accent">Zakelijk</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">04</td><td style="font-weight:600" data-i18n="svc_4_title">Interieur stoomreiniging</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_4_desc">Reiniging met stoom van 175 graden: bacterien en geuren weg zonder agressieve middelen.</td><td data-i18n="svc_4_time">Dagdeel</td><td><span class="tag tag-neutral">Beide</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">05</td><td style="font-weight:600" data-i18n="svc_5_title">Lakcorrectie &amp; meerstaps polijsten</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_5_desc">Machinaal verwijderen van swirls, krasjes en hologrammen in meerdere stappen.</td><td data-i18n="svc_5_time">1-2 dagen</td><td><span class="tag tag-neutral">Beide</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">06</td><td style="font-weight:600" data-i18n="svc_6_title">Ceramic coating</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_6_desc">Lakbescherming met 2, 3 of 5 jaar garantie en digitaal certificaat op kenteken.</td><td data-i18n="svc_6_time">1-2 dagen</td><td><span class="tag tag-neutral">Beide</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">07</td><td style="font-weight:600" data-i18n="svc_7_title">Koplamprestauratie</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_7_desc">Vergeelde en matte koplampen helder geschuurd, gepolijst en verzegeld.</td><td>2u</td><td><span class="tag tag-neutral">Beide</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">08</td><td style="font-weight:600" data-i18n="svc_8_title">Geur- en ozonbehandeling</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_8_desc">Neutraliseert rook-, dier- en vochtgeuren tot in het ventilatiesysteem.</td><td>4u</td><td><span class="tag tag-neutral">Beide</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">09</td><td style="font-weight:600" data-i18n="svc_9_title">Sticker- en belettering verwijderen</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_9_desc">Reclame- en stickerverwijdering zonder lakschade, lijmresten volledig verwijderd.</td><td data-i18n="svc_9_time">Dagdeel</td><td><span class="tag tag-accent">Zakelijk</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">10</td><td style="font-weight:600" data-i18n="svc_10_title">Kunststofreparatie</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_10_desc">Kleine beschadigingen aan bumpers, spiegels en lijsten vakkundig hersteld.</td><td data-i18n="svc_10_time">Op offerte</td><td><span class="tag tag-neutral">Beide</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">11</td><td style="font-weight:600" data-i18n="svc_11_title">Voertuigfotografie</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_11_desc">Consistente occasionfoto's in eigen fotostudio, klaar voor uw portalen.</td><td>1u</td><td><span class="tag tag-accent">Zakelijk</span></td></tr>
+            <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;color:var(--color-accent-700)">12</td><td style="font-weight:600" data-i18n="svc_12_title">Haal- en brengservice</td><td style="color:var(--color-neutral-700);font-size:13px" data-i18n="svc_12_desc">Ophalen en terugbezorgen van voertuigen, ingepland op uw behoefte.</td><td data-i18n="svc_12_time">Gepland</td><td><span class="tag tag-neutral">Beide</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -368,409 +376,652 @@ select.input{appearance:auto}
   </div>
 </section>
 
-<!-- J. Prijzen -->
-<section id="prijzen" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div class="sec-label" data-i18n="sec_pricing">06 · Tarieven</div>
-  <div class="sec-divider"></div>
-  <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:end;margin-bottom:40px">
-    <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="pricing_title">Transparante tarieven</h2>
-    <div class="seg" role="tablist">
-      <button type="button" role="tab" class="seg-opt" id="seg-part" onclick="setPricing('part')" style="background:var(--color-accent);color:var(--color-bg)" data-i18n="tab_private">Particulier</button>
-      <button type="button" role="tab" class="seg-opt" id="seg-zak" onclick="setPricing('zak')" data-i18n="tab_business">Zakelijk</button>
+<!-- ════════════════════════════════════════════════
+     6. BLAD 04: WERKWIJZE (dark)
+     ════════════════════════════════════════════════ -->
+<section id="werkwijze" style="background:var(--color-accent-900);color:var(--color-bg);padding:clamp(64px,8vw,112px) 0">
+  <div class="wrap">
+    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px)">
+      <!-- Left sticky -->
+      <div class="sticky-left" style="position:sticky;top:80px;align-self:start">
+        <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-300);margin-bottom:12px" data-i18n="sec_workflow">Blad 04 &middot; Werkwijze</div>
+        <div style="height:1px;background:color-mix(in srgb,var(--color-bg) 20%,transparent);margin-bottom:24px"></div>
+        <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 16px;color:var(--color-bg)" data-i18n="workflow_title">Zeven stappen, afgetekend</h2>
+        <p style="color:var(--color-accent-100);margin:0 0 40px;max-width:42ch" data-i18n="workflow_desc">Elke stap wordt afgetekend door de verantwoordelijke medewerker. Pas na dubbele controle gaat het voertuig naar aflevering.</p>
+        <!-- Stats -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+          <div style="text-align:center;padding:16px;border:1px solid color-mix(in srgb,var(--color-bg) 20%,transparent)">
+            <div style="font-family:var(--font-heading);font-weight:700;font-size:32px;color:var(--color-accent-300)">48 u</div>
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-200);margin-top:4px" data-i18n="wf_stat1">standaard</div>
+          </div>
+          <div style="text-align:center;padding:16px;border:1px solid color-mix(in srgb,var(--color-bg) 20%,transparent)">
+            <div style="font-family:var(--font-heading);font-weight:700;font-size:32px;color:var(--color-accent-300)">24 u</div>
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-200);margin-top:4px" data-i18n="wf_stat2">op aanvraag</div>
+          </div>
+          <div style="text-align:center;padding:16px;border:1px solid color-mix(in srgb,var(--color-bg) 20%,transparent)">
+            <div style="font-family:var(--font-heading);font-weight:700;font-size:32px;color:var(--color-accent-300)">2x</div>
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-200);margin-top:4px" data-i18n="wf_stat3">controle</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right — 7 steps -->
+      <ol style="list-style:none;margin:0;padding:0;display:grid;gap:0">
+        <li style="display:grid;grid-template-columns:72px 1fr;gap:0;padding:24px 0;border-bottom:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:48px;line-height:1;color:var(--color-accent-300);font-feature-settings:'tnum' 1">01</span>
+          <div>
+            <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600;display:block;margin-bottom:6px" data-i18n="step_1_title">Aanvraag</strong>
+            <p style="margin:0 0 8px;font-size:14px;color:var(--color-accent-100)" data-i18n="step_1_desc">Via portaal, e-mail of telefoon. Binnen 2 uur bevestigd met planning.</p>
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300)" data-i18n="step_1_sign">Afgetekend door: Planning</span>
+          </div>
+        </li>
+        <li style="display:grid;grid-template-columns:72px 1fr;gap:0;padding:24px 0;border-bottom:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:48px;line-height:1;color:var(--color-accent-300);font-feature-settings:'tnum' 1">02</span>
+          <div>
+            <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600;display:block;margin-bottom:6px" data-i18n="step_2_title">Ophalen of aanleveren</strong>
+            <p style="margin:0 0 8px;font-size:14px;color:var(--color-accent-100)" data-i18n="step_2_desc">Op afspraak gebracht of door onze chauffeur opgehaald.</p>
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300)" data-i18n="step_2_sign">Afgetekend door: Chauffeur</span>
+          </div>
+        </li>
+        <li style="display:grid;grid-template-columns:72px 1fr;gap:0;padding:24px 0;border-bottom:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:48px;line-height:1;color:var(--color-accent-300);font-feature-settings:'tnum' 1">03</span>
+          <div>
+            <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600;display:block;margin-bottom:6px" data-i18n="step_3_title">Intake-inspectie</strong>
+            <p style="margin:0 0 8px;font-size:14px;color:var(--color-accent-100)" data-i18n="step_3_desc">Staat vastgelegd met foto's. Bestaande schade gedocumenteerd voor aanvang.</p>
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300)" data-i18n="step_3_sign">Afgetekend door: Intake</span>
+          </div>
+        </li>
+        <li style="display:grid;grid-template-columns:72px 1fr;gap:0;padding:24px 0;border-bottom:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:48px;line-height:1;color:var(--color-accent-300);font-feature-settings:'tnum' 1">04</span>
+          <div>
+            <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600;display:block;margin-bottom:6px" data-i18n="step_4_title">Behandeling</strong>
+            <p style="margin:0 0 8px;font-size:14px;color:var(--color-accent-100)" data-i18n="step_4_desc">Volgens vaste werkinstructie per diensttype. Producten en methode vastgelegd.</p>
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300)" data-i18n="step_4_sign">Afgetekend door: Detailer</span>
+          </div>
+        </li>
+        <li style="display:grid;grid-template-columns:72px 1fr;gap:0;padding:24px 0;border-bottom:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:48px;line-height:1;color:var(--color-accent-300);font-feature-settings:'tnum' 1">05</span>
+          <div>
+            <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600;display:block;margin-bottom:6px" data-i18n="step_5_title">Kwaliteitscontrole</strong>
+            <p style="margin:0 0 8px;font-size:14px;color:var(--color-accent-100)" data-i18n="step_5_desc">Checklist door tweede controleur. Bij afkeur terug naar stap 4.</p>
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300)" data-i18n="step_5_sign">Afgetekend door: 2e controleur</span>
+          </div>
+        </li>
+        <li style="display:grid;grid-template-columns:72px 1fr;gap:0;padding:24px 0;border-bottom:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:48px;line-height:1;color:var(--color-accent-300);font-feature-settings:'tnum' 1">06</span>
+          <div>
+            <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600;display:block;margin-bottom:6px" data-i18n="step_6_title">Foto-rapport</strong>
+            <p style="margin:0 0 8px;font-size:14px;color:var(--color-accent-100)" data-i18n="step_6_desc">Gereedmelding met voor/na-foto's. Automatisch beschikbaar in het portaal.</p>
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300)" data-i18n="step_6_sign">Afgetekend door: Administratie</span>
+          </div>
+        </li>
+        <li style="display:grid;grid-template-columns:72px 1fr;gap:0;padding:24px 0">
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:48px;line-height:1;color:var(--color-accent-300);font-feature-settings:'tnum' 1">07</span>
+          <div>
+            <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600;display:block;margin-bottom:6px" data-i18n="step_7_title">Aflevering en factuur</strong>
+            <p style="margin:0 0 8px;font-size:14px;color:var(--color-accent-100)" data-i18n="step_7_desc">Terugbezorgd of opgehaald. Maandfactuur met PO-verwijzing.</p>
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-300)" data-i18n="step_7_sign">Afgetekend door: Planning</span>
+          </div>
+        </li>
+      </ol>
     </div>
   </div>
-  <div id="pricing-part">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
-      <div class="blueprint" style="padding:28px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)">Pakket 01</div>
-        <h3 style="font-size:28px;text-transform:uppercase;margin:0" data-i18n="pkg_1">Basis</h3>
-        <div style="font-family:var(--font-heading);font-weight:600;font-size:36px;line-height:1" data-i18n="pkg_1_price">Vanaf € 89<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. btw</span></div>
-        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;flex:1">
-          <li data-i18n="pkg_1_f1">Exterieur handwas</li><li data-i18n="pkg_1_f2">Velgen reinigen</li><li data-i18n="pkg_1_f3">Ramen binnen en buiten</li><li data-i18n="pkg_1_f4">Interieur stofzuigen</li><li data-i18n="pkg_1_f5">Kunststof reinigen</li>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     7. BLAD 05: FACILITEIT
+     ════════════════════════════════════════════════ -->
+<section id="faciliteit" style="padding:clamp(64px,8vw,112px) 0">
+  <div class="wrap">
+    <div class="kicker" style="margin-bottom:12px" data-i18n="sec_facility">Blad 05 &middot; Faciliteit en capaciteit</div>
+    <div style="height:1px;background:var(--color-divider);margin-bottom:24px"></div>
+    <div class="facility-grid" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1px;background:var(--color-divider);border:1px solid var(--color-divider)">
+      <!-- Large photo placeholder (span 2 rows) -->
+      <div class="duotone" style="grid-row:span 2;background:var(--color-neutral-300);min-height:360px;display:grid;place-items:center;color:var(--color-neutral-600);font-size:12px;letter-spacing:.06em;text-transform:uppercase">
+        Foto: behandelruimte
+      </div>
+      <!-- Info box -->
+      <div style="background:var(--color-bg);padding:clamp(20px,3vw,32px)">
+        <h2 style="font-size:clamp(26px,3vw,36px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 12px" data-i18n="facility_title">Ingericht op volume</h2>
+        <p style="margin:0 0 24px;color:var(--color-neutral-700);font-size:15px" data-i18n="facility_desc">Onze vestiging in Rotterdam is volledig ingericht voor professionele voertuigpreparatie op schaal. Overdekt, beveiligd en met eigen fotostudio.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="padding:10px;border:1px solid var(--color-divider)">
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-600)" data-i18n="fac_capacity">Capaciteit</div>
+            <div style="font-family:var(--font-heading);font-weight:600;font-size:18px" data-i18n="fac_capacity_val">[X] / dag</div>
+          </div>
+          <div style="padding:10px;border:1px solid var(--color-divider)">
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-600)" data-i18n="fac_spaces">Behandelruimtes</div>
+            <div style="font-family:var(--font-heading);font-weight:600;font-size:18px" data-i18n="fac_spaces_val">Overdekt</div>
+          </div>
+          <div style="padding:10px;border:1px solid var(--color-divider)">
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-600)" data-i18n="fac_studio">Fotostudio</div>
+            <div style="font-family:var(--font-heading);font-weight:600;font-size:18px" data-i18n="fac_studio_val">Eigen</div>
+          </div>
+          <div style="padding:10px;border:1px solid var(--color-divider)">
+            <div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-600)" data-i18n="fac_storage">Stalling</div>
+            <div style="font-family:var(--font-heading);font-weight:600;font-size:18px" data-i18n="fac_storage_val">Beveiligd</div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom right: Products & certification -->
+      <div style="background:var(--color-bg);padding:clamp(20px,3vw,32px)">
+        <h3 style="font-size:18px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 16px" data-i18n="fac_products_title">Producten &amp; certificering</h3>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;color:var(--color-neutral-700)">
+          <li style="display:flex;gap:8px;align-items:start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="fac_p1">Gecertificeerd coatingapplicateur</span></li>
+          <li style="display:flex;gap:8px;align-items:start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="fac_p2">ISO-conforme werkinstructies</span></li>
+          <li style="display:flex;gap:8px;align-items:start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="fac_p3">Professionele polijstmachines (Rupes, Flex)</span></li>
+          <li style="display:flex;gap:8px;align-items:start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="fac_p4">Industriele stoomreiniger</span></li>
+          <li style="display:flex;gap:8px;align-items:start"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="fac_p5">Ozonbehandelingsapparatuur</span></li>
         </ul>
-        <a href="#afspraak" class="btn btn-secondary" style="min-height:42px" data-i18n="pkg_cta">Afspraak aanvragen</a>
-      </div>
-      <div class="blueprint" style="padding:28px;display:flex;flex-direction:column;gap:16px;border-color:var(--color-accent);background:var(--color-accent-100)"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)">Pakket 02</span><span class="tag tag-accent" style="background:var(--color-accent);color:var(--color-bg)" data-i18n="pkg_popular">Meest gekozen</span></div>
-        <h3 style="font-size:28px;text-transform:uppercase;margin:0" data-i18n="pkg_2">Compleet</h3>
-        <div style="font-family:var(--font-heading);font-weight:600;font-size:36px;line-height:1" data-i18n="pkg_2_price">Vanaf € 169<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. btw</span></div>
-        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;flex:1">
-          <li data-i18n="pkg_2_f1">Alles uit Basis</li><li data-i18n="pkg_2_f2">Interieur stoomreiniging</li><li data-i18n="pkg_2_f3">Bekleding en hemel</li><li data-i18n="pkg_2_f4">Kofferbak</li><li data-i18n="pkg_2_f5">Wax-afwerking</li>
-        </ul>
-        <a href="#afspraak" class="btn btn-primary" style="min-height:42px" data-i18n="pkg_cta">Afspraak aanvragen</a>
-      </div>
-      <div class="blueprint" style="padding:28px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700)">Pakket 03</div>
-        <h3 style="font-size:28px;text-transform:uppercase;margin:0" data-i18n="pkg_3">Premium</h3>
-        <div style="font-family:var(--font-heading);font-weight:600;font-size:36px;line-height:1" data-i18n="pkg_3_price">Vanaf € 289<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. btw</span></div>
-        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;flex:1">
-          <li data-i18n="pkg_3_f1">Alles uit Compleet</li><li data-i18n="pkg_3_f2">Kleibehandeling</li><li data-i18n="pkg_3_f3">Meerstaps polijsten</li><li data-i18n="pkg_3_f4">Motorruimte</li><li data-i18n="pkg_3_f5">Lakverzegeling</li>
-        </ul>
-        <a href="#afspraak" class="btn btn-secondary" style="min-height:42px" data-i18n="pkg_cta">Afspraak aanvragen</a>
-      </div>
-    </div>
-    <p style="font-size:13px;color:var(--color-neutral-700);margin:20px 0 0;max-width:80ch" data-i18n="pricing_note">Toeslag voor SUV/MPV. Toeslag bij sterke vervuiling wordt altijd vooraf besproken. Haal- en brengservice € 35.</p>
-    <h3 style="font-size:24px;text-transform:uppercase;letter-spacing:.02em;margin:48px 0 24px" data-i18n="coating_title">Ceramic coating</h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
-      <div class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <div style="font-family:var(--font-heading);font-weight:600;font-size:32px;line-height:1" data-i18n="coat_2y">2 jaar<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">garantie</span></div>
-        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px;flex:1"><li data-i18n="coat_2y_1">Eenstaps polijsten</li><li data-i18n="coat_2y_2">Eén laag coating op lak</li><li data-i18n="coat_2y_3">Digitaal certificaat</li></ul>
-        <div style="font-size:14px;color:var(--color-neutral-700)" data-i18n="coat_2y_price">Vanaf € 399 incl. btw</div>
-      </div>
-      <div class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <div style="font-family:var(--font-heading);font-weight:600;font-size:32px;line-height:1" data-i18n="coat_3y">3 jaar<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">garantie</span></div>
-        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px;flex:1"><li data-i18n="coat_3y_1">Tweestaps polijsten</li><li data-i18n="coat_3y_2">Twee lagen coating</li><li data-i18n="coat_3y_3">Velgen en glas gecoat</li><li data-i18n="coat_3y_4">Jaarlijkse controle</li></ul>
-        <div style="font-size:14px;color:var(--color-neutral-700)" data-i18n="coat_3y_price">Vanaf € 699 incl. btw</div>
-      </div>
-      <div class="blueprint" style="padding:24px;display:flex;flex-direction:column;gap:12px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <div style="font-family:var(--font-heading);font-weight:600;font-size:32px;line-height:1" data-i18n="coat_5y">5 jaar<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">garantie</span></div>
-        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14px;flex:1"><li data-i18n="coat_5y_1">Meerstaps lakcorrectie</li><li data-i18n="coat_5y_2">Basis- en toplaag coating</li><li data-i18n="coat_5y_3">Velgen, glas, kunststof en interieur</li><li data-i18n="coat_5y_4">Jaarlijkse controle inbegrepen</li></ul>
-        <div style="font-size:14px;color:var(--color-neutral-700)" data-i18n="coat_5y_price">Vanaf € 999 incl. btw</div>
       </div>
     </div>
   </div>
-  <div id="pricing-zak" style="display:none">
-    <div class="blueprint" style="padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:center"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     8. BLAD 06: PORTAAL
+     ════════════════════════════════════════════════ -->
+<section id="portaal" style="padding-bottom:clamp(64px,8vw,112px)">
+  <div class="wrap">
+    <div class="blueprint" style="overflow:hidden">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--color-divider)">
+        <!-- Left -->
+        <div style="background:var(--color-bg);padding:clamp(24px,4vw,48px)">
+          <div class="kicker" style="margin-bottom:12px" data-i18n="sec_portal">Blad 06 &middot; Zakelijk portaal</div>
+          <div style="height:1px;background:var(--color-divider);margin-bottom:24px"></div>
+          <h2 style="font-size:clamp(26px,3vw,36px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 16px" data-i18n="portal_title">Uw voertuigen realtime in beeld</h2>
+          <p style="color:var(--color-neutral-700);margin:0 0 24px;max-width:42ch" data-i18n="portal_desc">Het portaal geeft uw vestigingen direct inzicht in status, foto's en facturatie. Geen telefoontjes, geen losse e-mails.</p>
+          <a href="#contact" class="btn btn-primary" style="min-height:44px;padding-inline:20px" data-i18n="portal_cta">Bekijk het portaal</a>
+        </div>
+        <!-- Right — tracking table -->
+        <div style="background:var(--color-bg)">
+          <div style="padding:14px 20px;border-bottom:1px solid var(--color-divider);display:flex;justify-content:space-between;align-items:center;background:var(--color-surface)">
+            <span style="font-family:var(--font-heading);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.02em" data-i18n="portal_table_title">Vestiging Rotterdam &middot; Week 41</span>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="table" style="min-width:400px;font-size:13px">
+              <thead><tr><th style="padding-left:20px" data-i18n="th_plate">Kenteken</th><th data-i18n="th_model">Model</th><th data-i18n="th_service">Dienst</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;font-size:14px">XR-392-K</td><td>Volvo XC60</td><td data-i18n="tbl_svc1">Afleverpoets</td><td><span class="tag tag-accent" data-i18n="status_done">Gereed</span></td></tr>
+                <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;font-size:14px">SK-118-P</td><td>Toyota Yaris</td><td data-i18n="tbl_svc2">Retourpreparatie</td><td><span class="tag tag-outline" data-i18n="status_wip">In behandeling</span></td></tr>
+                <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;font-size:14px">NL-640-T</td><td>Mercedes-Benz A</td><td data-i18n="tbl_svc3">Ceramic coating</td><td><span class="tag tag-outline" data-i18n="status_wip">In behandeling</span></td></tr>
+                <tr><td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;font-size:14px">RT-071-G</td><td>Kia Sportage</td><td data-i18n="tbl_svc4">Fotografie</td><td><span class="tag tag-neutral" data-i18n="status_recv">Ontvangen</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     9. BLAD 07: TARIEVEN
+     ════════════════════════════════════════════════ -->
+<section id="tarieven" style="padding-bottom:clamp(64px,8vw,112px)">
+  <div class="wrap">
+    <div class="kicker" style="margin-bottom:12px" data-i18n="sec_pricing">Blad 07 &middot; Tarieven</div>
+    <div style="height:1px;background:var(--color-divider);margin-bottom:24px"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:end;margin-bottom:32px">
+      <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="pricing_title">Transparant geprijsd</h2>
+      <div class="seg" role="tablist">
+        <button type="button" role="tab" class="seg-opt" id="seg-part" onclick="setPricing('part')" style="background:var(--color-accent);color:var(--color-bg)" data-i18n="tab_private">Particulier</button>
+        <button type="button" role="tab" class="seg-opt" id="seg-zak" onclick="setPricing('zak')" data-i18n="tab_business">Zakelijk</button>
+      </div>
+    </div>
+
+    <!-- Particulier tab -->
+    <div id="pricing-part">
+      <div class="blueprint" style="overflow:hidden">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="pricing-table-wrap" style="overflow-x:auto">
+          <table class="table" style="min-width:600px">
+            <thead>
+              <tr>
+                <th style="padding-left:20px;width:35%" data-i18n="th_onderdeel">Onderdeel</th>
+                <th style="text-align:center;width:20%" data-i18n="pkg_1">Basis</th>
+                <th style="text-align:center;width:25%;background:var(--color-accent-100)" data-i18n="pkg_2">Compleet</th>
+                <th style="text-align:center;width:20%" data-i18n="pkg_3">Premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding-left:20px" data-i18n="feat_wash">Exterieur handwas</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_wheels">Velgen reinigen</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_windows">Ramen binnen en buiten</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_vacuum">Interieur stofzuigen</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_plastic">Kunststof reinigen</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_steam">Interieur stoomreiniging</td><td style="text-align:center;color:var(--color-neutral-400)">&mdash;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_upholstery">Bekleding en hemel</td><td style="text-align:center;color:var(--color-neutral-400)">&mdash;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_trunk">Kofferbak</td><td style="text-align:center;color:var(--color-neutral-400)">&mdash;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_wax">Wax-afwerking</td><td style="text-align:center;color:var(--color-neutral-400)">&mdash;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700);background:var(--color-accent-100)">&#9679;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_clay">Kleibehandeling</td><td style="text-align:center;color:var(--color-neutral-400)">&mdash;</td><td style="text-align:center;color:var(--color-neutral-400);background:var(--color-accent-100)">&mdash;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_polish">Meerstaps polijsten</td><td style="text-align:center;color:var(--color-neutral-400)">&mdash;</td><td style="text-align:center;color:var(--color-neutral-400);background:var(--color-accent-100)">&mdash;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_engine">Motorruimte</td><td style="text-align:center;color:var(--color-neutral-400)">&mdash;</td><td style="text-align:center;color:var(--color-neutral-400);background:var(--color-accent-100)">&mdash;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <tr><td style="padding-left:20px" data-i18n="feat_sealant">Lakverzegeling</td><td style="text-align:center;color:var(--color-neutral-400)">&mdash;</td><td style="text-align:center;color:var(--color-neutral-400);background:var(--color-accent-100)">&mdash;</td><td style="text-align:center;font-size:18px;color:var(--color-accent-700)">&#9679;</td></tr>
+              <!-- Price row -->
+              <tr style="border-top:2px solid var(--color-divider)">
+                <td style="padding-left:20px;font-family:var(--font-heading);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.04em" data-i18n="th_price">Prijs</td>
+                <td style="text-align:center;font-family:var(--font-heading);font-weight:700;font-size:24px;color:var(--color-accent-700)">&#8364; [XX]</td>
+                <td style="text-align:center;font-family:var(--font-heading);font-weight:700;font-size:24px;color:var(--color-accent-700);background:var(--color-accent-100)">&#8364; [XX]</td>
+                <td style="text-align:center;font-family:var(--font-heading);font-weight:700;font-size:24px;color:var(--color-accent-700)">&#8364; [XX]</td>
+              </tr>
+              <!-- CTA row -->
+              <tr>
+                <td style="padding-left:20px"></td>
+                <td style="text-align:center;padding:12px 8px"><a href="#contact" class="btn btn-secondary" style="width:100%;min-height:38px;font-size:13px" data-i18n="pkg_cta">Boek nu</a></td>
+                <td style="text-align:center;padding:12px 8px;background:var(--color-accent-100)"><a href="#contact" class="btn btn-primary" style="width:100%;min-height:38px;font-size:13px" data-i18n="pkg_cta">Boek nu</a></td>
+                <td style="text-align:center;padding:12px 8px"><a href="#contact" class="btn btn-secondary" style="width:100%;min-height:38px;font-size:13px" data-i18n="pkg_cta">Boek nu</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--color-neutral-700);margin:16px 0 0;max-width:80ch" data-i18n="pricing_note">Prijzen incl. btw. Toeslag voor SUV/MPV. Toeslag bij sterke vervuiling wordt altijd vooraf besproken. Haal- en brengservice op aanvraag.</p>
+    </div>
+
+    <!-- Zakelijk tab -->
+    <div id="pricing-zak" style="display:none">
+      <div class="blueprint" style="padding:clamp(28px,4vw,48px)">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
         <h3 style="font-size:28px;text-transform:uppercase;margin:0 0 12px" data-i18n="biz_title">Volumetarieven en raamovereenkomsten op maat</h3>
-        <p style="margin:0;color:var(--color-neutral-700);max-width:52ch" data-i18n="biz_desc">Zakelijke tarieven zijn afhankelijk van volume, dienstenmix en doorlooptijd. Wij stellen binnen één werkdag een voorstel op met SLA en maandfacturatie.</p>
-      </div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:end">
-        <a href="#afspraak" class="btn btn-primary" style="min-height:44px;padding-inline:20px" data-i18n="biz_cta">Offerte aanvragen</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- K. Referenties -->
-<section id="referenties" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div class="sec-label" data-i18n="sec_refs">07 · Referenties</div>
-  <div class="sec-divider"></div>
-  <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:end;margin-bottom:40px">
-    <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="refs_title">Wat klanten zeggen</h2>
-    <div class="blueprint" style="display:inline-flex;align-items:center;gap:12px;padding:10px 16px;font-size:14px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" style="color:var(--color-accent-700)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      <strong style="font-family:var(--font-heading);font-size:18px">4,8</strong>
-      <span style="color:var(--color-neutral-700)" data-i18n="google_reviews">op Google · 127 reviews</span>
-    </div>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
-    <figure class="blueprint" style="margin:0;padding:24px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <blockquote style="margin:0;font-family:var(--font-heading);font-size:22px;line-height:1.3;flex:1" data-i18n="review_1">"Onze afleverplanning is voorspelbaar geworden. Het foto-rapport scheelt discussie bij overdracht."</blockquote>
-      <figcaption style="font-size:14px;color:var(--color-neutral-700)"><strong style="color:var(--color-text)" data-i18n="review_1_name">R. Janssen</strong> · <span data-i18n="review_1_role">Aftersalesmanager, Autodealer Zuid</span></figcaption>
-    </figure>
-    <figure class="blueprint" style="margin:0;padding:24px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <blockquote style="margin:0;font-family:var(--font-heading);font-size:22px;line-height:1.3;flex:1" data-i18n="review_2">"Retourvoertuigen worden gedocumenteerd ingenomen en binnen 48 uur verkoopklaar aangeleverd."</blockquote>
-      <figcaption style="font-size:14px;color:var(--color-neutral-700)"><strong style="color:var(--color-text)" data-i18n="review_2_name">M. de Vries</strong> · <span data-i18n="review_2_role">Remarketing, LeasePlan</span></figcaption>
-    </figure>
-    <figure class="blueprint" style="margin:0;padding:24px;display:flex;flex-direction:column;gap:16px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <blockquote style="margin:0;font-family:var(--font-heading);font-size:22px;line-height:1.3;flex:1" data-i18n="review_3">"De auto zag er na de coating beter uit dan bij aflevering. Duidelijke afspraak, duidelijke prijs."</blockquote>
-      <figcaption style="font-size:14px;color:var(--color-neutral-700)"><strong style="color:var(--color-text)" data-i18n="review_3_name">S. Bakker</strong> · <span data-i18n="review_3_role">Particuliere klant</span></figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- L. Garantie -->
-<section id="garantie" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div class="sec-label" data-i18n="sec_warranty">08 · Garantie</div>
-  <div class="sec-divider"></div>
-  <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 40px" data-i18n="warranty_title">Vastgelegd, niet beloofd</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">
-    <div class="blueprint" style="padding:24px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 10px" data-i18n="war_1_title">Vakmanschapsgarantie</h3>
-      <p style="margin:0;font-size:15px;color:var(--color-neutral-700)" data-i18n="war_1_desc">Niet tevreden? Meld het binnen 48 uur. Wij behandelen het voertuig kosteloos opnieuw.</p>
-    </div>
-    <div class="blueprint" style="padding:24px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 10px" data-i18n="war_2_title">Coatinggarantie</h3>
-      <p style="margin:0;font-size:15px;color:var(--color-neutral-700)" data-i18n="war_2_desc">2, 3 of 5 jaar, met digitaal garantiecertificaat op kenteken en jaarlijkse controle.</p>
-    </div>
-    <div class="blueprint" style="padding:24px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 10px" data-i18n="war_3_title">Schadebeleid</h3>
-      <p style="margin:0;font-size:15px;color:var(--color-neutral-700)" data-i18n="war_3_desc">Intake met foto's. Schade die door ons ontstaat, herstellen wij op onze kosten. Volledig verzekerd.</p>
-    </div>
-  </div>
-</section>
-
-<!-- M. FAQ -->
-<section id="faq" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div class="sec-label" data-i18n="sec_faq">09 · Kennisbank</div>
-  <div class="sec-divider"></div>
-  <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0 0 24px" data-i18n="faq_title">Veelgestelde vragen</h2>
-  <div style="max-width:720px">
-    <div style="border-bottom:1px solid var(--color-divider)">
-      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q1">Hoe lang duurt een behandeling?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
-      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a1">Een Basis-behandeling duurt circa 2 uur, Compleet een dagdeel en Premium of ceramic coating één tot twee werkdagen.</p>
-    </div>
-    <div style="border-bottom:1px solid var(--color-divider)">
-      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q2">Verdwijnen alle krassen door polijsten?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
-      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a2">Krassen in de blanke lak verdwijnen vrijwel volledig. Krassen tot in de grondlaag kunnen wij verminderen maar niet verwijderen.</p>
-    </div>
-    <div style="border-bottom:1px solid var(--color-divider)">
-      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q3">Wat is het verschil tussen wax en ceramic coating?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
-      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a3">Wax beschermt enkele weken. Ceramic coating hecht chemisch aan de lak en beschermt 2 tot 5 jaar, met garantiecertificaat.</p>
-    </div>
-    <div style="border-bottom:1px solid var(--color-divider)">
-      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q4">Zijn voertuigen verzekerd tijdens behandeling?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
-      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a4">Ja. Voertuigen in onze zorg vallen onder onze opzichtverzekering, inclusief transport.</p>
-    </div>
-    <div style="border-bottom:1px solid var(--color-divider)">
-      <button type="button" onclick="toggleFaq(this)" style="width:100%;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;background:none;border:0;padding:16px 0;font:inherit;font-family:var(--font-heading);font-weight:600;font-size:19px;color:inherit;cursor:pointer;min-height:48px" data-i18n="faq_q5">Hebben jullie zakelijke tarieven?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:var(--color-accent-700);transition:transform .2s"><path d="m6 9 6 6 6-6"/></svg></button>
-      <p style="margin:0;padding:0 0 18px;color:var(--color-neutral-700);max-width:64ch;display:none" data-i18n="faq_a5">Ja. Op basis van volume en dienstenmix stellen wij een raamovereenkomst op met vaste tarieven en SLA.</p>
-    </div>
-  </div>
-</section>
-
-<!-- N. Afspraak / Contact -->
-<section id="afspraak" style="max-width:1200px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(20px,5vw,72px) 0">
-  <div class="sec-label" data-i18n="sec_appointment">10 · Offerte of afspraak</div>
-  <div class="sec-divider"></div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px clamp(32px,5vw,80px);align-items:start">
-    <div class="blueprint" style="padding:clamp(20px,3vw,32px)"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <form style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px" onsubmit="event.preventDefault()">
-        <div class="field"><label data-i18n="form_name">Naam</label><input class="input" style="min-height:44px"></div>
-        <div class="field"><label data-i18n="form_company">Bedrijfsnaam (optioneel)</label><input class="input" style="min-height:44px"></div>
-        <div class="field"><label data-i18n="form_email">E-mailadres</label><input class="input" type="email" style="min-height:44px"></div>
-        <div class="field"><label data-i18n="form_phone">Telefoonnummer</label><input class="input" type="tel" style="min-height:44px"></div>
-        <div class="field"><label data-i18n="form_plate">Kenteken</label><input class="input" placeholder="XX-123-X" style="min-height:44px;text-transform:uppercase;font-family:var(--font-heading);font-weight:600;letter-spacing:.06em"></div>
-        <div class="field"><label data-i18n="form_service">Gewenste dienst</label>
-          <select class="input" style="min-height:44px">
-            <option data-i18n="form_svc_1">Afleverpoetsbeurt</option>
-            <option data-i18n="form_svc_2">Compleet pakket</option>
-            <option data-i18n="form_svc_3">Premium pakket</option>
-            <option data-i18n="form_svc_4">Ceramic coating</option>
-            <option data-i18n="form_svc_5">Lakcorrectie</option>
-            <option data-i18n="form_svc_6">Zakelijke offerte</option>
-          </select>
-        </div>
-        <div class="field" style="grid-column:1/-1"><label data-i18n="form_message">Opmerkingen</label><textarea class="input"></textarea></div>
-        <label style="grid-column:1/-1;display:flex;gap:10px;align-items:start;font-size:13px;color:var(--color-neutral-700)"><input type="checkbox" style="accent-color:var(--color-accent);width:16px;height:16px;margin-top:2px"><span data-i18n="form_privacy">Ik ga akkoord met de verwerking van mijn gegevens (AVG).</span></label>
-        <button type="submit" class="btn btn-primary" style="min-height:46px;justify-self:start;padding-inline:22px" data-i18n="form_submit">Aanvraag versturen</button>
-      </form>
-    </div>
-    <aside style="display:grid;gap:24px">
-      <div class="blueprint" style="padding:24px;background:var(--color-accent-900);color:var(--color-bg);border-color:var(--color-accent-900)"><i class="corner tl" style="color:var(--color-accent-400)"></i><i class="corner tr" style="color:var(--color-accent-400)"></i><i class="corner bl" style="color:var(--color-accent-400)"></i><i class="corner br" style="color:var(--color-accent-400)"></i>
-        <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-300)" data-i18n="response_label">Reactie binnen 1 werkdag</div>
-        <p style="margin:10px 0 0;color:var(--color-accent-100)" data-i18n="response_desc">Aanvragen worden binnen één werkdag beantwoord met een voorstel inclusief doorlooptijd en tarief.</p>
-      </div>
-      <div class="blueprint" style="padding:24px;display:grid;gap:14px;font-size:15px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-        <h3 style="font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="contact_direct">Direct contact</h3>
-        <a href="tel:0101234567" style="display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span data-i18n="topbar_phone">010 123 4567</span>
-        </a>
-        <a href="mailto:info@autodetailpro.nl" style="display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          info@autodetailpro.nl
-        </a>
-        <div style="display:flex;gap:12px;align-items:start">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span data-i18n="topbar_hours">Ma–vr 08:00–17:30</span>
+        <p style="margin:0 0 24px;color:var(--color-neutral-700);max-width:56ch" data-i18n="biz_desc">Zakelijke tarieven zijn afhankelijk van volume, dienstenmix en doorlooptijd. Wij stellen binnen een werkdag een voorstel op met SLA en maandfacturatie.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#contact" class="btn btn-primary" style="min-height:44px;padding-inline:20px" data-i18n="biz_cta">Offerte aanvragen</a>
+          <a href="tel:0101234567" class="btn btn-secondary" style="min-height:44px;padding-inline:20px" data-i18n="biz_call">Bel direct: 010 123 4567</a>
         </div>
       </div>
-    </aside>
+    </div>
   </div>
 </section>
 
-<!-- O. Contact & kaart -->
-<section id="contact" style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,72px) clamp(64px,8vw,112px)">
-  <div class="sec-label" data-i18n="sec_contact">11 · Contact en route</div>
-  <div class="sec-divider"></div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px">
-    <div class="blueprint" style="min-height:320px;display:grid;place-items:center;background:var(--color-neutral-200);color:var(--color-neutral-700);font-size:13px;letter-spacing:.06em;text-transform:uppercase"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-      <span data-i18n="map_ph">Kaart: Industrieweg 15, Rotterdam</span>
+<!-- ════════════════════════════════════════════════
+     10. BLAD 08: REFERENTIES
+     ════════════════════════════════════════════════ -->
+<section id="referenties" style="padding-bottom:clamp(64px,8vw,112px)">
+  <div class="wrap">
+    <div class="kicker" style="margin-bottom:12px" data-i18n="sec_refs">Blad 08 &middot; Referenties</div>
+    <div style="height:1px;background:var(--color-divider);margin-bottom:24px"></div>
+    <div class="three-col" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+      <!-- Column 1: Quote + Google rating -->
+      <div style="display:grid;gap:24px;align-content:start">
+        <figure class="blueprint" style="margin:0;padding:28px;display:flex;flex-direction:column;gap:16px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <blockquote style="margin:0;font-family:var(--font-heading);font-size:22px;line-height:1.3;flex:1" data-i18n="review_1">"Onze afleverplanning is voorspelbaar geworden. Het foto-rapport scheelt discussie bij overdracht."</blockquote>
+          <figcaption style="font-size:14px;color:var(--color-neutral-700)"><strong style="color:var(--color-text)" data-i18n="review_1_name">R. Janssen</strong> &mdash; <span data-i18n="review_1_role">Aftersalesmanager, Autodealer Zuid</span></figcaption>
+        </figure>
+        <!-- Google rating badge -->
+        <div class="blueprint" style="display:flex;align-items:center;gap:12px;padding:14px 18px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" style="color:var(--color-accent-700)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <strong style="font-family:var(--font-heading);font-size:20px">4,8</strong>
+          <span style="font-size:13px;color:var(--color-neutral-700)" data-i18n="google_reviews">op Google &middot; 127 reviews</span>
+        </div>
+      </div>
+      <!-- Column 2: Garantie boxes -->
+      <div class="blueprint" style="padding:28px;display:grid;gap:24px;align-content:start">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div>
+          <h3 style="font-size:18px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 8px" data-i18n="war_1_title">Vakmanschapsgarantie</h3>
+          <p style="margin:0;font-size:14px;color:var(--color-neutral-700)" data-i18n="war_1_desc">Niet tevreden? Meld het binnen 48 uur. Wij behandelen het voertuig kosteloos opnieuw.</p>
+        </div>
+        <div style="height:1px;background:var(--color-divider)"></div>
+        <div>
+          <h3 style="font-size:18px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 8px" data-i18n="war_2_title">Coatinggarantie</h3>
+          <p style="margin:0;font-size:14px;color:var(--color-neutral-700)" data-i18n="war_2_desc">2, 3 of 5 jaar, met digitaal garantiecertificaat op kenteken en jaarlijkse controle.</p>
+        </div>
+        <div style="height:1px;background:var(--color-divider)"></div>
+        <div>
+          <h3 style="font-size:18px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 8px" data-i18n="war_3_title">Schadebeleid</h3>
+          <p style="margin:0;font-size:14px;color:var(--color-neutral-700)" data-i18n="war_3_desc">Intake met foto's. Schade die door ons ontstaat, herstellen wij op onze kosten. Volledig verzekerd.</p>
+        </div>
+      </div>
+      <!-- Column 3: Case study + before/after -->
+      <div style="display:grid;gap:24px;align-content:start">
+        <div class="blueprint" style="padding:28px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <span class="tag tag-accent" style="margin-bottom:12px;display:inline-flex" data-i18n="case_tag">Case study</span>
+          <h3 style="font-size:20px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 10px" data-i18n="case_title">Dealer Zuid: van 3 dagen naar 48 uur doorlooptijd</h3>
+          <a href="#contact" style="font-size:14px;font-weight:500" data-i18n="case_link">Lees de volledige case &rarr;</a>
+        </div>
+        <!-- Before/after slider -->
+        <div class="blueprint" style="padding:0;overflow:hidden;position:relative">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="aspect-ratio:4/3;position:relative;background:var(--color-neutral-300)">
+            <!-- Before side -->
+            <div id="ba-before" style="position:absolute;inset:0;display:grid;place-items:center;color:var(--color-neutral-600);font-size:12px;letter-spacing:.06em;text-transform:uppercase;overflow:hidden">
+              <div style="position:absolute;top:8px;left:12px;font-size:10px;letter-spacing:.08em;background:var(--color-neutral-800);color:var(--color-bg);padding:2px 8px" data-i18n="ba_before">VOOR</div>
+              Foto: voor behandeling
+            </div>
+            <!-- After side (clip) -->
+            <div id="ba-after" style="position:absolute;inset:0;display:grid;place-items:center;background:var(--color-accent-100);color:var(--color-accent-700);font-size:12px;letter-spacing:.06em;text-transform:uppercase;clip-path:inset(0 0 0 50%);overflow:hidden">
+              <div style="position:absolute;top:8px;right:12px;font-size:10px;letter-spacing:.08em;background:var(--color-accent-700);color:var(--color-bg);padding:2px 8px" data-i18n="ba_after">NA</div>
+              Foto: na behandeling
+            </div>
+          </div>
+          <div style="padding:8px 16px;display:flex;align-items:center;gap:10px;border-top:1px solid var(--color-divider)">
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-600);flex:none" data-i18n="ba_before">VOOR</span>
+            <input type="range" id="ba-slider" min="0" max="100" value="50" style="flex:1;accent-color:var(--color-accent);cursor:pointer">
+            <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-neutral-600);flex:none" data-i18n="ba_after">NA</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div style="display:grid;gap:24px;align-content:start">
-      <h2 style="font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="visit_title">Bezoekadres</h2>
-      <address style="font-style:normal;display:grid;gap:4px;font-size:16px">
-        <strong style="font-family:var(--font-heading);font-size:20px;font-weight:600" data-i18n="brand_name">AutoDetail Pro</strong>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     11. BLAD 09: CONTACT
+     ════════════════════════════════════════════════ -->
+<section id="contact" style="padding-bottom:clamp(64px,8vw,112px)">
+  <div class="wrap">
+    <div class="kicker" style="margin-bottom:12px" data-i18n="sec_contact">Blad 09 &middot; Contact</div>
+    <div style="height:1px;background:var(--color-divider);margin-bottom:24px"></div>
+    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);align-items:start">
+      <!-- Left: Form -->
+      <div class="blueprint" style="padding:clamp(20px,3vw,32px)">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <!-- Form tabs -->
+        <div class="seg" style="margin-bottom:24px;width:100%">
+          <button type="button" class="seg-opt" id="form-tab-offerte" onclick="setForm('offerte')" style="flex:1;background:var(--color-accent);color:var(--color-bg)" data-i18n="form_tab_offerte">Zakelijke offerte</button>
+          <button type="button" class="seg-opt" id="form-tab-afspraak" onclick="setForm('afspraak')" style="flex:1" data-i18n="form_tab_afspraak">Afspraak particulier</button>
+        </div>
+        <!-- Offerte form -->
+        <form id="form-offerte" style="display:grid;grid-template-columns:1fr 1fr;gap:16px" onsubmit="event.preventDefault()">
+          <div class="field"><label data-i18n="form_company">Bedrijfsnaam</label><input class="input" style="min-height:42px"></div>
+          <div class="field"><label data-i18n="form_contact">Contactpersoon</label><input class="input" style="min-height:42px"></div>
+          <div class="field"><label data-i18n="form_email">E-mailadres</label><input class="input" type="email" style="min-height:42px"></div>
+          <div class="field"><label data-i18n="form_phone">Telefoonnummer</label><input class="input" type="tel" style="min-height:42px"></div>
+          <div class="field"><label data-i18n="form_sector">Sector</label>
+            <select class="input" style="min-height:42px">
+              <option data-i18n="sector_1_title">Autodealers</option>
+              <option data-i18n="sector_2_title">Leasemaatschappijen</option>
+              <option data-i18n="sector_3_title">Wagenparkbeheer</option>
+              <option data-i18n="sector_4_title">Autoverhuur</option>
+              <option data-i18n="sector_5_title">Occasionhandel &amp; remarketing</option>
+            </select>
+          </div>
+          <div class="field"><label data-i18n="form_volume">Voertuigen per maand</label><input class="input" type="number" min="1" style="min-height:42px"></div>
+          <div class="field" style="grid-column:1/-1">
+            <label data-i18n="form_diensten">Gewenste diensten</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;font-size:14px">
+              <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--color-accent)"> <span data-i18n="svc_1_title">Afleverpoetsbeurt</span></label>
+              <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--color-accent)"> <span data-i18n="svc_2_title">Showroomonderhoud</span></label>
+              <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--color-accent)"> <span data-i18n="svc_3_title">Occasion- &amp; remarketingpreparatie</span></label>
+              <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--color-accent)"> <span data-i18n="svc_4_title">Interieur stoomreiniging</span></label>
+              <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--color-accent)"> <span data-i18n="svc_6_title">Ceramic coating</span></label>
+              <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--color-accent)"> <span data-i18n="svc_11_title">Voertuigfotografie</span></label>
+            </div>
+          </div>
+          <div class="field" style="grid-column:1/-1"><label data-i18n="form_message">Opmerkingen</label><textarea class="input"></textarea></div>
+          <label style="grid-column:1/-1;display:flex;gap:10px;align-items:start;font-size:13px;color:var(--color-neutral-700)"><input type="checkbox" style="accent-color:var(--color-accent);width:16px;height:16px;margin-top:2px"><span data-i18n="form_privacy">Ik ga akkoord met de verwerking van mijn gegevens (AVG).</span></label>
+          <button type="submit" class="btn btn-primary" style="min-height:46px;justify-self:start;padding-inline:22px;grid-column:1/-1" data-i18n="form_submit_offerte">Offerte aanvragen</button>
+        </form>
+        <!-- Afspraak form -->
+        <form id="form-afspraak" style="display:none;grid-template-columns:1fr 1fr;gap:16px" onsubmit="event.preventDefault()">
+          <div class="field"><label data-i18n="form_plate">Kenteken</label><input class="input" placeholder="XX-123-X" style="min-height:42px;text-transform:uppercase;font-family:var(--font-heading);font-weight:600;letter-spacing:.06em"></div>
+          <div class="field"><label data-i18n="form_pakket">Pakket</label>
+            <select class="input" style="min-height:42px">
+              <option data-i18n="pkg_1">Basis</option>
+              <option data-i18n="pkg_2">Compleet</option>
+              <option data-i18n="pkg_3">Premium</option>
+              <option data-i18n="svc_6_title">Ceramic coating</option>
+            </select>
+          </div>
+          <div class="field"><label data-i18n="form_date">Gewenste datum</label><input class="input" type="date" style="min-height:42px"></div>
+          <div class="field">
+            <label data-i18n="form_haalbeng">Haal-en-brengservice</label>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+              <span style="font-size:13px;color:var(--color-neutral-600)" data-i18n="form_nee">Nee</span>
+              <label style="position:relative;display:inline-block;width:44px;height:24px;cursor:pointer">
+                <input type="checkbox" id="toggle-hb" style="opacity:0;width:0;height:0">
+                <span id="toggle-track" style="position:absolute;inset:0;background:var(--color-neutral-300);transition:background .2s"></span>
+                <span id="toggle-thumb" style="position:absolute;top:2px;left:2px;width:20px;height:20px;background:var(--color-bg);transition:transform .2s;box-shadow:var(--shadow-sm)"></span>
+              </label>
+              <span style="font-size:13px;color:var(--color-neutral-600)" data-i18n="form_ja">Ja</span>
+            </div>
+          </div>
+          <div class="field"><label data-i18n="form_name">Naam</label><input class="input" style="min-height:42px"></div>
+          <div class="field"><label data-i18n="form_email">E-mailadres</label><input class="input" type="email" style="min-height:42px"></div>
+          <div class="field" style="grid-column:1/-1"><label data-i18n="form_phone">Telefoonnummer</label><input class="input" type="tel" style="min-height:42px"></div>
+          <label style="grid-column:1/-1;display:flex;gap:10px;align-items:start;font-size:13px;color:var(--color-neutral-700)"><input type="checkbox" style="accent-color:var(--color-accent);width:16px;height:16px;margin-top:2px"><span data-i18n="form_privacy">Ik ga akkoord met de verwerking van mijn gegevens (AVG).</span></label>
+          <button type="submit" class="btn btn-primary" style="min-height:46px;justify-self:start;padding-inline:22px;grid-column:1/-1" data-i18n="form_submit_afspraak">Afspraak aanvragen</button>
+        </form>
+      </div>
+      <!-- Right -->
+      <div style="display:grid;gap:24px">
+        <!-- Response time dark box -->
+        <div class="blueprint" style="padding:24px;background:var(--color-accent-900);color:var(--color-bg);border-color:var(--color-accent-900)">
+          <i class="corner tl" style="color:var(--color-accent-400)"></i><i class="corner tr" style="color:var(--color-accent-400)"></i><i class="corner bl" style="color:var(--color-accent-400)"></i><i class="corner br" style="color:var(--color-accent-400)"></i>
+          <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-300);margin-bottom:8px" data-i18n="response_label">Reactie binnen 1 werkdag</div>
+          <p style="margin:0;color:var(--color-accent-100);font-size:15px" data-i18n="response_desc">Aanvragen worden binnen een werkdag beantwoord met een voorstel inclusief doorlooptijd en tarief.</p>
+        </div>
+        <!-- Address / contact box -->
+        <div class="blueprint" style="padding:24px;display:grid;gap:14px;font-size:15px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <h3 style="font-size:20px;text-transform:uppercase;letter-spacing:.02em;margin:0" data-i18n="contact_direct">Direct contact</h3>
+          <address style="font-style:normal;display:grid;gap:4px">
+            <strong style="font-family:var(--font-heading);font-size:18px;font-weight:600" data-i18n="brand_name">AutoDetail Pro</strong>
+            <span data-i18n="address_street">Industrieweg 15</span>
+            <span data-i18n="address_city">3045 AE Rotterdam</span>
+          </address>
+          <a href="tel:0101234567" style="display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span data-i18n="topbar_phone">010 123 4567</span>
+          </a>
+          <a href="mailto:info@autodetailpro.nl" style="display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700)"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            info@autodetailpro.nl
+          </a>
+          <div style="display:flex;gap:10px;align-items:center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent-700);flex:none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span data-i18n="topbar_hours">Ma-vr 08:00-17:30</span>
+          </div>
+        </div>
+        <!-- Map placeholder -->
+        <div class="blueprint" style="min-height:200px;display:grid;place-items:center;background:var(--color-neutral-200);color:var(--color-neutral-600);font-size:12px;letter-spacing:.06em;text-transform:uppercase">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <span data-i18n="map_ph">Kaart: Industrieweg 15, Rotterdam</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     12. FOOTER
+     ════════════════════════════════════════════════ -->
+<footer style="background:var(--color-accent-900);color:var(--color-accent-200)">
+  <div class="wrap" style="padding-top:clamp(48px,6vw,72px);padding-bottom:32px">
+    <div class="footer-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;gap:32px;font-size:14px;margin-bottom:40px">
+      <!-- Brand -->
+      <div style="display:grid;gap:12px;align-content:start;max-width:28ch">
+        <span style="font-family:var(--font-heading);font-weight:600;font-size:20px;text-transform:uppercase;letter-spacing:.02em;color:var(--color-bg)" data-i18n="brand_name">AutoDetail Pro</span>
+        <p style="margin:0" data-i18n="footer_desc">Professionele voertuigpreparatie voor dealers, leasemaatschappijen en particulieren in de regio Rotterdam.</p>
+      </div>
+      <!-- Diensten -->
+      <div style="display:grid;gap:8px;align-content:start">
+        <strong style="font-family:var(--font-heading);font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_services">Diensten</strong>
+        <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_1_title">Afleverpoetsbeurt</a>
+        <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_4_title">Interieur stoomreiniging</a>
+        <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_5_title">Lakcorrectie &amp; meerstaps polijsten</a>
+        <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_6_title">Ceramic coating</a>
+        <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_11_title">Voertuigfotografie</a>
+      </div>
+      <!-- Zakelijk -->
+      <div style="display:grid;gap:8px;align-content:start">
+        <strong style="font-family:var(--font-heading);font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_business">Zakelijk</strong>
+        <a href="#sectoren" style="color:inherit;text-decoration:none" data-i18n="footer_sectors">Sectoren</a>
+        <a href="#portaal" style="color:inherit;text-decoration:none" data-i18n="footer_portal">Portaal</a>
+        <a href="#tarieven" style="color:inherit;text-decoration:none" data-i18n="footer_rates">Tarieven</a>
+        <a href="#contact" style="color:inherit;text-decoration:none" data-i18n="footer_quote">Offerte aanvragen</a>
+      </div>
+      <!-- Bedrijf -->
+      <div style="display:grid;gap:8px;align-content:start">
+        <strong style="font-family:var(--font-heading);font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_company">Bedrijf</strong>
+        <a href="#werkwijze" style="color:inherit;text-decoration:none" data-i18n="footer_workflow">Werkwijze</a>
+        <a href="#faciliteit" style="color:inherit;text-decoration:none" data-i18n="footer_facility">Faciliteit</a>
+        <a href="#referenties" style="color:inherit;text-decoration:none" data-i18n="footer_refs">Referenties</a>
+      </div>
+      <!-- Contact -->
+      <div style="display:grid;gap:8px;align-content:start">
+        <strong style="font-family:var(--font-heading);font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_contact">Contact</strong>
         <span data-i18n="address_street">Industrieweg 15</span>
         <span data-i18n="address_city">3045 AE Rotterdam</span>
-      </address>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="tel:0101234567" class="btn btn-secondary" style="min-height:44px" data-i18n="cta_call">Bel 010 123 4567</a>
-        <a href="#afspraak" class="btn btn-primary" style="min-height:44px" data-i18n="nav_cta">Afspraak maken</a>
+        <a href="tel:0101234567" style="color:inherit;text-decoration:none" data-i18n="topbar_phone">010 123 4567</a>
+        <a href="mailto:info@autodetailpro.nl" style="color:inherit;text-decoration:none">info@autodetailpro.nl</a>
+        <span data-i18n="topbar_hours">Ma-vr 08:00-17:30</span>
       </div>
-      <dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 24px;font-size:15px">
-        <dt style="color:var(--color-neutral-700)" data-i18n="dt_email">E-mail</dt><dd style="margin:0"><a href="mailto:info@autodetailpro.nl">info@autodetailpro.nl</a></dd>
-        <dt style="color:var(--color-neutral-700)" data-i18n="dt_hours">Openingstijden</dt><dd style="margin:0" data-i18n="dd_hours">Ma–vr 08:00–17:30 · za op afspraak</dd>
-      </dl>
     </div>
   </div>
-</section>
-
-<!-- P. Footer -->
-<footer style="background:var(--color-accent-900);color:var(--color-accent-200)">
-  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,6vw,72px) clamp(20px,5vw,72px) 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px 32px;font-size:14px">
-    <div style="grid-column:span 1;display:grid;gap:14px;align-content:start;max-width:30ch">
-      <span style="font-family:var(--font-heading);font-weight:600;font-size:20px;text-transform:uppercase;letter-spacing:.02em;color:var(--color-bg)" data-i18n="brand_name">AutoDetail Pro</span>
-      <p style="margin:0" data-i18n="footer_desc">Professionele voertuigverzorging voor dealers, leasemaatschappijen en particulieren.</p>
-    </div>
-    <div style="display:grid;gap:10px;align-content:start">
-      <strong style="font-family:var(--font-heading);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_services">Diensten</strong>
-      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_1_title">Afleverpoetsbeurt</a>
-      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_4_title">Interieur stoomreiniging</a>
-      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_5_title">Lakcorrectie &amp; polijsten</a>
-      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_6_title">Ceramic coating</a>
-      <a href="#diensten" style="color:inherit;text-decoration:none" data-i18n="svc_9_title">Voertuigfotografie</a>
-    </div>
-    <div style="display:grid;gap:10px;align-content:start">
-      <strong style="font-family:var(--font-heading);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_company">Bedrijf</strong>
-      <a href="#over-ons" style="color:inherit;text-decoration:none" data-i18n="nav_about">Over ons</a>
-      <a href="#werkwijze" style="color:inherit;text-decoration:none" data-i18n="footer_workflow">Werkwijze</a>
-      <a href="#garantie" style="color:inherit;text-decoration:none" data-i18n="footer_warranty">Garantie</a>
-      <a href="#faq" style="color:inherit;text-decoration:none" data-i18n="footer_faq">Veelgestelde vragen</a>
-    </div>
-    <div style="display:grid;gap:10px;align-content:start">
-      <strong style="font-family:var(--font-heading);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-bg)" data-i18n="footer_contact">Contact</strong>
-      <span data-i18n="address_street">Industrieweg 15</span>
-      <span data-i18n="address_city">3045 AE Rotterdam</span>
-      <a href="tel:0101234567" style="color:inherit;text-decoration:none" data-i18n="topbar_phone">010 123 4567</a>
-      <a href="mailto:info@autodetailpro.nl" style="color:inherit;text-decoration:none">info@autodetailpro.nl</a>
-      <span data-i18n="topbar_hours">Ma–vr 08:00–17:30</span>
-    </div>
-  </div>
+  <!-- Bottom bar -->
   <div style="border-top:1px solid color-mix(in srgb,var(--color-bg) 15%,transparent)">
-    <div style="max-width:1200px;margin:0 auto;padding:18px clamp(20px,5vw,72px);display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;align-items:center">
+    <div class="wrap" style="padding-top:18px;padding-bottom:18px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;align-items:center">
       <span data-i18n="footer_copy">&copy; 2026 AutoDetail Pro</span>
+      <span style="color:var(--color-accent-400)">KvK 12345678 &middot; BTW NL123456789B01</span>
       <a href="#" style="color:inherit" data-i18n="footer_terms">Algemene voorwaarden</a>
       <a href="#" style="color:inherit" data-i18n="footer_privacy">Privacyverklaring</a>
+      <span style="display:inline-flex;gap:3px;margin-left:8px">
+        <button onclick="setLang('nl')" id="lang-nl-f" style="background:none;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:12px;padding:2px 4px;color:var(--color-bg)">NL</button>
+        <span style="opacity:.3">|</span>
+        <button onclick="setLang('en')" id="lang-en-f" style="background:none;border:0;cursor:pointer;font:inherit;font-size:12px;padding:2px 4px;color:var(--color-accent-400)">EN</button>
+      </span>
       <span style="margin-left:auto;font-size:11px;color:var(--color-accent-400)">Powered by DES Systems</span>
     </div>
   </div>
 </footer>
 
-<!-- Q. Floating WhatsApp -->
-<a href="#afspraak" aria-label="WhatsApp" class="btn btn-primary elev-lg" style="position:fixed;right:20px;bottom:20px;width:52px;height:52px;padding:0;z-index:70;border-radius:0">
+<!-- Floating WhatsApp -->
+<a href="#contact" aria-label="WhatsApp" class="btn btn-primary elev-lg" style="position:fixed;right:20px;bottom:20px;width:52px;height:52px;padding:0;z-index:70;border-radius:0">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
 </a>
 
 </div>
 
 <script>
-var LANG = localStorage.getItem('adp-lang') || 'nl';
+/* ═══════════════════════════════════════════════
+   JAVASCRIPT — i18n, live data, interactions
+   ═══════════════════════════════════════════════ */
+
+var LANG = 'nl';
+try { LANG = localStorage.getItem('adp-lang') || 'nl'; } catch(e) {}
+
 var I18N = {
   en: {
-    topbar_phone: '010 123 4567',
-    topbar_hours: 'Mon–Fri 08:00–17:30',
-    brand_name: 'AutoDetail Pro',
-    nav_services: 'Services', nav_about: 'About us', nav_pricing: 'Pricing',
-    nav_reviews: 'Reviews', nav_contact: 'Contact', nav_cta: 'Book now',
-    hero_kicker: 'Professional vehicle care',
-    hero_title: 'Your vehicle deserves craftsmanship',
-    hero_sub: 'Detailing, ceramic coating and interior care for private owners, dealers and fleets. With fixed quality control and warranty certificate.',
-    hero_cta1: 'Book appointment', hero_cta2: 'View services',
-    badge_1: 'Certified applicator', badge_2: 'ISO work instructions', badge_3: 'Up to 5 year warranty',
-    stat_1: 'Years experience', stat_2: 'Vehicles per year', stat_3: 'Dealer partners', stat_4: 'Hours avg turnaround',
-    sec_sectors: '01 · Sectors', sectors_title: 'Who we work for',
-    sector_1_title: 'Car dealers', sector_1_desc: 'Delivery preparation and showroom maintenance with fixed SLA and photo reporting.',
-    sector_2_title: 'Leasing companies', sector_2_desc: 'Return preparation and remarketing-ready vehicles with digital handover report.',
-    sector_3_title: 'Private owners', sector_3_desc: 'Complete detailing and coating treatments, by appointment with warranty.',
-    sector_cta: 'View options →', sector_cta_pricing: 'View packages →',
-    sec_services: '02 · Services', services_title: 'Twelve services, one quality standard',
-    svc_1_title: 'Delivery detailing', svc_1_desc: 'New and used vehicles showroom-ready to your delivery standard.',
-    svc_2_title: 'Showroom maintenance', svc_2_desc: 'Periodic maintenance of showroom vehicles, on-site possible.',
-    svc_3_title: 'Pre-owned preparation', svc_3_desc: 'Making trade-in and return vehicles sale-ready, including photography.',
-    svc_4_title: 'Interior steam cleaning', svc_4_desc: 'Cleaning with ±175°C steam: removes bacteria and odors without harsh chemicals.',
-    svc_5_title: 'Paint correction & polishing', svc_5_desc: 'Machine removal of swirls, scratches and holograms in multiple steps.',
-    svc_6_title: 'Ceramic coating', svc_6_desc: 'Paint protection with 2, 3 or 5 year warranty and digital certificate.',
-    svc_7_title: 'Headlight restoration', svc_7_desc: 'Yellowed and dull headlights sanded clear, polished and sealed.',
-    svc_8_title: 'Odor treatment', svc_8_desc: 'Neutralizes smoke, pet and moisture odors down to the ventilation system.',
-    svc_9_title: 'Vehicle photography', svc_9_desc: 'Consistent pre-owned photos in our studio, ready for your portals.',
-    svc_more: 'More info',
-    sec_why: '03 · Why AutoDetail Pro', why_title: 'A partner that follows your process',
-    why_sub: 'We work with fixed agreements, fixed inspections and fixed contacts. So you know what you get, when you get it and what it costs.',
-    why_1: 'Fixed turnaround times in an SLA', why_2: 'Quality checklist per vehicle',
-    why_3: 'Before/after photo report', why_4: 'Dedicated contact person',
-    why_5: 'Monthly invoicing with PO numbers', why_6: 'Insured vehicles in our care',
-    ph_detailer: 'Photo: detailer with polishing machine',
-    sec_workflow: '04 · Workflow', workflow_title: 'Seven steps, from request to invoice',
-    step_1_title: 'Request', step_1_desc: 'Via portal, email or phone.',
-    step_2_title: 'Pick-up or delivery', step_2_desc: 'By appointment or collected by us.',
-    step_3_title: 'Intake inspection', step_3_desc: 'Condition documented with photos.',
-    step_4_title: 'Treatment', step_4_desc: 'Per fixed work instruction.',
-    step_5_title: 'Quality control', step_5_desc: 'Checklist by second inspector.',
-    step_6_title: 'Photo report', step_6_desc: 'Completion with before/after photos.',
-    step_7_title: 'Delivery & invoice', step_7_desc: 'Returned; monthly invoice with PO.',
-    sec_portal: '05 · Business portal', portal_title: 'Your vehicles in real-time view',
-    portal_sub: 'The portal gives your locations direct insight into status, photos and invoicing. No phone calls, no loose emails.',
-    portal_1: 'Register vehicles by license plate', portal_2: 'Track status: received → in progress → done',
-    portal_3: 'Download before/after photos', portal_4: 'Invoices and reports per period',
-    portal_cta: 'View the portal',
-    portal_table_title: 'Vehicles · Location South', portal_week: 'This week: 18',
-    th_plate: 'Plate', th_model: 'Model', th_service: 'Service', th_date: 'Date',
-    tbl_svc1: 'Delivery detail', tbl_svc2: 'Return prep', tbl_svc3: 'Ceramic coating', tbl_svc4: 'Photography', tbl_svc5: 'Steam clean',
-    status_done: 'Done', status_wip: 'In progress', status_recv: 'Received',
-    sec_pricing: '06 · Pricing', pricing_title: 'Transparent pricing',
-    tab_private: 'Private', tab_business: 'Business',
-    pkg_1: 'Basic', pkg_1_price: 'From €89<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. VAT</span>',
-    pkg_1_f1: 'Exterior hand wash', pkg_1_f2: 'Wheel cleaning', pkg_1_f3: 'Windows inside & out', pkg_1_f4: 'Interior vacuuming', pkg_1_f5: 'Plastic cleaning',
-    pkg_2: 'Complete', pkg_2_price: 'From €169<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. VAT</span>',
-    pkg_2_f1: 'Everything in Basic', pkg_2_f2: 'Interior steam cleaning', pkg_2_f3: 'Upholstery & headliner', pkg_2_f4: 'Trunk', pkg_2_f5: 'Wax finish',
-    pkg_3: 'Premium', pkg_3_price: 'From €289<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">incl. VAT</span>',
-    pkg_3_f1: 'Everything in Complete', pkg_3_f2: 'Clay bar treatment', pkg_3_f3: 'Multi-step polishing', pkg_3_f4: 'Engine bay', pkg_3_f5: 'Paint sealant',
-    pkg_popular: 'Most popular', pkg_cta: 'Book appointment',
-    pricing_note: 'Surcharge for SUV/MPV. Extra soiling surcharge always discussed beforehand. Pick-up & delivery €35.',
-    coating_title: 'Ceramic coating',
-    coat_2y: '2 year<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">warranty</span>',
-    coat_2y_1: 'Single-step polishing', coat_2y_2: 'One layer on paint', coat_2y_3: 'Digital certificate',
-    coat_2y_price: 'From €399 incl. VAT',
-    coat_3y: '3 year<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">warranty</span>',
-    coat_3y_1: 'Two-step polishing', coat_3y_2: 'Two layers coating', coat_3y_3: 'Wheels & glass coated', coat_3y_4: 'Annual inspection',
-    coat_3y_price: 'From €699 incl. VAT',
-    coat_5y: '5 year<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-700);margin-left:8px">warranty</span>',
-    coat_5y_1: 'Multi-step paint correction', coat_5y_2: 'Base & top layer coating', coat_5y_3: 'Wheels, glass, plastic & interior', coat_5y_4: 'Annual inspection included',
-    coat_5y_price: 'From €999 incl. VAT',
-    biz_title: 'Volume rates and framework agreements', biz_desc: 'Business rates depend on volume, service mix and turnaround. We provide a proposal within one business day with SLA and monthly invoicing.',
-    biz_cta: 'Request quote',
-    sec_refs: '07 · Reviews', refs_title: 'What clients say', google_reviews: 'on Google · 127 reviews',
-    review_1: '"Our delivery planning has become predictable. The photo report saves discussion at handover."',
-    review_1_name: 'R. Janssen', review_1_role: 'Aftersales Manager, Dealer South',
-    review_2: '"Return vehicles are documented on intake and delivered sale-ready within 48 hours."',
-    review_2_name: 'M. de Vries', review_2_role: 'Remarketing, LeasePlan',
-    review_3: '"The car looked better after coating than at delivery. Clear agreement, clear price."',
-    review_3_name: 'S. Bakker', review_3_role: 'Private client',
-    sec_warranty: '08 · Warranty', warranty_title: 'Documented, not just promised',
-    war_1_title: 'Craftsmanship guarantee', war_1_desc: 'Not satisfied? Report within 48 hours. We treat the vehicle again at no cost.',
-    war_2_title: 'Coating warranty', war_2_desc: '2, 3 or 5 years, with digital warranty certificate and annual inspection.',
-    war_3_title: 'Damage policy', war_3_desc: 'Intake with photos. Damage caused by us is repaired at our cost. Fully insured.',
-    sec_faq: '09 · Knowledge base', faq_title: 'Frequently asked questions',
-    faq_q1: 'How long does a treatment take?', faq_a1: 'A Basic treatment takes about 2 hours, Complete half a day, and Premium or ceramic coating one to two business days.',
-    faq_q2: 'Will polishing remove all scratches?', faq_a2: 'Scratches in the clear coat are almost fully removed. Scratches down to the primer can be reduced but not eliminated.',
-    faq_q3: 'What is the difference between wax and ceramic coating?', faq_a3: 'Wax protects for a few weeks. Ceramic coating bonds chemically and protects for 2 to 5 years, with warranty certificate.',
-    faq_q4: 'Are vehicles insured during treatment?', faq_a4: 'Yes. Vehicles in our care are covered by our custodian insurance, including transport.',
-    faq_q5: 'Do you have business rates?', faq_a5: 'Yes. Based on volume and service mix we set up a framework agreement with fixed rates and SLA.',
-    sec_appointment: '10 · Quote or appointment',
-    form_name: 'Name', form_company: 'Company (optional)', form_email: 'Email address',
-    form_phone: 'Phone number', form_plate: 'License plate', form_service: 'Desired service',
-    form_svc_1: 'Delivery detailing', form_svc_2: 'Complete package', form_svc_3: 'Premium package',
-    form_svc_4: 'Ceramic coating', form_svc_5: 'Paint correction', form_svc_6: 'Business quote',
-    form_message: 'Comments', form_privacy: 'I agree to data processing (GDPR).', form_submit: 'Send request',
-    response_label: 'Response within 1 business day', response_desc: 'Requests are answered within one business day with a proposal including turnaround and pricing.',
-    contact_direct: 'Direct contact',
-    sec_contact: '11 · Contact & directions', visit_title: 'Visit address',
-    address_street: 'Industrieweg 15', address_city: '3045 AE Rotterdam',
-    map_ph: 'Map: Industrieweg 15, Rotterdam',
-    cta_call: 'Call 010 123 4567',
-    dt_email: 'Email', dt_hours: 'Opening hours', dd_hours: 'Mon–Fri 08:00–17:30 · Sat by appointment',
-    footer_desc: 'Professional vehicle care for dealers, leasing companies and private owners.',
-    footer_services: 'Services', footer_company: 'Company', footer_contact: 'Contact',
-    footer_workflow: 'Workflow', footer_warranty: 'Warranty', footer_faq: 'FAQ',
-    footer_copy: '© 2026 AutoDetail Pro', footer_terms: 'Terms & conditions', footer_privacy: 'Privacy policy'
+    brand_name:'AutoDetail Pro', brand_sub:'Vehicle preparation · Rotterdam',
+    nav_services:'Services', nav_business:'Business', nav_workflow:'Workflow',
+    nav_pricing:'Pricing', nav_contact:'Contact', nav_cta:'Request quote',
+    topbar_phone:'010 123 4567', topbar_hours:'Mon–Fri 08:00–17:30',
+    hero_blad:'Sheet 01 of 09',
+    hero_l1:'Delivery ready.', hero_l2:'Every time.', hero_l3:'At scale.',
+    hero_desc:'Professional vehicle preparation for dealers, leasing companies and fleets. Fixed turnaround times, photo reporting and full custodian insurance.',
+    hero_cta1:'Request business quote', hero_cta2:'Book appointment (private)',
+    stat_turnaround:'Turnaround', stat_reporting:'Reporting', stat_reporting_val:'Photo per vehicle',
+    stat_insurance:'Insurance', stat_insurance_val:'Custodian, full', stat_logistics:'Logistics', stat_logistics_val:'Pick-up & delivery',
+    live_label:'Live · Rotterdam location', live_note:'Quality control in progress — expected ready 14:30',
+    step_intake:'Intake', step_treatment:'Treatment', step_control:'Control', step_ready:'Ready',
+    sec_sectors:'Sheet 02 · Sectors', sectors_title:'Six sectors, one standard',
+    sectors_desc:'From car dealers to private owners: the same quality control, the same reporting, the same warranty.',
+    sector_1_title:'Car dealers', sector_1_sla:'SLA 48h', sector_1_desc:'Delivery preparation and showroom maintenance with fixed SLA, photo reporting and monthly invoicing per location.',
+    sector_2_title:'Leasing companies', sector_2_sla:'SLA 48h', sector_2_desc:'Return preparation and remarketing-ready vehicles with digital handover report and condition documentation.',
+    sector_3_title:'Fleet management', sector_3_sla:'SLA 72h', sector_3_desc:'Periodic maintenance and preparation of company vehicles, on-site or at our location.',
+    sector_4_title:'Car rental', sector_4_sla:'SLA 24h', sector_4_desc:'Fast return cleaning between rentals, steam cleaning and odor treatment included.',
+    sector_5_title:'Pre-owned trade & remarketing', sector_5_sla:'SLA 48h', sector_5_desc:'Sale-ready preparation including photography and online-ready presentation for remarketing.',
+    sector_6_title:'Private owners', sector_6_sla:'By appointment', sector_6_desc:'Complete detailing and coating treatments by appointment, with warranty and certificate.',
+    sec_services:'Sheet 03 · Services', diensten_title:'Service register — AutoDetail Pro', diensten_count:'12 items',
+    th_dienst:'Service', th_omschrijving:'Description', th_doorlooptijd:'Turnaround', th_voor:'For',
+    svc_1_title:'Delivery detailing', svc_1_desc:'New and used vehicles showroom-ready to your delivery standard.',
+    svc_2_title:'Showroom maintenance', svc_2_desc:'Periodic maintenance of showroom vehicles, on-site possible.', svc_2_time:'Cyclic',
+    svc_3_title:'Pre-owned & remarketing prep', svc_3_desc:'Making trade-in and return vehicles sale-ready, including photography.',
+    svc_4_title:'Interior steam cleaning', svc_4_desc:'Cleaning with 175-degree steam: bacteria and odors removed without harsh chemicals.', svc_4_time:'Half day',
+    svc_5_title:'Paint correction & multi-step polishing', svc_5_desc:'Machine removal of swirls, scratches and holograms in multiple steps.', svc_5_time:'1–2 days',
+    svc_6_title:'Ceramic coating', svc_6_desc:'Paint protection with 2, 3 or 5 year warranty and digital certificate.', svc_6_time:'1–2 days',
+    svc_7_title:'Headlight restoration', svc_7_desc:'Yellowed and dull headlights sanded clear, polished and sealed.',
+    svc_8_title:'Odor & ozone treatment', svc_8_desc:'Neutralizes smoke, pet and moisture odors down to the ventilation system.',
+    svc_9_title:'Sticker & lettering removal', svc_9_desc:'Advertising and sticker removal without paint damage, adhesive fully removed.', svc_9_time:'Half day',
+    svc_10_title:'Plastic repair', svc_10_desc:'Minor damage to bumpers, mirrors and trim professionally repaired.', svc_10_time:'On quote',
+    svc_11_title:'Vehicle photography', svc_11_desc:'Consistent pre-owned photos in our studio, ready for your portals.',
+    svc_12_title:'Pick-up & delivery service', svc_12_desc:'Collection and return of vehicles, scheduled to your needs.', svc_12_time:'Scheduled',
+    sec_workflow:'Sheet 04 · Workflow', workflow_title:'Seven steps, signed off',
+    workflow_desc:'Each step is signed off by the responsible staff member. Only after double inspection does the vehicle go to delivery.',
+    wf_stat1:'standard', wf_stat2:'on request', wf_stat3:'inspection',
+    step_1_title:'Request', step_1_desc:'Via portal, email or phone. Confirmed within 2 hours with planning.', step_1_sign:'Signed off by: Planning',
+    step_2_title:'Pick-up or delivery', step_2_desc:'By appointment or collected by our driver.', step_2_sign:'Signed off by: Driver',
+    step_3_title:'Intake inspection', step_3_desc:'Condition documented with photos. Existing damage documented before start.', step_3_sign:'Signed off by: Intake',
+    step_4_title:'Treatment', step_4_desc:'Per fixed work instruction by service type. Products and method documented.', step_4_sign:'Signed off by: Detailer',
+    step_5_title:'Quality control', step_5_desc:'Checklist by second inspector. On rejection back to step 4.', step_5_sign:'Signed off by: 2nd inspector',
+    step_6_title:'Photo report', step_6_desc:'Completion with before/after photos. Automatically available in the portal.', step_6_sign:'Signed off by: Administration',
+    step_7_title:'Delivery & invoice', step_7_desc:'Returned or collected. Monthly invoice with PO reference.', step_7_sign:'Signed off by: Planning',
+    sec_facility:'Sheet 05 · Facility and capacity', facility_title:'Built for volume',
+    facility_desc:'Our Rotterdam location is fully equipped for professional vehicle preparation at scale. Covered, secured and with in-house photo studio.',
+    fac_capacity:'Capacity', fac_capacity_val:'[X] / day', fac_spaces:'Treatment bays', fac_spaces_val:'Covered',
+    fac_studio:'Photo studio', fac_studio_val:'In-house', fac_storage:'Storage', fac_storage_val:'Secured',
+    fac_products_title:'Products & certification',
+    fac_p1:'Certified coating applicator', fac_p2:'ISO-compliant work instructions', fac_p3:'Professional polishing machines (Rupes, Flex)',
+    fac_p4:'Industrial steam cleaner', fac_p5:'Ozone treatment equipment',
+    sec_portal:'Sheet 06 · Business portal', portal_title:'Your vehicles in real-time view',
+    portal_desc:'The portal gives your locations direct insight into status, photos and invoicing. No phone calls, no loose emails.',
+    portal_cta:'View the portal', portal_table_title:'Rotterdam location · Week 41',
+    th_plate:'Plate', th_model:'Model', th_service:'Service',
+    tbl_svc1:'Delivery detail', tbl_svc2:'Return prep', tbl_svc3:'Ceramic coating', tbl_svc4:'Photography',
+    status_done:'Done', status_wip:'In progress', status_recv:'Received',
+    sec_pricing:'Sheet 07 · Pricing', pricing_title:'Transparently priced',
+    tab_private:'Private', tab_business:'Business',
+    th_onderdeel:'Feature', pkg_1:'Basic', pkg_2:'Complete', pkg_3:'Premium', th_price:'Price',
+    feat_wash:'Exterior hand wash', feat_wheels:'Wheel cleaning', feat_windows:'Windows inside & out',
+    feat_vacuum:'Interior vacuuming', feat_plastic:'Plastic cleaning', feat_steam:'Interior steam cleaning',
+    feat_upholstery:'Upholstery & headliner', feat_trunk:'Trunk', feat_wax:'Wax finish',
+    feat_clay:'Clay bar treatment', feat_polish:'Multi-step polishing', feat_engine:'Engine bay', feat_sealant:'Paint sealant',
+    pkg_cta:'Book now',
+    pricing_note:'Prices incl. VAT. Surcharge for SUV/MPV. Extra soiling surcharge always discussed beforehand. Pick-up & delivery on request.',
+    biz_title:'Volume rates and framework agreements', biz_desc:'Business rates depend on volume, service mix and turnaround. We provide a proposal within one business day with SLA and monthly invoicing.',
+    biz_cta:'Request quote', biz_call:'Call directly: 010 123 4567',
+    sec_refs:'Sheet 08 · References',
+    review_1:'“Our delivery planning has become predictable. The photo report saves discussion at handover.”',
+    review_1_name:'R. Janssen', review_1_role:'Aftersales Manager, Dealer South',
+    google_reviews:'on Google · 127 reviews',
+    war_1_title:'Craftsmanship guarantee', war_1_desc:'Not satisfied? Report within 48 hours. We treat the vehicle again at no cost.',
+    war_2_title:'Coating warranty', war_2_desc:'2, 3 or 5 years, with digital warranty certificate and annual inspection.',
+    war_3_title:'Damage policy', war_3_desc:'Intake with photos. Damage caused by us is repaired at our cost. Fully insured.',
+    case_tag:'Case study', case_title:'Dealer South: from 3 days to 48 hours turnaround', case_link:'Read the full case →',
+    ba_before:'BEFORE', ba_after:'AFTER',
+    sec_contact:'Sheet 09 · Contact',
+    form_tab_offerte:'Business quote', form_tab_afspraak:'Private appointment',
+    form_company:'Company name', form_contact:'Contact person', form_email:'Email address',
+    form_phone:'Phone number', form_sector:'Sector', form_volume:'Vehicles per month',
+    form_diensten:'Desired services', form_message:'Comments',
+    form_privacy:'I agree to data processing (GDPR).', form_submit_offerte:'Request quote',
+    form_plate:'License plate', form_pakket:'Package', form_date:'Preferred date',
+    form_haalbeng:'Pick-up & delivery service', form_nee:'No', form_ja:'Yes',
+    form_name:'Name', form_submit_afspraak:'Request appointment',
+    response_label:'Response within 1 business day', response_desc:'Requests are answered within one business day with a proposal including turnaround and pricing.',
+    contact_direct:'Direct contact', address_street:'Industrieweg 15', address_city:'3045 AE Rotterdam',
+    map_ph:'Map: Industrieweg 15, Rotterdam',
+    footer_desc:'Professional vehicle preparation for dealers, leasing companies and private owners in the Rotterdam region.',
+    footer_services:'Services', footer_business:'Business', footer_company:'Company', footer_contact:'Contact',
+    footer_sectors:'Sectors', footer_portal:'Portal', footer_rates:'Pricing', footer_quote:'Request quote',
+    footer_workflow:'Workflow', footer_facility:'Facility', footer_refs:'References',
+    footer_copy:'© 2026 AutoDetail Pro', footer_terms:'Terms & conditions', footer_privacy:'Privacy policy'
   }
 };
 
+/* ─── Language toggle ─── */
 function setLang(lang) {
   LANG = lang;
   try { localStorage.setItem('adp-lang', lang); } catch(e) {}
-  document.getElementById('lang-nl').style.color = lang === 'nl' ? 'var(--color-bg)' : 'var(--color-accent-300)';
-  document.getElementById('lang-nl').style.fontWeight = lang === 'nl' ? '700' : '400';
-  document.getElementById('lang-en').style.color = lang === 'en' ? 'var(--color-bg)' : 'var(--color-accent-300)';
-  document.getElementById('lang-en').style.fontWeight = lang === 'en' ? '700' : '400';
+  /* Update header toggle */
+  var nlBtn = document.getElementById('lang-nl');
+  var enBtn = document.getElementById('lang-en');
+  var nlBtnF = document.getElementById('lang-nl-f');
+  var enBtnF = document.getElementById('lang-en-f');
+  if (nlBtn) { nlBtn.style.color = lang === 'nl' ? 'var(--color-text)' : 'var(--color-neutral-500)'; nlBtn.style.fontWeight = lang === 'nl' ? '700' : '400'; }
+  if (enBtn) { enBtn.style.color = lang === 'en' ? 'var(--color-text)' : 'var(--color-neutral-500)'; enBtn.style.fontWeight = lang === 'en' ? '700' : '400'; }
+  if (nlBtnF) { nlBtnF.style.color = lang === 'nl' ? 'var(--color-bg)' : 'var(--color-accent-400)'; nlBtnF.style.fontWeight = lang === 'nl' ? '700' : '400'; }
+  if (enBtnF) { enBtnF.style.color = lang === 'en' ? 'var(--color-bg)' : 'var(--color-accent-400)'; enBtnF.style.fontWeight = lang === 'en' ? '700' : '400'; }
   document.documentElement.lang = lang;
   if (lang === 'en' && I18N.en) {
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
       var key = el.getAttribute('data-i18n');
-      if (I18N.en[key]) {
+      if (I18N.en[key] !== undefined) {
         if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = I18N.en[key];
         else el.innerHTML = I18N.en[key];
       }
@@ -780,6 +1031,56 @@ function setLang(lang) {
   }
 }
 
+/* ─── Live vehicle rotation ─── */
+var liveData = [
+  { plate:'XR-392-K', model:'Volvo XC60', service:'Afleverpoets', prog:[100,100,60,0], note:'Kwaliteitscontrole loopt — verwacht gereed 14:30' },
+  { plate:'SK-118-P', model:'Toyota Yaris', service:'Retourpreparatie', prog:[100,80,0,0], note:'Behandeling fase 2 — interieurreiniging' },
+  { plate:'NL-640-T', model:'Mercedes-Benz A', service:'Ceramic coating', prog:[100,50,0,0], note:'Polijstfase 2 van 3 — machinaal' },
+  { plate:'RT-071-G', model:'Kia Sportage', service:'Fotografie', prog:[100,100,100,80], note:'Laatste foto’s worden gemaakt' }
+];
+var liveIndex = 0;
+
+function updateLive() {
+  var d = liveData[liveIndex];
+  var plateEl = document.getElementById('live-plate');
+  var modelEl = document.getElementById('live-model');
+  var serviceEl = document.getElementById('live-service');
+  var noteEl = document.getElementById('live-note');
+  if (plateEl) plateEl.textContent = d.plate;
+  if (modelEl) modelEl.textContent = d.model;
+  if (serviceEl) serviceEl.textContent = d.service;
+  if (noteEl) noteEl.textContent = d.note;
+  for (var i = 1; i <= 4; i++) {
+    var bar = document.getElementById('prog-' + i);
+    if (bar) bar.style.width = d.prog[i - 1] + '%';
+  }
+  liveIndex = (liveIndex + 1) % liveData.length;
+}
+setInterval(updateLive, 5000);
+
+/* ─── Clock ─── */
+function updateClock() {
+  var now = new Date();
+  var h = String(now.getHours()).padStart(2, '0');
+  var m = String(now.getMinutes()).padStart(2, '0');
+  var s = String(now.getSeconds()).padStart(2, '0');
+  var el = document.getElementById('live-clock');
+  if (el) el.textContent = h + ':' + m + ':' + s;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+/* ─── Sector hover ─── */
+function setSector(index) {
+  var items = document.querySelectorAll('.sector-desc');
+  items.forEach(function(el, i) {
+    el.style.maxHeight = i === index ? '120px' : '0';
+  });
+}
+/* Open first sector by default */
+setSector(0);
+
+/* ─── Pricing toggle ─── */
 function setPricing(tab) {
   var partEl = document.getElementById('pricing-part');
   var zakEl = document.getElementById('pricing-zak');
@@ -796,44 +1097,50 @@ function setPricing(tab) {
   }
 }
 
-function toggleFaq(btn) {
-  var answer = btn.nextElementSibling;
-  var chevron = btn.querySelector('svg');
-  var isOpen = answer.style.display !== 'none';
-  document.querySelectorAll('#faq p[data-i18n^="faq_a"]').forEach(function(p) { p.style.display = 'none'; });
-  document.querySelectorAll('#faq button svg').forEach(function(s) { s.style.transform = 'rotate(0deg)'; });
-  if (!isOpen) {
-    answer.style.display = 'block';
-    chevron.style.transform = 'rotate(180deg)';
+/* ─── Form tabs ─── */
+function setForm(tab) {
+  var offerteForm = document.getElementById('form-offerte');
+  var afspraakForm = document.getElementById('form-afspraak');
+  var tabOfferte = document.getElementById('form-tab-offerte');
+  var tabAfspraak = document.getElementById('form-tab-afspraak');
+  if (tab === 'afspraak') {
+    offerteForm.style.display = 'none'; afspraakForm.style.display = 'grid';
+    tabAfspraak.style.background = 'var(--color-accent)'; tabAfspraak.style.color = 'var(--color-bg)';
+    tabOfferte.style.background = 'transparent'; tabOfferte.style.color = 'inherit';
+  } else {
+    offerteForm.style.display = 'grid'; afspraakForm.style.display = 'none';
+    tabOfferte.style.background = 'var(--color-accent)'; tabOfferte.style.color = 'var(--color-bg)';
+    tabAfspraak.style.background = 'transparent'; tabAfspraak.style.color = 'inherit';
   }
 }
 
-// Animated counters
-(function() {
-  var targets = [12, 3200, 35, 48], animated = false;
-  function check() {
-    if (animated) return;
-    var el = document.getElementById('stats-plate');
-    if (el && el.getBoundingClientRect().top < window.innerHeight) {
-      animated = true;
-      window.removeEventListener('scroll', check);
-      var t0 = performance.now(), dur = 1400;
-      (function step(now) {
-        var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-        document.getElementById('c0').textContent = Math.round(targets[0] * e);
-        document.getElementById('c1').textContent = Math.round(targets[1] * e).toLocaleString('nl-NL');
-        document.getElementById('c2').textContent = Math.round(targets[2] * e);
-        document.getElementById('c3').textContent = Math.round(targets[3] * e);
-        if (p < 1) requestAnimationFrame(step);
-      })(performance.now());
-    }
-  }
-  window.addEventListener('scroll', check, { passive: true });
-  check();
-  setTimeout(check, 500);
-})();
+/* ─── Before/after slider ─── */
+var baSlider = document.getElementById('ba-slider');
+if (baSlider) {
+  baSlider.addEventListener('input', function() {
+    var val = this.value;
+    var afterEl = document.getElementById('ba-after');
+    if (afterEl) afterEl.style.clipPath = 'inset(0 0 0 ' + val + '%)';
+  });
+}
 
-// Init language
+/* ─── Haal-en-breng toggle switch ─── */
+var toggleHb = document.getElementById('toggle-hb');
+if (toggleHb) {
+  toggleHb.addEventListener('change', function() {
+    var track = document.getElementById('toggle-track');
+    var thumb = document.getElementById('toggle-thumb');
+    if (this.checked) {
+      track.style.background = 'var(--color-accent)';
+      thumb.style.transform = 'translateX(20px)';
+    } else {
+      track.style.background = 'var(--color-neutral-300)';
+      thumb.style.transform = 'translateX(0)';
+    }
+  });
+}
+
+/* ─── Init language ─── */
 try {
   var saved = localStorage.getItem('adp-lang');
   if (saved === 'en') setLang('en');

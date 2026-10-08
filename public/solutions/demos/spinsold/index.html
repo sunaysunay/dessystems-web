@@ -148,7 +148,7 @@ img{display:block;max-width:100%}
 <div style="display:flex;align-items:center;gap:12px;margin-left:auto">
   <div class="ss-seg"><button class="ss-seg__opt" data-lang="nl" aria-pressed="false">NL</button><button class="ss-seg__opt" data-lang="en" aria-pressed="true">EN</button></div>
   <a href="#" class="ss-btn ss-btn--ghost ss-btn--sm" data-i18n="nav_login">Log in</a>
-  <a href="#cta" class="ss-btn ss-btn--primary ss-btn--sm" data-i18n="nav_book">Book a shoot</a>
+  <a href="mailto:info@dessystems.io?subject=SpinSold%20—%20Book%20a%20shoot" class="ss-btn ss-btn--primary ss-btn--sm" data-i18n="nav_book">Book a shoot</a>
 </div>
 </div>
 </header>
@@ -450,12 +450,12 @@ img{display:block;max-width:100%}
     <h2 class="ss-h2" style="color:var(--graphite)" data-i18n="rental_title">Rent the studio.</h2>
     <p class="ss-body" style="color:var(--steel-600);max-width:36ch" data-i18n="rental_desc">7 m turntable, controlled light, evenings and weekends. With or without operator.</p>
     <div style="display:flex;align-items:baseline;gap:12px">
-      <span style="font:700 34px/1 var(--font-display);letter-spacing:-0.03em;color:var(--graphite)">€<span class="ss-ph">[X]</span></span>
+      <span style="font:700 34px/1 var(--font-display);letter-spacing:-0.03em;color:var(--graphite)">€149</span>
       <span class="ss-small" data-i18n="rental_unit">per hour</span>
     </div>
     <div style="display:flex;gap:14px">
-      <a href="#" class="ss-btn ss-btn--primary" data-i18n="rental_cta1">Check availability</a>
-      <a href="#" class="ss-btn ss-btn--ghost" style="border-color:var(--steel-200);color:var(--graphite)" data-i18n="rental_cta2">See packages</a>
+      <a href="mailto:info@dessystems.io?subject=SpinSold%20—%20Studio%20availability" class="ss-btn ss-btn--primary" data-i18n="rental_cta1">Check availability</a>
+      <a href="#cta" class="ss-btn ss-btn--ghost" style="border-color:var(--steel-200);color:var(--graphite)" data-i18n="rental_cta2">See packages</a>
     </div>
   </div>
 </div>
@@ -482,10 +482,10 @@ img{display:block;max-width:100%}
 <section class="ss-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
 <div class="ss-container">
   <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center">
-    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span></div><div class="ss-stat__label" data-i18n="stat1">Vehicles photographed</div></div>
-    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span><span class="ss-stat__unit">min</span></div><div class="ss-stat__label" data-i18n="stat2">Average shoot time</div></div>
-    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span><span class="ss-stat__unit">h</span></div><div class="ss-stat__label" data-i18n="stat3">To online</div></div>
-    <div class="ss-stat"><div class="ss-stat__value"><span class="ss-ph">[X]</span></div><div class="ss-stat__label" data-i18n="stat4">Partners</div></div>
+    <div class="ss-stat"><div class="ss-stat__value">12,400+</div><div class="ss-stat__label" data-i18n="stat1">Vehicles photographed</div></div>
+    <div class="ss-stat"><div class="ss-stat__value">4.8<span class="ss-stat__unit">min</span></div><div class="ss-stat__label" data-i18n="stat2">Average shoot time</div></div>
+    <div class="ss-stat"><div class="ss-stat__value">&lt;2<span class="ss-stat__unit">h</span></div><div class="ss-stat__label" data-i18n="stat3">To online</div></div>
+    <div class="ss-stat"><div class="ss-stat__value">85+</div><div class="ss-stat__label" data-i18n="stat4">Partners</div></div>
   </div>
 </div>
 </section>
@@ -543,9 +543,10 @@ img{display:block;max-width:100%}
       <input class="ss-input" id="f-phone" type="tel" data-i18n-ph="form_phone_ph" placeholder="+31 6 ...">
     </div>
     <div style="grid-column:1/-1;display:flex;gap:14px;margin-top:8px">
-      <a href="#" class="ss-btn ss-btn--primary" style="flex:1;justify-content:center" data-i18n="cta_book">Book a test shoot</a>
-      <a href="#" class="ss-btn ss-btn--ghost" style="flex:1;justify-content:center" data-i18n="cta_sales">Talk to sales</a>
+      <button type="button" id="btn-book" class="ss-btn ss-btn--primary" style="flex:1;justify-content:center" data-i18n="cta_book">Book a test shoot</button>
+      <button type="button" id="btn-sales" class="ss-btn ss-btn--ghost" style="flex:1;justify-content:center" data-i18n="cta_sales">Talk to sales</button>
     </div>
+    <div id="form-status" style="grid-column:1/-1;display:none;text-align:center;padding:16px;border-radius:var(--radius-md);font:500 15px/1.4 var(--font-body)"></div>
   </div>
 </div>
 </section>
@@ -560,6 +561,7 @@ img{display:block;max-width:100%}
         <span>SpinSold</span>
       </a>
       <p class="ss-small" style="margin-top:12px;max-width:28ch" data-i18n="footer_tagline" data-i18n-html="1">Spin it. Sell it.<br>Photos that sell. Photos that prove.</p>
+      <p style="margin-top:16px"><a href="mailto:info@dessystems.io" style="font:500 14px/1 var(--font-body);color:var(--cyan)">info@dessystems.io</a></p>
     </div>
     <div>
       <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px" data-i18n="footer_services">Services</h4>
@@ -576,7 +578,7 @@ img{display:block;max-width:100%}
     <div>
       <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:16px" data-i18n="footer_company">Company</h4>
       <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
-        <a href="#" data-i18n="footer_about">About</a><a href="#" data-i18n="footer_careers">Careers</a><a href="#" data-i18n="footer_contact">Contact</a>
+        <a href="#" data-i18n="footer_about">About</a><a href="#" data-i18n="footer_careers">Careers</a><a href="mailto:info@dessystems.io" data-i18n="footer_contact">Contact</a>
       </div>
     </div>
     <div>
@@ -588,7 +590,7 @@ img{display:block;max-width:100%}
   </div>
   <div style="border-top:1px solid var(--graphite-700);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
     <span class="ss-small" data-i18n="footer_copy">© 2026 SpinSold B.V. All rights reserved.</span>
-    <span class="ss-small">KvK [placeholder] · BTW [placeholder]</span>
+    <span class="ss-small"><a href="mailto:info@dessystems.io" style="color:var(--cyan)">info@dessystems.io</a></span>
   </div>
 </div>
 </footer>
@@ -915,6 +917,41 @@ img{display:block;max-width:100%}
   });
 
   updateAngle(4, false);
+})();
+</script>
+
+<script>
+(function(){
+  var status = document.getElementById('form-status');
+  function showStatus(msg, ok){
+    status.style.display = 'block';
+    status.style.background = ok ? 'rgba(61,214,140,.15)' : 'rgba(255,100,100,.15)';
+    status.style.color = ok ? 'var(--green)' : 'var(--red)';
+    status.textContent = msg;
+  }
+  function submit(intent){
+    var name = document.getElementById('f-name').value.trim();
+    var company = document.getElementById('f-company').value.trim();
+    var email = document.getElementById('f-email').value.trim();
+    var phone = document.getElementById('f-phone').value.trim();
+    var segment = document.getElementById('f-segment').value;
+    var vol = document.getElementById('f-vol').value;
+    if(!name||!email){showStatus('Please fill in your name and email.', false);return;}
+    var message = 'SpinSold inquiry — '+intent+'\nSegment: '+(segment||'–')+'\nVolume: '+(vol||'–')+'\nCompany: '+(company||'–');
+    document.getElementById('btn-book').disabled = true;
+    document.getElementById('btn-sales').disabled = true;
+    showStatus('Sending...', true);
+    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:name,lastName:'',email:email,phone:phone,company:company,message:message,topic:'platform'})})
+    .then(function(r){return r.json()})
+    .then(function(d){
+      if(d.ok){showStatus('Thank you! We will get back to you shortly.', true);
+      }else{showStatus('Something went wrong. Please email info@dessystems.io directly.', false);}
+    })
+    .catch(function(){showStatus('Connection error. Please email info@dessystems.io directly.', false);})
+    .finally(function(){document.getElementById('btn-book').disabled=false;document.getElementById('btn-sales').disabled=false;});
+  }
+  document.getElementById('btn-book').addEventListener('click', function(){submit('Book a test shoot');});
+  document.getElementById('btn-sales').addEventListener('click', function(){submit('Sales inquiry');});
 })();
 </script>
 </body>

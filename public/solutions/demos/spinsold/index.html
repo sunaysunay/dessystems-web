@@ -155,7 +155,7 @@ img{display:block;max-width:100%}
 
 <!-- HERO -->
 <section class="ss-dark" style="position:relative;padding:100px 0 0;overflow:hidden">
-<div style="position:absolute;inset:0;background:var(--graphite-900);opacity:.35"></div><!-- IMG: hero-bg.webp — full-width hero background -->
+<div style="position:absolute;inset:0;background:url('/solutions/demos/spinsold/img/hero-bg.webp') center/cover no-repeat;opacity:.35"></div>
 <div style="position:absolute;inset:0;background:linear-gradient(to right,var(--graphite) 30%,transparent 70%)"></div>
 <div class="ss-container hero-grid" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 260px)">
   <div style="display:flex;flex-direction:column;gap:24px">
@@ -168,7 +168,7 @@ img{display:block;max-width:100%}
     </div>
   </div>
   <div class="hero-visual" style="position:relative;display:flex;align-items:center;justify-content:center">
-    <div class="ss-img" style="width:460px;aspect-ratio:4/3;border-radius:var(--radius-xl);z-index:1"><span class="ss-small">hero-bmw.webp</span></div>
+    <img src="/solutions/demos/spinsold/img/hero-bmw.webp" alt="BMW X5 on turntable in SpinSold studio" style="width:460px;aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);z-index:1;object-fit:cover">
     <span class="ss-ring ss-ring--spin" style="--size:400px;--w:1px;position:absolute;z-index:2"><span class="ss-ring__arc"></span></span>
   </div>
 </div>
@@ -309,7 +309,7 @@ img{display:block;max-width:100%}
   <h2 class="ss-h2" style="margin-bottom:48px" data-i18n="s04_title">See every angle.</h2>
   <div class="ss-viewer" id="spin-viewer">
     <div class="ss-viewer__stage" style="aspect-ratio:16/9;position:relative;cursor:grab;overflow:hidden;user-select:none" id="spin-stage">
-      <div id="spin-img" class="ss-img" style="position:absolute;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center"><span class="ss-small">viewer-360.webp</span></div>
+      <img id="spin-img" src="/solutions/demos/spinsold/img/viewer-360.webp" alt="360° vehicle photography" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s,transform .4s ease">
       <div class="ss-viewer__top" style="z-index:10;pointer-events:auto">
         <div class="ss-tabs--pill">
           <button class="ss-tab ss-view-tab" aria-selected="true" data-mode="exterior" data-i18n="tab_exterior">Exterior</button>
@@ -365,7 +365,7 @@ img{display:block;max-width:100%}
     </button>
   </div>
   <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center">
-    <div class="ss-img" style="width:100%;aspect-ratio:16/9;border-radius:var(--radius-md);border:1px solid var(--graphite-700)"><span class="ss-small">angles-grid.webp</span></div>
+    <img src="/solutions/demos/spinsold/img/angles-grid.webp" alt="AI inspection with damage detection overlay" style="width:100%;border-radius:var(--radius-md);border:1px solid var(--graphite-700)">
     <div style="display:flex;flex-direction:column;gap:16px">
       <h3 class="ss-h3" data-i18n="showcase_title">Consistent angles, every vehicle.</h3>
       <p class="ss-lead" data-i18n="showcase_desc">Eight fixed angles captured automatically. Same framing across your entire fleet — ready for your website, portals and print.</p>
@@ -399,7 +399,7 @@ img{display:block;max-width:100%}
     </div>
     <!-- Dashboard mockup -->
     <div style="border-radius:var(--radius-xl);overflow:hidden;border:1px solid var(--steel-150);aspect-ratio:4/3;background:var(--graphite-900)">
-      <div class="ss-img" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center"><span class="ss-small">platform-screen.webp</span></div>
+      <img src="/solutions/demos/spinsold/img/platform-screen.webp" alt="SpinSold platform dashboard" style="width:100%;height:100%;display:block;object-fit:cover">
     </div>
   </div>
 </div>
@@ -441,7 +441,7 @@ img{display:block;max-width:100%}
 <!-- STUDIO RENTAL -->
 <section id="studio" class="ss-light" style="padding:128px 0;border-top:1px solid var(--steel-150)">
 <div class="ss-container rental-grid" style="display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center">
-  <div class="ss-img" style="aspect-ratio:4/3;border-radius:var(--radius-xl);width:100%"><span class="ss-small">studio-empty.webp</span></div>
+  <img src="/solutions/demos/spinsold/img/viewer-360.webp" alt="Vehicle on turntable in SpinSold studio" style="aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);object-fit:cover;width:100%">
   <div style="display:flex;flex-direction:column;gap:24px">
     <div class="ss-divider">
       <span class="ss-ring" style="--size:14px;--w:1.5px;--r:-45deg"><span class="ss-ring__arc"></span></span>
@@ -472,10 +472,8 @@ img{display:block;max-width:100%}
     <h2 class="ss-h2" style="color:var(--graphite)" data-i18n="large_title" data-i18n-html="1">Too heavy to lift.<br>Easy to spin.</h2>
     <p class="ss-body" style="color:var(--steel-600);max-width:36ch" data-i18n="large_desc">Furniture, machinery, e-bikes and motorbikes on the turntable. Webshop-ready photos without a studio build.</p>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-    <div class="ss-img" style="width:100%;border-radius:var(--radius-md);aspect-ratio:16/10"><span class="ss-small">motorcycle.webp</span></div>
-    <div class="ss-img" style="width:100%;border-radius:var(--radius-md);aspect-ratio:16/10"><span class="ss-small">sprinter.webp</span></div>
-    <div class="ss-img" style="grid-column:1/-1;width:100%;border-radius:var(--radius-md);aspect-ratio:21/9"><span class="ss-small">caravan.webp</span></div>
+  <div>
+    <img src="/solutions/demos/spinsold/img/large-goods-lineup.webp" alt="Multi-vehicle lineup: cars, vans and campers" style="width:100%;border-radius:var(--radius-md);object-fit:cover">
   </div>
 </div>
 </section>
@@ -501,8 +499,8 @@ img{display:block;max-width:100%}
     <p class="ss-lead" style="max-width:44ch" data-i18n="cta_lead">Book a test shoot or talk to our team. We'll show you how SpinSold fits your workflow.</p>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px">
-    <div class="ss-img" style="width:100%;aspect-ratio:4/3;border-radius:var(--radius-md)"><span class="ss-small">app-phone.webp</span></div>
-    <div class="ss-img" style="width:100%;aspect-ratio:4/3;border-radius:var(--radius-md)"><span class="ss-small">marketing-card.webp</span></div>
+    <img src="/solutions/demos/spinsold/img/viewer-360.webp" alt="SpinSold 360° vehicle photography" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-md)">
+    <img src="/solutions/demos/spinsold/img/angles-grid.webp" alt="AI-powered vehicle inspection" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-md)">
   </div>
   <div class="cta-form" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
     <div class="ss-field">

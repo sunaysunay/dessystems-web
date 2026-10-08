@@ -18,6 +18,7 @@ const nextConfig = {
       { source: "/solutions/demos/vehicles/mockup2/vehicle", destination: "/solutions/demos/vehicles/mockup2/vehicle.html" },
       { source: "/solutions/demos/vehicles/mockup3", destination: "/solutions/demos/vehicles/mockup3/index.html" },
       { source: "/solutions/demos/vehicles/mockup4", destination: "/solutions/demos/vehicles/mockup4/index.html" },
+      { source: "/solutions/demos/garage", destination: "/solutions/demos/garage/index.html" },
       { source: "/solutions/demos/spinsold", destination: "/solutions/demos/spinsold/index.html" },
       { source: "/solutions/demos/detailing", destination: "/solutions/demos/detailing/index.html" },
       { source: "/solutions/demos/bodyshop", destination: "/solutions/demos/bodyshop/index.html" },

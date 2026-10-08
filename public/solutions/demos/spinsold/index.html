@@ -78,9 +78,14 @@ img{display:block;max-width:100%}
 .ss-ph{color:var(--cyan);font-style:italic}
 .ss-divider{display:flex;align-items:center;gap:12px}
 .ss-divider__line{flex:1;height:1px;background:var(--steel-150)}
-.ss-hotspot{position:absolute;width:20px;height:20px;border-radius:50%;border:2px solid var(--cyan);background:rgba(46,197,255,.2);cursor:pointer;transform:translate(-50%,-50%)}
-.ss-hotspot::after{content:'';position:absolute;inset:4px;border-radius:50%;background:var(--cyan)}
-.ss-damage{position:absolute;width:28px;height:28px;border-radius:50%;border:2px solid var(--red);background:rgba(255,100,100,.2);cursor:pointer;transform:translate(-50%,-50%);font:700 13px/24px var(--font-body);text-align:center;color:var(--red)}
+.ss-hotspot{position:absolute;width:16px;height:16px;border-radius:50%;border:0;background:rgba(46,197,255,.85);cursor:pointer;transform:translate(-50%,-50%);box-shadow:0 0 6px 2px rgba(46,197,255,.4);z-index:5;transition:background .2s,box-shadow .2s}
+.ss-hotspot:hover{background:rgba(46,197,255,1);box-shadow:0 0 12px 4px rgba(46,197,255,.6)}
+.ss-hotspot::before,.ss-hotspot::after{content:'';position:absolute;top:50%;left:50%;width:16px;height:16px;border-radius:50%;border:2px solid var(--cyan);transform:translate(-50%,-50%) scale(1);opacity:1;animation:hotspot-pulse 2.4s ease-out infinite}
+.ss-hotspot::after{animation-delay:1.2s}
+@keyframes hotspot-pulse{0%{transform:translate(-50%,-50%) scale(1);opacity:.7}100%{transform:translate(-50%,-50%) scale(3.5);opacity:0}}
+.ss-damage{position:absolute;width:28px;height:28px;border-radius:50%;border:0;background:rgba(255,100,100,.85);cursor:pointer;transform:translate(-50%,-50%);box-shadow:0 0 6px 2px rgba(255,100,100,.4);font:700 13px/28px var(--font-body);text-align:center;color:#fff;z-index:5}
+.ss-damage::before{content:'';position:absolute;top:50%;left:50%;width:28px;height:28px;border-radius:50%;border:2px solid var(--red);transform:translate(-50%,-50%) scale(1);opacity:1;animation:damage-pulse 2s ease-out infinite}
+@keyframes damage-pulse{0%{transform:translate(-50%,-50%) scale(1);opacity:.6}100%{transform:translate(-50%,-50%) scale(2.8);opacity:0}}
 .ss-quote__text{font:400 22px/34px var(--font-display);color:var(--graphite);font-style:italic}
 .ss-quote__avatar{width:40px;height:40px;border-radius:50%;background:var(--steel-200)}
 .ss-logo-slot{display:flex;align-items:center;justify-content:center;height:56px;border:1px dashed var(--steel-200);border-radius:var(--radius-sm);font:500 13px/1 var(--font-body);color:var(--steel-400)}

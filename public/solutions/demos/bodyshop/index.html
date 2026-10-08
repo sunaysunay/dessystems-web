@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colour King — Autospuitbedrijf Rotterdam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --char:#121417;--char-900:#181B1F;--char-850:#1E2227;--char-800:#252930;--char-700:#31363E;
+  --steel-600:#4F5761;--steel-500:#646D77;--steel-400:#8C959E;--steel-300:#A7B0B8;--steel-200:#C9CED3;--steel-150:#DDE0E2;--steel-100:#ECEDEC;
+  --paper:#F6F6F4;--white:#FFFFFF;
+  --orange:#FF8A2B;--orange-300:#FFB06A;--orange-600:#E0700F;--orange-700:#B85A0A;--orange-800:#8C4508;--orange-ink:#1A0A00;
+  --green:#3DD68C;--amber:#F2B84B;--red:#FF6464;
+  --font-display:'Manrope',sans-serif;--font-body:'Inter',sans-serif;
+  --radius-sm:8px;--radius-md:12px;--radius-xl:20px;
+}
+body{font-family:var(--font-body);-webkit-font-smoothing:antialiased;color:#F2F4F7;background:var(--char)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.ck-container{max-width:1140px;margin:0 auto;padding:0 24px}
+@media(max-width:768px){.ck-container{padding:0 16px}}
+.ck-display{font:800 60px/66px var(--font-display);letter-spacing:-0.02em}
+.ck-h1{font:700 44px/50px var(--font-display);letter-spacing:-0.015em}
+.ck-h2{font:650 34px/40px var(--font-display)}
+.ck-h3{font:600 22px/28px var(--font-display)}
+.ck-h4{font:600 17px/23px var(--font-display)}
+.ck-lead{font:400 18px/28px var(--font-body);color:var(--steel-300)}
+.ck-body{font:400 15px/24px var(--font-body)}
+.ck-small{font:400 14px/20px var(--font-body);color:var(--steel-400)}
+.ck-eyebrow{font:600 12px/16px var(--font-body);text-transform:uppercase;letter-spacing:0.08em;color:var(--orange)}
+@media(max-width:768px){
+  .ck-display{font-size:36px;line-height:40px}
+  .ck-h1{font-size:30px;line-height:36px}
+  .ck-h2{font-size:24px;line-height:30px}
+}
+.ck-btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 26px;border-radius:var(--radius-sm);font:600 15px/1 var(--font-body);border:0;cursor:pointer;transition:all .2s}
+.ck-btn--primary{background:var(--orange);color:var(--orange-ink)}
+.ck-btn--primary:hover{background:var(--orange-300)}
+.ck-btn--ghost{background:transparent;border:1px solid var(--steel-600);color:#F2F4F7}
+.ck-btn--ghost:hover{border-color:var(--steel-400)}
+.ck-btn--sm{height:38px;padding:0 18px;font-size:14px}
+.ck-card{display:flex;flex-direction:column;border:1px solid var(--steel-150);border-radius:var(--radius-md);background:var(--white)}
+.ck-card__title{font:600 18px/24px var(--font-display);color:var(--char)}
+.ck-card__body{font:400 14px/22px var(--font-body);color:var(--steel-600)}
+.ck-card--dark{border-color:var(--char-700);background:var(--char-900)}
+.ck-card--dark .ck-card__title{color:#F2F4F7}
+.ck-card--dark .ck-card__body{color:var(--steel-300)}
+.ck-tag{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 14px;border-radius:999px;font:500 13px/1 var(--font-body);border:1px solid var(--steel-150);background:var(--white);color:var(--char)}
+.ck-chip{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:999px;font:600 12px/1 var(--font-body)}
+.ck-chip--orange{background:rgba(255,138,43,.12);color:var(--orange-700)}
+.ck-chip--green{background:rgba(61,214,140,.12);color:#147A4A}
+.ck-chip--amber{background:rgba(242,184,75,.12);color:#8A5B00}
+.ck-divider{display:flex;align-items:center;gap:12px}
+.ck-divider__line{flex:1;height:1px;background:var(--steel-150)}
+.ck-img{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px dashed var(--steel-200);background:var(--char-850);border-radius:var(--radius-md);min-height:200px;text-align:center;padding:32px}
+.ck-img__desc{font:400 13px/18px var(--font-body);color:var(--steel-400);max-width:32ch}
+.ck-img--light{background:var(--steel-100);border-color:var(--steel-200)}
+.ck-stat{text-align:center}
+.ck-stat__value{font:700 48px/1 var(--font-display);letter-spacing:-0.03em;color:var(--orange);font-variant-numeric:tabular-nums}
+.ck-stat__unit{font:500 18px/1 var(--font-body);color:var(--steel-400);margin-left:4px}
+.ck-stat__label{font:500 14px/1 var(--font-body);color:var(--steel-300);margin-top:10px}
+.ck-field{display:flex;flex-direction:column;gap:6px}
+.ck-field__label{font:600 13px/1 var(--font-body);color:var(--steel-300)}
+.ck-input,.ck-select,.ck-textarea{padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--char-700);background:var(--char-850);color:#F2F4F7;font:400 15px/1.5 var(--font-body)}
+.ck-input{height:44px}
+.ck-select{height:44px}
+.ck-textarea{min-height:100px;resize:vertical}
+.ck-input::placeholder,.ck-textarea::placeholder{color:var(--steel-500)}
+.ck-input:focus,.ck-select:focus,.ck-textarea:focus{outline:2px solid var(--orange);outline-offset:-1px}
+.ck-seg{display:flex;border-radius:999px;overflow:hidden;border:1px solid var(--steel-600)}
+.ck-seg__opt{border:0;background:none;color:var(--steel-400);font:600 13px/1 var(--font-body);padding:6px 14px;cursor:pointer;transition:.2s}
+.ck-seg__opt[aria-pressed="true"]{background:var(--orange);color:var(--orange-ink)}
+.ck-dark{background:var(--char);color:#F2F4F7}
+.ck-light{background:var(--paper);color:var(--char)}
+.ck-light .ck-lead{color:var(--steel-600)}
+.ck-light .ck-small{color:var(--steel-500)}
+.ck-light .ck-eyebrow{color:var(--orange-700)}
+.ck-wordmark{display:flex;align-items:center;gap:8px;font:800 20px/1 var(--font-display);letter-spacing:-0.02em;color:#F2F4F7}
+.ck-step{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;position:relative}
+.ck-step__num{width:40px;height:40px;border-radius:50%;background:var(--orange);color:var(--orange-ink);font:700 16px/40px var(--font-display);text-align:center}
+.ck-star{color:var(--amber)}
+.ck-before-after{display:grid;grid-template-columns:1fr 1fr;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--steel-150)}
+.ck-before-after__side{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;aspect-ratio:4/3;padding:24px;text-align:center}
+.ck-before-after__side:first-child{background:#2a1a1a;border-right:2px solid var(--orange)}
+.ck-before-after__side:last-child{background:#1a2a1a}
+.des-banner{text-align:center;padding:24px;background:var(--char-900);border-top:1px solid var(--char-700);font:500 13px/1 var(--font-body);color:var(--steel-400)}
+.des-banner a{color:var(--orange);font-weight:600}
+.des-banner a:hover{color:var(--orange-300)}
+@media(max-width:768px){
+  .hero-grid{grid-template-columns:1fr!important}
+  .hero-visual{display:none}
+  .services-grid,.usp-grid,.process-grid,.gallery-grid{grid-template-columns:1fr!important}
+  .stats-grid{grid-template-columns:1fr 1fr!important}
+  .cta-grid,.test-grid{grid-template-columns:1fr!important}
+  .footer-grid{grid-template-columns:1fr 1fr!important}
+  .nav-links{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="ck-dark" style="position:sticky;top:0;z-index:100;border-bottom:1px solid var(--char-700);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(18,20,23,0.92)">
+<div class="ck-container" style="display:flex;align-items:center;height:64px;gap:24px">
+<a class="ck-wordmark" href="#">
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="4" fill="var(--orange)"/><text x="14" y="19" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="var(--orange-ink)">CK</text></svg>
+  <span>Colour King</span>
+</a>
+<nav class="nav-links" style="display:flex;gap:20px;font:500 14px/1 var(--font-body);flex:1;min-width:0;margin-left:16px">
+  <a href="#diensten" style="color:var(--steel-300)" data-i18n="nav_services">Diensten</a>
+  <a href="#werkwijze" style="color:var(--steel-300)" data-i18n="nav_process">Werkwijze</a>
+  <a href="#garantie" style="color:var(--steel-300)" data-i18n="nav_warranty">Garantie</a>
+  <a href="#over" style="color:var(--steel-300)" data-i18n="nav_about">Over ons</a>
+  <a href="#contact" style="color:var(--steel-300)">Contact</a>
+</nav>
+<div style="display:flex;align-items:center;gap:10px;margin-left:auto">
+  <div class="ck-seg"><button class="ck-seg__opt" data-lang="nl" aria-pressed="true">NL</button><button class="ck-seg__opt" data-lang="en" aria-pressed="false">EN</button></div>
+  <a href="#contact" class="ck-btn ck-btn--primary ck-btn--sm" data-i18n="nav_cta">Offerte aanvragen</a>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="ck-dark" style="padding:100px 0 0;overflow:hidden">
+<div class="ck-container hero-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 260px)">
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <span class="ck-eyebrow" data-i18n="hero_eyebrow">Autospuitbedrijf Rotterdam</span>
+    <h1 class="ck-display" data-i18n="hero_title" data-i18n-html="1">Vakkundig<br>schadeherstel.<br>Fabriekskwaliteit.</h1>
+    <p class="ck-lead" style="max-width:42ch" data-i18n="hero_lead">Professioneel autoschadeherstel, spuitwerk en uitdeuken zonder spuiten. Kleurmatching op spectrofotometer, stofvrije spuitcabine en 2 jaar garantie op alle werkzaamheden.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a href="#contact" class="ck-btn ck-btn--primary" data-i18n="hero_cta1">Offerte aanvragen</a>
+      <a href="#diensten" class="ck-btn ck-btn--ghost" data-i18n="hero_cta2">Bekijk onze diensten</a>
+    </div>
+  </div>
+  <div class="hero-visual" style="position:relative;display:flex;align-items:center;justify-content:center">
+    <figure class="ck-img" style="width:480px;aspect-ratio:4/3;margin:0;border-radius:var(--radius-xl);z-index:1">
+      <span class="ck-eyebrow">Eigen foto</span>
+      <span class="ck-img__desc">Voertuig in spuitcabine onder inspectielicht, professionele afwerking</span>
+    </figure>
+  </div>
+</div>
+<div class="ck-container" style="display:flex;justify-content:center;gap:40px;font:500 14px/1 var(--font-body);color:var(--steel-400);padding:48px 0 64px;flex-wrap:wrap">
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span data-i18n="hero_usp1">Spectrofotometer kleurmatch</span></span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="hero_usp2">2 jaar garantie</span></span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="hero_usp3">Reactie binnen 24 uur</span></span>
+  <span style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="hero_usp4">Stofvrije spuitcabine</span></span>
+</div>
+</section>
+
+<!-- STATS BAR -->
+<section style="background:var(--char-900);padding:64px 0;border-top:1px solid var(--char-700);border-bottom:1px solid var(--char-700)">
+<div class="ck-container">
+  <div class="stats-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center">
+    <div class="ck-stat"><div class="ck-stat__value">12<span class="ck-stat__unit">+</span></div><div class="ck-stat__label" data-i18n="stat1">Jaar ervaring</div></div>
+    <div class="ck-stat"><div class="ck-stat__value">4.800<span class="ck-stat__unit">+</span></div><div class="ck-stat__label" data-i18n="stat2">Auto's hersteld</div></div>
+    <div class="ck-stat"><div class="ck-stat__value">98<span class="ck-stat__unit">%</span></div><div class="ck-stat__label" data-i18n="stat3">Klanttevredenheid</div></div>
+    <div class="ck-stat"><div class="ck-stat__value">2<span class="ck-stat__unit" data-i18n="stat4_unit">jaar</span></div><div class="ck-stat__label" data-i18n="stat4">Garantie</div></div>
+  </div>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="diensten" class="ck-light" style="padding:96px 0">
+<div class="ck-container">
+  <div class="ck-divider" style="margin-bottom:48px">
+    <span class="ck-eyebrow" style="color:var(--orange-700)">01</span><span class="ck-eyebrow" style="color:var(--steel-500)" data-i18n="s01_label">Diensten</span><span class="ck-divider__line"></span>
+  </div>
+  <h2 class="ck-h2" style="color:var(--char);margin-bottom:48px" data-i18n="s01_title">Ons dienstenpakket</h2>
+  <div class="services-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px">
+    <!-- Service 1: Chip & Scratch -->
+    <div class="ck-card" style="padding:36px;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span class="ck-eyebrow" style="color:var(--orange-700)">01</span>
+      </div>
+      <h3 class="ck-card__title" style="font-size:22px" data-i18n="svc1_title">Steenslag- en krasherstel</h3>
+      <p class="ck-card__body" style="font-size:15px;line-height:24px" data-i18n="svc1_desc">Schade wordt laag voor laag opgevuld met exact gematcht lak. Geschikt voor steenslagschade, parkeerschade en oppervlakkige krassen. Onzichtbaar resultaat.</p>
+      <figure class="ck-img ck-img--light" style="aspect-ratio:16/9;margin:0;min-height:0;border-radius:var(--radius-sm)">
+        <span class="ck-eyebrow" style="color:var(--orange-700)">Foto</span>
+        <span class="ck-img__desc" style="color:var(--steel-500)">Close-up steenslagherstel: voor en na op motorkap</span>
+      </figure>
+    </div>
+    <!-- Service 2: PDR -->
+    <div class="ck-card" style="padding:36px;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        <span class="ck-eyebrow" style="color:var(--orange-700)">02</span>
+      </div>
+      <h3 class="ck-card__title" style="font-size:22px" data-i18n="svc2_title">Uitdeuken zonder spuiten (PDR)</h3>
+      <p class="ck-card__body" style="font-size:15px;line-height:24px" data-i18n="svc2_desc">Deuken worden verwijderd zonder de originele lak aan te tasten. Ideaal voor hagelschade, parkeerdeuken en lichte aanrijdingsschade. Behoud van fabriekslak.</p>
+      <figure class="ck-img ck-img--light" style="aspect-ratio:16/9;margin:0;min-height:0;border-radius:var(--radius-sm)">
+        <span class="ck-eyebrow" style="color:var(--orange-700)">Foto</span>
+        <span class="ck-img__desc" style="color:var(--steel-500)">PDR-gereedschap in actie op autodeur</span>
+      </figure>
+    </div>
+    <!-- Service 3: Colour Matching & Spraying -->
+    <div class="ck-card" style="padding:36px;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10"/><path d="M2 12h20"/></svg>
+        <span class="ck-eyebrow" style="color:var(--orange-700)">03</span>
+      </div>
+      <h3 class="ck-card__title" style="font-size:22px" data-i18n="svc3_title">Kleurmatching en spuitwerk</h3>
+      <p class="ck-card__body" style="font-size:15px;line-height:24px" data-i18n="svc3_desc">Volledige paneellakering met exacte fabriekskleurafstemming via spectrofotometer. Opbouw met primer, basiskleur en blanke lak in stofvrije spuitcabine.</p>
+      <figure class="ck-img ck-img--light" style="aspect-ratio:16/9;margin:0;min-height:0;border-radius:var(--radius-sm)">
+        <span class="ck-eyebrow" style="color:var(--orange-700)">Foto</span>
+        <span class="ck-img__desc" style="color:var(--steel-500)">Spuitcabine met voertuig onder afwerking</span>
+      </figure>
+    </div>
+    <!-- Service 4: Workshop -->
+    <div class="ck-card" style="padding:36px;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="ck-eyebrow" style="color:var(--orange-700)">04</span>
+      </div>
+      <h3 class="ck-card__title" style="font-size:22px" data-i18n="svc4_title">Herstelwerkplaats</h3>
+      <p class="ck-card__body" style="font-size:15px;line-height:24px" data-i18n="svc4_desc">Complete carrosseriereparaties in eigen werkplaats. Van bumpervervanging tot paneelherstel, uitgevoerd met originele laktechnieken en fabrieksmaterialen.</p>
+      <figure class="ck-img ck-img--light" style="aspect-ratio:16/9;margin:0;min-height:0;border-radius:var(--radius-sm)">
+        <span class="ck-eyebrow" style="color:var(--orange-700)">Foto</span>
+        <span class="ck-img__desc" style="color:var(--steel-500)">Werkplaats met voertuig in demontage</span>
+      </figure>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="ck-dark" style="padding:96px 0">
+<div class="ck-container">
+  <div class="ck-divider" style="margin-bottom:48px">
+    <span class="ck-eyebrow">02</span><span class="ck-eyebrow" style="color:var(--steel-400)" data-i18n="s02_label">Resultaat</span><span class="ck-divider__line" style="background:var(--char-700)"></span>
+  </div>
+  <h2 class="ck-h2" style="margin-bottom:48px" data-i18n="s02_title">Voor en na</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px">
+    <div class="ck-before-after">
+      <div class="ck-before-after__side">
+        <span class="ck-eyebrow" style="color:var(--red)">Voor</span>
+        <span class="ck-img__desc" data-i18n="ba1_before">Diepe kras op achterspatbord, blanke lak beschadigd</span>
+      </div>
+      <div class="ck-before-after__side">
+        <span class="ck-eyebrow" style="color:var(--green)">Na</span>
+        <span class="ck-img__desc" data-i18n="ba1_after">Volledig hersteld en gespoten, onzichtbaar resultaat</span>
+      </div>
+    </div>
+    <div class="ck-before-after">
+      <div class="ck-before-after__side">
+        <span class="ck-eyebrow" style="color:var(--red)">Voor</span>
+        <span class="ck-img__desc" data-i18n="ba2_before">Deuk in portier na parkeerschade</span>
+      </div>
+      <div class="ck-before-after__side">
+        <span class="ck-eyebrow" style="color:var(--green)">Na</span>
+        <span class="ck-img__desc" data-i18n="ba2_after">PDR-herstel, originele lak volledig behouden</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS / WERKWIJZE -->
+<section id="werkwijze" class="ck-light" style="padding:96px 0">
+<div class="ck-container">
+  <div class="ck-divider" style="margin-bottom:48px">
+    <span class="ck-eyebrow" style="color:var(--orange-700)">03</span><span class="ck-eyebrow" style="color:var(--steel-500)" data-i18n="s03_label">Werkwijze</span><span class="ck-divider__line"></span>
+  </div>
+  <h2 class="ck-h2" style="color:var(--char);margin-bottom:64px" data-i18n="s03_title">Van schade tot herstel in vijf stappen</h2>
+  <div class="process-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:24px">
+    <div class="ck-step"><div class="ck-step__num">1</div><h4 class="ck-h4" style="color:var(--char)" data-i18n="step1_title">Contact</h4><p class="ck-small" data-i18n="step1_desc">Bel, mail of vul het formulier in. Reactie binnen 24 uur.</p></div>
+    <div class="ck-step"><div class="ck-step__num">2</div><h4 class="ck-h4" style="color:var(--char)" data-i18n="step2_title">Inspectie</h4><p class="ck-small" data-i18n="step2_desc">Schade beoordelen, foto's maken en offerte opstellen.</p></div>
+    <div class="ck-step"><div class="ck-step__num">3</div><h4 class="ck-h4" style="color:var(--char)" data-i18n="step3_title">Kleurmatch</h4><p class="ck-small" data-i18n="step3_desc">Exacte kleur meten met spectrofotometer.</p></div>
+    <div class="ck-step"><div class="ck-step__num">4</div><h4 class="ck-h4" style="color:var(--char)" data-i18n="step4_title">Herstel</h4><p class="ck-small" data-i18n="step4_desc">Reparatie in stofvrije spuitcabine.</p></div>
+    <div class="ck-step"><div class="ck-step__num">5</div><h4 class="ck-h4" style="color:var(--char)" data-i18n="step5_title">Oplevering</h4><p class="ck-small" data-i18n="step5_desc">Kwaliteitscontrole en aflevering met garantie.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- USPs / WHY COLOUR KING -->
+<section class="ck-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="ck-container">
+  <div class="ck-divider" style="margin-bottom:48px">
+    <span class="ck-eyebrow" style="color:var(--orange-700)">04</span><span class="ck-eyebrow" style="color:var(--steel-500)" data-i18n="s04_label">Waarom Colour King</span><span class="ck-divider__line"></span>
+  </div>
+  <div class="usp-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="ck-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10"/><path d="M2 12h20"/></svg>
+      <h3 class="ck-card__title" data-i18n="usp1_title">Spectrofotometer kleurmatch</h3>
+      <p class="ck-card__body" data-i18n="usp1_desc">Exacte kleurmeting voor onzichtbare reparaties. Geen kleurverschil na herstel.</p>
+    </div>
+    <div class="ck-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <h3 class="ck-card__title" data-i18n="usp2_title">2 jaar garantie</h3>
+      <p class="ck-card__body" data-i18n="usp2_desc">Op alle werkzaamheden. Volledige zekerheid over de kwaliteit van uw herstel.</p>
+    </div>
+    <div class="ck-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <h3 class="ck-card__title" data-i18n="usp3_title">Stofvrije spuitcabine</h3>
+      <p class="ck-card__body" data-i18n="usp3_desc">Professionele spuitcabine voor een vlekkeloos, fabriekswaardig resultaat.</p>
+    </div>
+    <div class="ck-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><path d="M5 12l5 5L20 7"/></svg>
+      <h3 class="ck-card__title" data-i18n="usp4_title">Originele laktechnieken</h3>
+      <p class="ck-card__body" data-i18n="usp4_desc">Wij werken uitsluitend met fabrieksmaterialen en originele processen.</p>
+    </div>
+    <div class="ck-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <h3 class="ck-card__title" data-i18n="usp5_title">Snelle doorlooptijd</h3>
+      <p class="ck-card__body" data-i18n="usp5_desc">Reactie binnen 24 uur. Planning en uitvoering op korte termijn.</p>
+    </div>
+    <div class="ck-card" style="padding:28px;gap:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange-700)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <h3 class="ck-card__title" data-i18n="usp6_title">Persoonlijke service</h3>
+      <p class="ck-card__body" data-i18n="usp6_desc">Direct contact met de vakman. Eerlijk advies, geen verrassingen.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- GALLERY -->
+<section id="over" class="ck-light" style="padding:96px 0;border-top:1px solid var(--steel-150)">
+<div class="ck-container">
+  <div class="ck-divider" style="margin-bottom:48px">
+    <span class="ck-eyebrow" style="color:var(--orange-700)">05</span><span class="ck-eyebrow" style="color:var(--steel-500)" data-i18n="s05_label">Werkplaats</span><span class="ck-divider__line"></span>
+  </div>
+  <h2 class="ck-h2" style="color:var(--char);margin-bottom:48px" data-i18n="s05_title">Onze werkplaats in Rotterdam</h2>
+  <div class="gallery-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px">
+    <figure class="ck-img ck-img--light" style="aspect-ratio:4/3;margin:0;min-height:0;border-radius:var(--radius-md)"><span class="ck-eyebrow" style="color:var(--orange-700)">Foto</span><span class="ck-img__desc" style="color:var(--steel-500)">Buitenaanzicht werkplaats Satijnbloem 6</span></figure>
+    <figure class="ck-img ck-img--light" style="aspect-ratio:4/3;margin:0;min-height:0;border-radius:var(--radius-md)"><span class="ck-eyebrow" style="color:var(--orange-700)">Foto</span><span class="ck-img__desc" style="color:var(--steel-500)">Stofvrije spuitcabine met voertuig</span></figure>
+    <figure class="ck-img ck-img--light" style="aspect-ratio:4/3;margin:0;min-height:0;border-radius:var(--radius-md)"><span class="ck-eyebrow" style="color:var(--orange-700)">Foto</span><span class="ck-img__desc" style="color:var(--steel-500)">Kleurmeting met spectrofotometer</span></figure>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+    <span class="ck-tag" data-i18n="fac1">Eigen spuitcabine</span>
+    <span class="ck-tag" data-i18n="fac2">Spectrofotometer</span>
+    <span class="ck-tag" data-i18n="fac3">PDR-gereedschap</span>
+    <span class="ck-tag" data-i18n="fac4">Fabrieksmaterialen</span>
+    <span class="ck-tag">Rotterdam-Zuid</span>
+  </div>
+</div>
+</section>
+
+<!-- WARRANTY -->
+<section id="garantie" class="ck-dark" style="padding:96px 0">
+<div class="ck-container">
+  <div class="ck-divider" style="margin-bottom:48px">
+    <span class="ck-eyebrow">06</span><span class="ck-eyebrow" style="color:var(--steel-400)" data-i18n="s06_label">Garantie</span><span class="ck-divider__line" style="background:var(--char-700)"></span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="ck-card ck-card--dark" style="padding:32px;gap:16px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <h3 class="ck-card__title" data-i18n="war1_title">2 jaar garantie</h3>
+      <p class="ck-card__body" data-i18n="war1_desc">Op alle spuit- en hersteldiensten. Bij klachten binnen de garantietermijn herstellen wij kosteloos.</p>
+    </div>
+    <div class="ck-card ck-card--dark" style="padding:32px;gap:16px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10"/><path d="M2 12h20"/></svg>
+      <h3 class="ck-card__title" data-i18n="war2_title">Originele kleurafstemming</h3>
+      <p class="ck-card__body" data-i18n="war2_desc">Spectrofotometer kleurafstemming garandeert een perfect match met de fabriekslak van uw voertuig.</p>
+    </div>
+    <div class="ck-card ck-card--dark" style="padding:32px;gap:16px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      <h3 class="ck-card__title" data-i18n="war3_title">Vooraf advies</h3>
+      <p class="ck-card__body" data-i18n="war3_desc">Eerlijke beoordeling vooraf. Geen verrassingen achteraf. U weet precies wat u kunt verwachten.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="ck-light" style="padding:96px 0">
+<div class="ck-container">
+  <div class="ck-divider" style="margin-bottom:48px">
+    <span class="ck-eyebrow" style="color:var(--orange-700)">07</span><span class="ck-eyebrow" style="color:var(--steel-500)" data-i18n="s07_label">Klantervaringen</span><span class="ck-divider__line"></span>
+  </div>
+  <div class="test-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div class="ck-card" style="padding:28px;gap:16px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic" data-i18n="test1_quote">"Diepe kras in de portier, perfect gerepareerd. Geen kleurverschil te zien. Vakwerk."</p>
+      <div><span style="font:600 14px/1 var(--font-body);color:var(--char)">[Naam]</span><br><span class="ck-small" data-i18n="test1_role">Particuliere klant, Rotterdam</span></div>
+    </div>
+    <div class="ck-card" style="padding:28px;gap:16px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic" data-i18n="test2_quote">"Al meerdere auto's laten repareren. Altijd snel, professioneel en goede communicatie."</p>
+      <div><span style="font:600 14px/1 var(--font-body);color:var(--char)">[Naam]</span><br><span class="ck-small" data-i18n="test2_role">Zakelijke klant</span></div>
+    </div>
+    <div class="ck-card" style="padding:28px;gap:16px">
+      <div style="color:var(--amber);font-size:16px">★★★★★</div>
+      <p style="font:400 15px/24px var(--font-body);color:var(--steel-600);font-style:italic" data-i18n="test3_quote">"Via de verzekering gemeld. Snel afgehandeld, auto zag er weer als nieuw uit."</p>
+      <div><span style="font:600 14px/1 var(--font-body);color:var(--char)">[Naam]</span><br><span class="ck-small" data-i18n="test3_role">Verzekeringsklant</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contact" class="ck-dark" style="padding:96px 0">
+<div class="ck-container">
+  <div class="cta-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+    <div>
+      <h2 class="ck-h2" style="margin-bottom:8px" data-i18n="cta_title">Schade aan uw auto?</h2>
+      <p class="ck-lead" style="margin-bottom:32px" data-i18n="cta_lead">Vraag een vrijblijvende offerte aan. Stuur foto's van de schade en wij reageren binnen 24 uur.</p>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="ck-field"><label class="ck-field__label" for="f-name" data-i18n="form_name">Naam</label><input class="ck-input" id="f-name" type="text" data-i18n-ph="form_name_ph" placeholder="Uw naam"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="ck-field"><label class="ck-field__label" for="f-email">E-mail</label><input class="ck-input" id="f-email" type="email" placeholder="uw@email.nl"></div>
+          <div class="ck-field"><label class="ck-field__label" for="f-phone" data-i18n="form_phone">Telefoon</label><input class="ck-input" id="f-phone" type="tel" placeholder="06 ..."></div>
+        </div>
+        <div class="ck-field"><label class="ck-field__label" for="f-car" data-i18n="form_car">Auto</label><input class="ck-input" id="f-car" type="text" data-i18n-ph="form_car_ph" placeholder="Merk, model en bouwjaar"></div>
+        <div class="ck-field"><label class="ck-field__label" for="f-damage" data-i18n="form_damage">Omschrijving schade</label><textarea class="ck-textarea" id="f-damage" data-i18n-ph="form_damage_ph" placeholder="Beschrijf de schade zo nauwkeurig mogelijk..."></textarea></div>
+        <p class="ck-small" style="color:var(--steel-400)" data-i18n="form_photo_hint">Tip: voeg foto's van de schade toe voor een snellere beoordeling.</p>
+        <button class="ck-btn ck-btn--primary" style="width:100%;justify-content:center" data-i18n="form_submit">Offerte aanvragen</button>
+      </div>
+    </div>
+    <!-- Contact info -->
+    <div style="display:flex;flex-direction:column;gap:24px;padding:40px;border:1px solid var(--char-700);border-radius:var(--radius-xl);background:var(--char-900)">
+      <h3 class="ck-h3" data-i18n="contact_title">Neem contact op</h3>
+      <div style="display:flex;flex-direction:column;gap:16px;font:400 15px/24px var(--font-body);color:var(--steel-300)">
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>06 81 63 10 20</div>
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@colourking.nl</div>
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Satijnbloem 6, 3068 JP Rotterdam</div>
+        <div style="display:flex;gap:12px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="contact_response">Reactie binnen 24 uur</span></div>
+      </div>
+      <div style="border-top:1px solid var(--char-700);padding-top:20px">
+        <p class="ck-small" style="color:var(--orange)">KvK 66029783</p>
+      </div>
+      <figure class="ck-img" style="aspect-ratio:16/9;margin:0;border-radius:var(--radius-md);min-height:140px">
+        <span class="ck-eyebrow">Kaart</span>
+        <span class="ck-img__desc">Google Maps — Satijnbloem 6, Rotterdam</span>
+      </figure>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ck-dark" style="padding:64px 0 32px;border-top:1px solid var(--char-700)">
+<div class="ck-container">
+  <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+    <div>
+      <a class="ck-wordmark" href="#" style="margin-bottom:16px;display:inline-flex">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="4" fill="var(--orange)"/><text x="14" y="19" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="var(--orange-ink)">CK</text></svg>
+        <span>Colour King</span>
+      </a>
+      <p class="ck-small" style="margin-top:14px;max-width:28ch" data-i18n="footer_tagline">Vakkundig autoschadeherstel en spuitwerk in Rotterdam. Spectrofotometer kleurmatch, stofvrije cabine en 2 jaar garantie.</p>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px" data-i18n="footer_services">Diensten</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
+        <a href="#diensten" data-i18n="footer_svc1">Steenslagherstel</a>
+        <a href="#diensten" data-i18n="footer_svc2">Uitdeuken (PDR)</a>
+        <a href="#diensten" data-i18n="footer_svc3">Spuitwerk</a>
+        <a href="#diensten" data-i18n="footer_svc4">Carrosserieherstel</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px" data-i18n="footer_info">Informatie</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
+        <a href="#werkwijze" data-i18n="footer_process">Werkwijze</a>
+        <a href="#garantie" data-i18n="footer_warranty">Garantie</a>
+        <a href="#over" data-i18n="footer_about">Over ons</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div>
+      <h4 style="font:600 12px/1 var(--font-body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel-400);margin-bottom:14px" data-i18n="footer_legal">Juridisch</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/20px var(--font-body);color:var(--steel-300)">
+        <a href="#">Privacy</a>
+        <a href="#" data-i18n="footer_terms">Algemene voorwaarden</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--char-700);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <span class="ck-small">© 2026 Autospuitbedrijf Colour King · KvK 66029783</span>
+    <div style="display:flex;gap:12px">
+      <a href="#" style="color:var(--steel-400)" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      <a href="#" style="color:var(--steel-400)" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+    </div>
+  </div>
+</div>
+</footer>
+
+<!-- POWERED BY DES -->
+<div class="des-banner">
+  Ontworpen &amp; gebouwd door <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform
+</div>
+
+<script>
+(function(){
+  var T = {
+    en: {
+      nav_services:"Services", nav_process:"Process", nav_warranty:"Warranty",
+      nav_about:"About us", nav_cta:"Request a quote",
+
+      hero_eyebrow:"Auto Body Repair Shop Rotterdam",
+      hero_title:"Expert<br>body repair.<br>Factory quality.",
+      hero_lead:"Professional car body repair, spray painting and paintless dent removal. Spectrophotometer colour matching, dust-free spray booth and 2-year warranty on all work.",
+      hero_cta1:"Request a quote", hero_cta2:"View our services",
+      hero_usp1:"Spectrophotometer colour match", hero_usp2:"2-year warranty",
+      hero_usp3:"Response within 24 hours", hero_usp4:"Dust-free spray booth",
+
+      stat1:"Years of experience", stat2:"Cars repaired",
+      stat3:"Customer satisfaction", stat4:"Warranty", stat4_unit:"years",
+
+      s01_label:"Services", s01_title:"Our services",
+      svc1_title:"Chip and scratch repair",
+      svc1_desc:"Damage is filled layer by layer with precisely matched paint. Suitable for stone chips, parking dents and shallow scratches. Invisible result.",
+      svc2_title:"Paintless dent removal (PDR)",
+      svc2_desc:"Dents are removed without touching the original paint. Ideal for hail damage, parking dents and minor collision damage. Factory paint preserved.",
+      svc3_title:"Colour matching and spraying",
+      svc3_desc:"Full panel repainting with exact factory colour matching via spectrophotometer. Built up with primer, base coat and clear coat in a dust-free spray booth.",
+      svc4_title:"Repair workshop",
+      svc4_desc:"Complete bodywork repairs in our own workshop. From bumper replacement to panel repair, carried out with original paint techniques and factory materials.",
+
+      s02_label:"Result", s02_title:"Before and after",
+      ba1_before:"Deep scratch on rear fender, clear coat damaged",
+      ba1_after:"Fully repaired and sprayed, invisible result",
+      ba2_before:"Dent in door from parking damage",
+      ba2_after:"PDR repair, original paint fully preserved",
+
+      s03_label:"Process", s03_title:"From damage to repair in five steps",
+      step1_title:"Contact", step1_desc:"Call, email or fill in the form. Response within 24 hours.",
+      step2_title:"Inspection", step2_desc:"Assess damage, take photos and prepare a quote.",
+      step3_title:"Colour match", step3_desc:"Exact colour measurement with spectrophotometer.",
+      step4_title:"Repair", step4_desc:"Repair in dust-free spray booth.",
+      step5_title:"Delivery", step5_desc:"Quality check and delivery with warranty.",
+
+      s04_label:"Why Colour King",
+      usp1_title:"Spectrophotometer colour match", usp1_desc:"Exact colour measurement for invisible repairs. No colour difference after restoration.",
+      usp2_title:"2-year warranty", usp2_desc:"On all work. Complete confidence in the quality of your repair.",
+      usp3_title:"Dust-free spray booth", usp3_desc:"Professional spray booth for a flawless, factory-grade finish.",
+      usp4_title:"Original paint techniques", usp4_desc:"We work exclusively with factory materials and original processes.",
+      usp5_title:"Fast turnaround", usp5_desc:"Response within 24 hours. Scheduled and completed at short notice.",
+      usp6_title:"Personal service", usp6_desc:"Direct contact with the craftsman. Honest advice, no surprises.",
+
+      s05_label:"Workshop", s05_title:"Our workshop in Rotterdam",
+      fac1:"Own spray booth", fac2:"Spectrophotometer", fac3:"PDR tools", fac4:"Factory materials",
+
+      s06_label:"Warranty",
+      war1_title:"2-year warranty", war1_desc:"On all spray and repair services. In case of complaints within the warranty period, we repair free of charge.",
+      war2_title:"Original colour matching", war2_desc:"Spectrophotometer colour matching guarantees a perfect match with your vehicle's factory paint.",
+      war3_title:"Upfront advice", war3_desc:"Honest assessment beforehand. No surprises afterwards. You know exactly what to expect.",
+
+      s07_label:"Customer reviews",
+      test1_quote:'"Deep scratch in the door, perfectly repaired. No colour difference visible. Craftsmanship."',
+      test1_role:"Private customer, Rotterdam",
+      test2_quote:'"Had several cars repaired here. Always fast, professional and great communication."',
+      test2_role:"Business customer",
+      test3_quote:'"Filed through insurance. Handled quickly, car looked brand new again."',
+      test3_role:"Insurance customer",
+
+      cta_title:"Damage to your car?",
+      cta_lead:"Request a no-obligation quote. Send photos of the damage and we will respond within 24 hours.",
+      form_name:"Name", form_name_ph:"Your name",
+      form_phone:"Phone",
+      form_car:"Car", form_car_ph:"Make, model and year",
+      form_damage:"Damage description", form_damage_ph:"Describe the damage as accurately as possible...",
+      form_photo_hint:"Tip: add photos of the damage for a faster assessment.",
+      form_submit:"Request a quote",
+      contact_title:"Get in touch", contact_response:"Response within 24 hours",
+
+      footer_tagline:"Expert car body repair and spray painting in Rotterdam. Spectrophotometer colour match, dust-free booth and 2-year warranty.",
+      footer_services:"Services", footer_svc1:"Chip repair", footer_svc2:"Dent removal (PDR)",
+      footer_svc3:"Spray painting", footer_svc4:"Body repair",
+      footer_info:"Information", footer_process:"Process", footer_warranty:"Warranty", footer_about:"About us",
+      footer_legal:"Legal", footer_terms:"Terms and conditions"
+    }
+  };
+
+  var lang = 'nl';
+  var els = document.querySelectorAll('[data-i18n]');
+  var phEls = document.querySelectorAll('[data-i18n-ph]');
+  var originals = new Map();
+  var phOriginals = new Map();
+
+  els.forEach(function(el){
+    originals.set(el, el.getAttribute('data-i18n-html') ? el.innerHTML : el.textContent);
+  });
+  phEls.forEach(function(el){
+    phOriginals.set(el, el.placeholder);
+  });
+
+  function apply(l){
+    lang = l;
+    document.documentElement.lang = l;
+    document.title = l === 'en'
+      ? 'Colour King — Auto Body Repair Shop Rotterdam'
+      : 'Colour King — Autospuitbedrijf Rotterdam';
+
+    els.forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(l === 'nl'){
+        if(el.getAttribute('data-i18n-html')) el.innerHTML = originals.get(el);
+        else el.textContent = originals.get(el);
+      } else if(T[l] && T[l][key]){
+        if(el.getAttribute('data-i18n-html')) el.innerHTML = T[l][key];
+        else el.textContent = T[l][key];
+      }
+    });
+    phEls.forEach(function(el){
+      var key = el.getAttribute('data-i18n-ph');
+      if(l === 'nl') el.placeholder = phOriginals.get(el);
+      else if(T[l] && T[l][key]) el.placeholder = T[l][key];
+    });
+
+    document.querySelectorAll('.ck-seg__opt[data-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === l ? 'true' : 'false');
+    });
+  }
+
+  document.querySelectorAll('.ck-seg__opt[data-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      apply(btn.getAttribute('data-lang'));
+      try{ localStorage.setItem('ck-lang', lang); }catch(e){}
+    });
+  });
+
+  try{
+    var saved = localStorage.getItem('ck-lang');
+    if(saved && T[saved]) apply(saved);
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>

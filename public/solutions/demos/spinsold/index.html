@@ -588,9 +588,15 @@ img{display:block;max-width:100%}
       </div>
     </div>
   </div>
-  <div style="border-top:1px solid var(--graphite-700);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
-    <span class="ss-small" data-i18n="footer_copy">© 2026 SpinSold B.V. All rights reserved.</span>
-    <span class="ss-small"><a href="mailto:info@dessystems.io" style="color:var(--cyan)">info@dessystems.io</a></span>
+  <div style="border-top:1px solid var(--graphite-700);padding:24px 0 20px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px">
+    <div>
+      <p style="font:600 13px/1 var(--font-body);color:var(--steel-300);margin-bottom:8px" data-i18n="footer_office">Office</p>
+      <p class="ss-small" style="line-height:1.7">DES Systems B.V.<br>The Netherlands<br><a href="mailto:info@dessystems.io" style="color:var(--cyan)">info@dessystems.io</a><br><a href="https://dessystems.io" target="_blank" rel="noopener" style="color:var(--cyan)">dessystems.io</a></p>
+    </div>
+    <div style="text-align:right">
+      <span class="ss-small" data-i18n="footer_copy">© 2026 SpinSold B.V. All rights reserved.</span>
+      <p class="ss-small" style="margin-top:4px" data-i18n="footer_powered" data-i18n-html="1">A product by <a href="https://dessystems.io" target="_blank" rel="noopener" style="color:var(--cyan)">DES Systems</a></p>
+    </div>
   </div>
 </div>
 </footer>
@@ -691,6 +697,8 @@ img{display:block;max-width:100%}
       footer_careers:"Vacatures", footer_contact:"Contact",
       footer_legal:"Juridisch", footer_terms:"Voorwaarden",
       footer_copy:"© 2026 SpinSold B.V. Alle rechten voorbehouden.",
+      footer_office:"Kantoor",
+      footer_powered:'Een product van <a href="https://dessystems.io" target="_blank" rel="noopener" style="color:var(--cyan)">DES Systems</a>',
       des_banner:'Ontworpen &amp; gebouwd door <a href="https://dessystems.io" target="_blank" rel="noopener">DES Systems</a> — Custom SaaS Platform',
       showcase_title:"Consistente hoeken, elk voertuig.",
       showcase_desc:"Acht vaste hoeken automatisch vastgelegd. Dezelfde kadrering voor uw hele wagenpark — klaar voor uw website, portalen en drukwerk."
@@ -745,10 +753,19 @@ img{display:block;max-width:100%}
     });
   });
 
-  try{
-    var saved = localStorage.getItem('ss-lang');
-    if(saved && T[saved]) apply(saved);
-  }catch(e){}
+  function detectLang(){
+    try{
+      var saved = localStorage.getItem('ss-lang');
+      if(saved && T[saved]){ apply(saved); return; }
+    }catch(e){}
+    fetch('https://get.geojs.io/v1/ip/country.json')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.country === 'NL') apply('nl');
+      })
+      .catch(function(){});
+  }
+  detectLang();
 })();
 </script>
 

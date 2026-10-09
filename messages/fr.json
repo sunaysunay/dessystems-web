@@ -969,6 +969,7 @@
       "spinsold_title": "Plateforme studio photo automobile",
       "spinsold_desc": "Studio véhicule 360° automatisé avec traitement IA, rapports d'inspection des dommages et livraison multi-canal — une plateforme SaaS complète pour les studios photo automobile.",
       "spinsold_cta": "Ouvrir la démo",
+      "spinsold_cta2": "Enterprise V2",
       "detailing_label": "Démo live",
       "detailing_title": "Plateforme de préparation automobile",
       "detailing_desc": "Préparation professionnelle de véhicules pour concessionnaires, sociétés de leasing et flottes — avec un portail SaaS sur mesure pour les réservations, le suivi et les rapports photo.",
@@ -976,11 +977,7 @@
       "bodyshop_label": "Démo live",
       "bodyshop_title": "Carrosserie automobile",
       "bodyshop_desc": "Carrosserie et peinture avec prise en charge des dommages en ligne, suivi des réparations et portail client — une plateforme SaaS complète pour les carrossiers.",
-      "bodyshop_cta": "Ouvrir la démo",
-      "spinsold2_label": "Live demo",
-      "spinsold2_title": "SpinSold landing page",
-      "spinsold2_desc": "A modern product landing page for SpinSold — showcasing the car photography studio platform with features, pricing and call-to-action.",
-      "spinsold2_cta": "Open live demo"
+      "bodyshop_cta": "Ouvrir la démo"
     }
   },
   "DesLab": {

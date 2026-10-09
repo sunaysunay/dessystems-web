@@ -281,11 +281,7 @@
       "demo_title": "Platformă pentru dealeri auto",
       "demo_desc": "Machete interactive ale unei platforme pentru dealeri auto, construită pe stack-ul nostru SaaS: listă de stoc, pagini de detaliu ale vehiculelor și un asistent de vânzări AI.",
       "demo_cta": "Deschideți demo-ul",
-      "nav": "SaaS personalizat",
-      "spinsold2_label": "Live demo",
-      "spinsold2_title": "SpinSold landing page",
-      "spinsold2_desc": "A modern product landing page for SpinSold — showcasing the car photography studio platform with features, pricing and call-to-action.",
-      "spinsold2_cta": "Open live demo"
+      "nav": "SaaS personalizat"
     }
   },
   "DesLab": {

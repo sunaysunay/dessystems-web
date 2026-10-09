@@ -22,10 +22,9 @@ const solutions = [
 const demos = [
   { id: "vehicles",  url: "/solutions/demos/vehicles" },
   { id: "garage",    url: "/solutions/demos/garage" },
-  { id: "spinsold",  url: "/solutions/demos/spinsold" },
+  { id: "spinsold",  url: "/solutions/demos/spinsold", url2: "/solutions/demos/spinsold3" },
   { id: "detailing", url: "/solutions/demos/detailing" },
   { id: "bodyshop",  url: "/solutions/demos/bodyshop" },
-  { id: "spinsold2", url: "/solutions/demos/spinsold2" },
 ] as const
 
 const platformFeatures = ["ai", "auto", "multi", "sec", "anal", "flow"]
@@ -120,7 +119,12 @@ export default async function SolutionsPage({ params }: { params: Promise<{ loca
                                 <div className="sx-demo-title">{t(`saas.${d.id}_title`)}</div>
                                 <p>{t(`saas.${d.id}_desc`)}</p>
                               </div>
-                              <a href={d.url} target="_blank" rel="noopener" className="sx-btn sx-btn-primary">{t(`saas.${d.id}_cta`)} <ArrowRight /></a>
+                              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
+                                <a href={d.url} target="_blank" rel="noopener" className="sx-btn sx-btn-primary">{t(`saas.${d.id}_cta`)} <ArrowRight /></a>
+                                {"url2" in d && d.url2 && (
+                                  <a href={d.url2} target="_blank" rel="noopener" className="sx-btn sx-btn-ghost">{t(`saas.${d.id}_cta2`)} <ArrowRight /></a>
+                                )}
+                              </div>
                             </div>
                           </div>
                         ))}

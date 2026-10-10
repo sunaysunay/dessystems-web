@@ -26,6 +26,14 @@ export default function middleware(request: NextRequest) {
   const host = request.headers.get('host') ?? '';
   const isBopHost = host.startsWith('bop.') || host.startsWith('bop-dev.');
 
+  // ── Static demo pages: rewrite directory URL to index.html ─────────
+  const demoMatch = pathname.match(/^\/solutions\/demos\/([a-z0-9-]+)\/?$/);
+  if (demoMatch) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/solutions/demos/${demoMatch[1]}/index.html`;
+    return NextResponse.rewrite(url);
+  }
+
   // ── Locale-prefixed console paths: strip the prefix ────────────────
   // Console lives at /console/... (no locale). Old links like /nl/console/... → /console/...
   const localeConsole = pathname.match(/^\/(en|nl|de|fr|tr|ro|bg|el|es|it)(\/console(?:\/.*)?)$/);
@@ -115,5 +123,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/(en|nl|de|fr|tr|ro|bg|el|es|it)/:path*', '/console/:path*']
+  matcher: ['/', '/(en|nl|de|fr|tr|ro|bg|el|es|it)/:path*', '/console/:path*', '/solutions/demos/:path*']
 };

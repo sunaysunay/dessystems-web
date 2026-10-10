@@ -26,12 +26,15 @@ export default function middleware(request: NextRequest) {
   const host = request.headers.get('host') ?? '';
   const isBopHost = host.startsWith('bop.') || host.startsWith('bop-dev.');
 
-  // ── Static demo pages: rewrite directory URL to index.html ─────────
-  const demoMatch = pathname.match(/^\/solutions\/demos\/([a-z0-9-]+)\/?$/);
-  if (demoMatch) {
-    const url = request.nextUrl.clone();
-    url.pathname = `/solutions/demos/${demoMatch[1]}/index.html`;
-    return NextResponse.rewrite(url);
+  // ── Static demo pages: serve index.html for directory URLs ──────────
+  if (pathname.startsWith('/solutions/demos/')) {
+    const demoMatch = pathname.match(/^\/solutions\/demos\/([a-z0-9-]+)\/?$/);
+    if (demoMatch) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/solutions/demos/${demoMatch[1]}/index.html`;
+      return NextResponse.rewrite(url);
+    }
+    return NextResponse.next();
   }
 
   // ── Locale-prefixed console paths: strip the prefix ────────────────
